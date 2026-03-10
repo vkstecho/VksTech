@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VKSTech – vkstech.com | Vivek Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600;700&family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Oriya:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf9f6;--bg2:#f3f1ec;--bg3:#eceae3;--card:#fff;
+  --border:#e2ddd4;--border2:#d0c9bc;
+  --navy:#1a2744;--orange:#e85d26;--orange2:#f07040;
+  --teal:#0d8c7e;--gold:#c8860a;
+  --text:#1a2744;--muted:#6b7a99;--light:#9aaac4;--white:#fff;
+  --radius:14px;
+  --ss:0 2px 12px rgba(26,39,68,.07);
+  --sm:0 8px 40px rgba(26,39,68,.10);
+  --sl:0 20px 60px rgba(26,39,68,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;}
+body.lang-hi{font-family:'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif;}
+body.lang-bn{font-family:'Noto Sans Bengali','Plus Jakarta Sans',sans-serif;}
+body.lang-kn{font-family:'Noto Sans Kannada','Plus Jakarta Sans',sans-serif;}
+body.lang-or{font-family:'Noto Sans Oriya','Plus Jakarta Sans',sans-serif;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px;}
+/* BG BLOBS */
+.pg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.pg .b1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,38,.06) 0%,transparent 70%);top:-200px;right:-100px;animation:bm1 14s ease-in-out infinite;}
+.pg .b2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,126,.05) 0%,transparent 70%);bottom:-100px;left:-80px;animation:bm2 18s ease-in-out infinite;}
+@keyframes bm1{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,70px);}}
+@keyframes bm2{0%,100%{transform:translate(0,0);}50%{transform:translate(70px,-50px);}}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 4%;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,249,246,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:all .3s;gap:10px;}
+nav.scrolled{box-shadow:var(--ss);}
+/* ── NEW PREMIUM VKS LOGO ── */
+.nav-logo{
+  text-decoration:none;
+  white-space:nowrap;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  gap:0;
+  position:relative;
+  line-height:1;
+}
+.nav-logo .vks-wrap{
+  display:flex;
+  align-items:baseline;
+  gap:0;
+  position:relative;
+  line-height:1;
+}
+/* Ghost watermark behind */
+.nav-logo .vks-ghost{
+  position:absolute;
+  top:50%; left:0;
+  transform:translateY(-50%);
+  font-family:'Bebas Neue','Rajdhani','Plus Jakarta Sans',sans-serif;
+  font-weight:900;
+  font-size:3.2rem;
+  color:rgba(26,39,68,0.055);
+  letter-spacing:-1px;
+  pointer-events:none;
+  user-select:none;
+  line-height:1;
+  white-space:nowrap;
+}
+.nav-logo .vks-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  position:relative;
+  z-index:1;
+}
+.nav-logo .vks-letters{
+  display:flex;
+  align-items:baseline;
+  gap:0;
+  line-height:.95;
+  font-family:'Bebas Neue','Plus Jakarta Sans',sans-serif;
+  font-weight:900;
+  font-size:1.9rem;
+  letter-spacing:1px;
+}
+.nav-logo .lv{color:#18b83e;}
+.nav-logo .lk{color:#2068ee;}
+.nav-logo .ls{color:#dd1111;}
+/* Tri-colour underline */
+.nav-logo .vks-line{
+  width:100%;
+  height:2.5px;
+  border-radius:2px;
+  background:linear-gradient(90deg,#18b83e 33%,#2068ee 33% 66%,#dd1111 66%);
+  margin-top:1px;
+  box-shadow:0 0 6px rgba(40,104,238,0.3);
+}
+/* TECH label */
+.nav-logo .vks-tech{
+  display:flex;
+  align-items:flex-end;
+  padding-left:7px;
+  padding-bottom:3px;
+}
+.nav-logo .vks-tech-txt{
+  font-family:'Rajdhani','Plus Jakarta Sans',sans-serif;
+  font-weight:600;
+  font-size:1.05rem;
+  color:var(--muted);
+  letter-spacing:3.5px;
+  text-transform:uppercase;
+  line-height:1;
+  position:relative;
+}
+/* Short rainbow line under TECH */
+.nav-logo .vks-tech-line{
+  width:100%;
+  height:1.5px;
+  border-radius:2px;
+  background:linear-gradient(90deg,#18b83e,#2068ee,#dd1111);
+  margin-top:2px;
+  opacity:0.55;
+}
+.nav-links{display:flex;gap:1.4rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.83rem;font-weight:600;transition:color .2s;white-space:nowrap;}
+.nav-links a:hover{color:var(--navy);}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+/* ── LANGUAGE SPLIT PILLS ── */
+.lang-pills{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  background:rgba(26,39,68,0.06);
+  border:1px solid var(--border2);
+  border-radius:50px;
+  padding:3px;
+}
+.lpill{
+  border:none;
+  background:transparent;
+  padding:5px 11px;
+  border-radius:50px;
+  cursor:pointer;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;
+  font-weight:700;
+  color:var(--muted);
+  transition:all .2s;
+  white-space:nowrap;
+  line-height:1;
+}
+.lpill:hover{color:var(--navy);background:rgba(255,255,255,0.7);}
+.lpill.active{
+  background:var(--navy);
+  color:white;
+  box-shadow:0 2px 8px rgba(26,39,68,0.25);
+}
+/* On scrolled/white nav, pills stay readable */
+nav.scrolled .lang-pills{background:rgba(26,39,68,0.05);}
+/* ── OLD lang classes (kept for mobile menu) ── */
+.mob-lang{display:flex;flex-wrap:wrap;gap:7px;padding-top:12px;border-top:1px solid var(--border);}
+.mob-lang-btn{
+  padding:7px 14px;border-radius:50px;
+  border:1.5px solid var(--border);
+  font-size:.78rem;font-weight:700;
+  cursor:pointer;background:var(--white);
+  color:var(--navy);transition:all .2s;
+  font-family:'JetBrains Mono',monospace;
+}
+.mob-lang-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+/* ── COMPREHENSIVE MOBILE FIXES ── */
+/* Nav: hide pills on small screens, show hamburger */
+@media(max-width:900px){
+  .lang-pills{display:none;}
+  .nav-cta{display:none;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
+@media(min-width:901px){
+  .hamburger{display:none;}
+  .mob{display:none!important;}
+}
+/* Responsive nav height */
+@media(max-width:600px){
+  nav{height:58px;padding:0 4%;}
+  .nav-logo .vks-letters{font-size:1.55rem;}
+  .nav-logo .vks-tech-txt{font-size:.85rem;}
+}
+/* Hero */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;padding-top:20px;}
+  .hero-sub{margin:0 auto 2.4rem;max-width:100%;}
+  .hero-btns{justify-content:center;}
+  .hero-stats{justify-content:center;}
+  .hero-visual{display:none;}
+  .req-inner{grid-template-columns:1fr;gap:2rem;}
+  .about-inner{grid-template-columns:1fr;gap:2rem;}
+  .fi{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  /* General spacing */
+  section{padding-top:60px!important;padding-bottom:60px!important;}
+  #hero{padding-top:70px!important;}
+  .container{padding:0 4%;}
+  /* Hero */
+  .hero-title{font-size:clamp(2rem,8vw,3rem)!important;letter-spacing:-1px;}
+  .hero-eyebrow{font-size:.68rem;padding:6px 14px;}
+  .hero-stats{gap:1.2rem;}
+  .stat-item .num{font-size:1.7rem;}
+  /* Apps grid */
+  .apps-grid{grid-template-columns:1fr!important;}
+  /* Request form */
+  .frow{grid-template-columns:1fr;}
+  .form-box{padding:22px 18px;}
+  /* About */
+  .av-card{margin-bottom:1.5rem;}
+  /* Footer */
+  .fi{grid-template-columns:1fr;}
+  .fb{flex-direction:column;text-align:center;}
+  .cos-row{gap:8px;}
+  /* People grid */
+  .pgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
+  /* Section titles */
+  .section-title{font-size:clamp(1.6rem,5vw,2.2rem)!important;}
+}
+@media(max-width:480px){
+  nav{padding:0 3%;}
+  .hero-title{font-size:1.9rem!important;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-p,.btn-s{width:100%;text-align:center;}
+  .form-box{padding:18px 14px;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  .cos-row{flex-direction:column;align-items:center;}
+  .cob{width:100%;max-width:320px;}
+  /* Hero watermark smaller on mobile */
+  .hero-inner>[aria-hidden]{font-size:8rem!important;}
+  /* Footer */
+  .fi{gap:2rem;}
+  /* About timeline */
+  .tli{padding-left:12px;}
+  .tly{min-width:55px;font-size:.62rem;}
+}
+.nav-cta{background:var(--navy);color:var(--white);padding:9px 18px;border-radius:50px;font-weight:700;font-size:0.82rem;text-decoration:none;transition:all .25s;white-space:nowrap;}
+.nav-cta:hover{background:var(--orange);transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,93,38,.3);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0;}
+.hamburger span{display:block;width:23px;height:2px;background:var(--navy);border-radius:2px;}
+.mob{display:none;position:fixed;top:66px;left:0;right:0;z-index:999;background:rgba(250,249,246,.98);backdrop-filter:blur(20px);padding:1.5rem 5%;flex-direction:column;gap:1.2rem;border-bottom:1px solid var(--border);box-shadow:var(--sm);}
+.mob.open{display:flex;}
+.mob a{color:var(--navy);text-decoration:none;font-size:1rem;font-weight:600;}
+.mob a:hover{color:var(--orange);}
+
+/* LAYOUT */
+section{position:relative;z-index:1;}
+.container{max-width:1180px;margin:0 auto;padding:0 5%;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem;font-weight:600;}
+.section-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;letter-spacing:-.5px;color:var(--navy);margin-bottom:1rem;}
+.section-title span{color:var(--orange);}
+.section-sub{color:var(--muted);font-size:.97rem;max-width:540px;line-height:1.85;}
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:90px;background:linear-gradient(160deg,var(--bg) 0%,rgba(243,241,236,.8) 100%);}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;width:100%;position:relative;overflow:hidden;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);background:var(--white);padding:7px 18px;border-radius:50px;margin-bottom:1.6rem;font-size:.78rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:1px;font-weight:600;box-shadow:var(--ss);}
+.hero-eyebrow::before{content:'';width:8px;height:8px;background:var(--teal);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.6rem,5vw,4.3rem);line-height:1.08;letter-spacing:-1.5px;color:var(--navy);margin-bottom:1.3rem;}
+.hero-title .accent{color:var(--orange);}
+.hero-title .ghost{color:transparent;-webkit-text-stroke:1.5px var(--border2);font-size:clamp(2rem,4vw,3.4rem);}
+.hero-sub{font-size:1.02rem;color:var(--muted);max-width:500px;margin-bottom:2.4rem;line-height:1.85;}
+.hero-sub strong{color:var(--navy);}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-p{background:var(--orange);color:var(--white);padding:13px 32px;border-radius:50px;font-weight:700;font-size:.94rem;text-decoration:none;transition:all .25s;display:inline-block;box-shadow:0 6px 22px rgba(232,93,38,.32);}
+.btn-p:hover{background:var(--navy);transform:translateY(-2px);}
+.btn-s{border:2px solid var(--border2);color:var(--navy);padding:12px 30px;border-radius:50px;font-weight:600;font-size:.94rem;text-decoration:none;transition:all .25s;display:inline-block;background:var(--white);box-shadow:var(--ss);}
+.btn-s:hover{border-color:var(--orange);color:var(--orange);}
+.hero-stats{display:flex;gap:2rem;margin-top:2.8rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.stat-item .num{font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;color:var(--navy);line-height:1;}
+.stat-item .num em{color:var(--orange);font-style:normal;}
+.stat-item .lbl{font-size:.73rem;color:var(--light);margin-top:4px;font-weight:500;}
+/* Hero visual */
+.hero-visual{display:flex;justify-content:flex-end;align-items:center;}
+.card-stack{position:relative;width:300px;height:380px;}
+.hcard{position:absolute;border-radius:20px;padding:20px 22px;background:var(--white);border:1px solid var(--border);box-shadow:var(--sm);}
+.hcard1{width:265px;top:0;left:8px;animation:hf1 6s ease-in-out infinite;z-index:3;}
+.hcard2{width:240px;top:120px;left:30px;animation:hf2 7s ease-in-out infinite 1s;z-index:2;}
+.hcard3{width:210px;top:230px;left:52px;animation:hf3 8s ease-in-out infinite 2s;z-index:1;}
+@keyframes hf1{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(-2deg) translateY(-10px);}}
+@keyframes hf2{0%,100%{transform:rotate(1.5deg) translateY(0);}50%{transform:rotate(2deg) translateY(-7px);}}
+@keyframes hf3{0%,100%{transform:rotate(-1deg) translateY(0);}50%{transform:rotate(0deg) translateY(-5px);}}
+.hchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:3px 9px;border-radius:50px;font-weight:600;margin-bottom:10px;}
+.co{background:rgba(232,93,38,.1);color:var(--orange);border:1px solid rgba(232,93,38,.2);}
+.ct{background:rgba(13,140,126,.1);color:var(--teal);border:1px solid rgba(13,140,126,.2);}
+.cn{background:rgba(26,39,68,.07);color:var(--navy);border:1px solid rgba(26,39,68,.12);}
+.hcard-icon{font-size:1.8rem;display:block;margin-bottom:7px;}
+.hcard-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--navy);}
+.hcard-sub{font-size:.73rem;color:var(--muted);margin-top:3px;}
+/* COMPANIES */
+.cos{padding:46px 0;background:var(--navy);position:relative;z-index:1;}
+.cos .section-label{text-align:center;color:rgba(255,255,255,.35);margin-bottom:1.6rem;}
+.cos-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+.cob{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 26px;transition:all .3s;cursor:default;}
+.cob:hover{background:rgba(255,255,255,.1);border-color:rgba(232,93,38,.4);}
+.cob strong{color:var(--white);font-weight:700;font-size:.9rem;}
+.cob small{color:rgba(255,255,255,.38);font-size:.7rem;margin-top:3px;font-family:'JetBrains Mono',monospace;}
+/* APP CARDS */
+.acard{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--ss);}
+.acard:hover{border-color:var(--orange);transform:translateY(-5px);box-shadow:var(--sl);}
+.acard-bar{height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:3px;margin-bottom:20px;transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.acard:hover .acard-bar{transform:scaleX(1);}
+.acard-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:13px;}
+.io{background:rgba(232,93,38,.1);}.it{background:rgba(13,140,126,.1);}.in_{background:rgba(26,39,68,.07);}.ig{background:rgba(200,134,10,.1);}
+.acard-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:7px;}
+.acard-desc{font-size:.84rem;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+.acard-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:13px;}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.66rem;padding:3px 10px;border-radius:50px;font-weight:600;}
+.to{background:rgba(232,93,38,.08);color:var(--orange);border:1px solid rgba(232,93,38,.18);}
+.tt{background:rgba(13,140,126,.08);color:var(--teal);border:1px solid rgba(13,140,126,.18);}
+.tg{background:rgba(200,134,10,.08);color:var(--gold);border:1px solid rgba(200,134,10,.18);}
+.tp{background:rgba(107,122,153,.08);color:var(--muted);border:1px solid var(--border);}
+.clink{font-size:.78rem;font-weight:700;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:4px;transition:gap .2s;}
+.clink:hover{gap:8px;}
+/* SECTIONS */
+#industry-apps{padding:90px 0;background:var(--bg);}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem;margin-top:2.8rem;}
+#personal-apps{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
+#request-app{padding:90px 0;background:var(--bg);border-top:1px solid var(--border);}
+.req-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.feats{margin-top:2.2rem;display:flex;flex-direction:column;gap:12px;}
+.feat{display:flex;gap:13px;align-items:flex-start;padding:15px;border-radius:12px;background:var(--white);border:1px solid var(--border);box-shadow:var(--ss);transition:all .25s;}
+.feat:hover{border-color:var(--orange);box-shadow:var(--sm);}
+.feat-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.feat-t h4{font-weight:700;font-size:.88rem;color:var(--navy);margin-bottom:2px;}
+.feat-t p{font-size:.8rem;color:var(--muted);line-height:1.65;}
+.form-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:34px;box-shadow:var(--sm);}
+.form-title{font-family:'Playfair Display',serif;font-weight:800;font-size:1.35rem;color:var(--navy);margin-bottom:4px;}
+.form-sub{font-size:.83rem;color:var(--muted);margin-bottom:24px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;transition:border-color .2s,box-shadow .2s;resize:none;outline:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,93,38,.1);background:var(--white);}
+.fg select option{background:var(--white);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.sbtn{width:100%;background:var(--orange);color:var(--white);border:none;padding:13px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .25s;box-shadow:0 6px 20px rgba(232,93,38,.3);margin-top:6px;}
+.sbtn:hover{background:var(--navy);transform:translateY(-2px);}
+.fnote{text-align:center;font-size:.74rem;color:var(--light);margin-top:10px;line-height:1.6;}
+.fnote strong{color:var(--orange);}
+/* ABOUT */
+#about{padding:90px 0;background:var(--navy);color:var(--white);}
+#about .section-label{color:rgba(232,93,38,.9);}
+#about .section-title{color:var(--white);}
+#about .section-title span{color:var(--orange2);}
+.about-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start;}
+.av-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;overflow:hidden;}
+.av-hd{background:linear-gradient(135deg,rgba(232,93,38,.2),rgba(13,140,126,.15));padding:36px 26px 26px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);}
+.av-init{width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.9rem;color:var(--white);margin:0 auto 13px;box-shadow:0 8px 24px rgba(232,93,38,.4);}
+.av-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem;color:var(--white);}
+.av-role{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:5px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;}
+.av-bd{padding:22px 26px;}
+.tl{display:flex;flex-direction:column;}
+.tli{display:flex;gap:13px;padding:13px 0;border-left:2px solid rgba(255,255,255,.1);margin-left:8px;padding-left:18px;position:relative;}
+.tli::before{content:'';position:absolute;left:-7px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--navy);border:2px solid var(--orange2);}
+.tli:last-child{border-left-color:transparent;}
+.tly{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--orange2);white-space:nowrap;min-width:68px;padding-top:2px;font-weight:600;}
+.tlc h4{font-weight:700;font-size:.86rem;color:rgba(255,255,255,.9);}
+.tlc p{font-size:.76rem;color:rgba(255,255,255,.42);margin-top:2px;}
+.about-text p{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;margin-bottom:1rem;}
+.about-text p strong{color:var(--white);}
+.ecards{display:flex;flex-direction:column;gap:11px;margin-top:2rem;}
+.ecard{display:flex;gap:13px;align-items:center;padding:15px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.ee{font-size:1.5rem;}
+.ei h4{font-weight:700;font-size:.88rem;color:var(--white);}
+.ei p{font-size:.76rem;color:rgba(255,255,255,.42);margin-top:2px;}
+.ei .yr{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--orange2);margin-top:3px;}
+.stags{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.8rem;}
+.stag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:.74rem;padding:5px 13px;border-radius:50px;font-family:'JetBrains Mono',monospace;transition:all .2s;}
+.stag:hover{background:rgba(232,93,38,.15);border-color:rgba(232,93,38,.3);color:var(--orange2);}
+/* PEOPLE */
+#people{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
+.pi{text-align:center;max-width:600px;margin:0 auto 4rem;}
+.pcat{margin-bottom:3.5rem;}
+.pcath{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;display:flex;align-items:center;gap:12px;}
+.pcath::after{content:'';flex:1;height:1px;background:var(--border);}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.pcard{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;transition:all .3s;box-shadow:var(--ss);}
+.pcard:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:var(--sm);}
+.pav{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 11px;border:2px solid var(--border);background:var(--bg2);}
+.pname{font-family:'Playfair Display',serif;font-weight:800;font-size:.95rem;color:var(--navy);}
+.prel{font-size:.74rem;color:var(--light);margin-top:4px;font-weight:500;}
+.pnote{font-size:.78rem;color:var(--muted);margin-top:8px;line-height:1.6;font-style:italic;}
+.love-c{border-color:rgba(232,93,38,.25);background:linear-gradient(135deg,rgba(232,93,38,.03),var(--white));}
+.love-c .pav{border-color:rgba(232,93,38,.3);background:rgba(232,93,38,.06);}
+.star-c{border-color:rgba(200,134,10,.3);background:linear-gradient(135deg,rgba(200,134,10,.03),var(--white));}
+.star-c .pav{border-color:rgba(200,134,10,.35);background:rgba(200,134,10,.06);}
+.sbadge{display:inline-block;margin-bottom:7px;background:rgba(200,134,10,.1);color:var(--gold);border:1px solid rgba(200,134,10,.25);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:2px 9px;border-radius:50px;font-weight:600;}
+.alink{display:inline-flex;align-items:center;gap:4px;color:var(--teal);font-size:.75rem;text-decoration:none;margin-top:9px;padding:4px 11px;border-radius:50px;border:1px solid rgba(13,140,126,.2);background:rgba(13,140,126,.05);transition:all .2s;font-weight:600;}
+.alink:hover{background:rgba(13,140,126,.12);}
+.pend{margin-top:1.1rem;padding:14px 18px;background:var(--white);border:1.5px dashed var(--border2);border-radius:12px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.6;font-style:italic;}
+.pend strong{display:block;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.68rem;margin-bottom:3px;font-style:normal;}
+/* FOOTER */
+footer{background:var(--navy);color:var(--white);padding:56px 0 28px;}
+.fi{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.flogo{text-decoration:none;display:inline-flex;align-items:center;gap:0;margin-bottom:.9rem;position:relative;line-height:1;}
+.flogo .fvks-wrap{position:relative;display:flex;align-items:flex-start;}
+.flogo .fvks-ghost{position:absolute;top:50%;left:0;transform:translateY(-50%);font-family:'Bebas Neue','Plus Jakarta Sans',sans-serif;font-weight:900;font-size:3rem;color:rgba(255,255,255,0.04);letter-spacing:-1px;pointer-events:none;user-select:none;white-space:nowrap;line-height:1;}
+.flogo .fvks-inner{display:flex;flex-direction:column;position:relative;z-index:1;}
+.flogo .fvks-letters{display:flex;align-items:baseline;gap:0;font-family:'Bebas Neue','Plus Jakarta Sans',sans-serif;font-weight:900;font-size:1.8rem;letter-spacing:1px;line-height:.95;}
+.flogo .flv{color:#1eca4a;}.flogo .flk{color:#3a8aff;}.flogo .fls{color:#ff3030;}
+.flogo .fvks-line{width:100%;height:2px;border-radius:2px;background:linear-gradient(90deg,#1eca4a 33%,#3a8aff 33% 66%,#ff3030 66%);margin-top:2px;opacity:0.7;}
+.flogo .ftech{padding-left:7px;padding-bottom:2px;display:flex;flex-direction:column;justify-content:flex-end;}
+.flogo .ftech-txt{font-family:'Rajdhani','Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.95rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;line-height:1;}
+.flogo .ftech-line{height:1.5px;background:linear-gradient(90deg,#1eca4a,#3a8aff,#ff3030);border-radius:2px;margin-top:2px;opacity:0.4;}
+.fbp{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.8;max-width:240px;}
+.floc{margin-top:.9rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.28);}
+.fcol h4{font-weight:700;font-size:.8rem;color:rgba(255,255,255,.88);margin-bottom:.9rem;letter-spacing:.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.fcol ul a{color:rgba(255,255,255,.42);text-decoration:none;font-size:.83rem;transition:color .2s;}
+.fcol ul a:hover{color:var(--orange2);}
+.fb{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fb p{font-size:.78rem;color:rgba(255,255,255,.32);}
+.fb span{color:var(--orange2);}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.18s;}.d3{transition-delay:.26s;}
+/* TOAST */
+.toast{position:fixed;bottom:26px;right:26px;z-index:9999;background:var(--white);border:1px solid rgba(13,140,126,.3);border-radius:14px;padding:15px 20px;display:flex;align-items:center;gap:11px;transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:var(--sl);max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-icon{font-size:1.2rem;}
+.toast-text strong{display:block;font-size:.88rem;color:var(--teal);margin-bottom:2px;}
+.toast-text span{font-size:.78rem;color:var(--muted);}
+/* responsive handled above */
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+// 🔧 FIREBASE CONFIG — Replace with YOUR Firebase project config
+// Go to: Firebase Console → Project Settings → General → Your apps → Web app
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+</head>
+<body>
+
+<div class="pg"><div class="b1"></div><div class="b2"></div></div>
+
+<div class="toast" id="toast">
+  <div class="toast-icon">🎉</div>
+  <div class="toast-text">
+    <strong data-i18n="toast_title">Request Submitted!</strong>
+    <span data-i18n="toast_sub">Vivek will review your idea soon.</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">
+    <span class="vks-ghost" style="position:absolute;top:50%;left:0;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-weight:900;font-size:3rem;color:rgba(26,39,68,0.06);letter-spacing:-1px;pointer-events:none;user-select:none;white-space:nowrap;line-height:1;z-index:0;">VKS</span>
+    <span class="vks-inner" style="display:flex;flex-direction:column;align-items:flex-start;position:relative;z-index:1;">
+      <span class="vks-letters" style="display:flex;align-items:baseline;font-family:'Bebas Neue',sans-serif;font-weight:900;font-size:1.9rem;letter-spacing:1px;line-height:.95;">
+        <span class="lv">V</span><span class="lk">K</span><span class="ls">S</span>
+      </span>
+      <span class="vks-line"></span>
+    </span>
+    <span class="vks-tech" style="display:flex;flex-direction:column;align-items:flex-start;padding-left:7px;padding-bottom:2px;justify-content:flex-end;">
+      <span class="vks-tech-txt">TECH</span>
+      <span class="vks-tech-line"></span>
+    </span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#industry-apps" data-i18n="nav_ind">Industry Apps</a></li>
+    <li><a href="#personal-apps" data-i18n="nav_per">Personal Apps</a></li>
+    <li><a href="#request-app" data-i18n="nav_req">Request App</a></li>
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#people" data-i18n="nav_people">People</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <!-- LANGUAGE PILL BUTTONS (split, no dropdown) -->
+    <div class="lang-pills" id="langPills">
+      <button class="lpill active" id="lp-en" onclick="setLang('en',event)">EN</button>
+      <button class="lpill" id="lp-hi" onclick="setLang('hi',event)">हिंदी</button>
+      <button class="lpill" id="lp-or" onclick="setLang('or',event)">ଓଡ଼ିଆ</button>
+      <button class="lpill" id="lp-kn" onclick="setLang('kn',event)">ಕನ್ನಡ</button>
+      <button class="lpill" id="lp-bn" onclick="setLang('bn',event)">বাংলা</button>
+    </div>
+    <a href="#request-app" class="nav-cta" data-i18n="nav_cta">Request an App</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mobileMenu">
+  <a href="#industry-apps" onclick="toggleMenu()" data-i18n="nav_ind">🏭 Industry Apps</a>
+  <a href="#personal-apps" onclick="toggleMenu()" data-i18n="nav_per">🎯 Personal Apps</a>
+  <a href="#request-app" onclick="toggleMenu()" data-i18n="nav_req">📩 Request App</a>
+  <a href="#about" onclick="toggleMenu()" data-i18n="nav_about">👤 About</a>
+  <a href="#people" onclick="toggleMenu()" data-i18n="nav_people">❤️ People</a>
+  <a href="#request-app" onclick="toggleMenu()" class="nav-cta" style="text-align:center;display:block;" data-i18n="nav_cta">Request an App</a>
+  <div style="font-size:.65rem;font-family:'JetBrains Mono',monospace;letter-spacing:2px;color:var(--light);text-transform:uppercase;padding-top:2px;">🌐 Language</div>
+  <div class="mob-lang">
+    <button class="mob-lang-btn active" onclick="setLang('en',event)">EN 🇬🇧</button>
+    <button class="mob-lang-btn" onclick="setLang('hi',event)">हिंदी</button>
+    <button class="mob-lang-btn" onclick="setLang('or',event)">ଓଡ଼ିଆ</button>
+    <button class="mob-lang-btn" onclick="setLang('kn',event)">ಕನ್ನಡ</button>
+    <button class="mob-lang-btn" onclick="setLang('bn',event)">বাংলা</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <!-- BIG HERO VKS WATERMARK -->
+      <div aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bebas Neue',sans-serif;font-weight:900;font-size:clamp(14rem,28vw,22rem);line-height:1;color:transparent;pointer-events:none;user-select:none;z-index:0;white-space:nowrap;letter-spacing:-4px;">
+        <span style="-webkit-text-stroke:1.5px rgba(24,184,62,0.08);color:transparent;">V</span><span style="-webkit-text-stroke:1.5px rgba(32,104,238,0.08);color:transparent;">K</span><span style="-webkit-text-stroke:1.5px rgba(221,17,17,0.08);color:transparent;">S</span>
+      </div>
+      <div style="position:relative;z-index:1;">
+        <div class="hero-eyebrow" data-i18n="hero_badge">LIVE — Real Tools from Real Experience</div>
+        <h1 class="hero-title">
+          <span data-i18n="hero_t1">Apps Built for</span><br/>
+          <span class="accent" data-i18n="hero_t2">Real Problems</span><br/>
+          <span class="ghost" data-i18n="hero_t3">by a Real Engineer</span>
+        </h1>
+        <p class="hero-sub" data-i18n="hero_sub">Hi, I'm <strong>Vivek Kumar</strong> — M.Tech (GATE), Mechanical Engineer from <strong>NIT Uttarakhand</strong>. 9 years across India's top flexible packaging companies, turning industry experience into tools that actually help.</p>
+        <div class="hero-btns">
+          <a href="#industry-apps" class="btn-p" data-i18n="hero_btn1">Explore My Apps →</a>
+          <a href="#request-app" class="btn-s" data-i18n="hero_btn2">Request Your App</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="num">9<em>+</em></div><div class="lbl" data-i18n="stat1">Years Industry Experience</div></div>
+          <div class="stat-item"><div class="num">3<em>+</em></div><div class="lbl" data-i18n="stat2">Apps Published</div></div>
+          <div class="stat-item"><div class="num">3</div><div class="lbl" data-i18n="stat3">Major Companies</div></div>
+          <div class="stat-item"><div class="num">∞</div><div class="lbl" data-i18n="stat4">Ideas in Pipeline</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="card-stack">
+          <div class="hcard hcard1"><span class="hchip co" data-i18n="chip_ind">Industry Tool</span><span class="hcard-icon">⚙️</span><div class="hcard-title" data-i18n="hc1_t">Packaging Calc Pro</div><div class="hcard-sub" data-i18n="hc1_s">Flexible Packaging Industry</div></div>
+          <div class="hcard hcard2"><span class="hchip ct" data-i18n="chip_prod">Production</span><span class="hcard-icon">📐</span><div class="hcard-title" data-i18n="hc2_t">Film GSM Calculator</div><div class="hcard-sub" data-i18n="hc2_s">For production planning</div></div>
+          <div class="hcard hcard3"><span class="hchip cn" data-i18n="chip_pers">Personal</span><span class="hcard-icon">⚡</span><div class="hcard-title" data-i18n="hc3_t">Daily Planner</div><div class="hcard-sub" data-i18n="hc3_s">Personal efficiency tool</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<div class="cos">
+  <div class="container">
+    <div class="section-label" style="text-align:center;" data-i18n="cos_label">9 Years Across India's Flexible Packaging Leaders</div>
+    <div class="cos-row">
+      <div class="cob"><strong>UFlex Limited</strong><small>Noida, Uttar Pradesh</small></div>
+      <div class="cob"><strong>JPFL Films Pvt. Ltd.</strong><small>Nashik, Maharashtra</small></div>
+      <div class="cob"><strong>GLS Polyfilms</strong><small>Gurawara, Haryana</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- INDUSTRY APPS -->
+<section id="industry-apps">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="ind_label">🏭 Flexible Packaging Industry</div>
+      <h2 class="section-title" data-i18n="ind_title">Apps for <span>Packaging Professionals</span></h2>
+      <p class="section-sub" data-i18n="ind_sub">Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.</p>
+    </div>
+    <div class="apps-grid">
+      <div class="acard reveal d1"><div class="acard-bar"></div><div class="acard-icon io">🧮</div><div class="acard-title" data-i18n="app1_t">App #1 — Details Coming</div><div class="acard-desc" data-i18n="app1_d">Your first industry application will be listed here. Share the name, description, and key features to update this card and go live.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span><span class="clink" data-i18n="soon">Update Soon →</span></div></div>
+      <div class="acard reveal d2"><div class="acard-bar"></div><div class="acard-icon it">📐</div><div class="acard-title" data-i18n="app2_t">App #2 — Details Coming</div><div class="acard-desc" data-i18n="app2_d">Second tool in your packaging toolkit. Awaiting details to showcase full functionality and benefits for industry professionals.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span><span class="clink" data-i18n="soon">Update Soon →</span></div></div>
+      <div class="acard reveal d3"><div class="acard-bar"></div><div class="acard-icon in_">📊</div><div class="acard-title" data-i18n="app3_t">App #3 — Details Coming</div><div class="acard-desc" data-i18n="app3_d">Third tool for the flexible packaging industry. Share the name, purpose, and features to complete this card and share it.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span><span class="clink" data-i18n="soon">Update Soon →</span></div></div>
+      <div class="acard reveal" style="border-style:dashed;opacity:.55;"><div class="acard-bar"></div><div class="acard-icon ig">➕</div><div class="acard-title" data-i18n="app4_t">Your Next App</div><div class="acard-desc" data-i18n="app4_d">More packaging industry tools always in development — costing, production planning, quality checks, and more. Stay tuned.</div><div class="acard-foot"><span class="tag tg" data-i18n="indev">In Development</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL APPS -->
+<section id="personal-apps">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i18n="per_label">🎯 Personal & Lifestyle</div>
+      <h2 class="section-title" data-i18n="per_title">Fun, Productivity &amp; <span>Personal Tools</span></h2>
+      <p class="section-sub" data-i18n="per_sub">Apps for life beyond work — habit trackers, fun activities, games, and efficiency boosters. Built from personal needs, shared free with everyone.</p>
+    </div>
+    <div class="apps-grid">
+      <div class="acard reveal d1"><div class="acard-bar"></div><div class="acard-icon io">🎮</div><div class="acard-title" data-i18n="papp1_t">Personal App #1</div><div class="acard-desc" data-i18n="papp1_d">Your personal or fun application will be showcased here. Add the name, description, and screenshot to bring it to life on this page.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span></div></div>
+      <div class="acard reveal d2"><div class="acard-bar"></div><div class="acard-icon ig">⚡</div><div class="acard-title" data-i18n="papp2_t">Efficiency App #1</div><div class="acard-desc" data-i18n="papp2_d">A personal productivity tool built to improve daily routines, track habits, or plan tasks smarter. Details to be added soon.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span></div></div>
+      <div class="acard reveal d3"><div class="acard-bar"></div><div class="acard-icon it">😄</div><div class="acard-title" data-i18n="papp3_t">Fun Activity App</div><div class="acard-desc" data-i18n="papp3_d">Something built just for joy — a game, a quiz, a challenge, or anything that brings a smile. More details coming soon.</div><div class="acard-foot"><span class="tag tp" data-i18n="pending">⏳ Details Pending</span></div></div>
+      <div class="acard reveal" style="border-style:dashed;opacity:.55;"><div class="acard-bar"></div><div class="acard-icon in_">✨</div><div class="acard-title" data-i18n="papp4_t">More on the Way</div><div class="acard-desc" data-i18n="papp4_d">Vivek is always building. Upcoming personal apps covering wellness, finance, creativity, and more. Watch this space.</div><div class="acard-foot"><span class="tag tg" data-i18n="inpipe">In Pipeline</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST APP -->
+<section id="request-app">
+  <div class="container">
+    <div class="req-inner">
+      <div class="reveal">
+        <div class="section-label" data-i18n="req_label">📩 App Request Portal</div>
+        <h2 class="section-title" data-i18n="req_title">Got an <span>Idea?</span> I'll Build It.</h2>
+        <p class="section-sub" data-i18n="req_sub">Have a problem that needs a digital solution? Vivek will build it completely free for you. If others want to use it, a fair profit-share model applies.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ic it">🆓</div><div class="feat-t"><h4 data-i18n="f1t">Always Free for You</h4><p data-i18n="f1d">The person who requested the app always gets it free — no conditions, no fine print.</p></div></div>
+          <div class="feat"><div class="feat-ic io">💰</div><div class="feat-t"><h4 data-i18n="f2t">Fair Profit Sharing</h4><p data-i18n="f2d">If other users benefit commercially from your idea, a transparent revenue-share model applies fairly.</p></div></div>
+          <div class="feat"><div class="feat-ic in_">🎓</div><div class="feat-t"><h4 data-i18n="f3t">Real Engineering Expertise</h4><p data-i18n="f3d">Every app built with M.Tech-level technical knowledge and 9+ years of domain experience.</p></div></div>
+          <div class="feat"><div class="feat-ic ig">🌐</div><div class="feat-t"><h4 data-i18n="f4t">Any Domain Welcome</h4><p data-i18n="f4d">Packaging, farming, education, health, finance, games — no domain is too niche or too simple.</p></div></div>
+        </div>
+      </div>
+      <div class="form-box reveal">
+        <div class="form-title" data-i18n="form_title">Submit Your Idea 💡</div>
+        <div class="form-sub" data-i18n="form_sub">Tell Vivek about the problem you want solved</div>
+        <div class="frow">
+          <div class="fg"><label data-i18n="fl_name">Your Name *</label><input type="text" id="rn" data-i18n-ph="ph_name" placeholder="Full Name"/></div>
+          <div class="fg"><label data-i18n="fl_email">Email *</label><input type="email" id="re" data-i18n-ph="ph_email" placeholder="you@email.com"/></div>
+        </div>
+        <div class="fg"><label data-i18n="fl_phone">Phone / WhatsApp</label><input type="tel" id="rp" data-i18n-ph="ph_phone" placeholder="+91 XXXXX XXXXX (optional)"/></div>
+        <div class="fg"><label data-i18n="fl_cat">Category *</label>
+          <select id="rc">
+            <option value="" disabled selected data-i18n="cat0">Select a category</option>
+            <option data-i18n="cat1">Flexible Packaging / Manufacturing</option>
+            <option data-i18n="cat2">Agriculture / Farming</option>
+            <option data-i18n="cat3">Education / Learning</option>
+            <option data-i18n="cat4">Personal Productivity</option>
+            <option data-i18n="cat5">Health &amp; Fitness</option>
+            <option data-i18n="cat6">Finance / Accounting</option>
+            <option data-i18n="cat7">Fun / Games / Entertainment</option>
+            <option data-i18n="cat8">Business / Management</option>
+            <option data-i18n="cat9">Other</option>
+          </select>
+        </div>
+        <div class="fg"><label data-i18n="fl_title">App Title *</label><input type="text" id="rt" data-i18n-ph="ph_title" placeholder="Give your idea a name"/></div>
+        <div class="fg"><label data-i18n="fl_desc">Describe the Problem *</label><textarea id="rd" rows="4" data-i18n-ph="ph_desc" placeholder="What problem do you face? What should the app do? Who will use it?"></textarea></div>
+        <button class="sbtn" onclick="submitReq()" data-i18n="submit_btn">Send My App Request 🚀</button>
+        <div class="fnote" data-i18n="form_note">By submitting, you agree Vivek Kumar may publish this app. <strong>You always get it free.</strong> Monetisation for others is discussed with you first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="av-card">
+          <div class="av-hd">
+            <div class="av-init">VK</div>
+            <div class="av-name">Vivek Kumar</div>
+            <div class="av-role">M.Tech · Mechanical Engineer · App Builder</div>
+          </div>
+          <div class="av-bd">
+            <div class="tl">
+              <div class="tli"><div class="tly">2013–17</div><div class="tlc"><h4 data-i18n="tl1h">B.Tech – NIT Uttarakhand</h4><p data-i18n="tl1p">Mechanical Engineering</p></div></div>
+              <div class="tli"><div class="tly">GATE</div><div class="tlc"><h4 data-i18n="tl2h">M.Tech – DCRUST University</h4><p data-i18n="tl2p">Highest Academic Qualification</p></div></div>
+              <div class="tli"><div class="tly">UFlex</div><div class="tlc"><h4 data-i18n="tl3h">UFlex Limited, Noida</h4><p data-i18n="tl3p">Flexible Packaging Industry</p></div></div>
+              <div class="tli"><div class="tly">JPFL</div><div class="tlc"><h4 data-i18n="tl4h">JPFL Films Pvt. Ltd., Nashik</h4><p data-i18n="tl4p">Films Production &amp; Technology</p></div></div>
+              <div class="tli"><div class="tly">GLS</div><div class="tlc"><h4 data-i18n="tl5h">GLS Polyfilms, Gurawara</h4><p data-i18n="tl5p">Polymer Films Manufacturing</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-label" data-i18n="about_label">👤 About Me</div>
+        <h2 class="section-title">Vivek <span>Kumar</span></h2>
+        <p data-i18n="about_p1">I'm a <strong>Mechanical Engineer by training</strong>, a <strong>Flexible Packaging professional by career</strong>, and an <strong>app builder by passion</strong>. After 9 years working at UFlex Limited, JPFL Films, and GLS Polyfilms, I've experienced first-hand the daily inefficiencies that slow down professionals in this industry.</p>
+        <p data-i18n="about_p2">That frustration became fuel. I began building tools to automate repetitive calculations, streamline quality processes, and reduce manual errors. What started as personal tools slowly grew into something worth sharing with the whole community.</p>
+        <p data-i18n="about_p3">Beyond the industry, I love building apps that make everyday life more organised, more fun, and less stressful. <strong>VKSTech (vkstech.com)</strong> is the home for all of it.</p>
+        <div class="ecards">
+          <div class="ecard"><div class="ee">🎓</div><div class="ei"><h4 data-i18n="edu1h">M.Tech (Through GATE)</h4><p data-i18n="edu1p">DCRUST University — Mechanical Engineering</p><div class="yr" data-i18n="edu1y">Highest Qualification</div></div></div>
+          <div class="ecard"><div class="ee">🏛️</div><div class="ei"><h4 data-i18n="edu2h">B.Tech – Mechanical Engineering</h4><p data-i18n="edu2p">NIT Uttarakhand</p><div class="yr">2013 – 2017</div></div></div>
+        </div>
+        <div class="stags">
+          <span class="stag" data-i18n="sk1">Flexible Packaging</span><span class="stag" data-i18n="sk2">Polymer Films</span>
+          <span class="stag" data-i18n="sk3">Production Planning</span><span class="stag" data-i18n="sk4">Quality Control</span>
+          <span class="stag" data-i18n="sk5">App Development</span><span class="stag" data-i18n="sk6">GATE Qualified</span>
+          <span class="stag" data-i18n="sk7">Mechanical Engg.</span><span class="stag" data-i18n="sk8">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="container">
+    <div class="pi reveal">
+      <div class="section-label" data-i18n="ppl_label">❤️ With Gratitude</div>
+      <h2 class="section-title" data-i18n="ppl_title">The People Behind <span>This Journey</span></h2>
+      <p class="section-sub" style="margin:0 auto;" data-i18n="ppl_sub">Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.</p>
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i18n="pcat_love">💞 Love of My Life</div>
+      <div class="pgrid">
+        <div class="pcard love-c"><div class="pav">💖</div><div class="pname" data-i18n="love_name">[Name to be Added]</div><div class="prel" data-i18n="love_rel">Partner &amp; Life Companion</div><div class="pnote" data-i18n="love_note">"The one who makes every achievement feel truly worth it. My constant inspiration."</div></div>
+      </div>
+      <div class="pend"><strong data-i18n="upd_pend">[ UPDATE PENDING ]</strong><span data-i18n="love_pend">Vivek will share the name and a personal note to complete this section.</span></div>
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i18n="pcat_par">🙏 My Parents</div>
+      <div class="pgrid">
+        <div class="pcard" style="padding:24px 18px;">
+          <div class="photo-av" style="width:100px;height:100px;margin:0 auto 12px;border-radius:50%;overflow:hidden;box-shadow:0 4px 18px rgba(26,39,68,0.18),0 0 0 3px rgba(232,93,38,0.15);background:var(--bg2);">
+            <img src="images/papa.jpeg" alt="Father" onerror="this.style.display='none';this.parentElement.innerHTML='👨';" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          </div>
+          <div class="pname" data-i18n="dad_name">[Father's Name]</div>
+          <div class="prel" data-i18n="dad_rel">Father</div>
+          <div class="pnote" data-i18n="dad_note">"Your sacrifices built the foundation of everything I am today."</div>
+        </div>
+        <div class="pcard" style="padding:24px 18px;">
+          <div class="photo-av" style="width:100px;height:100px;margin:0 auto 12px;border-radius:50%;overflow:hidden;box-shadow:0 4px 18px rgba(26,39,68,0.18),0 0 0 3px rgba(232,93,38,0.15);background:var(--bg2);">
+            <img src="images/mom.jpeg" alt="Mother" onerror="this.style.display='none';this.parentElement.innerHTML='👩';" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          </div>
+          <div class="pname" data-i18n="mom_name">[Mother's Name]</div>
+          <div class="prel" data-i18n="mom_rel">Mother</div>
+          <div class="pnote" data-i18n="mom_note">"Your unconditional love and prayers have carried me through every storm."</div>
+        </div>
+      </div>
+      <div class="pend"><strong data-i18n="upd_pend">[ UPDATE PENDING ]</strong><span data-i18n="par_pend">Share your parents' names and a personal note — this will be updated with love.</span></div>
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i18n="pcat_spec">⭐ Special Thanks</div>
+      <div class="pgrid">
+        <div class="pcard star-c" style="max-width:320px;margin:0 auto;padding:24px 22px;">
+          <div class="sbadge" data-i18n="ankit_badge">⭐ Guide &amp; Mentor</div>
+          <!-- Ankit Photo -->
+          <div style="width:110px;height:110px;margin:10px auto 14px;border-radius:50%;overflow:hidden;box-shadow:0 4px 20px rgba(26,202,74,0.25),0 0 0 3px rgba(26,202,74,0.15);">
+            <img src="images/ankit.png" alt="Mr. Ankit Bhardwaj"
+                 style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          </div>
+          <div class="pname">Ankit Bhardwaj</div>
+          <div class="prel" data-i18n="ankit_rel">Cousin &amp; Guiding Light</div>
+          <!-- Company info -->
+          <div style="margin:10px 0 8px;padding:10px 14px;background:rgba(13,140,126,0.06);border:1px solid rgba(13,140,126,0.15);border-radius:10px;text-align:left;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:5px;">🏢 FOUNDER &amp; DIRECTOR</div>
+            <div style="font-weight:700;font-size:.88rem;color:var(--navy);line-height:1.3;">Rithora IT Services Pvt. Ltd.</div>
+            <div style="font-size:.74rem;color:var(--muted);margin-top:4px;line-height:1.5;">
+              💻 Software &amp; IT Services<br/>
+              📍 Hodal, Faridabad, Haryana<br/>
+              📅 Est. December 2022<br/>
+              🔖 CIN: U72200HR2022PTC108373
+            </div>
+          </div>
+          <div class="pnote" data-i18n="ankit_note">"Ankit bhai, your guidance and wisdom have been the backbone of this entire journey. I owe more than words can express."</div>
+          <a href="https://rithora.com" target="_blank" class="alink" data-i18n="ankit_link">🔗 Visit Ankit's Website →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i18n="pcat_rel">👨‍👩‍👧‍👦 Family &amp; Relatives</div>
+      <div class="pgrid">
+        <div class="pcard"><div class="pav">👤</div><div class="pname" data-i18n="rel1">[Name 1]</div><div class="prel" data-i18n="rel_lbl">Relative</div><div class="pnote" data-i18n="rel_note">To be updated by Vivek.</div></div>
+        <div class="pcard"><div class="pav">👤</div><div class="pname" data-i18n="rel2">[Name 2]</div><div class="prel" data-i18n="rel_lbl">Relative</div><div class="pnote" data-i18n="rel_note">To be updated by Vivek.</div></div>
+        <div class="pcard"><div class="pav">👤</div><div class="pname" data-i18n="rel3">[Name 3]</div><div class="prel" data-i18n="rel_lbl">Relative</div><div class="pnote" data-i18n="rel_note">To be updated by Vivek.</div></div>
+      </div>
+      <div class="pend"><strong data-i18n="upd_pend">[ UPDATE PENDING ]</strong><span data-i18n="rel_pend">Send full names list with relationships — everyone you want to acknowledge will be added here with care.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="fi">
+      <div>
+        <a class="flogo" href="#hero">
+          <span class="fvks-wrap" style="position:relative;">
+            <span class="fvks-ghost">VKS</span>
+            <span class="fvks-inner">
+              <span class="fvks-letters"><span class="flv">V</span><span class="flk">K</span><span class="fls">S</span></span>
+              <span class="fvks-line"></span>
+            </span>
+          </span>
+          <span class="ftech" style="padding-left:7px;padding-bottom:2px;display:flex;flex-direction:column;justify-content:flex-end;">
+            <span class="ftech-txt">TECH</span>
+            <span class="ftech-line"></span>
+          </span>
+        </a>
+        <p class="fbp" data-i18n="footer_about">Built by Vivek Kumar — a mechanical engineer who turned 9 years of industry experience into tools that genuinely help people.</p>
+        <div class="floc">📍 Jhajjar, Haryana, India 🇮🇳</div>
+      </div>
+      <div class="fcol"><h4 data-i18n="fc1h">Apps</h4><ul><li><a href="#industry-apps" data-i18n="nav_ind">Industry Apps</a></li><li><a href="#personal-apps" data-i18n="nav_per">Personal Apps</a></li><li><a href="#request-app" data-i18n="nav_req">Request an App</a></li></ul></div>
+      <div class="fcol"><h4 data-i18n="fc2h">Explore</h4><ul><li><a href="#about" data-i18n="nav_about">About Vivek</a></li><li><a href="#people" data-i18n="nav_people">People &amp; Thanks</a></li><li><a href="#hero" data-i18n="fc_top">Back to Top</a></li></ul></div>
+      <div class="fcol"><h4 data-i18n="fc3h">Contact</h4><ul><li><a href="#request-app" data-i18n="nav_req">Request an App</a></li><li><a href="/cdn-cgi/l/email-protection#691f001f0c02291f021a1d0c0a01470a0604"><span class="__cf_email__" data-cfemail="63150a150608231508101706000b4d000c0e">[email&#160;protected]</span></a></li><li><a href="#people" data-i18n="nav_people">Acknowledgements</a></li></ul></div>
+    </div>
+    <div class="fb">
+      <p>© 2025 <strong style="color:rgba(255,255,255,.65);">VKSTech</strong> · <span style="color:rgba(255,255,255,.3);">vkstech.com</span> · Vivek Kumar. <span data-i18n="rights">All Rights Reserved.</span></p>
+      <p><span data-i18n="made_with">Made with</span> <span>♥</span> <span data-i18n="from_hr">from Haryana, India</span></p>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ======================================================
+   TRANSLATIONS
+====================================================== */
+const T = {
+  en: {
+    nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_req:"Request App",
+    nav_about:"About", nav_people:"People", nav_cta:"Request an App",
+    hero_badge:"LIVE — Real Tools from Real Experience",
+    hero_t1:"Apps Built for", hero_t2:"Real Problems", hero_t3:"by a Real Engineer",
+    hero_sub:"Hi, I'm <strong>Vivek Kumar</strong> — M.Tech (GATE), Mechanical Engineer from <strong>NIT Uttarakhand</strong>. 9 years across India's top flexible packaging companies, turning industry experience into tools that actually help.",
+    hero_btn1:"Explore My Apps →", hero_btn2:"Request Your App",
+    stat1:"Years Industry Experience", stat2:"Apps Published", stat3:"Major Companies", stat4:"Ideas in Pipeline",
+    chip_ind:"Industry Tool", chip_prod:"Production", chip_pers:"Personal",
+    hc1_t:"Packaging Calc Pro", hc1_s:"Flexible Packaging Industry",
+    hc2_t:"Film GSM Calculator", hc2_s:"For production planning",
+    hc3_t:"Daily Planner", hc3_s:"Personal efficiency tool",
+    cos_label:"9 Years Across India's Flexible Packaging Leaders",
+    ind_label:"🏭 Flexible Packaging Industry",
+    ind_title:"Apps for <span>Packaging Professionals</span>",
+    ind_sub:"Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.",
+    app1_t:"App #1 — Details Coming", app1_d:"Your first industry application will be listed here. Share the name, description, and key features to update this card and go live.",
+    app2_t:"App #2 — Details Coming", app2_d:"Second tool in your packaging toolkit. Awaiting details to showcase full functionality and benefits for industry professionals.",
+    app3_t:"App #3 — Details Coming", app3_d:"Third tool for the flexible packaging industry. Share name, purpose, and features to complete this card.",
+    app4_t:"Your Next App", app4_d:"More packaging industry tools always in development — costing, production planning, quality checks, and more.",
+    pending:"⏳ Details Pending", soon:"Update Soon →", indev:"In Development", inpipe:"In Pipeline",
+    per_label:"🎯 Personal & Lifestyle",
+    per_title:"Fun, Productivity & <span>Personal Tools</span>",
+    per_sub:"Apps for life beyond work — habit trackers, fun activities, games, and efficiency boosters. Built from personal needs, shared free.",
+    papp1_t:"Personal App #1", papp1_d:"Your personal or fun application will be showcased here. Add the name, description, and screenshot.",
+    papp2_t:"Efficiency App #1", papp2_d:"A personal productivity tool built to improve daily routines, track habits, or plan tasks smarter.",
+    papp3_t:"Fun Activity App", papp3_d:"Something built just for joy — a game, a quiz, a challenge, or anything that brings a smile.",
+    papp4_t:"More on the Way", papp4_d:"Vivek is always building. Upcoming personal apps covering wellness, finance, creativity, and more.",
+    req_label:"📩 App Request Portal",
+    req_title:"Got an <span>Idea?</span> I'll Build It.",
+    req_sub:"Have a problem that needs a digital solution? Vivek will build it completely free for you. If others want to use it, a fair profit-share model applies.",
+    f1t:"Always Free for You", f1d:"The person who requested the app always gets it free — no conditions, no fine print.",
+    f2t:"Fair Profit Sharing", f2d:"If other users benefit commercially from your idea, a transparent revenue-share model applies fairly.",
+    f3t:"Real Engineering Expertise", f3d:"Every app built with M.Tech-level technical knowledge and 9+ years of domain experience.",
+    f4t:"Any Domain Welcome", f4d:"Packaging, farming, education, health, finance, games — no domain is too niche or too simple.",
+    form_title:"Submit Your Idea 💡", form_sub:"Tell Vivek about the problem you want solved",
+    fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
+    ph_name:"Full Name", ph_email:"you@email.com", ph_phone:"+91 XXXXX XXXXX (optional)", ph_title:"Give your idea a name", ph_desc:"What problem do you face? What should the app do?",
+    cat0:"Select a category", cat1:"Flexible Packaging / Manufacturing", cat2:"Agriculture / Farming", cat3:"Education / Learning", cat4:"Personal Productivity", cat5:"Health & Fitness", cat6:"Finance / Accounting", cat7:"Fun / Games / Entertainment", cat8:"Business / Management", cat9:"Other",
+    submit_btn:"Send My App Request 🚀",
+    form_note:"By submitting, you agree Vivek Kumar may publish this app. <strong>You always get it free.</strong> Monetisation for others is discussed with you first.",
+    about_label:"👤 About Me",
+    tl1h:"B.Tech – NIT Uttarakhand", tl1p:"Mechanical Engineering",
+    tl2h:"M.Tech – DCRUST University", tl2p:"Highest Academic Qualification",
+    tl3h:"UFlex Limited, Noida", tl3p:"Flexible Packaging Industry",
+    tl4h:"JPFL Films Pvt. Ltd., Nashik", tl4p:"Films Production & Technology",
+    tl5h:"GLS Polyfilms, Gurawara", tl5p:"Polymer Films Manufacturing",
+    about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>Flexible Packaging professional by career</strong>, and an <strong>app builder by passion</strong>. After 9 years working at UFlex Limited, JPFL Films, and GLS Polyfilms, I've experienced first-hand the daily inefficiencies that slow down professionals in this industry.",
+    about_p2:"That frustration became fuel. I began building tools to automate repetitive calculations, streamline quality processes, and reduce manual errors. What started as personal tools slowly grew into something worth sharing with the whole community.",
+    about_p3:"Beyond the industry, I love building apps that make everyday life more organised, more fun, and less stressful. <strong>VKSTech (vkstech.com)</strong> is the home for all of it.",
+    edu1h:"M.Tech (Through GATE)", edu1p:"DCRUST University — Mechanical Engineering", edu1y:"Highest Qualification",
+    edu2h:"B.Tech – Mechanical Engineering", edu2p:"NIT Uttarakhand",
+    sk1:"Flexible Packaging", sk2:"Polymer Films", sk3:"Production Planning", sk4:"Quality Control", sk5:"App Development", sk6:"GATE Qualified", sk7:"Mechanical Engg.", sk8:"Problem Solving",
+    ppl_label:"❤️ With Gratitude",
+    ppl_title:"The People Behind <span>This Journey</span>",
+    ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
+    pcat_love:"💞 Love of My Life", pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks", pcat_rel:"👨‍👩‍👧‍👦 Family & Relatives",
+    love_name:"[Name to be Added]", love_rel:"Partner & Life Companion", love_note:"\"The one who makes every achievement feel truly worth it. My constant inspiration.\"",
+    love_pend:"Vivek will share the name and a personal note to complete this section.",
+    dad_name:"[Father's Name]", dad_rel:"Father", dad_note:"\"Your sacrifices built the foundation of everything I am today.\"",
+    mom_name:"[Mother's Name]", mom_rel:"Mother", mom_note:"\"Your unconditional love and prayers have carried me through every storm.\"",
+    par_pend:"Share your parents' names and a personal note — this will be updated with love.",
+    ankit_badge:"⭐ Guide & Mentor", ankit_rel:"Cousin & Guiding Light | IT Entrepreneur", ankit_note:"\"Ankit bhai, your guidance, wisdom and constant encouragement have been the backbone of this entire journey. I owe more than words can express.\"",
+    ankit_link:"🌐 Visit Rithora IT Services →", ankit_pend:"",
+    rel1:"[Name 1]", rel2:"[Name 2]", rel3:"[Name 3]", rel_lbl:"Relative", rel_note:"To be updated by Vivek.",
+    rel_pend:"Send full names list with relationships — everyone you want to acknowledge will be added here with care.",
+    upd_pend:"[ UPDATE PENDING ]",
+    footer_about:"Built by Vivek Kumar — a mechanical engineer who turned 9 years of industry experience into tools that genuinely help people.",
+    fc1h:"Apps", fc2h:"Explore", fc3h:"Contact", fc_top:"Back to Top",
+    rights:"All Rights Reserved.", made_with:"Made with", from_hr:"from Haryana, India",
+    toast_title:"Request Submitted!", toast_sub:"Vivek will review your idea soon.",
+    alert_fill:"Please fill in all required fields (*)", alert_ankit:"This spot is reserved for Mr. Ankit's website — a token of appreciation from Vivek. URL will be added soon! 🌟"
+  },
+  hi: {
+    nav_ind:"उद्योग ऐप्स", nav_per:"व्यक्तिगत ऐप्स", nav_req:"ऐप अनुरोध",
+    nav_about:"परिचय", nav_people:"लोग", nav_cta:"ऐप का अनुरोध करें",
+    hero_badge:"LIVE — वास्तविक अनुभव से निर्मित असली उपकरण",
+    hero_t1:"ऐप्स बनाए गए हैं", hero_t2:"असली समस्याओं के लिए", hero_t3:"एक असली इंजीनियर द्वारा",
+    hero_sub:"नमस्ते, मैं <strong>विवेक कुमार</strong> हूँ — M.Tech (GATE), मैकेनिकल इंजीनियर, <strong>NIT उत्तराखंड</strong>। भारत की शीर्ष फ्लेक्सिबल पैकेजिंग कंपनियों में 9 साल का अनुभव, अब उपयोगी टूल्स में बदल रहा हूँ।",
+    hero_btn1:"मेरे ऐप्स देखें →", hero_btn2:"अपना ऐप माँगें",
+    stat1:"साल उद्योग अनुभव", stat2:"ऐप्स प्रकाशित", stat3:"प्रमुख कंपनियाँ", stat4:"विचार पाइपलाइन में",
+    chip_ind:"उद्योग टूल", chip_prod:"उत्पादन", chip_pers:"व्यक्तिगत",
+    hc1_t:"पैकेजिंग कैलक्यूलेटर", hc1_s:"फ्लेक्सिबल पैकेजिंग उद्योग",
+    hc2_t:"फिल्म GSM कैलकुलेटर", hc2_s:"उत्पादन योजना के लिए",
+    hc3_t:"डेली प्लानर", hc3_s:"व्यक्तिगत दक्षता उपकरण",
+    cos_label:"भारत के शीर्ष फ्लेक्सिबल पैकेजिंग कंपनियों में 9 साल",
+    ind_label:"🏭 फ्लेक्सिबल पैकेजिंग उद्योग",
+    ind_title:"<span>पैकेजिंग पेशेवरों</span> के लिए ऐप्स",
+    ind_sub:"उत्पादन, गुणवत्ता नियंत्रण और तकनीकी भूमिकाओं में 9 साल के व्यावहारिक अनुभव से निर्मित।",
+    app1_t:"ऐप #1 — विवरण शीघ्र आएगा", app1_d:"आपका पहला उद्योग आवेदन यहाँ सूचीबद्ध होगा। नाम, विवरण और मुख्य विशेषताएँ साझा करें।",
+    app2_t:"ऐप #2 — विवरण शीघ्र आएगा", app2_d:"आपके पैकेजिंग टूलकिट में दूसरा उपकरण। पूरी कार्यक्षमता दिखाने के लिए विवरण की प्रतीक्षा है।",
+    app3_t:"ऐप #3 — विवरण शीघ्र आएगा", app3_d:"फ्लेक्सिबल पैकेजिंग उद्योग के लिए तीसरा उपकरण। नाम, उद्देश्य और विशेषताएँ साझा करें।",
+    app4_t:"आगे और ऐप्स", app4_d:"पैकेजिंग उद्योग के और टूल्स हमेशा विकास में — लागत, उत्पादन योजना, गुणवत्ता जाँच आदि।",
+    pending:"⏳ विवरण अपेक्षित", soon:"शीघ्र अपडेट →", indev:"विकास में", inpipe:"पाइपलाइन में",
+    per_label:"🎯 व्यक्तिगत और जीवनशैली",
+    per_title:"मनोरंजन, उत्पादकता और <span>व्यक्तिगत उपकरण</span>",
+    per_sub:"काम से परे जीवन के लिए ऐप्स — आदत ट्रैकर, मज़ेदार गतिविधियाँ, गेम्स और दक्षता बूस्टर।",
+    papp1_t:"व्यक्तिगत ऐप #1", papp1_d:"आपका व्यक्तिगत या मज़ेदार ऐप यहाँ दिखाया जाएगा। नाम, विवरण और स्क्रीनशॉट जोड़ें।",
+    papp2_t:"दक्षता ऐप #1", papp2_d:"दैनिक दिनचर्या सुधारने, आदतें ट्रैक करने या कार्य योजना बनाने के लिए व्यक्तिगत उत्पादकता उपकरण।",
+    papp3_t:"मज़ेदार गतिविधि ऐप", papp3_d:"केवल आनंद के लिए बना — एक गेम, एक क्विज़, एक चुनौती, या कुछ भी जो मुस्कान लाए।",
+    papp4_t:"और आ रहे हैं", papp4_d:"विवेक हमेशा कुछ न कुछ बना रहे हैं। स्वास्थ्य, वित्त, रचनात्मकता के ऐप्स आने वाले हैं।",
+    req_label:"📩 ऐप अनुरोध पोर्टल",
+    req_title:"आपके पास <span>कोई विचार है?</span> मैं बनाऊँगा।",
+    req_sub:"क्या आपके पास कोई ऐसी समस्या है जिसके लिए डिजिटल समाधान चाहिए? विवेक आपके लिए बिल्कुल मुफ़्त बनाएँगे।",
+    f1t:"आपके लिए हमेशा मुफ़्त", f1d:"जिस व्यक्ति ने ऐप माँगा, उसे हमेशा मुफ़्त मिलेगा — कोई शर्त नहीं।",
+    f2t:"उचित लाभ साझाकरण", f2d:"यदि अन्य उपयोगकर्ता आपके विचार से व्यावसायिक लाभ उठाते हैं, तो पारदर्शी राजस्व-हिस्सा मॉडल लागू होता है।",
+    f3t:"वास्तविक इंजीनियरिंग विशेषज्ञता", f3d:"हर ऐप M.Tech स्तर के तकनीकी ज्ञान और 9+ वर्षों के अनुभव से बनाया जाता है।",
+    f4t:"कोई भी क्षेत्र स्वागत योग्य", f4d:"पैकेजिंग, खेती, शिक्षा, स्वास्थ्य, वित्त, गेम्स — कोई भी क्षेत्र बहुत छोटा नहीं है।",
+    form_title:"अपना विचार भेजें 💡", form_sub:"विवेक को बताएं कि आप क्या समाधान चाहते हैं",
+    fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
+    ph_name:"पूरा नाम", ph_email:"आप@ईमेल.com", ph_phone:"+91 XXXXX XXXXX (वैकल्पिक)", ph_title:"अपने विचार को नाम दें", ph_desc:"आप किस समस्या का सामना करते हैं? ऐप क्या करना चाहिए?",
+    cat0:"श्रेणी चुनें", cat1:"फ्लेक्सिबल पैकेजिंग / विनिर्माण", cat2:"कृषि / खेती", cat3:"शिक्षा / सीखना", cat4:"व्यक्तिगत उत्पादकता", cat5:"स्वास्थ्य और फिटनेस", cat6:"वित्त / लेखांकन", cat7:"मनोरंजन / गेम्स", cat8:"व्यापार / प्रबंधन", cat9:"अन्य",
+    submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
+    form_note:"सबमिट करके आप सहमत हैं कि विवेक कुमार इस ऐप को प्रकाशित कर सकते हैं। <strong>आपको हमेशा मुफ़्त मिलेगा।</strong> अन्य के लिए मुद्रीकरण पहले आपसे चर्चा करके होगा।",
+    about_label:"👤 मेरे बारे में",
+    tl1h:"B.Tech – NIT उत्तराखंड", tl1p:"मैकेनिकल इंजीनियरिंग",
+    tl2h:"M.Tech – DCRUST विश्वविद्यालय", tl2p:"सर्वोच्च शैक्षणिक योग्यता",
+    tl3h:"UFlex Limited, नोएडा", tl3p:"फ्लेक्सिबल पैकेजिंग उद्योग",
+    tl4h:"JPFL Films Pvt. Ltd., नासिक", tl4p:"फिल्म उत्पादन और तकनीक",
+    tl5h:"GLS Polyfilms, गुरावरा", tl5p:"पॉलिमर फिल्म निर्माण",
+    about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>करियर से फ्लेक्सिबल पैकेजिंग पेशेवर</strong> और <strong>जुनून से ऐप निर्माता</strong> हूँ। UFlex, JPFL Films और GLS Polyfilms में 9 साल काम करके मैंने उद्योग की दैनिक अक्षमताओं को स्वयं महसूस किया।",
+    about_p2:"वह निराशा ईंधन बन गई। मैंने दोहराई जाने वाली गणनाओं को स्वचालित करने, गुणवत्ता प्रक्रियाओं को सुव्यवस्थित करने के लिए उपकरण बनाने शुरू किए।",
+    about_p3:"उद्योग से परे, मुझे ऐसे ऐप्स बनाना पसंद है जो रोज़मर्रा की ज़िंदगी को अधिक व्यवस्थित और कम तनावपूर्ण बनाएं। <strong>VKSTech (vkstech.com)</strong> इन सबका घर है।",
+    edu1h:"M.Tech (GATE के माध्यम से)", edu1p:"DCRUST विश्वविद्यालय — मैकेनिकल इंजीनियरिंग", edu1y:"सर्वोच्च योग्यता",
+    edu2h:"B.Tech – मैकेनिकल इंजीनियरिंग", edu2p:"NIT उत्तराखंड",
+    sk1:"फ्लेक्सिबल पैकेजिंग", sk2:"पॉलिमर फिल्म्स", sk3:"उत्पादन योजना", sk4:"गुणवत्ता नियंत्रण", sk5:"ऐप विकास", sk6:"GATE योग्य", sk7:"मैकेनिकल इंजी.", sk8:"समस्या समाधान",
+    ppl_label:"❤️ आभार के साथ",
+    ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
+    ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
+    pcat_love:"💞 मेरे जीवन का प्यार", pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद", pcat_rel:"👨‍👩‍👧‍👦 परिवार और रिश्तेदार",
+    love_name:"[नाम जोड़ा जाएगा]", love_rel:"जीवनसाथी", love_note:"\"वो जो हर उपलब्धि को सच में सार्थक बनाते हैं। मेरी निरंतर प्रेरणा।\"",
+    love_pend:"विवेक इस अनुभाग को पूर्ण करने के लिए नाम और व्यक्तिगत नोट साझा करेंगे।",
+    dad_name:"[पिताजी का नाम]", dad_rel:"पिता", dad_note:"\"आपके बलिदानों ने मेरे हर चीज़ की नींव रखी।\"",
+    mom_name:"[माताजी का नाम]", mom_rel:"माता", mom_note:"\"आपके निस्वार्थ प्रेम और प्रार्थनाओं ने मुझे हर तूफ़ान में थामे रखा।\"",
+    par_pend:"माता-पिता का नाम और व्यक्तिगत नोट साझा करें — प्यार के साथ अपडेट किया जाएगा।",
+    ankit_badge:"⭐ मार्गदर्शक और गुरु", ankit_rel:"भाई और मार्गदर्शक प्रकाश", ankit_note:"\"अंकित भाई, आपका मार्गदर्शन और ज्ञान इस पूरी यात्रा की रीढ़ रहे हैं। शब्दों से अधिक का ऋणी हूँ।\"",
+    ankit_link:"🔗 अंकित की वेबसाइट देखें →", ankit_pend:"अंकित भाई की वेबसाइट URL साझा करें — सराहना के प्रतीक के रूप में यहाँ प्रकाशित की जाएगी।",
+    rel1:"[नाम 1]", rel2:"[नाम 2]", rel3:"[नाम 3]", rel_lbl:"रिश्तेदार", rel_note:"विवेक द्वारा अपडेट किया जाएगा।",
+    rel_pend:"पूरी नामों की सूची रिश्तों के साथ भेजें — सभी को यहाँ सावधानी से जोड़ा जाएगा।",
+    upd_pend:"[ अपडेट होने वाला है ]",
+    footer_about:"विवेक कुमार द्वारा बनाया गया — एक मैकेनिकल इंजीनियर जिसने 9 साल के उद्योग अनुभव को लोगों की मदद करने वाले उपकरणों में बदला।",
+    fc1h:"ऐप्स", fc2h:"अन्वेषण करें", fc3h:"संपर्क", fc_top:"शीर्ष पर वापस",
+    rights:"सर्वाधिकार सुरक्षित।", made_with:"बनाया गया", from_hr:"हरियाणा, भारत से",
+    toast_title:"अनुरोध सबमिट हुआ!", toast_sub:"विवेक शीघ्र ही आपके विचार की समीक्षा करेंगे।",
+    alert_fill:"कृपया सभी आवश्यक फ़ील्ड (*) भरें", alert_ankit:"यह स्थान अंकित भाई की वेबसाइट के लिए आरक्षित है — विवेक की सराहना का प्रतीक। URL शीघ्र जोड़ा जाएगा! 🌟"
+  },
+  or: {
+    nav_ind:"ଶିଳ୍ପ ଆପ୍", nav_per:"ବ୍ୟକ୍ତିଗତ ଆପ୍", nav_req:"ଆପ୍ ଅନୁରୋଧ",
+    nav_about:"ପରିଚୟ", nav_people:"ଲୋକ", nav_cta:"ଆପ୍ ଅନୁରୋଧ କରନ୍ତୁ",
+    hero_badge:"LIVE — ପ୍ରକୃତ ଅଭିଜ୍ଞତାରୁ ନିର୍ମିତ ଉପକରଣ",
+    hero_t1:"ଆପ୍ ତୈରି ହୋଇଛି", hero_t2:"ପ୍ରକୃତ ସମସ୍ୟା ପାଇଁ", hero_t3:"ଜଣେ ପ୍ରକୃତ ଇଞ୍ଜିନୀୟର ଦ୍ୱାରା",
+    hero_sub:"ନମସ୍କାର, ମୁଁ <strong>ବିବେକ କୁମାର</strong> — M.Tech (GATE), ମେକାନିକଲ ଇଞ୍ଜିନୀୟର, <strong>NIT ଉତ୍ତରାଖଣ୍ଡ</strong>। ଭାରତର ଶୀର୍ଷ ଫ୍ଲେକ୍ସିବଲ୍ ପ୍ୟାକେଜିଂ କମ୍ପାନୀଗୁଡ଼ିକରେ 9 ବର୍ଷ, ଉପଯୋଗୀ ଉପକରଣ ତୈରି କରୁଛି।",
+    hero_btn1:"ମୋ ଆପ୍ ଦେଖନ୍ତୁ →", hero_btn2:"ଆପ୍ ଅନୁରୋଧ କରନ୍ତୁ",
+    stat1:"ବର୍ଷ ଶିଳ୍ପ ଅଭିଜ୍ଞତା", stat2:"ଆପ୍ ପ୍ରକାଶିତ", stat3:"ପ୍ରମୁଖ କମ୍ପାନୀ", stat4:"ପାଇପଲାଇନ୍‌ରେ ଧାରଣା",
+    chip_ind:"ଶିଳ୍ପ ଉପକରଣ", chip_prod:"ଉତ୍ପାଦନ", chip_pers:"ବ୍ୟକ୍ତିଗତ",
+    hc1_t:"ପ୍ୟାକେଜିଂ କ୍ୟାଲ୍‌କ୍ ପ୍ରୋ", hc1_s:"ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ ଶିଳ୍ପ",
+    hc2_t:"ଫିଲ୍ମ GSM କ୍ୟାଲ୍‌କ.", hc2_s:"ଉତ୍ପାଦନ ଯୋଜନା ପାଇଁ",
+    hc3_t:"ଦୈନିକ ଯୋଜନାକାରୀ", hc3_s:"ବ୍ୟକ୍ତିଗତ ଦକ୍ଷତା ଉପକରଣ",
+    cos_label:"ଭାରତର ଶୀର୍ଷ ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ କମ୍ପାନୀଗୁଡ଼ିକରେ 9 ବର୍ଷ",
+    ind_label:"🏭 ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ ଶିଳ୍ପ",
+    ind_title:"<span>ପ୍ୟାକେଜିଂ ବୃତ୍ତିଧାରୀ</span>ଙ୍କ ପାଇଁ ଆପ୍",
+    ind_sub:"ଉତ୍ପାଦନ, ଗୁଣବତ୍ତା ନିୟନ୍ତ୍ରଣ ଏବଂ ବ୍ୟବହାରିକ ଭୂମିକାରେ 9 ବର୍ଷ ଅଭିଜ୍ଞତାରୁ ନିର୍ମିତ।",
+    app1_t:"ଆପ୍ #1 — ବିବରଣ ଶୀଘ୍ର ଆସିବ", app1_d:"ଆପଣଙ୍କ ପ୍ରଥମ ଶିଳ୍ପ ଆପ୍ ଏଠାରେ ତାଲିକାଭୁକ୍ତ ହେବ। ନାମ ଏବଂ ବିବରଣ ଶେୟାର କରନ୍ତୁ।",
+    app2_t:"ଆପ୍ #2 — ବିବରଣ ଶୀଘ୍ର ଆସିବ", app2_d:"ଆପଣଙ୍କ ଟୁଲ୍‌କିଟ୍‌ର ଦ୍ୱିତୀୟ ଉପକରଣ। ସ୍ୱତ୍ ସ୍ୱୀକୃତ ପ୍ରଦଶ୍ର୍ଶ ବିବରଣ ଅପେକ୍ଷା।",
+    app3_t:"ଆପ୍ #3 — ବିବରଣ ଶୀଘ୍ର ଆସିବ", app3_d:"ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ ଶିଳ୍ପ ପାଇଁ ତୃତୀୟ ଉପକରଣ। ନାମ ଓ ବିବରଣ ଶେୟାର କରନ୍ତୁ।",
+    app4_t:"ଆଉ ଅଧିକ ଆସୁଛି", app4_d:"ପ୍ୟାକେଜିଂ ଶିଳ୍ପ ଉପକରଣ ସର୍ବଦା ବିକଶିତ ହେଉଛି। ସ୍ଥିର ରୁହନ୍ତୁ।",
+    pending:"⏳ ବିବରଣ ଅପେକ୍ଷିତ", soon:"ଶୀଘ୍ର ଅପଡେଟ →", indev:"ବିକଶିତ ହେଉଛି", inpipe:"ପାଇପ୍‌ଲାଇନ୍‌ରେ",
+    per_label:"🎯 ବ୍ୟକ୍ତିଗତ ଓ ଜୀବନଶୈଳୀ",
+    per_title:"ମଜା, ଦକ୍ଷତା ଏବଂ <span>ବ୍ୟକ୍ତିଗତ ଉପକରଣ</span>",
+    per_sub:"କାର୍ଯ୍ୟ ବାହାରେ ଜୀବନ ପାଇଁ ଆପ୍ — ଅଭ୍ୟାସ ଟ୍ରାକର, ଗେମ୍, ଦକ୍ଷତା ବୁଷ୍ଟର।",
+    papp1_t:"ବ୍ୟକ୍ତିଗତ ଆପ୍ #1", papp1_d:"ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ଆପ୍ ଏଠାରେ ପ୍ରଦର୍ଶିତ ହେବ।",
+    papp2_t:"ଦକ୍ଷତା ଆପ୍ #1", papp2_d:"ଦୈନନ୍ଦିନ ରୁଟିନ ଉନ୍ନତ କରିବା ପାଇଁ ଉତ୍ପାଦକତା ଉପକରଣ।",
+    papp3_t:"ମଜା କ୍ରିୟାକଳାପ ଆପ୍", papp3_d:"କେବଳ ଆନନ୍ଦ ପାଇଁ — ଗେମ୍, କ୍ୱିଜ୍, ଚ୍ୟାଲେଞ୍ଜ ଯାହା ହଁ ବ‌ ହ‍ ‍ ।",
+    papp4_t:"ଆଉ ଅଧିକ ଆସୁଛି", papp4_d:"ବିବେକ ସର୍ବଦା ନିର୍ମାଣ କରୁଛନ୍ତି। ଆଗ ଆସୁଛି ଅଧିକ ଆପ୍।",
+    req_label:"📩 ଆପ୍ ଅନୁରୋଧ ପୋର୍ଟାଲ",
+    req_title:"ଆପଣଙ୍କ ପାଖରେ <span>ଧାରଣା ଅଛି?</span> ମୁଁ ତୈରି କରିବି।",
+    req_sub:"ଡିଜିଟାଲ ସମାଧାନ ଦରକାର? ବିବେକ ଆପଣ ପାଇଁ ସଂପୂର୍ଣ ମୁଫ୍ ତୈରି କରିବେ।",
+    f1t:"ଆପଣ ପାଇଁ ସଦା ମୁଫ୍", f1d:"ଯେ ଅନୁରୋଧ କଲେ, ସେ ସର୍ବଦା ମୁଫ୍ ପାଇବେ।",
+    f2t:"ନ୍ୟାଯ୍ୟ ଲାଭ ଭାଗ", f2d:"ଅନ୍ୟ ଉପଯୋଗକର୍ତ୍ତା ଆପଣଙ୍କ ଧାରଣାରୁ ଲାଭ ପାଇଲେ ରାଜସ୍ୱ ଭାଗ ମଡେଲ ପ୍ରଯୁଜ୍ୟ।",
+    f3t:"ପ୍ରକୃତ ଇଞ୍ଜିନୀୟରିଂ ଦକ୍ଷତା", f3d:"ପ୍ରତ୍ୟେକ ଆପ୍ M.Tech ଜ୍ଞାନ ଓ 9+ ବର୍ଷ ଅଭିଜ୍ଞତାରେ ନିର୍ମିତ।",
+    f4t:"ଯେ କୌଣସି ଡୋମେନ୍ ସ୍ୱାଗତ", f4d:"ପ୍ୟାକେଜିଂ, କୃଷି, ଶିକ୍ଷା, ସ୍ୱାସ୍ଥ୍ୟ, ଗେମ୍ — ଯୁ କ୍ ‍ ‌ ।",
+    form_title:"ଆପଣଙ୍କ ଧାରଣା ଦିଅନ୍ତୁ 💡", form_sub:"ବିବେକଙ୍କୁ ଜଣାନ୍ତୁ ଆପଣ କ'ଣ ଚାହୁଁଛନ୍ତି",
+    fl_name:"ଆପଣଙ୍କ ନାମ *", fl_email:"ଇ-ମେଲ୍ *", fl_phone:"ଫୋନ / WhatsApp", fl_cat:"ବର୍ଗ *", fl_title:"ଆପ୍ ଶୀର୍ଷକ *", fl_desc:"ସମସ୍ୟାର ବିବରଣ *",
+    ph_name:"ପୂରା ନାମ", ph_email:"ଆପଣ@ଇମେଲ.com", ph_phone:"+91 XXXXX (ଐଚ୍ଛିକ)", ph_title:"ଧାରଣାକୁ ନାମ ଦିଅନ୍ତୁ", ph_desc:"ସମସ୍ୟା କ'ଣ? ଆପ୍ କ'ଣ କରିବ?",
+    cat0:"ବର୍ଗ ବାଛନ୍ତୁ", cat1:"ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ/ଉତ୍ପାଦନ", cat2:"କୃଷି", cat3:"ଶିକ୍ଷା", cat4:"ବ୍ୟକ୍ତିଗତ ଦକ୍ଷତା", cat5:"ସ୍ୱାସ୍ଥ୍ୟ ଓ ଫିଟ୍‌ନେସ", cat6:"ଅର୍ଥ/ହିସାବ", cat7:"ମଜା/ଗେମ୍ス", cat8:"ବ୍ୟବସାୟ", cat9:"ଅନ୍ୟ",
+    submit_btn:"ଅନୁରୋଧ ପଠାନ୍ତୁ 🚀",
+    form_note:"ଦାଖଲ କରି ଆପଣ ସ୍ୱୀକାର କରୁଛନ୍ତି ଯେ ବିବେକ ଏହି ଆପ୍ ପ୍ରକାଶ କରିପାରିବେ। <strong>ଆପଣ ସର୍ବଦା ମୁଫ୍ ପାଇବେ।</strong>",
+    about_label:"👤 ମୋ ବିଷୟରେ",
+    tl1h:"B.Tech – NIT ଉତ୍ତରାଖଣ୍ଡ", tl1p:"ମେକାନିକଲ ଇଞ୍ଜିନୀୟରିଂ",
+    tl2h:"M.Tech – DCRUST ବିଶ୍ୱବିଦ୍ୟାଳୟ", tl2p:"ସର୍ବୋଚ୍ଚ ଶୈକ୍ଷଣିକ ଯୋଗ୍ୟତା",
+    tl3h:"UFlex Limited, ନୋଏଡା", tl3p:"ଫ୍ଲେକ୍ସ. ପ୍ୟାକେଜିଂ ଶିଳ୍ପ",
+    tl4h:"JPFL Films, ନାଶିକ", tl4p:"ଫିଲ୍ମ ଉତ୍ପାଦନ ଓ ବ‍ ‍‌ ‍‌ ‌",
+    tl5h:"GLS Polyfilms, ଗୁରାୱାରା", tl5p:"ପଲ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌",
+    about_p1:"ମୁଁ <strong>ପ୍ରଶିକ୍ଷଣ ଦ୍ୱାରା ମେକ. ଇଞ୍ଜ.</strong>, <strong>କ୍ୟାରିୟର ଦ୍ୱାରା ପ୍ୟାକ. ପ୍ରଫେ.</strong> ଏବଂ <strong>ଆଗ୍ରହ ଦ୍ୱାରା ଆପ୍ ନିର୍ମାତା</strong>। 9 ବର୍ଷ ଅଭିଜ୍ଞତା।",
+    about_p2:"ସେ ନିରାଶା ଇନ୍ଧନ ହୋଇଗଲା। ମୁଁ ଉଦ୍ୟୋଗ ସମସ୍ୟା ସ୍ୱୟଂଚଳିତ ଉପକରଣ ନିର୍ମାଣ ଆରମ୍ଭ କଲି।",
+    about_p3:"<strong>VKSTech (vkstech.com)</strong> ଏ ସବୁ ଜିନିଷର ଘର।",
+    edu1h:"M.Tech (GATE ଦ୍ୱାରା)", edu1p:"DCRUST — ମେ. ଇଞ୍ଜ.", edu1y:"ସର୍ବୋଚ୍ଚ ଯୋଗ୍ୟତା",
+    edu2h:"B.Tech – ମେ. ଇଞ୍ଜ.", edu2p:"NIT ଉତ୍ତରାଖଣ୍ଡ",
+    sk1:"ଫ୍ଲେ. ପ୍ୟାକ.", sk2:"ପ. ଫିଲ୍ମ", sk3:"ଉ. ଯୋଜନା", sk4:"ଗୁ. ନିୟ.", sk5:"ଆ. ବି.", sk6:"GATE", sk7:"ମେ. ଇଞ୍ଜ.", sk8:"ସ. ସ.",
+    ppl_label:"❤️ କୃତଜ୍ଞତା ସହ",
+    ppl_title:"ଏ ଯାତ୍ରା ପଛରେ <span>ଥିବା ଲୋକ</span>",
+    ppl_sub:"ପ୍ରତ୍ୟେକ ସଫଳତା ପଛରେ ଯେଉଁ ଲୋକ ଅଛନ୍ତି।",
+    pcat_love:"💞 ଜୀବନର ପ୍ରେମ", pcat_par:"🙏 ମୋ ବାପା-ମା", pcat_spec:"⭐ ବିଶେଷ ଧନ୍ୟବାଦ", pcat_rel:"👨‍👩‍👧‍👦 ପରିବାର ଓ ସ. ସ.",
+    love_name:"[ନାମ ଯୋଡ଼ା ଯିବ]", love_rel:"ଜୀବନ ସଙ୍ଗୀ", love_note:"\"ଯିଏ ପ୍ରତ୍ୟେକ ସ. ଙ୍କୁ ଅ. ବ. ।\"",
+    love_pend:"ବିବେକ ନାମ ଓ ବ. ‌ ‍ ‌ ।",
+    dad_name:"[ବାପାଙ୍କ ନାମ]", dad_rel:"ବାପା", dad_note:"\"ଆ. ‌ ‍ ‌ ।\"",
+    mom_name:"[ମାଆଙ୍କ ନାମ]", mom_rel:"ମାଆ", mom_note:"\"ଆ. ‌ ‍ ‌ ।\"",
+    par_pend:"ନାମ ଓ ନୋଟ ଶେ. — ᤵ ‌ ‍ ।",
+    ankit_badge:"⭐ ଗ. ‌ ‍ ‌", ankit_rel:"ଭ. ‌ ‍ ‌ ‍", ankit_note:"\"ଅ. ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌।\"",
+    ankit_link:"🔗 ଅ. ‌ ‍ →", ankit_pend:"ଅ. ‌ ‍ URL ‌ ‍ ‌ ‍ ‌ ‍ ।",
+    rel1:"[ନ. 1]", rel2:"[ନ. 2]", rel3:"[ନ. 3]", rel_lbl:"ସ. ‌", rel_note:"ବ. ‌ ‍ ‌ ।",
+    rel_pend:"ସ. ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌।",
+    upd_pend:"[ ✏ ‌ ‍ ‌ ‍ ]",
+    footer_about:"ବ. ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌।",
+    fc1h:"ଆ.", fc2h:"ଅ. ‌", fc3h:"ଯ. ‌", fc_top:"ଉ. ‌ ‍ →",
+    rights:"ସ. ‌ ‍ ‌।", made_with:"ତ. ‌ ‍ ‌ ‍", from_hr:"ହ., ‌ ‍ ‌",
+    toast_title:"ଅ. ‌ ‍ ‌!", toast_sub:"ବ. ‌ ‍ ‌ ‍ ।",
+    alert_fill:"ସ. ‌ ‍ * ‌ ‍ ‌ ।", alert_ankit:"ଏ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍ URL ‌ ‍ ‌ ‍ ‌ ‍ ‌ ‍! 🌟"
+  },
+  kn: {
+    nav_ind:"ಉದ್ಯಮ ಅಪ್ಲಿಕೇಶನ್", nav_per:"ವೈಯಕ್ತಿಕ ಅಪ್ಲಿಕೇಶನ್", nav_req:"ಅಪ್ ವಿನಂತಿ",
+    nav_about:"ಪರಿಚಯ", nav_people:"ಜನರು", nav_cta:"ಅಪ್ ವಿನಂತಿಸಿ",
+    hero_badge:"LIVE — ನಿಜ ಅನುಭವದಿಂದ ನಿರ್ಮಿತ ಉಪಕರಣಗಳು",
+    hero_t1:"ಅಪ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಲಾಗಿದೆ", hero_t2:"ನಿಜ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ", hero_t3:"ನಿಜ ಎಂಜಿನಿಯರ್‌ನಿಂದ",
+    hero_sub:"ನಮಸ್ಕಾರ, ನಾನು <strong>ವಿವೇಕ್ ಕುಮಾರ್</strong> — M.Tech (GATE), ಮೆಕ್ಯಾನಿಕಲ್ ಎಂಜಿನಿಯರ್, <strong>NIT ಉತ್ತರಾಖಂಡ</strong>. ಭಾರತದ ಅಗ್ರ ಫ್ಲೆಕ್ಸಿಬಲ್ ಪ್ಯಾಕೇಜಿಂಗ್ ಕಂಪನಿಗಳಲ್ಲಿ 9 ವರ್ಷಗಳ ಅನುಭವ.",
+    hero_btn1:"ನನ್ನ ಅಪ್‌ಗಳನ್ನು ನೋಡಿ →", hero_btn2:"ನಿಮ್ಮ ಅಪ್ ಕೇಳಿ",
+    stat1:"ವರ್ಷಗಳ ಉದ್ಯಮ ಅನುಭವ", stat2:"ಅಪ್‌ಗಳು ಪ್ರಕಾಶಿತ", stat3:"ಪ್ರಮುಖ ಕಂಪನಿಗಳು", stat4:"ಪೈಪ್‌ಲೈನ್‌ನಲ್ಲಿ ಐಡಿಯಾಗಳು",
+    chip_ind:"ಉದ್ಯಮ ಉಪಕರಣ", chip_prod:"ಉತ್ಪಾದನೆ", chip_pers:"ವೈಯಕ್ತಿಕ",
+    hc1_t:"ಪ್ಯಾಕೇಜಿಂಗ್ ಕ್ಯಾಲ್ಕ್ ಪ್ರೊ", hc1_s:"ಫ್ಲೆಕ್ಸಿಬಲ್ ಪ್ಯಾಕೇಜಿಂಗ್",
+    hc2_t:"ಫಿಲ್ಮ್ GSM ಕ್ಯಾಲ್ಕ್.", hc2_s:"ಉತ್ಪಾದನ ಯೋಜನೆಗಾಗಿ",
+    hc3_t:"ದೈನಂದಿನ ಯೋಜಕ", hc3_s:"ವೈಯಕ್ತಿಕ ದಕ್ಷತೆ ಉಪಕರಣ",
+    cos_label:"ಭಾರತದ ಅಗ್ರ ಫ್ಲೆ. ಪ್ಯಾಕ್. ಕಂಪನಿಗಳಲ್ಲಿ 9 ವರ್ಷ",
+    ind_label:"🏭 ಫ್ಲೆಕ್ಸಿಬಲ್ ಪ್ಯಾಕೇಜಿಂಗ್ ಉದ್ಯಮ",
+    ind_title:"<span>ಪ್ಯಾಕೇಜಿಂಗ್ ವೃತ್ತಿಪರರಿಗಾಗಿ</span> ಅಪ್‌ಗಳು",
+    ind_sub:"ಉತ್ಪಾದನೆ, ಗುಣಮಟ್ಟ ನಿಯಂತ್ರಣ ಮತ್ತು ತಾಂತ್ರಿಕ ಪಾತ್ರಗಳಲ್ಲಿ 9 ವರ್ಷಗಳ ಪ್ರಾಯೋಗಿಕ ಅನುಭವದಿಂದ ನಿರ್ಮಿತ.",
+    app1_t:"ಅಪ್ #1 — ವಿವರಗಳು ಶೀಘ್ರ", app1_d:"ನಿಮ್ಮ ಮೊದಲ ಉದ್ಯಮ ಅಪ್ ಇಲ್ಲಿ ಪಟ್ಟಿ ಆಗುತ್ತದೆ. ಹೆಸರು ಮತ್ತು ವಿವರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+    app2_t:"ಅಪ್ #2 — ವಿವರಗಳು ಶೀಘ್ರ", app2_d:"ನಿಮ್ಮ ಟೂಲ್‌ಕಿಟ್‌ನ ಎರಡನೇ ಉಪಕರಣ. ಸಂಪೂರ್ಣ ವಿವರಗಳ ನಿರೀಕ್ಷೆ.",
+    app3_t:"ಅಪ್ #3 — ವಿವರಗಳು ಶೀಘ್ರ", app3_d:"ಫ್ಲೆ. ಪ್ಯಾಕ್. ಉದ್ಯಮದ ಮೂರನೇ ಉಪಕರಣ. ಹೆಸರು ಮತ್ತು ವಿಶೇಷತೆಗಳನ್ನು ಹಂಚಿ.",
+    app4_t:"ಇನ್ನಷ್ಟು ಬರಲಿದೆ", app4_d:"ಪ್ಯಾಕೇಜಿಂಗ್ ಉಪಕರಣಗಳು ಯಾವಾಗಲೂ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿವೆ. ನಿರೀಕ್ಷಿಸಿ.",
+    pending:"⏳ ವಿವರಗಳ ನಿರೀಕ್ಷೆ", soon:"ಶೀಘ್ರ ಅಪ್‌ಡೇಟ್ →", indev:"ಅಭಿವೃದ್ಧಿಯಲ್ಲಿ", inpipe:"ಪೈಪ್‌ಲೈನ್‌ನಲ್ಲಿ",
+    per_label:"🎯 ವೈಯಕ್ತಿಕ ಮತ್ತು ಜೀವನಶೈಲಿ",
+    per_title:"ಮೋಜು, ಉತ್ಪಾದಕತೆ ಮತ್ತು <span>ವೈಯಕ್ತಿಕ ಉಪಕರಣಗಳು</span>",
+    per_sub:"ಕೆಲಸದ ಹೊರಗಿನ ಜೀವನಕ್ಕಾಗಿ — ಅಭ್ಯಾಸ ಟ್ರ್ಯಾಕರ್, ಆಟಗಳು, ದಕ್ಷತೆ ಬೂಸ್ಟರ್.",
+    papp1_t:"ವೈಯ. ಅಪ್ #1", papp1_d:"ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಅಪ್ ಇಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲಾಗುತ್ತದೆ.",
+    papp2_t:"ದಕ್ಷತೆ ಅಪ್ #1", papp2_d:"ದೈನಂದಿನ ದಿನಚರಿ ಸುಧಾರಿಸಲು ಉಪಕರಣ.",
+    papp3_t:"ಮೋಜಿನ ಅಪ್", papp3_d:"ಕೇವಲ ಆನಂದಕ್ಕಾಗಿ — ಆಟ, ಕ್ವಿಜ್, ಸವಾಲು.",
+    papp4_t:"ಇನ್ನಷ್ಟು ಬರಲಿದೆ", papp4_d:"ವಿವೇಕ್ ಯಾವಾಗಲೂ ನಿರ್ಮಿಸುತ್ತಿರುತ್ತಾರೆ.",
+    req_label:"📩 ಅಪ್ ವಿನಂತಿ ಪೋರ್ಟಲ್",
+    req_title:"ಐಡಿಯಾ ಇದೆಯೇ? <span>ನಾನು ಮಾಡುತ್ತೇನೆ.</span>",
+    req_sub:"ಡಿಜಿಟಲ್ ಪರಿಹಾರ ಬೇಕೇ? ವಿವೇಕ್ ನಿಮಗಾಗಿ ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿ ನಿರ್ಮಿಸುತ್ತಾರೆ.",
+    f1t:"ನಿಮಗೆ ಯಾವಾಗಲೂ ಉಚಿತ", f1d:"ವಿನಂತಿ ಮಾಡಿದ ವ್ಯಕ್ತಿಗೆ ಯಾವಾಗಲೂ ಉಚಿತ.",
+    f2t:"ನ್ಯಾಯಯುತ ಲಾಭ ಹಂಚಿಕೆ", f2d:"ಇತರರು ಬಳಸಿದರೆ ಪಾರದರ್ಶಕ ಆದಾಯ ಹಂಚಿಕೆ ಮಾದರಿ.",
+    f3t:"ನಿಜ ಎಂಜಿನಿಯರಿಂಗ್ ಪರಿಣತಿ", f3d:"M.Tech ತಾಂತ್ರಿಕ ಜ್ಞಾನ ಮತ್ತು 9+ ವರ್ಷಗಳ ಅನುಭವ.",
+    f4t:"ಯಾವ ಡೊಮೇನ್ ಆದರೂ ಸ್ವಾಗತ", f4d:"ಪ್ಯಾಕ್., ಕೃಷಿ, ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ, ಆಟ — ಎಲ್ಲ ಸ್ವಾಗತ.",
+    form_title:"ನಿಮ್ಮ ಐಡಿಯಾ ಸಲ್ಲಿಸಿ 💡", form_sub:"ವಿವೇಕ್‌ಗೆ ನಿಮ್ಮ ಸಮಸ್ಯೆ ಹೇಳಿ",
+    fl_name:"ನಿಮ್ಮ ಹೆಸರು *", fl_email:"ಇ-ಮೇಲ್ *", fl_phone:"ಫೋನ್ / WhatsApp", fl_cat:"ವರ್ಗ *", fl_title:"ಅಪ್ ಶೀರ್ಷಿಕೆ *", fl_desc:"ಸಮಸ್ಯೆ ವಿವರಿಸಿ *",
+    ph_name:"ಪೂರ್ಣ ಹೆಸರು", ph_email:"ನೀವು@ಇಮೇಲ್.com", ph_phone:"+91 XXXXX (ಐಚ್ಛಿಕ)", ph_title:"ಐಡಿಯಾಗೆ ಹೆಸರು ಕೊಡಿ", ph_desc:"ಸಮಸ್ಯೆ ಏನು? ಅಪ್ ಏನು ಮಾಡಬೇಕು?",
+    cat0:"ವರ್ಗ ಆರಿಸಿ", cat1:"ಫ್ಲೆ. ಪ್ಯಾಕ್./ಉತ್ಪಾ.", cat2:"ಕೃಷಿ", cat3:"ಶಿಕ್ಷಣ", cat4:"ವೈ. ಉತ್ಪಾ.", cat5:"ಆರೋಗ್ಯ", cat6:"ಹಣಕಾಸು", cat7:"ಮೋಜು/ಆಟ", cat8:"ವ್ಯವಹಾರ", cat9:"ಇತರ",
+    submit_btn:"ವಿನಂತಿ ಕಳುಹಿಸಿ 🚀",
+    form_note:"ಸಲ್ಲಿಸುವ ಮೂಲಕ ವಿವೇಕ್ ಈ ಅಪ್ ಪ್ರಕಟಿಸಬಹುದು ಎಂದು ಒಪ್ಪುತ್ತೀರಿ. <strong>ನಿಮಗೆ ಯಾವಾಗಲೂ ಉಚಿತ.</strong>",
+    about_label:"👤 ನನ್ನ ಬಗ್ಗೆ",
+    tl1h:"B.Tech – NIT ಉತ್ತರಾಖಂಡ", tl1p:"ಮೆಕ್ಯಾನಿಕಲ್ ಎಂಜಿನಿಯರಿಂಗ್",
+    tl2h:"M.Tech – DCRUST ವಿಶ್ವವಿದ್ಯಾಲಯ", tl2p:"ಅತ್ಯುನ್ನತ ಶೈಕ್ಷಣಿಕ ಅರ್ಹತೆ",
+    tl3h:"UFlex Limited, ನೊಯ್ಡಾ", tl3p:"ಫ್ಲೆ. ಪ್ಯಾಕ್. ಉದ್ಯಮ",
+    tl4h:"JPFL Films, ನಾಶಿಕ್", tl4p:"ಫಿಲ್ಮ್ ಉತ್ಪಾ. ಮತ್ತು ತಂತ್ರಜ್ಞಾನ",
+    tl5h:"GLS Polyfilms, ಗುರಾವಾರ", tl5p:"ಪಾಲಿಮರ್ ಫಿಲ್ಮ್ ತಯಾರಿಕೆ",
+    about_p1:"ನಾನು <strong>ತರಬೇತಿಯಲ್ಲಿ ಮೆ. ಎಂಜ.</strong>, <strong>ವೃತ್ತಿಯಲ್ಲಿ ಪ್ಯಾಕ. ತಜ್ಞ</strong> ಮತ್ತು <strong>ಉತ್ಸಾಹದಲ್ಲಿ ಅಪ್ ನಿರ್ಮಾಪಕ</strong>. 9 ವರ್ಷಗಳ ಅನುಭವ.",
+    about_p2:"ಆ ಹತಾಶೆ ಇಂಧನವಾಯಿತು. ಉದ್ಯಮ ಸಮಸ್ಯೆಗಳಿಗೆ ಉಪಕರಣ ನಿರ್ಮಿಸಲು ಆರಂಭಿಸಿದೆ.",
+    about_p3:"<strong>VKSTech (vkstech.com)</strong> ಇವೆಲ್ಲದರ ಮನೆ.",
+    edu1h:"M.Tech (GATE ಮೂಲಕ)", edu1p:"DCRUST — ಮೆ. ಎಂಜ.", edu1y:"ಅತ್ಯುನ್ನತ ಅರ್ಹತೆ",
+    edu2h:"B.Tech – ಮೆ. ಎಂಜ.", edu2p:"NIT ಉತ್ತರಾಖಂಡ",
+    sk1:"ಫ್ಲೆ. ಪ್ಯಾಕ್.", sk2:"ಪಾ. ಫಿಲ್ಮ್", sk3:"ಉ. ಯೋ.", sk4:"ಗು. ನಿ.", sk5:"ಅ. ಅಭಿ.", sk6:"GATE", sk7:"ಮೆ. ಎಂಜ.", sk8:"ಸ. ಪ.",
+    ppl_label:"❤️ ಕೃತಜ್ಞತೆಯೊಂದಿಗೆ",
+    ppl_title:"ಈ ಪ್ರಯಾಣದ ಹಿಂದಿರುವ <span>ಜನರು</span>",
+    ppl_sub:"ಪ್ರತಿ ಯಶಸ್ಸು, ಪ್ರತಿ ರಾತ್ರಿ — ಇವರು ಸಾಧ್ಯ ಮಾಡಿದ ಜನರು.",
+    pcat_love:"💞 ನನ್ನ ಜೀವನದ ಪ್ರೇಮ", pcat_par:"🙏 ನನ್ನ ಪೋಷಕರು", pcat_spec:"⭐ ವಿಶೇಷ ಧನ್ಯವಾದ", pcat_rel:"👨‍👩‍👧‍👦 ಕುಟುಂಬ ಮತ್ತು ಸ. ಬ.",
+    love_name:"[ಹೆಸರು ಸೇರಿಸಲಾಗುವುದು]", love_rel:"ಜೀವನ ಸಂಗಾತಿ", love_note:"\"ಪ್ರತಿ ಸಾಧನೆಯನ್ನು ನಿಜಕ್ಕೂ ಮೌಲ್ಯವತ್ತಾಗಿ ಮಾಡುವವರು. ನನ್ನ ನಿರಂತರ ಸ್ಫೂರ್ತಿ.\"",
+    love_pend:"ವಿವೇಕ್ ಹೆಸರು ಮತ್ತು ನೋಟ್ ಹಂಚಿಕೊಂಡ ನಂತರ ಅಪ್‌ಡೇಟ್.",
+    dad_name:"[ತಂದೆಯ ಹೆಸರು]", dad_rel:"ತಂದೆ", dad_note:"\"ನಿಮ್ಮ ತ್ಯಾಗ ನನ್ನ ಎಲ್ಲದರ ಅಡಿಪಾಯ.\"",
+    mom_name:"[ತಾಯಿಯ ಹೆಸರು]", mom_rel:"ತಾಯಿ", mom_note:"\"ನಿಮ್ಮ ಪ್ರೀತಿ ಮತ್ತು ಪ್ರಾರ್ಥನೆ ನನ್ನನ್ನು ಎಲ್ಲ ಬಿರುಗಾಳಿಯಲ್ಲೂ ಕಾಪಾಡಿದೆ.\"",
+    par_pend:"ಪೋಷಕರ ಹೆಸರು ಮತ್ತು ನೋಟ್ ಹಂಚಿ.",
+    ankit_badge:"⭐ ಮಾರ್ಗದರ್ಶಕ", ankit_rel:"ಅಣ್ಣ ಮತ್ತು ಮಾರ್ಗದರ್ಶಕ", ankit_note:"\"ಅಂಕಿತ್ ಅಣ್ಣ, ನಿಮ್ಮ ಮಾರ್ಗದರ್ಶನ ಈ ಇಡೀ ಪ್ರಯಾಣದ ಬೆನ್ನೆಲುಬು.\"",
+    ankit_link:"🔗 ಅಂಕಿತ್‌ರ ವೆಬ್‌ಸೈಟ್ ನೋಡಿ →", ankit_pend:"ಅಂಕಿತ್‌ರ URL ಹಂಚಿ — ಕೃತಜ್ಞತೆಯ ಸಂಕೇತವಾಗಿ ಪ್ರಕಟಿಸಲಾಗುವುದು.",
+    rel1:"[ಹೆ. 1]", rel2:"[ಹೆ. 2]", rel3:"[ಹೆ. 3]", rel_lbl:"ಸಂಬಂಧಿ", rel_note:"ವಿವೇಕ್‌ನಿಂದ ಅಪ್‌ಡೇಟ್ ಆಗುವುದು.",
+    rel_pend:"ಪೂರ್ಣ ಪಟ್ಟಿ ಹಂಚಿ — ಎಲ್ಲರನ್ನು ಸೇರಿಸಲಾಗುವುದು.",
+    upd_pend:"[ ✏ ಅಪ್‌ಡೇಟ್ ಬಾಕಿ ]",
+    footer_about:"ವಿವೇಕ್ ಕುಮಾರ್ ನಿರ್ಮಿಸಿದ — 9 ವರ್ಷಗಳ ಅನುಭವವನ್ನು ಉಪಯುಕ್ತ ಉಪಕರಣಗಳಾಗಿ ಬದಲಾಯಿಸಿದ ಎಂಜಿನಿಯರ್.",
+    fc1h:"ಅಪ್‌ಗಳು", fc2h:"ಅನ್ವೇಷಿಸಿ", fc3h:"ಸಂಪರ್ಕ", fc_top:"ಮೇಲಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+    rights:"ಸರ್ವ ಹಕ್ಕುಗಳು ಮೀಸಲು.", made_with:"ಜೊತೆ ಮಾಡಿದ್ದಾರೆ", from_hr:"ಹರಿಯಾಣ, ಭಾರತದಿಂದ",
+    toast_title:"ವಿನಂತಿ ಸಲ್ಲಿಸಲಾಯಿತು!", toast_sub:"ವಿವೇಕ್ ಶೀಘ್ರ ಪರಿಶೀಲಿಸುತ್ತಾರೆ.",
+    alert_fill:"ಎಲ್ಲ ಅಗತ್ಯ ಕ್ಷೇತ್ರಗಳನ್ನು (*) ತುಂಬಿ", alert_ankit:"ಈ ಸ್ಥಳ ಅಂಕಿತ್‌ರ ವೆಬ್‌ಸೈಟ್‌ಗಾಗಿ ಮೀಸಲಿರಿಸಲಾಗಿದೆ! 🌟"
+  },
+  bn: {
+    nav_ind:"শিল্প অ্যাপস", nav_per:"ব্যক্তিগত অ্যাপস", nav_req:"অ্যাপ অনুরোধ",
+    nav_about:"পরিচয়", nav_people:"মানুষজন", nav_cta:"অ্যাপ অনুরোধ করুন",
+    hero_badge:"LIVE — বাস্তব অভিজ্ঞতা থেকে তৈরি আসল সরঞ্জাম",
+    hero_t1:"অ্যাপ তৈরি হয়েছে", hero_t2:"আসল সমস্যার জন্য", hero_t3:"একজন আসল ইঞ্জিনিয়ার দ্বারা",
+    hero_sub:"নমস্কার, আমি <strong>বিবেক কুমার</strong> — M.Tech (GATE), মেকানিক্যাল ইঞ্জিনিয়ার, <strong>NIT উত্তরাখন্ড</strong>। ভারতের শীর্ষ ফ্লেক্সিবল প্যাকেজিং কোম্পানিগুলিতে ৯ বছরের অভিজ্ঞতা।",
+    hero_btn1:"আমার অ্যাপ দেখুন →", hero_btn2:"আপনার অ্যাপ চাইুন",
+    stat1:"বছর শিল্প অভিজ্ঞতা", stat2:"অ্যাপ প্রকাশিত", stat3:"প্রধান কোম্পানি", stat4:"পাইপলাইনে ধারণা",
+    chip_ind:"শিল্প সরঞ্জাম", chip_prod:"উৎপাদন", chip_pers:"ব্যক্তিগত",
+    hc1_t:"প্যাকেজিং ক্যালক্ প্রো", hc1_s:"ফ্লেক্সিবল প্যাকেজিং শিল্প",
+    hc2_t:"ফিল্ম GSM ক্যালক্.", hc2_s:"উৎপাদন পরিকল্পনার জন্য",
+    hc3_t:"ডেইলি প্ল্যানার", hc3_s:"ব্যক্তিগত দক্ষতা সরঞ্জাম",
+    cos_label:"ভারতের শীর্ষ ফ্লেক্সিবল প্যাকেজিং কোম্পানিতে ৯ বছর",
+    ind_label:"🏭 ফ্লেক্সিবল প্যাকেজিং শিল্প",
+    ind_title:"<span>প্যাকেজিং পেশাদারদের</span> জন্য অ্যাপ",
+    ind_sub:"উৎপাদন, মান নিয়ন্ত্রণ এবং প্রযুক্তিগত ভূমিকায় ৯ বছরের হাতে-কলমে অভিজ্ঞতা থেকে তৈরি।",
+    app1_t:"অ্যাপ #১ — বিবরণ শীঘ্রই", app1_d:"আপনার প্রথম শিল্প আবেদন এখানে তালিকাভুক্ত হবে। নাম ও বিবরণ শেয়ার করুন।",
+    app2_t:"অ্যাপ #২ — বিবরণ শীঘ্রই", app2_d:"আপনার টুলকিটের দ্বিতীয় সরঞ্জাম। সম্পূর্ণ কার্যকারিতা দেখাতে বিবরণ প্রয়োজন।",
+    app3_t:"অ্যাপ #৩ — বিবরণ শীঘ্রই", app3_d:"ফ্লেক্সিবল প্যাকেজিং শিল্পের তৃতীয় সরঞ্জাম। নাম ও বৈশিষ্ট্য শেয়ার করুন।",
+    app4_t:"আরো আসছে", app4_d:"প্যাকেজিং শিল্পের সরঞ্জাম সবসময় উন্নয়নে থাকে।",
+    pending:"⏳ বিবরণ প্রয়োজন", soon:"শীঘ্রই আপডেট →", indev:"উন্নয়নে", inpipe:"পাইপলাইনে",
+    per_label:"🎯 ব্যক্তিগত ও জীবনধারা",
+    per_title:"মজা, উৎপাদনশীলতা ও <span>ব্যক্তিগত সরঞ্জাম</span>",
+    per_sub:"কাজের বাইরের জীবনের জন্য — অভ্যাস ট্র্যাকার, গেমস, দক্ষতা বুস্টার।",
+    papp1_t:"ব্যক্তিগত অ্যাপ #১", papp1_d:"আপনার ব্যক্তিগত বা মজার অ্যাপ এখানে প্রদর্শিত হবে।",
+    papp2_t:"দক্ষতা অ্যাপ #১", papp2_d:"প্রতিদিনের রুটিন উন্নত করতে উৎপাদনশীলতার সরঞ্জাম।",
+    papp3_t:"মজার কার্যকলাপ অ্যাপ", papp3_d:"শুধু আনন্দের জন্য — গেম, কুইজ, চ্যালেঞ্জ।",
+    papp4_t:"আরো আসছে", papp4_d:"বিবেক সবসময় কিছু না কিছু তৈরি করছেন।",
+    req_label:"📩 অ্যাপ অনুরোধ পোর্টাল",
+    req_title:"আপনার কি <span>ধারণা আছে?</span> আমি তৈরি করব।",
+    req_sub:"ডিজিটাল সমাধান দরকার? বিবেক আপনার জন্য সম্পূর্ণ বিনামূল্যে তৈরি করবেন।",
+    f1t:"আপনার জন্য সবসময় বিনামূল্যে", f1d:"যিনি অনুরোধ করেছেন, তিনি সবসময় বিনামূল্যে পাবেন।",
+    f2t:"ন্যায্য মুনাফা ভাগাভাগি", f2d:"অন্য ব্যবহারকারীরা বাণিজ্যিকভাবে উপকৃত হলে স্বচ্ছ আয় ভাগাভাগি মডেল প্রযোজ্য।",
+    f3t:"বাস্তব ইঞ্জিনিয়ারিং দক্ষতা", f3d:"M.Tech প্রযুক্তিগত জ্ঞান ও ৯+ বছরের অভিজ্ঞতা দিয়ে তৈরি।",
+    f4t:"যেকোনো ডোমেন স্বাগত", f4d:"প্যাকেজিং, কৃষি, শিক্ষা, স্বাস্থ্য, গেম — সব স্বাগত।",
+    form_title:"আপনার ধারণা জমা দিন 💡", form_sub:"বিবেককে বলুন কী সমাধান চান",
+    fl_name:"আপনার নাম *", fl_email:"ইমেইল *", fl_phone:"ফোন / WhatsApp", fl_cat:"বিভাগ *", fl_title:"অ্যাপের শিরোনাম *", fl_desc:"সমস্যার বিবরণ *",
+    ph_name:"পূর্ণ নাম", ph_email:"আপনি@ইমেইল.com", ph_phone:"+91 XXXXX (ঐচ্ছিক)", ph_title:"ধারণাকে নাম দিন", ph_desc:"সমস্যা কী? অ্যাপ কী করবে?",
+    cat0:"বিভাগ বেছে নিন", cat1:"ফ্লেক্সিবল প্যাকেজিং/উৎপাদন", cat2:"কৃষি", cat3:"শিক্ষা", cat4:"ব্যক্তিগত উৎপাদনশীলতা", cat5:"স্বাস্থ্য ও ফিটনেস", cat6:"অর্থ/হিসাব", cat7:"মজা/গেমস", cat8:"ব্যবসা", cat9:"অন্যান্য",
+    submit_btn:"আমার অ্যাপ অনুরোধ পাঠান 🚀",
+    form_note:"জমা দিয়ে আপনি সম্মত হচ্ছেন যে বিবেক কুমার এই অ্যাপ প্রকাশ করতে পারেন। <strong>আপনি সবসময় বিনামূল্যে পাবেন।</strong>",
+    about_label:"👤 আমার সম্পর্কে",
+    tl1h:"B.Tech – NIT উত্তরাখন্ড", tl1p:"মেকানিক্যাল ইঞ্জিনিয়ারিং",
+    tl2h:"M.Tech – DCRUST বিশ্ববিদ্যালয়", tl2p:"সর্বোচ্চ শিক্ষাগত যোগ্যতা",
+    tl3h:"UFlex Limited, নয়ডা", tl3p:"ফ্লেক্সিবল প্যাকেজিং শিল্প",
+    tl4h:"JPFL Films, নাসিক", tl4p:"ফিল্ম উৎপাদন ও প্রযুক্তি",
+    tl5h:"GLS Polyfilms, গুরাওয়ারা", tl5p:"পলিমার ফিল্ম উৎপাদন",
+    about_p1:"আমি <strong>প্রশিক্ষণে মেক. ইঞ্জ.</strong>, <strong>ক্যারিয়ারে প্যাকেজিং পেশাদার</strong> এবং <strong>আবেগে অ্যাপ নির্মাতা</strong>। ৯ বছরের অভিজ্ঞতা।",
+    about_p2:"সেই হতাশা জ্বালানি হয়ে উঠল। শিল্পের সমস্যা সমাধানের জন্য সরঞ্জাম তৈরি শুরু করলাম।",
+    about_p3:"<strong>VKSTech (vkstech.com)</strong> এই সবকিছুর ঘর।",
+    edu1h:"M.Tech (GATE-এর মাধ্যমে)", edu1p:"DCRUST — মেক. ইঞ্জ.", edu1y:"সর্বোচ্চ যোগ্যতা",
+    edu2h:"B.Tech – মেক. ইঞ্জ.", edu2p:"NIT উত্তরাখন্ড",
+    sk1:"ফ্লে. প্যাক.", sk2:"পলিমার ফিল্ম", sk3:"উৎ. পরিকল্পনা", sk4:"গুণমান নিয়ন্ত্রণ", sk5:"অ্যাপ উন্নয়ন", sk6:"GATE", sk7:"মেক. ইঞ্জ.", sk8:"সমস্যা সমাধান",
+    ppl_label:"❤️ কৃতজ্ঞতার সাথে",
+    ppl_title:"এই যাত্রার পেছনের <span>মানুষজন</span>",
+    ppl_sub:"প্রতিটি সাফল্য, প্রতিটি রাত — এঁরাই সম্ভব করেছেন।",
+    pcat_love:"💞 আমার জীবনের ভালোবাসা", pcat_par:"🙏 আমার বাবা-মা", pcat_spec:"⭐ বিশেষ ধন্যবাদ", pcat_rel:"👨‍👩‍👧‍👦 পরিবার ও আত্মীয়",
+    love_name:"[নাম যোগ করা হবে]", love_rel:"জীবনসঙ্গী", love_note:"\"যিনি প্রতিটি সাফল্যকে সত্যিকার মূল্যবান করেন। আমার নিরন্তর অনুপ্রেরণা।\"",
+    love_pend:"বিবেক নাম ও ব্যক্তিগত নোট শেয়ার করবেন।",
+    dad_name:"[বাবার নাম]", dad_rel:"বাবা", dad_note:"\"আপনার ত্যাগ আমার সবকিছুর ভিত্তি তৈরি করেছে।\"",
+    mom_name:"[মায়ের নাম]", mom_rel:"মা", mom_note:"\"আপনার ভালোবাসা ও প্রার্থনা প্রতিটি ঝড়ে আমাকে ধরে রেখেছে।\"",
+    par_pend:"বাবা-মায়ের নাম ও নোট শেয়ার করুন — ভালোবাসার সাথে আপডেট করা হবে।",
+    ankit_badge:"⭐ পথপ্রদর্শক ও গুরু", ankit_rel:"ভাই ও পথপ্রদর্শক", ankit_note:"\"অঙ্কিত ভাই, আপনার পথনির্দেশনা এই পুরো যাত্রার মেরুদণ্ড। ভাষায় বলা যাবে না কতটা কৃতজ্ঞ।\"",
+    ankit_link:"🔗 অঙ্কিতের ওয়েবসাইট দেখুন →", ankit_pend:"অঙ্কিতের ওয়েবসাইট URL শেয়ার করুন — কৃতজ্ঞতার নিদর্শন হিসেবে প্রকাশিত হবে।",
+    rel1:"[নাম ১]", rel2:"[নাম ২]", rel3:"[নাম ৩]", rel_lbl:"আত্মীয়", rel_note:"বিবেক আপডেট করবেন।",
+    rel_pend:"সম্পূর্ণ নামের তালিকা পাঠান — সবাইকে যত্ন করে যোগ করা হবে।",
+    upd_pend:"[ ✏ আপডেট বাকি ]",
+    footer_about:"বিবেক কুমার তৈরি — একজন মেকানিক্যাল ইঞ্জিনিয়ার যিনি ৯ বছরের শিল্প অভিজ্ঞতাকে সত্যিকার সহায়ক সরঞ্জামে রূপান্তরিত করেছেন।",
+    fc1h:"অ্যাপস", fc2h:"অন্বেষণ করুন", fc3h:"যোগাযোগ", fc_top:"উপরে ফিরুন",
+    rights:"সর্বস্বত্ব সংরক্ষিত।", made_with:"তৈরি হয়েছে", from_hr:"হরিয়ানা, ভারত থেকে",
+    toast_title:"অনুরোধ জমা হয়েছে!", toast_sub:"বিবেক শীঘ্রই আপনার ধারণা পর্যালোচনা করবেন।",
+    alert_fill:"সব প্রয়োজনীয় (*) ঘর পূরণ করুন", alert_ankit:"এই জায়গাটি অঙ্কিত ভাইয়ের ওয়েবসাইটের জন্য সংরক্ষিত! 🌟"
+  }
+};
+
+/* ======================================================
+   LANGUAGE ENGINE
+====================================================== */
+let currentLang = 'en';
+
+function applyLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.body.className = lang !== 'en' ? 'lang-' + lang : '';
+
+  // Text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // Select options
+  const sel = document.getElementById('rc');
+  if (sel) {
+    sel.querySelectorAll('option[data-i18n]').forEach(opt => {
+      const key = opt.getAttribute('data-i18n');
+      if (t[key] !== undefined) opt.textContent = t[key];
+    });
+  }
+
+  // Update active states — navbar pills
+  document.querySelectorAll('.lpill').forEach(el => {
+    el.classList.remove('active');
+    if (el.getAttribute('onclick') && el.getAttribute('onclick').includes("'"+lang+"'")) {
+      el.classList.add('active');
+    }
+  });
+  // Mobile buttons
+  document.querySelectorAll('.mob-lang-btn').forEach(el => {
+    el.classList.remove('active');
+    if (el.getAttribute('onclick') && el.getAttribute('onclick').includes("'"+lang+"'")) {
+      el.classList.add('active');
+    }
+  });
+}
+
+function setLang(lang, e) {
+  if (e) e.stopPropagation();
+  applyLang(lang);
+  localStorage.setItem('vkstech_lang', lang);
+}
+
+// Load saved language
+const saved = localStorage.getItem('vkstech_lang');
+if (saved && T[saved]) applyLang(saved);
+
+/* ======================================================
+   NAV / MENU
+====================================================== */
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40));
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.addEventListener('click', (e) => {
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  if (m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) m.classList.remove('open');
+});
+
+/* ======================================================
+   REVEAL
+====================================================== */
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 65);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(r => ro.observe(r));
+
+/* ======================================================
+   FORM
+====================================================== */
+function submitReq() {
+  const n = document.getElementById('rn').value.trim();
+  const em = document.getElementById('re').value.trim();
+  const c = document.getElementById('rc').value;
+  const ti = document.getElementById('rt').value.trim();
+  const d = document.getElementById('rd').value.trim();
+  if (!n || !em || !c || !ti || !d) {
+    alert(T[currentLang].alert_fill || 'Please fill all required fields (*)');
+    return;
+  }
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4500);
+  ['rn','re','rp','rt','rd'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('rc').selectedIndex = 0;
+  
+  // 🔥 Save to Firebase Firestore
+  try {
+    db.collection('app-requests').add({
+      name: n,
+      email: em,
+      phone: document.getElementById('rp').value.trim(),
+      category: c,
+      title: ti,
+      description: d,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      status: 'new',
+      lang: currentLang
+    }).then(() => {
+      console.log('✅ Request saved to Firebase');
+    }).catch((err) => {
+      console.warn('Firebase save failed (config may not be set):', err.message);
+    });
+  } catch(e) {
+    console.warn('Firebase not configured yet:', e.message);
+  }
+}
+
+// Ankit website link handler
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.alink').forEach(link => {
+    if (link.href && link.href.includes('#')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert(T[currentLang].alert_ankit || 'This spot is reserved for Ankit\'s website!');
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
