@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VKSTech – vkstech.com | Vivek Kumar</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png"/>
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="icon180.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600;700&family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf9f6;--bg2:#f3f1ec;--bg3:#eceae3;--card:#fff;
+  --border:#e2ddd4;--border2:#d0c9bc;
+  --navy:#1a2744;--orange:#e85d26;--orange2:#f07040;
+  --teal:#0d8c7e;--gold:#c8860a;
+  --text:#1a2744;--muted:#6b7a99;--light:#9aaac4;--white:#fff;
+  --radius:14px;
+  --ss:0 2px 12px rgba(26,39,68,.07);
+  --sm:0 8px 40px rgba(26,39,68,.10);
+  --sl:0 20px 60px rgba(26,39,68,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px;}
+.pg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.pg .b1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,38,.06) 0%,transparent 70%);top:-200px;right:-100px;animation:bm1 14s ease-in-out infinite;}
+.pg .b2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,126,.05) 0%,transparent 70%);bottom:-100px;left:-80px;animation:bm2 18s ease-in-out infinite;}
+@keyframes bm1{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,70px);}}
+@keyframes bm2{0%,100%{transform:translate(0,0);}50%{transform:translate(70px,-50px);}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 4%;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,249,246,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:all .3s;gap:10px;}
+nav.scrolled{box-shadow:var(--ss);}
+.nav-logo{text-decoration:none;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:10px;line-height:1;}
+.nav-logo-img{height:42px;width:42px;border-radius:50%;object-fit:cover;box-shadow:0 2px 8px rgba(26,39,68,.12);}
+.nav-logo-text{font-family:'Playfair Display','Plus Jakarta Sans',serif;font-weight:900;font-size:1.35rem;color:var(--navy);letter-spacing:1px;}
+.nav-logo-tech{font-family:'Rajdhani','Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.95rem;color:var(--muted);letter-spacing:3px;}
+.lang-pills{display:flex;gap:4px;background:rgba(26,39,68,.06);border:1px solid var(--border);border-radius:50px;padding:3px;margin-right:8px;}
+.lpill{border:none;background:transparent;padding:5px 12px;border-radius:50px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;color:var(--muted);transition:all .2s;line-height:1;}
+.lpill:hover{color:var(--navy);background:rgba(255,255,255,.7);}
+.lpill.active{background:var(--navy);color:white;box-shadow:0 2px 8px rgba(26,39,68,.25);}
+@media(max-width:900px){.lang-pills{padding:2px;margin-right:6px;}.lang-pills .lpill{padding:5px 10px;font-size:.7rem;}}
+.mob-lang{display:flex;gap:8px;padding-top:12px;border-top:1px solid var(--border);}
+.mob-lang-btn{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);font-size:.78rem;font-weight:700;cursor:pointer;background:var(--card);color:var(--navy);font-family:'JetBrains Mono',monospace;}
+.mob-lang-btn.active{background:var(--navy);color:white;border-color:var(--navy);}
+.nav-links{display:flex;gap:1.4rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:600;transition:color .2s;white-space:nowrap;}
+.nav-links a:hover{color:var(--navy);}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.nav-cta{background:var(--navy);color:var(--white);padding:9px 18px;border-radius:50px;font-weight:700;font-size:.82rem;text-decoration:none;transition:all .25s;white-space:nowrap;}
+.nav-cta:hover{background:var(--orange);transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,93,38,.3);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0;}
+.hamburger span{display:block;width:23px;height:2px;background:var(--navy);border-radius:2px;}
+.mob{display:none;position:fixed;top:66px;left:0;right:0;z-index:999;background:rgba(250,249,246,.98);backdrop-filter:blur(20px);padding:1.5rem 5%;flex-direction:column;gap:1.2rem;border-bottom:1px solid var(--border);box-shadow:var(--sm);}
+.mob.open{display:flex;}
+.mob a{color:var(--navy);text-decoration:none;font-size:1rem;font-weight:600;}
+
+@media(max-width:900px){.nav-cta{display:none;}.nav-links{display:none;}.hamburger{display:flex;}}
+@media(min-width:901px){.hamburger{display:none;}.mob{display:none!important;}}
+
+/* LAYOUT */
+section{position:relative;z-index:1;}
+.container{max-width:1180px;margin:0 auto;padding:0 5%;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem;font-weight:600;}
+.section-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;letter-spacing:-.5px;color:var(--navy);margin-bottom:1rem;}
+.section-title span{color:var(--orange);}
+.section-sub{color:var(--muted);font-size:.97rem;max-width:540px;line-height:1.85;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:90px;background:linear-gradient(160deg,var(--bg) 0%,rgba(243,241,236,.8) 100%);}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;width:100%;position:relative;overflow:hidden;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);background:var(--white);padding:7px 18px;border-radius:50px;margin-bottom:1.6rem;font-size:.78rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:1px;font-weight:600;box-shadow:var(--ss);}
+.hero-eyebrow::before{content:'';width:8px;height:8px;background:var(--teal);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.6rem,5vw,4.3rem);line-height:1.08;letter-spacing:-1.5px;color:var(--navy);margin-bottom:1.3rem;}
+.hero-title .accent{color:var(--orange);}
+.hero-sub{font-size:1.02rem;color:var(--muted);max-width:500px;margin-bottom:2.4rem;line-height:1.85;}
+.hero-sub strong{color:var(--navy);}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-p{background:var(--orange);color:var(--white);padding:13px 32px;border-radius:50px;font-weight:700;font-size:.94rem;text-decoration:none;transition:all .25s;display:inline-block;box-shadow:0 6px 22px rgba(232,93,38,.32);}
+.btn-p:hover{background:var(--navy);transform:translateY(-2px);}
+.btn-s{border:2px solid var(--border2);color:var(--navy);padding:12px 30px;border-radius:50px;font-weight:600;font-size:.94rem;text-decoration:none;transition:all .25s;display:inline-block;background:var(--white);box-shadow:var(--ss);}
+.btn-s:hover{border-color:var(--orange);color:var(--orange);}
+.hero-stats{display:flex;gap:2rem;margin-top:2.8rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.stat-item .num{font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;color:var(--navy);line-height:1;}
+.stat-item .num em{color:var(--orange);font-style:normal;}
+.stat-item .lbl{font-size:.73rem;color:var(--light);margin-top:4px;font-weight:500;}
+.hero-visual{display:flex;justify-content:flex-end;align-items:center;}
+.card-stack{position:relative;width:300px;height:380px;}
+.hcard{position:absolute;border-radius:20px;padding:20px 22px;background:var(--white);border:1px solid var(--border);box-shadow:var(--sm);}
+.hcard1{width:265px;top:0;left:8px;animation:hf1 6s ease-in-out infinite;z-index:3;}
+.hcard2{width:240px;top:120px;left:30px;animation:hf2 7s ease-in-out infinite 1s;z-index:2;}
+.hcard3{width:210px;top:230px;left:52px;animation:hf3 8s ease-in-out infinite 2s;z-index:1;}
+@keyframes hf1{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(-2deg) translateY(-10px);}}
+@keyframes hf2{0%,100%{transform:rotate(1.5deg) translateY(0);}50%{transform:rotate(2deg) translateY(-7px);}}
+@keyframes hf3{0%,100%{transform:rotate(-1deg) translateY(0);}50%{transform:rotate(0deg) translateY(-5px);}}
+.hchip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:3px 9px;border-radius:50px;font-weight:600;margin-bottom:10px;}
+.co{background:rgba(232,93,38,.1);color:var(--orange);border:1px solid rgba(232,93,38,.2);}
+.ct{background:rgba(13,140,126,.1);color:var(--teal);border:1px solid rgba(13,140,126,.2);}
+.cn{background:rgba(26,39,68,.07);color:var(--navy);border:1px solid rgba(26,39,68,.12);}
+.me{background:rgba(106,27,154,.08);color:#6a1b9a;border:1px solid rgba(106,27,154,.18);}
+.hcard-icon{font-size:1.8rem;display:block;margin-bottom:7px;}
+.hcard-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--navy);}
+.hcard-sub{font-size:.73rem;color:var(--muted);margin-top:3px;}
+
+/* COMPANIES */
+.cos{padding:46px 0;background:var(--navy);position:relative;z-index:1;}
+.cos .section-label{text-align:center;color:rgba(255,255,255,.35);margin-bottom:1.6rem;}
+.cos-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+.cob{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 26px;transition:all .3s;}
+.cob:hover{background:rgba(255,255,255,.1);border-color:rgba(232,93,38,.4);}
+.cob strong{color:var(--white);font-weight:700;font-size:.9rem;}
+.cob small{color:rgba(255,255,255,.38);font-size:.7rem;margin-top:3px;font-family:'JetBrains Mono',monospace;}
+
+/* APP CARDS */
+.acard{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--ss);}
+.acard:hover{border-color:var(--orange);transform:translateY(-5px);box-shadow:var(--sl);}
+.acard-bar{height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:3px;margin-bottom:20px;transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.acard:hover .acard-bar{transform:scaleX(1);}
+.acard-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:13px;overflow:hidden;}
+.acard-icon img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+.io{background:rgba(232,93,38,.1);}.it{background:rgba(13,140,126,.1);}.in_{background:rgba(26,39,68,.07);}.ig{background:rgba(200,134,10,.1);}
+.acard-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:7px;}
+.acard-desc{font-size:.84rem;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+.acard-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:13px;}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.66rem;padding:3px 10px;border-radius:50px;font-weight:600;}
+.to{background:rgba(232,93,38,.08);color:var(--orange);border:1px solid rgba(232,93,38,.18);}
+.tt{background:rgba(13,140,126,.08);color:var(--teal);border:1px solid rgba(13,140,126,.18);}
+.tg{background:rgba(200,134,10,.08);color:var(--gold);border:1px solid rgba(200,134,10,.18);}
+.tp{background:rgba(107,122,153,.08);color:var(--muted);border:1px solid var(--border);}
+.clink{font-size:.78rem;font-weight:700;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:4px;transition:gap .2s;}
+.clink:hover{gap:8px;}
+#industry-apps{padding:90px 0;background:var(--bg);}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem;margin-top:2.8rem;}
+#personal-apps{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
+
+/* CALCULATORS */
+#calculators{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
+.calc-grid{display:flex;flex-direction:column;gap:12px;margin-top:2.2rem;max-width:680px;}
+.calc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--ss);transition:all .3s;}
+.calc-card:hover{border-color:var(--orange);box-shadow:var(--sm);}
+.calc-head{padding:16px 22px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .2s;}
+.calc-head:hover{background:rgba(232,93,38,.03);}
+.calc-head .calc-emoji{font-size:1.5rem;flex-shrink:0;}
+.calc-head .calc-info{flex:1;}
+.calc-head h3{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--navy);}
+.calc-head p{font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.calc-arrow{font-size:.8rem;color:var(--muted);transition:transform .3s;flex-shrink:0;}
+.calc-card.open .calc-arrow{transform:rotate(180deg);}
+.calc-card.open .calc-head{background:linear-gradient(135deg,rgba(232,93,38,.03),rgba(13,140,126,.03));border-bottom:1px solid var(--border);}
+.calc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 22px;}
+.calc-card.open .calc-body{max-height:500px;padding:18px 22px;}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.calc-row.c1{grid-template-columns:1fr;}
+.calc-row.c3{grid-template-columns:1fr 1fr 1fr;}
+.calc-field label{display:block;font-size:.68rem;font-weight:700;color:var(--navy);margin-bottom:4px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;}
+.calc-field input,.calc-field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit;outline:none;background:var(--bg);transition:border-color .2s;}
+.calc-field input:focus,.calc-field select:focus{border-color:var(--orange);background:var(--card);}
+.calc-field input.missing,.calc-field select.missing{border-color:#e85d26;background:rgba(232,93,38,.06);box-shadow:0 0 0 3px rgba(232,93,38,.08);}
+.calc-field input.missing::placeholder{color:#e85d26;opacity:.7;}
+.calc-result.waiting .val{color:#c66!important;font-size:.85rem!important;font-family:'JetBrains Mono',monospace!important;letter-spacing:0;text-transform:none;}
+
+.calc-result{margin-top:14px;padding:14px 16px;border-radius:10px;background:linear-gradient(135deg,rgba(13,140,126,.06),rgba(13,140,126,.02));border:1px solid rgba(13,140,126,.15);display:flex;justify-content:space-between;align-items:center;}
+.calc-result .val{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--teal);}
+.calc-result .unit{font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:600;}
+.calc-result .sub{font-size:.72rem;color:var(--muted);margin-top:2px;}
+@media(max-width:768px){.calc-grid{max-width:100%;}.calc-row.c3{grid-template-columns:1fr 1fr;}}
+#blog{padding:90px 0;background:var(--bg);border-top:1px solid var(--border);}
+.blog-cats{display:flex;gap:8px;flex-wrap:wrap;margin:1.5rem 0;}
+
+.blog-search{display:flex;align-items:center;gap:10px;max-width:520px;margin:0 auto 24px;background:var(--card);border:1.5px solid var(--border);border-radius:50px;padding:6px 20px;transition:all .2s;box-shadow:var(--ss);}
+.blog-search:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,93,38,.1);}
+.blog-search svg{width:18px;height:18px;color:var(--muted);flex-shrink:0;}
+.blog-search input{flex:1;border:none;outline:none;background:transparent;font-size:.92rem;padding:10px 0;font-family:inherit;color:var(--navy);}
+.blog-search input::placeholder{color:var(--muted);}
+.blog-noresult{text-align:center;padding:40px;color:var(--muted);font-size:.95rem;grid-column:1/-1;}
+
+.blog-cat{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);font-size:.78rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--navy);transition:all .2s;font-family:'JetBrains Mono',monospace;}
+.blog-cat:hover,.blog-cat.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;margin-top:1.5rem;}
+.blog-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s;box-shadow:var(--ss);}
+.blog-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:var(--sl);}
+.blog-img{width:100%;height:180px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--muted);border-bottom:1px solid var(--border);}
+.blog-body{padding:20px 22px;}
+.blog-body .blog-tag{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:3px 9px;border-radius:50px;font-weight:600;display:inline-block;margin-bottom:10px;}
+.blog-body h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:6px;line-height:1.35;}
+.blog-body p{font-size:.82rem;color:var(--muted);line-height:1.7;}
+.blog-body .blog-date{font-size:.7rem;color:var(--light);margin-top:10px;font-family:'JetBrains Mono',monospace;}
+
+/* REQUEST FORM */
+#request-app{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
+.req-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.feats{margin-top:2.2rem;display:flex;flex-direction:column;gap:12px;}
+.feat{display:flex;gap:13px;align-items:flex-start;padding:15px;border-radius:12px;background:var(--white);border:1px solid var(--border);box-shadow:var(--ss);transition:all .25s;}
+.feat:hover{border-color:var(--orange);box-shadow:var(--sm);}
+.feat-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.feat-t h4{font-weight:700;font-size:.88rem;color:var(--navy);margin-bottom:2px;}
+.feat-t p{font-size:.8rem;color:var(--muted);line-height:1.65;}
+.form-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:34px;box-shadow:var(--sm);}
+.form-title{font-family:'Playfair Display',serif;font-weight:800;font-size:1.35rem;color:var(--navy);margin-bottom:4px;}
+.form-sub{font-size:.83rem;color:var(--muted);margin-bottom:24px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;transition:border-color .2s,box-shadow .2s;resize:none;outline:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,93,38,.1);background:var(--white);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.sbtn{width:100%;background:var(--orange);color:var(--white);border:none;padding:13px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .25s;box-shadow:0 6px 20px rgba(232,93,38,.3);margin-top:6px;}
+.sbtn:hover{background:var(--navy);transform:translateY(-2px);}
+
+/* ABOUT */
+#about{padding:90px 0;background:var(--navy);color:var(--white);}
+#about .section-label{color:rgba(232,93,38,.9);}
+#about .section-title{color:var(--white);}
+#about .section-title span{color:var(--orange2);}
+.about-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start;}
+.av-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;overflow:hidden;}
+.av-hd{background:linear-gradient(135deg,rgba(232,93,38,.2),rgba(13,140,126,.15));padding:36px 26px 26px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);}
+.av-init{width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.9rem;color:var(--white);margin:0 auto 13px;box-shadow:0 8px 24px rgba(232,93,38,.4);}
+.av-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem;color:var(--white);}
+.av-role{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:5px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;}
+.av-bd{padding:22px 26px;}
+.tl{display:flex;flex-direction:column;}
+.tli{display:flex;gap:13px;padding:13px 0;border-left:2px solid rgba(255,255,255,.1);margin-left:8px;padding-left:18px;position:relative;}
+.tli::before{content:'';position:absolute;left:-7px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--navy);border:2px solid var(--orange2);}
+.tli:last-child{border-left-color:transparent;}
+.tly{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--orange2);white-space:nowrap;min-width:68px;padding-top:2px;font-weight:600;}
+.tlc h4{font-weight:700;font-size:.86rem;color:rgba(255,255,255,.9);}
+.tlc p{font-size:.76rem;color:rgba(255,255,255,.42);margin-top:2px;}
+.about-text p{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;margin-bottom:1rem;}
+.about-text p strong{color:var(--white);}
+.ecards{display:flex;flex-direction:column;gap:11px;margin-top:2rem;}
+.ecard{display:flex;gap:13px;align-items:center;padding:15px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.ee{font-size:1.5rem;}
+.ei h4{font-weight:700;font-size:.88rem;color:var(--white);}
+.ei p{font-size:.76rem;color:rgba(255,255,255,.42);margin-top:2px;}
+.ei .yr{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--orange2);margin-top:3px;}
+.stags{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.8rem;}
+.stag{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:5px 12px;border-radius:50px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);font-weight:500;}
+
+/* PEOPLE */
+#people{padding:90px 0;background:var(--bg);border-top:1px solid var(--border);}
+.pi{text-align:center;margin-bottom:3rem;}
+.pcat{margin-bottom:2.5rem;}
+.pcath{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--navy);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;justify-items:center;}
+.pcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;box-shadow:var(--ss);transition:all .3s;width:100%;max-width:240px;}
+.pcard:hover{box-shadow:var(--sm);border-color:var(--orange);}
+.pav{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;overflow:hidden;border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem;background:var(--bg2);}
+.pav img{width:100%;height:100%;object-fit:cover;}
+.pname{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--navy);}
+.prel{font-size:.72rem;color:var(--muted);margin-top:3px;font-family:'JetBrains Mono',monospace;}
+.pnote{font-size:.78rem;color:var(--muted);margin-top:8px;font-style:italic;line-height:1.5;}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,.5);padding:60px 0 30px;}
+.fi{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
+.fc h4{color:var(--white);font-weight:700;font-size:.88rem;margin-bottom:16px;}
+.fc a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem;padding:3px 0;transition:color .2s;}
+.fc a:hover{color:var(--orange);}
+.fb{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:.75rem;flex-wrap:wrap;gap:10px;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all .65s ease-out;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* TOAST */
+.toast{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--white);padding:16px 28px;border-radius:14px;z-index:10000;box-shadow:var(--sl);display:flex;align-items:center;gap:12px;transition:bottom .4s cubic-bezier(.4,0,.2,1);white-space:nowrap;}
+.toast.show{bottom:30px;}
+.toast-icon{font-size:1.5rem;}
+
+/* RESPONSIVE */
+@media(max-width:600px){nav{height:58px;padding:0 4%;}.nav-logo-img{height:34px;width:34px;}.nav-logo-text{font-size:1.1rem;}.nav-logo-tech{font-size:.8rem;}}
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr;text-align:center;padding-top:20px;}.hero-sub{margin:0 auto 2.4rem;max-width:100%;}.hero-btns{justify-content:center;}.hero-stats{justify-content:center;}.hero-visual{display:none;}.req-inner{grid-template-columns:1fr;gap:2rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.fi{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){section{padding-top:60px!important;padding-bottom:60px!important;}#hero{padding-top:70px!important;}.container{padding:0 4%;}.hero-title{font-size:clamp(2rem,8vw,3rem)!important;letter-spacing:-1px;}.apps-grid{grid-template-columns:1fr!important;}.blog-grid{grid-template-columns:1fr!important;}.frow{grid-template-columns:1fr;}.form-box{padding:22px 18px;}.pgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}.section-title{font-size:clamp(1.6rem,5vw,2.2rem)!important;}}
+@media(max-width:480px){nav{padding:0 3%;}.hero-title{font-size:1.9rem!important;}.hero-btns{flex-direction:column;align-items:center;}.btn-p,.btn-s{width:100%;text-align:center;}.form-box{padding:18px 14px;}.pgrid{grid-template-columns:1fr 1fr;}.fi{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="pg"><div class="b1"></div><div class="b2"></div></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="logo.jpeg" alt="VKS Tech" class="nav-logo-img"/>
+    <span class="nav-logo-text">VKS <span class="nav-logo-tech">TECH</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#industry-apps" data-i="nav_ind">Industry Apps</a></li>
+    <li><a href="#calculators" data-i="nav_calc">Calculators</a></li>
+    <li><a href="#personal-apps" data-i="nav_per">Personal Apps</a></li>
+    <li><a href="#blog" data-i="nav_blog">Blog</a></li>
+    <li><a href="#request-app" data-i="nav_req">Request App</a></li>
+    <li><a href="#about" data-i="nav_about">About</a></li>
+    <li><a href="#people" data-i="nav_people">People</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-pills">
+      <button class="lpill active" onclick="setLang('en')">EN</button>
+      <button class="lpill" onclick="setLang('hi')">हिं</button>
+    </div>
+    <a href="#request-app" class="nav-cta" data-i="nav_cta">Request an App</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob" id="mobileMenu">
+  <a href="#industry-apps" onclick="toggleMenu()" data-i="nav_ind">Industry Apps</a>
+  <a href="#calculators" onclick="toggleMenu()" data-i="nav_calc">Calculators</a>
+  <a href="#personal-apps" onclick="toggleMenu()" data-i="nav_per">Personal Apps</a>
+  <a href="#blog" onclick="toggleMenu()" data-i="nav_blog">Blog</a>
+  <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request App</a>
+  <a href="#about" onclick="toggleMenu()" data-i="nav_about">About</a>
+  <a href="#people" onclick="toggleMenu()" data-i="nav_people">People</a>
+  <div class="mob-lang">
+    <button class="mob-lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="mob-lang-btn" onclick="setLang('hi')">हिंदी</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow" data-i="hero_badge">LIVE — Real Tools from Real Experience</div>
+        <h1 class="hero-title" data-i="hero_title">Apps Built for<br><span class="accent">Real Problems</span><br>by a Real Engineer</h1>
+        <p class="hero-sub" data-i="hero_sub">Hi, I'm <strong>Vivek Kumar</strong> — M.Tech (GATE), Mechanical Engineer from <strong>NIT Uttarakhand</strong>. 9 years across India's top flexible packaging companies, turning industry experience into tools that actually help.</p>
+        <div class="hero-btns">
+          <a href="#industry-apps" class="btn-p" data-i="hero_btn1">Explore My Apps →</a>
+          <a href="#request-app" class="btn-s" data-i="hero_btn2">Request Your App</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="num">9<em>+</em></div><div class="lbl" data-i="stat1">Years Industry Experience</div></div>
+          <div class="stat-item"><div class="num">8<em>+</em></div><div class="lbl" data-i="stat2">Apps Published</div></div>
+          <div class="stat-item"><div class="num">3</div><div class="lbl" data-i="stat3">Major Companies</div></div>
+          <div class="stat-item"><div class="num">∞</div><div class="lbl" data-i="stat4">Ideas in Pipeline</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="card-stack">
+          <div class="hcard hcard1"><span class="hchip co">Industry Tool</span><span class="hcard-icon">⚙️</span><div class="hcard-title">MET Power</div><div class="hcard-sub">Complete Metalliser Management</div></div>
+          <div class="hcard hcard2"><span class="hchip ct">Production</span><span class="hcard-icon">📐</span><div class="hcard-title">Plan Power</div><div class="hcard-sub">Production Planning Engine</div></div>
+          <div class="hcard hcard3"><span class="hchip cn">Network</span><span class="hcard-icon">💼</span><div class="hcard-title">FP Job</div><div class="hcard-sub">Packaging Industry Jobs</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<div class="cos">
+  <div class="container">
+    <div class="section-label" style="text-align:center;" data-i="cos_label">9 Years Across India's Flexible Packaging Leaders</div>
+    <div class="cos-row">
+      <div class="cob"><strong>UFlex Limited</strong><small>Noida, Uttar Pradesh</small></div>
+      <div class="cob"><strong>JPFL Films Pvt. Ltd.</strong><small>Nashik, Maharashtra</small></div>
+      <div class="cob"><strong>GLS Polyfilms</strong><small>Gurawara, Haryana</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- INDUSTRY APPS -->
+<section id="industry-apps">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i="ind_label">🏭 Flexible Packaging Industry</div>
+      <h2 class="section-title" data-i="ind_title">Apps for <span>Packaging Professionals</span></h2>
+      <p class="section-sub" data-i="ind_sub">Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.</p>
+    </div>
+    <div class="apps-grid">
+
+      <a href="https://glsmp.vkstech.com" target="_blank" class="acard reveal d1" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512.png" alt="MET Power"/></div><div class="acard-title">MET Power — Metalliser Management</div><div class="acard-desc">Complete department management system for metalliser units. Shift scheduling, leave management, task tracking, NCR reports, manpower cost analysis, attendance, and WhatsApp notifications — all in one app.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
+
+      <a href="https://pp.vkstech.com" target="_blank" class="acard reveal d2" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_2.png" alt="Plan Power"/></div><div class="acard-title">Plan Power — Production Planning</div><div class="acard-desc">Advanced production planning & scheduling engine for GLS Polyfilms. Pendency analysis, Met/F/04 & F/05 tracking, primary slit tracker, SF stock management, met sequencing, order tracker with customer ETA, and plan archive.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
+
+      <a href="https://fpjob.vkstech.com" target="_blank" class="acard reveal d3" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_1.png" alt="FP Job"/></div><div class="acard-title">FP Job — Packaging Industry Network</div><div class="acard-desc">India's first dedicated job network for Flexible Packaging professionals. Admin-verified members, job board with hiring & seeking listings, company profiles (UFlex, SRF, Cosmo Films, JPFL & 20+ companies), multi-language support.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
+
+      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon io">📊</div><div class="acard-title">MetCost Pro — Production Cost Tracker</div><div class="acard-desc">Comprehensive production cost analysis tool. Tracks wire, boat, power, wastage, manpower, and conversion costs. Department mapping, monthly cost computation with Firebase sync. Manager-level analytics dashboard.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+
+      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon it">📗</div><div class="acard-title">Excel Expert — Industry Formula Training</div><div class="acard-desc">Excel formula training built for packaging professionals. 8 categories (Basic, Text, Lookup, Conditional, Advanced, Dynamic, Date, Stats) with industry-specific examples, practice exercises, quizzes, and progress tracking.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+
+      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon in_">⚙️</div><div class="acard-title">Met Train PRO — Operator Training</div><div class="acard-desc">Comprehensive metalliser operator training platform covering machine operations, SOPs, safety procedures, SAP processes, preventive maintenance, and assessment quizzes. Free for all GLS employees.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+
+      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon ig">🎯</div><div class="acard-title">SupSkill — Supervisor Platform</div><div class="acard-desc">Supervisor skill development module. Shift report generation, OD targets tracking, boat calculator, performance metrics, and leadership training. Designed for shift incharges and supervisors.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATORS -->
+<section id="calculators">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i="calc_label">🧮 Film Roll Calculators</div>
+      <h2 class="section-title" data-i="calc_title">Packaging <span>Calculators</span></h2>
+      <p class="section-sub" data-i="calc_sub">Free online calculators for flexible packaging professionals. Calculate film roll weight, length, OD, GSM, yield, machine utilisation and more.</p>
+    </div>
+    <div class="calc-grid">
+
+      <!-- 1. FILM ROLL WEIGHT -->
+      <div class="calc-card reveal d1">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚖️</span><div class="calc-info"><h3 data-i="c1_t">Film Roll Weight</h3><p>W = L × W/1000 × μm/10⁶ × ρ</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cw-type" onchange="calcWeight()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="cw-len" placeholder="10000" oninput="calcWeight()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cw-wid" placeholder="1500" oninput="calcWeight()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cw-mic" placeholder="12" oninput="calcWeight()"></div></div>
+          <div class="calc-result"><div><div class="val" id="cw-res">—</div><div class="sub" id="cw-sub"></div></div><div class="unit">Kg</div></div>
+        </div>
+      </div>
+
+      <!-- 2. ROLL LENGTH FROM WEIGHT -->
+      <div class="calc-card reveal d2">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📏</span><div class="calc-info"><h3 data-i="c2_t">Roll Length from Weight</h3><p>L = W / (W/1000 × μm/10⁶ × ρ)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cl-type" onchange="calcLength()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Weight (kg)</label><input type="number" id="cl-wt" placeholder="25" oninput="calcLength()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cl-wid" placeholder="1500" oninput="calcLength()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cl-mic" placeholder="12" oninput="calcLength()"></div></div>
+          <div class="calc-result"><div><div class="val" id="cl-res">—</div><div class="sub" id="cl-sub"></div></div><div class="unit">Meters</div></div>
+        </div>
+      </div>
+
+      <!-- 3. ROLL OD -->
+      <div class="calc-card reveal d3">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm/1000)/π + Core²)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
+          <div class="calc-result"><div><div class="val" id="co-res">—</div><div class="sub" id="co-sub"></div></div><div class="unit">mm</div></div>
+        </div>
+      </div>
+
+      <!-- 4. GSM ↔ MICRON -->
+      <div class="calc-card reveal">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚗️</span><div class="calc-info"><h3 data-i="c4_t">GSM ↔ Micron Conversion</h3><p>GSM = Micron × Density (g/cm³)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cg-type" onchange="calcGSM()"><option value="1.38">PET — 1.38 g/cm³</option><option value="0.91">BOPP — 0.91 g/cm³</option><option value="0.90">CPP — 0.90 g/cm³</option><option value="0.92">LDPE — 0.92 g/cm³</option></select></div></div>
+          <div class="calc-row"><div class="calc-field"><label>Micron → GSM</label><input type="number" id="cg-mic" placeholder="12" oninput="calcGSM()"></div><div class="calc-field"><label>GSM → Micron</label><input type="number" id="cg-gsm" placeholder="16.56" oninput="calcGSMr()"></div></div>
+          <div class="calc-result"><div><div class="val" id="cg-res">—</div><div class="sub" id="cg-sub"></div></div><div class="unit" id="cg-unit">GSM</div></div>
+        </div>
+      </div>
+
+      <!-- 5. YIELD % -->
+      <div class="calc-card reveal">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📊</span><div class="calc-info"><h3 data-i="c5_t">Production Yield %</h3><p>Yield = (Output ÷ Input) × 100</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row"><div class="calc-field"><label>Input Weight (kg)</label><input type="number" id="cy-in" placeholder="500" oninput="calcYield()"></div><div class="calc-field"><label>Output Weight (kg)</label><input type="number" id="cy-out" placeholder="472" oninput="calcYield()"></div></div>
+          <div class="calc-result"><div><div class="val" id="cy-res">—</div><div class="sub" id="cy-sub"></div></div><div class="unit">%</div></div>
+        </div>
+      </div>
+
+      <!-- 6. MACHINE UTILISATION -->
+      <div class="calc-card reveal">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c6_t">Machine Utilisation %</h3><p>Running ÷ Shift × 100</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c3"><div class="calc-field"><label>Shift (min)</label><input type="number" id="cm-shift" value="720" oninput="calcUtil()"></div><div class="calc-field"><label>Setup (min)</label><input type="number" id="cm-setup" placeholder="45" oninput="calcUtil()"></div><div class="calc-field"><label>Downtime (min)</label><input type="number" id="cm-dt" placeholder="30" oninput="calcUtil()"></div></div>
+          <div class="calc-result"><div><div class="val" id="cm-res">—</div><div class="sub" id="cm-sub"></div></div><div class="unit">%</div></div>
+        </div>
+      </div>
+
+      <!-- 7. COST PER SQM -->
+      <div class="calc-card reveal">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">💰</span><div class="calc-info"><h3 data-i="c7_t">Cost per Square Meter</h3><p>₹/sqm = ₹/kg × GSM ÷ 1000</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option></select></div></div>
+          <div class="calc-result"><div><div class="val" id="cs-res">—</div><div class="sub" id="cs-sub"></div></div><div class="unit">₹/sqm</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL APPS -->
+<section id="personal-apps">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i="per_label">🎯 Personal & Lifestyle</div>
+      <h2 class="section-title" data-i="per_title">Fun, Productivity & <span>Personal Tools</span></h2>
+      <p class="section-sub" data-i="per_sub">Apps for life beyond work — habit trackers, fun activities, games, and efficiency boosters. Built from personal needs, shared free with everyone.</p>
+    </div>
+    <div class="apps-grid">
+      <a href="https://fitsutra.vkstech.com" target="_blank" class="acard reveal d1" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_3.png" alt="FitSutra" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"/></div><div class="acard-title">FitSutra — Health & Fitness</div><div class="acard-desc">A personal health and fitness companion designed to help track workouts, nutrition, and wellness goals. Built with simplicity in mind for everyday use.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
+      <div class="acard reveal d2" style="border-style:dashed;opacity:.55;"><div class="acard-bar"></div><div class="acard-icon in_">✨</div><div class="acard-title">More on the Way</div><div class="acard-desc">Vivek is always building. Upcoming personal apps covering wellness, finance, creativity, and more. Watch this space.</div><div class="acard-foot"><span class="tag tg">In Pipeline</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i="blog_label">📝 Knowledge Hub</div>
+      <h2 class="section-title" data-i="blog_title">Blog & <span>Articles</span></h2>
+      <p class="section-sub" data-i="blog_sub">Insights from 9 years in flexible packaging, tech tutorials, Excel tips, and industry knowledge — shared freely for the community.</p>
+    </div>
+    <div class="blog-cats">
+      <button class="blog-cat active" onclick="filterBlog('all',this)" data-i="filt_all">All</button>
+      <button class="blog-cat" onclick="filterBlog('packaging',this)" data-i="filt_pack">Flexible Packaging</button>
+      <button class="blog-cat" onclick="filterBlog('excel',this)" data-i="filt_excel">Excel & Formulas</button>
+      <button class="blog-cat" onclick="filterBlog('career',this)" data-i="filt_career">Career & Growth</button>
+      <button class="blog-cat" onclick="filterBlog('tech',this)" data-i="filt_tech">Tech & Tools</button>
+      <button class="blog-cat" onclick="filterBlog('manufacturing',this)" data-i="filt_mfg">Manufacturing Excellence</button>
+    </div>
+    <div class="blog-grid" id="blogGrid">
+      <div id="blogLoading" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:.9rem;">Loading articles...</div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST APP -->
+<section id="request-app">
+  <div class="container">
+    <div class="req-inner">
+      <div class="reveal">
+        <div class="section-label" data-i="req_label">📩 App Request Portal</div>
+        <h2 class="section-title" data-i="req_title">Got an <span>Idea?</span> I'll Build It.</h2>
+        <p class="section-sub" data-i="req_sub">Have a problem that needs a digital solution? Vivek will build it completely free for you. If others want to use it, a fair profit-share model applies.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ic it">🆓</div><div class="feat-t"><h4 data-i="f1t">Always Free for You</h4><p data-i="f1d">The person who requested the app always gets it free — no conditions.</p></div></div>
+          <div class="feat"><div class="feat-ic io">💰</div><div class="feat-t"><h4 data-i="f2t">Fair Profit Sharing</h4><p data-i="f2d">If other users benefit commercially, a transparent revenue-share model applies.</p></div></div>
+          <div class="feat"><div class="feat-ic in_">🎓</div><div class="feat-t"><h4 data-i="f3t">Real Engineering Expertise</h4><p data-i="f3d">Every app built with M.Tech-level knowledge and 9+ years of domain experience.</p></div></div>
+          <div class="feat"><div class="feat-ic ig">🌐</div><div class="feat-t"><h4 data-i="f4t">Any Domain Welcome</h4><p data-i="f4d">Packaging, farming, education, health, finance, games — no domain is too niche.</p></div></div>
+        </div>
+      </div>
+      <div class="form-box reveal">
+        <div class="form-title" data-i="form_title">Submit Your Idea 💡</div>
+        <div class="form-sub" data-i="form_sub">Tell Vivek about the problem you want solved</div>
+        <div class="frow">
+          <div class="fg"><label data-i="fl_name">Your Name *</label><input type="text" id="rn" placeholder="Full Name"/></div>
+          <div class="fg"><label data-i="fl_email">Email *</label><input type="email" id="re" placeholder="you@email.com"/></div>
+        </div>
+        <div class="fg"><label data-i="fl_phone">Phone / WhatsApp</label><input type="tel" id="rp" placeholder="+91 XXXXX XXXXX (optional)"/></div>
+        <div class="fg"><label data-i="fl_cat">Category *</label>
+          <select id="rc">
+            <option value="" disabled selected>Select a category</option>
+            <option>Flexible Packaging / Manufacturing</option>
+            <option>Agriculture / Farming</option>
+            <option>Education / Learning</option>
+            <option>Personal Productivity</option>
+            <option>Health & Fitness</option>
+            <option>Finance / Accounting</option>
+            <option>Fun / Games / Entertainment</option>
+            <option>Business / Management</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label data-i="fl_title">App Title *</label><input type="text" id="rt" placeholder="Give your idea a name"/></div>
+        <div class="fg"><label data-i="fl_desc">Describe the Problem *</label><textarea id="rd" rows="4" placeholder="What problem do you face? What should the app do?"></textarea></div>
+        <button class="sbtn" onclick="submitReq()" data-i="submit_btn">Send My App Request 🚀</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="av-card">
+          <div class="av-hd">
+            <div class="av-init">VK</div>
+            <div class="av-name">Vivek Kumar</div>
+            <div class="av-role">M.Tech · Mechanical Engineer · App Builder</div>
+          </div>
+          <div class="av-bd">
+            <div class="tl">
+              <div class="tli"><div class="tly">2013–17</div><div class="tlc"><h4>B.Tech – NIT Uttarakhand</h4><p>Mechanical Engineering</p></div></div>
+              <div class="tli"><div class="tly">GATE</div><div class="tlc"><h4>M.Tech – DCRUST University</h4><p>Highest Academic Qualification</p></div></div>
+              <div class="tli"><div class="tly">UFlex</div><div class="tlc"><h4>UFlex Limited, Noida</h4><p>Flexible Packaging Industry</p></div></div>
+              <div class="tli"><div class="tly">JPFL</div><div class="tlc"><h4>JPFL Films Pvt. Ltd., Nashik</h4><p>Films Production & Technology</p></div></div>
+              <div class="tli"><div class="tly">GLS</div><div class="tlc"><h4>GLS Polyfilms, Gurawara</h4><p>Polymer Films Manufacturing</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-label" data-i="about_label">👤 About Me</div>
+        <h2 class="section-title">Vivek <span>Kumar</span></h2>
+        <p data-i="about_p1">I'm a <strong>Mechanical Engineer by training</strong>, a <strong>Flexible Packaging professional by career</strong>, and an <strong>app builder by passion</strong>. After 9 years working at UFlex Limited, JPFL Films, and GLS Polyfilms, I've experienced first-hand the daily inefficiencies that slow down professionals in this industry.</p>
+        <p data-i="about_p2">That frustration became fuel. I began building tools to automate repetitive calculations, streamline quality processes, and reduce manual errors. What started as personal tools slowly grew into something worth sharing.</p>
+        <p data-i="about_p3">Beyond the industry, I love building apps that make everyday life more organised, more fun, and less stressful. <strong>VKSTech (vkstech.com)</strong> is the home for all of it.</p>
+        <div class="ecards">
+          <div class="ecard"><div class="ee">🎓</div><div class="ei"><h4>M.Tech (Through GATE)</h4><p>DCRUST University — Mechanical Engineering</p><div class="yr">Highest Qualification</div></div></div>
+          <div class="ecard"><div class="ee">🏛️</div><div class="ei"><h4>B.Tech – Mechanical Engineering</h4><p>NIT Uttarakhand</p><div class="yr">2013 – 2017</div></div></div>
+        </div>
+        <div class="stags">
+          <span class="stag">Flexible Packaging</span><span class="stag">Polymer Films</span>
+          <span class="stag">Production Planning</span><span class="stag">Quality Control</span>
+          <span class="stag">App Development</span><span class="stag">GATE Qualified</span>
+          <span class="stag">Mechanical Engg.</span><span class="stag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="container">
+    <div class="pi reveal">
+      <div class="section-label" data-i="ppl_label">❤️ With Gratitude</div>
+      <h2 class="section-title" data-i="ppl_title">The People Behind <span>This Journey</span></h2>
+      <p class="section-sub" style="margin:0 auto;" data-i="ppl_sub">Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.</p>
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i="pcat_par">🙏 My Parents</div>
+      <div class="pgrid">
+        <div class="pcard"><div class="pav"><img src="papa.jpeg" alt="Father" onerror="this.style.display='none';this.parentElement.innerHTML='👨';"/></div><div class="pname">Mr. Guru Dutt</div><div class="prel">Father</div><div class="pnote">"Your sacrifices built the foundation of everything I am today."</div></div>
+        <div class="pcard"><div class="pav"><img src="mom.jpeg" alt="Mother" onerror="this.style.display='none';this.parentElement.innerHTML='👩';"/></div><div class="pname">Mrs. Prem</div><div class="prel">Mother</div><div class="pnote">"Your unconditional love and prayers have carried me through every storm."</div></div>
+      </div>
+    </div>
+
+    <div class="pcat reveal">
+      <div class="pcath" data-i="pcat_spec">⭐ Special Thanks</div>
+      <div class="pgrid">
+        <div class="pcard" style="max-width:320px;">
+          <div class="pav" style="border-color:rgba(26,202,74,.3);box-shadow:0 4px 20px rgba(26,202,74,.25);"><img src="Ankit.jpeg" alt="Ankit Bhardwaj" onerror="this.style.display='none';this.parentElement.innerHTML='⭐';"/></div>
+          <div class="pname">Ankit Bhardwaj</div>
+          <div class="prel">Cousin & Guiding Light | IT Entrepreneur</div>
+          <div class="pnote">"Ankit bhai, your guidance, wisdom and constant encouragement have been the backbone of this entire journey. I owe more than words can express."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="fi">
+      <div class="fc"><h4>VKS Tech</h4><p style="font-size:.84rem;color:rgba(255,255,255,.4);line-height:1.75;">Built by Vivek Kumar — a mechanical engineer who turned 9 years of industry experience into tools that genuinely help people.</p></div>
+      <div class="fc"><h4>Apps</h4><a href="https://glsmp.vkstech.com" target="_blank">MET Power</a><a href="https://pp.vkstech.com" target="_blank">Plan Power</a><a href="https://fpjob.vkstech.com" target="_blank">FP Job</a></div>
+      <div class="fc"><h4>Explore</h4><a href="#industry-apps">Industry Apps</a><a href="#personal-apps">Personal Apps</a><a href="#blog">Blog</a><a href="#about">About</a></div>
+      <div class="fc"><h4>Contact</h4><a href="#request-app">Request an App</a><a href="https://vkstech.com">vkstech.com</a></div>
+    </div>
+    <div class="fb">
+      <span>© 2025 VKSTech. All Rights Reserved.</span>
+      <span>Made with ❤️ from Haryana, India</span>
+      <a href="#hero" style="color:var(--orange);text-decoration:none;font-weight:700;">Back to Top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-icon">✅</span><div><strong>Request Submitted!</strong><br><span style="font-size:.8rem;opacity:.7;">Vivek will review your idea soon.</span></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ═══════════════════════════════════════════
+   SUPABASE CONFIG — REPLACE WITH YOUR VALUES
+   ═══════════════════════════════════════════ */
+const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* NAV */
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40));
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+document.addEventListener('click',(e)=>{const m=document.getElementById('mobileMenu');const h=document.getElementById('hamburger');if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target))m.classList.remove('open');});
+
+/* ═══════════════════════════════
+   LANGUAGE ENGINE — EN / HI
+   ═══════════════════════════════ */
+const HI = {
+  nav_ind:"उद्योग ऐप्स", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_cta:"ऐप का अनुरोध करें",
+  hero_badge:"LIVE — वास्तविक अनुभव से निर्मित असली उपकरण",
+  hero_title:"ऐप्स बनाए गए हैं<br><span class='accent'>असली समस्याओं</span> के लिए<br>एक असली इंजीनियर द्वारा",
+  hero_sub:"नमस्ते, मैं <strong>विवेक कुमार</strong> हूँ — M.Tech (GATE), मैकेनिकल इंजीनियर, <strong>NIT उत्तराखंड</strong>। भारत की शीर्ष फ्लेक्सिबल पैकेजिंग कंपनियों में 9 साल का अनुभव, अब उपयोगी टूल्स में बदल रहा हूँ।",
+  hero_btn1:"मेरे ऐप्स देखें →", hero_btn2:"अपना ऐप माँगें",
+  stat1:"साल उद्योग अनुभव", stat2:"ऐप्स प्रकाशित", stat3:"प्रमुख कंपनियाँ", stat4:"विचार पाइपलाइन में",
+  cos_label:"भारत की शीर्ष फ्लेक्सिबल पैकेजिंग कंपनियों में 9 साल",
+  ind_label:"🏭 फ्लेक्सिबल पैकेजिंग उद्योग", ind_title:"<span>पैकेजिंग पेशेवरों</span> के लिए ऐप्स",
+  ind_sub:"उत्पादन, गुणवत्ता नियंत्रण और तकनीकी भूमिकाओं में 9 साल के व्यावहारिक अनुभव से निर्मित।",
+  per_label:"🎯 व्यक्तिगत और जीवनशैली", per_title:"मनोरंजन, उत्पादकता और <span>व्यक्तिगत उपकरण</span>",
+  per_sub:"काम से परे जीवन के लिए ऐप्स — आदत ट्रैकर, मज़ेदार गतिविधियाँ, गेम्स और दक्षता बूस्टर।",
+  blog_label:"📝 ज्ञान केंद्र", blog_title:"ब्लॉग और <span>लेख</span>",
+  blog_sub:"फ्लेक्सिबल पैकेजिंग, एक्सेल टिप्स, करियर सलाह और तकनीक — समुदाय के लिए मुफ़्त में साझा।",
+  req_label:"📩 ऐप अनुरोध पोर्टल",
+  req_title:"आपके पास <span>कोई विचार है?</span> मैं बनाऊँगा।",
+  req_sub:"क्या आपके पास कोई ऐसी समस्या है जिसके लिए डिजिटल समाधान चाहिए? विवेक आपके लिए बिल्कुल मुफ़्त बनाएँगे।",
+  f1t:"आपके लिए हमेशा मुफ़्त", f1d:"जिस व्यक्ति ने ऐप माँगा, उसे हमेशा मुफ़्त मिलेगा — कोई शर्त नहीं।",
+  f2t:"उचित लाभ साझाकरण", f2d:"यदि अन्य उपयोगकर्ता व्यावसायिक लाभ उठाते हैं, तो पारदर्शी राजस्व-हिस्सा मॉडल लागू होता है।",
+  f3t:"वास्तविक इंजीनियरिंग विशेषज्ञता", f3d:"हर ऐप M.Tech स्तर के ज्ञान और 9+ वर्षों के अनुभव से बनाया जाता है।",
+  f4t:"कोई भी क्षेत्र स्वागत योग्य", f4d:"पैकेजिंग, खेती, शिक्षा, स्वास्थ्य, वित्त, गेम्स — कोई भी क्षेत्र बहुत छोटा नहीं है।",
+  form_title:"अपना विचार भेजें 💡", form_sub:"विवेक को बताएं कि आप क्या समाधान चाहते हैं",
+  fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
+  submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
+  about_label:"👤 मेरे बारे में",
+  about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>करियर से फ्लेक्सिबल पैकेजिंग पेशेवर</strong> और <strong>जुनून से ऐप निर्माता</strong> हूँ। UFlex, JPFL Films और GLS Polyfilms में 9 साल काम करके मैंने उद्योग की दैनिक अक्षमताओं को स्वयं महसूस किया।",
+  about_p2:"वह निराशा ईंधन बन गई। मैंने दोहराई जाने वाली गणनाओं को स्वचालित करने और गुणवत्ता प्रक्रियाओं को सुव्यवस्थित करने के लिए उपकरण बनाने शुरू किए।",
+  about_p3:"उद्योग से परे, मुझे ऐसे ऐप्स बनाना पसंद है जो रोज़मर्रा की ज़िंदगी को अधिक व्यवस्थित और कम तनावपूर्ण बनाएं। <strong>VKSTech (vkstech.com)</strong> इन सबका घर है।",
+  ppl_label:"❤️ आभार के साथ",
+  ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
+  ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
+  pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद",
+  nav_calc:"कैलकुलेटर", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"बारे में", nav_people:"लोग", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
+};
+
+const EN = {
+  nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_cta:"Request an App",
+  hero_badge:"LIVE — Real Tools from Real Experience",
+  hero_title:"Apps Built for<br><span class='accent'>Real Problems</span><br>by a Real Engineer",
+  hero_sub:"Hi, I'm <strong>Vivek Kumar</strong> — M.Tech (GATE), Mechanical Engineer from <strong>NIT Uttarakhand</strong>. 9 years across India's top flexible packaging companies, turning industry experience into tools that actually help.",
+  hero_btn1:"Explore My Apps →", hero_btn2:"Request Your App",
+  stat1:"Years Industry Experience", stat2:"Apps Published", stat3:"Major Companies", stat4:"Ideas in Pipeline",
+  cos_label:"9 Years Across India's Flexible Packaging Leaders",
+  ind_label:"🏭 Flexible Packaging Industry", ind_title:"Apps for <span>Packaging Professionals</span>",
+  ind_sub:"Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.",
+  per_label:"🎯 Personal & Lifestyle", per_title:"Fun, Productivity & <span>Personal Tools</span>",
+  per_sub:"Apps for life beyond work — habit trackers, fun activities, games, and efficiency boosters. Built from personal needs, shared free with everyone.",
+  blog_label:"📝 Knowledge Hub", blog_title:"Blog & <span>Articles</span>",
+  blog_sub:"Insights from 9 years in flexible packaging, tech tutorials, Excel tips, and industry knowledge — shared freely for the community.",
+  req_label:"📩 App Request Portal",
+  req_title:"Got an <span>Idea?</span> I'll Build It.",
+  req_sub:"Have a problem that needs a digital solution? Vivek will build it completely free for you. If others want to use it, a fair profit-share model applies.",
+  f1t:"Always Free for You", f1d:"The person who requested the app always gets it free — no conditions.",
+  f2t:"Fair Profit Sharing", f2d:"If other users benefit commercially, a transparent revenue-share model applies.",
+  f3t:"Real Engineering Expertise", f3d:"Every app built with M.Tech-level knowledge and 9+ years of domain experience.",
+  f4t:"Any Domain Welcome", f4d:"Packaging, farming, education, health, finance, games — no domain is too niche.",
+  form_title:"Submit Your Idea 💡", form_sub:"Tell Vivek about the problem you want solved",
+  fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
+  submit_btn:"Send My App Request 🚀",
+  about_label:"👤 About Me",
+  about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>Flexible Packaging professional by career</strong>, and an <strong>app builder by passion</strong>. After 9 years working at UFlex Limited, JPFL Films, and GLS Polyfilms, I've experienced first-hand the daily inefficiencies that slow down professionals in this industry.",
+  about_p2:"That frustration became fuel. I began building tools to automate repetitive calculations, streamline quality processes, and reduce manual errors. What started as personal tools slowly grew into something worth sharing.",
+  about_p3:"Beyond the industry, I love building apps that make everyday life more organised, more fun, and less stressful. <strong>VKSTech (vkstech.com)</strong> is the home for all of it.",
+  ppl_label:"❤️ With Gratitude",
+  ppl_title:"The People Behind <span>This Journey</span>",
+  ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
+  pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks",
+  nav_calc:"Calculators", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
+};
+
+let curLang = localStorage.getItem('vkstech_lang') || 'en';
+
+function setLang(lang) {
+  curLang = lang;
+  localStorage.setItem('vkstech_lang', lang);
+  const t = lang === 'hi' ? HI : EN;
+  document.querySelectorAll('[data-i-placeholder]').forEach(function(el){var k=el.getAttribute('data-i-placeholder');if(t[k])el.placeholder=t[k];});
+  document.querySelectorAll('[data-i]').forEach(el => {
+    const key = el.getAttribute('data-i');
+    if(t[key]) el.innerHTML = t[key];
+  });
+  // Update pill states
+  document.querySelectorAll('.lpill').forEach(p => p.classList.toggle('active', p.textContent.trim() === (lang==='hi'?'हिं':'EN')));
+  document.querySelectorAll('.mob-lang-btn').forEach(p => p.classList.toggle('active', (lang==='hi' && p.textContent.trim()==='हिंदी') || (lang==='en' && p.textContent.trim()==='EN')));
+  // Add font for Hindi
+  document.body.style.fontFamily = lang==='hi' ? "'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif" : "'Plus Jakarta Sans',sans-serif";
+  // Re-render blog cards in new language
+  try {
+    if(typeof allBlogs !== 'undefined' && allBlogs && allBlogs.length > 0) {
+      if(typeof searchBlogs === 'function') {
+        searchBlogs();
+      } else {
+        var grid = document.getElementById('blogGrid');
+        if(grid) grid.innerHTML = allBlogs.map(renderBlogCard).join('');
+      }
+    }
+  } catch(e) { console.log('Blog re-render skipped:', e); }
+}
+
+// Apply saved language on load
+if(curLang === 'hi') setLang('hi');
+
+/* REVEAL */
+const ro=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*65);ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
+
+/* ═══════════════════════════════════════
+   CALCULATORS — Film Roll Industry
+   ═══════════════════════════════════════ */
+function toggleCalc(head){
+  var card = head.parentElement;
+  var wasOpen = card.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.calc-card.open').forEach(function(c){c.classList.remove('open');});
+  // Toggle clicked
+  if(!wasOpen) card.classList.add('open');
+}
+/* Helper: validate required fields, highlight missing ones, return true if all filled */
+function _calcCheck(ids, resId, subId, waitingMsg){
+  var allOk = true;
+  ids.forEach(function(id){
+    var el = document.getElementById(id);
+    var v = parseFloat(el.value);
+    if(!v || isNaN(v)){
+      el.classList.add('missing');
+      allOk = false;
+    } else {
+      el.classList.remove('missing');
+    }
+  });
+  var resEl = document.getElementById(resId);
+  var subEl = subId ? document.getElementById(subId) : null;
+  var resultBox = resEl ? resEl.closest('.calc-result') : null;
+  if(!allOk){
+    if(resEl) resEl.textContent = waitingMsg || 'Fill all fields';
+    if(subEl) subEl.textContent = '';
+    if(resultBox) resultBox.classList.add('waiting');
+    return false;
+  }
+  if(resultBox) resultBox.classList.remove('waiting');
+  return true;
+}
+function calcWeight(){
+  if(!_calcCheck(['cw-len','cw-wid','cw-mic'],'cw-res','cw-sub')) return;
+  var d=parseFloat(document.getElementById('cw-type').value),l=parseFloat(document.getElementById('cw-len').value),w=parseFloat(document.getElementById('cw-wid').value),m=parseFloat(document.getElementById('cw-mic').value);
+  var wt=l*(w/1000)*(m/1000000)*d;
+  document.getElementById('cw-res').textContent=wt.toFixed(2);
+  document.getElementById('cw-sub').textContent=l+'m × '+w+'mm × '+m+'μm';
+}
+function calcLength(){
+  if(!_calcCheck(['cl-wt','cl-wid','cl-mic'],'cl-res','cl-sub')) return;
+  var d=parseFloat(document.getElementById('cl-type').value),wt=parseFloat(document.getElementById('cl-wt').value),w=parseFloat(document.getElementById('cl-wid').value),m=parseFloat(document.getElementById('cl-mic').value);
+  var len=wt/((w/1000)*(m/1000000)*d);
+  document.getElementById('cl-res').textContent=Math.round(len).toLocaleString();
+  document.getElementById('cl-sub').textContent=wt+'kg → '+Math.round(len).toLocaleString()+' meters';
+}
+function calcOD(){
+  if(!_calcCheck(['co-len','co-mic','co-core'],'co-res','co-sub')) return;
+  var l=parseFloat(document.getElementById('co-len').value),m=parseFloat(document.getElementById('co-mic').value),c=parseFloat(document.getElementById('co-core').value);
+  var od=Math.sqrt((4*l*(m/1000))/Math.PI+(c*c));
+  document.getElementById('co-res').textContent=od.toFixed(1);
+  document.getElementById('co-sub').textContent='Core '+c+'mm → OD '+od.toFixed(1)+'mm';
+}
+function calcGSM(){
+  if(!_calcCheck(['cg-mic'],'cg-res','cg-sub')) return;
+  var d=parseFloat(document.getElementById('cg-type').value),m=parseFloat(document.getElementById('cg-mic').value);
+  var gsm=m*d;
+  document.getElementById('cg-res').textContent=gsm.toFixed(2);
+  document.getElementById('cg-sub').textContent=m+'μm × '+d+' = '+gsm.toFixed(2)+' GSM';
+  document.getElementById('cg-unit').textContent='GSM';
+}
+function calcGSMr(){
+  if(!_calcCheck(['cg-gsm'],'cg-res','cg-sub')) return;
+  var d=parseFloat(document.getElementById('cg-type').value),g=parseFloat(document.getElementById('cg-gsm').value);
+  var mic=g/d;
+  document.getElementById('cg-res').textContent=mic.toFixed(2);
+  document.getElementById('cg-sub').textContent=g+' GSM ÷ '+d+' = '+mic.toFixed(2)+'μm';
+  document.getElementById('cg-unit').textContent='Micron';
+}
+function calcYield(){
+  if(!_calcCheck(['cy-in','cy-out'],'cy-res','cy-sub')) return;
+  var inp=parseFloat(document.getElementById('cy-in').value),out=parseFloat(document.getElementById('cy-out').value);
+  var y=(out/inp)*100,waste=inp-out;
+  document.getElementById('cy-res').textContent=y.toFixed(2);
+  document.getElementById('cy-sub').textContent='Waste: '+waste.toFixed(2)+' kg ('+(100-y).toFixed(2)+'%)';
+}
+function calcUtil(){
+  if(!_calcCheck(['cm-shift'],'cm-res','cm-sub')) return;
+  var s=parseFloat(document.getElementById('cm-shift').value),su=parseFloat(document.getElementById('cm-setup').value)||0,dt=parseFloat(document.getElementById('cm-dt').value)||0;
+  var run=s-su-dt,u=(run/s)*100;
+  document.getElementById('cm-res').textContent=u.toFixed(1);
+  document.getElementById('cm-sub').textContent='Running: '+run+' min / '+s+' min shift';
+}
+function calcSqm(){
+  if(!_calcCheck(['cs-rate','cs-mic'],'cs-res','cs-sub')) return;
+  var rate=parseFloat(document.getElementById('cs-rate').value),m=parseFloat(document.getElementById('cs-mic').value),d=parseFloat(document.getElementById('cs-type').value);
+  var gsm=m*d,sqm=rate*gsm/1000;
+  document.getElementById('cs-res').textContent='₹'+sqm.toFixed(2);
+  document.getElementById('cs-sub').textContent='₹'+rate+'/kg × '+gsm.toFixed(2)+' GSM ÷ 1000';
+}
+
+/* ═══════════════════════════════════════
+   BLOG — DYNAMIC LOADING FROM FIREBASE
+   ═══════════════════════════════════════ */
+const CAT_STYLES = {
+  packaging: {cls:'to', label:'Flexible Packaging', icon:'🏭'},
+  excel:     {cls:'tt', label:'Excel & Formulas', icon:'📊'},
+  career:    {cls:'co', label:'Career & Growth', icon:'🚀'},
+  tech:      {cls:'cn', label:'Tech & Tools', icon:'💡'},
+  manufacturing: {cls:'me', label:'Manufacturing Excellence', icon:'🏗️'}
+};
+
+let allBlogs = [];
+
+
+var currentFilter = 'all';
+function searchBlogs(){
+  var input = document.getElementById('blogSearchInput');
+  var grid = document.getElementById('blogGrid');
+  if(!grid) return;
+  if(typeof allBlogs === 'undefined' || !allBlogs || allBlogs.length === 0) return;
+  var q = (input && input.value ? input.value : '').toLowerCase().trim();
+  var filtered = allBlogs.filter(function(b){
+    if(currentFilter !== 'all' && b.category !== currentFilter) return false;
+    if(!q) return true;
+    var title = (getLocalText(b.title) || '').toLowerCase();
+    var summary = (getLocalText(b.summary) || '').toLowerCase();
+    var content = (b.content || '').toLowerCase();
+    return title.indexOf(q) > -1 || summary.indexOf(q) > -1 || content.indexOf(q) > -1;
+  });
+  if(filtered.length === 0){
+    grid.innerHTML = '<div class="blog-noresult">🔍 ' + (curLang==='hi'?'कोई परिणाम नहीं मिला':'No blogs found') + '</div>';
+  } else {
+    grid.innerHTML = filtered.map(renderBlogCard).join('');
+  }
+}
+
+function getLocalText(text) {
+  if(!text) return '';
+  // Split on | with flexible spacing: "|", " |", "| ", " | "
+  if(text.indexOf('|') > -1) {
+    var parts = text.split(/\s*\|\s*/);
+    if(curLang === 'hi' && parts.length > 1 && parts[1]) return parts[1].trim();
+    return parts[0].trim();
+  }
+  return text;
+}
+function renderBlogCard(b) {
+  b._title = getLocalText(b.title);
+  b._summary = getLocalText(b.summary);
+  const cat = CAT_STYLES[b.category] || {cls:'tp', label:b.category, icon:'📝'};
+  const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+  const imgHtml = b.imageUrl
+    ? '<div class="blog-img" style="background:url(\''+b.imageUrl+'\') center/cover no-repeat;"></div>'
+    : '<div class="blog-img">'+cat.icon+'</div>';
+  return '<div class="blog-card" data-cat="'+b.category+'" onclick="openBlog(\''+b.id+'\')" style="cursor:pointer;">'
+    + imgHtml
+    + '<div class="blog-body">'
+    + '<span class="blog-tag '+cat.cls+'">'+cat.label+'</span>'
+    + '<h3>'+escH(b._title || b.title)+'</h3>'
+    + '<p>'+escH(b._summary || b.summary || '')+'</p>'
+    + '<div class="blog-date">'+dateStr+'</div>'
+    + '</div></div>';
+}
+
+function escH(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function loadBlogs() {
+  const grid = document.getElementById('blogGrid');
+  sb.from('blogs').select('*').eq('published', true).order('created_at', {ascending: false})
+    .then(({data, error}) => {
+      if(error) throw error;
+      allBlogs = (data || []).map(b => ({
+        id: b.id,
+        slug: b.slug,
+        title: b.title,
+        category: b.category,
+        summary: b.summary,
+        content: b.content,
+        imageUrl: b.cover_image,
+        published: b.published,
+        date: {seconds: new Date(b.created_at).getTime()/1000}
+      }));
+      if(allBlogs.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles about flexible packaging, Excel formulas, career tips, and tech tools coming soon!</p></div>';
+      } else {
+        grid.innerHTML = allBlogs.map(renderBlogCard).join('');
+      }
+    })
+    .catch(err => {
+      console.warn('Blog load:', err.message);
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles coming soon!</p></div>';
+    });
+}
+
+function filterBlog(cat, btn){
+  currentFilter = cat;
+  document.querySelectorAll('.blog-cat').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  searchBlogs();
+}
+
+/* OPEN FULL BLOG POST */
+function cleanBlogContent(html) {
+  // Strip full-page elements if someone uploaded a complete HTML page
+  var temp = document.createElement('div');
+  temp.innerHTML = html;
+  // Remove nav, header, footer, style, script, meta elements
+  temp.querySelectorAll('nav, header, footer, style, script, link, meta, title, .back-btn, .blog-footer, .share-bar').forEach(el => el.remove());
+  // Remove .article-hero (title/subtitle from standalone blog page - we render our own)
+  temp.querySelectorAll('.article-hero').forEach(el => el.remove());
+  // Try to find article-body content specifically
+  var body = temp.querySelector('.article-body');
+  var result = body ? body.innerHTML : temp.innerHTML;
+  // If content has no en-content/hi-content but has hindi-section, wrap the non-hindi parts as en-content
+  if(result.indexOf('hindi-section') > -1 && result.indexOf('en-content') === -1) {
+    result = result.replace(/<div class="hindi-section/g, '</div><div class="hindi-section hi-content');
+    // Wrap everything before first hindi-section as en-content
+    var parts = result.split('</div><div class="hindi-section');
+    if(parts.length > 1) {
+      result = '<div class="en-content">' + parts[0] + '</div><div class="hindi-section' + parts.slice(1).join('</div><div class="hindi-section');
+    }
+  }
+  // Fix relative image paths so they resolve from root, not /blog/
+  result = result.replace(/src="(?!http)(?!\/)/g, 'src="/');
+  return result;
+}
+
+function openBlog(id) {
+  const b = allBlogs.find(x=>String(x.id)===String(id));
+  if(!b) return;
+  const cat = CAT_STYLES[b.category] || {cls:'tp', label:b.category, icon:'📝'};
+  const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : '';
+  
+  // Clean the content
+  const cleanContent = cleanBlogContent(b.content);
+  
+  // Hide navbar
+  document.getElementById('navbar').style.display='none';
+  
+  const overlay = document.createElement('div');
+  overlay.id = 'blogOverlay';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:10001;background:var(--bg);overflow-y:auto;';
+  
+  overlay.innerHTML = ''
+    // Top bar with back button and language toggle
+    + '<div style="position:sticky;top:0;z-index:10;background:rgba(250,249,246,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:12px 5%;display:flex;justify-content:space-between;align-items:center;">'
+    + '<button onclick="closeBlogOverlay()" style="background:var(--navy);color:#fff;border:none;padding:9px 20px;border-radius:50px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;">← Back</button>'
+    + '<div style="display:flex;gap:4px;background:rgba(26,39,68,.06);border:1px solid var(--border);border-radius:50px;padding:3px;">'
+    + '<button onclick="toggleBlogLang(\'en\')" class="blpill" data-bl="en" style="border:none;padding:5px 12px;border-radius:50px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:.7rem;font-weight:700;background:'+(curLang==='en'?'var(--navy)':'transparent')+';color:'+(curLang==='en'?'#fff':'var(--muted)')+';">EN</button>'
+    + '<button onclick="toggleBlogLang(\'hi\')" class="blpill" data-bl="hi" style="border:none;padding:5px 12px;border-radius:50px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:.7rem;font-weight:700;background:'+(curLang==='hi'?'var(--navy)':'transparent')+';color:'+(curLang==='hi'?'#fff':'var(--muted)')+';">हिं</button>'
+    + '</div></div>'
+    // Cover image
+    // Article header
+    + '<div style="max-width:780px;margin:0 auto;padding:24px 5% 0;text-align:center;">'
+    + '<span class="blog-tag '+cat.cls+'" style="display:inline-block;margin-bottom:14px;">'+cat.label+'</span>'
+    + '<h1 style="font-family:Playfair Display,serif;font-weight:900;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--navy);line-height:1.25;margin-bottom:10px;">'+escH(b._title || b.title)+'</h1>'
+    + '<div style="font-size:.78rem;color:var(--light);margin-bottom:28px;font-family:JetBrains Mono,monospace;">'+dateStr+' · By Vivek Kumar</div>'
+    + '</div>'
+    // Article content (cleaned) with table styles
+    + '<style>#blogBodyContent table{width:100%;border-collapse:collapse;margin:20px 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);}#blogBodyContent th{background:var(--navy);color:#fff;padding:11px 15px;font-size:.82rem;font-weight:700;text-align:left;}#blogBodyContent td{padding:11px 15px;font-size:.86rem;border-bottom:1px solid var(--border);}#blogBodyContent tr:nth-child(even){background:rgba(26,39,68,.02);}#blogBodyContent .en-content,#blogBodyContent .hi-content{display:block;}#blogBodyContent h2{font-family:Playfair Display,serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin:32px 0 14px;padding-top:18px;border-top:1px solid var(--border);}#blogBodyContent h3{font-weight:700;font-size:1.05rem;color:var(--orange);margin:24px 0 10px;}#blogBodyContent ul{margin:10px 0 18px 22px;}#blogBodyContent li{margin-bottom:8px;line-height:1.8;}#blogBodyContent blockquote{border-left:3px solid var(--orange);padding-left:14px;margin:14px 0;color:var(--muted);font-style:italic;}#blogBodyContent .callout{background:rgba(232,93,38,.05);border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0;}#blogBodyContent .hindi-section{background:rgba(13,140,126,.04);border:1px solid rgba(13,140,126,.15);border-radius:16px;padding:24px;margin:28px 0;}#blogBodyContent img{max-width:100%;height:auto;border-radius:12px;margin:16px 0;display:block;}.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;border-radius:12px;border:1px solid var(--border);}@media(max-width:600px){#blogBodyContent{font-size:.92rem!important;line-height:1.85!important;padding:0 4% 60px!important;}#blogBodyContent h2{font-size:1.2rem!important;margin:24px 0 10px!important;}#blogBodyContent h3{font-size:.95rem!important;}#blogBodyContent table{font-size:.75rem;display:block;overflow-x:auto;white-space:nowrap;}#blogBodyContent th{padding:8px 10px;font-size:.72rem;}#blogBodyContent td{padding:8px 10px;font-size:.75rem;}#blogBodyContent .callout{padding:12px 14px;font-size:.85rem;}#blogBodyContent .hindi-section{padding:16px;margin:20px 0;}#blogBodyContent ul{margin-left:16px;}#blogBodyContent li{font-size:.88rem;line-height:1.7;}}</style>'
+    + '<div id="blogBodyContent" style="max-width:780px;margin:0 auto;padding:0 5% 80px;font-size:1rem;color:var(--text);line-height:2;">'+cleanContent+'</div>'+ '<button id="blogShareBtn" onclick="shareBlog(\''+b.id+'\')" title="Share this article" style="position:fixed;bottom:24px;right:24px;z-index:10002;width:56px;height:56px;border-radius:50%;border:none;background:var(--orange);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(232,93,38,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;font-family:inherit;" onmouseover="this.style.transform=\'scale(1.08)\';this.style.boxShadow=\'0 8px 26px rgba(232,93,38,.55)\'" onmouseout="this.style.transform=\'scale(1)\';this.style.boxShadow=\'0 6px 20px rgba(232,93,38,.4)\'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>';
+  
+  document.body.appendChild(overlay);
+  overlay.scrollTop = 0;
+  
+  // Apply language filter to blog content
+  applyBlogLang(curLang);
+
+  // Update URL so it can be shared/bookmarked
+  try { if(b.slug) { history.pushState({blog:true}, '', '/blog/' + b.slug); } else { history.pushState({blog:true}, '', '#blog-' + b.id); } } catch(e) {}
+}
+
+function closeBlogOverlay() {
+  const ov = document.getElementById('blogOverlay');
+  if(ov) ov.remove();
+  document.getElementById('navbar').style.display='';
+  if(history.state && history.state.blog){
+    history.back();
+  } else if(location.pathname.indexOf('/blog/')===0 || location.hash.indexOf('#blog-')===0){
+    history.replaceState(null,'','/');
+  }
+}
+
+// Phone back button / browser back button support
+window.addEventListener('popstate', function(){
+  var ov = document.getElementById('blogOverlay');
+  if(ov){
+    ov.remove();
+    document.getElementById('navbar').style.display='';
+  }
+});
+
+function shareBlog(id){
+  const b = allBlogs.find(x=>String(x.id)===String(id));
+  if(!b) return;
+  const title = (b._title || b.title || 'VKS Tech Blog');
+  const url = b.slug ? (location.origin + '/blog/' + b.slug) : (location.origin + '/#blog-' + b.id);
+  const shareData = {
+    title: title,
+    text: (b._summary || b.summary || 'Read this article on VKS Tech') + ' — ',
+    url: url
+  };
+  if(navigator.share){
+    navigator.share(shareData).catch(function(err){
+      if(err && err.name !== 'AbortError') _copyShareLink(url);
+    });
+  } else {
+    _copyShareLink(url);
+  }
+}
+function _copyShareLink(url){
+  var ok = false;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url); ok = true;
+    }
+  } catch(e) {}
+  if(!ok){
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = url; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta); ok = true;
+    } catch(e){}
+  }
+  _showShareToast(ok ? 'Link copied to clipboard!' : 'Copy this link: ' + url);
+}
+function _showShareToast(msg){
+  var old = document.getElementById('shareToast');
+  if(old) old.remove();
+  var t = document.createElement('div');
+  t.id = 'shareToast';
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:96px;right:24px;z-index:10003;background:var(--navy);color:#fff;padding:12px 18px;border-radius:50px;font-size:.85rem;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.2);max-width:calc(100vw - 48px);animation:fadeInUp .25s ease-out;';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 320); }, 2400);
+}
+/* Auto-open blog if URL has #blog-{id} on load */
+function _tryOpenBlogFromHash(){
+  // Handle /blog/{slug} URLs
+  var pathMatch = location.pathname.match(/^\/blog\/(.+)$/);
+  if(pathMatch) {
+    var slug = pathMatch[1];
+    if(!allBlogs || !allBlogs.length){ setTimeout(_tryOpenBlogFromHash, 250); return; }
+    var found = allBlogs.find(function(x){ return x.slug === slug; });
+    if(found) { openBlog(found.id); return; }
+  }
+  // Fallback: handle #blog-{id} hash URLs
+  var h = location.hash || '';
+  var m = h.match(/^#blog-(.+)$/);
+  if(!m) return;
+  var id = m[1];
+  if(!allBlogs || !allBlogs.length){
+    setTimeout(_tryOpenBlogFromHash, 250); return;
+  }
+  if(allBlogs.find(function(x){ return String(x.id)===String(id); })){
+    openBlog(id);
+  }
+}
+window.addEventListener('load', function(){ setTimeout(_tryOpenBlogFromHash, 400); });
+window.addEventListener('hashchange', _tryOpenBlogFromHash);
+
+function toggleBlogLang(lang) {
+  curLang = lang;
+  localStorage.setItem('vkstech_lang', lang);
+  // Update pill styles in overlay
+  document.querySelectorAll('.blpill').forEach(p => {
+    const isActive = p.getAttribute('data-bl') === lang;
+    p.style.background = isActive ? 'var(--navy)' : 'transparent';
+    p.style.color = isActive ? '#fff' : 'var(--muted)';
+  });
+  // Update main nav pills too
+  document.querySelectorAll('.lpill').forEach(p => p.classList.toggle('active', p.textContent.trim() === (lang==='hi'?'हिं':'EN')));
+  applyBlogLang(lang);
+  // Also apply main site translations
+  setLang(lang);
+  // Re-render blog cards in new language
+  if(typeof allBlogs !== 'undefined' && allBlogs.length > 0) {
+    var grid = document.getElementById('blogGrid');
+    if(grid) grid.innerHTML = allBlogs.map(renderBlogCard).join('');
+  }
+}
+
+function applyBlogLang(lang) {
+  const body = document.getElementById('blogBodyContent');
+  if(!body) return;
+  // Handle en-content / hi-content wrappers
+  body.querySelectorAll('.en-content').forEach(el => el.style.display = lang==='en' ? '' : 'none');
+  body.querySelectorAll('.hi-content, .hindi-section').forEach(el => el.style.display = lang==='hi' ? '' : 'none');
+  // Make all visible images responsive
+  body.querySelectorAll('img').forEach(img => {
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+    img.style.borderRadius = '12px';
+    img.style.margin = '16px 0';
+  });
+  // If no en-content/hi-content wrappers found, show everything (backwards compatibility)
+  if(!body.querySelector('.en-content') && !body.querySelector('.hi-content') && !body.querySelector('.hindi-section')) return;
+}
+
+loadBlogs();
+
+/* FORM SUBMISSION */
+function submitReq(){
+  const n=document.getElementById('rn').value.trim();
+  const em=document.getElementById('re').value.trim();
+  const p=document.getElementById('rp').value.trim();
+  const c=document.getElementById('rc').value;
+  const ti=document.getElementById('rt').value.trim();
+  const d=document.getElementById('rd').value.trim();
+  if(!n||!em||!c||!ti||!d){alert('Please fill all required fields (*)');return;}
+  sb.from('app_requests').insert([{
+    name:n, email:em, phone:p, category:c, title:ti, description:d
+  }]).then(({error})=>{
+    if(error) throw error;
+    const toast=document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),4500);
+    ['rn','re','rp','rt','rd'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('rc').selectedIndex=0;
+  }).catch(err=>{
+    console.error('Submit error:',err);
+    alert('Something went wrong. Please try again.');
+  });
+}
+</script>
+</body>
+</html>
