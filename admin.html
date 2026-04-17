@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VKSTech Blog Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--navy:#1a2744;--teal:#0d8c7e;--orange:#e85d26;--bg:#faf9f6;--card:#fff;--border:#e2ddd4;--muted:#6b7a99;--red:#dc3545;--green:#28a745}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.topbar{background:var(--navy);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-size:1.2rem;font-weight:800}
+.btn{padding:9px 18px;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-danger{background:var(--red);color:#fff}
+.btn-success{background:var(--green);color:#fff}
+.container{max-width:1100px;margin:30px auto;padding:0 24px}
+.login-box{max-width:400px;margin:100px auto;background:var(--card);border-radius:16px;padding:40px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.login-box h2{margin-bottom:24px;font-family:'Playfair Display',serif}
+.login-box input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:1rem;margin-bottom:16px;font-family:inherit}
+.tabs{display:flex;gap:8px;border-bottom:2px solid var(--border);margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:12px 20px;background:none;border:none;font-family:inherit;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+.panel{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.panel h3{margin-bottom:18px;font-family:'Playfair Display',serif}
+.field{margin-bottom:18px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--orange)}
+.field textarea{resize:vertical;min-height:200px;font-family:monospace;font-size:.8rem}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.post-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.post-item h4{font-size:1rem;margin-bottom:4px}
+.post-item .meta{font-size:.78rem;color:var(--muted)}
+.status{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.7rem;font-weight:700;margin-left:8px}
+.status.pub{background:#d4edda;color:#155724}.status.draft{background:#fff3cd;color:#856404}
+.post-actions{display:flex;gap:6px;flex-wrap:wrap}
+.post-actions button,.post-actions a{padding:6px 12px;font-size:.75rem}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}.empty div{font-size:3rem;margin-bottom:12px}
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer}
+.drop-zone:hover{border-color:var(--orange)}
+.drop-zone input{display:none}
+.toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999}
+.toast.show{opacity:1;transform:translateY(0)}.toast.err{background:var(--red)}
+</style></head>
+<body>
+
+<div id="loginView"><div class="login-box"><h2>🔐 Admin Login</h2>
+<input type="password" id="pwdInput" placeholder="Enter password" onkeypress="if(event.key==='Enter')login()">
+<button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">Login</button></div></div>
+
+<div id="adminView" style="display:none">
+<div class="topbar"><h1>📝 VKSTech Blog Admin</h1>
+<div><a href="index.html" class="btn btn-ghost" target="_blank">🌐 View Site</a>
+<button class="btn btn-ghost" onclick="logout()">🚪 Logout</button></div></div>
+
+<div class="container">
+<div class="tabs">
+<button class="tab active" onclick="switchTab('upload',this)">📤 Upload Blog</button>
+<button class="tab" onclick="switchTab('write',this)">✍️ Write Manually</button>
+<button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
+<button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
+</div>
+
+<div id="tab-upload" class="panel">
+<h3>📤 Upload Blog HTML File</h3>
+<div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+<div style="font-size:2rem">📄</div><p style="margin:12px 0 4px;font-weight:700">Click to upload HTML file</p>
+<input type="file" id="fileInput" accept=".html" onchange="handleFile(this)"></div>
+<div id="uploadForm" style="display:none;margin-top:20px">
+<div class="field"><label>Blog Title (use " | " for bilingual)</label><input type="text" id="upTitle" placeholder="English Title | हिंदी शीर्षक"></div>
+<div class="field"><label>URL Slug (auto-generated, editable)</label><input type="text" id="upSlug" placeholder="e.g. oee-calculation-metalliser" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Edit if needed. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="upCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option></select></div>
+<div class="field"><label>Summary (use " | " for bilingual)</label><textarea id="upSummary" style="min-height:80px" placeholder="English summary | हिंदी सारांश"></textarea></div>
+<div class="field"><label>Cover Image URL (optional)</label><input type="text" id="upCover" placeholder="folder/image.png"></div>
+<div class="field"><label>Content Preview</label><textarea id="upContent" readonly></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="publishBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="publishBlog(false)">💾 Save as Draft</button></div></div></div>
+
+<div id="tab-write" class="panel" style="display:none">
+<h3>✍️ Write Blog Manually</h3>
+<div class="field"><label>Title</label><input type="text" id="wTitle" placeholder="English | हिंदी"></div>
+<div class="field"><label>URL Slug</label><input type="text" id="wSlug" placeholder="e.g. my-blog-post" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="wCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option></select></div>
+<div class="field"><label>Summary</label><textarea id="wSummary" style="min-height:80px"></textarea></div>
+<div class="field"><label>Cover Image URL</label><input type="text" id="wCover"></div>
+<div class="field"><label>HTML Content</label><textarea id="wContent"></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="writeBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="writeBlog(false)">💾 Save as Draft</button></div></div>
+
+<div id="tab-posts" class="panel" style="display:none">
+<h3>📋 All Blog Posts</h3>
+<div id="postsList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+
+<div id="tab-req" class="panel" style="display:none">
+<h3>📩 App Requests</h3>
+<div id="reqList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+</div></div>
+
+<div class="toast" id="toast">✅ Success</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:800px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-family:'Playfair Display',serif;">✏️ Edit Blog Post</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">✕ Close</button>
+    </div>
+    <input type="hidden" id="editId">
+    <div class="field"><label>Title (bilingual with " | ")</label><input type="text" id="editTitle"></div>
+    <div class="field"><label>URL Slug</label><input type="text" id="editSlug" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/blog/<b>your-slug</b></div></div>
+    <div class="field"><label>Category</label><select id="editCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option></select></div>
+    <div class="field"><label>Summary (bilingual with " | ")</label><textarea id="editSummary" style="min-height:80px;"></textarea></div>
+    <div class="field"><label>Cover Image URL</label><input type="text" id="editCover"></div>
+    <div class="field"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="saveEdit()">💾 Save Changes</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const PASSWORD = 'sunitavks26';
+
+if(sessionStorage.getItem('vkstech_admin') === 'yes'){
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('adminView').style.display = 'block';
+}
+function login(){
+  if(document.getElementById('pwdInput').value === PASSWORD){
+    sessionStorage.setItem('vkstech_admin','yes');
+    document.getElementById('loginView').style.display='none';
+    document.getElementById('adminView').style.display='block';
+  } else toast('Wrong password', true);
+}
+function logout(){ sessionStorage.removeItem('vkstech_admin'); location.reload(); }
+function toast(msg, err){
+  const t=document.getElementById('toast');
+  t.textContent=(err?'❌ ':'✅ ')+msg;
+  t.className='toast show'+(err?' err':'');
+  setTimeout(()=>t.className='toast'+(err?' err':''), 3000);
+}
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['upload','write','posts','req'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  if(tab==='posts')loadPosts();
+  if(tab==='req')loadRequests();
+}
+
+let uploadedContent='';
+function handleFile(input){
+  const file=input.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const temp=document.createElement('div');
+    temp.innerHTML=e.target.result;
+    temp.querySelectorAll('nav,header,footer,style,script,link,meta,title,.back-btn,.blog-footer,.share-bar,.article-hero').forEach(el=>el.remove());
+    const body=temp.querySelector('.article-body');
+    uploadedContent=body?body.outerHTML:temp.innerHTML;
+    document.getElementById('upContent').value=uploadedContent;
+    document.getElementById('uploadForm').style.display='block';
+    toast('File loaded!');
+  };
+  reader.readAsText(file);
+}
+
+async function publishBlog(published){
+  const title=document.getElementById('upTitle').value.trim();
+  const cat=document.getElementById('upCat').value;
+  const summary=document.getElementById('upSummary').value.trim();
+  const cover=document.getElementById('upCover').value.trim();
+  if(!title||!summary||!uploadedContent){toast('Fill all fields and upload file',true);return;}
+  const slug=document.getElementById('upSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content:uploadedContent,published}]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['upTitle','upSlug','upSummary','upCover','upContent'].forEach(id=>document.getElementById(id).value='');
+  uploadedContent='';
+  document.getElementById('uploadForm').style.display='none';
+  document.getElementById('fileInput').value='';
+}
+
+async function writeBlog(published){
+  const title=document.getElementById('wTitle').value.trim();
+  const cat=document.getElementById('wCat').value;
+  const summary=document.getElementById('wSummary').value.trim();
+  const cover=document.getElementById('wCover').value.trim();
+  const content=document.getElementById('wContent').value.trim();
+  if(!title||!summary||!content){toast('Fill all fields',true);return;}
+  const slug=document.getElementById('wSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content,published}]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['wTitle','wSlug','wSummary','wCover','wContent'].forEach(id=>document.getElementById(id).value='');
+}
+
+async function loadPosts(){
+  const list=document.getElementById('postsList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('blogs').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📝</div><p>No posts yet</p></div>';return;}
+  list.innerHTML=data.map(b=>`<div class="post-item">
+    <div style="flex:1;min-width:250px"><h4>${escH(b.title)}<span class="status ${b.published?'pub':'draft'}">${b.published?'Published':'Draft'}</span></h4>
+    <div class="meta">${b.category||''} • ${new Date(b.created_at).toLocaleDateString()}</div></div>
+    <div class="post-actions">
+    <button class="btn btn-primary" onclick="editPost(${b.id})">✏️ Edit</button>
+    <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="downloadPost(${b.id})">⬇️ Download</button>
+    <button class="btn ${b.published?'btn-ghost':'btn-success'}" style="${b.published?'border:1.5px solid var(--border);color:var(--navy)':''}" onclick="togglePub(${b.id},${!b.published})">${b.published?'📥 Unpublish':'🚀 Publish'}</button>
+    <button class="btn btn-danger" onclick="delPost(${b.id})">🗑️ Delete</button></div></div>`).join('');
+}
+
+async function togglePub(id,pub){
+  const {error}=await sb.from('blogs').update({published:pub}).eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast(pub?'Published':'Unpublished');loadPosts();
+}
+async function delPost(id){
+  if(!confirm('Delete permanently?'))return;
+  const {error}=await sb.from('blogs').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadPosts();
+}
+
+async function editPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error loading: '+error.message,true);return;}
+  document.getElementById('editId').value=data.id;
+  document.getElementById('editTitle').value=data.title||'';
+  document.getElementById('editSlug').value=data.slug||'';
+  document.getElementById('editCat').value=data.category||'packaging';
+  document.getElementById('editSummary').value=data.summary||'';
+  document.getElementById('editCover').value=data.cover_image||'';
+  document.getElementById('editContent').value=data.content||'';
+  document.getElementById('editModal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeEdit(){
+  document.getElementById('editModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+async function saveEdit(){
+  const id=document.getElementById('editId').value;
+  const title=document.getElementById('editTitle').value.trim();
+  const cat=document.getElementById('editCat').value;
+  const summary=document.getElementById('editSummary').value.trim();
+  const cover=document.getElementById('editCover').value.trim();
+  const content=document.getElementById('editContent').value.trim();
+  if(!title||!summary||!content){toast('Fill all required fields',true);return;}
+  const slug=document.getElementById('editSlug').value.trim();
+  if(!slug){toast('Slug is required',true);return;}
+  const {error}=await sb.from('blogs').update({
+    title,slug,category:cat,summary,cover_image:cover,content
+  }).eq('id',id);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast('Updated successfully!');
+  closeEdit();
+  loadPosts();
+}
+
+async function downloadPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error: '+error.message,true);return;}
+  const html=`<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>${escH(data.title)}</title></head>
+<body>
+<h1>${escH(data.title)}</h1>
+<p><strong>Category:</strong> ${escH(data.category)}</p>
+<p><strong>Summary:</strong> ${escH(data.summary)}</p>
+${data.cover_image?'<img src="'+escH(data.cover_image)+'" style="max-width:100%;"/>':''}
+${data.content}
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='blog-'+id+'.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Downloaded!');
+}
+
+async function loadRequests(){
+  const list=document.getElementById('reqList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('app_requests').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📭</div><p>No requests yet</p></div>';return;}
+  list.innerHTML=data.map(r=>{
+    const wa=r.phone?`https://wa.me/${r.phone.replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+r.name+', thanks for your idea "'+r.title+'"')}`:'';
+    return `<div class="post-item">
+      <div style="flex:1;min-width:250px"><h4>${escH(r.title)}</h4>
+      <div class="meta">From: <strong>${escH(r.name)}</strong> • ${escH(r.email)} • ${escH(r.phone||'No phone')}</div>
+      <div class="meta">${escH(r.category)} • ${new Date(r.created_at).toLocaleDateString()}</div>
+      <p style="margin-top:8px;font-size:.85rem">${escH(r.description)}</p></div>
+      <div class="post-actions">
+      ${wa?`<a href="${wa}" target="_blank" class="btn btn-success">📲 WhatsApp</a>`:''}
+      <a href="mailto:${r.email}" class="btn btn-primary">📧 Email</a>
+      <button class="btn btn-danger" onclick="delReq(${r.id})">🗑️</button></div></div>`;
+  }).join('');
+}
+async function delReq(id){
+  if(!confirm('Delete?'))return;
+  const {error}=await sb.from('app_requests').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadRequests();
+}
+function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* Auto-generate slug from English part of title */
+function generateSlug(title){
+  const en = title.split('|')[0].trim();
+  return en.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .substring(0, 60);
+}
+/* Hook: auto-fill slug when title changes */
+document.addEventListener('DOMContentLoaded', function(){
+  ['upTitle','wTitle'].forEach(function(tid){
+    var el = document.getElementById(tid);
+    if(!el) return;
+    var slugId = tid.replace('Title','Slug');
+    el.addEventListener('input', function(){
+      var slugEl = document.getElementById(slugId);
+      if(slugEl && !slugEl.dataset.manual){
+        slugEl.value = generateSlug(this.value);
+      }
+    });
+  });
+  ['upSlug','wSlug','editSlug'].forEach(function(sid){
+    var el = document.getElementById(sid);
+    if(el){
+      el.addEventListener('input', function(){ this.dataset.manual = 'true'; });
+    }
+  });
+});
+</script>
+</body></html>
