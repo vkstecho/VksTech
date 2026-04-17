@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VKSTech Blog Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--navy:#1a2744;--teal:#0d8c7e;--orange:#e85d26;--bg:#faf9f6;--card:#fff;--border:#e2ddd4;--muted:#6b7a99;--red:#dc3545;--green:#28a745}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.topbar{background:var(--navy);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-size:1.2rem;font-weight:800}
+.btn{padding:9px 18px;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-danger{background:var(--red);color:#fff}
+.btn-success{background:var(--green);color:#fff}
+.container{max-width:1100px;margin:30px auto;padding:0 24px}
+.login-box{max-width:400px;margin:100px auto;background:var(--card);border-radius:16px;padding:40px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.login-box h2{margin-bottom:24px;font-family:'Playfair Display',serif}
+.login-box input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:1rem;margin-bottom:16px;font-family:inherit}
+.tabs{display:flex;gap:8px;border-bottom:2px solid var(--border);margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:12px 20px;background:none;border:none;font-family:inherit;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+.panel{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.panel h3{margin-bottom:18px;font-family:'Playfair Display',serif}
+.field{margin-bottom:18px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--orange)}
+.field textarea{resize:vertical;min-height:200px;font-family:monospace;font-size:.8rem}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.post-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.post-item h4{font-size:1rem;margin-bottom:4px}
+.post-item .meta{font-size:.78rem;color:var(--muted)}
+.status{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.7rem;font-weight:700;margin-left:8px}
+.status.pub{background:#d4edda;color:#155724}.status.draft{background:#fff3cd;color:#856404}
+.post-actions{display:flex;gap:6px;flex-wrap:wrap}
+.post-actions button,.post-actions a{padding:6px 12px;font-size:.75rem}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}.empty div{font-size:3rem;margin-bottom:12px}
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer}
+.drop-zone:hover{border-color:var(--orange)}
+.drop-zone input{display:none}
+.toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999}
+.toast.show{opacity:1;transform:translateY(0)}.toast.err{background:var(--red)}
+</style></head>
+<body>
+
+<div id="loginView"><div class="login-box"><h2>🔐 Admin Login</h2>
+<input type="password" id="pwdInput" placeholder="Enter password" onkeypress="if(event.key==='Enter')login()">
+<button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">Login</button></div></div>
+
+<div id="adminView" style="display:none">
+<div class="topbar"><h1>📝 VKSTech Blog Admin</h1>
+<div><a href="index.html" class="btn btn-ghost" target="_blank">🌐 View Site</a>
+<button class="btn btn-ghost" onclick="logout()">🚪 Logout</button></div></div>
+
+<div class="container">
+<div class="tabs">
+<button class="tab active" onclick="switchTab('github',this)">📦 From GitHub</button>
+<button class="tab" onclick="switchTab('upload',this)">📤 Upload File</button>
+<button class="tab" onclick="switchTab('write',this)">✍️ Write Manually</button>
+<button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
+<button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
+</div>
+
+<div id="tab-github" class="panel">
+<h3>📦 Publish from GitHub Folder</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Pick-and-publish.</strong> Upload your blog folder (HTML + images + PDFs + Excel) to <code style="background:#fff;padding:2px 6px;border-radius:4px">github.com/vkstecho/VksTech</code>. The dropdown below lists all blog folders on your GitHub repo — pick one, click Fetch & Preview, then Publish. Edit on GitHub anytime; the site updates automatically.
+</p>
+
+<div style="background:#fffbea;border:1px solid #f0d47c;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.82rem;line-height:1.7">
+<strong style="color:var(--navy)">Your HTML file needs this 1 line in the <code>&lt;head&gt;</code>:</strong>
+<pre style="background:#1a2744;color:#f0e7d5;padding:12px 14px;border-radius:8px;margin-top:8px;overflow-x:auto;font-size:.78rem;line-height:1.55;font-family:'Courier New',monospace;">&lt;meta name="category" content="manufacturing"&gt;</pre>
+<span style="color:var(--muted);font-size:.78rem">Category values: <code>packaging</code> · <code>excel</code> · <code>career</code> · <code>tech</code> · <code>manufacturing</code>. Title comes from the first <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>, summary from the first <code>&lt;p&gt;</code>, cover from the first <code>&lt;img&gt;</code>. Bilingual: English from <code>.en-content</code> + Hindi from <code>.hindi-section</code>, joined with <code>|</code>.</span>
+</div>
+
+<div class="field"><label>Select Blog Folder *</label>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">
+<select id="gFolderSelect" style="flex:1;min-width:260px;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none;background:#fff">
+<option value="">⏳ Loading folders from GitHub...</option>
+</select>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="loadGithubFolders()" title="Refresh folder list">🔄 Refresh</button>
+<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;padding:11px 0;cursor:pointer;white-space:nowrap">
+<input type="checkbox" id="gShowAll" onchange="loadGithubFolders()" style="width:auto;margin:0;cursor:pointer"> Show already-published
+</label>
+</div>
+<div style="font-size:.72rem;color:#999;margin-top:6px">Folders are scanned from <code>github.com/vkstecho/VksTech</code>. Only folders containing a <code>.html</code> file are shown. Already-published folders are hidden by default — tick the checkbox to see all.</div>
+
+<details style="margin-top:10px;font-size:.78rem">
+<summary style="cursor:pointer;color:var(--muted)">Can't find your folder? Type it manually</summary>
+<input type="text" id="gFolderManual" placeholder="e.g. metalliser-budget-blog (if not in the list above)" oninput="this.value=this.value.replace(/[^a-z0-9\-_\/]/gi,'')" style="margin-top:8px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit">
+<div style="font-size:.7rem;color:#999;margin-top:4px">Useful if GitHub's API rate limit was hit, or for sub-paths like <code>blogs/my-folder</code>.</div>
+</details>
+</div>
+
+<div class="buttons">
+<button class="btn btn-primary" onclick="fetchAndPreview()">🔍 Fetch & Preview</button>
+</div>
+
+<div id="gPreview" style="display:none;margin-top:24px;padding:20px;background:#f8f6f1;border:1px solid var(--border);border-radius:12px">
+<h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy)">📋 Auto-detected Metadata</h4>
+<div id="gPreviewContent" style="font-size:.88rem;line-height:1.8"></div>
+<div class="buttons" style="margin-top:20px">
+<button class="btn btn-success" onclick="publishGithubBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="publishGithubBlog(false)">💾 Save as Draft</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="resetGithubForm()">🔄 Reset</button>
+</div>
+</div></div>
+
+<div id="tab-upload" class="panel" style="display:none">
+<h3>📤 Upload Blog HTML File</h3>
+<p style="background:#fff8e6;border-left:3px solid var(--orange);padding:10px 14px;border-radius:8px;font-size:.8rem;color:var(--navy);margin-bottom:18px">
+⚠️ <strong>Legacy method.</strong> Stores HTML directly in database. For new blogs, prefer the <strong>📦 From GitHub</strong> tab — it handles images and downloads much better.
+</p>
+<div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+<div style="font-size:2rem">📄</div><p style="margin:12px 0 4px;font-weight:700">Click to upload HTML file</p>
+<input type="file" id="fileInput" accept=".html" onchange="handleFile(this)"></div>
+<div id="uploadForm" style="display:none;margin-top:20px">
+<div class="field"><label>Blog Title (use " | " for bilingual)</label><input type="text" id="upTitle" placeholder="English Title | हिंदी शीर्षक"></div>
+<div class="field"><label>URL Slug (auto-generated, editable)</label><input type="text" id="upSlug" placeholder="e.g. oee-calculation-metalliser" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Edit if needed. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="upCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field"><label>Summary (use " | " for bilingual)</label><textarea id="upSummary" style="min-height:80px" placeholder="English summary | हिंदी सारांश"></textarea></div>
+<div class="field"><label>Cover Image URL (optional)</label><input type="text" id="upCover" placeholder="folder/image.png"></div>
+<div class="field"><label>Content Preview</label><textarea id="upContent" readonly></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="publishBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="publishBlog(false)">💾 Save as Draft</button></div></div></div>
+
+<div id="tab-write" class="panel" style="display:none">
+<h3>✍️ Write Blog Manually</h3>
+<div class="field"><label>Title</label><input type="text" id="wTitle" placeholder="English | हिंदी"></div>
+<div class="field"><label>URL Slug</label><input type="text" id="wSlug" placeholder="e.g. my-blog-post" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="wCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field"><label>Summary</label><textarea id="wSummary" style="min-height:80px"></textarea></div>
+<div class="field"><label>Cover Image URL</label><input type="text" id="wCover"></div>
+<div class="field"><label>HTML Content</label><textarea id="wContent"></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="writeBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="writeBlog(false)">💾 Save as Draft</button></div></div>
+
+<div id="tab-posts" class="panel" style="display:none">
+<h3>📋 All Blog Posts</h3>
+<div id="postsList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+
+<div id="tab-req" class="panel" style="display:none">
+<h3>📩 App Requests</h3>
+<div id="reqList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+</div></div>
+
+<div class="toast" id="toast">✅ Success</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:800px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-family:'Playfair Display',serif;">✏️ Edit Blog Post</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">✕ Close</button>
+    </div>
+    <input type="hidden" id="editId">
+    <div class="field"><label>Title (bilingual with " | ")</label><input type="text" id="editTitle"></div>
+    <div class="field"><label>URL Slug</label><input type="text" id="editSlug" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/blog/<b>your-slug</b></div></div>
+    <div class="field"><label>Category</label><select id="editCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+    <div class="field"><label>Summary (bilingual with " | ")</label><textarea id="editSummary" style="min-height:80px;"></textarea></div>
+    <div class="field"><label>Cover Image URL</label><input type="text" id="editCover"></div>
+    <div class="field"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="saveEdit()">💾 Save Changes</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const PASSWORD = 'sunitavks26';
+
+/* GitHub config — all blog folders live in this repo on the `main` branch */
+const GH_OWNER = 'vkstecho';
+const GH_REPO  = 'VksTech';
+const GH_BRANCH = 'main';
+function ghRawUrl(folder, file){ return `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`; }
+function ghEditUrl(folder, file){ return `https://github.com/${GH_OWNER}/${GH_REPO}/edit/${GH_BRANCH}/${folder}/${file}`; }
+function ghFolderUrl(folder){ return `https://github.com/${GH_OWNER}/${GH_REPO}/tree/${GH_BRANCH}/${folder}`; }
+
+if(sessionStorage.getItem('vkstech_admin') === 'yes'){
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('adminView').style.display = 'block';
+  /* GitHub tab is open by default on load — fetch the folder list */
+  setTimeout(function(){ if(typeof loadGithubFolders === 'function') loadGithubFolders(); }, 100);
+}
+function login(){
+  if(document.getElementById('pwdInput').value === PASSWORD){
+    sessionStorage.setItem('vkstech_admin','yes');
+    document.getElementById('loginView').style.display='none';
+    document.getElementById('adminView').style.display='block';
+    setTimeout(function(){ if(typeof loadGithubFolders === 'function') loadGithubFolders(); }, 100);
+  } else toast('Wrong password', true);
+}
+function logout(){ sessionStorage.removeItem('vkstech_admin'); location.reload(); }
+function toast(msg, err){
+  const t=document.getElementById('toast');
+  t.textContent=(err?'❌ ':'✅ ')+msg;
+  t.className='toast show'+(err?' err':'');
+  setTimeout(()=>t.className='toast'+(err?' err':''), 3000);
+}
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['github','upload','write','posts','req'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
+  if(tab==='posts')loadPosts();
+  if(tab==='req')loadRequests();
+}
+
+let uploadedContent='';
+function handleFile(input){
+  const file=input.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const temp=document.createElement('div');
+    temp.innerHTML=e.target.result;
+    temp.querySelectorAll('nav,header,footer,style,script,link,meta,title,.back-btn,.blog-footer,.share-bar,.article-hero').forEach(el=>el.remove());
+    const body=temp.querySelector('.article-body');
+    uploadedContent=body?body.outerHTML:temp.innerHTML;
+    document.getElementById('upContent').value=uploadedContent;
+    document.getElementById('uploadForm').style.display='block';
+    toast('File loaded!');
+  };
+  reader.readAsText(file);
+}
+
+async function publishBlog(published){
+  const title=document.getElementById('upTitle').value.trim();
+  const cat=document.getElementById('upCat').value;
+  const summary=document.getElementById('upSummary').value.trim();
+  const cover=document.getElementById('upCover').value.trim();
+  if(!title||!summary||!uploadedContent){toast('Fill all fields and upload file',true);return;}
+  const slug=document.getElementById('upSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content:uploadedContent,published}]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['upTitle','upSlug','upSummary','upCover','upContent'].forEach(id=>document.getElementById(id).value='');
+  uploadedContent='';
+  document.getElementById('uploadForm').style.display='none';
+  document.getElementById('fileInput').value='';
+}
+
+/* ---------- GITHUB-BASED PUBLISHING (auto-parse metadata from HTML) ---------- */
+let ghParsed = null;  // stores parsed metadata between fetch and publish
+let ghFoldersLoaded = false;  // tracks whether folder dropdown has been populated
+
+/* Text utilities */
+function textOf(el){ return el ? (el.textContent || '').trim().replace(/\s+/g,' ') : ''; }
+function firstMatch(root, selectors){
+  for (const sel of selectors){
+    const el = root.querySelector(sel);
+    if (el) return el;
+  }
+  return null;
+}
+
+/* Load all folders in the repo that look like blogs (contain at least one .html file)
+   and populate the dropdown. Excludes already-published ones unless "Show all" is ticked. */
+async function loadGithubFolders(){
+  const select = document.getElementById('gFolderSelect');
+  const showAll = document.getElementById('gShowAll').checked;
+
+  select.innerHTML = '<option value="">⏳ Scanning GitHub repo...</option>';
+  ghFoldersLoaded = true;
+
+  try{
+    /* Step 1: list everything at repo root */
+    const rootApi = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/?ref=${GH_BRANCH}`;
+    const r = await fetch(rootApi);
+    if (!r.ok){
+      if (r.status === 403){
+        select.innerHTML = '<option value="">⚠️ GitHub rate limit — use manual entry below</option>';
+        return;
+      }
+      throw new Error('GitHub API HTTP '+r.status);
+    }
+    const items = await r.json();
+    const dirs = items.filter(i => i.type === 'dir').map(i => i.name);
+
+    if (dirs.length === 0){
+      select.innerHTML = '<option value="">📭 No folders found in repo root</option>';
+      return;
+    }
+
+    /* Step 2: for each folder, check if it contains a .html file (= blog folder).
+       Run in parallel but limit concurrency so we don't hammer GitHub. */
+    select.innerHTML = '<option value="">⏳ Checking ' + dirs.length + ' folders...</option>';
+    const blogFolders = [];
+    const CONCURRENCY = 5;
+    for (let i = 0; i < dirs.length; i += CONCURRENCY){
+      const batch = dirs.slice(i, i + CONCURRENCY);
+      const results = await Promise.all(batch.map(async (folder) => {
+        try{
+          const files = await listGithubFolder(folder);
+          const html = pickBestHtml(files);
+          return html ? { folder, htmlFile: html.name, totalFiles: files.length } : null;
+        }catch(e){ return null; }
+      }));
+      results.forEach(x => { if (x) blogFolders.push(x); });
+    }
+
+    if (blogFolders.length === 0){
+      select.innerHTML = '<option value="">📭 No blog folders found (no folder with .html file)</option>';
+      return;
+    }
+
+    /* Step 3: fetch already-published github_paths so we can tag folders */
+    const { data: publishedRows } = await sb.from('blogs').select('github_path').not('github_path','is',null);
+    const publishedFolders = new Set();
+    (publishedRows || []).forEach(row => {
+      if (row.github_path){
+        publishedFolders.add(row.github_path.split('::')[0]);
+      }
+    });
+
+    /* Step 4: build dropdown */
+    blogFolders.sort((a,b) => a.folder.localeCompare(b.folder));
+    const opts = ['<option value="">— Select a folder —</option>'];
+    let newCount = 0, pubCount = 0;
+    blogFolders.forEach(({folder, htmlFile, totalFiles}) => {
+      const isPub = publishedFolders.has(folder);
+      if (isPub){ pubCount++; }
+      else { newCount++; }
+      if (!showAll && isPub) return;  // hide already-published when checkbox unticked
+      const tag = isPub ? ' [already published]' : ' (NEW)';
+      opts.push('<option value="'+escH(folder)+'">📁 '+escH(folder)+' — '+escH(htmlFile)+' + '+(totalFiles-1)+' other files'+tag+'</option>');
+    });
+    select.innerHTML = opts.join('');
+
+    /* Summary message */
+    const msg = showAll
+      ? 'Loaded '+blogFolders.length+' folders ('+newCount+' new, '+pubCount+' already published)'
+      : 'Loaded '+newCount+' new folders'+(pubCount ? ' ('+pubCount+' already published, hidden)' : '');
+    toast(msg);
+  }catch(e){
+    select.innerHTML = '<option value="">❌ '+escH(e.message)+'</option>';
+    toast('Could not load GitHub folders — use manual entry', true);
+  }
+}
+
+/* List all files in a GitHub folder using the public API.
+   Returns array of {name, size, download_url} or throws. */
+async function listGithubFolder(folder){
+  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${folder}?ref=${GH_BRANCH}`;
+  const r = await fetch(apiUrl);
+  if (!r.ok){
+    if (r.status === 404) throw new Error('Folder not found on GitHub: '+folder);
+    if (r.status === 403) throw new Error('GitHub rate limit reached — wait a minute and try again');
+    throw new Error('GitHub API error: HTTP '+r.status);
+  }
+  const items = await r.json();
+  if (!Array.isArray(items)) throw new Error('Path exists but is not a folder');
+  return items.filter(i => i.type === 'file');
+}
+
+/* Pick the best HTML file from a file list.
+   Priority: index.html > any .html (biggest first). */
+function pickBestHtml(files){
+  const htmls = files.filter(f => /\.html?$/i.test(f.name));
+  if (htmls.length === 0) return null;
+  const idx = htmls.find(f => f.name.toLowerCase() === 'index.html');
+  if (idx) return idx;
+  htmls.sort((a,b) => (b.size||0) - (a.size||0));
+  return htmls[0];
+}
+
+async function fetchAndPreview(){
+  /* Read folder from dropdown first, fall back to manual input */
+  const fromDropdown = document.getElementById('gFolderSelect').value;
+  const fromManual = (document.getElementById('gFolderManual').value || '').trim().replace(/^\/|\/$/g,'');
+  const folder = fromDropdown || fromManual;
+
+  const previewBox = document.getElementById('gPreview');
+  const previewContent = document.getElementById('gPreviewContent');
+  if (!folder){ toast('Pick a folder from the dropdown or type one manually', true); return; }
+
+  previewContent.innerHTML = '⏳ Listing GitHub folder...';
+  previewBox.style.display = 'block';
+
+  /* Step 1: list folder contents to find the HTML file automatically */
+  let files, htmlFile;
+  try{
+    files = await listGithubFolder(folder);
+  }catch(e){
+    previewContent.innerHTML = '<div style="color:var(--red);padding:10px"><strong>❌ '+escH(e.message)+'</strong><br><small>Check: folder uploaded to <a href="'+ghFolderUrl(folder)+'" target="_blank" style="color:var(--red)">'+ghFolderUrl(folder)+'</a>?</small></div>';
+    ghParsed = null;
+    return;
+  }
+  if (files.length === 0){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ Folder exists but is empty.</div>';
+    ghParsed = null;
+    return;
+  }
+  htmlFile = pickBestHtml(files);
+  if (!htmlFile){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ No .html file found in this folder. Files present: '+files.map(f=>escH(f.name)).join(', ')+'</div>';
+    ghParsed = null;
+    return;
+  }
+  const file = htmlFile.name;
+
+  /* Step 2: fetch the HTML content */
+  previewContent.innerHTML = '⏳ Fetching <code>'+escH(file)+'</code>...';
+  try{
+    const url = ghRawUrl(folder, file) + '?cb=' + Date.now();
+    const r = await fetch(url);
+    if (!r.ok){
+      previewContent.innerHTML = '<div style="color:var(--red)">❌ Not fetchable (HTTP '+r.status+')</div>';
+      ghParsed = null;
+      return;
+    }
+    const html = await r.text();
+    const meta = parseBlogHtml(html);
+
+    /* Build cover URL — resolve relative to folder */
+    let coverUrl = '';
+    if (meta.cover){
+      if (/^https?:\/\//i.test(meta.cover)){
+        coverUrl = meta.cover;
+      } else {
+        const clean = meta.cover.replace(/^\.?\/+/, '');
+        coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
+      }
+    }
+
+    /* Save for publish step */
+    ghParsed = {
+      folder, file,
+      slug: folder.split('/').pop().toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,''),
+      title: meta.title,
+      summary: meta.summary,
+      category: meta.category,
+      cover: coverUrl,
+      sizeKB: (html.length/1024).toFixed(1)
+    };
+
+    /* Show list of other files found in the folder */
+    const otherFiles = files.filter(f => f.name !== file);
+    const filesRow = otherFiles.length
+      ? '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Files in folder:</td><td style="font-size:.78rem;color:var(--muted)">'+otherFiles.map(f=>'<code style="background:#fff;padding:2px 6px;border-radius:4px;margin:2px;display:inline-block">'+escH(f.name)+'</code>').join(' ')+'</td></tr>'
+      : '';
+
+    const warn = meta.warnings.length
+      ? '<div style="background:#fff4e6;border-left:3px solid var(--orange);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:.82rem"><strong>⚠️ Notes:</strong><ul style="margin:6px 0 0 18px">'+meta.warnings.map(w=>'<li>'+escH(w)+'</li>').join('')+'</ul></div>'
+      : '<div style="background:#e6f7ed;border-left:3px solid var(--green);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:.82rem">✅ All metadata found cleanly.</div>';
+
+    const coverHtml = coverUrl
+      ? '<div style="display:flex;gap:14px;align-items:flex-start;margin-top:6px"><img src="'+escH(coverUrl)+'" alt="Cover" style="width:140px;height:auto;border-radius:8px;border:1px solid var(--border)"><div style="flex:1;font-size:.78rem;color:var(--muted);word-break:break-all">'+escH(coverUrl)+'</div></div>'
+      : '<div style="color:var(--muted);font-style:italic">No cover image detected</div>';
+
+    previewContent.innerHTML =
+      '<table style="width:100%;border-collapse:collapse">'+
+      '<tr><td style="padding:6px 0;font-weight:700;width:130px;vertical-align:top">HTML file:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--teal)">'+escH(file)+'</code> <small style="color:var(--muted)">(auto-detected, '+ghParsed.sizeKB+' KB)</small></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Slug:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--orange)">'+escH(ghParsed.slug)+'</code> <small style="color:var(--muted)">→ vkstech.com/blog/'+escH(ghParsed.slug)+'</small></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Category:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px">'+escH(ghParsed.category)+'</code></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Title:</td><td>'+escH(ghParsed.title || '(missing)')+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Summary:</td><td style="color:var(--muted)">'+escH(ghParsed.summary || '(missing)')+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Cover:</td><td>'+coverHtml+'</td></tr>'+
+      filesRow+
+      '</table>'+
+      warn;
+  }catch(e){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ Error: '+escH(e.message)+'</div>';
+    ghParsed = null;
+  }
+}
+
+/* Parse a blog HTML string and extract title, summary, cover, category.
+   Handles bilingual .en-content / .hindi-section structure. */
+function parseBlogHtml(html){
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const out = { title:'', summary:'', cover:'', category:'', warnings:[] };
+
+  /* CATEGORY — from <meta name="category"> */
+  const metaCat = doc.querySelector('meta[name="category"]');
+  if (metaCat && metaCat.getAttribute('content')){
+    out.category = metaCat.getAttribute('content').trim().toLowerCase();
+  } else {
+    out.warnings.push('No <meta name="category"> found — will default to "manufacturing". Add it to the HTML for correct tagging.');
+    out.category = 'manufacturing';
+  }
+
+  /* Pick content scopes for EN and HI.
+     Strategy: if the body has .en-content / .hindi-section blocks, use those.
+     Otherwise, the whole body is treated as English only. */
+  const enScope = doc.querySelector('.en-content')  || doc.querySelector('.article-body') || doc.body;
+  const hiScope = doc.querySelector('.hindi-section, .hi-content');
+
+  /* TITLE — first h1/h2 inside each scope */
+  const enTitleEl = firstMatch(enScope, ['h1','h2']);
+  const hiTitleEl = hiScope ? firstMatch(hiScope, ['h1','h2']) : null;
+  const enTitle = textOf(enTitleEl);
+  const hiTitle = textOf(hiTitleEl);
+  if (!enTitle){
+    out.warnings.push('No <h1>/<h2> title found in the HTML body.');
+  }
+  out.title = hiTitle ? (enTitle + ' | ' + hiTitle) : enTitle;
+
+  /* SUMMARY — first <p> inside each scope (skip empty / whitespace only) */
+  function firstParagraph(scope){
+    if (!scope) return '';
+    const paras = scope.querySelectorAll('p');
+    for (const p of paras){
+      const t = textOf(p);
+      if (t && t.length > 20) return t;
+    }
+    return '';
+  }
+  const enSummary = firstParagraph(enScope);
+  const hiSummary = firstParagraph(hiScope);
+  if (!enSummary){
+    out.warnings.push('No substantive <p> paragraph found in the body — summary will be empty.');
+  }
+  /* Trim summaries to ~240 chars so card display stays clean */
+  const trim = (s) => s.length > 240 ? (s.slice(0,237) + '...') : s;
+  out.summary = hiSummary ? (trim(enSummary) + ' | ' + trim(hiSummary)) : trim(enSummary);
+
+  /* COVER — first <img src="..."> in body */
+  const firstImg = doc.body ? doc.body.querySelector('img[src]') : null;
+  if (firstImg){
+    out.cover = firstImg.getAttribute('src').trim();
+  } else {
+    out.warnings.push('No <img> found in body — cover will be blank.');
+  }
+
+  return out;
+}
+
+
+async function publishGithubBlog(published){
+  if (!ghParsed){ toast('Click "Fetch & Preview" first', true); return; }
+  if (!ghParsed.title){ toast('Title missing from HTML — add <h1> or <h2>', true); return; }
+  if (!ghParsed.slug){ toast('Cannot derive slug from folder name', true); return; }
+
+  /* Insert row — content left empty because HTML will be fetched live from GitHub */
+  const github_path = ghParsed.folder + '::' + ghParsed.file;
+  const row = {
+    title: ghParsed.title,
+    slug: ghParsed.slug,
+    category: ghParsed.category || 'manufacturing',
+    summary: ghParsed.summary,
+    cover_image: ghParsed.cover,
+    content: '',
+    github_path,
+    published
+  };
+  const { error } = await sb.from('blogs').insert([row]);
+  if (error){
+    if (String(error.message).toLowerCase().indexOf('github_path') > -1){
+      toast('Database update needed. Run SQL: ALTER TABLE blogs ADD COLUMN github_path text;', true);
+    } else if (String(error.message).toLowerCase().indexOf('duplicate') > -1 || String(error.message).toLowerCase().indexOf('unique') > -1){
+      toast('Slug already exists. Rename folder or edit existing post.', true);
+    } else {
+      toast('Error: ' + error.message, true);
+    }
+    return;
+  }
+  toast(published ? 'Published from GitHub!' : 'Saved as draft');
+  resetGithubForm();
+}
+
+function resetGithubForm(){
+  document.getElementById('gFolder').value = '';
+  document.getElementById('gPreview').style.display = 'none';
+  ghParsed = null;
+}
+
+async function writeBlog(published){
+  const title=document.getElementById('wTitle').value.trim();
+  const cat=document.getElementById('wCat').value;
+  const summary=document.getElementById('wSummary').value.trim();
+  const cover=document.getElementById('wCover').value.trim();
+  const content=document.getElementById('wContent').value.trim();
+  if(!title||!summary||!content){toast('Fill all fields',true);return;}
+  const slug=document.getElementById('wSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content,published}]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['wTitle','wSlug','wSummary','wCover','wContent'].forEach(id=>document.getElementById(id).value='');
+}
+
+async function loadPosts(){
+  const list=document.getElementById('postsList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('blogs').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📝</div><p>No posts yet</p></div>';return;}
+  list.innerHTML=data.map(b=>{
+    const gh = b.github_path ? b.github_path.split('::') : null;
+    const sourceTag = gh
+      ? `<span class="status" style="background:#dbeafe;color:#1e40af;margin-left:6px">📦 GitHub</span>`
+      : `<span class="status" style="background:#fde68a;color:#854d0e;margin-left:6px">📄 Inline</span>`;
+    const pathLine = gh
+      ? `<div class="meta" style="margin-top:4px;font-family:monospace;font-size:.72rem;color:#1e40af">📁 ${escH(gh[0])}/<strong>${escH(gh[1])}</strong></div>`
+      : '';
+    const editGhBtn = gh
+      ? `<a href="${ghEditUrl(gh[0], gh[1])}" target="_blank" class="btn" style="background:#1e40af;color:#fff">✏️ Edit on GitHub</a>
+         <a href="${ghFolderUrl(gh[0])}" target="_blank" class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)">📁 Folder</a>
+         <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="refreshGhMeta(${b.id})">🔄 Re-fetch Meta</button>`
+      : '';
+    return `<div class="post-item">
+      <div style="flex:1;min-width:250px">
+        <h4>${escH(b.title)}<span class="status ${b.published?'pub':'draft'}">${b.published?'Published':'Draft'}</span>${sourceTag}</h4>
+        <div class="meta">${escH(b.category||'')} • ${new Date(b.created_at).toLocaleDateString()}</div>
+        ${pathLine}
+      </div>
+      <div class="post-actions">
+        ${editGhBtn}
+        <button class="btn btn-primary" onclick="editPost(${b.id})">✏️ Metadata</button>
+        <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="downloadPost(${b.id})">⬇️ Download</button>
+        <button class="btn ${b.published?'btn-ghost':'btn-success'}" style="${b.published?'border:1.5px solid var(--border);color:var(--navy)':''}" onclick="togglePub(${b.id},${!b.published})">${b.published?'📥 Unpublish':'🚀 Publish'}</button>
+        <button class="btn btn-danger" onclick="delPost(${b.id})">🗑️ Delete</button>
+      </div></div>`;
+  }).join('');
+}
+
+/* Re-fetch metadata from GitHub (useful after you edit the HTML there) */
+async function refreshGhMeta(id){
+  const {data,error} = await sb.from('blogs').select('*').eq('id',id).single();
+  if (error || !data || !data.github_path){ toast('Not a GitHub-backed post',true); return; }
+  const [folder, file] = data.github_path.split('::');
+  toast('Re-fetching from GitHub...');
+  try{
+    const r = await fetch(ghRawUrl(folder, file) + '?cb=' + Date.now());
+    if (!r.ok){ toast('GitHub file not reachable ('+r.status+')',true); return; }
+    const html = await r.text();
+    const meta = parseBlogHtml(html);
+    let coverUrl = '';
+    if (meta.cover){
+      if (/^https?:\/\//i.test(meta.cover)) coverUrl = meta.cover;
+      else {
+        const clean = meta.cover.replace(/^\.?\/+/, '');
+        coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
+      }
+    }
+    const { error:uerr } = await sb.from('blogs').update({
+      title: meta.title || data.title,
+      summary: meta.summary || data.summary,
+      cover_image: coverUrl || data.cover_image,
+      category: meta.category || data.category
+    }).eq('id', id);
+    if (uerr){ toast('Update failed: '+uerr.message, true); return; }
+    toast('Metadata refreshed from GitHub!');
+    loadPosts();
+  }catch(e){
+    toast('Error: '+e.message,true);
+  }
+}
+
+async function togglePub(id,pub){
+  const {error}=await sb.from('blogs').update({published:pub}).eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast(pub?'Published':'Unpublished');loadPosts();
+}
+async function delPost(id){
+  if(!confirm('Delete permanently?'))return;
+  const {error}=await sb.from('blogs').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadPosts();
+}
+
+async function editPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error loading: '+error.message,true);return;}
+  document.getElementById('editId').value=data.id;
+  document.getElementById('editTitle').value=data.title||'';
+  document.getElementById('editSlug').value=data.slug||'';
+  document.getElementById('editCat').value=data.category||'packaging';
+  document.getElementById('editSummary').value=data.summary||'';
+  document.getElementById('editCover').value=data.cover_image||'';
+  document.getElementById('editContent').value=data.content||'';
+  document.getElementById('editModal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeEdit(){
+  document.getElementById('editModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+async function saveEdit(){
+  const id=document.getElementById('editId').value;
+  const title=document.getElementById('editTitle').value.trim();
+  const cat=document.getElementById('editCat').value;
+  const summary=document.getElementById('editSummary').value.trim();
+  const cover=document.getElementById('editCover').value.trim();
+  const content=document.getElementById('editContent').value.trim();
+  if(!title||!summary||!content){toast('Fill all required fields',true);return;}
+  const slug=document.getElementById('editSlug').value.trim();
+  if(!slug){toast('Slug is required',true);return;}
+  const {error}=await sb.from('blogs').update({
+    title,slug,category:cat,summary,cover_image:cover,content
+  }).eq('id',id);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast('Updated successfully!');
+  closeEdit();
+  loadPosts();
+}
+
+async function downloadPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error: '+error.message,true);return;}
+  const html=`<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>${escH(data.title)}</title></head>
+<body>
+<h1>${escH(data.title)}</h1>
+<p><strong>Category:</strong> ${escH(data.category)}</p>
+<p><strong>Summary:</strong> ${escH(data.summary)}</p>
+${data.cover_image?'<img src="'+escH(data.cover_image)+'" style="max-width:100%;"/>':''}
+${data.content}
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='blog-'+id+'.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Downloaded!');
+}
+
+async function loadRequests(){
+  const list=document.getElementById('reqList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('app_requests').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📭</div><p>No requests yet</p></div>';return;}
+  list.innerHTML=data.map(r=>{
+    const wa=r.phone?`https://wa.me/${r.phone.replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+r.name+', thanks for your idea "'+r.title+'"')}`:'';
+    return `<div class="post-item">
+      <div style="flex:1;min-width:250px"><h4>${escH(r.title)}</h4>
+      <div class="meta">From: <strong>${escH(r.name)}</strong> • ${escH(r.email)} • ${escH(r.phone||'No phone')}</div>
+      <div class="meta">${escH(r.category)} • ${new Date(r.created_at).toLocaleDateString()}</div>
+      <p style="margin-top:8px;font-size:.85rem">${escH(r.description)}</p></div>
+      <div class="post-actions">
+      ${wa?`<a href="${wa}" target="_blank" class="btn btn-success">📲 WhatsApp</a>`:''}
+      <a href="mailto:${r.email}" class="btn btn-primary">📧 Email</a>
+      <button class="btn btn-danger" onclick="delReq(${r.id})">🗑️</button></div></div>`;
+  }).join('');
+}
+async function delReq(id){
+  if(!confirm('Delete?'))return;
+  const {error}=await sb.from('app_requests').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadRequests();
+}
+function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* Auto-generate slug from English part of title */
+function generateSlug(title){
+  const en = title.split('|')[0].trim();
+  return en.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .substring(0, 60);
+}
+/* Hook: auto-fill slug when title changes */
+document.addEventListener('DOMContentLoaded', function(){
+  ['upTitle','wTitle'].forEach(function(tid){
+    var el = document.getElementById(tid);
+    if(!el) return;
+    var slugId = tid.replace('Title','Slug');
+    el.addEventListener('input', function(){
+      var slugEl = document.getElementById(slugId);
+      if(slugEl && !slugEl.dataset.manual){
+        slugEl.value = generateSlug(this.value);
+      }
+    });
+  });
+  ['upSlug','wSlug','editSlug'].forEach(function(sid){
+    var el = document.getElementById(sid);
+    if(el){
+      el.addEventListener('input', function(){ this.dataset.manual = 'true'; });
+    }
+  });
+});
+</script>
+</body></html>
