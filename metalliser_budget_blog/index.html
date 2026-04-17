@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="category" content="manufacturing">
+<title>How to Build an Annual Budget for Your Metalliser | VKS Tech</title>
+</head>
+<body>
+<div class="article-body">
+
+<div style="margin:24px 0;"><img src="metalliser-budget/cover.png" alt="Metalliser Annual Budget — Complete Guide with Free Formats" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<!-- ════════════════════ ENGLISH ════════════════════ -->
+<div class="en-content">
+
+<h2>💰 How to Build an Annual Budget for Your Metalliser (or Any Production Line)</h2>
+
+<p>It's October. Finance has sent that annual email: <em>"Submit your department budget by 15th November."</em> You open a blank Excel. Cursor blinks. Somewhere deep inside, you already know — this is the document that decides whether your critical spare gets approved in March, whether your OEM service visit happens on time, whether your chill-drum survives the next monsoon.</p>
+
+<p>A maintenance budget is not a spreadsheet. It's a one-year operating contract between you, finance, and the machine. Do it badly and you spend the year chasing emergency purchase orders. Do it well and you walk into every monthly review with a clean conscience. This blog gives you <strong>two ready-to-use budget formats</strong> — one simple, one detailed — built from what actually works on Indian metalliser shop floors, and a 6-step method that keeps the numbers defensible.</p>
+
+<h3>⚠️ Why Most Maintenance Budgets Fail</h3>
+
+<ul>
+  <li><strong>"Last year +10%" disease:</strong> The laziest budget method on earth. Fine if last year was sensible; catastrophic if a major component was deferred — you now have a 4-year deferred item sitting in year 5's cash-flow crisis.</li>
+  <li><strong>No line-item backup:</strong> When finance asks "what is this ₹18 lakh?", and the answer is "general spares", the number gets slashed.</li>
+  <li><strong>Routine mixed with emergency:</strong> A ₹25 lakh insurance spare hidden inside routine consumables looks like overspending. Separated, it looks like risk management.</li>
+  <li><strong>Brand-locked line items:</strong> Budgets written around one OEM brand get rejected when procurement switches vendors mid-year. Always budget the generic category, not the brand.</li>
+  <li><strong>No "per machine" or "per month" figure:</strong> Senior management benchmarks across plants. If your number isn't expressed per-machine, it can't be compared, and comparison without context is usually unkind.</li>
+</ul>
+
+<h3>🎯 The 6-Step Budget Method</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Action</th><th>Time</th><th>Output</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Pull history</strong></td><td>Extract Last FY actual cost-centre consumption from SAP / ERP</td><td>1 day</td><td>Raw baseline in Excel</td></tr>
+<tr><td><strong>2. Classify</strong></td><td>Split into 7 heads: Consumables, Oils, Essential, Services, Job Work, E&amp;I, Safety/Stationery</td><td>2 hours</td><td>Category-wise last FY numbers</td></tr>
+<tr><td><strong>3. Adjust for reality</strong></td><td>Check each line: price hike, quantity change, new PM, deferred item</td><td>3 hours</td><td>Line-wise proposed FY numbers</td></tr>
+<tr><td><strong>4. Add Emergency bucket</strong></td><td>List insurance spares (long-lead, machine-stop risk) with justification</td><td>2 hours</td><td>Separate emergency schedule</td></tr>
+<tr><td><strong>5. Validate per machine</strong></td><td>Divide total by number of machines; sanity-check against benchmark</td><td>30 min</td><td>One-line per-machine cost</td></tr>
+<tr><td><strong>6. Write justification</strong></td><td>One sentence per line. "Why this item, why this amount, why this FY"</td><td>2 hours</td><td>Approval-ready document</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>📋 Step 1 — Pull History (1 day)</h3>
+
+<p>Budget starts in the ERP, not in Excel. Before you type a single number, go to your SAP cost-centre report and pull the last full financial year's consumption against your department's cost centre. Pull it at transaction-level — item code, description, quantity, value. Not summarised. Not categorised. Raw.</p>
+
+<p>Why raw? Because the categorisation you impose today is how you will <em>defend</em> the budget for the next 12 months. If you accept whatever category SAP assigned, you are defending someone else's logic.</p>
+
+<ul>
+  <li><strong>Time window:</strong> Full previous FY, month-wise — identifies seasonal spikes</li>
+  <li><strong>Cost-centre filter:</strong> Your department only — not the whole plant</li>
+  <li><strong>Plant-to-vendor check:</strong> Any invoice above ₹5 lakh, verify the PO was correctly booked — one wrong booking can distort the year</li>
+  <li><strong>Exclude Capex:</strong> Machine purchases, major retrofits — those go in a separate Capex budget, not maintenance</li>
+</ul>
+
+<h3>🗂️ Step 2 — Classify into 7 Cost Heads</h3>
+
+<p>Every spare, oil, service, and consumable in a metalliser plant falls into one of seven buckets. Force yourself to classify every line item — it stops "miscellaneous" from swallowing the budget.</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>#</th><th>Cost Head</th><th>Examples (Generic)</th><th>Typical Share</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Consumables</strong></td><td>Aluminium wire, ceramic boats, copper clamps, graphite tape, masking / cork tape, emery, glass fabric</td><td>35–45%</td></tr>
+<tr><td>2</td><td><strong>Lub &amp; Oils</strong></td><td>Rotary-vane pump oil, booster oil, diffusion-pump silicone oil, gear oil, bearing grease, chiller glycol</td><td>5–10%</td></tr>
+<tr><td>3</td><td><strong>Essential Spares</strong></td><td>Pump spare kits, rollers, seals, shields, chuck spares, gauges — breakdown prevention stock</td><td>15–20%</td></tr>
+<tr><td>4</td><td><strong>Services &amp; AMC</strong></td><td>OEM annual visit, pump overhaul, chiller service, helium leak testing, NABL calibration</td><td>10–15%</td></tr>
+<tr><td>5</td><td><strong>Repair Job Work</strong></td><td>Bow-roller re-rubberisation, shaft repair, motor rewinding, pump overhaul at vendor</td><td>5–10%</td></tr>
+<tr><td>6</td><td><strong>E&amp;I Spares</strong></td><td>VFDs, PLCs, contactors, relays, sensors, cables, connectors</td><td>8–12%</td></tr>
+<tr><td>7</td><td><strong>Safety &amp; Stationery</strong></td><td>PPE, fire extinguishers, logbooks, signage, training material</td><td>3–5%</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>An eighth head sits above all seven: <strong>Emergency Spares</strong> (insurance stock). Keep it separate — it is not routine maintenance, it is risk cover.</p>
+
+<h3>🏭 Step 3 — Substitute Brand Names with Generic Categories</h3>
+
+<p>This is where most plants lose flexibility. If your budget line says "Busch Cobra NC 630 service", procurement cannot easily swap to a Leybold or Edwards service without a budget amendment. Write it as the <strong>generic category</strong>, and put the specific brand in the remarks column.</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Component</th><th>Generic Line-Item (Budget)</th><th>Example Brands / Substitutes (Remarks)</th></tr>
+</thead>
+<tbody>
+<tr><td>Dry-Screw Pump</td><td>Vacuum Pump Spares — Dry/Screw</td><td>Busch Cobra / Leybold DryVac / Edwards GXS / Pfeiffer HeptaDry</td></tr>
+<tr><td>Roots Booster</td><td>Vacuum Pump Spares — Roots Booster</td><td>Aerzen / Leybold RUVAC / Edwards EH / Pfeiffer Okta</td></tr>
+<tr><td>Rotary-Vane Pump</td><td>Vacuum Pump Spares — Rotary Vane</td><td>Busch R5 / Leybold SOGEVAC / Edwards RV / Pfeiffer Duo</td></tr>
+<tr><td>Diffusion Pump</td><td>Vacuum Pump Spares — Diffusion</td><td>Varian / Edwards Diffstak / Leybold DI</td></tr>
+<tr><td>DP Silicone Oil</td><td>Diffusion Pump Oil (silicone)</td><td>Santovac 5 / Dow 704 / Dow 705 / CVC Silicone-4</td></tr>
+<tr><td>Rotary Pump Oil</td><td>Rotary-Vane Pump Oil (mineral / diester)</td><td>Busch R530 / Leybold LVO 108 / Edwards 19</td></tr>
+<tr><td>Booster Oil</td><td>Roots Booster Oil (synthetic)</td><td>Anderol 555 / Aerzen / equivalent PAO</td></tr>
+<tr><td>Cryo-cooler / Water-Vapour Pump</td><td>Cryopump Spares &amp; Service</td><td>Polycold / Brooks / Sumitomo / Oerlikon — helium leak AMC</td></tr>
+<tr><td>Spreader Roller</td><td>Spreader Roller Re-rubberisation</td><td>Kickert / Mount Hope / generic re-rubber vendor</td></tr>
+<tr><td>Expanding Shafts</td><td>Expanding-Shaft Spares</td><td>Svecom / Double-E / Goldenrod</td></tr>
+<tr><td>Bearings</td><td>Bearings (deep-groove / roller)</td><td>SKF / FAG / NTN / NSK</td></tr>
+<tr><td>VFD Drives</td><td>Drives &amp; VFD Spares</td><td>Siemens G120 / Schneider ATV71 / ABB ACS / Emerson Unidrive</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🛡️ Step 4 — Separate Emergency Bucket (Insurance Stock)</h3>
+
+<p>Emergency spares are not things you <em>plan</em> to use. They are things you <em>hope</em> not to use but keep anyway because the machine stops without them. If you bury them in routine spares, finance sees overspending. If you list them separately, they look like what they are: risk insurance.</p>
+
+<ul>
+  <li><strong>Source / Evaporator Frame:</strong> OEM-only, 8–16 week lead time. Machine-stop if it fails.</li>
+  <li><strong>Main Drive Motor:</strong> Long-lead rewind / replacement cycle.</li>
+  <li><strong>Complete Drum Shield Set:</strong> Damage during cleaning can halt production for a week.</li>
+  <li><strong>Standby Rotary Pump (new):</strong> When vacuum falls off and you need to swap pumps in 4 hours, not 4 days.</li>
+  <li><strong>Heating &amp; Cooling Circulation Pump:</strong> Chill-drum goes offline — entire line stops.</li>
+  <li><strong>Cryopump Critical Valve / E-box:</strong> Specialist spare, long lead.</li>
+</ul>
+
+<p>Each emergency line needs a one-sentence justification: <em>"Machine stops if failed; OEM lead time 12 weeks; last failure in plant X caused 7-day stoppage."</em> That single sentence is the difference between approval and rejection.</p>
+
+<h3>📏 Step 5 — Validate Per Machine and Per Month</h3>
+
+<p>A ₹1.8 crore budget means nothing on its own. Divide it:</p>
+
+<ul>
+  <li><strong>Per machine:</strong> Total ÷ number of active machines. Compare across your plants or against industry benchmark.</li>
+  <li><strong>Per month:</strong> Total ÷ 12. This is your monthly commitment — and finance will track against it month-by-month.</li>
+  <li><strong>Per kg / per MT of production:</strong> If you know annual production tonnage, maintenance cost/MT is the single cleanest benchmark. Indian metalliser plants typically land ₹4–7 per kg of metallised film.</li>
+</ul>
+
+<h3>✅ Step 6 — Write Justification</h3>
+
+<p>One sentence per line is enough. A justification should answer three questions in one sentence:</p>
+
+<ol>
+  <li><strong>Why this item?</strong> "Drum bearings past 5-year life."</li>
+  <li><strong>Why this amount?</strong> "Quote from SKF dated Sept, 4 bearings × ₹18,500."</li>
+  <li><strong>Why this FY?</strong> "Planned for Q2 shutdown July '26."</li>
+</ol>
+
+<p>Stitched together: <em>"Drum bearings past 5-year life — quote from SKF dated Sept, 4 bearings × ₹18,500 — planned for Q2 shutdown July '26."</em> That's a line finance will approve.</p>
+
+<div style="margin:24px 0;"><img src="metalliser-budget/budget-flow.png" alt="Budget Making 6-Step Flow" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<h3>🏭 Real Shop Floor Story — The ₹22 Lakh Cryopump That Wasn't in the Budget</h3>
+
+<div style="background:#f8f6f1;border-left:4px solid #e85d26;padding:18px 20px;border-radius:8px;margin:20px 0;font-style:italic;line-height:1.7;">
+
+<p style="margin:0 0 12px 0;"><strong>October, FY budget season, a large metalliser plant.</strong> The maintenance engineer had prepared the annual budget carefully. Last year's consumption pulled from SAP, categorised, inflated by 8% for price hike. Total came to ₹1.4 crore. Finance smiled, approved it in the first meeting. Clean year ahead.</p>
+
+<p style="margin:0 0 12px 0;">March of the new FY. A routine PM on Metalliser-2 revealed that the cryopump compressor was making an abnormal sound. Specialist vendor called. Diagnosis: the compressor's internal valve assembly had failed. Cost of replacement compressor: ₹22 lakh. Lead time: 10 weeks.</p>
+
+<p style="margin:0 0 12px 0;">The engineer went back to his budget file. The cryopump did not appear as a line item — it was buried inside "Essential Spares ₹18 lakh" as an implicit allowance. He had never imagined the compressor itself failing. Finance's reaction in the emergency approval meeting was predictable: <em>"This was not in the approved budget."</em></p>
+
+<p style="margin:0 0 12px 0;">Three weeks of back-and-forth followed. Approval finally came — but only after the metalliser had been running on 70% vacuum performance for 18 production days, generating off-spec film that cost ₹14 lakh in quality claims. <strong>The ₹22 lakh cryopump, plus ₹14 lakh in quality claims, plus 18 days of opportunity cost = approximately ₹48 lakh of damage — all because one line item was missing from a ₹1.4 crore budget.</strong></p>
+
+<p style="margin:0;">The plant rewrote its budget methodology. Emergency Spares was separated into its own schedule with line-by-line justification. Every long-lead, machine-stop component was listed, including cryopump compressor, main drive motor, source frame, and chill-drum circulation pump. Total emergency budget: ₹35 lakh. Finance approved it in the next cycle, because it was now a document about risk, not about spending. The next cryopump failure — 14 months later — was a 2-week resolution, not 3.</p>
+
+</div>
+
+<p><strong>Lesson:</strong> An annual budget is not a prediction of what will be spent. It is a <em>pre-approval</em> of what <em>might</em> need to be spent. The items you leave out are the ones that hurt you. List them all — clearly categorised, clearly justified — and finance becomes a partner instead of a gatekeeper.</p>
+
+<h3>📐 Two Formats — Which One to Use?</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Situation</th><th>Use Format A (Simple)</th><th>Use Format B (Detailed)</th></tr>
+</thead>
+<tbody>
+<tr><td>Running machine with 3+ years history</td><td>✅ Fast, category-based</td><td>Overkill</td></tr>
+<tr><td>New machine / new line</td><td>Too thin — no basis</td><td>✅ Bottom-up line items</td></tr>
+<tr><td>Internal department review</td><td>✅ 1-page summary</td><td>Too long</td></tr>
+<tr><td>CEO / Finance approval</td><td>Use as cover sheet</td><td>✅ Attach as annexure</td></tr>
+<tr><td>Budget is &lt; ₹50 lakh</td><td>✅ Enough detail</td><td>Disproportionate</td></tr>
+<tr><td>Budget is &gt; ₹1 crore</td><td>Summary only</td><td>✅ Needed for defensibility</td></tr>
+<tr><td>Multi-year forecast</td><td>✅ Easy to project</td><td>Harder to maintain</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Recommended:</strong> prepare both. Format A is your 1-pager for the approval meeting. Format B is the annexure that backs it up if finance drills down.</p>
+
+<h3>📊 Typical Budget Distribution — Metalliser</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Category</th><th>Typical Share</th><th>Red Flag If…</th></tr>
+</thead>
+<tbody>
+<tr><td>A. Evaporation Consumables (wire, boats)</td><td>35–45%</td><td>&lt; 30% → under-counted; &gt; 50% → yield problem</td></tr>
+<tr><td>B. Vacuum System (oils + consumables)</td><td>8–12%</td><td>&gt; 15% → oil leak / over-changing</td></tr>
+<tr><td>C. Cooling System</td><td>2–4%</td><td>&gt; 6% → chemistry / chiller issue</td></tr>
+<tr><td>D. Winding System</td><td>3–6%</td><td>&gt; 8% → roller wear problem</td></tr>
+<tr><td>E. Electrical &amp; Drives</td><td>8–12%</td><td>&gt; 15% → electrical instability</td></tr>
+<tr><td>F. Mechanical Spares</td><td>5–8%</td><td>&gt; 10% → PM discipline gap</td></tr>
+<tr><td>G. OEM Services &amp; AMC</td><td>10–15%</td><td>&lt; 8% → skipping services; &gt; 18% → over-servicing</td></tr>
+<tr><td>H. Safety &amp; PPE</td><td>2–4%</td><td>&lt; 2% → compliance risk</td></tr>
+<tr><td>I. Calibration &amp; Testing</td><td>1–3%</td><td>&lt; 1% → audit risk</td></tr>
+<tr><td>J. Cleaning &amp; Housekeeping</td><td>1–2%</td><td>—</td></tr>
+<tr><td>K. Contingency</td><td>3–5%</td><td>&gt; 8% → insufficient planning</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🛡️ Prevention — Avoid the 7 Classic Budget Mistakes</h3>
+
+<ul>
+  <li><strong>Don't copy last year.</strong> Pull every line fresh from SAP, even if the number ends up similar.</li>
+  <li><strong>Don't hide emergency in routine.</strong> Separate schedule, separate approval.</li>
+  <li><strong>Don't lock a brand.</strong> Generic line, brand in remarks.</li>
+  <li><strong>Don't skip services.</strong> OEM visit saved once is three breakdowns next year.</li>
+  <li><strong>Don't forget calibration.</strong> One NABL audit failure costs more than a year of calibrations.</li>
+  <li><strong>Don't over-specify contingency.</strong> 5% is defensible; 10% looks like bad planning.</li>
+  <li><strong>Don't submit without per-machine figure.</strong> It's the one number senior management will remember.</li>
+</ul>
+
+<div style="background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:white;padding:24px;border-radius:14px;margin:32px 0;box-shadow:0 4px 16px rgba(26,39,68,0.2);">
+  <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 Free Downloads — Two Budget Formats</h3>
+  <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">Two ready-to-use Excel formats with all formulas, category headers, justification sheets, and instructions built in. Open, fill your numbers, print. All brand names are kept generic with common substitutes listed:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="metalliser-budget/Format_A_Metalliser_Budget_Simple.xlsx" download style="background:#e85d26;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📘 Format A — Simple Summary</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">6-sheet workbook: Instructions, Summary, Detail, Justification (Essential + Emergency), Actual vs Proposal. Good for internal review and 1-page approval.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">Download XLSX →</span>
+    </a>
+    <a href="metalliser-budget/Format_B_Metalliser_Budget_Detailed.xlsx" download style="background:#0d8c7e;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;border:2px solid rgba(255,255,255,0.3);">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📗 Format B — Detailed Line-Item</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">3-sheet workbook with 76 line items across 11 categories (A–K), auto-subtotals, per-machine + per-month view, category summary. Use as annexure for large budgets or CEO approval.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">Download XLSX →</span>
+    </a>
+  </div>
+</div>
+
+<div class="callout"><strong>💡 Key Takeaway:</strong> A budget is a <em>risk-management document dressed as a spreadsheet</em>. The plants that run smoothly all year are the ones whose budgets are written with one eye on operations and one eye on probability — what <em>might</em> fail, not only what <em>will</em> be consumed. Follow the 6 steps, keep generic language, separate emergency from routine, and every rupee you ask for becomes defensible. Finance stops being a brake; they become a partner.</div>
+
+</div>
+
+<!-- ════════════════════ HINDI ════════════════════ -->
+<div class="hindi-section hi-content">
+
+<h2>💰 Metalliser (या किसी भी Production Line) के लिए Annual Budget कैसे बनाएँ</h2>
+
+<p>October आ गया। Finance का वो सालाना email आ गया: <em>"15 November तक Department Budget submit करो।"</em> Blank Excel खोलते हैं, cursor blink कर रहा है। मन में कहीं गहरे पता है — यही वो document है जो तय करेगा कि March में आपका critical spare approve होगा या नहीं, OEM service visit time पर होगी या नहीं, monsoon में chill-drum बच पाएगा या नहीं।</p>
+
+<p>Maintenance Budget सिर्फ़ एक spreadsheet नहीं है। यह आप, Finance, और Machine के बीच का एक साल का operating contract है। ग़लत बनाया — पूरा साल emergency PO भागते रहोगे। सही बनाया — हर monthly review में आराम से चले जाओगे। यह blog आपको देता है <strong>दो ready-to-use budget formats</strong> — एक simple, एक detailed — जो सच्ची Indian metalliser shop floor की practice पर बने हैं, और एक 6-step method जो numbers को defensible रखता है।</p>
+
+<h3>⚠️ ज़्यादातर Budgets क्यों फेल होते हैं</h3>
+
+<ul>
+  <li><strong>"पिछले साल +10%" की बीमारी:</strong> दुनिया का सबसे lazy तरीका। अगर पिछला साल सही था तो ठीक; वरना एक deferred item चार साल बाद cash-flow crisis बनता है।</li>
+  <li><strong>Line-item backup नहीं:</strong> Finance पूछे "ये ₹18 लाख क्या है?" — और जवाब हो "general spares" — तो number कट जाता है।</li>
+  <li><strong>Routine और Emergency मिला हुआ:</strong> ₹25 लाख का insurance spare routine में छुपाओ तो overspending दिखता है। Separate करो तो risk management दिखता है।</li>
+  <li><strong>Brand-lock line items:</strong> एक OEM brand के नाम पर लिखा budget, procurement दूसरा vendor ले तो reject हो जाता है। हमेशा generic category पर budget बनाओ, brand नहीं।</li>
+  <li><strong>"Per machine" या "per month" figure नहीं:</strong> Senior management plants के बीच compare करता है। अगर आपका number per-machine नहीं है, तो comparison नहीं हो सकता।</li>
+</ul>
+
+<h3>🎯 6-Step Budget Method</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Action</th><th>Time</th><th>Output</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. History निकालो</strong></td><td>SAP / ERP से Last FY की actual cost-centre consumption निकालो</td><td>1 दिन</td><td>Raw baseline Excel में</td></tr>
+<tr><td><strong>2. Classify करो</strong></td><td>7 heads में बाँटो: Consumables, Oils, Essential, Services, Job Work, E&amp;I, Safety/Stationery</td><td>2 घंटे</td><td>Category-wise last FY numbers</td></tr>
+<tr><td><strong>3. Reality से adjust</strong></td><td>हर line check: price hike, quantity change, new PM, deferred item</td><td>3 घंटे</td><td>Line-wise proposed FY numbers</td></tr>
+<tr><td><strong>4. Emergency bucket जोड़ो</strong></td><td>Insurance spares list (long-lead, machine-stop risk) justification के साथ</td><td>2 घंटे</td><td>Separate emergency schedule</td></tr>
+<tr><td><strong>5. Per machine validate</strong></td><td>Total ÷ machines की संख्या; benchmark से sanity-check</td><td>30 मिनट</td><td>Per-machine cost figure</td></tr>
+<tr><td><strong>6. Justification लिखो</strong></td><td>हर line पर एक वाक्य। "क्यों item, क्यों amount, क्यों FY"</td><td>2 घंटे</td><td>Approval-ready document</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>📋 Step 1 — History निकालो (1 दिन)</h3>
+
+<p>Budget Excel में नहीं, ERP में शुरू होता है। एक भी number type करने से पहले, SAP cost-centre report पर जाकर पिछले पूरे FY की consumption अपने department cost centre पर pull करो। Transaction-level पर — item code, description, quantity, value। Summarise नहीं। Categorise नहीं। Raw।</p>
+
+<p>Raw क्यों? क्योंकि आज जो categorisation आप करते हो, वही अगले 12 महीने आपको <em>defend</em> करनी है। SAP जो category देता है उसे accept कर लिया, तो आप किसी और की logic defend कर रहे हो।</p>
+
+<ul>
+  <li><strong>Time window:</strong> पूरा पिछला FY, month-wise — seasonal spikes पता चलती हैं</li>
+  <li><strong>Cost-centre filter:</strong> सिर्फ़ आपका department — पूरा plant नहीं</li>
+  <li><strong>Plant-to-vendor check:</strong> ₹5 लाख से ऊपर का कोई invoice हो, PO की booking verify करो — एक ग़लत booking साल को distort कर देती है</li>
+  <li><strong>Capex अलग:</strong> Machine purchase, major retrofits — ये अलग Capex budget में जाते हैं, maintenance में नहीं</li>
+</ul>
+
+<h3>🗂️ Step 2 — 7 Cost Heads में Classify करो</h3>
+
+<p>Metalliser plant का हर spare, oil, service, consumable इन सात बकेट्स में से किसी एक में जाता है। हर line item को force करके classify करो — इससे "miscellaneous" budget नहीं खा जाता।</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>#</th><th>Cost Head</th><th>Examples (Generic)</th><th>Typical Share</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Consumables</strong></td><td>Aluminium wire, ceramic boats, copper clamps, graphite tape, masking / cork tape, emery, glass fabric</td><td>35–45%</td></tr>
+<tr><td>2</td><td><strong>Lub &amp; Oils</strong></td><td>Rotary-vane pump oil, booster oil, DP silicone oil, gear oil, bearing grease, chiller glycol</td><td>5–10%</td></tr>
+<tr><td>3</td><td><strong>Essential Spares</strong></td><td>Pump spare kits, rollers, seals, shields, chuck spares, gauges — breakdown prevention stock</td><td>15–20%</td></tr>
+<tr><td>4</td><td><strong>Services &amp; AMC</strong></td><td>OEM annual visit, pump overhaul, chiller service, helium leak test, NABL calibration</td><td>10–15%</td></tr>
+<tr><td>5</td><td><strong>Repair Job Work</strong></td><td>Bow-roller re-rubberisation, shaft repair, motor rewinding, vendor pump overhaul</td><td>5–10%</td></tr>
+<tr><td>6</td><td><strong>E&amp;I Spares</strong></td><td>VFDs, PLCs, contactors, relays, sensors, cables, connectors</td><td>8–12%</td></tr>
+<tr><td>7</td><td><strong>Safety &amp; Stationery</strong></td><td>PPE, fire extinguishers, logbooks, signage, training material</td><td>3–5%</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>सातों से ऊपर एक आठवाँ head है: <strong>Emergency Spares</strong> (insurance stock)। इसे अलग रखो — यह routine maintenance नहीं, risk cover है।</p>
+
+<h3>🏭 Step 3 — Brand Names की जगह Generic Categories</h3>
+
+<p>यहीं पर ज़्यादातर plants flexibility खो देते हैं। अगर budget line में लिखा है "Busch Cobra NC 630 service", तो procurement बीच साल में Leybold या Edwards पर switch नहीं कर सकता बिना budget amendment के। इसे <strong>generic category</strong> के रूप में लिखो, brand को remarks column में डालो।</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Component</th><th>Generic Line-Item (Budget)</th><th>Example Brands / Substitutes (Remarks)</th></tr>
+</thead>
+<tbody>
+<tr><td>Dry-Screw Pump</td><td>Vacuum Pump Spares — Dry/Screw</td><td>Busch Cobra / Leybold DryVac / Edwards GXS / Pfeiffer HeptaDry</td></tr>
+<tr><td>Roots Booster</td><td>Vacuum Pump Spares — Roots Booster</td><td>Aerzen / Leybold RUVAC / Edwards EH / Pfeiffer Okta</td></tr>
+<tr><td>Rotary-Vane Pump</td><td>Vacuum Pump Spares — Rotary Vane</td><td>Busch R5 / Leybold SOGEVAC / Edwards RV / Pfeiffer Duo</td></tr>
+<tr><td>Diffusion Pump</td><td>Vacuum Pump Spares — Diffusion</td><td>Varian / Edwards Diffstak / Leybold DI</td></tr>
+<tr><td>DP Silicone Oil</td><td>Diffusion Pump Oil (silicone)</td><td>Santovac 5 / Dow 704 / Dow 705 / CVC Silicone-4</td></tr>
+<tr><td>Rotary Pump Oil</td><td>Rotary-Vane Pump Oil (mineral / diester)</td><td>Busch R530 / Leybold LVO 108 / Edwards 19</td></tr>
+<tr><td>Booster Oil</td><td>Roots Booster Oil (synthetic)</td><td>Anderol 555 / Aerzen / equivalent PAO</td></tr>
+<tr><td>Cryo-cooler</td><td>Cryopump Spares &amp; Service</td><td>Polycold / Brooks / Sumitomo / Oerlikon — helium leak AMC</td></tr>
+<tr><td>Spreader Roller</td><td>Spreader Roller Re-rubberisation</td><td>Kickert / Mount Hope / generic re-rubber vendor</td></tr>
+<tr><td>Expanding Shafts</td><td>Expanding-Shaft Spares</td><td>Svecom / Double-E / Goldenrod</td></tr>
+<tr><td>Bearings</td><td>Bearings (deep-groove / roller)</td><td>SKF / FAG / NTN / NSK</td></tr>
+<tr><td>VFD Drives</td><td>Drives &amp; VFD Spares</td><td>Siemens G120 / Schneider ATV71 / ABB ACS / Emerson Unidrive</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🛡️ Step 4 — Emergency Bucket अलग रखो (Insurance Stock)</h3>
+
+<p>Emergency spares वो चीज़ें नहीं हैं जिन्हें आप <em>use करने की plan</em> करते हो। वो चीज़ें हैं जिन्हें आप <em>use नहीं</em> करना चाहते, पर रखते हो क्योंकि इनके बिना machine रुक जाती है। अगर routine spares में छुपा दो, तो finance को overspending दिखता है। Separate list करो, तो वो वही दिखेगा जो है: risk insurance।</p>
+
+<ul>
+  <li><strong>Source / Evaporator Frame:</strong> सिर्फ़ OEM से मिलता है, 8–16 हफ्ते का lead time। Fail हुआ तो machine रुक जाती है।</li>
+  <li><strong>Main Drive Motor:</strong> लंबा rewind / replacement cycle।</li>
+  <li><strong>Complete Drum Shield Set:</strong> Cleaning में damage हो गया तो एक हफ्ता production बंद।</li>
+  <li><strong>Standby Rotary Pump (नया):</strong> Vacuum गिरा तो 4 घंटे में pump swap करना है, 4 दिन नहीं।</li>
+  <li><strong>Heating &amp; Cooling Circulation Pump:</strong> Chill-drum offline — पूरी line रुकी।</li>
+  <li><strong>Cryopump Critical Valve / E-box:</strong> Specialist spare, long lead।</li>
+</ul>
+
+<p>हर emergency line पर एक वाक्य justification चाहिए: <em>"Fail हुआ तो machine रुकती है; OEM lead time 12 हफ्ते; पिछली बार Plant X में 7 दिन का stoppage हुआ था।"</em> यही एक वाक्य approval और rejection के बीच का फ़र्क़ है।</p>
+
+<h3>📏 Step 5 — Per Machine और Per Month Validate करो</h3>
+
+<p>₹1.8 करोड़ का budget अकेले कुछ नहीं कहता। उसे divide करो:</p>
+
+<ul>
+  <li><strong>Per machine:</strong> Total ÷ active machines की संख्या। अपने plants के बीच या industry benchmark से compare करो।</li>
+  <li><strong>Per month:</strong> Total ÷ 12। यह आपकी monthly commitment है — और finance इसी के हिसाब से month-by-month track करेगा।</li>
+  <li><strong>Per kg / per MT production:</strong> Annual production tonnage पता है तो maintenance cost/MT सबसे clean benchmark है। Indian metalliser plants typically ₹4–7/kg metallised film पर होते हैं।</li>
+</ul>
+
+<h3>✅ Step 6 — Justification लिखो</h3>
+
+<p>हर line पर एक वाक्य काफ़ी है। Justification को तीन सवालों के जवाब एक वाक्य में देने चाहिए:</p>
+
+<ol>
+  <li><strong>यह item क्यों?</strong> "Drum bearings 5-year life पार।"</li>
+  <li><strong>यह amount क्यों?</strong> "SKF quote सितंबर का, 4 bearings × ₹18,500।"</li>
+  <li><strong>इसी FY क्यों?</strong> "Q2 shutdown July '26 में planned।"</li>
+</ol>
+
+<p>एक साथ: <em>"Drum bearings 5-year life पार — SKF quote सितंबर का, 4 bearings × ₹18,500 — Q2 shutdown July '26 में planned।"</em> यह line finance approve करेगा।</p>
+
+<div style="margin:24px 0;"><img src="metalliser-budget/budget-flow-hi.png" alt="Budget Making 6-Step Flow Hindi" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<h3>🏭 असली Shop Floor कहानी — वो ₹22 लाख का Cryopump जो Budget में नहीं था</h3>
+
+<div style="background:#f8f6f1;border-left:4px solid #e85d26;padding:18px 20px;border-radius:8px;margin:20px 0;font-style:italic;line-height:1.7;">
+
+<p style="margin:0 0 12px 0;"><strong>October, FY budget season, एक बड़ा metalliser plant।</strong> Maintenance engineer ने annual budget सावधानी से बनाया। पिछले साल की consumption SAP से pull की, categorise किया, price hike के लिए 8% बढ़ाया। Total आया ₹1.4 करोड़। Finance ने पहली meeting में ही approve कर दिया। साल साफ़ दिख रहा था।</p>
+
+<p style="margin:0 0 12px 0;">नए FY का March। Metalliser-2 पर routine PM में पता चला कि cryopump का compressor असामान्य आवाज़ कर रहा है। Specialist vendor बुलाया। Diagnosis: compressor का internal valve assembly fail हो गया है। Replacement compressor की cost: ₹22 लाख। Lead time: 10 हफ्ते।</p>
+
+<p style="margin:0 0 12px 0;">Engineer ने budget file खोली। Cryopump कहीं line item में नहीं था — "Essential Spares ₹18 लाख" में implicitly छुपा था। Compressor ख़ुद fail होगा, यह कभी imagine नहीं किया था। Emergency approval meeting में finance का reaction predictable था: <em>"यह approved budget में नहीं है।"</em></p>
+
+<p style="margin:0 0 12px 0;">तीन हफ्ते back-and-forth चला। Approval आख़िर में मिली — पर तब तक metalliser 18 production days तक 70% vacuum performance पर चला, off-spec film बनी जिसकी quality claim ₹14 लाख की आई। <strong>₹22 लाख का cryopump + ₹14 लाख quality claims + 18 दिन का opportunity cost = लगभग ₹48 लाख का नुकसान — सिर्फ़ इसलिए कि ₹1.4 करोड़ के budget में एक line item छूट गया था।</strong></p>
+
+<p style="margin:0;">Plant ने अपनी budget methodology फिर से लिखी। Emergency Spares को अपनी अलग schedule में डाला गया, हर line पर justification के साथ। हर long-lead, machine-stop component list में आया — cryopump compressor, main drive motor, source frame, chill-drum circulation pump। कुल emergency budget: ₹35 लाख। अगले cycle में finance ने approve कर दिया, क्योंकि अब यह spending नहीं, risk का document था। अगली बार cryopump fail हुआ — 14 महीने बाद — 2 हफ्ते में solve हुआ, 3 में नहीं।</p>
+
+</div>
+
+<p><strong>सीख:</strong> Annual budget यह prediction नहीं है कि क्या ख़र्च होगा। यह <em>pre-approval</em> है कि क्या ख़र्च <em>हो सकता</em> है। जो item आप छोड़ देते हो, वही बाद में तकलीफ़ देता है। सबको list करो — clearly categorised, clearly justified — और finance gatekeeper की जगह partner बन जाता है।</p>
+
+<h3>📐 दो Formats — कौन सा कब इस्तेमाल करें?</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>स्थिति</th><th>Format A (Simple) इस्तेमाल करें</th><th>Format B (Detailed) इस्तेमाल करें</th></tr>
+</thead>
+<tbody>
+<tr><td>Running machine, 3+ साल history</td><td>✅ Fast, category-based</td><td>ज़रूरत से ज़्यादा</td></tr>
+<tr><td>नयी machine / नयी line</td><td>बहुत पतला — कोई basis नहीं</td><td>✅ Bottom-up line items</td></tr>
+<tr><td>Internal department review</td><td>✅ 1-page summary</td><td>बहुत लंबा</td></tr>
+<tr><td>CEO / Finance approval</td><td>Cover sheet के लिए</td><td>✅ Annexure के रूप में</td></tr>
+<tr><td>Budget &lt; ₹50 लाख</td><td>✅ काफ़ी detail</td><td>अनुपातहीन</td></tr>
+<tr><td>Budget &gt; ₹1 करोड़</td><td>सिर्फ़ summary</td><td>✅ Defensibility के लिए ज़रूरी</td></tr>
+<tr><td>Multi-year forecast</td><td>✅ Project करना आसान</td><td>Maintain करना मुश्किल</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>सुझाव:</strong> दोनों बनाओ। Format A approval meeting का 1-pager है। Format B वो annexure है जो finance drill-down करे तो support करता है।</p>
+
+<h3>📊 Typical Budget Distribution — Metalliser</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Category</th><th>Typical Share</th><th>Red Flag अगर…</th></tr>
+</thead>
+<tbody>
+<tr><td>A. Evaporation Consumables (wire, boats)</td><td>35–45%</td><td>&lt; 30% → under-counted; &gt; 50% → yield problem</td></tr>
+<tr><td>B. Vacuum System (oils + consumables)</td><td>8–12%</td><td>&gt; 15% → oil leak / over-changing</td></tr>
+<tr><td>C. Cooling System</td><td>2–4%</td><td>&gt; 6% → chemistry / chiller issue</td></tr>
+<tr><td>D. Winding System</td><td>3–6%</td><td>&gt; 8% → roller wear problem</td></tr>
+<tr><td>E. Electrical &amp; Drives</td><td>8–12%</td><td>&gt; 15% → electrical instability</td></tr>
+<tr><td>F. Mechanical Spares</td><td>5–8%</td><td>&gt; 10% → PM discipline gap</td></tr>
+<tr><td>G. OEM Services &amp; AMC</td><td>10–15%</td><td>&lt; 8% → services skip; &gt; 18% → over-servicing</td></tr>
+<tr><td>H. Safety &amp; PPE</td><td>2–4%</td><td>&lt; 2% → compliance risk</td></tr>
+<tr><td>I. Calibration &amp; Testing</td><td>1–3%</td><td>&lt; 1% → audit risk</td></tr>
+<tr><td>J. Cleaning &amp; Housekeeping</td><td>1–2%</td><td>—</td></tr>
+<tr><td>K. Contingency</td><td>3–5%</td><td>&gt; 8% → planning कमज़ोर</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🛡️ Prevention — 7 Classic Budget ग़लतियाँ से बचो</h3>
+
+<ul>
+  <li><strong>पिछले साल को copy मत करो।</strong> SAP से हर line fresh निकालो, चाहे number same आए।</li>
+  <li><strong>Emergency को routine में मत छुपाओ।</strong> Separate schedule, separate approval।</li>
+  <li><strong>एक brand पर lock मत हो।</strong> Generic line, brand को remarks में।</li>
+  <li><strong>Services skip मत करो।</strong> एक बार OEM visit save की, अगले साल तीन breakdown।</li>
+  <li><strong>Calibration मत भूलो।</strong> एक NABL audit failure पूरे साल की calibration से महँगा पड़ता है।</li>
+  <li><strong>Contingency ज़्यादा मत रखो।</strong> 5% defensible है; 10% ख़राब planning दिखाता है।</li>
+  <li><strong>Per-machine figure के बिना submit मत करो।</strong> यही एक number senior management को याद रहता है।</li>
+</ul>
+
+<div style="background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:white;padding:24px;border-radius:14px;margin:32px 0;box-shadow:0 4px 16px rgba(26,39,68,0.2);">
+  <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 मुफ़्त Downloads — दो Budget Formats</h3>
+  <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">दो ready-to-use Excel formats — सभी formulas, category headers, justification sheets, और instructions built-in। खोलो, numbers भरो, print करो। सारे brand names generic रखे गए हैं, common substitutes की list दी गई है:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="metalliser-budget/Format_A_Metalliser_Budget_Simple.xlsx" download style="background:#e85d26;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📘 Format A — Simple Summary</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">6-sheet workbook: Instructions, Summary, Detail, Justification (Essential + Emergency), Actual vs Proposal। Internal review और 1-page approval के लिए।</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">XLSX Download →</span>
+    </a>
+    <a href="metalliser-budget/Format_B_Metalliser_Budget_Detailed.xlsx" download style="background:#0d8c7e;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;border:2px solid rgba(255,255,255,0.3);">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📗 Format B — Detailed Line-Item</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">3-sheet workbook: 11 categories (A–K) में 76 line items, auto-subtotals, per-machine + per-month view, category summary। बड़े budgets या CEO approval के लिए annexure।</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">XLSX Download →</span>
+    </a>
+  </div>
+</div>
+
+<div class="callout"><strong>💡 मुख्य बात:</strong> Budget असल में एक <em>risk-management document है जो spreadsheet का रूप ले लेता है</em>। जो plants पूरा साल smoothly चलते हैं, उनके budgets operations पर एक नज़र और probability पर एक नज़र रखकर लिखे जाते हैं — क्या <em>हो सकता</em> है, सिर्फ़ क्या <em>होगा</em> नहीं। 6 steps follow करो, language generic रखो, emergency को routine से अलग रखो, और आपका हर rupee defensible हो जाता है। Finance brake की जगह partner बन जाता है।</div>
+
+</div>
+
+</div>
+</body>
+</html>
