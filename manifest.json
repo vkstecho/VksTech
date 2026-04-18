@@ -1,0 +1,44 @@
+{
+  "name": "VKS Tech – Vivek Kumar",
+  "short_name": "VKS Tech",
+  "description": "Apps, tools and calculators built by Vivek Kumar from 9 years of flexible packaging industry experience.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf9f6",
+  "theme_color": "#1a2744",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["productivity", "business", "utilities"],
+  "icons": [
+    { "src": "favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "favicon-48x48.png", "sizes": "48x48", "type": "image/png" },
+    { "src": "favicon-96x96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "favicon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Industry Apps",
+      "short_name": "Industry",
+      "description": "Apps for flexible packaging professionals",
+      "url": "/#industry-apps"
+    },
+    {
+      "name": "Calculators",
+      "short_name": "Calcs",
+      "description": "Film roll calculators",
+      "url": "/#calculators"
+    },
+    {
+      "name": "Request an App",
+      "short_name": "Request",
+      "description": "Submit your app idea",
+      "url": "/#request-app"
+    }
+  ]
+}

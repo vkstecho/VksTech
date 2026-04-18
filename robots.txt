@@ -1,0 +1,21 @@
+# VKS Tech — vkstech.com
+# Allow all well-behaved crawlers; respect rate limits.
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /sw.js
+
+# AI training scrapers — site owner's choice to opt out
+# (Remove these lines if you WANT your content in training data)
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+
+Sitemap: https://vkstech.com/sitemap.xml
