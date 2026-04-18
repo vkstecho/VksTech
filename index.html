@@ -1425,13 +1425,18 @@ async function openBlog(id) {
     + '</div>'
     // Article content (cleaned) with table styles
     + '<style>#blogBodyContent table{width:100%;border-collapse:collapse;margin:20px 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);}#blogBodyContent th{background:var(--navy);color:#fff;padding:11px 15px;font-size:.82rem;font-weight:700;text-align:left;}#blogBodyContent td{padding:11px 15px;font-size:.86rem;border-bottom:1px solid var(--border);}#blogBodyContent tr:nth-child(even){background:rgba(26,39,68,.02);}#blogBodyContent .en-content,#blogBodyContent .hi-content{display:block;}#blogBodyContent h2{font-family:Playfair Display,serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin:32px 0 14px;padding-top:18px;border-top:1px solid var(--border);}#blogBodyContent h3{font-weight:700;font-size:1.05rem;color:var(--orange);margin:24px 0 10px;}#blogBodyContent ul{margin:10px 0 18px 22px;}#blogBodyContent li{margin-bottom:8px;line-height:1.8;}#blogBodyContent blockquote{border-left:3px solid var(--orange);padding-left:14px;margin:14px 0;color:var(--muted);font-style:italic;}#blogBodyContent .callout{background:rgba(232,93,38,.05);border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0;}#blogBodyContent .hindi-section{background:rgba(13,140,126,.04);border:1px solid rgba(13,140,126,.15);border-radius:16px;padding:24px;margin:28px 0;}#blogBodyContent img{max-width:100%;height:auto;border-radius:12px;margin:16px 0;display:block;}.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;border-radius:12px;border:1px solid var(--border);}@media(max-width:600px){#blogBodyContent{font-size:.92rem!important;line-height:1.85!important;padding:0 4% 60px!important;}#blogBodyContent h2{font-size:1.2rem!important;margin:24px 0 10px!important;}#blogBodyContent h3{font-size:.95rem!important;}#blogBodyContent table{font-size:.75rem;display:block;overflow-x:auto;white-space:nowrap;}#blogBodyContent th{padding:8px 10px;font-size:.72rem;}#blogBodyContent td{padding:8px 10px;font-size:.75rem;}#blogBodyContent .callout{padding:12px 14px;font-size:.85rem;}#blogBodyContent .hindi-section{padding:16px;margin:20px 0;}#blogBodyContent ul{margin-left:16px;}#blogBodyContent li{font-size:.88rem;line-height:1.7;}}</style>'
-    + '<div id="blogBodyContent" style="max-width:780px;margin:0 auto;padding:0 5% 80px;font-size:1rem;color:var(--text);line-height:2;">'+cleanContent+'</div>'+ '<button id="blogShareBtn" onclick="shareBlog(\''+b.id+'\')" title="Share this article" style="position:fixed;bottom:24px;right:24px;z-index:10002;width:56px;height:56px;border-radius:50%;border:none;background:var(--orange);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(232,93,38,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;font-family:inherit;" onmouseover="this.style.transform=\'scale(1.08)\';this.style.boxShadow=\'0 8px 26px rgba(232,93,38,.55)\'" onmouseout="this.style.transform=\'scale(1)\';this.style.boxShadow=\'0 6px 20px rgba(232,93,38,.4)\'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>';
+    + '<div id="blogBodyContent" style="max-width:780px;margin:0 auto;padding:0 5% 80px;font-size:1rem;color:var(--text);line-height:2;">'+cleanContent+'</div>'
+    + renderBlogQA(b.id)
+    + '<button id="blogShareBtn" onclick="shareBlog(\''+b.id+'\')" title="Share this article" style="position:fixed;bottom:24px;right:24px;z-index:10002;width:56px;height:56px;border-radius:50%;border:none;background:var(--orange);color:#fff;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(232,93,38,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;font-family:inherit;" onmouseover="this.style.transform=\'scale(1.08)\';this.style.boxShadow=\'0 8px 26px rgba(232,93,38,.55)\'" onmouseout="this.style.transform=\'scale(1)\';this.style.boxShadow=\'0 6px 20px rgba(232,93,38,.4)\'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>';
   
   document.body.appendChild(overlay);
   overlay.scrollTop = 0;
   
   // Apply language filter to blog content
   applyBlogLang(curLang);
+  
+  // Load the Q&A thread for this blog
+  loadBlogQuestions(b.id);
 
   // Update URL so it can be shared/bookmarked
   try { if(b.slug) { history.pushState({blog:true}, '', '/blog/' + b.slug); } else { history.pushState({blog:true}, '', '#blog-' + b.id); } } catch(e) {}
@@ -1526,6 +1531,127 @@ function _tryOpenBlogFromHash(){
 }
 window.addEventListener('load', function(){ setTimeout(_tryOpenBlogFromHash, 400); });
 window.addEventListener('hashchange', _tryOpenBlogFromHash);
+
+/* ═══════════════════════════════════════════════════════════
+   BLOG Q&A — reader side (question form + answered list)
+   ═══════════════════════════════════════════════════════════ */
+function renderBlogQA(blogId){
+  /* Initial shell — list populates async via loadBlogQuestions() */
+  return ''
+    + '<div id="blogQASection" style="max-width:780px;margin:0 auto;padding:20px 5% 120px;border-top:1px solid var(--border);">'
+    +   '<h2 style="font-family:Playfair Display,serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin-bottom:4px;">💬 Questions & Answers</h2>'
+    +   '<p style="color:var(--muted);font-size:.85rem;margin-bottom:24px;">Ask a question about this article. Answered questions appear publicly below.</p>'
+
+    /* ── Ask form ── */
+    +   '<div id="askForm" style="background:linear-gradient(135deg,rgba(232,93,38,.04),rgba(13,140,126,.03));border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-bottom:28px;">'
+    +     '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px;">Ask a Question</h3>'
+    +     '<div style="margin-bottom:12px;"><label style="display:block;font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:5px;font-family:JetBrains Mono,monospace;text-transform:uppercase;">Your Name *</label>'
+    +       '<input id="qaName" type="text" placeholder="Your full name" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;background:#fff;outline:none;" onfocus="this.style.borderColor=\'var(--orange)\'" onblur="this.style.borderColor=\'var(--border)\'"/></div>'
+    +     '<div style="margin-bottom:12px;"><label style="display:block;font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:5px;font-family:JetBrains Mono,monospace;text-transform:uppercase;">Email <span style="opacity:.6">(optional — to notify you when answered)</span></label>'
+    +       '<input id="qaEmail" type="email" placeholder="you@email.com" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;background:#fff;outline:none;" onfocus="this.style.borderColor=\'var(--orange)\'" onblur="this.style.borderColor=\'var(--border)\'"/></div>'
+    +     '<div style="margin-bottom:14px;"><label style="display:block;font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:5px;font-family:JetBrains Mono,monospace;text-transform:uppercase;">Your Question *</label>'
+    +       '<textarea id="qaQuestion" rows="3" placeholder="What would you like to know?" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;background:#fff;outline:none;resize:vertical;" onfocus="this.style.borderColor=\'var(--orange)\'" onblur="this.style.borderColor=\'var(--border)\'"></textarea></div>'
+    /* Honeypot — hidden from humans, bots fill it, we reject silently */
+    +     '<div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;"><input type="text" id="qaHp" tabindex="-1" autocomplete="off"/></div>'
+    +     '<button onclick="submitQuestion('+blogId+')" style="background:var(--orange);color:#fff;border:none;padding:11px 26px;border-radius:50px;font-weight:700;font-size:.88rem;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(232,93,38,.28);">Submit Question →</button>'
+    +     '<div id="qaFormMsg" style="margin-top:10px;font-size:.82rem;min-height:1.2em;"></div>'
+    +   '</div>'
+
+    /* ── Answered list (populated by loadBlogQuestions) ── */
+    +   '<div id="qaList"><div style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem;">Loading questions...</div></div>'
+    + '</div>';
+}
+
+async function loadBlogQuestions(blogId){
+  const listEl = document.getElementById('qaList');
+  if(!listEl) return;
+  const { data, error } = await sb.from('blog_questions')
+    .select('id,question,asker_name,answer,answered_at,created_at')
+    .eq('blog_id', blogId)
+    .not('answered_at','is',null)
+    .order('answered_at', { ascending:false });
+  if(error){
+    listEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:.85rem;">Could not load questions.</div>';
+    return;
+  }
+  if(!data || !data.length){
+    listEl.innerHTML = '<div style="text-align:center;padding:30px 20px;color:var(--muted);font-size:.85rem;"><div style="font-size:2rem;margin-bottom:8px;opacity:.5;">💭</div>No questions answered yet. Be the first to ask!</div>';
+    return;
+  }
+  listEl.innerHTML = '<h3 style="font-family:Playfair Display,serif;font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:14px;">'+data.length+' '+(data.length===1?'Question':'Questions')+' Answered</h3>' +
+    data.map(renderQABubble).join('');
+}
+
+function renderQABubble(q){
+  const when = new Date(q.answered_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  return ''
+    + '<div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(26,39,68,.04);">'
+    +   '<div style="display:flex;gap:10px;margin-bottom:12px;">'
+    +     '<div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(232,93,38,.12);color:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;">Q</div>'
+    +     '<div style="flex:1;"><div style="font-weight:700;font-size:.82rem;color:var(--navy);">'+escH(q.asker_name)+'</div>'
+    +       '<div style="font-size:.93rem;color:var(--text);line-height:1.7;margin-top:3px;">'+escH(q.question)+'</div></div>'
+    +   '</div>'
+    +   '<div style="display:flex;gap:10px;padding-top:12px;border-top:1px dashed var(--border);">'
+    +     '<div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(13,140,126,.12);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;">A</div>'
+    +     '<div style="flex:1;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><div style="font-weight:700;font-size:.82rem;color:var(--teal);">Vivek Kumar</div><div style="font-size:.7rem;color:var(--light);font-family:JetBrains Mono,monospace;">'+when+'</div></div>'
+    +       '<div style="font-size:.92rem;color:var(--text);line-height:1.75;white-space:pre-wrap;">'+escH(q.answer)+'</div></div>'
+    +   '</div>'
+    + '</div>';
+}
+
+async function submitQuestion(blogId){
+  const msgEl = document.getElementById('qaFormMsg');
+  const name  = document.getElementById('qaName').value.trim();
+  const email = document.getElementById('qaEmail').value.trim();
+  const qtext = document.getElementById('qaQuestion').value.trim();
+  const hp    = document.getElementById('qaHp').value.trim();
+
+  /* Honeypot — silently pretend success for bots */
+  if(hp){
+    msgEl.style.color = 'var(--teal)';
+    msgEl.textContent = '✅ Thanks! Your question has been received.';
+    return;
+  }
+
+  if(!name || !qtext){
+    msgEl.style.color = '#c33';
+    msgEl.textContent = 'Name and question are required.';
+    return;
+  }
+  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
+    msgEl.style.color = '#c33';
+    msgEl.textContent = 'Please enter a valid email or leave it blank.';
+    return;
+  }
+  if(qtext.length < 10){
+    msgEl.style.color = '#c33';
+    msgEl.textContent = 'Please write a bit more detail (at least 10 characters).';
+    return;
+  }
+
+  msgEl.style.color = 'var(--muted)';
+  msgEl.textContent = 'Submitting...';
+
+  const { error } = await sb.from('blog_questions').insert([{
+    blog_id: blogId,
+    question: qtext,
+    asker_name: name,
+    asker_email: email || null
+  }]);
+
+  if(error){
+    msgEl.style.color = '#c33';
+    msgEl.textContent = 'Could not submit: ' + error.message;
+    return;
+  }
+
+  /* Clear form + success message */
+  document.getElementById('qaName').value = '';
+  document.getElementById('qaEmail').value = '';
+  document.getElementById('qaQuestion').value = '';
+  msgEl.style.color = 'var(--teal)';
+  msgEl.textContent = '✅ Thanks ' + name.split(' ')[0] + '! Your question will appear below once Vivek replies.';
+}
 
 function toggleBlogLang(lang) {
   curLang = lang;
