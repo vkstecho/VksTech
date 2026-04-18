@@ -44,8 +44,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <body>
 
 <div id="loginView"><div class="login-box"><h2>🔐 Admin Login</h2>
-<input type="password" id="pwdInput" placeholder="Enter password" onkeypress="if(event.key==='Enter')login()">
-<button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">Login</button></div></div>
+<input type="email" id="emailInput" placeholder="Email" autocomplete="email" style="margin-bottom:12px">
+<input type="password" id="pwdInput" placeholder="Password" autocomplete="current-password" onkeypress="if(event.key==='Enter')login()">
+<button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">Login</button>
+<div id="loginMsg" style="color:var(--red);font-size:.82rem;margin-top:12px;min-height:1.2em"></div>
+</div></div>
 
 <div id="adminView" style="display:none">
 <div class="topbar"><h1>📝 VKSTech Blog Admin</h1>
@@ -58,6 +61,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <button class="tab" onclick="switchTab('upload',this)">📤 Upload File</button>
 <button class="tab" onclick="switchTab('write',this)">✍️ Write Manually</button>
 <button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
+<button class="tab" onclick="switchTab('qa',this)">❓ Q&amp;A <span id="qaBadge" style="display:none;background:var(--red);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
 <button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
 </div>
 
@@ -139,6 +143,23 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <h3>📋 All Blog Posts</h3>
 <div id="postsList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
 
+<div id="tab-qa" class="panel" style="display:none">
+<h3>❓ Reader Questions</h3>
+<p style="background:#fff8e6;border-left:3px solid var(--orange);padding:10px 14px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:18px">
+  Answer pending questions — they appear publicly under the blog post once you reply. Delete spam questions instead of answering them.
+</p>
+
+<div style="margin-bottom:28px">
+  <h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy);font-size:1rem">⏳ Pending (<span id="qaPendingCount">0</span>)</h4>
+  <div id="qaPendingList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div>
+</div>
+
+<div>
+  <h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy);font-size:1rem">✅ Answered (<span id="qaAnsweredCount">0</span>)</h4>
+  <div id="qaAnsweredList"></div>
+</div>
+</div>
+
 <div id="tab-req" class="panel" style="display:none">
 <h3>📩 App Requests</h3>
 <div id="reqList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
@@ -171,8 +192,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <script>
 const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const PASSWORD = 'sunitavks26';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
+});
 
 /* GitHub config — all blog folders live in this repo on the `main` branch */
 const GH_OWNER = 'vkstecho';
@@ -182,21 +204,47 @@ function ghRawUrl(folder, file){ return `https://raw.githubusercontent.com/${GH_
 function ghEditUrl(folder, file){ return `https://github.com/${GH_OWNER}/${GH_REPO}/edit/${GH_BRANCH}/${folder}/${file}`; }
 function ghFolderUrl(folder){ return `https://github.com/${GH_OWNER}/${GH_REPO}/tree/${GH_BRANCH}/${folder}`; }
 
-if(sessionStorage.getItem('vkstech_admin') === 'yes'){
-  document.getElementById('loginView').style.display = 'none';
-  document.getElementById('adminView').style.display = 'block';
-  /* GitHub tab is open by default on load — fetch the folder list */
-  setTimeout(function(){ if(typeof loadGithubFolders === 'function') loadGithubFolders(); }, 100);
-}
-function login(){
-  if(document.getElementById('pwdInput').value === PASSWORD){
-    sessionStorage.setItem('vkstech_admin','yes');
-    document.getElementById('loginView').style.display='none';
-    document.getElementById('adminView').style.display='block';
+/* ════════════════════════════════════════════════════════════
+   SUPABASE AUTH — checks session on load, shows admin if logged in
+   ════════════════════════════════════════════════════════════ */
+async function checkSession(){
+  const { data:{ session } } = await sb.auth.getSession();
+  if(session && session.user){
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
     setTimeout(function(){ if(typeof loadGithubFolders === 'function') loadGithubFolders(); }, 100);
-  } else toast('Wrong password', true);
+    /* Fetch pending-question count for the tab badge */
+    updateQaBadge();
+  } else {
+    document.getElementById('loginView').style.display = 'block';
+    document.getElementById('adminView').style.display = 'none';
+  }
 }
-function logout(){ sessionStorage.removeItem('vkstech_admin'); location.reload(); }
+checkSession();
+
+async function login(){
+  const email = document.getElementById('emailInput').value.trim();
+  const pwd   = document.getElementById('pwdInput').value;
+  const msg   = document.getElementById('loginMsg');
+  msg.textContent = '';
+  if(!email || !pwd){ msg.textContent = 'Enter email and password.'; return; }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+  if(error){ msg.textContent = error.message; return; }
+  document.getElementById('pwdInput').value = '';
+  checkSession();
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  location.reload();
+}
+
+/* Auto-logout if session is revoked server-side */
+sb.auth.onAuthStateChange((_event, session) => {
+  if(!session && document.getElementById('adminView').style.display === 'block'){
+    location.reload();
+  }
+});
 function toast(msg, err){
   const t=document.getElementById('toast');
   t.textContent=(err?'❌ ':'✅ ')+msg;
@@ -206,9 +254,10 @@ function toast(msg, err){
 function switchTab(tab,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['github','upload','write','posts','req'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  ['github','upload','write','posts','qa','req'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
   if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
   if(tab==='posts')loadPosts();
+  if(tab==='qa')loadQuestions();
   if(tab==='req')loadRequests();
 }
 
@@ -750,6 +799,125 @@ async function delReq(id){
   const {error}=await sb.from('app_requests').delete().eq('id',id);
   if(error){toast(error.message,true);return;}
   toast('Deleted');loadRequests();
+}
+
+/* ════════════════════════════════════════════════════════════
+   Q&A MANAGEMENT
+   ════════════════════════════════════════════════════════════ */
+async function updateQaBadge(){
+  /* Lightweight count query for pending questions, shown as a red pill on the tab */
+  const { count } = await sb.from('blog_questions')
+    .select('id', { count:'exact', head:true })
+    .is('answered_at', null);
+  const badge = document.getElementById('qaBadge');
+  if(count && count > 0){
+    badge.textContent = count;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+async function loadQuestions(){
+  const pendEl = document.getElementById('qaPendingList');
+  const ansEl  = document.getElementById('qaAnsweredList');
+  pendEl.innerHTML = '<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  ansEl.innerHTML  = '';
+
+  /* Pull all questions + the blog title they belong to via a join */
+  const { data, error } = await sb.from('blog_questions')
+    .select('*, blogs(id,title,slug)')
+    .order('created_at', { ascending:false });
+  if(error){
+    pendEl.innerHTML = '<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';
+    return;
+  }
+
+  const pending  = (data||[]).filter(q => !q.answered_at);
+  const answered = (data||[]).filter(q => q.answered_at);
+
+  document.getElementById('qaPendingCount').textContent = pending.length;
+  document.getElementById('qaAnsweredCount').textContent = answered.length;
+
+  pendEl.innerHTML = pending.length
+    ? pending.map(renderPendingQ).join('')
+    : '<div class="empty"><div>📭</div><p>No pending questions</p></div>';
+
+  ansEl.innerHTML = answered.length
+    ? answered.map(renderAnsweredQ).join('')
+    : '<div class="empty" style="padding:30px"><div>✨</div><p>No answered questions yet</p></div>';
+
+  updateQaBadge();
+}
+
+function renderPendingQ(q){
+  const blogTitle = (q.blogs && q.blogs.title) ? q.blogs.title.split('|')[0].trim() : '(deleted blog)';
+  const askedOn   = new Date(q.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  const email     = q.asker_email ? `<a href="mailto:${escH(q.asker_email)}?subject=Re: your question on VKSTech" style="color:var(--orange);text-decoration:none">${escH(q.asker_email)}</a>` : '<span style="color:#999">no email</span>';
+  return `<div class="post-item" style="flex-direction:column;align-items:stretch">
+    <div style="width:100%">
+      <div class="meta" style="font-size:.75rem;margin-bottom:4px">📄 <strong>${escH(blogTitle)}</strong> • ${askedOn}</div>
+      <h4 style="font-size:.95rem;margin-bottom:6px">❓ ${escH(q.question)}</h4>
+      <div class="meta">Asked by: <strong>${escH(q.asker_name)}</strong> • ${email}</div>
+    </div>
+    <div style="width:100%;margin-top:12px">
+      <textarea id="ans-${q.id}" placeholder="Write your answer here..." style="width:100%;min-height:90px;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;resize:vertical;outline:none" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      <div class="buttons" style="margin-top:10px">
+        <button class="btn btn-success" onclick="answerQ(${q.id})">✅ Submit Answer</button>
+        <button class="btn btn-danger" onclick="delQ(${q.id})">🗑️ Delete (Spam)</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAnsweredQ(q){
+  const blogTitle  = (q.blogs && q.blogs.title) ? q.blogs.title.split('|')[0].trim() : '(deleted blog)';
+  const answeredOn = new Date(q.answered_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  return `<div class="post-item" style="flex-direction:column;align-items:stretch;background:#f8f6f1">
+    <div style="width:100%">
+      <div class="meta" style="font-size:.75rem;margin-bottom:4px">📄 <strong>${escH(blogTitle)}</strong> • answered ${answeredOn}</div>
+      <h4 style="font-size:.92rem;margin-bottom:6px">❓ ${escH(q.question)}</h4>
+      <div class="meta" style="margin-bottom:8px">— <strong>${escH(q.asker_name)}</strong></div>
+      <div style="background:#fff;padding:11px 14px;border-left:3px solid var(--green);border-radius:6px;font-size:.88rem;line-height:1.7;white-space:pre-wrap">${escH(q.answer)}</div>
+    </div>
+    <div style="width:100%;margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="editAnswer(${q.id})">✏️ Edit Answer</button>
+      <button class="btn btn-danger" onclick="delQ(${q.id})">🗑️ Delete</button>
+    </div>
+  </div>`;
+}
+
+async function answerQ(id){
+  const txt = document.getElementById('ans-'+id).value.trim();
+  if(!txt){ toast('Answer cannot be empty', true); return; }
+  const { error } = await sb.from('blog_questions')
+    .update({ answer: txt, answered_at: new Date().toISOString() })
+    .eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Answer published!');
+  loadQuestions();
+}
+
+async function editAnswer(id){
+  const { data, error } = await sb.from('blog_questions').select('answer').eq('id',id).single();
+  if(error){ toast(error.message, true); return; }
+  const newAns = prompt('Edit your answer:', data.answer || '');
+  if(newAns === null) return;
+  if(!newAns.trim()){ toast('Answer cannot be empty', true); return; }
+  const { error:uerr } = await sb.from('blog_questions')
+    .update({ answer: newAns.trim() })
+    .eq('id', id);
+  if(uerr){ toast(uerr.message, true); return; }
+  toast('Answer updated');
+  loadQuestions();
+}
+
+async function delQ(id){
+  if(!confirm('Delete this question? This cannot be undone.')) return;
+  const { error } = await sb.from('blog_questions').delete().eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Deleted');
+  loadQuestions();
 }
 function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
