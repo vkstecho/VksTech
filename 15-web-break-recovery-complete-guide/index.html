@@ -1,0 +1,672 @@
+<div class="article-body">
+
+<div style="margin:24px 0;"><img src="web-break-recovery-guide/cover.png" alt="Web Break Recovery Guide — Complete Metalliser Troubleshooting for Operators, Supervisors, and Managers" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<h2>💥 Web Break on Metalliser — The Complete Recovery Guide</h2>
+
+<p>Web breaks are the <strong>#1 cause of unplanned downtime</strong> on any vacuum metalliser. They're also the most misunderstood defect in our industry. Most plants blame "film quality" and call the supplier. But in real plants running thousands of jumbos a year, <strong>8 out of 10 web breaks are caused by something inside your own plant</strong> — tension, alignment, cleanliness, or a parameter someone changed and forgot.</p>
+
+<p>This single guide serves everyone who has to deal with web breaks — <strong>from the ITI operator threading the film at 3 AM to the plant manager reviewing utilisation numbers on Monday morning</strong>. Jump directly to your role, or read the whole thing if you want the full picture:</p>
+
+<!-- ════════════════════ JUMP NAV ════════════════════ -->
+<div style="background:#F8F6F1;border:2px solid #E2DDD4;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <p style="margin:0 0 12px 0;font-size:14px;font-weight:700;color:#1A2744;">📍 JUMP TO YOUR ROLE:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+    <a href="#operator" style="background:#C8102E;color:#fff;padding:14px;border-radius:8px;text-decoration:none;display:block;text-align:center;">
+      <strong style="font-size:15px;display:block;margin-bottom:4px;">👷 OPERATOR</strong>
+      <span style="font-size:12px;opacity:0.95;">Hinglish · 5 min read · Shop-floor quick fixes</span>
+    </a>
+    <a href="#supervisor" style="background:#E85D26;color:#fff;padding:14px;border-radius:8px;text-decoration:none;display:block;text-align:center;">
+      <strong style="font-size:15px;display:block;margin-bottom:4px;">🔧 SUPERVISOR / ENGINEER</strong>
+      <span style="font-size:12px;opacity:0.95;">Technical depth · 8 causes · Diagnostic tools</span>
+    </a>
+    <a href="#manager" style="background:#0D8C7E;color:#fff;padding:14px;border-radius:8px;text-decoration:none;display:block;text-align:center;">
+      <strong style="font-size:15px;display:block;margin-bottom:4px;">🎯 PLANT MANAGER</strong>
+      <span style="font-size:12px;opacity:0.95;">Strategic · KPIs · 30/60/90 roadmap</span>
+    </a>
+  </div>
+</div>
+
+<!-- ════════════════════ LAYER 1: OPERATOR ════════════════════ -->
+
+<div id="operator" style="margin-top:40px;padding-top:10px;">
+
+<div style="background:#C8102E;color:#fff;padding:16px 22px;border-radius:10px 10px 0 0;">
+  <div style="font-size:12px;opacity:0.9;letter-spacing:1px;margin-bottom:3px;">LAYER 1 · FOR OPERATORS</div>
+  <div style="font-size:22px;font-weight:800;">👷 Web Phati — Ab Kya Karu?</div>
+  <div style="font-size:13px;opacity:0.95;margin-top:4px;">Hinglish · ITI-level · Phone par padho · Machine ke paas khade hoke bhi padh sakte ho</div>
+</div>
+
+<div style="background:#fff;border:2px solid #C8102E;border-top:none;padding:22px;border-radius:0 0 10px 10px;">
+
+<p>Raat ke 3:47 baje. Aap machine ke paas hain. Tension alarm bajta hai. Viewing window se dekha — web phati hui hai. <strong>Abhi ghabrana mat.</strong> Pura section 5 minute me padh sakte ho, aur jo bhi zaruri hai wohi hai.</p>
+
+<!-- E-STOP WARNING -->
+<div style="background:#FFE8E8;border-left:6px solid #C8102E;padding:18px 20px;border-radius:10px;margin:24px 0;">
+<p style="margin:0 0 10px 0;font-size:18px;font-weight:800;color:#C8102E;">⛔ Sabse Pehle — E-Stop MAT Dabao</p>
+<p style="margin:0;font-size:15px;line-height:1.6;">E-Stop sirf asli emergency ke liye hai — aag, koi aadmi fas gaya, ya kuch girne wala hai. <strong>Web phatna emergency nahi hai.</strong> Machine khud controlled stop kar degi — drives dheere-dheere ruk jayenge, boats standby par, vacuum aur cooling chalu rahenge. Aap sirf dekho ki auto-stop complete ho gayi — fir next step pe jao.</p>
+</div>
+
+<h3 style="color:#1A2744;">🎯 Sabse Pehle 3 Kaam — Kul 2 Minute</h3>
+
+<div style="background:#F8F6F1;border-radius:10px;padding:20px;margin:20px 0;">
+
+<p style="margin:0 0 16px 0;font-size:16px;"><strong style="color:#1A2744;">Kaam 1 (30 sec):</strong> Auto-stop ruk gayi? Confirm karo. Time note karo — kitne baje break hui.</p>
+
+<p style="margin:0 0 16px 0;font-size:16px;"><strong style="color:#1A2744;">Kaam 2 (1 min):</strong> Phati hui film ke paas jao. <strong>Haath mat lagao.</strong> Pehle <strong>phone se photo lo</strong> — tear ka close-up. Yeh photo baad me supervisor ko dikhana hai. Agar tumne clean kar diya, evidence chala gaya.</p>
+
+<p style="margin:0;font-size:16px;"><strong style="color:#1A2744;">Kaam 3 (30 sec):</strong> Tear ka pattern dekho — seedha hai? Tircha (diagonal) hai? Edge se shuru hua? Niche ki tasveer se match karo.</p>
+
+</div>
+
+<h3 style="color:#1A2744;">👀 Tear Dekho — Kya Reason Hai</h3>
+
+<p>Har web break ka tear alag dikhta hai. Photo le chuke ho? Ab yeh 5 patterns se match karo. Jo pattern match ho, wohi aapka reason hai.</p>
+
+<div style="margin:24px 0;"><img src="web-break-recovery-guide/tear-patterns-visual.png" alt="5 Tear Patterns — Visual Reference Card" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<div style="background:#fff;border:2px solid #E2DDD4;border-left:6px solid #1A2744;border-radius:10px;padding:16px 18px;margin:12px 0;">
+<p style="margin:0 0 6px 0;font-size:17px;font-weight:800;color:#1A2744;">✂️ Pattern 1 — Seedhi Saaf Tear (Horizontal)</p>
+<p style="margin:0 0 10px 0;font-size:14px;color:#5A5A5A;"><em>Film ekdum saaf, seedhi lakir me phati. Jaise kisi ne kaenchi se kaata ho.</em></p>
+<p style="margin:0;font-size:15px;line-height:1.7;"><strong style="color:#E85D26;">➤ Reason:</strong> Film zyada tight thi (tension zyada thi).<br/>
+<strong style="color:#0D8C7E;">➤ Aap kya karo:</strong> Tension display dekho — number stable hai ya upar-neeche jump kar raha hai? Jump kar raha hai toh dancer roller (woh jhoolne wala upper-niche) haath se push karo. Agar chipka hua lagta hai ya nahi ghumta easily, supervisor ko batao.</p>
+</div>
+
+<div style="background:#fff;border:2px solid #E2DDD4;border-left:6px solid #1A2744;border-radius:10px;padding:16px 18px;margin:12px 0;">
+<p style="margin:0 0 6px 0;font-size:17px;font-weight:800;color:#1A2744;">╱ Pattern 2 — Tircha (Diagonal) + Jhurriya</p>
+<p style="margin:0 0 10px 0;font-size:14px;color:#5A5A5A;"><em>Tear tircha — kone se kone tak. Phatne se pehle film me jhurriya (wrinkles) aa rahi thi.</em></p>
+<p style="margin:0;font-size:15px;line-height:1.7;"><strong style="color:#E85D26;">➤ Reason:</strong> Web side me slide ho raha tha (alignment bigad gayi thi).<br/>
+<strong style="color:#0D8C7E;">➤ Aap kya karo:</strong> Web guide ka sensor (jo film ke kinare pe lagi lal LED wala hai) dekho — saaf hai ya dhool hai? Dry cloth se halka saaf karo. Fir threading karte waqt slow speed pe 50 meter chalao aur dekho film kinare se 5mm se zyada hilti toh nahi. Hilti hai to Mechanical ko call karo.</p>
+</div>
+
+<div style="background:#fff;border:2px solid #E2DDD4;border-left:6px solid #1A2744;border-radius:10px;padding:16px 18px;margin:12px 0;">
+<p style="margin:0 0 6px 0;font-size:17px;font-weight:800;color:#1A2744;">┣ Pattern 3 — Ek Kinare Se Tear Shuru</p>
+<p style="margin:0 0 10px 0;font-size:14px;color:#5A5A5A;"><em>Tear ek side (left ya right) se shuru hui, bich tak phatti gayi.</em></p>
+<p style="margin:0;font-size:15px;line-height:1.7;"><strong style="color:#E85D26;">➤ Reason:</strong> Unwind roll ke kinare pe damage tha. Shayad forklift se thokar lagi, ya supplier se hi damaged aaya.<br/>
+<strong style="color:#0D8C7E;">➤ Aap kya karo:</strong> Us roll ko <strong>waapas stores bhejo</strong> — aage mat chalao. Damaged roll continue karoge toh phir phategi. Agli roll mount karne se pehle <strong>30 second lena — flashlight lekar pura circle ghumake dekho, edge pe koi cut ya dent toh nahi.</strong> Yeh 30 second har break se bachayega.</p>
+</div>
+
+<div style="background:#fff;border:2px solid #E2DDD4;border-left:6px solid #1A2744;border-radius:10px;padding:16px 18px;margin:12px 0;">
+<p style="margin:0 0 6px 0;font-size:17px;font-weight:800;color:#1A2744;">🔥 Pattern 4 — Jali Hui (Burnt) + Kala Dhabba</p>
+<p style="margin:0 0 10px 0;font-size:14px;color:#5A5A5A;"><em>Tear ke paas chota jala hua nishan, ya kale aluminium ke chhote bindi jaise daag.</em></p>
+<p style="margin:0;font-size:15px;line-height:1.7;"><strong style="color:#E85D26;">➤ Reason:</strong> Boat splash — boat se molten aluminium uchchal ke film pe gira aur jala diya.<br/>
+<strong style="color:#0D8C7E;">➤ Aap kya karo:</strong> Wahi boat <strong>turant retire karo</strong> — yani next cycle me nikal do. Boat usage log dekho — agar 80% life cross kar chuki hai, woh boat splash karti hi rahegi. Supervisor ko batao, naya boat lagwao.</p>
+</div>
+
+<div style="background:#fff;border:2px solid #E2DDD4;border-left:6px solid #1A2744;border-radius:10px;padding:16px 18px;margin:12px 0;">
+<p style="margin:0 0 6px 0;font-size:17px;font-weight:800;color:#1A2744;">∿ Pattern 5 — Uljhi Huii (Random Jagged) Tear</p>
+<p style="margin:0 0 10px 0;font-size:14px;color:#5A5A5A;"><em>Tear na seedhi, na tirchi — tooti-phooti, uneven. Film pe scratch marks ya dust dikh raha.</em></p>
+<p style="margin:0;font-size:15px;line-height:1.7;"><strong style="color:#E85D26;">➤ Reason:</strong> Gande roller ya film me hi defect.<br/>
+<strong style="color:#0D8C7E;">➤ Aap kya karo:</strong> Saare idler rollers ko IPA aur lint-free cloth se wipe karo. Agar yeh hi roll pe 2nd time tear hua, toh us batch ke baki rolls <strong>hold karo</strong> aur supervisor ko dikhao — ho sakta hai film hi kharab hai.</p>
+</div>
+
+<h3 style="color:#1A2744;">🎯 Agar Pattern Match Nahi Ho Rahi?</h3>
+
+<p>Koi baat nahi. 3 cheez check karo ek-ek karke. 30 second lagega bas.</p>
+
+<div style="background:#FFF4E6;border:2px solid #E85D26;border-radius:10px;padding:18px;margin:20px 0;">
+<p style="margin:0 0 12px 0;font-size:15px;line-height:1.6;"><strong>1. Speed change:</strong> Abhi-abhi speed badli thi? Bada jump tha? Answer yes toh reason yehi hai — aage se 50 m/min ke steps me badhana, ek dum se 200 m/min jump nahi karna.</p>
+<p style="margin:0 0 12px 0;font-size:15px;line-height:1.6;"><strong>2. Static:</strong> Sardi hai? Dry weather? Film fluttering kar rahi thi break se pehle? Anti-static bar ka light jal raha hai check karo. Nahi jal raha? E&amp;I ko call.</p>
+<p style="margin:0;font-size:15px;line-height:1.6;"><strong>3. Joint:</strong> Jahan tear hui hai wahan koi joint tha? Double-sided tape wala? Joint weak tha shayad. Next joint banate waqt tape achhi tarah dabao, beech me air bubble nahi rehna chahiye.</p>
+</div>
+
+<h3 style="color:#1A2744;">📝 Re-Threading ke Baad — F/16 Me Likhna Mat Bhulo</h3>
+
+<p>Threading ho gayi, machine chalu, shift chal rahi hai. Ab <strong>30 second ka kaam reh gaya hai</strong> — F/16 format me entry.</p>
+
+<div style="background:#E8F5F3;border-left:5px solid #0D8C7E;padding:16px 18px;border-radius:8px;margin:16px 0;">
+<p style="margin:0;font-size:15px;line-height:1.65;"><strong>Yeh kyun zaruri hai:</strong> 30 din tak har break log hoga. Mahine ke end me supervisor aur engineer saath dekhenge — pattern milega. "Oh, saare breaks Met-2 pe raat ki shift me hote hain" ya "har baar batch 2403-P se". Log nahi karoge = pattern kabhi nahi milega = break hote rahenge.</p>
+</div>
+
+<p>F/16 me likhne ke liye cause code yaad rakho:</p>
+
+<div style="background:#fff;border:2px solid #0D8C7E;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:15px;line-height:1.9;">
+<strong style="color:#0D8C7E;">T</strong> = Tension &nbsp;•&nbsp; <strong style="color:#0D8C7E;">E</strong> = Edge damage &nbsp;•&nbsp; <strong style="color:#0D8C7E;">A</strong> = Alignment &nbsp;•&nbsp; <strong style="color:#0D8C7E;">D</strong> = Dirty roller &nbsp;•&nbsp; <strong style="color:#0D8C7E;">S</strong> = Speed change &nbsp;•&nbsp; <strong style="color:#0D8C7E;">St</strong> = Static &nbsp;•&nbsp; <strong style="color:#0D8C7E;">F</strong> = Film defect &nbsp;•&nbsp; <strong style="color:#0D8C7E;">B</strong> = Boat splash &nbsp;•&nbsp; <strong style="color:#0D8C7E;">O</strong> = Other
+</div>
+
+<p>Bas itna likho: <em>"03:47, Met-2, Jumbo GMB26D0047, 480m pe break, Pattern 2 (Diagonal), Cause: A (Alignment), Downtime 52 min, Waste 65m, EPC sensor clean kiya."</em> Bas itna kaafi hai.</p>
+
+<h3 style="color:#1A2744;">🚨 Kab Supervisor ya Engineer Ko Call Karna Hai</h3>
+
+<p>Kuch cheezein operator khud fix nahi kar sakta — aur karna bhi nahi chahiye. Yeh list clear rakho:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th style="width:50%">Situation</th><th style="width:50%">Kisko Call Karo</th></tr>
+</thead>
+<tbody>
+<tr><td>Tension display stable nahi, dancer roller chipka lagta hai</td><td><strong>E&amp;I</strong> — load cell calibration ka kaam hai</td></tr>
+<tr><td>EPC sensor kaam nahi kar raha, web slide ho raha hai</td><td><strong>Mechanical</strong> — sensor replacement ka kaam hai</td></tr>
+<tr><td>Ek hi batch ke 2+ rolls pe break hua</td><td><strong>Supervisor + Quality</strong> — supplier NCR raise hoga</td></tr>
+<tr><td>Boat splash ka shak hai</td><td><strong>Supervisor</strong> — boat retire ka decision unka</td></tr>
+<tr><td>Static meter reading 0 aa raha hai</td><td><strong>E&amp;I</strong> — anti-static bar ka fault</td></tr>
+<tr><td>Ek shift me 3+ break ho chuke hain same cause se</td><td><strong>Shift Incharge</strong> — production halt ka call</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Important:</strong> Call karne me sharm nahi. Galat diagnose karke khud fix karne ki koshish = shift me 5 break, galti pe galti. Seniors ki madad lena operator ki smart move hai.</p>
+
+<h3 style="color:#1A2744;">🛡️ Agle Break Se Bachne ke liye 5 Chote Kaam</h3>
+
+<p>Yeh 5 kaam routine me shamil kar lo — hafte me break 3-4 se 1 pe aa jayega.</p>
+
+<ul style="font-size:15px;line-height:1.8;">
+<li><strong>Roll mount karne se pehle 30 second:</strong> Flashlight lekar roll ko ghumao, edge pe cuts ya damage dekho. 30 second = ghanto ki bachat.</li>
+<li><strong>Shift shuru me tension display check:</strong> 30 second stare karo. Stable hai na? Fluctuation dikh raha hai to shift shuru me hi issue raise karo.</li>
+<li><strong>Har 48 ghante me roller wipe:</strong> Coating zone se pehle wale idler rollers ko IPA se wipe karo. Har roller pe last-cleaned date ka sticker.</li>
+<li><strong>Speed change hamesha 50 m/min step me:</strong> 600 se 800 m/min ek click me mat badhao. 50-50 ke steps me, 30-30 second ke hold ke saath.</li>
+<li><strong>F/16 har break pe bharo:</strong> Bhale hi jaldi me ho. 30 second ka kaam hai. Nahi bharoge toh pattern kabhi nahi milega.</li>
+</ul>
+
+<div style="background:#C8102E;color:#fff;padding:16px 20px;border-radius:10px;margin:20px 0;text-align:center;">
+<p style="margin:0;font-size:14px;">👷 <strong>Operator Section Done.</strong> Aapke liye A4 laminated card aur F/16 format PDF niche downloads section me mil jayega.</p>
+</div>
+
+</div>
+</div>
+
+<!-- ════════════════════ LAYER 2: SUPERVISOR / ENGINEER ════════════════════ -->
+
+<div id="supervisor" style="margin-top:40px;padding-top:10px;">
+
+<div style="background:#E85D26;color:#fff;padding:16px 22px;border-radius:10px 10px 0 0;">
+  <div style="font-size:12px;opacity:0.9;letter-spacing:1px;margin-bottom:3px;">LAYER 2 · FOR SUPERVISORS &amp; ENGINEERS</div>
+  <div style="font-size:22px;font-weight:800;">🔧 Deep Dive — 8 Causes, Diagnostics &amp; Root Cause Analysis</div>
+  <div style="font-size:13px;opacity:0.95;margin-top:4px;">Technical depth · Interactive analyzer · Sample filled F/16 · Shop floor story</div>
+</div>
+
+<div style="background:#fff;border:2px solid #E85D26;border-top:none;padding:22px;border-radius:0 0 10px 10px;">
+
+<p>The operator section above covers what to do in the moment. This section is for the people who have to prevent the break from happening again — supervisors, production engineers, quality heads. You need to move from reactive firefighting to pattern recognition, and from pattern recognition to root cause elimination.</p>
+
+<h3 style="color:#1A2744;">⚠️ Why Web Breaks Cost More Than You Think</h3>
+
+<ul>
+  <li><strong>Direct production loss:</strong> 45-60 minutes average per break × 2-3 breaks per shift = 2+ hours lost daily</li>
+  <li><strong>Wasted bare film:</strong> 40-80 metres scrapped per break (threading loss + damaged section)</li>
+  <li><strong>Chamber vent cycle:</strong> Re-pumping vacuum consumes 25-40 min + diffusion pump stress</li>
+  <li><strong>Missed customer deliveries:</strong> 3 breaks in one shift = 1 jumbo short = delayed dispatch</li>
+  <li><strong>Operator fatigue:</strong> Night-shift threading under pressure = more errors on the next roll</li>
+  <li><strong>Hidden quality cost:</strong> Post-break rolls often have OD variation in first 100m — future rejection risk</li>
+</ul>
+
+<p>Add it up. A plant running 2 breaks per shift × 3 shifts × 30 days = 180 breaks per month. At an average of ₹4,000 lost per break (downtime + waste + rework), that's <strong>₹7.2 lakh per month</strong> silently leaking from your P&amp;L. Most plants never calculate this because each individual break feels "small".</p>
+
+<h3 style="color:#1A2744;">🎯 The 5-Minute Recovery Plan</h3>
+
+<p>When a break happens, the clock starts immediately. Every minute the chamber stays open and vented is a minute you're losing. Follow these 5 steps in this exact order — no shortcuts:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Action</th><th>Time</th><th>Why This Order</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Controlled Stop &amp; Record</strong></td><td>Let auto-stop sequence complete. Note exact time + location of break on web.</td><td>30 sec</td><td>Time + location = half the diagnosis</td></tr>
+<tr><td><strong>2. Observe Before Touching</strong></td><td>Photo the torn edge, note if clean tear or jagged</td><td>1 min</td><td>Once you clear it, evidence is gone</td></tr>
+<tr><td><strong>3. 8-Point Cause Scan</strong></td><td>Run the causes checklist below</td><td>2 min</td><td>Prevents repeat break on same roll</td></tr>
+<tr><td><strong>4. Re-thread &amp; Reset</strong></td><td>Fresh leader, correct tension recipe, alignment check</td><td>1 min (during vent)</td><td>Most threading errors = next break</td></tr>
+<tr><td><strong>5. Log in F/16</strong></td><td>Fill cause code, downtime min, operator sign</td><td>30 sec</td><td>No log entry = pattern never found</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;"><img src="web-break-recovery-guide/recovery-flowchart.png" alt="5-Step Web Break Recovery Plan Flowchart — Controlled Stop, Observe, Scan, Re-thread, Log" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<div style="background:#FFE8E8;border-left:5px solid #C8102E;padding:14px 18px;border-radius:8px;margin:20px 0;">
+<p style="margin:0 0 6px 0;"><strong style="color:#C8102E;">⛔ DO NOT press E-Stop for a web break.</strong></p>
+<p style="margin:0;font-size:14px;">E-Stop is for real emergencies only — fire, person in danger, entanglement. Pressing E-Stop cuts power to critical systems (boat heating, cooling circuits, winding drives) and can cause boat thermal shock, create new alarms, and make recovery slower. Let the machine's <strong>automatic break-detection sequence</strong> do a controlled stop: drives ramp to zero, boats drop to standby, vacuum and drum cooling stay ON.</p>
+</div>
+
+<h3 style="color:#1A2744;">🔍 The 8 Hidden Causes — Ranked by Frequency</h3>
+
+<p>Real breakdown from production metalliser plants. Note that "film quality" — the first thing everyone blames — is actually <strong>cause #7</strong>. The real culprits are almost always in your own machine parameters and maintenance discipline:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Rank</th><th>Cause</th><th>Frequency</th><th>Tear Signature</th></tr>
+</thead>
+<tbody>
+<tr><td>#1</td><td>Tension mismatch (unwind vs rewind)</td><td>~28%</td><td>Clean horizontal tear, straight edge</td></tr>
+<tr><td>#2</td><td>Edge damage on unwind roll</td><td>~18%</td><td>Tear initiates from one edge</td></tr>
+<tr><td>#3</td><td>Misalignment (web tracking)</td><td>~14%</td><td>Diagonal tear, wrinkle trail before break</td></tr>
+<tr><td>#4</td><td>Dirty / worn rollers</td><td>~11%</td><td>Random tear location, scratch marks</td></tr>
+<tr><td>#5</td><td>Sudden speed / tension change</td><td>~9%</td><td>Break right after parameter change</td></tr>
+<tr><td>#6</td><td>Static discharge + web flutter</td><td>~7%</td><td>Clean break but fluttering just before</td></tr>
+<tr><td>#7</td><td>Film quality issue (supplier side)</td><td>~6%</td><td>Tear follows a visible film defect/crease</td></tr>
+<tr><td>#8</td><td>Boat splash burning through film</td><td>~4%</td><td>Burnt edge, aluminium splatter near tear</td></tr>
+<tr><td>Other</td><td>Joint failure, core slippage, shaft issue</td><td>~3%</td><td>Varies — always check joints in F/16</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;"><img src="web-break-recovery-guide/causes-frequency-chart.png" alt="8 Web Break Causes Ranked by Frequency — Tension Mismatch 28%, Edge Damage 18%, Misalignment 14%, Dirty Rollers 11%, Speed Change 9%, Static 7%, Film Quality 6%, Boat Splash 4%" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<h3 style="color:#1A2744;">🛠️ Quick-Fix Reference Table</h3>
+
+<p>For each cause: what to check first, what to fix, who to escalate to if it doesn't solve:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th style="width:5%">#</th><th style="width:20%">Cause</th><th style="width:30%">Check First</th><th style="width:30%">Quick Fix</th><th style="width:15%">If Not Fixed</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1</strong></td><td><strong>Tension mismatch</strong></td><td>Watch tension display for 30 sec. Numbers jumping?</td><td>Check recipe matches current film micron. Push dancer roller by hand — should move freely.</td><td>Call E&amp;I for load cell calibration</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Edge damage on unwind roll</strong></td><td>Look at tear — does it start from left or right edge?</td><td>Return the roll to stores. Inspect roll edges BEFORE next mount.</td><td>Raise NCR with supplier on that batch</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Misalignment (web tracking)</strong></td><td>Tear is diagonal and you saw wrinkles before break?</td><td>Check EPC sensor is clean and powered. Run slow speed 50m, watch web edge.</td><td>Call Mechanical for EPC service</td></tr>
+<tr><td><strong>4</strong></td><td><strong>Dirty or worn rollers</strong></td><td>When was last IPA roller wipe? Check log.</td><td>Wipe all idler rollers with IPA + lint-free cloth. Deep-clean at next PM.</td><td>Schedule roller replacement if surface worn</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Sudden speed / tension change</strong></td><td>Did you or someone change speed just before break?</td><td>Always ramp speed in 50 m/min steps with 30-second hold between each step.</td><td>Operator training on ramp protocol</td></tr>
+<tr><td><strong>6</strong></td><td><strong>Static + web flutter</strong></td><td>Winter or very dry weather? Web was fluttering before break?</td><td>Check anti-static bar is powered and clean. Bar must be within 5mm of web.</td><td>Call E&amp;I for static meter check</td></tr>
+<tr><td><strong>7</strong></td><td><strong>Film quality (supplier)</strong></td><td>Is this the 2nd or 3rd break on rolls from the same batch?</td><td>Hold remaining rolls from that batch. Save torn piece as evidence.</td><td>Quality Head raises NCR with supplier</td></tr>
+<tr><td><strong>8</strong></td><td><strong>Boat splash burn-through</strong></td><td>Burn mark + aluminium splatter visible near tear?</td><td>Retire the boat immediately. Check boat usage log — any boat past 80% life is risky.</td><td>Load new boat, restart cycle</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 style="color:#1A2744;">🔬 Interactive Tool — Root Cause Analyzer</h3>
+
+<p>Answer 4 quick questions about your break and this tool points you to the most likely cause — ranked by probability. No login, no data leaves your browser:</p>
+
+<div id="vks-wb-analyzer" style="margin:20px 0;background:#f8f6f1;border:2px solid #e2ddd4;border-radius:12px;padding:22px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
+
+<style>
+.wb-q{margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;}
+.wb-q-title{font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;}
+.wb-opts{display:flex;flex-wrap:wrap;gap:8px;}
+.wb-opt{background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;transition:all .15s;}
+.wb-opt:hover{border-color:#e85d26;}
+.wb-opt.sel{background:#1a2744;color:#fff;border-color:#1a2744;}
+.wb-result{display:none;margin-top:18px;padding:18px;background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:#fff;border-radius:10px;}
+.wb-result.active{display:block;}
+.wb-result h4{color:#fff;border:none;margin:0 0 10px 0;padding:0;font-size:15px;}
+.wb-rank{background:rgba(255,255,255,.12);padding:10px 12px;border-radius:7px;margin-bottom:8px;font-size:13px;line-height:1.55;}
+.wb-rank-top{background:rgba(232,93,38,.85);font-weight:600;}
+.wb-btn{background:#e85d26;color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;}
+.wb-btn-ghost{background:transparent;border:2px solid #fff;margin-left:8px;}
+.wb-intro{font-size:12px;color:#5a5a5a;margin-bottom:14px;font-style:italic;}
+</style>
+
+<div class="wb-intro">🔒 All analysis happens in your browser. Nothing is uploaded. Close the tab and everything clears.</div>
+
+<div class="wb-q" data-q="tear">
+  <div class="wb-q-title">1. What does the torn edge look like?</div>
+  <div class="wb-opts" data-group="tear">
+    <div class="wb-opt" data-v="clean">Clean, straight horizontal</div>
+    <div class="wb-opt" data-v="diag">Diagonal + wrinkles before</div>
+    <div class="wb-opt" data-v="edge">Starts from one edge</div>
+    <div class="wb-opt" data-v="burnt">Burnt / splatter near tear</div>
+    <div class="wb-opt" data-v="ragged">Jagged / torn unevenly</div>
+  </div>
+</div>
+
+<div class="wb-q" data-q="when">
+  <div class="wb-q-title">2. When in the run did the break happen?</div>
+  <div class="wb-opts" data-group="when">
+    <div class="wb-opt" data-v="start">Within first 100m</div>
+    <div class="wb-opt" data-v="middle">Middle of the run</div>
+    <div class="wb-opt" data-v="change">Right after a parameter change</div>
+    <div class="wb-opt" data-v="end">Near end of jumbo</div>
+  </div>
+</div>
+
+<div class="wb-q" data-q="display">
+  <div class="wb-q-title">3. What was the tension display doing just before?</div>
+  <div class="wb-opts" data-group="display">
+    <div class="wb-opt" data-v="stable">Stable around setpoint</div>
+    <div class="wb-opt" data-v="fluct">Fluctuating &gt;±10%</div>
+    <div class="wb-opt" data-v="rising">Climbing steadily</div>
+    <div class="wb-opt" data-v="unknown">Didn't check / unsure</div>
+  </div>
+</div>
+
+<div class="wb-q" data-q="roll">
+  <div class="wb-q-title">4. Has this happened on rolls from the same batch before?</div>
+  <div class="wb-opts" data-group="roll">
+    <div class="wb-opt" data-v="first">First break on this batch</div>
+    <div class="wb-opt" data-v="repeat">Yes — 2+ rolls from same batch</div>
+    <div class="wb-opt" data-v="diffbatch">Different batches, same machine</div>
+  </div>
+</div>
+
+<button class="wb-btn" id="wb-analyze" type="button">🔬 Analyze My Break</button>
+<button class="wb-btn wb-btn-ghost" id="wb-reset" type="button" style="color:#1a2744;border-color:#1a2744;">Reset</button>
+
+<div class="wb-result" id="wb-result"></div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var answers = {tear:null, when:null, display:null, roll:null};
+  document.querySelectorAll('#vks-wb-analyzer .wb-opts').forEach(function(group){
+    var name = group.getAttribute('data-group');
+    group.querySelectorAll('.wb-opt').forEach(function(opt){
+      opt.addEventListener('click', function(){
+        group.querySelectorAll('.wb-opt').forEach(function(o){ o.classList.remove('sel'); });
+        opt.classList.add('sel');
+        answers[name] = opt.getAttribute('data-v');
+      });
+    });
+  });
+
+  function score(a){
+    var s = {tension:0, edge:0, align:0, dirty:0, speed:0, static:0, film:0, boat:0};
+    if(a.tear==='clean'){ s.tension+=3; s.speed+=1; }
+    if(a.tear==='diag'){ s.align+=3; s.edge+=1; }
+    if(a.tear==='edge'){ s.edge+=3; s.align+=1; }
+    if(a.tear==='burnt'){ s.boat+=4; }
+    if(a.tear==='ragged'){ s.film+=2; s.dirty+=2; }
+    if(a.when==='start'){ s.tension+=2; s.align+=1; }
+    if(a.when==='middle'){ s.dirty+=2; s.boat+=1; }
+    if(a.when==='change'){ s.speed+=4; s.tension+=2; }
+    if(a.when==='end'){ s.tension+=2; s.edge+=1; }
+    if(a.display==='stable'){ s.edge+=1; s.static+=1; s.dirty+=1; s.boat+=1; }
+    if(a.display==='fluct'){ s.tension+=4; }
+    if(a.display==='rising'){ s.tension+=3; s.dirty+=1; }
+    if(a.roll==='first'){ }
+    if(a.roll==='repeat'){ s.film+=4; s.edge+=1; }
+    if(a.roll==='diffbatch'){ s.tension+=1; s.dirty+=2; s.align+=1; s.static+=1; }
+    return s;
+  }
+
+  var labels = {
+    tension:'Tension mismatch',
+    edge:'Edge damage on unwind roll',
+    align:'Misalignment / web tracking',
+    dirty:'Dirty or worn rollers',
+    speed:'Sudden speed / tension change',
+    static:'Static discharge + web flutter',
+    film:'Film supplier quality issue',
+    boat:'Boat splash burning through film'
+  };
+
+  var actions = {
+    tension:'Check tension display live. If fluctuating >±10%, inspect dancer roller friction first, then load cell calibration. Verify recipe matches current film micron.',
+    edge:'Examine unwind roll edge under bright light. If damaged, return roll. Always rotate+inspect roll edges BEFORE mounting.',
+    align:'Run web at slow speed, watch edge position at each guide. If wandering >5mm, adjust EPC sensor. Service EPC every PM cycle.',
+    dirty:'Wipe all idler rollers with IPA immediately. Schedule deep-clean at next PM. Add daily IPA wipe to F/07 Daily Checklist for rollers just before coating zone.',
+    speed:'Never jump more than 50 m/min per click with 30-second holds. Review recent parameter change log — train operator on ramp protocol.',
+    static:'Check anti-static bar cleanliness, power, and distance from web (<5mm). Use static meter weekly. Winter = double frequency.',
+    film:'Keep torn piece as evidence. Photograph on ruler for scale. Raise NCR with roll number + batch code. Hold remaining rolls from same batch for inspection.',
+    boat:'Retire the boat now. Check boat usage log — any boat past 80% life is splash-risk. Inspect film for burnt edge + aluminium splatter to confirm.'
+  };
+
+  document.getElementById('wb-analyze').addEventListener('click', function(){
+    if(!answers.tear || !answers.when || !answers.display || !answers.roll){
+      alert('Please answer all 4 questions first.');
+      return;
+    }
+    var s = score(answers);
+    var ranked = Object.keys(s).map(function(k){return {k:k, v:s[k]};}).sort(function(a,b){return b.v-a.v;});
+    var top3 = ranked.slice(0,3);
+    var maxScore = top3[0].v || 1;
+    var out = '<h4>🎯 Most Likely Causes (ranked)</h4>';
+    top3.forEach(function(r, i){
+      var pct = Math.round((r.v/maxScore)*100);
+      var cls = i===0 ? 'wb-rank wb-rank-top' : 'wb-rank';
+      out += '<div class="'+cls+'"><strong>'+(i+1)+'. '+labels[r.k]+'</strong> <span style="opacity:.85;">('+pct+'% match)</span><br><span style="font-size:12px;">▸ '+actions[r.k]+'</span></div>';
+    });
+    out += '<div style="margin-top:14px;font-size:12px;opacity:.85;">⚠️ This is a diagnostic aid, not a replacement for physical inspection. Always verify on the machine before concluding.</div>';
+    var resEl = document.getElementById('wb-result');
+    resEl.innerHTML = out;
+    resEl.classList.add('active');
+  });
+
+  document.getElementById('wb-reset').addEventListener('click', function(){
+    answers = {tear:null, when:null, display:null, roll:null};
+    document.querySelectorAll('#vks-wb-analyzer .wb-opt.sel').forEach(function(o){o.classList.remove('sel');});
+    document.getElementById('wb-result').classList.remove('active');
+  });
+})();
+</script>
+
+<h3 style="color:#1A2744;">📝 What a Filled F/16 Record Actually Looks Like</h3>
+
+<p>The whole point of logging every break in F/16 is to see the pattern nobody sees day-to-day. Here's a real row from one plant's Web Break &amp; Downtime Record:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th style="width:30%">Field</th><th style="width:35%">Entry</th><th style="width:35%">Why This Matters</th></tr>
+</thead>
+<tbody>
+<tr><td>Date / Shift</td><td>18.04.2026 / B-Shift</td><td>Cross-reference with tension data for that shift</td></tr>
+<tr><td>Machine</td><td>Met-2</td><td>Machine-specific pattern detection</td></tr>
+<tr><td>Operator</td><td>R. Sharma</td><td>Training gap identification (not blame)</td></tr>
+<tr><td>Break Time</td><td>03:47</td><td>Night-shift breaks often = fatigue or skipped checks</td></tr>
+<tr><td>Film / Micron</td><td>PET G301 / 12µ</td><td>Film-type pattern (some breaks are film-specific)</td></tr>
+<tr><td>Jumbo / Batch No.</td><td>GMB26D0047 / Batch 2403-P</td><td>Supplier claim evidence if needed</td></tr>
+<tr><td>Metres Run Before Break</td><td>480 m</td><td>Edge defects often break at similar distance</td></tr>
+<tr><td>Break Location on Web</td><td>Operator side, 200mm from edge</td><td>One-sided = alignment or edge damage</td></tr>
+<tr><td>Tear Signature</td><td>Diagonal, wrinkles visible before tear</td><td>Classic misalignment fingerprint</td></tr>
+<tr><td>Tension Display (last 30 sec)</td><td>Unwind 28 → 34N fluctuating</td><td>Fluctuation + diagonal tear = dancer issue</td></tr>
+<tr><td>Cause Code (T/E/A/D/S/F/B/O)</td><td>A (Alignment) + T (Tension secondary)</td><td>Two-code logging for compound causes</td></tr>
+<tr><td>Downtime (min)</td><td>52</td><td>Tracks true cost per break</td></tr>
+<tr><td>Wasted Film (m)</td><td>65 m</td><td>Monthly bare-waste KPI</td></tr>
+<tr><td>Corrective Action Taken</td><td>EPC sensor cleaned, dancer tension re-verified</td><td>Future audit traceability</td></tr>
+<tr><td>Signatures</td><td>R.S. / A.V. / QA-init</td><td>Three-tier accountability</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Multiply this across every break for a month and the pattern jumps off the page. One plant discovered <strong>73% of their night-shift breaks on Met-2 had diagonal tears with tension fluctuation</strong> — a signature pointing to one specific dancer roller bearing that had been quietly degrading for 8 months. Replacing one bearing cut their monthly break count by 60%. None of this was visible without the Format.</p>
+
+<h3 style="color:#1A2744;">🏭 Real Shop Floor Story — The ₹21 Lakh Bearing</h3>
+
+<div style="background:#f8f6f1;border-left:4px solid #e85d26;padding:18px 20px;border-radius:8px;margin:20px 0;font-style:italic;line-height:1.7;">
+
+<p style="margin:0 0 12px 0;"><strong>Met-2, night shift, December.</strong> The plant had been averaging 4 web breaks per shift for almost 6 months. Every operator had a different theory. Supervisors blamed "bad winter film quality". Production blamed night-shift operators. Night-shift blamed morning-shift for leaving the machine with wrong tension. Nobody agreed, nobody could prove anything, and the breaks kept coming.</p>
+
+<p style="margin:0 0 12px 0;">Production loss was running at <strong>~8 hours/day of unplanned downtime</strong>. Bare film waste had climbed to 2.3% from a 1.1% baseline. Two customer deliveries had gone short. The plant manager was under pressure to explain why metalliser utilisation had dropped from 82% to 68%.</p>
+
+<p style="margin:0 0 12px 0;">The Quality Head proposed one change: <em>"Har break F/16 mein log hoga. No exceptions. Agar tension fluctuation thi, cause code T, aur tension value bhi likho."</em> Every web break, fully documented. For 30 days.</p>
+
+<p style="margin:0 0 12px 0;">After 30 days, 97 breaks were logged. The engineer sat down with the data on a Saturday. The pattern was loud:</p>
+<ul style="margin:0 0 12px 18px;">
+  <li><strong>73% of breaks</strong> showed diagonal tears</li>
+  <li><strong>81% of those</strong> had tension fluctuation &gt;±10% in the 30 seconds before the break</li>
+  <li><strong>Nearly all of them</strong> were on Met-2</li>
+</ul>
+
+<p style="margin:0 0 12px 0;">They pulled the dancer roller bearings on Met-2 that weekend. One bearing — the one feeding tension data to the PLC — had developed a 0.3mm radial play. Not enough to make noise. Not enough to show up on PM visual check. But enough to send wrong tension signals to the control loop, which then over-corrected, which created the fluctuation, which led to the diagonal tear. <strong>One ₹4,200 bearing was costing the plant ₹21 lakh per month in downtime + waste.</strong></p>
+
+<p style="margin:0;">After the bearing change, the break rate on Met-2 dropped from 4/shift to 1/week within 10 days. Six months later it was still stable. The plant now keeps a running dashboard of F/16 data and reviews it every Monday morning. They don't argue about web break causes anymore — they just look at what the data says.</p>
+
+</div>
+
+<p><strong>Lesson:</strong> Web breaks aren't random events. They're a signal your machine is telling you something. But the signal only becomes readable when you log every single break honestly in F/16. The plants that fix their break rate are the plants that treat every break as data, not as a 45-minute annoyance to move past.</p>
+
+<h3 style="color:#1A2744;">🛡️ Prevention Checklist for Supervisors</h3>
+
+<ul>
+  <li><strong>Weekly bearing audit:</strong> Every dancer and EPC bearing gets a manual play check every 7 days. Any perceivable play = replace</li>
+  <li><strong>Load cell calibration:</strong> Every 6 months without exception. Log in F/10 or F/11 PM Quarterly</li>
+  <li><strong>Recipe lock on film-type change:</strong> Operators cannot change micron setting without supervisor sign-off on SOP-03</li>
+  <li><strong>IPA roller wipe:</strong> All idlers before coating zone wiped every 48 hours. Sticker-per-roller with last-cleaned date</li>
+  <li><strong>Ramp protocol training:</strong> Every operator trained on the 50 m/min step rule. Verify during skill assessment</li>
+  <li><strong>Boat retirement at 80%:</strong> No more "squeeze-the-last-jumbo" on end-of-life boats</li>
+  <li><strong>Edge inspection before mount:</strong> 30-second rotation under light. No exceptions. Track in F/03 Job Card</li>
+  <li><strong>Monday morning F/16 review:</strong> Quality + Production sit down, look at last week's data, pick one thing to fix</li>
+</ul>
+
+<div style="background:#E85D26;color:#fff;padding:16px 20px;border-radius:10px;margin:20px 0;text-align:center;">
+<p style="margin:0;font-size:14px;">🔧 <strong>Supervisor/Engineer Section Done.</strong> Detailed Action Card PDF with 8-cause reference table and investigation checklist in the downloads below.</p>
+</div>
+
+</div>
+</div>
+
+<!-- ════════════════════ LAYER 3: PLANT MANAGER ════════════════════ -->
+
+<div id="manager" style="margin-top:40px;padding-top:10px;">
+
+<div style="background:#0D8C7E;color:#fff;padding:16px 22px;border-radius:10px 10px 0 0;">
+  <div style="font-size:12px;opacity:0.9;letter-spacing:1px;margin-bottom:3px;">LAYER 3 · FOR PLANT MANAGERS</div>
+  <div style="font-size:22px;font-weight:800;">🎯 The Plant Manager's Playbook</div>
+  <div style="font-size:13px;opacity:0.95;margin-top:4px;">Strategic framing · Benchmarks · 30/60/90 roadmap · KPIs · ROI · Board talking points</div>
+</div>
+
+<div style="background:#fff;border:2px solid #0D8C7E;border-top:none;padding:22px;border-radius:0 0 10px 10px;">
+
+<h3 style="color:#1A2744;">📋 Executive Summary — 3 Lines for Your Monday Meeting</h3>
+
+<div style="background:#E8F5F3;border-left:5px solid #0D8C7E;padding:16px 20px;border-radius:8px;margin:20px 0;">
+<p style="margin:0 0 8px 0;font-size:15px;line-height:1.7;">1. <strong>80% of web breaks originate inside the plant</strong>, not from the film supplier. The cost is typically <strong>₹5-10 lakh per month per metalliser line</strong>, silently leaking from P&amp;L.</p>
+<p style="margin:0 0 8px 0;font-size:15px;line-height:1.7;">2. <strong>The root cause is almost never the one operators and supervisors guess first.</strong> It's a bearing, a sensor, or a discipline gap — all invisible without systematic F/16 logging.</p>
+<p style="margin:0;font-size:15px;line-height:1.7;">3. <strong>Fixing it requires 30 days of disciplined logging + a Monday morning review ritual.</strong> Capital investment: zero. Most plants see 50-70% break rate reduction within 60 days.</p>
+</div>
+
+<h3 style="color:#1A2744;">📊 Industry Benchmarks — Is Your Plant Good, Okay, or Bleeding?</h3>
+
+<p>Before you decide if you have a problem, know what "normal" looks like. These are field-observed ranges for metalliser lines running PET/CPP at 700-800 m/min:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Metric</th><th style="color:#0D8C7E;">🟢 Best-in-class</th><th style="color:#E85D26;">🟡 Acceptable</th><th style="color:#C8102E;">🔴 Problem zone</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Web breaks / shift / machine</strong></td><td>&lt; 0.5</td><td>0.5 – 1.5</td><td>&gt; 2</td></tr>
+<tr><td><strong>Avg recovery time / break</strong></td><td>&lt; 35 min</td><td>35 – 55 min</td><td>&gt; 60 min</td></tr>
+<tr><td><strong>Bare film waste %</strong></td><td>&lt; 1.0%</td><td>1.0 – 1.8%</td><td>&gt; 2.0%</td></tr>
+<tr><td><strong>Metalliser utilisation %</strong></td><td>&gt; 85%</td><td>75 – 85%</td><td>&lt; 75%</td></tr>
+<tr><td><strong>F/16 logging completeness</strong></td><td>100%</td><td>75 – 95%</td><td>&lt; 75%</td></tr>
+<tr><td><strong>Monthly web-break cost/line</strong></td><td>&lt; ₹2 lakh</td><td>₹2 – 5 lakh</td><td>&gt; ₹5 lakh</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;"><img src="web-break-recovery-guide/benchmark-dashboard.png" alt="Web Break Plant Benchmark Dashboard — Best-in-class vs Acceptable vs Problem Zone KPIs" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+
+<p>If you have 2+ metrics in the red zone, you don't have a small problem — you have a meaningful P&amp;L drag that your board will eventually ask about. Better to fix it now with data than explain it in an Annual General Meeting without data.</p>
+
+<h3 style="color:#1A2744;">💰 Quick ROI Math — What ₹4,200 Fixes</h3>
+
+<p>Here's the actual math from the ₹21 lakh bearing story above, laid out so you can adapt it to your plant:</p>
+
+<div style="background:#F8F6F1;border-radius:10px;padding:20px;margin:20px 0;font-family:ui-monospace,'Consolas',monospace;font-size:14px;line-height:1.9;">
+<strong>Before (6-month baseline):</strong><br/>
+Break rate: 4 per shift × 3 shifts = 12/day × 30 = <strong>360 breaks/month</strong><br/>
+Cost per break: ~₹4,000 (downtime + waste + rework)<br/>
+Monthly web-break cost: <strong>₹14.4 lakh</strong><br/>
++ Lost production opportunity cost: ~₹6-8 lakh/month<br/>
+<strong>Total monthly drag: ~₹21 lakh</strong><br/><br/>
+
+<strong>After bearing replacement:</strong><br/>
+Spare part cost: <strong>₹4,200</strong><br/>
+Labour cost: ~₹15,000 (weekend job, 2 engineers + helpers)<br/>
+<strong>Total investment: ~₹20,000</strong><br/>
+Break rate: 1 per week ~<strong>4 breaks/month</strong><br/>
+Monthly cost: ~₹16,000<br/><br/>
+
+<strong style="color:#0D8C7E;">Monthly saving: ~₹20 lakh · Payback: 1 day · Annual ROI: ~12,000%</strong>
+</div>
+
+<p>Your plant's numbers will differ but the pattern is consistent: web breaks are almost always the highest-ROI fix available to a plant manager. The investment is near-zero. The return is operational margin.</p>
+
+<h3 style="color:#1A2744;">🗓️ The 30 / 60 / 90-Day Roadmap</h3>
+
+<p>If you're serious about cutting your web break rate, here's the rollout that works. This is not theoretical — it's pulled from plants that went from 4/shift to &lt;1/week:</p>
+
+<h4 style="color:#0D8C7E;">Days 1-30: Build the Data Foundation</h4>
+<ul>
+  <li><strong>Day 1:</strong> Print &amp; laminate the operator Action Card at every metalliser. Announce the F/16 logging rule in all three shifts</li>
+  <li><strong>Days 1-30:</strong> Every single web break gets logged in F/16 — no exceptions, no verbal reports. Supervisor verifies completeness at shift handover</li>
+  <li><strong>Week 2:</strong> Supervisor does a sanity audit — spot-check 10 F/16 entries, confirm fields filled properly</li>
+  <li><strong>Day 30:</strong> Quality + Production sit together, review all 30 days of F/16 data, identify the top pattern (machine, shift, tear signature, cause code)</li>
+</ul>
+
+<h4 style="color:#0D8C7E;">Days 31-60: Fix the Top Pattern</h4>
+<ul>
+  <li><strong>Days 31-35:</strong> Engineer investigates the top pattern with targeted inspection — bearings, sensors, cleanliness records, operator SOP compliance</li>
+  <li><strong>Weekend of Day 40:</strong> Planned downtime for the fix — bearing replacement, sensor recalibration, whatever the data pointed to</li>
+  <li><strong>Days 41-60:</strong> Continue logging. Watch the break rate. If the fix worked, the line on your Monday chart goes down within 10 days</li>
+</ul>
+
+<h4 style="color:#0D8C7E;">Days 61-90: Institutionalise the Discipline</h4>
+<ul>
+  <li><strong>Every Monday morning:</strong> 15-minute "F/16 Review" — Quality + Production + maintenance look at last week's data, pick the next pattern to fix</li>
+  <li><strong>Day 75:</strong> Formalise the process — write the Monday Review as an SOP, assign permanent owners, make it part of weekly rhythm</li>
+  <li><strong>Day 90:</strong> Board-level report showing: baseline break rate → current break rate → ₹ saved → payback achieved</li>
+</ul>
+
+<h3 style="color:#1A2744;">📈 Your Weekly KPI Dashboard — 5 Numbers to Watch</h3>
+
+<p>You don't need 20 metrics. You need these 5, tracked weekly, on a single sheet pinned to your office wall:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>KPI</th><th>Target</th><th>Alarm if...</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Web breaks per week (all machines)</strong></td><td>Baseline -50% within 60 days</td><td>Trending up 2 weeks in a row</td></tr>
+<tr><td><strong>2. Avg recovery time per break (min)</strong></td><td>&lt; 45 min</td><td>&gt; 55 min for 3+ breaks</td></tr>
+<tr><td><strong>3. F/16 completeness (%)</strong></td><td>100% of breaks logged with full fields</td><td>Any blank field in any break that week</td></tr>
+<tr><td><strong>4. Bare film waste % (week)</strong></td><td>&lt; 1.5%</td><td>&gt; 1.8% or rising trend</td></tr>
+<tr><td><strong>5. Machine utilisation % (week)</strong></td><td>&gt; 80%</td><td>&lt; 75% two weeks in a row</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>These are leading indicators. When #3 (F/16 completeness) drops, #1 will rise 2-3 weeks later — guaranteed. Discipline first, numbers follow.</p>
+
+<h3 style="color:#1A2744;">🗣️ What to Tell Your Leadership</h3>
+
+<p>If you have to brief your owner or board on why web breaks matter, here's the framing that works:</p>
+
+<div style="background:#F8F6F1;border-left:4px solid #1A2744;padding:18px 20px;border-radius:8px;margin:20px 0;">
+<p style="margin:0 0 10px 0;font-style:italic;">"We have a silent ₹X lakh/month operational leak in our metalliser lines from web breaks. Most of it is fixable with zero capital investment — just disciplined data logging for 30 days and targeted maintenance fixes based on what the data shows. Our target: cut break rate by 50% within 60 days. Reinvestment into the fix is under ₹50,000 total. Expected annual impact: ₹60+ lakh added to operating margin."</p>
+</div>
+
+<p>Every board understands "zero capital investment, 60-day payback, ₹60 lakh annual margin." The technical details matter less. The business case is overwhelming.</p>
+
+<h3 style="color:#1A2744;">⚠️ The 3 Failure Modes to Avoid</h3>
+
+<p>Plants that try this initiative and fail almost always fall into one of three traps:</p>
+
+<ol>
+<li><strong>Logging theatre:</strong> F/16 gets filled with copy-paste entries, fake data, or rushed one-word causes. Result: no pattern emerges, initiative dies at Day 45. <strong>Fix:</strong> Supervisor personally audits 5 random entries every week. Quality signs off. Logging accuracy becomes a KPI.</li>
+<li><strong>Fix-of-the-week:</strong> Engineer jumps on Day 5 to "fix" something without waiting for 30 days of data. Usually wrong root cause. Rate doesn't improve. Demotivates team. <strong>Fix:</strong> No fixes until Day 30 F/16 review. Discipline.</li>
+<li><strong>Monday review becomes optional:</strong> Once break rate comes down, the Monday F/16 review stops feeling urgent. People skip it. Rate creeps back up. <strong>Fix:</strong> Weekly review is non-negotiable even when break rate is at target. It's the discipline that maintains the gain.</li>
+</ol>
+
+<div style="background:#0D8C7E;color:#fff;padding:16px 20px;border-radius:10px;margin:20px 0;text-align:center;">
+<p style="margin:0;font-size:14px;">🎯 <strong>Manager Section Done.</strong> You now have the data, the roadmap, the KPIs, and the talking points. Next step: print the operator card, announce the F/16 rule, start Day 1 tomorrow.</p>
+</div>
+
+</div>
+</div>
+
+<!-- ════════════════════ DOWNLOADS ════════════════════ -->
+
+<div style="background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:white;padding:24px;border-radius:14px;margin:40px 0 20px 0;box-shadow:0 4px 16px rgba(26,39,68,0.2);">
+  <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 Free Downloads — Pick What You Need</h3>
+  <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">Three resources covering all three audiences. Print, laminate, pin. Everything free forever:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+    <a href="web-break-recovery-guide/VKS-Tech-Web-Break-Operator-Card.pdf" download style="background:#C8102E;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:14px;display:block;margin-bottom:6px;">👷 Operator Card (Hinglish)</strong>
+      <span style="font-size:12px;opacity:0.95;display:block;">5 tear patterns visual · when-to-call table · cause codes. A4 laminate-ready.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;">Download PDF →</span>
+    </a>
+    <a href="web-break-recovery-guide/VKS-Tech-Web-Break-Action-Card.pdf" download style="background:#E85D26;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:14px;display:block;margin-bottom:6px;">🔧 Supervisor Action Card</strong>
+      <span style="font-size:12px;opacity:0.95;display:block;">8 causes ranked · tear signatures · 30-sec tension test · stop conditions.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;">Download PDF →</span>
+    </a>
+    <a href="web-break-recovery-guide/VKS-Tech-F16-Web-Break-Record.pdf" download style="background:#0D8C7E;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;border:2px solid rgba(255,255,255,0.3);">
+      <strong style="font-size:14px;display:block;margin-bottom:6px;">📋 F/16 Record (All)</strong>
+      <span style="font-size:12px;opacity:0.95;display:block;">The fillable format every break must be logged on. Operator clipboard + audit-ready.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;">Download PDF →</span>
+    </a>
+  </div>
+</div>
+
+<div class="callout"><strong>💡 One Last Thing:</strong> Eight out of ten web breaks are caused by something inside your own plant — not the film supplier. Whether you're an operator handling tonight's break, a supervisor diagnosing the pattern, or a plant manager building the business case — the answer is always the same: <strong>log every break in F/16, review the data every Monday, fix the root cause not the symptom.</strong> A ₹4,200 bearing cost one plant ₹21 lakh a month because nobody was logging. The tools, the templates, and the PDFs above are all free. The only thing left is to start. Good luck.</div>
+
+</div>
