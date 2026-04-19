@@ -932,17 +932,23 @@ function generateSlug(title){
     .substring(0, 60);
 }
 /* Convert a GitHub folder name into a clean URL slug.
-   Strips common redundant suffixes (_blog, -blog, _post, -post) so that
-   a folder like "sop-wi-format-guide_blog" becomes "sop-wi-format-guide"
-   in the URL — the word "blog" is already implied by the /blog/ path. */
+   Transformations:
+     1. Take last path segment (if nested like "blogs/foo")
+     2. Lowercase + normalise special chars to hyphens
+     3. Strip leading numeric prefix — "16-web-break" → "web-break"
+        (lets you number folders for your own org without polluting URLs)
+     4. Strip redundant trailing suffixes — "-blog", "-post", "-article"
+        (the word is already implied by the /blog/ URL path)
+   Example: "16-web-break-reason-and-solution_blog" → "web-break-reason-and-solution" */
 function folderToSlug(folder){
-  return folder.split('/').pop()              // last path segment if nested
+  return folder.split('/').pop()
     .toLowerCase()
     .replace(/[^a-z0-9-]/g, '-')              // non-alphanumeric → hyphen
     .replace(/-+/g, '-')                      // collapse multiple hyphens
     .replace(/^-|-$/g, '')                    // trim leading/trailing
+    .replace(/^[0-9]+-/, '')                  // strip leading "16-", "07-", etc.
     .replace(/-(?:blog|post|article)s?$/, '') // strip -blog / -post / -article suffix
-    .replace(/^-|-$/g, '');                   // re-trim in case suffix removal left a trailing hyphen
+    .replace(/^-|-$/g, '');                   // re-trim in case above left stragglers
 }
 /* Hook: auto-fill slug when title changes */
 document.addEventListener('DOMContentLoaded', function(){
