@@ -481,7 +481,7 @@ async function fetchAndPreview(){
     /* Save for publish step */
     ghParsed = {
       folder, file,
-      slug: folder.split('/').pop().toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,''),
+      slug: folderToSlug(folder),
       title: meta.title,
       summary: meta.summary,
       category: meta.category,
@@ -930,6 +930,19 @@ function generateSlug(title){
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
     .substring(0, 60);
+}
+/* Convert a GitHub folder name into a clean URL slug.
+   Strips common redundant suffixes (_blog, -blog, _post, -post) so that
+   a folder like "sop-wi-format-guide_blog" becomes "sop-wi-format-guide"
+   in the URL — the word "blog" is already implied by the /blog/ path. */
+function folderToSlug(folder){
+  return folder.split('/').pop()              // last path segment if nested
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '-')              // non-alphanumeric → hyphen
+    .replace(/-+/g, '-')                      // collapse multiple hyphens
+    .replace(/^-|-$/g, '')                    // trim leading/trailing
+    .replace(/-(?:blog|post|article)s?$/, '') // strip -blog / -post / -article suffix
+    .replace(/^-|-$/g, '');                   // re-trim in case suffix removal left a trailing hyphen
 }
 /* Hook: auto-fill slug when title changes */
 document.addEventListener('DOMContentLoaded', function(){
