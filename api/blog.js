@@ -166,10 +166,15 @@ h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,4
 
 /* Language toggle for content */
 .en-content,.hi-content{display:block;}
-body.lang-hi .en-content{display:none;}
-body.lang-hi .hi-content{display:block;}
-body.lang-en .hi-content{display:none;}
-body.lang-en .en-content{display:block;}
+body.lang-hi .en-content{display:none !important;}
+body.lang-hi .hi-content{display:block !important;}
+body.lang-en .hi-content{display:none !important;}
+body.lang-en .en-content{display:block !important;}
+/* Ensure header title spans toggle correctly (higher specificity) */
+body.lang-hi h1 .en-content{display:none !important;}
+body.lang-hi h1 .hi-content{display:inline !important;}
+body.lang-en h1 .hi-content{display:none !important;}
+body.lang-en h1 .en-content{display:inline !important;}
 
 /* Share button */
 .share-btn{position:fixed;bottom:24px;right:24px;z-index:100;width:56px;height:56px;border-radius:50%;border:none;background:var(--orange);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(232,93,38,.4);transition:transform .2s,box-shadow .2s;}
