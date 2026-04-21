@@ -38,7 +38,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer}
 .drop-zone:hover{border-color:var(--orange)}
 .drop-zone input{display:none}
-.toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999}
+.toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}.toast.err{background:var(--red)}
 </style></head>
 <body>
