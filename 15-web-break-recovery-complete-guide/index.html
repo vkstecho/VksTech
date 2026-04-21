@@ -25,7 +25,7 @@ html { scroll-behavior: smooth; }
 }
 </style>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/cover.png" alt="Web Break on Metalliser — Complete Recovery Guide | Web Break on Metalliser — पूरी Recovery Guide" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/cover.png" alt="Web Break on Metalliser — Complete Recovery Guide | Web Break on Metalliser — पूरी Recovery Guide" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <div class="en-content">
 
@@ -84,7 +84,7 @@ html { scroll-behavior: smooth; }
 
 <p>The shape of the tear tells you which component failed. Before the supervisor arrives, match the tear to one of these five patterns — it saves 20 minutes of diagnostic back-and-forth.</p>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/tear-patterns-visual.png" alt="5 Web Break Tear Patterns Visual Reference" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/tear-patterns-visual.png" alt="5 Web Break Tear Patterns Visual Reference" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
 <table>
@@ -137,162 +137,116 @@ html { scroll-behavior: smooth; }
 </table>
 </div>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/causes-frequency-chart.png" alt="8 Web Break Causes Ranked by Frequency — Horizontal Bar Chart" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/causes-frequency-chart.png" alt="8 Web Break Causes Ranked by Frequency — Horizontal Bar Chart" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <h3 style="color:#1A2744;">🔬 Interactive Root Cause Analyzer</h3>
 
 <p>Answer four quick questions about the break. The tool scores all 8 causes against your inputs and returns the top 3 most likely causes with specific fix guidance. Everything runs locally in your browser — nothing uploaded:</p>
 
-<div id="vks-wb-analyzer" style="margin:20px 0;background:#f8f6f1;border:2px solid #e2ddd4;border-radius:12px;padding:22px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
-
-<style>
-.wb-q{margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;}
-.wb-q-title{font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;}
-.wb-opts{display:flex;flex-wrap:wrap;gap:8px;}
-.wb-opt{background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;transition:all .15s;}
-.wb-opt:hover{border-color:#e85d26;}
-.wb-opt.sel{background:#1a2744;color:#fff;border-color:#1a2744;}
-.wb-result{display:none;margin-top:18px;padding:18px;background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:#fff;border-radius:10px;}
-.wb-result.active{display:block;}
-.wb-result h4{color:#fff;border:none;margin:0 0 10px 0;padding:0;font-size:15px;}
-.wb-rank{background:rgba(255,255,255,.12);padding:10px 12px;border-radius:7px;margin-bottom:8px;font-size:13px;line-height:1.55;}
-.wb-rank-top{background:rgba(232,93,38,.85);font-weight:600;}
-.wb-btn{background:#e85d26;color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;}
-.wb-btn-ghost{background:transparent;border:2px solid #fff;margin-left:8px;}
-.wb-intro{font-size:12px;color:#5a5a5a;margin-bottom:14px;font-style:italic;}
-</style>
-
-<div class="wb-intro">🔒 All analysis happens in your browser. Nothing is uploaded. Close the tab and everything clears.</div>
-
-<div class="wb-q" data-q="tear">
-  <div class="wb-q-title">1. What does the torn edge look like?</div>
-  <div class="wb-opts" data-group="tear">
-    <div class="wb-opt" data-v="clean">Clean, straight horizontal</div>
-    <div class="wb-opt" data-v="diag">Diagonal + wrinkles before</div>
-    <div class="wb-opt" data-v="edge">Starts from one edge</div>
-    <div class="wb-opt" data-v="burnt">Burnt / splatter near tear</div>
-    <div class="wb-opt" data-v="ragged">Jagged / torn unevenly</div>
-  </div>
+<div id="vks-wb-analyzer" style="margin:20px 0;background:#f8f6f1;border:2px solid #e2ddd4;border-radius:12px;padding:22px;font-family:system-ui,-apple-system,sans-serif;">
+<div style="font-size:12px;color:#5a5a5a;margin-bottom:14px;font-style:italic;">🔒 All analysis happens in your browser. Nothing is uploaded. Close the tab and everything clears.</div>
+<div class="wb-q" data-q="tear" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">1. What does the torn edge look like?</div>
+<div class="wb-opts" data-group="tear" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt" data-v="clean" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Clean, straight horizontal</div>
+<div class="wb-opt" data-v="diag" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Diagonal + wrinkles before</div>
+<div class="wb-opt" data-v="edge" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Starts from one edge</div>
+<div class="wb-opt" data-v="burnt" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Burnt / splatter near tear</div>
+<div class="wb-opt" data-v="ragged" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Jagged / torn unevenly</div>
 </div>
-
-<div class="wb-q" data-q="when">
-  <div class="wb-q-title">2. When in the run did the break happen?</div>
-  <div class="wb-opts" data-group="when">
-    <div class="wb-opt" data-v="start">Within first 100m</div>
-    <div class="wb-opt" data-v="middle">Middle of the run</div>
-    <div class="wb-opt" data-v="change">Right after a parameter change</div>
-    <div class="wb-opt" data-v="end">Near end of jumbo</div>
-  </div>
 </div>
-
-<div class="wb-q" data-q="display">
-  <div class="wb-q-title">3. What was the tension display doing just before?</div>
-  <div class="wb-opts" data-group="display">
-    <div class="wb-opt" data-v="stable">Stable around setpoint</div>
-    <div class="wb-opt" data-v="fluct">Fluctuating &gt;±10%</div>
-    <div class="wb-opt" data-v="rising">Climbing steadily</div>
-    <div class="wb-opt" data-v="unknown">Didn't check / unsure</div>
-  </div>
+<div class="wb-q" data-q="when" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">2. When in the run did the break happen?</div>
+<div class="wb-opts" data-group="when" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt" data-v="start" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Within first 100m</div>
+<div class="wb-opt" data-v="middle" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Middle of the run</div>
+<div class="wb-opt" data-v="change" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Right after a parameter change</div>
+<div class="wb-opt" data-v="end" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Near end of jumbo</div>
 </div>
-
-<div class="wb-q" data-q="roll">
-  <div class="wb-q-title">4. Has this happened on rolls from the same batch before?</div>
-  <div class="wb-opts" data-group="roll">
-    <div class="wb-opt" data-v="first">First break on this batch</div>
-    <div class="wb-opt" data-v="repeat">Yes — 2+ rolls from same batch</div>
-    <div class="wb-opt" data-v="diffbatch">Different batches, same machine</div>
-  </div>
 </div>
-
-<button class="wb-btn" id="wb-analyze" type="button">🔬 Analyze My Break</button>
-<button class="wb-btn wb-btn-ghost" id="wb-reset" type="button" style="color:#1a2744;border-color:#1a2744;">Reset</button>
-
-<div class="wb-result" id="wb-result"></div>
-
+<div class="wb-q" data-q="display" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">3. What was the tension display doing just before?</div>
+<div class="wb-opts" data-group="display" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt" data-v="stable" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Stable around setpoint</div>
+<div class="wb-opt" data-v="fluct" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Fluctuating &gt;±10%</div>
+<div class="wb-opt" data-v="rising" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Climbing steadily</div>
+<div class="wb-opt" data-v="unknown" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Didn't check / unsure</div>
+</div>
+</div>
+<div class="wb-q" data-q="roll" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">4. Has this happened on rolls from the same batch before?</div>
+<div class="wb-opts" data-group="roll" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt" data-v="first" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">First break on this batch</div>
+<div class="wb-opt" data-v="repeat" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Yes — 2+ rolls from same batch</div>
+<div class="wb-opt" data-v="diffbatch" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Different batches, same machine</div>
+</div>
+</div>
+<button id="wb-analyze" type="button" style="background:#e85d26;color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;margin-right:8px;">🔬 Analyze My Break</button>
+<button id="wb-reset" type="button" style="background:transparent;color:#1a2744;border:2px solid #1a2744;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;">Reset</button>
+<div id="wb-result" style="display:none;margin-top:18px;padding:18px;background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:#fff;border-radius:10px;"></div>
 </div>
 
 <script>
-(function(){
+(function() {
   'use strict';
   var answers = {tear:null, when:null, display:null, roll:null};
-  document.querySelectorAll('#vks-wb-analyzer .wb-opts').forEach(function(group){
-    var name = group.getAttribute('data-group');
-    group.querySelectorAll('.wb-opt').forEach(function(opt){
-      opt.addEventListener('click', function(){
-        group.querySelectorAll('.wb-opt').forEach(function(o){ o.classList.remove('sel'); });
-        opt.classList.add('sel');
-        answers[name] = opt.getAttribute('data-v');
+  var container = document.getElementById('vks-wb-analyzer');
+  if (!container) return;
+  var UNSELECTED = 'background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;';
+  var SELECTED = 'background:#1a2744;border:2px solid #1a2744;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#fff;';
+  container.querySelectorAll('[data-v]').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var group = opt.parentElement;
+      var name = group.getAttribute('data-group');
+      group.querySelectorAll('[data-v]').forEach(function(sib) {
+        sib.setAttribute('style', UNSELECTED);
       });
+      opt.setAttribute('style', SELECTED);
+      answers[name] = opt.getAttribute('data-v');
     });
   });
-
-  function score(a){
-    var s = {tension:0, edge:0, align:0, dirty:0, speed:0, static:0, film:0, boat:0};
-    if(a.tear==='clean'){ s.tension+=3; s.speed+=1; }
-    if(a.tear==='diag'){ s.align+=3; s.edge+=1; }
-    if(a.tear==='edge'){ s.edge+=3; s.align+=1; }
-    if(a.tear==='burnt'){ s.boat+=4; }
-    if(a.tear==='ragged'){ s.film+=2; s.dirty+=2; }
-    if(a.when==='start'){ s.tension+=2; s.align+=1; }
-    if(a.when==='middle'){ s.dirty+=2; s.boat+=1; }
-    if(a.when==='change'){ s.speed+=4; s.tension+=2; }
-    if(a.when==='end'){ s.tension+=2; s.edge+=1; }
-    if(a.display==='stable'){ s.edge+=1; s.static+=1; s.dirty+=1; s.boat+=1; }
-    if(a.display==='fluct'){ s.tension+=4; }
-    if(a.display==='rising'){ s.tension+=3; s.dirty+=1; }
-    if(a.roll==='first'){ }
-    if(a.roll==='repeat'){ s.film+=4; s.edge+=1; }
-    if(a.roll==='diffbatch'){ s.tension+=1; s.dirty+=2; s.align+=1; s.static+=1; }
-    return s;
-  }
-
-  var labels = {
-    tension:'Tension mismatch',
-    edge:'Edge damage on unwind roll',
-    align:'Misalignment / web tracking',
-    dirty:'Dirty or worn rollers',
-    speed:'Sudden speed / tension change',
-    static:'Static discharge + web flutter',
-    film:'Film supplier quality issue',
-    boat:'Boat splash burning through film'
+  var SCORES = {
+    bearing:{tear:{clean:3,diag:1,edge:0,burnt:0,ragged:0},when:{start:2,middle:1,change:0,end:1},display:{stable:0,fluct:3,rising:2,unknown:1},roll:{first:1,repeat:1,diffbatch:3}},
+    sensor:{tear:{clean:2,diag:0,edge:0,burnt:0,ragged:0},when:{start:1,middle:1,change:0,end:1},display:{stable:0,fluct:2,rising:3,unknown:2},roll:{first:1,repeat:0,diffbatch:2}},
+    alignment:{tear:{clean:0,diag:3,edge:2,burnt:0,ragged:1},when:{start:2,middle:1,change:0,end:0},display:{stable:2,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:2}},
+    tension:{tear:{clean:1,diag:2,edge:1,burnt:0,ragged:0},when:{start:1,middle:1,change:3,end:0},display:{stable:0,fluct:2,rising:1,unknown:1},roll:{first:2,repeat:0,diffbatch:1}},
+    contam:{tear:{clean:0,diag:0,edge:0,burnt:1,ragged:2},when:{start:1,middle:2,change:0,end:2},display:{stable:1,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:1}},
+    electrical:{tear:{clean:1,diag:0,edge:0,burnt:0,ragged:0},when:{start:0,middle:1,change:0,end:0},display:{stable:1,fluct:2,rising:2,unknown:2},roll:{first:1,repeat:0,diffbatch:2}},
+    film:{tear:{clean:0,diag:0,edge:1,burnt:0,ragged:2},when:{start:2,middle:1,change:0,end:1},display:{stable:1,fluct:0,rising:0,unknown:1},roll:{first:0,repeat:3,diffbatch:0}},
+    static:{tear:{clean:0,diag:0,edge:0,burnt:1,ragged:1},when:{start:1,middle:1,change:0,end:1},display:{stable:1,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:1}}
   };
-
-  var actions = {
-    tension:'Check tension display live. If fluctuating >±10%, inspect dancer roller friction first, then load cell calibration. Verify recipe matches current film micron.',
-    edge:'Examine unwind roll edge under bright light. If damaged, return roll. Always rotate+inspect roll edges BEFORE mounting.',
-    align:'Run web at slow speed, watch edge position at each guide. If wandering >5mm, adjust EPC sensor. Service EPC every PM cycle.',
-    dirty:'Wipe all idler rollers with IPA immediately. Schedule deep-clean at next PM. Add daily IPA wipe to F/07 Daily Checklist for rollers just before coating zone.',
-    speed:'Never jump more than 50 m/min per click with 30-second holds. Review recent parameter change log — train operator on ramp protocol.',
-    static:'Check anti-static bar cleanliness, power, and distance from web (<5mm). Use static meter weekly. Winter = double frequency.',
-    film:'Keep torn piece as evidence. Photograph on ruler for scale. Raise NCR with roll number + batch code. Hold remaining rolls from same batch for inspection.',
-    boat:'Retire the boat now. Check boat usage log — any boat past 80% life is splash-risk. Inspect film for burnt edge + aluminium splatter to confirm.'
-  };
-
-  document.getElementById('wb-analyze').addEventListener('click', function(){
-    if(!answers.tear || !answers.when || !answers.display || !answers.roll){
-      alert('Please answer all 4 questions first.');
+  var MSGS = {"alert_incomplete": "Please answer all 4 questions before analyzing.", "result_title": "🎯 Top 3 Likely Causes", "causes": {"bearing": {"name": "Bearing play in tension-critical rollers", "fix": "Pull the bearing, measure play (>0.1mm = replace). Most common cause."}, "sensor": {"name": "Sensor fouling (tension cells, dancer)", "fix": "Clean sensor contacts with IPA. Recalibrate tension zero."}, "alignment": {"name": "Roller alignment out of spec", "fix": "Laser-align to manufacturer spec. Check for frame distortion."}, "tension": {"name": "Sudden tension pulse during acceleration", "fix": "Review recipe ramp rates. Lower acceleration gain."}, "contam": {"name": "Contamination on drum or idlers", "fix": "Wipe all contact rollers with IPA. Check scrubber effectiveness."}, "electrical": {"name": "Electrical noise on PLC tension loop", "fix": "Scope the 4-20mA signal. Check shield grounding."}, "film": {"name": "Actual film quality defect", "fix": "Original supplier review. Pull COA, cross-check batch."}, "static": {"name": "Static charge buildup", "fix": "Check ionizer bars. Measure surface voltage with static meter."}}};
+  document.getElementById('wb-analyze').addEventListener('click', function() {
+    if (!answers.tear || !answers.when || !answers.display || !answers.roll) {
+      alert(MSGS.alert_incomplete);
       return;
     }
-    var s = score(answers);
-    var ranked = Object.keys(s).map(function(k){return {k:k, v:s[k]};}).sort(function(a,b){return b.v-a.v;});
-    var top3 = ranked.slice(0,3);
-    var maxScore = top3[0].v || 1;
-    var out = '<h4>🎯 Most Likely Causes (ranked)</h4>';
-    top3.forEach(function(r, i){
-      var pct = Math.round((r.v/maxScore)*100);
-      var cls = i===0 ? 'wb-rank wb-rank-top' : 'wb-rank';
-      out += '<div class="'+cls+'"><strong>'+(i+1)+'. '+labels[r.k]+'</strong> <span style="opacity:.85;">('+pct+'% match)</span><br><span style="font-size:12px;">▸ '+actions[r.k]+'</span></div>';
+    var scores = [];
+    for (var cause in SCORES) {
+      var total = SCORES[cause].tear[answers.tear] + SCORES[cause].when[answers.when] + SCORES[cause].display[answers.display] + SCORES[cause].roll[answers.roll];
+      scores.push({cause: cause, score: total});
+    }
+    scores.sort(function(a, b) { return b.score - a.score; });
+    var top3 = scores.slice(0, 3);
+    var html = '<h4 style="color:#fff;margin:0 0 10px 0;padding:0;font-size:15px;">' + MSGS.result_title + '</h4>';
+    top3.forEach(function(r, i) {
+      var pct = Math.round((r.score / 12) * 100);
+      var bg = i === 0 ? 'rgba(232,93,38,.85)' : 'rgba(255,255,255,.12)';
+      var weight = i === 0 ? 'font-weight:600;' : '';
+      html += '<div style="background:' + bg + ';padding:10px 12px;border-radius:7px;margin-bottom:8px;font-size:13px;line-height:1.55;' + weight + '">#' + (i+1) + ' <strong>' + MSGS.causes[r.cause].name + '</strong> (' + pct + '% match)<br><span style="font-size:12px;opacity:0.95;">' + MSGS.causes[r.cause].fix + '</span></div>';
     });
-    out += '<div style="margin-top:14px;font-size:12px;opacity:.85;">⚠️ This is a diagnostic aid, not a replacement for physical inspection. Always verify on the machine before concluding.</div>';
     var resEl = document.getElementById('wb-result');
-    resEl.innerHTML = out;
-    resEl.classList.add('active');
+    resEl.innerHTML = html;
+    resEl.style.display = 'block';
   });
-
-  document.getElementById('wb-reset').addEventListener('click', function(){
+  document.getElementById('wb-reset').addEventListener('click', function() {
     answers = {tear:null, when:null, display:null, roll:null};
-    document.querySelectorAll('#vks-wb-analyzer .wb-opt.sel').forEach(function(o){o.classList.remove('sel');});
-    document.getElementById('wb-result').classList.remove('active');
+    container.querySelectorAll('[data-v]').forEach(function(opt) {
+      opt.setAttribute('style', UNSELECTED);
+    });
+    var resEl = document.getElementById('wb-result');
+    resEl.style.display = 'none';
+    resEl.innerHTML = '';
   });
 })();
 </script>
@@ -356,7 +310,7 @@ html { scroll-behavior: smooth; }
 </table>
 </div>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/benchmark-dashboard.png" alt="Web Break KPI Dashboard — 5 Numbers for Plant Managers" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/benchmark-dashboard.png" alt="Web Break KPI Dashboard — 5 Numbers for Plant Managers" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <div style="background:#1A2744;color:#fff;padding:14px 18px;border-radius:8px;margin:20px 0;">
 <p style="margin:0;font-size:15px;"><strong>💡 The Manager's Lesson — You Cannot Fix What You Do Not Log.</strong> The single highest-leverage decision a plant manager can make is enforcing 100% F/16 completion with photo evidence. Not because audit requires it — because diagnosis requires it. Plants with strong logging discipline find root causes in days. Plants without it blame suppliers for years.</p>
@@ -368,17 +322,17 @@ html { scroll-behavior: smooth; }
 <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 Free Downloads — 3 PDFs for Your Plant</h3>
 <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">Three professionally designed PDFs covering operator quick-reference, supervisor diagnostic workflow, and audit-ready F/16 record:</p>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Operator-Card.pdf" download style="background:#C8102E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Operator-Card.pdf" download style="background:#C8102E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">👷 Operator Card</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">5 tear patterns · 3-step response · when-to-call. A4 laminate-ready.</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
 </a>
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Action-Card.pdf" download style="background:#E85D26;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Action-Card.pdf" download style="background:#E85D26;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">🔧 Supervisor Card</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">8 causes ranked · tear signatures · 30-sec tension test · stop conditions.</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
 </a>
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-F16-Web-Break-Record.pdf" download style="background:#0D8C7E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-F16-Web-Break-Record.pdf" download style="background:#0D8C7E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">📋 F/16 Record</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">Audit-ready blank format. Photo slot, cause codes, signature block.</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
@@ -447,7 +401,7 @@ html { scroll-behavior: smooth; }
 
 <p>Tear की shape बताती है कौन सा component fail हुआ। Supervisor के आने से पहले, tear को इन पाँच patterns में से match करो — 20 मिनट की diagnostic back-and-forth बच जाती है।</p>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/tear-patterns-visual.png" alt="5 Web Break Tear Patterns Hindi Reference" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/tear-patterns-visual.png" alt="5 Web Break Tear Patterns Hindi Reference" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
 <table>
@@ -500,162 +454,116 @@ html { scroll-behavior: smooth; }
 </table>
 </div>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/causes-frequency-chart.png" alt="8 Web Break Causes Frequency Chart Hindi" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/causes-frequency-chart.png" alt="8 Web Break Causes Frequency Chart Hindi" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <h3 style="color:#1A2744;">🔬 Interactive Root Cause Analyzer</h3>
 
 <p>Break के बारे में 4 quick questions answer करो। Tool सारे 8 causes को आपके inputs के against score करेगा और top 3 most likely causes देगा with specific fix guidance। सब browser में local चलता है — कुछ upload नहीं होता:</p>
 
-<div id="vks-wb-analyzer-hi" style="margin:20px 0;background:#f8f6f1;border:2px solid #e2ddd4;border-radius:12px;padding:22px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
-
-<style>
-.wb-q{margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;}
-.wb-q-title{font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;}
-.wb-opts{display:flex;flex-wrap:wrap;gap:8px;}
-.wb-opt{background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;transition:all .15s;}
-.wb-opt:hover{border-color:#e85d26;}
-.wb-opt.sel{background:#1a2744;color:#fff;border-color:#1a2744;}
-.wb-result{display:none;margin-top:18px;padding:18px;background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:#fff;border-radius:10px;}
-.wb-result.active{display:block;}
-.wb-result h4{color:#fff;border:none;margin:0 0 10px 0;padding:0;font-size:15px;}
-.wb-rank{background:rgba(255,255,255,.12);padding:10px 12px;border-radius:7px;margin-bottom:8px;font-size:13px;line-height:1.55;}
-.wb-rank-top{background:rgba(232,93,38,.85);font-weight:600;}
-.wb-btn{background:#e85d26;color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;}
-.wb-btn-ghost{background:transparent;border:2px solid #fff;margin-left:8px;}
-.wb-intro{font-size:12px;color:#5a5a5a;margin-bottom:14px;font-style:italic;}
-</style>
-
-<div class="wb-intro">🔒 All analysis happens in your browser. Nothing is uploaded. Close the tab and everything clears.</div>
-
-<div class="wb-q" data-q="tear">
-  <div class="wb-q-title">1. Torn edge कैसी दिख रही है?</div>
-  <div class="wb-opts" data-group="tear">
-    <div class="wb-opt" data-v="clean">Clean, straight horizontal</div>
-    <div class="wb-opt" data-v="diag">Diagonal + पहले से wrinkles</div>
-    <div class="wb-opt" data-v="edge">एक edge से शुरू</div>
-    <div class="wb-opt" data-v="burnt">Burnt / splatter पास में</div>
-    <div class="wb-opt" data-v="ragged">Jagged / uneven torn</div>
-  </div>
+<div id="vks-wb-analyzer-hi" style="margin:20px 0;background:#f8f6f1;border:2px solid #e2ddd4;border-radius:12px;padding:22px;font-family:system-ui,-apple-system,sans-serif;">
+<div style="font-size:12px;color:#5a5a5a;margin-bottom:14px;font-style:italic;">🔒 सब analysis आपके browser में होती है। कुछ भी upload नहीं होता। Tab बंद करें, सब clear।</div>
+<div class="wb-q-hi" data-q="tear" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">1. टूटा हुआ edge कैसा दिखता है?</div>
+<div class="wb-opts-hi" data-group="tear" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt-hi" data-v="clean" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Clean, straight horizontal</div>
+<div class="wb-opt-hi" data-v="diag" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Diagonal + पहले wrinkles</div>
+<div class="wb-opt-hi" data-v="edge" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">एक edge से शुरू</div>
+<div class="wb-opt-hi" data-v="burnt" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Tear के पास Burnt / splatter</div>
+<div class="wb-opt-hi" data-v="ragged" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Jagged / असमान torn</div>
 </div>
-
-<div class="wb-q" data-q="when">
-  <div class="wb-q-title">2. Run में कब break हुआ?</div>
-  <div class="wb-opts" data-group="when">
-    <div class="wb-opt" data-v="start">पहले 100m में</div>
-    <div class="wb-opt" data-v="middle">Run के बीच में</div>
-    <div class="wb-opt" data-v="change">Parameter change के ठीक बाद</div>
-    <div class="wb-opt" data-v="end">Jumbo के end के पास</div>
-  </div>
 </div>
-
-<div class="wb-q" data-q="display">
-  <div class="wb-q-title">3. Break से पहले tension display क्या कर रही थी?</div>
-  <div class="wb-opts" data-group="display">
-    <div class="wb-opt" data-v="stable">Setpoint के आस-पास stable</div>
-    <div class="wb-opt" data-v="fluct">±10% से ज़्यादा fluctuating</div>
-    <div class="wb-opt" data-v="rising">Steadily बढ़ रही थी</div>
-    <div class="wb-opt" data-v="unknown">Check नहीं किया / पता नहीं</div>
-  </div>
+<div class="wb-q-hi" data-q="when" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">2. Run में कब break हुआ?</div>
+<div class="wb-opts-hi" data-group="when" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt-hi" data-v="start" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">पहले 100m के अंदर</div>
+<div class="wb-opt-hi" data-v="middle" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Run के बीच में</div>
+<div class="wb-opt-hi" data-v="change" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Parameter change के तुरंत बाद</div>
+<div class="wb-opt-hi" data-v="end" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Jumbo के आख़िर में</div>
 </div>
-
-<div class="wb-q" data-q="roll">
-  <div class="wb-q-title">4. क्या same batch के rolls पे पहले भी हुआ है?</div>
-  <div class="wb-opts" data-group="roll">
-    <div class="wb-opt" data-v="first">इस batch पे पहला break</div>
-    <div class="wb-opt" data-v="repeat">हाँ — same batch के 2+ rolls</div>
-    <div class="wb-opt" data-v="diffbatch">अलग batches, same machine</div>
-  </div>
 </div>
-
-<button class="wb-btn" id="wb-analyze-hi" type="button">🔬 Break Analyze करो</button>
-<button class="wb-btn wb-btn-ghost" id="wb-reset-hi" type="button" style="color:#1a2744;border-color:#1a2744;">Reset</button>
-
-<div class="wb-result" id="wb-result-hi"></div>
-
+<div class="wb-q-hi" data-q="display" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">3. Break से पहले tension display क्या कर रही थी?</div>
+<div class="wb-opts-hi" data-group="display" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt-hi" data-v="stable" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Setpoint के आस-पास stable</div>
+<div class="wb-opt-hi" data-v="fluct" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Fluctuating &gt;±10%</div>
+<div class="wb-opt-hi" data-v="rising" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">लगातार Climbing</div>
+<div class="wb-opt-hi" data-v="unknown" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">Check नहीं किया / unsure</div>
+</div>
+</div>
+<div class="wb-q-hi" data-q="roll" style="margin-bottom:16px;padding:14px;background:#fff;border-radius:10px;border-left:4px solid #1a2744;">
+<div style="font-weight:700;color:#1a2744;font-size:14px;margin-bottom:10px;display:block;">4. क्या इसी batch के rolls पर पहले भी हुआ है?</div>
+<div class="wb-opts-hi" data-group="roll" style="display:flex;flex-wrap:wrap;gap:8px;">
+<div class="wb-opt-hi" data-v="first" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">इस batch पर पहला break</div>
+<div class="wb-opt-hi" data-v="repeat" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">हाँ — 2+ rolls same batch से</div>
+<div class="wb-opt-hi" data-v="diffbatch" style="background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;">अलग batches, same machine</div>
+</div>
+</div>
+<button id="wb-analyze-hi" type="button" style="background:#e85d26;color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;margin-right:8px;">🔬 मेरा Break Analyze करो</button>
+<button id="wb-reset-hi" type="button" style="background:transparent;color:#1a2744;border:2px solid #1a2744;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;">Reset</button>
+<div id="wb-result-hi" style="display:none;margin-top:18px;padding:18px;background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:#fff;border-radius:10px;"></div>
 </div>
 
 <script>
-(function(){
+(function() {
   'use strict';
   var answers = {tear:null, when:null, display:null, roll:null};
-  document.querySelectorAll('#vks-wb-analyzer-hi .wb-opts').forEach(function(group){
-    var name = group.getAttribute('data-group');
-    group.querySelectorAll('.wb-opt').forEach(function(opt){
-      opt.addEventListener('click', function(){
-        group.querySelectorAll('.wb-opt').forEach(function(o){ o.classList.remove('sel'); });
-        opt.classList.add('sel');
-        answers[name] = opt.getAttribute('data-v');
+  var container = document.getElementById('vks-wb-analyzer-hi');
+  if (!container) return;
+  var UNSELECTED = 'background:#fff;border:2px solid #e2ddd4;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#1a2744;';
+  var SELECTED = 'background:#1a2744;border:2px solid #1a2744;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;user-select:none;display:inline-block;color:#fff;';
+  container.querySelectorAll('[data-v]').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var group = opt.parentElement;
+      var name = group.getAttribute('data-group');
+      group.querySelectorAll('[data-v]').forEach(function(sib) {
+        sib.setAttribute('style', UNSELECTED);
       });
+      opt.setAttribute('style', SELECTED);
+      answers[name] = opt.getAttribute('data-v');
     });
   });
-
-  function score(a){
-    var s = {tension:0, edge:0, align:0, dirty:0, speed:0, static:0, film:0, boat:0};
-    if(a.tear==='clean'){ s.tension+=3; s.speed+=1; }
-    if(a.tear==='diag'){ s.align+=3; s.edge+=1; }
-    if(a.tear==='edge'){ s.edge+=3; s.align+=1; }
-    if(a.tear==='burnt'){ s.boat+=4; }
-    if(a.tear==='ragged'){ s.film+=2; s.dirty+=2; }
-    if(a.when==='start'){ s.tension+=2; s.align+=1; }
-    if(a.when==='middle'){ s.dirty+=2; s.boat+=1; }
-    if(a.when==='change'){ s.speed+=4; s.tension+=2; }
-    if(a.when==='end'){ s.tension+=2; s.edge+=1; }
-    if(a.display==='stable'){ s.edge+=1; s.static+=1; s.dirty+=1; s.boat+=1; }
-    if(a.display==='fluct'){ s.tension+=4; }
-    if(a.display==='rising'){ s.tension+=3; s.dirty+=1; }
-    if(a.roll==='first'){ }
-    if(a.roll==='repeat'){ s.film+=4; s.edge+=1; }
-    if(a.roll==='diffbatch'){ s.tension+=1; s.dirty+=2; s.align+=1; s.static+=1; }
-    return s;
-  }
-
-  var labels = {
-    tension:'Tension mismatch',
-    edge:'Edge damage on unwind roll',
-    align:'Misalignment / web tracking',
-    dirty:'Dirty or worn rollers',
-    speed:'Sudden speed / tension change',
-    static:'Static discharge + web flutter',
-    film:'Film supplier quality issue',
-    boat:'Boat splash burning through film'
+  var SCORES = {
+    bearing:{tear:{clean:3,diag:1,edge:0,burnt:0,ragged:0},when:{start:2,middle:1,change:0,end:1},display:{stable:0,fluct:3,rising:2,unknown:1},roll:{first:1,repeat:1,diffbatch:3}},
+    sensor:{tear:{clean:2,diag:0,edge:0,burnt:0,ragged:0},when:{start:1,middle:1,change:0,end:1},display:{stable:0,fluct:2,rising:3,unknown:2},roll:{first:1,repeat:0,diffbatch:2}},
+    alignment:{tear:{clean:0,diag:3,edge:2,burnt:0,ragged:1},when:{start:2,middle:1,change:0,end:0},display:{stable:2,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:2}},
+    tension:{tear:{clean:1,diag:2,edge:1,burnt:0,ragged:0},when:{start:1,middle:1,change:3,end:0},display:{stable:0,fluct:2,rising:1,unknown:1},roll:{first:2,repeat:0,diffbatch:1}},
+    contam:{tear:{clean:0,diag:0,edge:0,burnt:1,ragged:2},when:{start:1,middle:2,change:0,end:2},display:{stable:1,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:1}},
+    electrical:{tear:{clean:1,diag:0,edge:0,burnt:0,ragged:0},when:{start:0,middle:1,change:0,end:0},display:{stable:1,fluct:2,rising:2,unknown:2},roll:{first:1,repeat:0,diffbatch:2}},
+    film:{tear:{clean:0,diag:0,edge:1,burnt:0,ragged:2},when:{start:2,middle:1,change:0,end:1},display:{stable:1,fluct:0,rising:0,unknown:1},roll:{first:0,repeat:3,diffbatch:0}},
+    static:{tear:{clean:0,diag:0,edge:0,burnt:1,ragged:1},when:{start:1,middle:1,change:0,end:1},display:{stable:1,fluct:1,rising:0,unknown:1},roll:{first:1,repeat:0,diffbatch:1}}
   };
-
-  var actions = {
-    tension:'Check tension display live. If fluctuating >±10%, inspect dancer roller friction first, then load cell calibration. Verify recipe matches current film micron.',
-    edge:'Examine unwind roll edge under bright light. If damaged, return roll. Always rotate+inspect roll edges BEFORE mounting.',
-    align:'Run web at slow speed, watch edge position at each guide. If wandering >5mm, adjust EPC sensor. Service EPC every PM cycle.',
-    dirty:'Wipe all idler rollers with IPA immediately. Schedule deep-clean at next PM. Add daily IPA wipe to F/07 Daily Checklist for rollers just before coating zone.',
-    speed:'Never jump more than 50 m/min per click with 30-second holds. Review recent parameter change log — train operator on ramp protocol.',
-    static:'Check anti-static bar cleanliness, power, and distance from web (<5mm). Use static meter weekly. Winter = double frequency.',
-    film:'Keep torn piece as evidence. Photograph on ruler for scale. Raise NCR with roll number + batch code. Hold remaining rolls from same batch for inspection.',
-    boat:'Retire the boat now. Check boat usage log — any boat past 80% life is splash-risk. Inspect film for burnt edge + aluminium splatter to confirm.'
-  };
-
-  document.getElementById('wb-analyze-hi').addEventListener('click', function(){
-    if(!answers.tear || !answers.when || !answers.display || !answers.roll){
-      alert('पहले सारे 4 questions answer करो।');
+  var MSGS = {"alert_incomplete": "Analyze करने से पहले सभी 4 questions का जवाब दें।", "result_title": "🎯 Top 3 संभावित कारण", "causes": {"bearing": {"name": "Tension-critical rollers में Bearing play", "fix": "Bearing निकालो, play मापो (>0.1mm = बदलो). सबसे common cause."}, "sensor": {"name": "Sensor fouling (tension cells, dancer)", "fix": "IPA से sensor contacts साफ़ करो. Tension zero recalibrate करो."}, "alignment": {"name": "Roller alignment spec से बाहर", "fix": "Manufacturer spec तक laser-align. Frame distortion check करो."}, "tension": {"name": "Acceleration के दौरान अचानक tension pulse", "fix": "Recipe ramp rates देखो. Acceleration gain कम करो."}, "contam": {"name": "Drum या idlers पर Contamination", "fix": "सभी contact rollers IPA से पोंछो. Scrubber effectiveness check."}, "electrical": {"name": "PLC tension loop पर Electrical noise", "fix": "4-20mA signal scope करो. Shield grounding check करो."}, "film": {"name": "असली Film quality defect", "fix": "Supplier review. COA pull, batch cross-check."}, "static": {"name": "Static charge buildup", "fix": "Ionizer bars check. Static meter से surface voltage मापो."}}};
+  document.getElementById('wb-analyze-hi').addEventListener('click', function() {
+    if (!answers.tear || !answers.when || !answers.display || !answers.roll) {
+      alert(MSGS.alert_incomplete);
       return;
     }
-    var s = score(answers);
-    var ranked = Object.keys(s).map(function(k){return {k:k, v:s[k]};}).sort(function(a,b){return b.v-a.v;});
-    var top3 = ranked.slice(0,3);
-    var maxScore = top3[0].v || 1;
-    var out = '<h4>🎯 Most Likely Causes (ranked)</h4>';
-    top3.forEach(function(r, i){
-      var pct = Math.round((r.v/maxScore)*100);
-      var cls = i===0 ? 'wb-rank wb-rank-top' : 'wb-rank';
-      out += '<div class="'+cls+'"><strong>'+(i+1)+'. '+labels[r.k]+'</strong> <span style="opacity:.85;">('+pct+'% match)</span><br><span style="font-size:12px;">▸ '+actions[r.k]+'</span></div>';
+    var scores = [];
+    for (var cause in SCORES) {
+      var total = SCORES[cause].tear[answers.tear] + SCORES[cause].when[answers.when] + SCORES[cause].display[answers.display] + SCORES[cause].roll[answers.roll];
+      scores.push({cause: cause, score: total});
+    }
+    scores.sort(function(a, b) { return b.score - a.score; });
+    var top3 = scores.slice(0, 3);
+    var html = '<h4 style="color:#fff;margin:0 0 10px 0;padding:0;font-size:15px;">' + MSGS.result_title + '</h4>';
+    top3.forEach(function(r, i) {
+      var pct = Math.round((r.score / 12) * 100);
+      var bg = i === 0 ? 'rgba(232,93,38,.85)' : 'rgba(255,255,255,.12)';
+      var weight = i === 0 ? 'font-weight:600;' : '';
+      html += '<div style="background:' + bg + ';padding:10px 12px;border-radius:7px;margin-bottom:8px;font-size:13px;line-height:1.55;' + weight + '">#' + (i+1) + ' <strong>' + MSGS.causes[r.cause].name + '</strong> (' + pct + '% match)<br><span style="font-size:12px;opacity:0.95;">' + MSGS.causes[r.cause].fix + '</span></div>';
     });
-    out += '<div style="margin-top:14px;font-size:12px;opacity:.85;">⚠️ This is a diagnostic aid, not a replacement for physical inspection. Always verify on the machine before concluding.</div>';
     var resEl = document.getElementById('wb-result-hi');
-    resEl.innerHTML = out;
-    resEl.classList.add('active');
+    resEl.innerHTML = html;
+    resEl.style.display = 'block';
   });
-
-  document.getElementById('wb-reset-hi').addEventListener('click', function(){
+  document.getElementById('wb-reset-hi').addEventListener('click', function() {
     answers = {tear:null, when:null, display:null, roll:null};
-    document.querySelectorAll('#vks-wb-analyzer-hi .wb-opt.sel').forEach(function(o){o.classList.remove('sel');});
-    document.getElementById('wb-result-hi').classList.remove('active');
+    container.querySelectorAll('[data-v]').forEach(function(opt) {
+      opt.setAttribute('style', UNSELECTED);
+    });
+    var resEl = document.getElementById('wb-result-hi');
+    resEl.style.display = 'none';
+    resEl.innerHTML = '';
   });
 })();
 </script>
@@ -719,7 +627,7 @@ html { scroll-behavior: smooth; }
 </table>
 </div>
 
-<div style="margin:24px 0;"><img src="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/benchmark-dashboard.png" alt="Web Break KPI Dashboard Hindi — 5 Numbers for Plant Managers" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
+<div style="margin:24px 0;"><img src="15-web-break-recovery-complete-guide/benchmark-dashboard.png" alt="Web Break KPI Dashboard Hindi — 5 Numbers for Plant Managers" style="width:100%;height:auto;border-radius:12px;display:block;"/></div>
 
 <div style="background:#1A2744;color:#fff;padding:14px 18px;border-radius:8px;margin:20px 0;">
 <p style="margin:0;font-size:15px;"><strong>💡 Manager की सीख — जो log नहीं होता वो fix नहीं होता।</strong> Plant manager का सबसे highest-leverage decision है 100% F/16 completion with photo evidence enforce करना। Audit requires इसलिए नहीं — diagnosis requires इसलिए। Strong logging discipline वाले plants root causes दिनों में ढूँढते हैं। Logging के बिना वाले plants सालों तक suppliers को blame करते हैं।</p>
@@ -731,17 +639,17 @@ html { scroll-behavior: smooth; }
 <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 मुफ़्त Downloads — आपके Plant के लिए 3 PDFs</h3>
 <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">तीन professionally designed PDFs — operator quick-reference, supervisor diagnostic workflow, और audit-ready F/16 record:</p>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Operator-Card.pdf" download style="background:#C8102E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Operator-Card.pdf" download style="background:#C8102E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">👷 Operator Card</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">5 tear patterns · 3-step response · when-to-call। A4 laminate-ready।</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
 </a>
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Action-Card.pdf" download style="background:#E85D26;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-Web-Break-Action-Card.pdf" download style="background:#E85D26;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">🔧 Supervisor Card</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">8 causes ranked · tear signatures · 30-sec tension test · stop conditions।</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
 </a>
-<a href="https://raw.githubusercontent.com/vkstecho/VksTech/main/15-web-break-recovery-complete-guide/VKS-Tech-F16-Web-Break-Record.pdf" download style="background:#0D8C7E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
+<a href="15-web-break-recovery-complete-guide/VKS-Tech-F16-Web-Break-Record.pdf" download style="background:#0D8C7E;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;">
 <strong style="font-size:14px;display:block;margin-bottom:4px;">📋 F/16 Record</strong>
 <span style="font-size:12px;opacity:0.95;display:block;">Audit-ready blank format। Photo slot, cause codes, signature block।</span>
 <span style="display:inline-block;margin-top:8px;background:rgba(255,255,255,0.25);padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">Download →</span>
