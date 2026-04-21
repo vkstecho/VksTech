@@ -5,6 +5,44 @@
 const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
 const SITE_URL = 'https://vkstech.com';
+const GH_OWNER = 'vkstecho';
+const GH_REPO = 'VksTech';
+const GH_BRANCH = 'main';
+
+// Extract only the <body> inner content from a full HTML file
+// (We want just the article content, not a full HTML wrapper)
+function extractBodyContent(html) {
+  if (!html) return '';
+  // Try to find <body>...</body>
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  if (bodyMatch) return bodyMatch[1];
+  // If no body tag, return as-is (content might be a fragment)
+  return html;
+}
+
+// Fetch blog content from GitHub for GitHub-backed blogs
+async function fetchGithubContent(githubPath) {
+  if (!githubPath) return '';
+  const [folder, file] = githubPath.split('::');
+  if (!folder || !file) return '';
+  const rawUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}?cb=${Date.now()}`;
+  try {
+    const r = await fetch(rawUrl);
+    if (!r.ok) return '';
+    const html = await r.text();
+    // Extract just the body content, fix relative image/pdf paths to point to GitHub folder
+    let body = extractBodyContent(html);
+    // Rewrite relative src/href to point to the GitHub folder served via site root
+    const folderPrefix = SITE_URL + '/' + folder + '/';
+    body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
+      return `${attr}="${folderPrefix}${path}"`;
+    });
+    return body;
+  } catch (e) {
+    console.error('GitHub fetch error:', e);
+    return '';
+  }
+}
 
 function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -47,11 +85,22 @@ export default async function handler(req, res) {
     const pageUrl = `${SITE_URL}/blog/${slug}`;
     const dateStr = b.created_at ? new Date(b.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : '';
     const cat = CAT_MAP[b.category] || { cls:'tp', label: b.category || 'Blog' };
-    // Fix relative image paths inside content
-    let content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + SITE_URL + '/');
+
+    // CONTENT RESOLUTION:
+    // 1. If blog is GitHub-backed (github_path set), fetch fresh from GitHub
+    // 2. Otherwise, use content field from Supabase (inline blog)
+    let content = '';
+    if (b.github_path) {
+      content = await fetchGithubContent(b.github_path);
+    }
+    if (!content) {
+      // Fallback: use Supabase content field
+      content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + SITE_URL + '/');
+    }
 
     res.setHeader('Content-Type','text/html;charset=utf-8');
-    res.setHeader('Cache-Control','s-maxage=300, stale-while-revalidate=86400');
+    // Cache briefly so GitHub updates propagate fast (60s cache, allow stale for 5min)
+    res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate=300');
     res.statusCode = 200;
     res.end(renderPage({ enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, content }));
   } catch (err) {
