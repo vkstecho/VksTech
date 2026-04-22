@@ -175,12 +175,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">✕ Close</button>
     </div>
     <input type="hidden" id="editId">
+    <div id="editSourceBanner" style="display:none;background:#fff8e6;border-left:3px solid #e85d26;padding:10px 14px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:14px;line-height:1.55;"></div>
     <div class="field"><label>Title (bilingual with " | ")</label><input type="text" id="editTitle"></div>
     <div class="field"><label>URL Slug</label><input type="text" id="editSlug" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/blog/<b>your-slug</b></div></div>
     <div class="field"><label>Category</label><select id="editCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
     <div class="field"><label>Summary (bilingual with " | ")</label><textarea id="editSummary" style="min-height:80px;"></textarea></div>
     <div class="field"><label>Cover Image URL</label><input type="text" id="editCover"></div>
-    <div class="field"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
+    <div class="field" id="editContentField"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
     <div class="buttons">
       <button class="btn btn-primary" onclick="saveEdit()">💾 Save Changes</button>
       <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">Cancel</button>
@@ -473,12 +474,7 @@ async function fetchAndPreview(){
       if (/^https?:\/\//i.test(meta.cover)){
         coverUrl = meta.cover;
       } else {
-        let clean = meta.cover.replace(/^\.?\/+/, '');
-        // If the relative path already starts with the folder name, strip it to avoid duplication
-        // e.g. "15-foo/cover.png" in folder "15-foo" would become "15-foo/15-foo/cover.png" — strip the prefix
-        if (clean.startsWith(folder + '/')) {
-          clean = clean.substring(folder.length + 1);
-        }
+        const clean = meta.cover.replace(/^\.?\/+/, '');
         coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
       }
     }
@@ -690,12 +686,7 @@ async function refreshGhMeta(id){
     if (meta.cover){
       if (/^https?:\/\//i.test(meta.cover)) coverUrl = meta.cover;
       else {
-        let clean = meta.cover.replace(/^\.?\/+/, '');
-        // If the relative path already starts with the folder name, strip it to avoid duplication
-        // e.g. "15-foo/cover.png" in folder "15-foo" would become "15-foo/15-foo/cover.png" — strip the prefix
-        if (clean.startsWith(folder + '/')) {
-          clean = clean.substring(folder.length + 1);
-        }
+        const clean = meta.cover.replace(/^\.?\/+/, '');
         coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
       }
     }
@@ -735,6 +726,25 @@ async function editPost(id){
   document.getElementById('editSummary').value=data.summary||'';
   document.getElementById('editCover').value=data.cover_image||'';
   document.getElementById('editContent').value=data.content||'';
+
+  /* Show a source banner so you know where this blog's content actually lives */
+  const banner = document.getElementById('editSourceBanner');
+  if(data.github_path){
+    const [folder, file] = data.github_path.split('::');
+    banner.innerHTML = '📦 <strong>GitHub-backed blog.</strong> Content lives in <code>' + escH(folder) + '/' + escH(file) + '</code>. ' +
+      'You can safely change title, slug, category, summary, cover here — to edit the article body, edit the file in GitHub.';
+    banner.style.background = '#e8f4fc';
+    banner.style.borderLeftColor = '#0080c8';
+    banner.style.display = 'block';
+    document.getElementById('editContentField').style.display = 'none';
+  } else {
+    banner.innerHTML = '📝 <strong>Inline blog.</strong> Content is stored in Supabase. Edit it below.';
+    banner.style.background = '#fff8e6';
+    banner.style.borderLeftColor = '#e85d26';
+    banner.style.display = 'block';
+    document.getElementById('editContentField').style.display = 'block';
+  }
+
   document.getElementById('editModal').style.display='block';
   document.body.style.overflow='hidden';
 }
@@ -751,12 +761,37 @@ async function saveEdit(){
   const summary=document.getElementById('editSummary').value.trim();
   const cover=document.getElementById('editCover').value.trim();
   const content=document.getElementById('editContent').value.trim();
-  if(!title||!summary||!content){toast('Fill all required fields',true);return;}
   const slug=document.getElementById('editSlug').value.trim();
+
+  /* Validate basics — title, slug, summary are always required.
+     Content is only required for INLINE blogs (no github_path).
+     GitHub-backed blogs store their content in GitHub, so editContent
+     is expected to be empty here and we must NOT overwrite github_path. */
+  if(!title){toast('Title is required',true);return;}
   if(!slug){toast('Slug is required',true);return;}
-  const {error}=await sb.from('blogs').update({
-    title,slug,category:cat,summary,cover_image:cover,content
-  }).eq('id',id);
+  if(!summary){toast('Summary is required',true);return;}
+
+  /* Check if this blog is GitHub-backed before deciding what to save */
+  const {data:existing, error:fetchErr} = await sb.from('blogs').select('github_path').eq('id',id).single();
+  if(fetchErr){toast('Could not load blog: '+fetchErr.message,true);return;}
+  const isGithubBacked = !!(existing && existing.github_path);
+
+  /* For inline blogs, content must be present */
+  if(!isGithubBacked && !content){
+    toast('HTML content is required for inline blogs',true);
+    return;
+  }
+
+  /* Build the update payload — only include content if it's an inline blog
+     OR if the admin explicitly typed something (to let them convert
+     GitHub blog → inline if they really want to). Otherwise leave content
+     alone so we don't clobber good GitHub-sourced data. */
+  const payload = { title, slug, category:cat, summary, cover_image:cover };
+  if(!isGithubBacked || content){
+    payload.content = content;
+  }
+
+  const {error} = await sb.from('blogs').update(payload).eq('id',id);
   if(error){toast('Error: '+error.message,true);return;}
   toast('Updated successfully!');
   closeEdit();
