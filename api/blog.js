@@ -5,6 +5,7 @@
 const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
 const SITE_URL = 'https://vkstech.com';
+const ASSET_URL = 'https://www.vkstech.com'; // Use www. for assets to avoid redirect on images
 const GH_OWNER = 'vkstecho';
 const GH_REPO = 'VksTech';
 const GH_BRANCH = 'main';
@@ -32,11 +33,11 @@ async function fetchGithubContent(githubPath) {
     const html = await r.text();
     // Extract just the body content, fix relative image/pdf paths to point to GitHub folder
     let body = extractBodyContent(html);
-    // Rewrite relative src/href to point to the GitHub folder served via site root
-    const folderPrefix = SITE_URL + '/' + folder + '/';
+    // Rewrite relative src/href to point to the GitHub folder served via www subdomain (no redirect)
+    const folderPrefix = ASSET_URL + '/' + folder + '/';
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
       // If path already starts with the folder name, strip it to avoid duplication
-      // e.g. "15-foo/cover.png" in folder "15-foo" should become SITE_URL/15-foo/cover.png (not SITE_URL/15-foo/15-foo/cover.png)
+      // e.g. "15-foo/cover.png" in folder "15-foo" should become ASSET_URL/15-foo/cover.png (not ASSET_URL/15-foo/15-foo/cover.png)
       let cleanPath = path;
       if (cleanPath.startsWith(folder + '/')) {
         cleanPath = cleanPath.substring(folder.length + 1);
@@ -101,7 +102,7 @@ export default async function handler(req, res) {
     }
     if (!content) {
       // Fallback: use Supabase content field
-      content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + SITE_URL + '/');
+      content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + ASSET_URL + '/');
     }
 
     res.setHeader('Content-Type','text/html;charset=utf-8');
@@ -345,4 +346,4 @@ function errorHtml() {
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f6;color:#1a2744;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:20px;text-align:center;}h1{font-size:2rem;margin-bottom:12px;}a{color:#e85d26;text-decoration:none;font-weight:600;}</style>
 </head><body><div><h1>Something went wrong</h1><p>Please try again shortly.</p><p style="margin-top:20px;"><a href="/">Back to VKS Tech</a></p></div></body></html>`;
-      }
+}
