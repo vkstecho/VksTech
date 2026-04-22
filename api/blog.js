@@ -28,7 +28,8 @@ async function fetchGithubContent(githubPath) {
   if (!folder || !file) return '';
   const rawUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}?cb=${Date.now()}`;
   try {
-    const r = await fetch(rawUrl);
+    // Force fresh fetch from GitHub (no Vercel runtime cache)
+    const r = await fetch(rawUrl, { cache: 'no-store' });
     if (!r.ok) return '';
     const html = await r.text();
     // Extract just the body content, fix relative image/pdf paths to point to GitHub folder
@@ -106,8 +107,9 @@ export default async function handler(req, res) {
     }
 
     res.setHeader('Content-Type','text/html;charset=utf-8');
-    // Cache briefly so GitHub updates propagate fast (60s cache, allow stale for 5min)
-    res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate=300');
+    // Minimal cache - serve fresh content on every request, revalidate quickly
+    // This ensures new GitHub uploads appear instantly
+    res.setHeader('Cache-Control','public, max-age=0, s-maxage=10, stale-while-revalidate=30');
     res.statusCode = 200;
     res.end(renderPage({ enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, content }));
   } catch (err) {
