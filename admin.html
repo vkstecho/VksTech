@@ -473,7 +473,12 @@ async function fetchAndPreview(){
       if (/^https?:\/\//i.test(meta.cover)){
         coverUrl = meta.cover;
       } else {
-        const clean = meta.cover.replace(/^\.?\/+/, '');
+        let clean = meta.cover.replace(/^\.?\/+/, '');
+        // If the relative path already starts with the folder name, strip it to avoid duplication
+        // e.g. "15-foo/cover.png" in folder "15-foo" would become "15-foo/15-foo/cover.png" — strip the prefix
+        if (clean.startsWith(folder + '/')) {
+          clean = clean.substring(folder.length + 1);
+        }
         coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
       }
     }
@@ -685,7 +690,12 @@ async function refreshGhMeta(id){
     if (meta.cover){
       if (/^https?:\/\//i.test(meta.cover)) coverUrl = meta.cover;
       else {
-        const clean = meta.cover.replace(/^\.?\/+/, '');
+        let clean = meta.cover.replace(/^\.?\/+/, '');
+        // If the relative path already starts with the folder name, strip it to avoid duplication
+        // e.g. "15-foo/cover.png" in folder "15-foo" would become "15-foo/15-foo/cover.png" — strip the prefix
+        if (clean.startsWith(folder + '/')) {
+          clean = clean.substring(folder.length + 1);
+        }
         coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
       }
     }
