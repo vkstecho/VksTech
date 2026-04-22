@@ -1239,14 +1239,17 @@ function renderBlogCard(b) {
   const imgHtml = b.imageUrl
     ? '<div class="blog-img" style="background:url(\''+b.imageUrl+'\') center/cover no-repeat;"></div>'
     : '<div class="blog-img">'+cat.icon+'</div>';
-  return '<div class="blog-card" data-cat="'+b.category+'" onclick="openBlog(\''+b.id+'\')" style="cursor:pointer;">'
+  /* Link to the server-rendered /blog/<slug> page (api/blog.js).
+     Fallback to #blog-<id> only if slug is missing (legacy data). */
+  const href = b.slug ? ('/blog/' + b.slug) : ('#blog-' + b.id);
+  return '<a href="'+href+'" class="blog-card" data-cat="'+b.category+'" style="text-decoration:none;color:inherit;display:block;cursor:pointer;">'
     + imgHtml
     + '<div class="blog-body">'
     + '<span class="blog-tag '+cat.cls+'">'+cat.label+'</span>'
     + '<h3>'+escH(b._title || b.title)+'</h3>'
     + '<p>'+escH(b._summary || b.summary || '')+'</p>'
     + '<div class="blog-date">'+dateStr+'</div>'
-    + '</div></div>';
+    + '</div></a>';
 }
 
 function escH(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
@@ -1461,13 +1464,9 @@ function closeBlogOverlay() {
      (the intermediate #blog entry we pushed in openBlog). */
   if(history.state && (history.state.blogPost || history.state.blog)){
     history.back();
-  } else if(location.pathname.indexOf('/blog/')===0){
-    /* Direct load of /blog/<slug> URL — no history to go back to,
-       navigate explicitly to the blog section. */
-    history.replaceState(null, '', '/#blog');
-    /* Smooth-scroll to blog section */
-    var blogSec = document.getElementById('blog');
-    if(blogSec) blogSec.scrollIntoView({behavior:'smooth'});
+  } else if(location.hash.indexOf('#blog-')===0){
+    /* Legacy hash URL — normalise back to the blog section */
+    history.replaceState(null,'','/#blog');
   }
 }
 
@@ -1525,31 +1524,13 @@ function _showShareToast(msg){
   document.body.appendChild(t);
   setTimeout(function(){ t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 320); }, 2400);
 }
-/* Auto-open blog if URL has /blog/<slug> or #blog-<id> on load.
-   Critical: blogs load async from Supabase, so this must retry
-   until allBlogs is populated — otherwise refresh on a blog URL
-   just shows the homepage. */
+/* Auto-open blog overlay ONLY for legacy #blog-<id> hash URLs.
+   /blog/<slug> URLs are now served by api/blog.js (server-rendered),
+   so this client-side code never sees them — they hit the server instead. */
 function _tryOpenBlogFromHash(_retries){
   _retries = (typeof _retries === 'number') ? _retries : 0;
-  var MAX_RETRIES = 20; /* 20 × 250ms = 5 seconds total */
+  var MAX_RETRIES = 20;
 
-  /* Handle /blog/{slug} URLs */
-  var pathMatch = location.pathname.match(/^\/blog\/(.+)$/);
-  if(pathMatch){
-    var slug = decodeURIComponent(pathMatch[1]).replace(/\/$/,'');
-    if(!allBlogs || !allBlogs.length){
-      if(_retries < MAX_RETRIES) setTimeout(function(){ _tryOpenBlogFromHash(_retries+1); }, 250);
-      return;
-    }
-    var found = allBlogs.find(function(x){ return x.slug === slug; });
-    if(found){ openBlog(found.id); return; }
-    /* Blogs loaded but slug doesn't match — probably stale URL. Keep retrying
-       briefly in case a render just finished; then give up silently. */
-    if(_retries < 4) setTimeout(function(){ _tryOpenBlogFromHash(_retries+1); }, 250);
-    return;
-  }
-
-  /* Fallback: handle #blog-{id} hash URLs */
   var h = location.hash || '';
   var m = h.match(/^#blog-(.+)$/);
   if(!m) return;
