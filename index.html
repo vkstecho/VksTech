@@ -1438,18 +1438,36 @@ async function openBlog(id) {
   // Load the Q&A thread for this blog
   loadBlogQuestions(b.id);
 
-  // Update URL so it can be shared/bookmarked
-  try { if(b.slug) { history.pushState({blog:true}, '', '/blog/' + b.slug); } else { history.pushState({blog:true}, '', '#blog-' + b.id); } } catch(e) {}
+  /* Update URL so it can be shared/bookmarked/refreshed.
+     We push TWO history entries: first one for the blog list (#blog if we
+     weren't already there), then the blog post itself. That way pressing
+     Back from a blog post lands on the blog list, not the homepage. */
+  try {
+    var blogUrl = b.slug ? ('/blog/' + b.slug) : ('#blog-' + b.id);
+    /* If the user came from anywhere other than the blog section,
+       push an intermediate #blog entry so Back goes to the list. */
+    if (location.hash !== '#blog' && location.pathname.indexOf('/blog/') !== 0){
+      history.pushState({blogList:true}, '', '#blog');
+    }
+    history.pushState({blogPost:true, blogId:b.id}, '', blogUrl);
+  } catch(e) {}
 }
 
 function closeBlogOverlay() {
   const ov = document.getElementById('blogOverlay');
   if(ov) ov.remove();
   document.getElementById('navbar').style.display='';
-  if(history.state && history.state.blog){
+  /* If we opened via pushState, going back takes us to the blog list
+     (the intermediate #blog entry we pushed in openBlog). */
+  if(history.state && (history.state.blogPost || history.state.blog)){
     history.back();
-  } else if(location.pathname.indexOf('/blog/')===0 || location.hash.indexOf('#blog-')===0){
-    history.replaceState(null,'','/');
+  } else if(location.pathname.indexOf('/blog/')===0){
+    /* Direct load of /blog/<slug> URL — no history to go back to,
+       navigate explicitly to the blog section. */
+    history.replaceState(null, '', '/#blog');
+    /* Smooth-scroll to blog section */
+    var blogSec = document.getElementById('blog');
+    if(blogSec) blogSec.scrollIntoView({behavior:'smooth'});
   }
 }
 
@@ -1507,23 +1525,38 @@ function _showShareToast(msg){
   document.body.appendChild(t);
   setTimeout(function(){ t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 320); }, 2400);
 }
-/* Auto-open blog if URL has #blog-{id} on load */
-function _tryOpenBlogFromHash(){
-  // Handle /blog/{slug} URLs
+/* Auto-open blog if URL has /blog/<slug> or #blog-<id> on load.
+   Critical: blogs load async from Supabase, so this must retry
+   until allBlogs is populated — otherwise refresh on a blog URL
+   just shows the homepage. */
+function _tryOpenBlogFromHash(_retries){
+  _retries = (typeof _retries === 'number') ? _retries : 0;
+  var MAX_RETRIES = 20; /* 20 × 250ms = 5 seconds total */
+
+  /* Handle /blog/{slug} URLs */
   var pathMatch = location.pathname.match(/^\/blog\/(.+)$/);
-  if(pathMatch) {
-    var slug = pathMatch[1];
-    if(!allBlogs || !allBlogs.length){ setTimeout(_tryOpenBlogFromHash, 250); return; }
+  if(pathMatch){
+    var slug = decodeURIComponent(pathMatch[1]).replace(/\/$/,'');
+    if(!allBlogs || !allBlogs.length){
+      if(_retries < MAX_RETRIES) setTimeout(function(){ _tryOpenBlogFromHash(_retries+1); }, 250);
+      return;
+    }
     var found = allBlogs.find(function(x){ return x.slug === slug; });
-    if(found) { openBlog(found.id); return; }
+    if(found){ openBlog(found.id); return; }
+    /* Blogs loaded but slug doesn't match — probably stale URL. Keep retrying
+       briefly in case a render just finished; then give up silently. */
+    if(_retries < 4) setTimeout(function(){ _tryOpenBlogFromHash(_retries+1); }, 250);
+    return;
   }
-  // Fallback: handle #blog-{id} hash URLs
+
+  /* Fallback: handle #blog-{id} hash URLs */
   var h = location.hash || '';
   var m = h.match(/^#blog-(.+)$/);
   if(!m) return;
   var id = m[1];
   if(!allBlogs || !allBlogs.length){
-    setTimeout(_tryOpenBlogFromHash, 250); return;
+    if(_retries < MAX_RETRIES) setTimeout(function(){ _tryOpenBlogFromHash(_retries+1); }, 250);
+    return;
   }
   if(allBlogs.find(function(x){ return String(x.id)===String(id); })){
     openBlog(id);
