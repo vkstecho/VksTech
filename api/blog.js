@@ -118,13 +118,20 @@ export default async function handler(req, res) {
       content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + ASSET_URL + '/');
     }
 
+    /* Compute reading time from the actual rendered content
+       (server-side has full GitHub HTML; this is more accurate than the homepage estimate) */
+    const cleanText = content.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+    const wordCount = cleanText ? cleanText.split(' ').filter(w => w.length > 0).length : 0;
+    const readMinutes = wordCount > 50 ? Math.max(1, Math.round(wordCount / 220)) : 0;
+    const readTime = readMinutes ? readMinutes + ' min read' : '';
+
     // Q&A — fetch answered questions in parallel (but awaited above already)
     const questions = await fetchAnsweredQuestions(b.id);
 
     res.setHeader('Content-Type','text/html;charset=utf-8');
     res.setHeader('Cache-Control','public, max-age=0, s-maxage=10, stale-while-revalidate=30');
     res.statusCode = 200;
-    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat: b.subcategory || '', content, questions }));
+    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat: b.subcategory || '', content, questions, readTime }));
   } catch (err) {
     console.error('Blog error:', err);
     res.statusCode = 500; res.setHeader('Content-Type','text/html;charset=utf-8');
@@ -155,7 +162,7 @@ function renderQuestionsList(questions) {
     }).join('');
 }
 
-function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat, content, questions }) {
+function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat, content, questions, readTime }) {
   const questionsHtml = renderQuestionsList(questions);
   const subcatLabel = subcat && SUBCAT_LABELS[subcat] ? SUBCAT_LABELS[subcat] : '';
   const subcatBadge = subcatLabel ? '<span class="blog-tag subcat-tag" style="margin-left:6px;background:rgba(232,93,38,.08);color:#e85d26;border:1px solid rgba(232,93,38,.25);">' + esc(subcatLabel) + '</span>' : '';
@@ -330,7 +337,7 @@ body.lang-en h1 .en-content{display:inline !important;}
     <span class="en-content">${esc(enTitle)}</span>
     <span class="hi-content">${esc(hiTitle)}</span>
   </h1>
-  <div class="meta">${esc(dateStr)} \xB7 By Vivek Kumar</div>
+  <div class="meta">${esc(dateStr)} \xB7 By Vivek Kumar${readTime ? ' \xB7 \u{1F4D6} ' + esc(readTime) : ''}</div>
 </div>
 
 <article class="article">
