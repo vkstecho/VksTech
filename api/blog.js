@@ -75,6 +75,13 @@ const CAT_MAP = {
   manufacturing: { cls:'to', label:'Manufacturing Excellence' }
 };
 
+const SUBCAT_LABELS = {
+  metalliser: '⚙️ Metalliser',
+  slitter:    '✂️ Slitter',
+  quality:    '🔍 Quality Control',
+  general:    '📦 General'
+};
+
 export default async function handler(req, res) {
   const slug = (req.query.slug || '').toString().trim();
   if (!slug) { res.writeHead(302, { Location: '/' }); return res.end(); }
@@ -117,7 +124,7 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type','text/html;charset=utf-8');
     res.setHeader('Cache-Control','public, max-age=0, s-maxage=10, stale-while-revalidate=30');
     res.statusCode = 200;
-    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, content, questions }));
+    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat: b.subcategory || '', content, questions }));
   } catch (err) {
     console.error('Blog error:', err);
     res.statusCode = 500; res.setHeader('Content-Type','text/html;charset=utf-8');
@@ -148,8 +155,10 @@ function renderQuestionsList(questions) {
     }).join('');
 }
 
-function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, content, questions }) {
+function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat, content, questions }) {
   const questionsHtml = renderQuestionsList(questions);
+  const subcatLabel = subcat && SUBCAT_LABELS[subcat] ? SUBCAT_LABELS[subcat] : '';
+  const subcatBadge = subcatLabel ? '<span class="blog-tag subcat-tag" style="margin-left:6px;background:rgba(232,93,38,.08);color:#e85d26;border:1px solid rgba(232,93,38,.25);">' + esc(subcatLabel) + '</span>' : '';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -316,7 +325,7 @@ body.lang-en h1 .en-content{display:inline !important;}
 </div>
 
 <div class="header">
-  <span class="blog-tag ${cat.cls}">${esc(cat.label)}</span>
+  <span class="blog-tag ${cat.cls}">${esc(cat.label)}</span>${subcatBadge}
   <h1>
     <span class="en-content">${esc(enTitle)}</span>
     <span class="hi-content">${esc(hiTitle)}</span>
