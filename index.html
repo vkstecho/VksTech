@@ -215,6 +215,56 @@ section{position:relative;z-index:1;}
 .clink:hover{gap:8px;}
 #industry-apps{padding:90px 0;background:var(--bg);}
 .apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem;margin-top:2.8rem;}
+
+/* "Modules inside MET Power" — visually nested under MET Power card */
+.modules-section{
+  background:linear-gradient(135deg,rgba(232,93,38,.04),rgba(13,140,126,.03));
+  border:1px solid var(--border);
+  border-left:4px solid var(--orange);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  position:relative;
+}
+.modules-section::before{
+  content:"";position:absolute;top:-1px;left:30px;width:42px;height:24px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 24'><path d='M0 0 L21 24 L42 0' fill='%23faf9f6' stroke='%23e2ddd4' stroke-width='1'/></svg>") center/cover no-repeat;
+}
+.modules-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px dashed var(--border2);}
+.modules-icon{
+  flex-shrink:0;width:48px;height:48px;border-radius:12px;
+  background:rgba(232,93,38,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+}
+.modules-title{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;color:var(--navy);margin-bottom:3px;}
+.modules-sub{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.9rem;}
+.mcard{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  display:flex;gap:12px;align-items:flex-start;
+  transition:all .25s;
+}
+.mcard:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:var(--ss);}
+.mcard-icon{
+  flex-shrink:0;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.mcard-body{flex:1;min-width:0;}
+.mcard-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.92rem;color:var(--navy);margin-bottom:4px;}
+.mcard-desc{font-size:.78rem;color:var(--muted);line-height:1.6;}
+@media(max-width:600px){
+  .modules-section{padding:18px 16px;}
+  .modules-header{gap:12px;margin-bottom:16px;padding-bottom:14px;}
+  .modules-icon{width:40px;height:40px;font-size:1.2rem;}
+  .modules-title{font-size:.95rem;}
+  .modules-sub{font-size:.76rem;}
+  .modules-grid{grid-template-columns:1fr;gap:.7rem;}
+}
+
 #personal-apps{padding:90px 0;background:var(--bg2);border-top:1px solid var(--border);}
 
 /* CALCULATORS */
@@ -543,20 +593,34 @@ body.sp-hidden::after{
     </div>
     <div class="apps-grid">
 
-      <a href="https://glsmp.vkstech.com" target="_blank" class="acard reveal d1" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512.png" alt="MET Power" loading="lazy" decoding="async"/></div><div class="acard-title">MET Power — Metalliser Management</div><div class="acard-desc">Complete department management system for metalliser units. Shift scheduling, leave management, task tracking, NCR reports, manpower cost analysis, attendance, and WhatsApp notifications — all in one app.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
+      <a href="https://glsmp.vkstech.com" target="_blank" class="acard reveal d1" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512.png" alt="MET Power" loading="lazy" decoding="async"/></div><div class="acard-title">MET Power — Metalliser Management</div><div class="acard-desc">Complete department management system for metalliser units. Shift scheduling, leave management, task tracking, NCR reports, manpower cost analysis, attendance, and WhatsApp notifications — all in one app.</div><div class="acard-foot"><span class="tag to">🔥 LIVE · 4 modules included</span><span class="clink">Open App →</span></div></a>
 
       <a href="https://pp.vkstech.com" target="_blank" class="acard reveal d2" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_2.png" alt="Plan Power" loading="lazy" decoding="async"/></div><div class="acard-title">Plan Power — Production Planning</div><div class="acard-desc">Advanced production planning & scheduling engine for GLS Polyfilms. Pendency analysis, Met/F/04 & F/05 tracking, primary slit tracker, SF stock management, met sequencing, order tracker with customer ETA, and plan archive.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
 
       <a href="https://fpjob.vkstech.com" target="_blank" class="acard reveal d3" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_1.png" alt="FP Job" loading="lazy" decoding="async"/></div><div class="acard-title">FP Job — Packaging Industry Network</div><div class="acard-desc">India's first dedicated job network for Flexible Packaging professionals. Admin-verified members, job board with hiring & seeking listings, company profiles (UFlex, SRF, Cosmo Films, JPFL & 20+ companies), multi-language support.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
 
-      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon io">📊</div><div class="acard-title">MetCost Pro — Production Cost Tracker</div><div class="acard-desc">Comprehensive production cost analysis tool. Tracks wire, boat, power, wastage, manpower, and conversion costs. Department mapping, monthly cost computation with Firebase sync. Manager-level analytics dashboard.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+    </div>
 
-      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon it">📗</div><div class="acard-title">Excel Expert — Industry Formula Training</div><div class="acard-desc">Excel formula training built for packaging professionals. 8 categories (Basic, Text, Lookup, Conditional, Advanced, Dynamic, Date, Stats) with industry-specific examples, practice exercises, quizzes, and progress tracking.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+    <!-- Modules inside MET Power — visually nested subsection -->
+    <div class="modules-section reveal" style="margin-top:3rem;">
+      <div class="modules-header">
+        <span class="modules-icon">⚙️</span>
+        <div>
+          <div class="modules-title">Modules inside MET Power</div>
+          <div class="modules-sub">These features are built into MET Power — not separate apps. They power specific roles inside the metalliser department.</div>
+        </div>
+      </div>
+      <div class="modules-grid">
 
-      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon in_">⚙️</div><div class="acard-title">Met Train PRO — Operator Training</div><div class="acard-desc">Comprehensive metalliser operator training platform covering machine operations, SOPs, safety procedures, SAP processes, preventive maintenance, and assessment quizzes. Free for all GLS employees.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+        <div class="mcard"><div class="mcard-icon io">📊</div><div class="mcard-body"><div class="mcard-title">MetCost Pro</div><div class="mcard-desc">Production cost tracker — wire, boat, power, wastage, manpower, conversion costs. Manager-level analytics.</div></div></div>
 
-      <div class="acard reveal"><div class="acard-bar"></div><div class="acard-icon ig">🎯</div><div class="acard-title">SupSkill — Supervisor Platform</div><div class="acard-desc">Supervisor skill development module. Shift report generation, OD targets tracking, boat calculator, performance metrics, and leadership training. Designed for shift incharges and supervisors.</div><div class="acard-foot"><span class="tag tt">✅ Integrated in MET Power</span></div></div>
+        <div class="mcard"><div class="mcard-icon it">📗</div><div class="mcard-body"><div class="mcard-title">Excel Expert</div><div class="mcard-desc">Excel formula training across 8 categories with industry examples, exercises, quizzes, progress tracking.</div></div></div>
 
+        <div class="mcard"><div class="mcard-icon in_">⚙️</div><div class="mcard-body"><div class="mcard-title">Met Train PRO</div><div class="mcard-desc">Operator training — machine ops, SOPs, safety, SAP processes, preventive maintenance, assessments.</div></div></div>
+
+        <div class="mcard"><div class="mcard-icon ig">🎯</div><div class="mcard-body"><div class="mcard-title">SupSkill</div><div class="mcard-desc">Supervisor platform — shift reports, OD targets, boat calculator, performance metrics, leadership training.</div></div></div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1254,24 +1318,58 @@ function getLocalText(text) {
   }
   return text;
 }
+/* Compute estimated reading time from blog content.
+   - For inline blogs (content in DB): strip HTML, count words, divide by 220 wpm
+   - For GitHub-backed blogs (content on GitHub, not in homepage fetch): fall back to summary-based estimate
+   - Returns a string like "5 min read" or null if can't estimate */
+function computeReadTime(b){
+  /* Prefer actual content if available */
+  var text = b.content || '';
+  var fromContent = text && text.length > 200;
+
+  /* If no real content, estimate from summary:
+     packaging blogs are typically 1500-3000 words → ~7-14 min.
+     We'll use the summary length as a rough proxy: longer summaries
+     usually correlate with longer articles. Better than no signal. */
+  if(!fromContent){
+    text = b.summary || '';
+    if(!text) return null;
+    /* Rough heuristic: assume the article is roughly 25× the summary length */
+    var summaryWords = text.replace(/\s+/g,' ').trim().split(' ').length;
+    var estimatedArticleWords = summaryWords * 25;
+    var minutes = Math.max(3, Math.round(estimatedArticleWords / 220));
+    return '~' + minutes + ' min read';
+  }
+
+  /* Strip HTML tags and entities for an accurate word count */
+  var cleanText = text.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+  var words = cleanText.split(' ').filter(function(w){ return w.length > 0; }).length;
+  if(words < 50) return null; /* too short to be meaningful */
+  var mins = Math.max(1, Math.round(words / 220));
+  return mins + ' min read';
+}
+
 function renderBlogCard(b) {
   b._title = getLocalText(b.title);
   b._summary = getLocalText(b.summary);
   const cat = CAT_STYLES[b.category] || {cls:'tp', label:b.category, icon:'📝'};
   const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+  const readTime = computeReadTime(b);
   const imgHtml = b.imageUrl
     ? '<div class="blog-img" style="background:url(\''+b.imageUrl+'\') center/cover no-repeat;"></div>'
     : '<div class="blog-img">'+cat.icon+'</div>';
   /* Link to the server-rendered /blog/<slug> page (api/blog.js).
      Fallback to #blog-<id> only if slug is missing (legacy data). */
   const href = b.slug ? ('/blog/' + b.slug) : ('#blog-' + b.id);
+  /* Combine date + read time on the same row, separated by a dot */
+  const metaLine = dateStr + (readTime ? ' <span style="opacity:.6">·</span> <span style="color:var(--orange);">📖 '+readTime+'</span>' : '');
   return '<a href="'+href+'" class="blog-card" data-cat="'+b.category+'" style="text-decoration:none;color:inherit;display:block;cursor:pointer;">'
     + imgHtml
     + '<div class="blog-body">'
     + '<span class="blog-tag '+cat.cls+'">'+cat.label+'</span>'
     + '<h3>'+escH(b._title || b.title)+'</h3>'
     + '<p>'+escH(b._summary || b.summary || '')+'</p>'
-    + '<div class="blog-date">'+dateStr+'</div>'
+    + '<div class="blog-date">'+metaLine+'</div>'
     + '</div></a>';
 }
 
