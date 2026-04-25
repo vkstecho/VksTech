@@ -60,6 +60,32 @@ async function fetchAnsweredQuestions(blogId) {
   }
 }
 
+// Fetch the previous + next published blogs (by creation date) for navigation footer.
+// Returns { prev, next } where each is { slug, title } or null.
+async function fetchPrevNext(currentCreatedAt, currentId) {
+  try {
+    /* Use a single bounded query that returns the row right before and right after. */
+    const baseHeaders = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` };
+    /* Older = published before this one */
+    const prevUrl = `${SUPABASE_URL}/rest/v1/blogs?published=eq.true&created_at=lt.${encodeURIComponent(currentCreatedAt)}&id=neq.${currentId}&select=slug,title&order=created_at.desc&limit=1`;
+    /* Newer = published after this one */
+    const nextUrl = `${SUPABASE_URL}/rest/v1/blogs?published=eq.true&created_at=gt.${encodeURIComponent(currentCreatedAt)}&id=neq.${currentId}&select=slug,title&order=created_at.asc&limit=1`;
+    const [pRes, nRes] = await Promise.all([
+      fetch(prevUrl, { headers: baseHeaders, cache: 'no-store' }),
+      fetch(nextUrl, { headers: baseHeaders, cache: 'no-store' })
+    ]);
+    const pData = pRes.ok ? await pRes.json() : [];
+    const nData = nRes.ok ? await nRes.json() : [];
+    return {
+      prev: pData[0] || null,
+      next: nData[0] || null
+    };
+  } catch (e) {
+    console.error('Prev/Next fetch error:', e);
+    return { prev: null, next: null };
+  }
+}
+
 function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
@@ -125,13 +151,16 @@ export default async function handler(req, res) {
     const readMinutes = wordCount > 50 ? Math.max(1, Math.round(wordCount / 220)) : 0;
     const readTime = readMinutes ? readMinutes + ' min read' : '';
 
-    // Q&A — fetch answered questions in parallel (but awaited above already)
-    const questions = await fetchAnsweredQuestions(b.id);
+    // Q&A + Prev/Next — fetch in parallel
+    const [questions, prevNext] = await Promise.all([
+      fetchAnsweredQuestions(b.id),
+      fetchPrevNext(b.created_at, b.id)
+    ]);
 
     res.setHeader('Content-Type','text/html;charset=utf-8');
     res.setHeader('Cache-Control','public, max-age=0, s-maxage=10, stale-while-revalidate=30');
     res.statusCode = 200;
-    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat: b.subcategory || '', content, questions, readTime }));
+    res.end(renderPage({ blogId: b.id, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat: b.subcategory || '', content, questions, readTime, prev: prevNext.prev, next: prevNext.next }));
   } catch (err) {
     console.error('Blog error:', err);
     res.statusCode = 500; res.setHeader('Content-Type','text/html;charset=utf-8');
@@ -162,10 +191,29 @@ function renderQuestionsList(questions) {
     }).join('');
 }
 
-function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat, content, questions, readTime }) {
+function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl, dateStr, cat, subcat, content, questions, readTime, prev, next }) {
   const questionsHtml = renderQuestionsList(questions);
   const subcatLabel = subcat && SUBCAT_LABELS[subcat] ? SUBCAT_LABELS[subcat] : '';
   const subcatBadge = subcatLabel ? '<span class="blog-tag subcat-tag" style="margin-left:6px;background:rgba(232,93,38,.08);color:#e85d26;border:1px solid rgba(232,93,38,.25);">' + esc(subcatLabel) + '</span>' : '';
+
+  /* Render the prev/next navigation block.
+     Title comes bilingual ("English | Hindi") — strip to English-only for the link label. */
+  function navTitle(t){ return t ? t.split('|')[0].trim() : ''; }
+  const prevHtml = prev ? `
+    <a class="nav-link nav-prev" href="/blog/${esc(prev.slug)}">
+      <div class="nav-dir">\u2190 Previous Article</div>
+      <div class="nav-title">${esc(navTitle(prev.title))}</div>
+    </a>` : '<div class="nav-spacer"></div>';
+  const nextHtml = next ? `
+    <a class="nav-link nav-next" href="/blog/${esc(next.slug)}">
+      <div class="nav-dir">Next Article \u2192</div>
+      <div class="nav-title">${esc(navTitle(next.title))}</div>
+    </a>` : '<div class="nav-spacer"></div>';
+  const prevNextNav = (prev || next) ? `
+    <nav class="prev-next-nav" aria-label="Adjacent articles">
+      ${prevHtml}
+      ${nextHtml}
+    </nav>` : '';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -297,6 +345,25 @@ body.lang-en h1 .en-content{display:inline !important;}
 .footer-cta a{display:inline-block;background:var(--navy);color:#fff;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .25s;}
 .footer-cta a:hover{background:var(--orange);transform:translateY(-1px);}
 
+/* Prev/Next blog navigation footer */
+.prev-next-nav{max-width:780px;margin:30px auto 50px;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.prev-next-nav .nav-link{
+  display:block;padding:16px 18px;border:1.5px solid var(--border);border-radius:14px;
+  background:var(--card);text-decoration:none;color:var(--text);
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.prev-next-nav .nav-link:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,39,68,.06);}
+.prev-next-nav .nav-dir{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;color:var(--orange);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;}
+.prev-next-nav .nav-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--navy);line-height:1.4;}
+.prev-next-nav .nav-next{text-align:right;}
+.prev-next-nav .nav-spacer{display:block;}
+@media(max-width:600px){
+  .prev-next-nav{grid-template-columns:1fr;gap:10px;margin:20px auto 40px;}
+  .prev-next-nav .nav-next{text-align:left;}
+  .prev-next-nav .nav-link{padding:13px 15px;}
+  .prev-next-nav .nav-title{font-size:.88rem;}
+}
+
 .toast-msg{position:fixed;bottom:96px;right:24px;z-index:101;background:var(--navy);color:#fff;padding:12px 18px;border-radius:50px;font-size:.85rem;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.2);max-width:calc(100vw - 48px);animation:fadeUp .25s ease-out;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
@@ -361,6 +428,8 @@ ${content}
 
   <div id="qaList">${questionsHtml}</div>
 </section>
+
+${prevNextNav}
 
 <div class="footer-cta">
   <a href="/#blog">\u2190 Read More Articles</a>
