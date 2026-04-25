@@ -293,6 +293,20 @@ section{position:relative;z-index:1;}
 .calc-field input.missing::placeholder{color:#e85d26;opacity:.7;}
 .calc-result.waiting .val{color:#c66!important;font-size:.85rem!important;font-family:'JetBrains Mono',monospace!important;letter-spacing:0;text-transform:none;}
 
+/* Copy button on calculator results — appears below the result row */
+.calc-copy-row{display:flex;justify-content:flex-end;margin-top:10px;}
+.calc-copy-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;border:1.5px solid var(--border);
+  color:var(--navy);padding:6px 14px;border-radius:50px;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+}
+.calc-copy-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.calc-copy-btn.copied{background:var(--teal);color:#fff;border-color:var(--teal);}
+.calc-copy-btn:disabled{opacity:.4;cursor:not-allowed;}
+.calc-copy-btn:disabled:hover{background:transparent;color:var(--navy);border-color:var(--border);}
+
 .calc-result{margin-top:14px;padding:14px 16px;border-radius:10px;background:linear-gradient(135deg,rgba(13,140,126,.06),rgba(13,140,126,.02));border:1px solid rgba(13,140,126,.15);display:flex;justify-content:space-between;align-items:center;}
 .calc-result .val{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--teal);}
 .calc-result .unit{font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:600;}
@@ -1260,6 +1274,90 @@ function calcSqm(){
   document.getElementById('cs-res').textContent='₹'+sqm.toFixed(2);
   document.getElementById('cs-sub').textContent='₹'+rate+'/kg × '+gsm.toFixed(2)+' GSM ÷ 1000';
 }
+
+/* ═══════════════════════════════════════
+   CALCULATOR COPY BUTTONS
+   Auto-injects a "Copy" button into every .calc-result block.
+   Build a WhatsApp-ready text from the calculator's title + inputs + result.
+   ═══════════════════════════════════════ */
+function _copyCalcResult(btn, cardEl){
+  /* Build a human-readable summary from the card */
+  var titleEl = cardEl.querySelector('.calc-info h3');
+  var resEl   = cardEl.querySelector('.calc-result .val');
+  var unitEl  = cardEl.querySelector('.calc-result .unit');
+  var subEl   = cardEl.querySelector('.calc-result .sub');
+  if(!resEl || !resEl.textContent.trim() || resEl.textContent.trim() === '—'){
+    return; /* No result yet — silently ignore */
+  }
+  /* Collect input fields (skip the result block) */
+  var inputs = [];
+  cardEl.querySelectorAll('.calc-body .calc-field').forEach(function(field){
+    var label = field.querySelector('label');
+    var input = field.querySelector('input, select');
+    if(!label || !input) return;
+    var v = input.value;
+    if(input.tagName.toLowerCase() === 'select'){
+      v = input.options[input.selectedIndex] ? input.options[input.selectedIndex].text : v;
+    }
+    if(v === '' || v == null) return;
+    inputs.push('• ' + label.textContent.trim() + ': ' + v);
+  });
+  var lines = [];
+  if(titleEl) lines.push('🧮 ' + titleEl.textContent.trim());
+  if(inputs.length) lines.push.apply(lines, inputs);
+  lines.push('');
+  lines.push('Result: ' + resEl.textContent.trim() + (unitEl ? ' ' + unitEl.textContent.trim() : ''));
+  if(subEl && subEl.textContent.trim()) lines.push('(' + subEl.textContent.trim() + ')');
+  lines.push('');
+  lines.push('— Calculated on vkstech.com');
+  var text = lines.join('\n');
+
+  /* Copy to clipboard with fallback */
+  var ok = false;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text);
+      ok = true;
+    }
+  } catch(_){}
+  if(!ok){
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok = true;
+    } catch(_){}
+  }
+  if(ok){
+    var orig = btn.textContent;
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.textContent = orig;
+    }, 1800);
+  }
+}
+/* On page load, inject a copy button into every calc-result block */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.calc-card').forEach(function(card){
+    var resultEl = card.querySelector('.calc-result');
+    if(!resultEl || resultEl.parentElement.querySelector('.calc-copy-row')) return;
+    var row = document.createElement('div');
+    row.className = 'calc-copy-row';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'calc-copy-btn';
+    btn.textContent = '📋 Copy result';
+    btn.title = 'Copy calculation as WhatsApp-ready text';
+    btn.addEventListener('click', function(e){ e.stopPropagation(); _copyCalcResult(btn, card); });
+    row.appendChild(btn);
+    /* Insert directly after the .calc-result element */
+    resultEl.parentNode.insertBefore(row, resultEl.nextSibling);
+  });
+});
 
 /* ═══════════════════════════════════════
    BLOG — DYNAMIC LOADING FROM FIREBASE
