@@ -72,9 +72,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </p>
 
 <div style="background:#fffbea;border:1px solid #f0d47c;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.82rem;line-height:1.7">
-<strong style="color:var(--navy)">Your HTML file needs this 1 line in the <code>&lt;head&gt;</code>:</strong>
-<pre style="background:#1a2744;color:#f0e7d5;padding:12px 14px;border-radius:8px;margin-top:8px;overflow-x:auto;font-size:.78rem;line-height:1.55;font-family:'Courier New',monospace;">&lt;meta name="category" content="manufacturing"&gt;</pre>
-<span style="color:var(--muted);font-size:.78rem">Category values: <code>packaging</code> · <code>excel</code> · <code>career</code> · <code>tech</code> · <code>manufacturing</code>. Title comes from the first <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>, summary from the first <code>&lt;p&gt;</code>, cover from the first <code>&lt;img&gt;</code>. Bilingual: English from <code>.en-content</code> + Hindi from <code>.hindi-section</code>, joined with <code>|</code>.</span>
+<strong style="color:var(--navy)">Your HTML file needs these lines in the <code>&lt;head&gt;</code>:</strong>
+<pre style="background:#1a2744;color:#f0e7d5;padding:12px 14px;border-radius:8px;margin-top:8px;overflow-x:auto;font-size:.78rem;line-height:1.55;font-family:'Courier New',monospace;">&lt;meta name="category" content="packaging"&gt;
+&lt;meta name="subcategory" content="metalliser"&gt;  &lt;!-- optional, only for category=packaging --&gt;</pre>
+<span style="color:var(--muted);font-size:.78rem">Category values: <code>packaging</code> · <code>excel</code> · <code>career</code> · <code>tech</code> · <code>manufacturing</code>. Sub-category values (only when <code>category=packaging</code>): <code>metalliser</code> · <code>slitter</code> · <code>quality</code> · <code>general</code>. Title comes from the first <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>, summary from the first <code>&lt;p&gt;</code>, cover from the first <code>&lt;img&gt;</code>. Bilingual: English from <code>.en-content</code> + Hindi from <code>.hindi-section</code>, joined with <code>|</code>.</span>
 </div>
 
 <div class="field"><label>Select Blog Folder *</label>
@@ -121,7 +122,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div id="uploadForm" style="display:none;margin-top:20px">
 <div class="field"><label>Blog Title (use " | " for bilingual)</label><input type="text" id="upTitle" placeholder="English Title | हिंदी शीर्षक"></div>
 <div class="field"><label>URL Slug (auto-generated, editable)</label><input type="text" id="upSlug" placeholder="e.g. oee-calculation-metalliser" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Edit if needed. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
-<div class="field"><label>Category</label><select id="upCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field"><label>Category</label><select id="upCat" onchange="toggleUploadSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field" id="upSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="upSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
 <div class="field"><label>Summary (use " | " for bilingual)</label><textarea id="upSummary" style="min-height:80px" placeholder="English summary | हिंदी सारांश"></textarea></div>
 <div class="field"><label>Cover Image URL (optional)</label><input type="text" id="upCover" placeholder="folder/image.png"></div>
 <div class="field"><label>Content Preview</label><textarea id="upContent" readonly></textarea></div>
@@ -132,7 +134,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <h3>✍️ Write Blog Manually</h3>
 <div class="field"><label>Title</label><input type="text" id="wTitle" placeholder="English | हिंदी"></div>
 <div class="field"><label>URL Slug</label><input type="text" id="wSlug" placeholder="e.g. my-blog-post" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
-<div class="field"><label>Category</label><select id="wCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field"><label>Category</label><select id="wCat" onchange="toggleWriteSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field" id="wSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="wSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
 <div class="field"><label>Summary</label><textarea id="wSummary" style="min-height:80px"></textarea></div>
 <div class="field"><label>Cover Image URL</label><input type="text" id="wCover"></div>
 <div class="field"><label>HTML Content</label><textarea id="wContent"></textarea></div>
@@ -178,7 +181,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div id="editSourceBanner" style="display:none;background:#fff8e6;border-left:3px solid #e85d26;padding:10px 14px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:14px;line-height:1.55;"></div>
     <div class="field"><label>Title (bilingual with " | ")</label><input type="text" id="editTitle"></div>
     <div class="field"><label>URL Slug</label><input type="text" id="editSlug" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/blog/<b>your-slug</b></div></div>
-    <div class="field"><label>Category</label><select id="editCat"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+    <div class="field"><label>Category</label><select id="editCat" onchange="toggleEditSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+    <div class="field" id="editSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="editSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
     <div class="field"><label>Summary (bilingual with " | ")</label><textarea id="editSummary" style="min-height:80px;"></textarea></div>
     <div class="field"><label>Cover Image URL</label><input type="text" id="editCover"></div>
     <div class="field" id="editContentField"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
@@ -282,12 +286,18 @@ function handleFile(input){
 async function publishBlog(published){
   const title=document.getElementById('upTitle').value.trim();
   const cat=document.getElementById('upCat').value;
+  const subcat=document.getElementById('upSubcat').value;
   const summary=document.getElementById('upSummary').value.trim();
   const cover=document.getElementById('upCover').value.trim();
   if(!title||!summary||!uploadedContent){toast('Fill all fields and upload file',true);return;}
   const slug=document.getElementById('upSlug').value.trim();
   if(!slug){toast('Slug is required for URL',true);return;}
-  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content:uploadedContent,published}]);
+  const row = {
+    title, slug, category:cat,
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover, content:uploadedContent, published
+  };
+  const {error}=await sb.from('blogs').insert([row]);
   if(error){toast('Error: '+error.message,true);return;}
   toast(published?'Published!':'Saved as draft');
   ['upTitle','upSlug','upSummary','upCover','upContent'].forEach(id=>document.getElementById(id).value='');
@@ -486,6 +496,7 @@ async function fetchAndPreview(){
       title: meta.title,
       summary: meta.summary,
       category: meta.category,
+      subcategory: meta.subcategory || '',
       cover: coverUrl,
       sizeKB: (html.length/1024).toFixed(1)
     };
@@ -508,7 +519,7 @@ async function fetchAndPreview(){
       '<table style="width:100%;border-collapse:collapse">'+
       '<tr><td style="padding:6px 0;font-weight:700;width:130px;vertical-align:top">HTML file:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--teal)">'+escH(file)+'</code> <small style="color:var(--muted)">(auto-detected, '+ghParsed.sizeKB+' KB)</small></td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Slug:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--orange)">'+escH(ghParsed.slug)+'</code> <small style="color:var(--muted)">→ vkstech.com/blog/'+escH(ghParsed.slug)+'</small></td></tr>'+
-      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Category:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px">'+escH(ghParsed.category)+'</code></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Category:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px">'+escH(ghParsed.category)+'</code>'+(ghParsed.subcategory?' <small style="color:var(--muted)">·</small> <code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--orange)">'+escH(ghParsed.subcategory)+'</code>':'')+'</td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Title:</td><td>'+escH(ghParsed.title || '(missing)')+'</td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Summary:</td><td style="color:var(--muted)">'+escH(ghParsed.summary || '(missing)')+'</td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Cover:</td><td>'+coverHtml+'</td></tr>'+
@@ -525,7 +536,7 @@ async function fetchAndPreview(){
    Handles bilingual .en-content / .hindi-section structure. */
 function parseBlogHtml(html){
   const doc = new DOMParser().parseFromString(html, 'text/html');
-  const out = { title:'', summary:'', cover:'', category:'', warnings:[] };
+  const out = { title:'', summary:'', cover:'', category:'', subcategory:'', warnings:[] };
 
   /* CATEGORY — from <meta name="category"> */
   const metaCat = doc.querySelector('meta[name="category"]');
@@ -534,6 +545,20 @@ function parseBlogHtml(html){
   } else {
     out.warnings.push('No <meta name="category"> found — will default to "manufacturing". Add it to the HTML for correct tagging.');
     out.category = 'manufacturing';
+  }
+
+  /* SUBCATEGORY — from <meta name="subcategory">. Optional — only meaningful when category=packaging. */
+  const metaSub = doc.querySelector('meta[name="subcategory"]');
+  if (metaSub && metaSub.getAttribute('content')){
+    out.subcategory = metaSub.getAttribute('content').trim().toLowerCase();
+    /* Validate it's one of our known values; warn if unknown */
+    const valid = ['metalliser','slitter','quality','general'];
+    if (out.category === 'packaging' && !valid.includes(out.subcategory)){
+      out.warnings.push('Unknown subcategory "' + out.subcategory + '". Valid: metalliser, slitter, quality, general.');
+    }
+    if (out.category !== 'packaging'){
+      out.warnings.push('Subcategory only applies when category="packaging" — it will be ignored for "' + out.category + '".');
+    }
   }
 
   /* Pick content scopes for EN and HI.
@@ -594,6 +619,8 @@ async function publishGithubBlog(published){
     title: ghParsed.title,
     slug: ghParsed.slug,
     category: ghParsed.category || 'manufacturing',
+    /* Only persist subcategory when main category is packaging — otherwise NULL */
+    subcategory: (ghParsed.category === 'packaging' && ghParsed.subcategory) ? ghParsed.subcategory : null,
     summary: ghParsed.summary,
     cover_image: ghParsed.cover,
     content: '',
@@ -604,6 +631,8 @@ async function publishGithubBlog(published){
   if (error){
     if (String(error.message).toLowerCase().indexOf('github_path') > -1){
       toast('Database update needed. Run SQL: ALTER TABLE blogs ADD COLUMN github_path text;', true);
+    } else if (String(error.message).toLowerCase().indexOf('subcategory') > -1){
+      toast('Run subcategory-migration.sql in Supabase first.', true);
     } else if (String(error.message).toLowerCase().indexOf('duplicate') > -1 || String(error.message).toLowerCase().indexOf('unique') > -1){
       toast('Slug already exists. Rename folder or edit existing post.', true);
     } else {
@@ -624,17 +653,65 @@ function resetGithubForm(){
 async function writeBlog(published){
   const title=document.getElementById('wTitle').value.trim();
   const cat=document.getElementById('wCat').value;
+  const subcat=document.getElementById('wSubcat').value;
   const summary=document.getElementById('wSummary').value.trim();
   const cover=document.getElementById('wCover').value.trim();
   const content=document.getElementById('wContent').value.trim();
   if(!title||!summary||!content){toast('Fill all fields',true);return;}
   const slug=document.getElementById('wSlug').value.trim();
   if(!slug){toast('Slug is required for URL',true);return;}
-  const {error}=await sb.from('blogs').insert([{title,slug,category:cat,summary,cover_image:cover,content,published}]);
+  const row = {
+    title, slug, category:cat,
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover, content, published
+  };
+  const {error}=await sb.from('blogs').insert([row]);
   if(error){toast('Error: '+error.message,true);return;}
   toast(published?'Published!':'Saved as draft');
   ['wTitle','wSlug','wSummary','wCover','wContent'].forEach(id=>document.getElementById(id).value='');
 }
+
+/* Show / hide sub-category dropdown based on main category selection.
+   Sub-categories only apply to "Flexible Packaging" — for other categories
+   the field is hidden and any existing value is cleared. */
+function toggleEditSubcat(){
+  var cat = document.getElementById('editCat').value;
+  var fld = document.getElementById('editSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('editSubcat').value = '';
+  }
+}
+function toggleWriteSubcat(){
+  var cat = document.getElementById('wCat').value;
+  var fld = document.getElementById('wSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('wSubcat').value = '';
+  }
+}
+function toggleUploadSubcat(){
+  var cat = document.getElementById('upCat').value;
+  var fld = document.getElementById('upSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('upSubcat').value = '';
+  }
+}
+/* Initialise both tabs on first load — packaging is the default so dropdowns show */
+document.addEventListener('DOMContentLoaded', function(){
+  toggleWriteSubcat();
+  toggleUploadSubcat();
+});
 
 async function loadPosts(){
   const list=document.getElementById('postsList');
@@ -723,9 +800,12 @@ async function editPost(id){
   document.getElementById('editTitle').value=data.title||'';
   document.getElementById('editSlug').value=data.slug||'';
   document.getElementById('editCat').value=data.category||'packaging';
+  document.getElementById('editSubcat').value=data.subcategory||'';
   document.getElementById('editSummary').value=data.summary||'';
   document.getElementById('editCover').value=data.cover_image||'';
   document.getElementById('editContent').value=data.content||'';
+  /* Show/hide subcategory dropdown based on main category */
+  toggleEditSubcat();
 
   /* Show a source banner so you know where this blog's content actually lives */
   const banner = document.getElementById('editSourceBanner');
@@ -786,7 +866,13 @@ async function saveEdit(){
      OR if the admin explicitly typed something (to let them convert
      GitHub blog → inline if they really want to). Otherwise leave content
      alone so we don't clobber good GitHub-sourced data. */
-  const payload = { title, slug, category:cat, summary, cover_image:cover };
+  const subcat = document.getElementById('editSubcat').value;
+  const payload = {
+    title, slug, category:cat,
+    /* Only save subcategory when category is packaging; otherwise force NULL */
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover
+  };
   if(!isGithubBacked || content){
     payload.content = content;
   }

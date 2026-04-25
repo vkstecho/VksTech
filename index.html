@@ -260,6 +260,11 @@ section{position:relative;z-index:1;}
 
 .blog-cat{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);font-size:.78rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--navy);transition:all .2s;font-family:'JetBrains Mono',monospace;}
 .blog-cat:hover,.blog-cat.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+/* Sub-category row — appears below main pills when "Flexible Packaging" is active */
+.blog-subcats{display:flex;gap:6px;flex-wrap:wrap;margin:-.6rem 0 1.5rem .8rem;padding-left:14px;border-left:3px solid rgba(232,93,38,.4);animation:subcatSlide .25s ease-out;}
+@keyframes subcatSlide{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.blog-subcat{padding:5px 13px;border-radius:50px;border:1.5px solid rgba(232,93,38,.25);font-size:.72rem;font-weight:600;cursor:pointer;background:rgba(232,93,38,.04);color:var(--orange);transition:all .2s;font-family:'JetBrains Mono',monospace;}
+.blog-subcat:hover,.blog-subcat.active{background:var(--orange);color:var(--white);border-color:var(--orange);}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;margin-top:1.5rem;}
 .blog-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s;box-shadow:var(--ss);}
 .blog-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:var(--sl);}
@@ -671,6 +676,13 @@ body.sp-hidden::after{
       <button class="blog-cat" onclick="filterBlog('career',this)" data-i="filt_career">Career & Growth</button>
       <button class="blog-cat" onclick="filterBlog('tech',this)" data-i="filt_tech">Tech & Tools</button>
       <button class="blog-cat" onclick="filterBlog('manufacturing',this)" data-i="filt_mfg">Manufacturing Excellence</button>
+    </div>
+    <div class="blog-subcats" id="blogSubcats" style="display:none;">
+      <button class="blog-subcat active" onclick="filterSubcat('all',this)">All Packaging</button>
+      <button class="blog-subcat" onclick="filterSubcat('metalliser',this)">⚙️ Metalliser</button>
+      <button class="blog-subcat" onclick="filterSubcat('slitter',this)">✂️ Slitter</button>
+      <button class="blog-subcat" onclick="filterSubcat('quality',this)">🔍 Quality Control</button>
+      <button class="blog-subcat" onclick="filterSubcat('general',this)">📦 General</button>
     </div>
     <div class="blog-grid" id="blogGrid">
       <div id="blogLoading" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:.9rem;">Loading articles...</div>
@@ -1199,7 +1211,12 @@ const CAT_STYLES = {
 let allBlogs = [];
 
 
+/* Two-level filter state:
+   - currentFilter: top-level category (all, packaging, excel, career, tech, manufacturing)
+   - currentSubcat: only meaningful when currentFilter='packaging' (all, metalliser, slitter, quality, general) */
 var currentFilter = 'all';
+var currentSubcat = 'all';
+
 function searchBlogs(){
   var input = document.getElementById('blogSearchInput');
   var grid = document.getElementById('blogGrid');
@@ -1207,7 +1224,13 @@ function searchBlogs(){
   if(typeof allBlogs === 'undefined' || !allBlogs || allBlogs.length === 0) return;
   var q = (input && input.value ? input.value : '').toLowerCase().trim();
   var filtered = allBlogs.filter(function(b){
+    /* Main category filter */
     if(currentFilter !== 'all' && b.category !== currentFilter) return false;
+    /* Sub-category filter — only applies when filtering by packaging */
+    if(currentFilter === 'packaging' && currentSubcat !== 'all'){
+      if((b.subcategory || '') !== currentSubcat) return false;
+    }
+    /* Text search */
     if(!q) return true;
     var title = (getLocalText(b.title) || '').toLowerCase();
     var summary = (getLocalText(b.summary) || '').toLowerCase();
@@ -1264,6 +1287,7 @@ function loadBlogs() {
         slug: b.slug,
         title: b.title,
         category: b.category,
+        subcategory: b.subcategory || null,
         summary: b.summary,
         content: b.content,
         github_path: b.github_path || null,
@@ -1285,7 +1309,25 @@ function loadBlogs() {
 
 function filterBlog(cat, btn){
   currentFilter = cat;
+  /* Reset subcategory whenever main category changes */
+  currentSubcat = 'all';
   document.querySelectorAll('.blog-cat').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  /* Show sub-category row only for "Flexible Packaging" */
+  var subRow = document.getElementById('blogSubcats');
+  if(subRow){
+    subRow.style.display = (cat === 'packaging') ? 'flex' : 'none';
+    /* Reset sub-pills to "All Packaging" active */
+    subRow.querySelectorAll('.blog-subcat').forEach(function(b, i){
+      b.classList.toggle('active', i === 0);
+    });
+  }
+  searchBlogs();
+}
+
+function filterSubcat(sub, btn){
+  currentSubcat = sub;
+  document.querySelectorAll('.blog-subcat').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
   searchBlogs();
 }
