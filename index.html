@@ -393,6 +393,33 @@ section{position:relative;z-index:1;}
 #people{padding:90px 0;background:var(--bg);border-top:1px solid var(--border);}
 .pi{text-align:center;margin-bottom:3rem;}
 .pcat{margin-bottom:2.5rem;}
+
+/* People discovery card — sits between Personal Apps and Blog,
+   quietly inviting visitors to the dedicated /people page. */
+.people-discovery{max-width:760px;margin:50px auto;padding:0 5%;}
+.pd-card{
+  display:flex;align-items:center;gap:18px;
+  background:linear-gradient(135deg,rgba(232,93,38,.05),rgba(13,140,126,.04));
+  border:1px solid var(--border);border-left:4px solid var(--orange);
+  border-radius:18px;padding:20px 24px;
+  text-decoration:none;color:inherit;
+  transition:all .25s;
+}
+.pd-card:hover{box-shadow:0 8px 24px rgba(26,39,68,.08);border-left-color:var(--teal);transform:translateY(-2px);}
+.pd-icon{flex-shrink:0;font-size:1.8rem;}
+.pd-text{flex:1;min-width:0;}
+.pd-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.pd-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--navy);line-height:1.4;margin-bottom:4px;}
+.pd-sub{font-size:.84rem;color:var(--muted);line-height:1.6;}
+.pd-arrow{flex-shrink:0;font-size:1.2rem;color:var(--orange);font-weight:700;transition:transform .25s;}
+.pd-card:hover .pd-arrow{transform:translateX(4px);}
+@media(max-width:600px){
+  .people-discovery{margin:30px auto;}
+  .pd-card{padding:16px 18px;gap:12px;}
+  .pd-icon{font-size:1.4rem;}
+  .pd-title{font-size:.95rem;}
+  .pd-sub{font-size:.78rem;}
+}
 .pcath{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--navy);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;justify-items:center;}
 .pcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;box-shadow:var(--ss);transition:all .3s;width:100%;max-width:240px;}
@@ -530,7 +557,7 @@ body.sp-hidden::after{
     <li><a href="#blog" data-i="nav_blog">Blog</a></li>
     <li><a href="#request-app" data-i="nav_req">Request App</a></li>
     <li><a href="#about" data-i="nav_about">About</a></li>
-    <li><a href="#people" data-i="nav_people">People</a></li>
+    <li><a href="/people" data-i="nav_people">People</a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-pills" role="group" aria-label="Language selector">
@@ -548,7 +575,7 @@ body.sp-hidden::after{
   <a href="#blog" onclick="toggleMenu()" data-i="nav_blog">Blog</a>
   <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request App</a>
   <a href="#about" onclick="toggleMenu()" data-i="nav_about">About</a>
-  <a href="#people" onclick="toggleMenu()" data-i="nav_people">People</a>
+  <a href="/people" data-i="nav_people">People</a>
   <div class="mob-lang">
     <button class="mob-lang-btn active" onclick="setLang('en')">EN</button>
     <button class="mob-lang-btn" onclick="setLang('hi')">हिंदी</button>
@@ -735,6 +762,20 @@ body.sp-hidden::after{
   </div>
 </section>
 
+<!-- People discovery card — replaces the old inline People section.
+     Quietly invites visitors to read the dedicated /people page. -->
+<section class="people-discovery reveal" aria-label="Meet the people behind this journey">
+  <a href="/people" class="pd-card">
+    <div class="pd-icon">\u2764\uFE0F</div>
+    <div class="pd-text">
+      <div class="pd-eyebrow">With Gratitude</div>
+      <div class="pd-title">Meet the people behind this journey</div>
+      <div class="pd-sub">Parents. Mentors. The ones who carried me when I couldn't carry myself.</div>
+    </div>
+    <div class="pd-arrow">\u2192</div>
+  </a>
+</section>
+
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
@@ -862,35 +903,7 @@ body.sp-hidden::after{
 </section>
 
 <!-- PEOPLE -->
-<section id="people">
-  <div class="container">
-    <div class="pi reveal">
-      <div class="section-label" data-i="ppl_label">❤️ With Gratitude</div>
-      <h2 class="section-title" data-i="ppl_title">The People Behind <span>This Journey</span></h2>
-      <p class="section-sub" style="margin:0 auto;" data-i="ppl_sub">Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.</p>
-    </div>
-
-    <div class="pcat reveal">
-      <div class="pcath" data-i="pcat_par">🙏 My Parents</div>
-      <div class="pgrid">
-        <div class="pcard"><div class="pav"><img src="papa.jpeg" alt="Father" onerror="this.style.display='none';this.parentElement.innerHTML='👨';" loading="lazy" decoding="async"/></div><div class="pname">Mr. Guru Dutt</div><div class="prel">Father</div><div class="pnote">"Your sacrifices built the foundation of everything I am today."</div></div>
-        <div class="pcard"><div class="pav"><img src="mom.jpeg" alt="Mother" onerror="this.style.display='none';this.parentElement.innerHTML='👩';" loading="lazy" decoding="async"/></div><div class="pname">Mrs. Prem</div><div class="prel">Mother</div><div class="pnote">"Your unconditional love and prayers have carried me through every storm."</div></div>
-      </div>
-    </div>
-
-    <div class="pcat reveal">
-      <div class="pcath" data-i="pcat_spec">⭐ Special Thanks</div>
-      <div class="pgrid">
-        <div class="pcard" style="max-width:320px;">
-          <div class="pav" style="border-color:rgba(26,202,74,.3);box-shadow:0 4px 20px rgba(26,202,74,.25);"><img src="Ankit.jpeg" alt="Ankit Bhardwaj" onerror="this.style.display='none';this.parentElement.innerHTML='⭐';" loading="lazy" decoding="async"/></div>
-          <div class="pname">Ankit Bhardwaj</div>
-          <div class="prel">Cousin & Guiding Light | IT Entrepreneur</div>
-          <div class="pnote">"Ankit bhai, your guidance, wisdom and constant encouragement have been the backbone of this entire journey. I owe more than words can express."</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="people" style="display:none;"><!-- People section moved to /people --></section>
 
 <!-- FOOTER -->
 <footer>
