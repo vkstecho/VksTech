@@ -449,6 +449,63 @@ section{position:relative;z-index:1;}
 
 /* FOOTER */
 footer{background:var(--navy);color:rgba(255,255,255,.5);padding:60px 0 30px;}
+
+/* Newsletter signup band — top of footer.
+   Quiet, classy, doesn't compete with the rest of the footer. */
+.newsletter-band{
+  display:grid;grid-template-columns:1.3fr 1.7fr;gap:2rem;align-items:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:28px 32px;
+  margin-bottom:2.6rem;
+  position:relative;
+}
+.newsletter-band .nl-text h3{
+  color:#fff;font-family:'Playfair Display',serif;font-weight:700;
+  font-size:1.15rem;line-height:1.4;margin-bottom:.55rem;
+}
+.newsletter-band .nl-text p{
+  color:rgba(255,255,255,.55);font-size:.84rem;line-height:1.6;margin:0;
+}
+.newsletter-band .nl-form{
+  display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;align-items:center;
+}
+.newsletter-band input[type=text]:not(#nlHp),
+.newsletter-band input[type=email]{
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:50px;
+  color:#fff;
+  padding:11px 18px;
+  font-family:inherit;font-size:.86rem;
+  outline:none;transition:border-color .2s,background .2s;
+  min-width:0;
+}
+.newsletter-band input::placeholder{color:rgba(255,255,255,.4);}
+.newsletter-band input:focus{
+  border-color:var(--orange);
+  background:rgba(255,255,255,.09);
+}
+.newsletter-band .nl-btn{
+  background:var(--orange);color:#fff;border:none;
+  padding:11px 22px;border-radius:50px;
+  font-family:inherit;font-weight:700;font-size:.84rem;
+  cursor:pointer;transition:all .2s;
+  white-space:nowrap;
+}
+.newsletter-band .nl-btn:hover{background:var(--orange2);transform:translateY(-1px);}
+.newsletter-band .nl-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.newsletter-band .nl-msg{
+  grid-column:1/-1;font-size:.82rem;margin-top:6px;min-height:0;
+}
+.newsletter-band .nl-msg.success{color:#5dd9b8;}
+.newsletter-band .nl-msg.error{color:#ff8a6e;}
+@media(max-width:900px){
+  .newsletter-band{grid-template-columns:1fr;padding:22px;gap:1.2rem;}
+  .newsletter-band .nl-form{grid-template-columns:1fr;}
+  .newsletter-band .nl-btn{padding:13px 22px;}
+}
 .fi{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
 .fc h4{color:var(--white);font-weight:700;font-size:.88rem;margin-bottom:16px;}
 .fc a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem;padding:3px 0;transition:color .2s;}
@@ -913,6 +970,22 @@ body.sp-hidden::after{
 <!-- FOOTER -->
 <footer>
   <div class="container">
+
+    <!-- Newsletter signup band -->
+    <div class="newsletter-band">
+      <div class="nl-text">
+        <h3>Industry insights, Excel tips, and free tools — direct to your inbox.</h3>
+        <p>One email when a new article goes live. No spam, no marketing. Unsubscribe anytime.</p>
+      </div>
+      <form class="nl-form" onsubmit="return submitNewsletter(event, 'site-footer')" novalidate>
+        <input type="text" name="name" id="nlName" placeholder="Your name" required autocomplete="name" maxlength="100"/>
+        <input type="email" name="email" id="nlEmail" placeholder="you@email.com" required autocomplete="email" maxlength="254"/>
+        <input type="text" name="website" id="nlHp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true"/>
+        <button type="submit" class="nl-btn" id="nlBtn">Subscribe →</button>
+      </form>
+      <div class="nl-msg" id="nlMsg" role="status" aria-live="polite"></div>
+    </div>
+
     <div class="fi">
       <div class="fc"><h4>VKS Tech</h4><p style="font-size:.84rem;color:rgba(255,255,255,.4);line-height:1.75;">Built by Vivek Kumar — a mechanical engineer who turned 9 years of industry experience into tools that genuinely help people.</p></div>
       <div class="fc"><h4>Apps</h4><a href="https://glsmp.vkstech.com" target="_blank">MET Power</a><a href="https://pp.vkstech.com" target="_blank">Plan Power</a><a href="https://fpjob.vkstech.com" target="_blank">FP Job</a><a href="https://fitsutra.vkstech.com" target="_blank">FitSutra</a><a href="https://moneyflow.vkstech.com" target="_blank">MoneyFlow</a></div>
@@ -2000,6 +2073,82 @@ function submitReq(){
     console.error('Submit error:',err);
     alert('Something went wrong. Please try again.');
   });
+}
+
+/* ════════════════════════════════════════════
+   NEWSLETTER SIGNUP
+   Used by both the footer form on index.html
+   AND the form rendered at the end of every blog post.
+   The `source` parameter records where the signup came from.
+   ════════════════════════════════════════════ */
+function submitNewsletter(ev, source){
+  if(ev && ev.preventDefault) ev.preventDefault();
+  /* Pick the right form's elements based on the source.
+     For blog posts, the form uses different IDs to avoid collisions. */
+  var prefix = (source === 'blog-footer') ? 'bnl' : 'nl';
+  var nameEl  = document.getElementById(prefix + 'Name');
+  var emailEl = document.getElementById(prefix + 'Email');
+  var hpEl    = document.getElementById(prefix + 'Hp');
+  var btnEl   = document.getElementById(prefix + 'Btn');
+  var msgEl   = document.getElementById(prefix + 'Msg');
+  if(!nameEl || !emailEl || !msgEl) return false;
+
+  /* Honeypot check — bots fill hidden fields */
+  if(hpEl && hpEl.value.trim() !== ''){
+    msgEl.textContent = 'Thanks — you are subscribed.';
+    msgEl.className = 'nl-msg success';
+    return false;
+  }
+
+  var name = nameEl.value.trim();
+  var email = emailEl.value.trim().toLowerCase();
+  if(!name){
+    msgEl.textContent = 'Please add your name.';
+    msgEl.className = 'nl-msg error';
+    return false;
+  }
+  var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  if(!emailOk){
+    msgEl.textContent = 'Please enter a valid email address.';
+    msgEl.className = 'nl-msg error';
+    return false;
+  }
+
+  /* Disable button during submit so impatient users don't double-submit */
+  if(btnEl){ btnEl.disabled = true; btnEl.textContent = 'Subscribing…'; }
+  msgEl.textContent = '';
+  msgEl.className = 'nl-msg';
+
+  sb.from('subscribers').insert([{ email: email, name: name, source: source || 'unknown' }])
+    .then(function(res){
+      if(res.error){
+        /* Treat duplicate-email as a friendly success — they're already subscribed */
+        var dup = String(res.error.message || '').toLowerCase().indexOf('duplicate') > -1
+               || String(res.error.message || '').toLowerCase().indexOf('unique') > -1;
+        if(dup){
+          msgEl.textContent = '✓ You are already subscribed — thank you!';
+          msgEl.className = 'nl-msg success';
+        } else {
+          msgEl.textContent = 'Could not subscribe right now. Please try again.';
+          msgEl.className = 'nl-msg error';
+          console.error('Newsletter:', res.error);
+        }
+      } else {
+        msgEl.textContent = '✓ Subscribed! You will get an email when a new article goes live.';
+        msgEl.className = 'nl-msg success';
+        nameEl.value = '';
+        emailEl.value = '';
+      }
+    })
+    .catch(function(err){
+      console.error('Newsletter:', err);
+      msgEl.textContent = 'Network error. Please try again.';
+      msgEl.className = 'nl-msg error';
+    })
+    .finally(function(){
+      if(btnEl){ btnEl.disabled = false; btnEl.textContent = 'Subscribe →'; }
+    });
+  return false;
 }
 </script>
 </body>

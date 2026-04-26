@@ -63,6 +63,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
 <button class="tab" onclick="switchTab('qa',this)">❓ Q&amp;A <span id="qaBadge" style="display:none;background:var(--red);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
 <button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
+<button class="tab" onclick="switchTab('subs',this)">📧 Subscribers <span id="subsBadge" style="display:none;background:var(--teal);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
 </div>
 
 <div id="tab-github" class="panel">
@@ -166,7 +167,31 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div id="tab-req" class="panel" style="display:none">
 <h3>📩 App Requests</h3>
 <div id="reqList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
-</div></div>
+
+<!-- SUBSCRIBERS TAB — newsletter signup list -->
+<div id="tab-subs" class="panel" style="display:none">
+<h3>📧 Newsletter Subscribers</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Your audience.</strong> People who signed up to be notified about new blogs.
+When you publish, copy the email list (BCC field) into Gmail/Outlook and send your update.
+Don't share or sell this list — it's a trust contract.
+</p>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;">
+  <div style="flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--border);border-radius:50px;padding:6px 18px;">
+    <span style="color:var(--muted);">🔍</span>
+    <input type="search" id="subsSearch" placeholder="Search by name or email…" style="flex:1;border:none;outline:none;background:transparent;font-size:.88rem;font-family:inherit;color:var(--navy);padding:8px 0;" oninput="renderSubs()"/>
+  </div>
+  <button class="btn btn-primary" onclick="copySubsEmails()" id="subsCopyBtn">📋 Copy emails (BCC)</button>
+  <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="downloadSubsCsv()">⬇ Export CSV</button>
+</div>
+
+<div id="subsStats" style="font-size:.82rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px;"></div>
+<div id="subsList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+
+</div>
+</div>
 
 <div class="toast" id="toast">✅ Success</div>
 
@@ -264,6 +289,7 @@ function switchTab(tab,btn){
   if(tab==='posts')loadPosts();
   if(tab==='qa')loadQuestions();
   if(tab==='req')loadRequests();
+  if(tab==='subs')loadSubscribers();
 }
 
 let uploadedContent='';
@@ -930,6 +956,153 @@ async function delReq(id){
   const {error}=await sb.from('app_requests').delete().eq('id',id);
   if(error){toast(error.message,true);return;}
   toast('Deleted');loadRequests();
+}
+
+/* ════════════════════════════════════════════════════════════
+   NEWSLETTER SUBSCRIBERS
+   Loaded on demand when the Subscribers tab is opened.
+   Stored in module-level `_subs` so search filtering avoids re-fetch.
+   ════════════════════════════════════════════════════════════ */
+let _subs = [];
+
+async function loadSubscribers(){
+  const list = document.getElementById('subsList');
+  list.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  const { data, error } = await sb.from('subscribers').select('*').order('subscribed_at', {ascending:false});
+  if(error){
+    list.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(error.message)+'</p></div>';
+    /* If the table doesn't exist, give a clear migration hint */
+    if(String(error.message).toLowerCase().indexOf('subscribers') > -1
+       || String(error.message).toLowerCase().indexOf('does not exist') > -1){
+      list.innerHTML += '<div style="margin-top:14px;padding:14px;background:#fff8e6;border-left:3px solid var(--orange);border-radius:8px;font-size:.84rem;line-height:1.6;color:var(--navy);">'
+        + '<strong>Database setup needed.</strong><br>Run <code>subscribers-migration.sql</code> in your Supabase SQL Editor first.'
+        + '</div>';
+    }
+    return;
+  }
+  _subs = data || [];
+  renderSubs();
+  /* Update the badge with the total count */
+  const badge = document.getElementById('subsBadge');
+  if(_subs.length > 0){
+    badge.textContent = _subs.length;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function renderSubs(){
+  const list = document.getElementById('subsList');
+  const stats = document.getElementById('subsStats');
+  const q = (document.getElementById('subsSearch').value || '').toLowerCase().trim();
+  const filtered = q ? _subs.filter(s =>
+    (s.name||'').toLowerCase().indexOf(q) > -1
+    || (s.email||'').toLowerCase().indexOf(q) > -1
+  ) : _subs;
+
+  /* Stats line */
+  if(_subs.length === 0){
+    stats.textContent = '0 subscribers yet';
+  } else if(q){
+    stats.textContent = filtered.length + ' of ' + _subs.length + ' subscribers match "' + q + '"';
+  } else {
+    stats.textContent = _subs.length + ' subscriber' + (_subs.length===1?'':'s')
+      + ' • Latest signup: ' + new Date(_subs[0].subscribed_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  }
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div class="empty"><div>📭</div><p>'+(q?'No matches':'No subscribers yet — share your blog!')+'</p></div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(function(s){
+    const dateStr = new Date(s.subscribed_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+    const sourceTag = s.source ? '<span style="font-size:.7rem;background:rgba(13,140,126,.08);color:var(--teal);border:1px solid rgba(13,140,126,.18);padding:2px 8px;border-radius:50px;font-family:monospace;">'+escH(s.source)+'</span>' : '';
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:240px">'
+      +   '<h4 style="margin-bottom:4px">'+escH(s.name||'(no name)')+'</h4>'
+      +   '<div class="meta"><a href="mailto:'+encodeURIComponent(s.email)+'" style="color:var(--navy);font-weight:600;">'+escH(s.email)+'</a></div>'
+      +   '<div class="meta" style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">'
+      +     'Subscribed ' + dateStr + ' ' + sourceTag
+      +   '</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-danger" onclick="delSub('+s.id+', \''+escH(s.email).replace(/\x27/g,'')+'\')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+async function delSub(id, email){
+  if(!confirm('Remove subscriber "'+email+'"? This cannot be undone.')) return;
+  const { error } = await sb.from('subscribers').delete().eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Removed');
+  loadSubscribers();
+}
+
+function copySubsEmails(){
+  if(_subs.length === 0){ toast('No subscribers to copy', true); return; }
+  /* Filter by current search if active */
+  const q = (document.getElementById('subsSearch').value || '').toLowerCase().trim();
+  const list = q ? _subs.filter(s =>
+    (s.name||'').toLowerCase().indexOf(q) > -1
+    || (s.email||'').toLowerCase().indexOf(q) > -1
+  ) : _subs;
+  if(list.length === 0){ toast('No subscribers match', true); return; }
+  /* Comma-separated list — paste into Gmail BCC */
+  const text = list.map(s => s.email).join(', ');
+  let ok = false;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text); ok = true;
+    }
+  } catch(_){}
+  if(!ok){
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta); ok = true;
+    } catch(_){}
+  }
+  if(ok){
+    toast('Copied ' + list.length + ' email' + (list.length===1?'':'s') + ' to clipboard');
+    /* Briefly show success on the button */
+    const btn = document.getElementById('subsCopyBtn');
+    if(btn){
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied ' + list.length + ' emails';
+      setTimeout(function(){ btn.textContent = orig; }, 2200);
+    }
+  } else {
+    toast('Could not copy. Use Export CSV instead.', true);
+  }
+}
+
+function downloadSubsCsv(){
+  if(_subs.length === 0){ toast('No subscribers to export', true); return; }
+  /* Build CSV with proper escaping */
+  function csvCell(v){
+    v = (v == null) ? '' : String(v);
+    if(/[",\n]/.test(v)) v = '"' + v.replace(/"/g, '""') + '"';
+    return v;
+  }
+  const rows = [['Name','Email','Source','Subscribed At']];
+  _subs.forEach(function(s){
+    rows.push([s.name||'', s.email||'', s.source||'', s.subscribed_at||'']);
+  });
+  const csv = rows.map(r => r.map(csvCell).join(',')).join('\n');
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = 'vkstech-subscribers-' + dateStr + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  toast('Downloaded ' + _subs.length + ' subscribers');
 }
 
 /* ════════════════════════════════════════════════════════════
