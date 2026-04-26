@@ -196,6 +196,24 @@ function renderPage({ blogId, slug, enTitle, hiTitle, enSummary, cover, pageUrl,
   const subcatLabel = subcat && SUBCAT_LABELS[subcat] ? SUBCAT_LABELS[subcat] : '';
   const subcatBadge = subcatLabel ? '<span class="blog-tag subcat-tag" style="margin-left:6px;background:rgba(232,93,38,.08);color:#e85d26;border:1px solid rgba(232,93,38,.25);">' + esc(subcatLabel) + '</span>' : '';
 
+  /* Newsletter signup form — shown on every blog page, at bottom */
+  const newsletterForm = `
+<section class="newsletter-section" aria-label="Subscribe to newsletter">
+  <div class="newsletter-card">
+    <div class="nl-text">
+      <h2>Liked this? Get the next one.</h2>
+      <p>Industry insights, Excel tips, and free tools — direct to your inbox. One email when a new article goes live. No spam.</p>
+    </div>
+    <form class="nl-form" onsubmit="return submitBlogNewsletter(event)" novalidate>
+      <input type="text" id="bnlName" placeholder="Your name" required autocomplete="name" maxlength="100"/>
+      <input type="email" id="bnlEmail" placeholder="you@email.com" required autocomplete="email" maxlength="254"/>
+      <input type="text" id="bnlHp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true"/>
+      <button type="submit" class="nl-btn" id="bnlBtn">Subscribe →</button>
+    </form>
+    <div class="nl-msg" id="bnlMsg" role="status" aria-live="polite"></div>
+  </div>
+</section>`;
+
   /* Render the prev/next navigation block.
      Title comes bilingual ("English | Hindi") — strip to English-only for the link label. */
   function navTitle(t){ return t ? t.split('|')[0].trim() : ''; }
@@ -345,6 +363,59 @@ body.lang-en h1 .en-content{display:inline !important;}
 .footer-cta a{display:inline-block;background:var(--navy);color:#fff;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.92rem;transition:all .25s;}
 .footer-cta a:hover{background:var(--orange);transform:translateY(-1px);}
 
+/* Newsletter signup card on every blog page */
+.newsletter-section{max-width:780px;margin:30px auto;padding:0 5%;}
+.newsletter-card{
+  background:linear-gradient(135deg,rgba(232,93,38,.06),rgba(13,140,126,.04));
+  border:1px solid var(--border);
+  border-left:4px solid var(--orange);
+  border-radius:18px;
+  padding:30px 32px;
+}
+.newsletter-card .nl-text h2{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:1.25rem;color:var(--navy);margin:0 0 .5rem;line-height:1.3;
+}
+.newsletter-card .nl-text p{
+  color:var(--muted);font-size:.9rem;line-height:1.6;margin:0 0 1.4rem;
+}
+.newsletter-card .nl-form{
+  display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;align-items:center;
+}
+.newsletter-card input[type=text]:not(#bnlHp),
+.newsletter-card input[type=email]{
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:50px;padding:11px 18px;
+  font-family:inherit;font-size:.88rem;
+  color:var(--navy);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  min-width:0;
+}
+.newsletter-card input::placeholder{color:var(--muted);}
+.newsletter-card input:focus{
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(232,93,38,.1);
+}
+.newsletter-card .nl-btn{
+  background:var(--orange);color:#fff;border:none;
+  padding:11px 22px;border-radius:50px;
+  font-family:inherit;font-weight:700;font-size:.85rem;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.newsletter-card .nl-btn:hover{background:#d44d1a;transform:translateY(-1px);}
+.newsletter-card .nl-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.newsletter-card .nl-msg{
+  font-size:.84rem;margin-top:10px;min-height:1.2em;
+}
+.newsletter-card .nl-msg.success{color:var(--teal);}
+.newsletter-card .nl-msg.error{color:#c64a32;}
+@media(max-width:600px){
+  .newsletter-card{padding:22px 20px;}
+  .newsletter-card .nl-text h2{font-size:1.1rem;}
+  .newsletter-card .nl-form{grid-template-columns:1fr;}
+  .newsletter-card .nl-btn{padding:13px 22px;}
+}
+
 /* Prev/Next blog navigation footer */
 .prev-next-nav{max-width:780px;margin:30px auto 50px;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .prev-next-nav .nav-link{
@@ -429,6 +500,8 @@ ${content}
   <div id="qaList">${questionsHtml}</div>
 </section>
 
+${newsletterForm}
+
 ${prevNextNav}
 
 <div class="footer-cta">
@@ -474,6 +547,69 @@ var sb = window.supabase.createClient(
   'https://hozqkfvusazdneockkxf.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY'
 );
+
+async function submitBlogNewsletter(ev){
+  if(ev && ev.preventDefault) ev.preventDefault();
+  var nameEl  = document.getElementById('bnlName');
+  var emailEl = document.getElementById('bnlEmail');
+  var hpEl    = document.getElementById('bnlHp');
+  var btnEl   = document.getElementById('bnlBtn');
+  var msgEl   = document.getElementById('bnlMsg');
+  if(!nameEl || !emailEl || !msgEl) return false;
+
+  if(hpEl && hpEl.value.trim() !== ''){
+    msgEl.textContent = 'Thanks — you are subscribed.';
+    msgEl.className = 'nl-msg success';
+    return false;
+  }
+
+  var name  = nameEl.value.trim();
+  var email = emailEl.value.trim().toLowerCase();
+  if(!name){ msgEl.textContent='Please add your name.'; msgEl.className='nl-msg error'; return false; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
+    msgEl.textContent='Please enter a valid email.'; msgEl.className='nl-msg error'; return false;
+  }
+
+  if(btnEl){ btnEl.disabled=true; btnEl.textContent='Subscribing\u2026'; }
+  msgEl.textContent=''; msgEl.className='nl-msg';
+
+  try {
+    var r = await fetch('${SUPABASE_URL}/rest/v1/subscribers', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':'${SUPABASE_ANON_KEY}',
+        'Authorization':'Bearer ${SUPABASE_ANON_KEY}',
+        'Prefer':'return=minimal'
+      },
+      body: JSON.stringify({ email: email, name: name, source: 'blog-footer' })
+    });
+    if(r.status === 201 || r.status === 200 || r.status === 204){
+      msgEl.textContent='\u2713 Subscribed! You will get an email when a new article goes live.';
+      msgEl.className='nl-msg success';
+      nameEl.value=''; emailEl.value='';
+    } else {
+      var body = await r.text();
+      var dup = body.toLowerCase().indexOf('duplicate') > -1 || body.toLowerCase().indexOf('unique') > -1;
+      if(dup){
+        msgEl.textContent='\u2713 You are already subscribed \u2014 thank you!';
+        msgEl.className='nl-msg success';
+        nameEl.value=''; emailEl.value='';
+      } else {
+        msgEl.textContent='Could not subscribe right now. Please try again.';
+        msgEl.className='nl-msg error';
+        console.error('Newsletter:', r.status, body);
+      }
+    }
+  } catch(err){
+    msgEl.textContent='Network error. Please try again.';
+    msgEl.className='nl-msg error';
+    console.error('Newsletter:', err);
+  } finally {
+    if(btnEl){ btnEl.disabled=false; btnEl.textContent='Subscribe \u2192'; }
+  }
+  return false;
+}
 
 async function submitQuestion(){
   var msgEl = document.getElementById('qaMsg');
