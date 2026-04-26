@@ -1518,7 +1518,6 @@ function loadBlogs() {
         var hint = document.querySelector('.blog-cta-hint');
         if(hint) hint.textContent = allBlogs.length + ' articles · filter, search, paginate';
       }
-      }
     })
     .catch(err => {
       console.warn('Blog load:', err.message);
