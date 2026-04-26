@@ -315,6 +315,23 @@ section{position:relative;z-index:1;}
 #blog{padding:90px 0;background:var(--bg);border-top:1px solid var(--border);}
 .blog-cats{display:flex;gap:8px;flex-wrap:wrap;margin:1.5rem 0;}
 
+/* Homepage Blog section now shows just latest 3 + this big CTA → /blog */
+.blog-cta-row{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  margin-top:2.4rem;
+}
+.blog-view-all{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--navy);color:#fff;
+  padding:14px 32px;border-radius:50px;
+  text-decoration:none;font-weight:700;font-size:.95rem;
+  transition:all .25s;box-shadow:0 6px 20px rgba(26,39,68,.18);
+}
+.blog-view-all:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,93,38,.32);}
+.blog-view-all .arrow{transition:transform .2s;}
+.blog-view-all:hover .arrow{transform:translateX(4px);}
+.blog-cta-hint{font-size:.74rem;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+
 .blog-search{display:flex;align-items:center;gap:10px;max-width:520px;margin:0 auto 24px;background:var(--card);border:1.5px solid var(--border);border-radius:50px;padding:6px 20px;transition:all .2s;box-shadow:var(--ss);}
 .blog-search:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,93,38,.1);}
 .blog-search svg{width:18px;height:18px;color:var(--muted);flex-shrink:0;}
@@ -766,45 +783,33 @@ body.sp-hidden::after{
      Quietly invites visitors to read the dedicated /people page. -->
 <section class="people-discovery reveal" aria-label="Meet the people behind this journey">
   <a href="/people" class="pd-card">
-    <div class="pd-icon">\u2764\uFE0F</div>
+    <div class="pd-icon">❤️</div>
     <div class="pd-text">
       <div class="pd-eyebrow">With Gratitude</div>
       <div class="pd-title">Meet the people behind this journey</div>
       <div class="pd-sub">Parents. Mentors. The ones who carried me when I couldn't carry myself.</div>
     </div>
-    <div class="pd-arrow">\u2192</div>
+    <div class="pd-arrow">→</div>
   </a>
 </section>
 
-<!-- BLOG -->
+<!-- BLOG — homepage preview (latest 3, full library at /blog) -->
 <section id="blog">
   <div class="container">
     <div class="reveal">
       <div class="section-label" data-i="blog_label">📝 Knowledge Hub</div>
-      <h2 class="section-title" data-i="blog_title">Blog & <span>Articles</span></h2>
+      <h2 class="section-title" data-i="blog_title">Latest from the <span>Blog</span></h2>
       <p class="section-sub" data-i="blog_sub">Insights from 9 years in flexible packaging, tech tutorials, Excel tips, and industry knowledge — shared freely for the community.</p>
     </div>
-    <div class="blog-search">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input id="blogSearchInput" type="search" placeholder="Search blogs..." data-i-placeholder="search_ph" oninput="searchBlogs()" aria-label="Search blogs"/>
-    </div>
-    <div class="blog-cats">
-      <button class="blog-cat active" onclick="filterBlog('all',this)" data-i="filt_all">All</button>
-      <button class="blog-cat" onclick="filterBlog('packaging',this)" data-i="filt_pack">Flexible Packaging</button>
-      <button class="blog-cat" onclick="filterBlog('excel',this)" data-i="filt_excel">Excel & Formulas</button>
-      <button class="blog-cat" onclick="filterBlog('career',this)" data-i="filt_career">Career & Growth</button>
-      <button class="blog-cat" onclick="filterBlog('tech',this)" data-i="filt_tech">Tech & Tools</button>
-      <button class="blog-cat" onclick="filterBlog('manufacturing',this)" data-i="filt_mfg">Manufacturing Excellence</button>
-    </div>
-    <div class="blog-subcats" id="blogSubcats" style="display:none;">
-      <button class="blog-subcat active" onclick="filterSubcat('all',this)">All Packaging</button>
-      <button class="blog-subcat" onclick="filterSubcat('metalliser',this)">⚙️ Metalliser</button>
-      <button class="blog-subcat" onclick="filterSubcat('slitter',this)">✂️ Slitter</button>
-      <button class="blog-subcat" onclick="filterSubcat('quality',this)">🔍 Quality Control</button>
-      <button class="blog-subcat" onclick="filterSubcat('general',this)">📦 General</button>
-    </div>
     <div class="blog-grid" id="blogGrid">
-      <div id="blogLoading" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:.9rem;">Loading articles...</div>
+      <div id="blogLoading" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:.9rem;">Loading latest articles...</div>
+    </div>
+    <div class="blog-cta-row">
+      <a href="/blog" class="blog-view-all">
+        <span>Browse all articles</span>
+        <span class="arrow">→</span>
+      </a>
+      <span class="blog-cta-hint">Filter by category, search, paginate</span>
     </div>
   </div>
 </section>
@@ -1170,14 +1175,13 @@ function setLang(lang) {
   document.querySelectorAll('.mob-lang-btn').forEach(p => p.classList.toggle('active', (lang==='hi' && p.textContent.trim()==='हिंदी') || (lang==='en' && p.textContent.trim()==='EN')));
   // Add font for Hindi
   document.body.style.fontFamily = lang==='hi' ? "'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif" : "'Plus Jakarta Sans',sans-serif";
-  // Re-render blog cards in new language
+  // Re-render blog cards in new language — preserve homepage 3-card preview
   try {
     if(typeof allBlogs !== 'undefined' && allBlogs && allBlogs.length > 0) {
-      if(typeof searchBlogs === 'function') {
-        searchBlogs();
-      } else {
-        var grid = document.getElementById('blogGrid');
-        if(grid) grid.innerHTML = allBlogs.map(renderBlogCard).join('');
+      var grid = document.getElementById('blogGrid');
+      if(grid){
+        var preview = allBlogs.slice(0, 3);
+        grid.innerHTML = preview.map(renderBlogCard).join('');
       }
     }
   } catch(e) { /* non-fatal; blog will re-render on next search/filter */ }
@@ -1507,7 +1511,13 @@ function loadBlogs() {
       if(allBlogs.length === 0) {
         grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles about flexible packaging, Excel formulas, career tips, and tech tools coming soon!</p></div>';
       } else {
-        grid.innerHTML = allBlogs.map(renderBlogCard).join('');
+        /* Homepage shows only latest 3 — full library lives at /blog */
+        var preview = allBlogs.slice(0, 3);
+        grid.innerHTML = preview.map(renderBlogCard).join('');
+        /* Update the "Browse all articles" hint with actual count */
+        var hint = document.querySelector('.blog-cta-hint');
+        if(hint) hint.textContent = allBlogs.length + ' articles · filter, search, paginate';
+      }
       }
     })
     .catch(err => {
