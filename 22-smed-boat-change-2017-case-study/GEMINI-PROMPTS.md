@@ -7,127 +7,190 @@
 **Blog scope:** Real 2017 MET-1 boat-set changeover SMED case study — 65 to 35 minutes
 **Published:** April 2026 (9-year validation arc since 2017 project)
 
+
+
+## ⚠️ IMPORTANT — IF THE LOGO COMES OUT WRONG
+
+Gemini's image generation **does NOT always reliably remember uploaded image files across separate prompts** in the same chat session. Despite the strong instructions in each prompt, you may sometimes get an image where:
+- The logo looks invented/redesigned (wrong shape, wrong colors)
+- The logo is missing entirely
+- The colors V (green), K (blue), S (red) don't match your actual logo
+
+**When this happens, the fix is simple:**
+
+1. **Re-upload `logo.png` directly with that specific prompt** — don't just say "use the logo from earlier"
+2. Add this line at the very top of your prompt: **"Logo file is attached to THIS prompt — use it directly, do not reference earlier prompts."**
+3. Re-generate that image
+
+**Why this happens:** Gemini's chat memory works well for text but is less reliable for retaining specific image asset files across multiple generation calls. Each image generation can sometimes be treated as a fresh request.
+
+**Recommended workflow for safety:**
+- Always re-upload `logo.png` if generating images more than ~30 minutes apart
+- Always re-upload `logo.png` after starting a new conversation
+- If unsure, re-upload — it costs nothing extra and guarantees brand consistency
+
 ---
 
-# 🌟 IMAGE 1: BILINGUAL COVER — `cover.png`
+---
 
-## Why bilingual on the cover
+# 🌟 IMAGE 1: BILINGUAL COVER — `cover.png` (PHOTOREALISTIC)
 
-The cover image is **always visible** regardless of which language the reader is reading the blog in. Hindi readers see the same cover as English readers. So the cover should support **both** languages — not look like an "English-only" graphic to Hindi readers.
+## Style direction — magazine-cover photorealism
 
-For inline content diagrams in future blogs, we'll use **separate `*-en.png` and `*-hi.png`** versions that swap based on language toggle. But the cover stays bilingual.
+This cover is a **photorealistic editorial photograph** with bilingual title overlay — like a premium business magazine cover (McKinsey Quarterly, Harvard Business Review, Financial Times Weekend). It is NOT a flat illustration. The photograph carries the visual weight; the title overlay carries the message.
 
 ## Recommended dimensions
 1600 × 900 px (16:9 aspect ratio for LinkedIn/web)
 
-## Style direction
-- **Mood:** Confident, real-plant-engineering, modern industrial
-- **Palette:** VKS Tech navy (#1A2744) + orange accents (#E85D26) + teal highlights (#0D8C7E) + cream background (#FAF9F6)
-- **Style:** Editorial illustration, clean and professional, NOT photo-realistic
-- **Typography:** Bold sans-serif (Inter or Bebas Neue) for English, clean Devanagari (Hind, Mukta, or Noto Sans Devanagari) for Hindi
+## The photograph (full-bleed, fills entire image)
 
-## Composition
+A photorealistic close-up of a metalliser chamber and source area in an Indian flexible packaging plant. Specific elements that should be visible:
 
-**Left side (40%):** Stylised illustration of a metalliser chamber with a stopwatch graphic transitioning from 65 → 35 minutes. The stopwatch can have an animation-feel arrow or motion lines. Keep it minimalist.
+- **Foreground (sharp focus):** A row of ceramic evaporation boats (TiB2-BN, flat rectangular bar shape with raised side rims) seated on a metalliser source bar. The source bar has copper clamps and aluminium wires running across the boats. Close-up, almost macro lens feel.
+- **Mid-ground (slightly soft):** The metalliser drum visible in the back, with a film web wrapping around it. Small specular highlights from chamber lights.
+- **Background (soft bokeh):** Suggested vacuum chamber walls, faint glow of machine status lights (small green/amber LEDs), industrial environment.
+- **Lighting:** Cinematic side lighting from upper-left, with subtle rim lighting on the boats and source bar to reveal ceramic surface textures and metallic reflections. Slight dramatic shadow falloff.
+- **Mood:** Premium engineering, calm, focused, "this is real plant work."
 
-**Right side (60%):** Bold title card on cream background with **bilingual title stack**:
+**Camera spec:** Sony A7R IV equivalent, 50mm prime lens, f/2.8, ISO 400, shutter 1/125. Photographic depth of field — boats sharp, drum slightly soft, background bokeh.
 
-**English title (in NAVY, BOLD, larger):**
+## Magazine-cover title overlay
+
+A subtle dark navy gradient overlays the **bottom 50% of the image** — fully transparent at the top of the gradient, ~85% opaque at the very bottom. This creates clean text legibility without obscuring the photo above.
+
+On this gradient, the bilingual title stack is rendered in clean typography:
+
+**English title (large, white, BOLD, top of gradient):**
 > How I Cut Metalliser Boat Change Time from 65 to 35 Minutes
 
-**Hindi title (in NAVY, BOLD, slightly smaller, below):**
+**Hindi title (slightly smaller, white, BOLD, below English, in Devanagari script):**
 > मैंने Metalliser Boat Change Time को 65 से 35 Minutes तक कैसे लाया
 
-**Subtitle in ORANGE (bilingual on one line):**
+**Subtitle (orange #E85D26, italic, smaller, below both titles, bilingual on one line):**
 > A 2017 Case Study  |  एक 2017 Case Study
 
-**Bottom strip — thin teal banner with white text (bilingual-friendly numerals):**
+**Bottom strip (very thin teal #0D8C7E semi-transparent banner with white text, bottom edge):**
 > 65 → 35 min  |  46% reduction  |  Zero capex  |  12-week project
 
-## Visual elements
+## Logo placement (top-right corner)
 
-- **Top-right corner:** Place uploaded `logo.png` EXACTLY as provided (80×80 pixels) with "VKS Tech" text below it in navy. Do NOT recreate the logo — use the actual uploaded file.
-- **Bottom-left of stopwatch:** Subtle "ECRS" letter cluster as a watermark
-- **Background texture:** Subtle grid lines or dot pattern in cream tones
-- **Optional:** Thin orange divider line between stopwatch and title card
+Top-right corner: Place the uploaded logo.png file EXACTLY as provided (this is the master reference logo for all subsequent images in this chat). Size: 80×80 pixels, 20px margin from edges.
 
-## What to avoid
+Because the photo background may have varying brightness, place the logo on a small **white circular badge** (90×90 px diameter, slight drop shadow) so it always reads cleanly. Below the badge, in white bold sans-serif (Inter font, 18pt): "VKS Tech".
 
-- Do NOT use photo-realistic plant imagery
-- Do NOT include any individual person's face or identifiable features
-- Do NOT use stock-photo metalliser images
-- Do NOT include any text not specified above
-- Do NOT use red color (reserved for warnings in VKS Tech brand)
+Do NOT recreate or redesign the logo — use the uploaded file pixel-for-pixel.
+
+## What to AVOID
+
+- Do NOT make this a flat illustration, vector art, or infographic
+- Do NOT use stock-photo "business handshake" or "engineer with clipboard" imagery
+- Do NOT show identifiable faces of any people
+- Do NOT use overly saturated colors — keep the photo's natural industrial palette
+- Do NOT add text other than what's specified above
+- Do NOT use red color anywhere in the photo or title overlay
+- Devanagari (Hindi) text must render correctly — use a Hindi-supporting typeface like Hind, Mukta, or Noto Sans Devanagari
 
 ## Prompt for Gemini / similar AI image generator
 
 ```
-[Upload logo.png attached with this prompt — this will be the LOGO REFERENCE for all subsequent images in this chat]
+[Upload logo.png attached with this prompt — THIS IS THE MASTER LOGO REFERENCE for all subsequent images in this chat session. Please retain this image file in chat memory.]
 
-IMPORTANT — LOGO BRANDING:
-Use the uploaded logo.png file EXACTLY as provided. Do NOT recreate, redesign, or reimagine the logo. The uploaded file is the official VKS Tech tri-color heart logo (V in green, K in blue, S in red, with a stylized heart shape). Use it as a placed asset, not as a description to redraw.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-NOTE: I will reference this same logo for all subsequent images in this chat session — please remember it for future prompts.
+1. Use the uploaded logo.png file EXACTLY as provided in this prompt. Do NOT recreate, redesign, or reimagine it.
 
-Create a 1600x900 px editorial illustration for a manufacturing blog cover. The cover is BILINGUAL — must include both English and Hindi (Devanagari script) text.
+2. The uploaded file is the official VKS Tech tri-color heart logo with V (green), K (blue), S (red).
 
-Composition: Split into two sides.
+3. Place the logo on a small white circular badge (90×90 px) in the top-right corner so it stays visible against the photo background.
 
-LEFT SIDE (40% of width): Stylized minimalist illustration of a metalliser chamber with a large stopwatch in front, transitioning from "65 min" (in red strike-through) to "35 min" (in bright orange). Motion lines suggest improvement. Editorial illustration style, not photo-realistic.
+4. CRITICAL FOR FUTURE PROMPTS: I will reference this same logo for all subsequent images. Please remember the exact file I am uploading right now.
 
-RIGHT SIDE (60% of width): Clean cream colored background (#FAF9F6) with bilingual typography stack:
+═══════════════════════════════════════════════════
 
-Top headline (large, dark navy #1A2744, bold):
+GENERATE A PHOTOREALISTIC MAGAZINE-COVER IMAGE.
+
+Style: Premium business magazine cover (think McKinsey Quarterly or Financial Times Weekend). Photorealistic editorial photograph with bilingual title overlay. NOT an illustration, NOT vector art, NOT infographic style.
+
+Dimensions: 1600 × 900 px (16:9)
+
+THE PHOTOGRAPH (fills entire image, full-bleed):
+
+A photorealistic close-up of a metalliser chamber interior in an Indian flexible packaging plant. Specifically:
+
+- FOREGROUND (sharp focus, lower-left third of frame): A row of ceramic evaporation boats — TiB2-BN type, flat rectangular bar shape with raised side rims — seated on a metalliser source bar. Visible copper clamps and aluminium wires running across the boats. Macro lens feel, every detail crisp.
+
+- MID-GROUND (soft focus): The metalliser drum visible behind, with film web wrapping around it. Small specular highlights from chamber lights.
+
+- BACKGROUND (bokeh): Vacuum chamber walls suggested through soft blur, faint amber/green LED status lights as small bokeh circles, industrial machinery environment.
+
+- LIGHTING: Cinematic side lighting from upper-left. Subtle rim lighting on boats and source bar revealing ceramic surface textures and metallic reflections. Slight dramatic shadow falloff into the background. Mood: calm, premium, "real plant work."
+
+- CAMERA: Sony A7R IV equivalent, 50mm prime lens, f/2.8, ISO 400, shutter 1/125. Photographic depth of field — boats sharp, drum slightly soft, background bokeh.
+
+- COLOR PALETTE in photo: Natural industrial — silvery boats, copper clamps, dark chamber tones, soft warm highlights. NOT saturated. NOT colorized.
+
+MAGAZINE-COVER TITLE OVERLAY:
+
+Apply a dark navy (#1A2744) gradient over the bottom 50% of the image. Fully transparent at the top of the gradient, ~85% opaque at the very bottom. This creates clean text legibility without obscuring the photo above.
+
+On this gradient, render the bilingual title stack in clean typography:
+
+ENGLISH TITLE (large, white, BOLD, Inter font, ~52pt):
 "How I Cut Metalliser Boat Change Time from 65 to 35 Minutes"
 
-Below it, in slightly smaller dark navy bold (Devanagari script):
+HINDI TITLE (slightly smaller, white, BOLD, Devanagari script with Hind/Mukta typeface, ~36pt, below English):
 "मैंने Metalliser Boat Change Time को 65 से 35 Minutes तक कैसे लाया"
 
-Below both, in orange (#E85D26):
+SUBTITLE (orange #E85D26, italic, ~22pt, below both titles, bilingual on one line):
 "A 2017 Case Study  |  एक 2017 Case Study"
 
-Bottom strip with teal background (#0D8C7E) and white text:
+BOTTOM STRIP (very thin teal #0D8C7E semi-transparent banner with white text, ~16pt, at the bottom edge):
 "65 → 35 min  |  46% reduction  |  Zero capex  |  12-week project"
 
-TOP-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 80×80 pixels, 20px margin from edges. Below it, in navy #1A2744 bold sans-serif (Inter font, 18pt): "VKS Tech". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+LOGO PLACEMENT (top-right corner):
+Place the uploaded logo.png on a small white circular badge (90×90 px diameter, with subtle drop shadow). Logo size 80×80 px, 20px margin from edges. Below the badge, in white bold sans-serif (Inter font, 18pt): "VKS Tech". Use the EXACT uploaded logo file — do not recreate.
 
-BACKGROUND: Subtle dot grid pattern in light cream tones, suggesting engineering paper.
-
-STYLE: Editorial illustration, clean lines, professional. Modern industrial aesthetic. NOT photo-realistic. Use only the brand colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6.
-
-CRITICAL: Devanagari (Hindi) script must be rendered correctly. Use a Hindi-supporting typeface like Hind, Mukta, or Noto Sans Devanagari.
-
-NO faces, NO individual people identifiable, NO red colors except for the strike-through "65 min", NO stock-photo imagery.
+CRITICAL CONSTRAINTS:
+- Photorealistic photography, NOT illustration or vector
+- NO faces, NO identifiable people
+- NO red color in the photograph or overlay (red is reserved for warnings only)
+- NO stock-photo handshakes, smiling engineers, or generic factory imagery
+- Devanagari (Hindi) script MUST render correctly
+- The title text must be highly legible against the gradient
+- Photo composition should make a plant manager think "this is my plant"
 ```
 
-## Alternative prompt — simpler stopwatch focus
+## Alternative prompt — simplified scene (if the first attempt has issues)
 
 ```
-[Upload logo.png attached with this prompt — this will be the LOGO REFERENCE for all subsequent images in this chat]
+[Upload logo.png attached with this prompt — master reference logo for the chat session]
 
-IMPORTANT — LOGO BRANDING:
-Use the uploaded logo.png file EXACTLY as provided. Do NOT recreate, redesign, or reimagine the logo. The uploaded file is the official VKS Tech tri-color heart logo (V in green, K in blue, S in red, with a stylized heart shape). Use it as a placed asset, not as a description to redraw.
+⚠️ Use the uploaded logo.png EXACTLY. Place on white circular badge in top-right.
 
-NOTE: I will reference this same logo for all subsequent images in this chat session — please remember it for future prompts.
+═══════════════════════════════════════════════════
 
-Editorial blog cover, 1600x900 px. BILINGUAL.
+GENERATE A PHOTOREALISTIC MAGAZINE-COVER IMAGE.
 
-Background: Cream (#FAF9F6) with subtle dot grid texture.
+Style: Premium business magazine cover, photorealistic editorial photograph with bilingual title overlay. NOT illustration or infographic.
 
-CENTER: A large minimalist analog stopwatch graphic. The clock face shows "65" being crossed out in faded gray. Below the clock face, in bright orange (#E85D26) bold, the number "35" appears prominently. Motion lines suggest transformation.
+Dimensions: 1600 × 900 px (16:9)
 
-ABOVE the stopwatch: Bilingual headline stack
-- Bold dark navy (#1A2744): "How I Cut Boat Change Time from 65 to 35 Minutes"
-- Bold dark navy Hindi (Devanagari): "मैंने Boat Change Time को 65 से 35 Minutes तक कैसे लाया"
+THE PHOTOGRAPH:
+Wide-angle photorealistic shot of a metalliser machine in an Indian flexible packaging plant. The machine is a large horizontal cylindrical vacuum chamber on an industrial floor. Visible elements: chamber, control panel with green/amber status LEDs, film rewinder spool with metallised film, polished concrete floor. Cinematic lighting from upper-left, depth of field, slight bokeh in the back. Sony A7R IV, 35mm lens, f/4, ISO 400.
 
-BELOW the stopwatch: Orange subtitle
-- "A 2017 Case Study | एक 2017 Case Study"
+OVERLAY:
+Dark navy gradient on bottom 50% (transparent at top, 85% opaque at bottom).
 
-TOP-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 80×80 pixels, 20px margin from edges. Below it, in navy #1A2744 bold sans-serif (Inter font, 18pt): "VKS Tech". Do NOT recreate the logo — use the uploaded file as-is.
+TITLE STACK on the gradient:
+- "How I Cut Metalliser Boat Change Time from 65 to 35 Minutes" (white bold, 52pt)
+- "मैंने Metalliser Boat Change Time को 65 से 35 Minutes तक कैसे लाया" (white bold Devanagari, 36pt)
+- "A 2017 Case Study  |  एक 2017 Case Study" (orange #E85D26 italic, 22pt)
 
-BOTTOM: Thin teal strip with white numerals: "46% reduction | Zero capex | 12-week project"
+BOTTOM STRIP: Teal banner with white text "65 → 35 min  |  46% reduction  |  Zero capex"
 
-Brand colors only: navy, orange, teal, cream. Editorial illustration aesthetic. Devanagari must render correctly.
+TOP-RIGHT: Uploaded logo on white circular badge, with "VKS Tech" white bold below.
+
+CONSTRAINTS: Photorealistic only. No faces. No red except UI warnings. Devanagari must render. No stock-photo cliché.
 ```
 
 ---
@@ -138,10 +201,32 @@ Brand colors only: navy, orange, teal, cream. Editorial illustration aesthetic. 
 **Placement in blog:** After the "Step 1 Progression" section header in EN
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a clean editorial data visualization, 1600x900 px, on a cream background (#FAF9F6).
 
@@ -181,7 +266,7 @@ CALLOUT BOXES (small annotations near intervention points):
 - Sub-40 (week 5): green background, white text
 - 35-min target (week 12): navy background, white text "TARGET ACHIEVED"
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean editorial data viz, Financial Times / Bloomberg aesthetic. NOT photo-realistic. Use only brand colors.
 
@@ -196,10 +281,32 @@ NO axis labels in red. NO clipart icons. NO 3D effects.
 **Placement in blog:** After the "Step 1 Progression" section header in HI
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a clean editorial data visualization, 1600x900 px, on a cream background (#FAF9F6). All text in Hindi (Devanagari script) where applicable.
 
@@ -231,7 +338,7 @@ CALLOUT BOXES (Hindi annotations):
 
 LINE STYLE: Same as English version (navy main line, orange interventions, green final).
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean editorial data viz. CRITICAL: Devanagari script must render correctly. Use Hindi-supporting typeface like Hind, Mukta, or Noto Sans Devanagari.
 
@@ -246,10 +353,32 @@ Use only brand colors: navy #1A2744, orange #E85D26, teal #0D8C7E, green #2E8B57
 **Placement in blog:** After "Tool Box System" section header in EN
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a clean isometric infographic, 1600x1000 px, on cream background (#FAF9F6).
 
@@ -293,7 +422,7 @@ BELOW the boxes — KEY INSIGHT BANNER:
 Navy background, white text, 18pt bold:
 "Each station has its own tools. No sharing. No fetching. Within 1 week of installation: 60 → 55 min average."
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean isometric infographic, Toyota Production System manual aesthetic. NOT photo-realistic. Engineering-paper feel.
 
@@ -309,10 +438,32 @@ NO 3D photo-realism. NO clipart. NO red colors.
 **Placement in blog:** After "Tool Box System" section header in HI
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a clean isometric infographic, 1600x1000 px, on cream background (#FAF9F6). All text in Hindi where applicable, with technical terms (Box 1, dimensions, tool names) staying in English.
 
@@ -350,7 +501,7 @@ KEY INSIGHT BANNER (Devanagari):
 Navy background, white text, 18pt bold:
 "हर station के अपने tools। कोई sharing नहीं। कोई fetching नहीं। Installation के 1 week के अंदर: 60 → 55 min average।"
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Same as English version. CRITICAL: Devanagari script must render correctly. Use Hind, Mukta, or Noto Sans Devanagari.
 
@@ -365,10 +516,32 @@ Use only brand colors. NO 3D photo-realism. NO red colors.
 **Placement in blog:** After "ECRS Discipline" section header in EN
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a 2x2 grid framework diagram, 1600x900 px, on cream background (#FAF9F6).
 
@@ -417,7 +590,7 @@ CENTER OVERLAP: Small navy circle with white text "29 changes total"
 BOTTOM CENTER: Banner in navy with white text:
 "Result: 65 min → 35 min in 12 weeks. Zero capex."
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean infographic, NOT photo-realistic. Toyota manual aesthetic.
 
@@ -432,10 +605,32 @@ Use only brand colors. NO red. NO clipart. NO 3D.
 **Placement in blog:** After "ECRS Discipline" section header in HI
 
 ```
-[Use the SAME VKS Tech logo.png that I uploaded with the cover image earlier in this chat session]
+[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
 
-IMPORTANT — LOGO BRANDING:
-Use the EXACT same VKS Tech logo file from earlier in this chat — the tri-color heart logo (V in green, K in blue, S in red). Do NOT recreate, redesign, or reimagine it. Refer to the logo.png from the previous prompt and place it as a visual asset, exactly as it appeared in the cover image. The logo must be visually identical across all images in this chat session.
+⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
+
+1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+
+2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
+   - "V" rendered in GREEN (#2E8B57 or similar)
+   - "K" rendered in BLUE (#1A2744 or navy blue)
+   - "S" rendered in RED (#E85D26 or warm red)
+   - Stylized heart shape integrated with the letters
+   - These three letters together form "VKS"
+
+3. STRICT RULES:
+   - Do NOT invent a new logo design
+   - Do NOT use a generic heart icon
+   - Do NOT use Microsoft clipart or stock heart symbols
+   - Do NOT change the colors of V, K, or S
+   - Do NOT add any decorative flourishes
+   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+
+4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+
+5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
+
+The logo must look IDENTICAL across all images in this chat session — same colors, same shape, same proportions. Brand consistency is non-negotiable.
 
 Create a 2x2 grid framework diagram, 1600x900 px, on cream background (#FAF9F6). Same structure as English version, with text in Hindi where natural.
 
@@ -480,7 +675,7 @@ CENTER OVERLAP: Navy circle, white text "29 total changes"
 BOTTOM BANNER (Devanagari):
 "Result: 12 weeks में 65 min → 35 min। Zero capex।"
 
-BOTTOM-RIGHT corner: Place the uploaded logo.png EXACTLY as provided at 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". Do NOT recreate or redesign the logo — use the uploaded file as-is.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Same as English version. CRITICAL: Devanagari script must render correctly.
 
