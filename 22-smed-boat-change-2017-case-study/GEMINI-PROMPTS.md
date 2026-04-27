@@ -129,23 +129,71 @@ A photorealistic close-up of a metalliser chamber interior in an Indian flexible
 
 - COLOR PALETTE in photo: Natural industrial — silvery boats, copper clamps, dark chamber tones, soft warm highlights. NOT saturated. NOT colorized.
 
-MAGAZINE-COVER TITLE OVERLAY:
+MAGAZINE-COVER TITLE OVERLAY (hero-numbers magazine-cover polish):
 
-Apply a dark navy (#1A2744) gradient over the bottom 50% of the image. Fully transparent at the top of the gradient, ~85% opaque at the very bottom. This creates clean text legibility without obscuring the photo above.
+Apply a dark navy (#1A2744) gradient over the bottom 55% of the image. Fully transparent at the top of the gradient, ~88% opaque at the very bottom. The text overlay is composed in 4 hierarchical layers — the numbers are the visual hero, everything else supports them.
 
-On this gradient, render the bilingual title stack in clean typography:
+═══ LAYER 1: TOP BADGE (small, uppercase, near top of image) ═══
 
-ENGLISH TITLE (large, white, BOLD, Inter font, ~52pt):
-"How I Cut Metalliser Boat Change Time from 65 to 35 Minutes"
+A small horizontal pill or thin underline label, top-left of the dark gradient or floating at the top of the bottom-half overlay area:
 
-HINDI TITLE (slightly smaller, white, BOLD, Devanagari script with Hind/Mukta typeface, ~36pt, below English):
-"मैंने Metalliser Boat Change Time को 65 से 35 Minutes तक कैसे लाया"
+"PROCESS ENGINEERING · CASE STUDY · 2017"
 
-SUBTITLE (orange #E85D26, italic, ~22pt, below both titles, bilingual on one line):
-"A 2017 Case Study  |  एक 2017 Case Study"
+Format: Uppercase, white text, mono or condensed sans-serif (IBM Plex Mono or Inter Tight), ~14pt, letter-spacing +2px, with a small orange (#E85D26) divider dot or vertical bar before the text. Looks like editorial publication tag.
 
-BOTTOM STRIP (very thin teal #0D8C7E semi-transparent banner with white text, ~16pt, at the bottom edge):
-"65 → 35 min  |  46% reduction  |  Zero capex  |  12-week project"
+═══ LAYER 2: HERO NUMBERS (the visual anchor — DOMINANT) ═══
+
+The single most important visual element on the cover:
+
+"65 → 35"
+
+Rendered HUGE — approximately 160pt — using a bold display typeface (Bebas Neue, Anton, Oswald, or Bahnschrift Bold). The numbers should occupy roughly 35-40% of the image width.
+
+COLOR TREATMENT: A vertical gradient — the "65" starts in muted gray-orange (#B85530) at the left edge, transitions through bright orange (#E85D26) in the middle, and the "35" ends in vivid coral-orange (#FF7A45) at the right. The arrow "→" is white with a slight orange glow.
+
+EFFECTS: Subtle drop shadow (8px blur, 50% opacity navy) underneath the numbers for depth. Slight letter-spacing of -2px for tight, premium feel. Numbers must visually dominate the lower half of the image.
+
+═══ LAYER 3: WRAPPING CONTEXT TEXT (smaller, white, supports the numbers) ═══
+
+Above the hero numbers, smaller white text in clean sans-serif (Inter or Söhne, ~32pt, REGULAR weight, NOT bold):
+
+"How I cut Metalliser Boat Change time from"
+
+Below the hero numbers, on a single line, larger weight (Inter or Söhne, ~38pt, MEDIUM weight):
+
+"Minutes — A 2017 Case Study"
+
+Both lines are white (#FFFFFF), positioned with comfortable negative space around the numbers (16-24px breathing room). The wrapping text reads naturally as: "How I cut Metalliser Boat Change time from [65 → 35] Minutes — A 2017 Case Study."
+
+═══ LAYER 4: HINDI TITLE STACK (parallel structure, smaller scale) ═══
+
+Below the English layer, slightly smaller, with the same hero-numbers visual treatment in Hindi:
+
+Hindi context line above (Devanagari, Hind/Mukta typeface, ~26pt, white, REGULAR):
+"मैंने Boat Change time को"
+
+Hindi hero numbers (same orange-gradient display treatment as English, but ~110pt — smaller than English numbers but still dominant):
+"65 → 35"
+
+Hindi context line below (Devanagari, ~28pt, white, MEDIUM weight):
+"Minutes तक कैसे लाया — एक 2017 Case Study"
+
+═══ LAYER 5: BOTTOM TAGLINE STRIP (premium editorial finish) ═══
+
+Very bottom of the image — a thin horizontal strip with center-justified uppercase text, letter-spaced:
+
+"9 WEEKS  ·  ZERO CAPEX  ·  46% REDUCTION  ·  REAL PLANT DATA"
+
+Format: White text on semi-transparent teal (#0D8C7E at 60% opacity) thin band (~36px tall). Mono or condensed sans (IBM Plex Mono or Inter Tight), ~14pt, uppercase, letter-spacing +3px. Each item separated by a small orange dot "·". Looks like a magazine subtitle/credit strip.
+
+═══ EDITORIAL POLISH RULES ═══
+
+- HIERARCHY: Numbers > English wrapping text > Hindi hero numbers > Hindi wrapping text > Top badge & bottom strip
+- NEGATIVE SPACE: Generous breathing room around the hero numbers — at least 24px on all sides
+- WEIGHT CONTRAST: Display heavy on numbers, regular/medium on context text, mono-light on metadata strips
+- COLOR DISCIPLINE: White (text) + orange-gradient (numbers) + teal-tinted strip (metadata). NO red anywhere.
+- LETTER-SPACING: Negative on hero numbers (-2px), positive on metadata strips (+2-3px). This is the magazine-cover signature.
+- The numbers must read at thumbnail size — a LinkedIn user scrolling at 30% zoom should still see "65 → 35" instantly
 
 LOGO PLACEMENT (top-right corner):
 Place the uploaded logo.png on a small white circular badge (90×90 px diameter, with subtle drop shadow). Logo size 80×80 px, 20px margin from edges. Below the badge, in white bold sans-serif (Inter font, 18pt): "VKS Tech". Use the EXACT uploaded logo file — do not recreate.
@@ -178,15 +226,25 @@ Dimensions: 1600 × 900 px (16:9)
 THE PHOTOGRAPH:
 Wide-angle photorealistic shot of a metalliser machine in an Indian flexible packaging plant. The machine is a large horizontal cylindrical vacuum chamber on an industrial floor. Visible elements: chamber, control panel with green/amber status LEDs, film rewinder spool with metallised film, polished concrete floor. Cinematic lighting from upper-left, depth of field, slight bokeh in the back. Sony A7R IV, 35mm lens, f/4, ISO 400.
 
-OVERLAY:
-Dark navy gradient on bottom 50% (transparent at top, 85% opaque at bottom).
+OVERLAY (hero-numbers magazine-cover style):
+Dark navy gradient on bottom 55% (transparent top, 88% opaque bottom).
 
-TITLE STACK on the gradient:
-- "How I Cut Metalliser Boat Change Time from 65 to 35 Minutes" (white bold, 52pt)
-- "मैंने Metalliser Boat Change Time को 65 से 35 Minutes तक कैसे लाया" (white bold Devanagari, 36pt)
-- "A 2017 Case Study  |  एक 2017 Case Study" (orange #E85D26 italic, 22pt)
+LAYER 1 — Top badge: "PROCESS ENGINEERING · CASE STUDY · 2017" — uppercase white mono, 14pt, +2px letter-spacing.
 
-BOTTOM STRIP: Teal banner with white text "65 → 35 min  |  46% reduction  |  Zero capex"
+LAYER 2 — HERO NUMBERS (dominant, ~160pt): "65 → 35" in display font (Bebas Neue / Anton / Oswald), with vertical gradient orange-coral (#B85530 → #E85D26 → #FF7A45). Subtle drop shadow. Letter-spacing -2px. Occupies 35-40% of image width.
+
+LAYER 3 — Wrapping text (white, regular weight Inter):
+- Above numbers (32pt regular): "How I cut Metalliser Boat Change time from"
+- Below numbers (38pt medium): "Minutes — A 2017 Case Study"
+
+LAYER 4 — Hindi parallel:
+- Above (26pt regular Devanagari Hind/Mukta): "मैंने Boat Change time को"
+- Hindi hero numbers (110pt, same orange gradient): "65 → 35"
+- Below (28pt medium Devanagari): "Minutes तक कैसे लाया — एक 2017 Case Study"
+
+LAYER 5 — Bottom strip: Thin teal #0D8C7E semi-transparent band, white uppercase mono 14pt, +3px letter-spacing: "9 WEEKS  ·  ZERO CAPEX  ·  46% REDUCTION  ·  REAL PLANT DATA"
+
+POLISH: Heavy hierarchy contrast (numbers dominate), generous negative space, no red, Devanagari must render correctly.
 
 TOP-RIGHT: Uploaded logo on white circular badge, with "VKS Tech" white bold below.
 
