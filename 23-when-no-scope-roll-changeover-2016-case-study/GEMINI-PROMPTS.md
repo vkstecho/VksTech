@@ -1,9 +1,9 @@
 # 🎨 Gemini Image Prompts — Blog #23 Inter-Cycle SMED Case Study
 
-**Workflow:** Upload `logo.png` ONCE with the cover prompt → Gemini will recall it for all subsequent prompts in the same chat session
+**Workflow:** ⚠️ ATTACH `logo.png` to EVERY prompt — all 7 images. Yes, every single one. Gemini's image generator does NOT reliably retrieve files from earlier turns in the chat — uploading each time is the only way to guarantee logo consistency across all images.
 **Total images:** 7 (1 bilingual cover + 3 EN diagrams + 3 HI diagrams)
-**Logo file:** `logo.png` is in this folder — upload it with the COVER prompt only; reference it by chat memory for inline diagrams
-**IMPORTANT:** Generate all 7 images in the SAME chat session so Gemini retains the logo reference. If you start a new chat, re-upload the logo with the first prompt of that session.
+**Logo file:** `logo.png` is in this folder — attach it FRESH with every prompt (cover + all 6 inline diagrams = 7 attachments total). Do NOT rely on chat memory — Gemini's image gen does not retrieve files from prior turns reliably.
+**IMPORTANT:** Attach `logo.png` to every prompt — including each inline diagram. Gemini's image generation does NOT reliably pull image files from prior turns; the only way to guarantee a consistent logo across all images is to attach the same file each time. Generating in the same chat session helps style continuity, but the LOGO specifically requires fresh attachment per prompt.
 **Blog scope:** Real 2016 MET-4 inter-cycle roll changeover SMED case study — 28.5 to 15 minutes
 **Published:** April 2026 (10-year validation arc since 2016 project)
 
@@ -11,29 +11,23 @@
 
 ## ⚠️ IMPORTANT — IF THE LOGO COMES OUT WRONG
 
-Gemini's image generation **does NOT always reliably remember uploaded image files across separate prompts** in the same chat session. Despite the strong instructions in each prompt, you may sometimes get an image where:
-- The logo looks invented/redesigned (wrong shape, wrong colors)
-- The logo is missing entirely
-- The colors V (green), K (blue), S (red) don't match your actual logo
+If the logo on a generated image looks wrong (invented design, missing entirely, wrong colors V=green / K=blue / S=red, wrong shape), the most likely cause is:
 
-**When this happens, the fix is simple:**
+1. **You did not attach `logo.png` to that specific prompt.** Gemini's image generator only sees images attached to the CURRENT prompt — it does NOT retrieve images from earlier prompts in the chat. Even if you attached the logo to the cover prompt, you must ALSO attach it to every inline diagram prompt.
 
-1. **Re-upload `logo.png` directly with that specific prompt** — don't just say "use the logo from earlier"
-2. Add this line at the very top of your prompt: **"Logo file is attached to THIS prompt — use it directly, do not reference earlier prompts."**
-3. Re-generate that image
+2. **Gemini ignored the attached logo and generated its own version.** This happens occasionally even with attachment. If this happens:
+   - Re-run the prompt with `logo.png` attached again
+   - Add this exact line at the very top of the prompt: **"⚠️ The attached logo.png is the official VKS Tech logo. Use it as a placed asset — DO NOT redesign or interpret. If you cannot use the file directly, output a placeholder and ask me to re-upload."**
 
-**Why this happens:** Gemini's chat memory works well for text but is less reliable for retaining specific image asset files across multiple generation calls. Each image generation can sometimes be treated as a fresh request.
+3. **Plan B — manual logo composite (most reliable for brand-critical work):**
+   - Generate the image WITHOUT a logo (remove logo instructions from the prompt)
+   - Open the resulting image in any editor (Canva, Photoshop, even MS Paint)
+   - Drop your actual `logo.png` onto the image at the specified position
+   - This takes 30 seconds per image and guarantees pixel-perfect logo placement
+   - **Recommended for the cover image specifically** — that's the most-seen image and most worth getting exactly right
 
-**Recommended workflow for safety:**
-- Always re-upload `logo.png` if generating images more than ~30 minutes apart
-- Always re-upload `logo.png` after starting a new conversation
-- If unsure, re-upload — it costs nothing extra and guarantees brand consistency
+**Plan A (attach to every prompt) usually works for inline diagrams. Plan B (manual composite) is safest for the cover.**
 
----
-
----
-
-# 🌟 IMAGE 1: BILINGUAL COVER — `cover.png` (PHOTOREALISTIC)
 
 ## Style direction — magazine-cover photorealism with human element
 
@@ -93,14 +87,14 @@ Top-right corner: Uploaded logo.png on a small white circular badge (90×90 px d
 ## Prompt for Gemini / similar AI image generator
 
 ```
-[Upload logo.png attached with this prompt — THIS IS THE MASTER LOGO REFERENCE for all subsequent images in this chat session. Please retain in chat memory.]
+[ATTACH logo.png to THIS prompt — the official VKS Tech logo file. Note: I will attach this same file to every subsequent prompt in this batch. Gemini's image gen only reads images attached to the current prompt, so per-prompt attachment is required.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
 1. Use the uploaded logo.png EXACTLY as provided. Do NOT recreate or redesign it.
 2. The uploaded file is the official VKS Tech tri-color heart logo with V (green), K (blue), S (red).
 3. Place the logo on a small white circular badge (90×90 px) in the top-right corner.
-4. CRITICAL FOR FUTURE PROMPTS: I will reference this same logo for all subsequent images in this chat. Please remember it.
+4. NOTE FOR FUTURE PROMPTS: I will attach this same logo.png file to EVERY subsequent prompt in this batch. Do not assume future prompts will rely on this attachment via chat memory — each prompt will carry its own attachment of the same file.
 
 ═══════════════════════════════════════════════════
 
@@ -212,7 +206,7 @@ CRITICAL CONSTRAINTS:
 ## Alternative prompt — single operator, simpler scene
 
 ```
-[Upload logo.png attached — master reference logo for the chat session]
+[ATTACH logo.png to THIS prompt — required for every image]
 
 ⚠️ Use uploaded logo.png EXACTLY. Place on white circular badge top-right.
 
@@ -259,7 +253,7 @@ CONSTRAINTS: Photorealistic only. NO face. NO red except callout. Devanagari mus
 ## Alternative prompt — symbolic stopwatch focus (most minimal)
 
 ```
-[Upload logo.png attached — master reference logo]
+[ATTACH logo.png to THIS prompt — required for every image]
 
 ⚠️ Use uploaded logo.png EXACTLY. White circular badge top-right.
 
@@ -305,11 +299,11 @@ CONSTRAINTS: Photorealistic only. NO faces. Devanagari must render.
 **Placement in blog:** After "13 Documented Improvements" section header in EN
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -324,9 +318,9 @@ CONSTRAINTS: Photorealistic only. NO faces. Devanagari must render.
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -378,7 +372,7 @@ LEGEND (top-right corner): Color squares with ECRS letter
 BOTTOM CALLOUT BANNER (navy background, white text, 18pt bold):
 "Total: ~610 seconds = ~10 minutes saved per cycle. Plus 'trough cleaning every 2 cycles' frequency change adds another 2 min/cycle on average."
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean editorial data viz, Financial Times / Bloomberg aesthetic. NOT photo-realistic.
 
@@ -394,11 +388,11 @@ NO red. NO 3D. NO clipart.
 **Placement in blog:** After "13 Documented Improvements" section header in HI
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -413,9 +407,9 @@ NO red. NO 3D. NO clipart.
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -459,7 +453,7 @@ LEGEND: Color squares with ECRS letter (English letters universal)
 BOTTOM CALLOUT BANNER (Devanagari):
 "Total: ~610 seconds = हर cycle ~10 minutes saved। Plus 'हर 2 cycles trough cleaning' frequency change average per cycle 2 min और add करता है।"
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
 
 STYLE: Same as English version. CRITICAL: Devanagari script must render correctly.
 
@@ -474,11 +468,11 @@ Use only brand colors. NO red. NO 3D. NO clipart.
 **Placement in blog:** After "Why-Why Analysis" section header in EN
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -493,9 +487,9 @@ Use only brand colors. NO red. NO 3D. NO clipart.
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -546,7 +540,7 @@ CONCLUSION BANNER at bottom:
 Navy background, white text, 22pt bold:
 "DECISION: Remove the visual check from SOP. Saves 25 sec/cycle. Across 12 cycles/day × 2 machines × 30 days = 5 hours saved per month from ONE Why-Why exercise."
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
 
 STYLE: Clean methodology infographic, Toyota training manual aesthetic. NOT photo-realistic.
 
@@ -561,11 +555,11 @@ Use only brand colors. NO red colors except the conclusion highlights. NO clipar
 **Placement in blog:** After "Why-Why Analysis" section header in HI
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -580,9 +574,9 @@ Use only brand colors. NO red colors except the conclusion highlights. NO clipar
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -609,7 +603,7 @@ BOX 6 (revelatory, orange background, white text):
 CONCLUSION BANNER (Devanagari, navy, white text):
 "DECISION: Visual check SOP से हटाओ। हर cycle 25 sec save। 12 cycles/day × 2 machines × 30 days = एक Why-Why exercise से हर महीना 5 hours save।"
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo. in navy
 
 STYLE: Same as English version. CRITICAL: Devanagari script must render correctly.
 
@@ -624,11 +618,11 @@ Use only brand colors. NO red except conclusion highlights. NO clipart.
 **Placement in blog:** After "Inter-Cycle vs Boat-Set" section header in EN
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -643,9 +637,9 @@ Use only brand colors. NO red except conclusion highlights. NO clipart.
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -689,7 +683,7 @@ For "Recovered/day/machine" row, show two horizontal bars proportional to the va
 BOTTOM CALLOUT BANNER (navy, white text, 22pt bold):
 "START WITH INTER-CYCLE. The frequency multiplier (12-15× vs 1.34×) means inter-cycle gains compound ~9× faster per project-week of effort."
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Clean comparison infographic, Wall Street Journal aesthetic. NOT photo-realistic.
 
@@ -704,11 +698,11 @@ Use only brand colors. NO red. NO 3D. NO clipart.
 **Placement in blog:** After "Inter-Cycle vs Boat-Set" section header in HI
 
 ```
-[CRITICAL: Use the EXACT VKS Tech logo.png file that I uploaded earlier in this chat session — the same file from the cover image prompt]
+[CRITICAL: ATTACH logo.png to THIS prompt — yes, the same file you attached to the cover prompt. Gemini's image generator does NOT reliably retrieve images from earlier turns. You MUST attach the file fresh with every prompt for consistent logo across all images.]
 
 ⚠️ LOGO INSTRUCTIONS — READ CAREFULLY:
 
-1. Reference the logo.png file I uploaded in the FIRST prompt of this chat (the cover image prompt). Do NOT generate a new logo.
+1. Use the logo.png file attached to THIS prompt directly. Do NOT generate, redesign, or interpret the logo. Treat it as a placed visual asset — like dropping a sticker onto the canvas.
 
 2. The logo is the official VKS Tech tri-color heart logo. Visual specs:
    - "V" rendered in GREEN (#2E8B57 or similar)
@@ -723,9 +717,9 @@ Use only brand colors. NO red. NO 3D. NO clipart.
    - Do NOT use Microsoft clipart or stock heart symbols
    - Do NOT change the colors of V, K, or S
    - Do NOT add any decorative flourishes
-   - Use the EXACT pixel-for-pixel logo from earlier in this chat
+   - Use the EXACT pixel-for-pixel logo from the file attached to this prompt
 
-4. If you cannot reliably access the logo file from the earlier prompt, output a placeholder note and ask the user to re-upload — do NOT invent a logo.
+4. If for any reason the attached logo.png is unclear, unreadable, or you cannot use it directly, output a placeholder note (e.g., "[LOGO PLACEHOLDER]") and ask the user to re-attach — do NOT invent a logo from the visual description.
 
 5. Place the logo as specified in the layout below. Treat it as a placed visual asset, not as a description to redraw.
 
@@ -762,7 +756,7 @@ COMPARISON BARS: Same proportional visual
 BOTTOM CALLOUT BANNER (Devanagari, navy, white):
 "INTER-CYCLE से शुरू करें। Frequency multiplier (12-15× vs 1.34×) का मतलब है inter-cycle gains project-week of effort में ~9× faster compound होते हैं।"
 
-BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the cover image prompt earlier in this chat (the file I uploaded with the first prompt). Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
+BOTTOM-RIGHT corner: Place the EXACT VKS Tech logo from the logo.png file attached to THIS prompt. Size: 60×60 pixels, 20px margin from edges. Next to it, in navy #1A2744 (Inter font, 14pt): "vkstech.com". The logo must be visually identical to the one in the cover image — same V (green) + K (blue) + S (red) heart logo. Do NOT generate a new logo.
 
 STYLE: Same as English version. CRITICAL: Devanagari script must render correctly.
 
@@ -787,9 +781,9 @@ Total: 7 images (1 bilingual cover + 6 inline = 3 EN + 3 HI)
 
 Before going live with Blog #23:
 
-- [ ] Upload `logo.png` ONCE with the COVER prompt (Image 1) in the chat session
-- [ ] Verify Gemini correctly applies the same logo to all subsequent images in the same chat (Images 2-N reference the uploaded logo by chat memory)
-- [ ] If starting a new chat session: re-upload `logo.png` with the first prompt of that session
+- [ ] Attach `logo.png` to EVERY prompt — cover + each inline diagram (7 attachments total for this blog)
+- [ ] After generation, visually compare logos across all 7 images — they should be identical because the same file is attached to each prompt. If any image's logo looks different, re-run that prompt with logo.png attached again, or use Plan B (manual composite — see troubleshoot block above)
+- [ ] Whether you generate all images in one chat session or across sessions, attach `logo.png` to every single prompt — do not skip any
 - [ ] Generate `cover.png` from bilingual prompt above
 - [ ] Verify **Devanagari script renders correctly** (no boxes, no garbled characters)
 - [ ] Save as PNG (not JPG) to preserve sharp text
