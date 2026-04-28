@@ -144,12 +144,18 @@ export default async function handler(req, res) {
       content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + ASSET_URL + '/');
     }
 
-    /* Compute reading time from the actual rendered content
-       (server-side has full GitHub HTML; this is more accurate than the homepage estimate) */
-    const cleanText = content.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
-    const wordCount = cleanText ? cleanText.split(' ').filter(w => w.length > 0).length : 0;
-    const readMinutes = wordCount > 50 ? Math.max(1, Math.round(wordCount / 220)) : 0;
-    const readTime = readMinutes ? readMinutes + ' min read' : '';
+    /* Compute reading time. Prefer stored value (fast, accurate, set at publish).
+       Fall back to live computation if not yet set (legacy blogs).
+       Always wins because we compute from the full GitHub content here. */
+    let readTime = '';
+    if (b.read_time_minutes && b.read_time_minutes > 0){
+      readTime = b.read_time_minutes + ' min read';
+    } else {
+      const cleanText = content.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+      const wordCount = cleanText ? cleanText.split(' ').filter(w => w.length > 0).length : 0;
+      const readMinutes = wordCount > 50 ? Math.max(1, Math.round(wordCount / 220)) : 0;
+      readTime = readMinutes ? readMinutes + ' min read' : '';
+    }
 
     // Q&A + Prev/Next — fetch in parallel
     const [questions, prevNext] = await Promise.all([
