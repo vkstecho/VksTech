@@ -235,20 +235,20 @@ function getEnText(t){
   return t;
 }
 
-/* Computed read time — for inline blogs only; for GitHub-backed estimate from summary length */
+/* Read time for archive cards. Prefers stored DB value; falls back to
+   computing from inline content. No estimates from summary length —
+   better to show nothing than a wrong number. */
 function readTime(b){
+  if(b.read_time_minutes && b.read_time_minutes > 0){
+    return b.read_time_minutes + ' min read';
+  }
   var text = b.content || '';
   if(text && text.length > 200){
     var clean = text.replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
     var words = clean.split(' ').filter(function(w){return w.length>0;}).length;
-    if(words < 50) return '';
-    return Math.max(1, Math.round(words/220)) + ' min read';
+    if(words >= 50) return Math.max(1, Math.round(words/220)) + ' min read';
   }
-  /* Fallback: estimate from summary length */
-  var s = b.summary || '';
-  if(!s) return '';
-  var sw = s.replace(/\s+/g,' ').trim().split(' ').length;
-  return '~' + Math.max(3, Math.round(sw*25/220)) + ' min read';
+  return null;
 }
 
 function renderCard(b){

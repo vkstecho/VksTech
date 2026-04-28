@@ -1506,35 +1506,28 @@ function getLocalText(text) {
   }
   return text;
 }
-/* Compute estimated reading time from blog content.
-   - For inline blogs (content in DB): strip HTML, count words, divide by 220 wpm
-   - For GitHub-backed blogs (content on GitHub, not in homepage fetch): fall back to summary-based estimate
-   - Returns a string like "5 min read" or null if can't estimate */
+/* Read time for blog cards.
+   Priority order:
+   1. Stored read_time_minutes from DB (set at publish time, accurate)
+   2. Computed from inline content if present (also accurate)
+   3. Skip — better to show nothing than a wrong estimate.
+   Returns string like "5 min read" or null. */
 function computeReadTime(b){
-  /* Prefer actual content if available */
-  var text = b.content || '';
-  var fromContent = text && text.length > 200;
-
-  /* If no real content, estimate from summary:
-     packaging blogs are typically 1500-3000 words → ~7-14 min.
-     We'll use the summary length as a rough proxy: longer summaries
-     usually correlate with longer articles. Better than no signal. */
-  if(!fromContent){
-    text = b.summary || '';
-    if(!text) return null;
-    /* Rough heuristic: assume the article is roughly 25× the summary length */
-    var summaryWords = text.replace(/\s+/g,' ').trim().split(' ').length;
-    var estimatedArticleWords = summaryWords * 25;
-    var minutes = Math.max(3, Math.round(estimatedArticleWords / 220));
-    return '~' + minutes + ' min read';
+  /* (1) Use stored value if available — this is the truth */
+  if(b.read_time_minutes && b.read_time_minutes > 0){
+    return b.read_time_minutes + ' min read';
   }
-
-  /* Strip HTML tags and entities for an accurate word count */
-  var cleanText = text.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
-  var words = cleanText.split(' ').filter(function(w){ return w.length > 0; }).length;
-  if(words < 50) return null; /* too short to be meaningful */
-  var mins = Math.max(1, Math.round(words / 220));
-  return mins + ' min read';
+  /* (2) Compute from inline content if present (rare for new blogs) */
+  var text = b.content || '';
+  if(text && text.length > 200){
+    var clean = text.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+    var words = clean.split(' ').filter(function(w){ return w.length > 0; }).length;
+    if(words >= 50){
+      return Math.max(1, Math.round(words / 220)) + ' min read';
+    }
+  }
+  /* (3) No reliable signal — show nothing rather than a wrong guess */
+  return null;
 }
 
 function renderBlogCard(b) {
@@ -1577,6 +1570,7 @@ function loadBlogs() {
         summary: b.summary,
         content: b.content,
         github_path: b.github_path || null,
+        read_time_minutes: b.read_time_minutes || null,
         imageUrl: b.cover_image,
         published: b.published,
         date: {seconds: new Date(b.created_at).getTime()/1000}

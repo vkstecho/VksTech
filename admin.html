@@ -321,7 +321,9 @@ async function publishBlog(published){
   const row = {
     title, slug, category:cat,
     subcategory: (cat === 'packaging' && subcat) ? subcat : null,
-    summary, cover_image:cover, content:uploadedContent, published
+    summary, cover_image:cover, content:uploadedContent,
+    read_time_minutes: computeReadTimeMinutes(uploadedContent),
+    published
   };
   const {error}=await sb.from('blogs').insert([row]);
   if(error){toast('Error: '+error.message,true);return;}
@@ -524,7 +526,8 @@ async function fetchAndPreview(){
       category: meta.category,
       subcategory: meta.subcategory || '',
       cover: coverUrl,
-      sizeKB: (html.length/1024).toFixed(1)
+      sizeKB: (html.length/1024).toFixed(1),
+      readTimeMinutes: computeReadTimeMinutes(html)
     };
 
     /* Show list of other files found in the folder */
@@ -549,6 +552,7 @@ async function fetchAndPreview(){
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Title:</td><td>'+escH(ghParsed.title || '(missing)')+'</td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Summary:</td><td style="color:var(--muted)">'+escH(ghParsed.summary || '(missing)')+'</td></tr>'+
       '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Cover:</td><td>'+coverHtml+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Read time:</td><td>'+(ghParsed.readTimeMinutes ? '<code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--teal)">📖 '+ghParsed.readTimeMinutes+' min</code> <small style="color:var(--muted)">(computed from full content)</small>' : '<small style="color:var(--muted)">(could not compute — content may be too short)</small>')+'</td></tr>'+
       filesRow+
       '</table>'+
       warn;
@@ -651,6 +655,7 @@ async function publishGithubBlog(published){
     cover_image: ghParsed.cover,
     content: '',
     github_path,
+    read_time_minutes: ghParsed.readTimeMinutes || null,
     published
   };
   const { error } = await sb.from('blogs').insert([row]);
@@ -659,6 +664,8 @@ async function publishGithubBlog(published){
       toast('Database update needed. Run SQL: ALTER TABLE blogs ADD COLUMN github_path text;', true);
     } else if (String(error.message).toLowerCase().indexOf('subcategory') > -1){
       toast('Run subcategory-migration.sql in Supabase first.', true);
+    } else if (String(error.message).toLowerCase().indexOf('read_time_minutes') > -1){
+      toast('Run read-time-migration.sql in Supabase first.', true);
     } else if (String(error.message).toLowerCase().indexOf('duplicate') > -1 || String(error.message).toLowerCase().indexOf('unique') > -1){
       toast('Slug already exists. Rename folder or edit existing post.', true);
     } else {
@@ -689,7 +696,9 @@ async function writeBlog(published){
   const row = {
     title, slug, category:cat,
     subcategory: (cat === 'packaging' && subcat) ? subcat : null,
-    summary, cover_image:cover, content, published
+    summary, cover_image:cover, content,
+    read_time_minutes: computeReadTimeMinutes(content),
+    published
   };
   const {error}=await sb.from('blogs').insert([row]);
   if(error){toast('Error: '+error.message,true);return;}
@@ -761,12 +770,13 @@ async function loadPosts(){
     return `<div class="post-item">
       <div style="flex:1;min-width:250px">
         <h4>${escH(b.title)}<span class="status ${b.published?'pub':'draft'}">${b.published?'Published':'Draft'}</span>${sourceTag}</h4>
-        <div class="meta">${escH(b.category||'')} • ${new Date(b.created_at).toLocaleDateString()}</div>
+        <div class="meta">${escH(b.category||'')} • ${new Date(b.created_at).toLocaleDateString()}${b.read_time_minutes ? ' • 📖 '+b.read_time_minutes+' min' : ' • <span style="color:#c66">⚠️ no read time</span>'}</div>
         ${pathLine}
       </div>
       <div class="post-actions">
         ${editGhBtn}
         <button class="btn btn-primary" onclick="editPost(${b.id})">✏️ Metadata</button>
+        <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="recalcReadTime(${b.id})" title="Recalculate read time from current content">🔁 Recalc Time</button>
         <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="downloadPost(${b.id})">⬇️ Download</button>
         <button class="btn ${b.published?'btn-ghost':'btn-success'}" style="${b.published?'border:1.5px solid var(--border);color:var(--navy)':''}" onclick="togglePub(${b.id},${!b.published})">${b.published?'📥 Unpublish':'🚀 Publish'}</button>
         <button class="btn btn-danger" onclick="delPost(${b.id})">🗑️ Delete</button>
@@ -817,6 +827,42 @@ async function delPost(id){
   const {error}=await sb.from('blogs').delete().eq('id',id);
   if(error){toast(error.message,true);return;}
   toast('Deleted');loadPosts();
+}
+
+/* Recalculate read_time_minutes for a single blog from its current content.
+   For GitHub-backed blogs: fetches the live HTML from GitHub.
+   For inline blogs: uses the content stored in the database.
+   Updates the row, then refreshes the list. */
+async function recalcReadTime(id){
+  /* Load the row to find content source */
+  const {data: row, error} = await sb.from('blogs').select('id,github_path,content').eq('id', id).single();
+  if(error){ toast('Could not load: '+error.message, true); return; }
+  let html = '';
+  if(row.github_path){
+    /* Fetch from GitHub raw */
+    const [folder, file] = row.github_path.split('::');
+    const url = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`;
+    try {
+      const r = await fetch(url, { cache:'no-store' });
+      if(!r.ok){ toast('GitHub fetch failed: '+r.status, true); return; }
+      html = await r.text();
+    } catch(e){ toast('Network error fetching GitHub: '+e.message, true); return; }
+  } else {
+    html = row.content || '';
+  }
+  const minutes = computeReadTimeMinutes(html);
+  if(!minutes){ toast('Content too short to compute read time', true); return; }
+  const {error: uerr} = await sb.from('blogs').update({ read_time_minutes: minutes }).eq('id', id);
+  if(uerr){
+    if(String(uerr.message).toLowerCase().indexOf('read_time_minutes') > -1){
+      toast('Run read-time-migration.sql in Supabase first.', true);
+    } else {
+      toast('Update failed: '+uerr.message, true);
+    }
+    return;
+  }
+  toast('✓ Updated: '+minutes+' min read');
+  loadPosts();
 }
 
 async function editPost(id){
@@ -901,6 +947,11 @@ async function saveEdit(){
   };
   if(!isGithubBacked || content){
     payload.content = content;
+    /* If content was set or modified, recompute read_time_minutes too.
+       For GitHub-backed blogs whose content stays empty in DB, the read time
+       is set during the GitHub publish step (and updated via Republish). */
+    var computed = computeReadTimeMinutes(content);
+    if(computed != null) payload.read_time_minutes = computed;
   }
 
   const {error} = await sb.from('blogs').update(payload).eq('id',id);
@@ -1224,6 +1275,18 @@ async function delQ(id){
   loadQuestions();
 }
 function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* Compute integer read-time-minutes from an HTML body.
+   Strips tags, counts words, divides by 220 wpm.
+   Returns null if content is too short to be meaningful. */
+function computeReadTimeMinutes(html){
+  if(!html || typeof html !== 'string') return null;
+  var text = html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+  if(!text) return null;
+  var words = text.split(' ').filter(function(w){ return w.length > 0; }).length;
+  if(words < 50) return null;
+  return Math.max(1, Math.round(words / 220));
+}
 
 /* Auto-generate slug from English part of title */
 function generateSlug(title){
