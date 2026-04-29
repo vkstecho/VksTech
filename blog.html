@@ -235,6 +235,17 @@ function getEnText(t){
   return t;
 }
 
+/* Defensive cleaner — strips any read-time-style text from a summary string.
+   Safety net so the meta line is the only place read time appears. */
+function stripReadTimeText(s){
+  if(!s) return '';
+  return s
+    .replace(/📖\s*~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
+    .replace(/~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 /* Read time for archive cards. Prefers stored DB value; falls back to
    computing from inline content. No estimates from summary length —
    better to show nothing than a wrong number. */
@@ -267,7 +278,7 @@ function renderCard(b){
     + '<div class="blog-body">'
     + '<span class="blog-tag '+cat.cls+'">'+escH(cat.label)+'</span>' + subBadge
     + '<h3>'+escH(getEnText(b.title))+'</h3>'
-    + '<p>'+escH(getEnText(b.summary))+'</p>'
+    + '<p>'+escH(stripReadTimeText(getEnText(b.summary)))+'</p>'
     + '<div class="blog-meta">'+dateStr + (rt ? ' · <span class="read-time">📖 '+rt+'</span>' : '') + '</div>'
     + '</div></a>';
 }

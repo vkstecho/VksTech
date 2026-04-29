@@ -1506,6 +1506,18 @@ function getLocalText(text) {
   }
   return text;
 }
+
+/* Defensive cleaner — strips read-time-style text from a summary string.
+   Used as a safety net so the meta line is the ONLY place read time appears,
+   even if a blog's summary still has it baked in. */
+function stripReadTimeText(s){
+  if(!s) return '';
+  return s
+    .replace(/📖\s*~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
+    .replace(/~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
 /* Read time for blog cards.
    Priority order:
    1. Stored read_time_minutes from DB (set at publish time, accurate)
@@ -1532,7 +1544,7 @@ function computeReadTime(b){
 
 function renderBlogCard(b) {
   b._title = getLocalText(b.title);
-  b._summary = getLocalText(b.summary);
+  b._summary = stripReadTimeText(getLocalText(b.summary));
   const cat = CAT_STYLES[b.category] || {cls:'tp', label:b.category, icon:'📝'};
   const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
   const readTime = computeReadTime(b);

@@ -145,6 +145,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <div id="tab-posts" class="panel" style="display:none">
 <h3>📋 All Blog Posts</h3>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(232,93,38,.04),rgba(13,140,126,.03));border:1px solid var(--border);border-radius:10px;">
+  <span style="flex:1;font-size:.82rem;color:var(--navy);min-width:200px;">📖 <strong>Read time tools:</strong> Recalculate all blogs from their actual content (one-click bulk fix).</span>
+  <button class="btn btn-primary" onclick="recalcAllReadTimes()" id="recalcAllBtn">🔁 Recalc ALL Read Times</button>
+</div>
 <div id="postsList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
 
 <div id="tab-qa" class="panel" style="display:none">
@@ -862,6 +866,81 @@ async function recalcReadTime(id){
     return;
   }
   toast('✓ Updated: '+minutes+' min read');
+  loadPosts();
+}
+
+/* Bulk recalculate read_time_minutes for ALL blogs.
+   Fetches GitHub content for github_path blogs (sequential to avoid
+   hammering raw.githubusercontent.com), uses inline content for others.
+   Shows live progress on the button so the user knows it's working. */
+async function recalcAllReadTimes(){
+  if(!confirm('Recalculate read time for ALL blogs?\n\nThis will fetch each GitHub blog\'s HTML and update the database. Takes about 30 seconds for 18 blogs.')) return;
+  const btn = document.getElementById('recalcAllBtn');
+  const orig = btn ? btn.textContent : '';
+  if(btn){ btn.disabled = true; btn.textContent = '⏳ Loading blogs…'; }
+
+  /* 1. Fetch every blog */
+  const {data: blogs, error} = await sb.from('blogs')
+    .select('id,title,github_path,content,read_time_minutes')
+    .order('id', {ascending: true});
+  if(error){
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    toast('Could not load blogs: '+error.message, true);
+    return;
+  }
+  if(!blogs || blogs.length === 0){
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    toast('No blogs to update', true);
+    return;
+  }
+
+  let updated = 0, skipped = 0, failed = 0;
+  const failures = [];
+
+  for(let i = 0; i < blogs.length; i++){
+    const b = blogs[i];
+    if(btn) btn.textContent = '⏳ '+(i+1)+'/'+blogs.length+' · '+(b.title||'').slice(0,30)+'…';
+
+    let html = '';
+    try {
+      if(b.github_path){
+        const [folder, file] = b.github_path.split('::');
+        const url = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`;
+        const r = await fetch(url, { cache:'no-store' });
+        if(!r.ok){ failed++; failures.push(b.title+' (HTTP '+r.status+')'); continue; }
+        html = await r.text();
+      } else {
+        html = b.content || '';
+      }
+    } catch(e){
+      failed++; failures.push(b.title+' (network)'); continue;
+    }
+
+    const minutes = computeReadTimeMinutes(html);
+    if(!minutes){ skipped++; continue; }
+
+    /* Skip the DB write if value is unchanged — saves writes */
+    if(minutes === b.read_time_minutes){ skipped++; continue; }
+
+    const {error: uerr} = await sb.from('blogs').update({ read_time_minutes: minutes }).eq('id', b.id);
+    if(uerr){
+      failed++; failures.push(b.title+' (db: '+uerr.message+')');
+      if(String(uerr.message).toLowerCase().indexOf('read_time_minutes') > -1){
+        if(btn){ btn.disabled=false; btn.textContent=orig; }
+        toast('Run read-time-migration.sql in Supabase first.', true);
+        return;
+      }
+      continue;
+    }
+    updated++;
+  }
+
+  if(btn){ btn.disabled=false; btn.textContent=orig; }
+  let msg = '✓ Done — '+updated+' updated';
+  if(skipped) msg += ', '+skipped+' unchanged';
+  if(failed)  msg += ', '+failed+' failed';
+  toast(msg, failed > 0);
+  if(failures.length) console.error('Failed blogs:', failures);
   loadPosts();
 }
 
