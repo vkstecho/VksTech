@@ -1,1 +1,904 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
 
+<div class="article-body">
+
+<div style="margin:24px 0;">
+<img src="cover.png" alt="Cut Bare Film Waste from 2% to 1% — A Shop-Floor Yield Playbook" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div class="en-content">
+
+<h2>🎯 Cut Bare Film Waste from 2% to 1% — A Shop-Floor Yield Playbook</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 18-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; Published April 2026 &nbsp;|&nbsp; Bookmark for reference</p>
+
+<p>Most metalliser plants in India track metallised waste obsessively. Output kg, OD reject, slitter scrap — every percentage point gets a meeting. But when you ask the same plant <em>how many kilograms of bare film were wasted before metallisation</em>, the answer is usually a shrug. That gap is where lakhs of rupees disappear every month, quietly, because nobody owns the number.</p>
+
+<p>I have spent 9+ years inside metalliser plants and I will tell you something most process engineers learn the hard way: <strong>bare film waste is a different animal from metallised waste.</strong> It sits at a different stage, has different owners (Stores, QC, Unwinder operator — not just the Met operator), and is invisible to the metallisation OD tracker. The plants that figure this out recover ₹3-5 lakh per machine per month. The plants that don't keep paying the leak.</p>
+
+<p>This blog is bare-film-side yield. It is the upstream half of the metalliser improvement story. <a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent">Blog 24</a> covered metallised-side waste (the downstream half). Together they recover the full yield gap. <strong>Read both, and use the formats from both.</strong></p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — What's at Stake</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Industry typical bare film waste:</strong> ~2-2.5% of bare film input</li>
+<li><strong>Achievable target:</strong> ~1% with discipline + machine settings</li>
+<li><strong>Per 54,000m jumbo at start-up:</strong> 300m typical → <strong>120m target</strong> (180m saving)</li>
+<li><strong>Per 54,000m jumbo at end-of-roll:</strong> 500m typical → <strong>150m target</strong> (350m saving)</li>
+<li><strong>Splice failure cost:</strong> 0 kg if joint holds, <strong>30-50 kg if it fails</strong> — binary, not structural</li>
+<li><strong>Capex required:</strong> Near zero — three formats and a stop-diameter setting on the unwinder</li>
+<li><strong>Recovery for a 200 MT/month machine:</strong> ~₹3.7 lakh/month direct material cost recovery</li>
+</ul>
+</div>
+
+<h3>📍 Why Bare Film Waste Hides — and Why It Costs More Than You Track</h3>
+
+<p>Walk into any metalliser hall and look at the production sheet. You will find columns for OD reject, sample, trim, and total metallised waste. What you will almost never find is a column for bare film consumed versus bare film purchased. The two numbers are kept in two different systems — Stores tracks the inward, Production tracks the output, and nobody reconciles them at the jumbo level.</p>
+
+<p>That gap between inward and consumed is the bare film waste. It accumulates from six places, before and around the metalliser, and almost none of them show up on the metallisation OD tracker. Five are reducible through discipline and one machine setting. The sixth — splice failure — is binary and reliability-driven. Get all six right and the typical 2-2.5% bare film waste collapses to ~1%, with no capex.</p>
+
+<p>The ownership map matters because no single role can fix this alone:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Source</th><th>Owner</th><th>Where it shows up</th></tr>
+</thead>
+<tbody>
+<tr><td>1. The Inward Gap (supplier vs weighed)</td><td>Stores + QC</td><td>Weighbridge log vs invoice</td></tr>
+<tr><td>2. Storage & Handling Damage</td><td>Warehouse + Material Handler</td><td>Reject jumbos + outer-layer discard</td></tr>
+<tr><td>3. Outer-Wrap Discard at Loading</td><td>Unwinder operator</td><td>Wrap film bin near unwinder</td></tr>
+<tr><td>4. Start-Up Length (300m → 120m)</td><td>Met operator</td><td>Bottom Waste at slitter</td></tr>
+<tr><td>5. End-of-Roll Tail (500m → 150m)</td><td>Met operator + machine setting</td><td>Bare film left on used core</td></tr>
+<tr><td>6. Splice Failure (binary, 0 or 30-50 kg)</td><td>Unwinder op + supplier QC</td><td>Web break event + scrap roll</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;">
+<img src="bare-film-loss-map-en.png" alt="Bare Film Loss Map — six leakage points from supplier to metalliser" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h3>🛠️ Source 1 — The Inward Gap (Supplier Weight vs Weighed)</h3>
+
+<p>Every consignment of bare film arrives with a supplier-stated weight on the invoice. Almost no plant weighs every consignment on its own weighbridge before accepting. The few plants that do, find a consistent gap — usually 0.3% to 0.5% — between supplier weight and actual weighed weight. On a typical 20 MT consignment, that is 60 to 100 kg gone before a single metre is unwound.</p>
+
+<p>Three discipline gaps drive this:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>No incoming weighbridge check.</strong> The consignment is accepted on supplier weight alone. The plant has no number to dispute.</li>
+<li><strong>Core and packaging weight not deducted.</strong> Some suppliers invoice gross weight (including core, wrap, and pallet). A 6" or 8" wooden core can weigh 8-15 kg. Across 30 jumbos, that is 240-450 kg of "film" that is actually wood.</li>
+<li><strong>Length tolerance abuse.</strong> Suppliers quote a length per jumbo (e.g., 54,000m) but actual length can be ±2% — sometimes consistently under. Length × thickness × width × density should match weight; if it does not, the plant is paying for film that is not there.</li>
+</ul>
+
+<p><strong>The fix:</strong> a per-consignment Inward Inspection Format filled at the weighbridge. Six columns: invoice no, supplier, claimed weight, weighed weight (net of core+packaging), length declared, gap %. If gap exceeds 0.5%, raise a debit note. After three months of consistent debit notes, supplier accuracy improves measurably.</p>
+
+<p>This is not a margin recovery — it is a cost-of-goods correction. But it is the easiest 0.3-0.5% on this list to capture, and it has zero shop floor cost.</p>
+
+<h3>🛠️ Source 2 — Storage and Handling Damage</h3>
+
+<p>Bare film is fragile in ways that surprise people who have not handled it. A jumbo dropped 6 inches onto a hard floor can develop a hairline crack in the inner layers that propagates into a tear during metallisation. A roll stored leaning against a wall can starring (axial misalignment) within 48 hours. A jumbo stored in a humid corner near a leaking roof picks up moisture, which manifests as edge waviness and reject at slitter. None of this damage is visible from outside the wrap.</p>
+
+<p>Typical loss: in a poorly managed warehouse, 1-2 jumbos per month per machine are rejected outright at incoming inspection. At 2,700 kg per jumbo and ₹180/kg, that is <strong>₹4.8-9.7 lakh/year per machine, before any metalliser sees the film</strong>.</p>
+
+<p>The discipline is unglamorous but proven:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Always vertical storage on cradles.</strong> Never horizontal, never against walls. Cradles cost ₹200-400 each.</li>
+<li><strong>FIFO with date stickers.</strong> Bare film over 60 days old has measurably higher reject rates. Use older stock first.</li>
+<li><strong>Forklift/crane rule: never lift by core ends alone</strong> — always with proper sling or boom. A 2,700 kg jumbo lifted by core ends will crush the core and crack the inner layers.</li>
+<li><strong>Visual check at receipt.</strong> Telescoping (lateral slip), starring, edge nicks, dent — all visible if someone looks. Ten seconds per jumbo at receipt prevents the reject 30 days later.</li>
+</ul>
+
+<h3>🛠️ Source 3 — Outer-Wrap Discard at Loading</h3>
+
+<p>When the Unwinder operator loads a fresh jumbo, the first 30 to 200 metres are routinely peeled off and discarded. The reason: outer layer is dirty, has wrap-rub marks, has small dents from packaging, or shows protrusions. Operator judgment governs how much gets peeled.</p>
+
+<p>The good operator peels <strong>30 metres or less</strong> — just the visibly affected outer wrap. The undisciplined operator peels <strong>150-200 metres "to be safe"</strong>. On a 54,000m jumbo, that is the difference between 0.06% and 0.37% — a 6× swing driven entirely by operator habit.</p>
+
+<p>Three behaviours separate the disciplined operator from the wasteful one:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Inspecting before peeling, not while peeling.</strong> The disciplined operator removes wrap, looks at the first layer for 10 seconds, decides 30m or 50m, and cuts cleanly. The undisciplined operator peels and unrolls and peels and unrolls.</li>
+<li><strong>Knowing what is acceptable downstream.</strong> Light wrap-rub usually metallises fine. Soft surface scratch usually metallises fine. Edge nick or visible crease — that needs to come off. Without this knowledge, operators err on the side of "remove more."</li>
+<li><strong>Measured, not estimated.</strong> The disciplined operator's unwinder has a metre counter or paint mark at 30m and 100m. He cuts at the mark, not by feel.</li>
+</ul>
+
+<p>Across 30 jumbos/day, the difference between 30m and 200m of outer-wrap discard is <strong>5,100m of bare film per day = ~258 kg/day = ~₹46,000/day at ₹180/kg</strong>. From one operator habit.</p>
+
+<h3>🛠️ Source 4 — Start-Up Length (300m → 120m, the Biggest Single Lever)</h3>
+
+<p>This is where the metalliser starts each cycle. Threading the film path, joining to the rewinder, pumping down, energising sources, ramping OD to target. The film consumed during this sequence is bare-film waste from the metalliser's perspective and "Bottom Waste at slitter" from the slitter's perspective (because the start-of-cycle wind sits at the core, which is the last to be slit). Same metres, two views.</p>
+
+<p>Here is the breakdown of where 120m is justified and 300m is not:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Disciplined operator</th><th>Undisciplined operator</th></tr>
+</thead>
+<tbody>
+<tr><td>Threading + joint pass</td><td>~20 m</td><td>~50-80 m</td></tr>
+<tr><td>OD ramp to target</td><td>~100 m</td><td>~200-220 m</td></tr>
+<tr><td><strong>Total start-up</strong></td><td><strong>120 m</strong></td><td><strong>250-300 m</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The undisciplined operator loses 180m more per jumbo. At 12 micron PET, 3000mm width, that is <strong>~9 kg of bare film per jumbo</strong>. Across 30 jumbos/day = 270 kg/day = <strong>~₹48,000/day per machine just from start-up discipline</strong>.</p>
+
+<p>Three controllable factors:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Pre-pump-down preparation.</strong> Boats seated, wires aligned, clamps clean — verified before chamber close, not after. The undisciplined operator closes chamber and discovers the problem at OD ramp, costing 100+ metres.</li>
+<li><strong>Confident OD ramp.</strong> Properly conditioned source bars hit target current in 60-80m. Operators who "ramp gently to be safe" stretch this to 200m without any benefit.</li>
+<li><strong>Active first-200m monitoring.</strong> The disciplined operator watches in-line OD for the first 200m and corrects if needed. The undisciplined operator sets the recipe and looks away.</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">🔗 Cross-Reference with Blog 24</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#333;">The same 180m of metres show up as <strong>"Ramp-Up Waste" in Blog 24's per-jumbo metallised tracking format</strong> (where it's the largest single contributor — 43% of metallised waste savings). On bare-film-side it is "Start-Up Length" tracked at unwinder. Either side catches it. <strong>Best practice: track from both sides.</strong> If the metalliser side shows 100m and the slitter Bottom Waste shows 280m, you have a measurement disagreement worth investigating — usually a metre-counter calibration issue or splice-pass over-counted.</p>
+</div>
+
+<h3>🛠️ Source 5 — End-of-Roll Tail (500m → 150m, the Stop-Diameter Setting)</h3>
+
+<p>This is the leak that shocks plants the most when they finally measure it. At end of jumbo, the operator stops the unwinder when "the roll looks empty." On an 8" or 10" core, "empty" by eye is typically 200-300mm OD — leaving <strong>400-500 metres of perfectly good bare film unmetallised, dumped with the core into scrap</strong>.</p>
+
+<p>The reason this is reducible: <strong>core wall thickness governs how close to the core you can safely run</strong>. Below a certain stop-diameter, the residual film is too thin to grip the core reliably and you risk a tail-end break. But that minimum diameter is much smaller than what operators typically use. For 8-12 micron film, <strong>150m of remaining film is enough buffer</strong> — and the corresponding stop-OD is just a few millimetres above bare core.</p>
+
+<p>Here is the math, for the three core sizes used at most Indian metalliser plants:</p>
+
+<div style="margin:24px 0;">
+<img src="stop-diameter-en.png" alt="Stop-Diameter math diagram showing core OD and remaining film calculation" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<details style="margin:20px 0;border:1px solid #e2ddd4;border-radius:12px;background:#FAF9F6;">
+<summary style="padding:14px 18px;cursor:pointer;font-weight:bold;color:#1A2744;background:#fff;border-radius:12px;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:0.98em;">
+<span>📊 View full Stop-Diameter Reference Table (9 rows: 6"/8"/10" cores × 8/10/12 micron film)</span>
+<span style="color:#E85D26;font-size:1.2em;margin-left:12px;">▼</span>
+</summary>
+<div style="overflow-x:auto;padding:0 14px 14px 14px;">
+<table>
+<thead>
+<tr><th>Core size</th><th>Core OD</th><th>Film thickness</th><th>Stop-OD at <strong>150m</strong> (Target)</th><th>Stop-OD at <strong>500m</strong> (Typical)</th><th>Saving</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="3"><strong>6"</strong></td><td rowspan="3">178 mm</td><td>8 micron</td><td>182 mm</td><td>192 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>183 mm</td><td>195 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>184 mm</td><td>198 mm</td><td>350 m</td></tr>
+<tr><td rowspan="3"><strong>8"</strong></td><td rowspan="3">229 mm</td><td>8 micron</td><td>232 mm</td><td>240 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>233 mm</td><td>243 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>234 mm</td><td>245 mm</td><td>350 m</td></tr>
+<tr><td rowspan="3"><strong>10"</strong></td><td rowspan="3">280 mm</td><td>8 micron</td><td>283 mm</td><td>289 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>283 mm</td><td>291 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>284 mm</td><td>293 mm</td><td>350 m</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.9em;color:#5A5A5A;font-style:italic;margin:12px 0 0 0;">Math: D = √[d² + (4 × t × L) / π]. Core wall taken as 13mm. Adjust core OD by ±2mm if your plant's wall thickness differs.</p>
+</div>
+</details>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.05em;">⚡ The Killer Insight</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#FAF9F6;">Look at any row: the difference between Target stop-OD and Typical stop-OD is <strong>just 8-14 millimetres of roll diameter</strong>. On a roll spinning at production speed, the human eye <em>cannot see this difference</em>. Both rolls look "nearly empty." This is exactly why stop-diameter must be set on the unwinder PLC and not left to operator judgment. Sensor cost is &lt;₹15,000. Annual recovery per machine: <strong>~₹28 lakh at ₹180/kg, 12 mic PET, 30 jumbos/day</strong>.</p>
+</div>
+
+<p>Per-jumbo math at 12 micron PET, 3000mm width: 350m × (3.0 × 0.012 × 1.40) = <strong>17.6 kg saved per jumbo</strong>. At ₹180/kg = ₹3,170 per jumbo. At 30 jumbos/day = ₹95,000/day = <strong>~₹28 lakh/month per machine from this single source</strong>.</p>
+
+<p>The fix is two parts:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Set stop-diameter in the unwinder PLC</strong> (or install a diameter sensor if not present). Use the table above as the setpoint reference. Lock the setpoint behind a supervisor password — operators must not be able to override during production.</li>
+<li><strong>Train tail-end recovery.</strong> When the alarm trips at stop-diameter, the operator stops the cycle, opens the chamber on schedule, and the leftover ~150m of film is recovered onto a small auxiliary core for the next cycle's threading (saving Source 4 metres on the next start-up). Some plants treat this as too fiddly. The math says it pays.</li>
+</ul>
+
+<h3>🛠️ Source 6 — Splice Failure (Binary, Not Structural)</h3>
+
+<p>Splices in bare film rolls happen because suppliers join two shorter rolls to make one full-length jumbo, or because a film breakage during base film production was rejoined during slitting. Every bare film jumbo has 0-3 splices. Splice failure on the metalliser is the one source on this list that is <strong>not</strong> reducible by gradual operator discipline. It is binary:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Outcome</th><th>Bare film loss</th><th>Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Joint passes through metalliser successfully</strong></td><td>0 kg (just brief OD dip)</td><td>~95-98% of splices</td></tr>
+<tr><td><strong>Joint fails at metalliser (web break)</strong></td><td><strong>30-50 kg per failure</strong></td><td>~2-5% of splices</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Why 30-50 kg? When a joint fails inside the chamber, the operator must vent, open chamber, re-thread, re-join, re-pump, and ramp OD again. The film between the broken joint and the rewinder (typically 100-200m unwound but caught in the chamber) gets cut and scrapped. Plus the next start-up consumes another 120-150m of bare film. Total <strong>~600-1000 metres of film lost per failure</strong>, which at 12 mic PET 3000mm is 30-50 kg.</p>
+
+<p>This is why splice failure rate matters far more than splice count. A plant with disciplined splice handling can run 0 splice failures across hundreds of jumbos. A plant with sloppy splice handling can lose 30-50 kg twice a week — that is <strong>₹40-72 lakh/year per machine</strong> from this one event class.</p>
+
+<p>Three discipline points control splice failure rate:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Joint inspection at receipt.</strong> Every joint visible from outside the wrap should be flagged at incoming inspection. Joint with visible misalignment, weak tape adhesion, or non-overlap geometry → reject the jumbo or insist supplier re-joins.</li>
+<li><strong>Speed reduction at splice pass.</strong> The disciplined operator slows metalliser speed by 30-50% as a known splice approaches the chamber. Most metallisers have a splice-detection sensor; use it. If you don't have one, the unwinder operator marks splice locations on the side of the roll with paint at receipt, and signals the met operator.</li>
+<li><strong>Joint geometry standard.</strong> Insist on lap-splice with double-sided film tape (not butt splice with single-side tape). Lap length minimum 25-30mm. This is a procurement standard you write into the supplier agreement.</li>
+</ul>
+
+<div style="background:#FAF9F6;border-left:4px solid #E85D26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>📌 Honest framing:</strong> You cannot eliminate splices — base film slitting will always produce some joined rolls. But you can drive the failure <em>rate</em> from 5% to under 1% with the three points above. That is the difference between ₹40 lakh/year and ₹8 lakh/year per machine on splice events alone.
+</div>
+
+<h3>📐 The Structural Floor — What Will <em>Not</em> Reduce Further</h3>
+
+<p>To keep this blog honest, here is what does <em>not</em> reduce, no matter how disciplined you get:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>The 120m start-up length itself.</strong> 20m threading + 100m OD ramp is physics, not slack. You cannot push below this without compromising metallised quality. Targeting "60m start-up" is a fool's errand and will damage OD consistency.</li>
+<li><strong>The 150m end-of-roll tail.</strong> Below this, the residual film is too thin to grip core reliably. Tail-break risk rises sharply, and a tail break in the chamber costs 30-50 kg (Source 6 territory). Stop at 150m.</li>
+<li><strong>±0.3% inward weight tolerance.</strong> Even the best supplier cannot weigh to zero error. Industry-standard weighbridge accuracy is ±0.2-0.3%. Push beyond this only via supplier change, not via debit notes alone.</li>
+</ul>
+
+<p>This is the floor of the leak. Below it, you are spending political capital on a 0% lever — same trap as Blog 24's "trim is structural" warning. <strong>Stay above the floor; squeeze the rest.</strong></p>
+
+<div style="margin:24px 0;">
+<img src="start-vs-end-loss-en.png" alt="Start vs End loss visualisation showing 300m vs 120m at start and 500m vs 150m at end" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h3>📋 The 3 Shop-Floor Formats — One per Owner</h3>
+
+<p>Bare film waste is a 3-owner problem. Stores doesn't see start-up loss. The Met operator doesn't see inward gap. The Unwinder operator doesn't see stop-diameter discipline. <strong>One format per owner, all three reconciled at month-end.</strong> This is the centrepiece artefact of this blog.</p>
+
+<div style="margin:24px 0;">
+<img src="three-formats-en.png" alt="Three shop-floor formats — Inward Inspection, Pre-Loading Check, Per-Jumbo Reconciliation" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 1 — Bare Film Inward Inspection Log (Stores + QC)</h4>
+<p>Filled at the weighbridge for every consignment. Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>What it captures</th><th>Action threshold</th></tr></thead>
+<tbody>
+<tr><td>Date / Invoice No.</td><td>Consignment identifier</td><td>—</td></tr>
+<tr><td>Supplier</td><td>Vendor name</td><td>—</td></tr>
+<tr><td>Claimed weight (kg)</td><td>Per supplier invoice</td><td>—</td></tr>
+<tr><td>Weighed weight (kg, net)</td><td>On plant weighbridge, net of core+packaging</td><td>—</td></tr>
+<tr><td>Length declared (m)</td><td>Per supplier invoice / sticker</td><td>—</td></tr>
+<tr><td>Gap %</td><td>(Claimed − Weighed) / Claimed × 100</td><td><strong>&gt; 0.5% → debit note</strong></td></tr>
+<tr><td>Telescoping / Starring (Y/N)</td><td>Visual at receipt</td><td>Y → quarantine</td></tr>
+<tr><td>Edge nick / dent (Y/N)</td><td>Visual at receipt</td><td>Y → quarantine</td></tr>
+<tr><td>Joint count visible</td><td>Per jumbo, mark on side</td><td>&gt; 3 → flag for met operator</td></tr>
+<tr><td>Accept / Reject</td><td>Final disposition</td><td>—</td></tr>
+<tr><td>QC signature</td><td>Accountability</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 2 — Bare Film Pre-Loading Check (Unwinder Operator)</h4>
+<p>Filled per jumbo, before loading on unwinder. Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>What it captures</th><th>Action threshold</th></tr></thead>
+<tbody>
+<tr><td>Jumbo ID</td><td>Unique identifier</td><td>—</td></tr>
+<tr><td>Age in store (days)</td><td>Receipt date to today</td><td><strong>&gt; 60 days → flag</strong></td></tr>
+<tr><td>Telescoping check (Y/N)</td><td>Lateral slip visible</td><td>Y → reject</td></tr>
+<tr><td>Edge condition</td><td>Nicks, dents, waviness</td><td>Reject if &gt; 5mm dent</td></tr>
+<tr><td>Outer-wrap discard (m)</td><td>Length peeled off</td><td><strong>Target ≤ 30m</strong></td></tr>
+<tr><td>Joint count + locations marked</td><td>Marked on roll side with paint</td><td>—</td></tr>
+<tr><td>Ready to load (tick)</td><td>Final go-ahead</td><td>—</td></tr>
+<tr><td>Operator signature</td><td>Accountability</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 3 — Bare Film Reconciliation Sheet (Met Operator, per Jumbo)</h4>
+<p>Filled at end of each jumbo cycle. Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>What it captures</th><th>Benchmark (12 mic PET, 54000m jumbo)</th></tr></thead>
+<tbody>
+<tr><td>Jumbo ID</td><td>Linked to Format 2</td><td>—</td></tr>
+<tr><td>Met operator name</td><td>Accountability</td><td>—</td></tr>
+<tr><td>Input bare weight (kg)</td><td>From Format 1 ÷ jumbos</td><td>~2,720 kg</td></tr>
+<tr><td><strong>Start-up length (m)</strong></td><td>Threading + ramp metres</td><td><strong>≤ 120 m</strong></td></tr>
+<tr><td>Splice events this jumbo</td><td>Count + pass/fail per splice</td><td>0 fails</td></tr>
+<tr><td><strong>End-of-roll tail (m)</strong></td><td>Film left on used core</td><td><strong>≤ 150 m</strong></td></tr>
+<tr><td>Output good metallised (kg)</td><td>From rewind weighbridge</td><td>—</td></tr>
+<tr><td>Bare film waste (kg)</td><td>Input − output − metallised waste from Blog 24 format</td><td><strong>≤ 27 kg/jumbo</strong></td></tr>
+<tr><td>Reason if &gt; benchmark</td><td>Free-text root cause</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The reconciliation column is the discipline that closes the loop. It cross-checks against Blog 24's Per-Jumbo Tracking Format (which captures metallised-side losses). When numbers don't match, you've found a measurement gap or an unmeasured loss source — both are wins.</p>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>📥 Free Downloadable Formats</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">All three formats above are available as printable A4 PDF on vksTech.com. Download, print, laminate, and put on the shop floor. No subscription, no email gate. Use them, modify them for your plant, share them with your team.</p>
+<p style="margin:0;"><a href="https://vksTech.com/formats/bare-film-waste" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ Download Bare Film Waste Formats (PDF) at vksTech.com/formats/bare-film-waste</a></p>
+</div>
+
+<h3>💰 Calculator — What's the Leak at Your Plant?</h3>
+
+<p>Edit any input below. The calculator updates live. Default values are typical for an Indian metalliser plant running 12 micron PET on a 200 MT/month machine.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:24px;margin:24px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Monthly metalliser production (MT)</label>
+      <input type="number" id="prodMT-en" value="200" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Basic film price (₹/kg)</label>
+      <input type="number" id="basicPrice-en" value="180" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Current bare film waste (%)</label>
+      <input type="number" id="currentPct-en" value="2.0" min="0.1" max="10" step="0.1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Target bare film waste (%)</label>
+      <input type="number" id="targetPct-en" value="1.0" min="0.1" max="10" step="0.1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Finished metallised film price (₹/kg)</label>
+      <input type="number" id="finishedPrice-en" value="220" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;margin-top:16px;">
+    <div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:12px;">YOUR RESULTS — LIVE</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Bare film saved per month</div>
+        <div id="kgMonth-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Bare film saved per year</div>
+        <div id="kgYear-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Direct material recovery / month</div>
+        <div id="costMonth-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Direct material recovery / year</div>
+        <div id="costYear-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Revenue opportunity (if metallised) / year</div>
+        <div id="revYear-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Equivalent metres saved per jumbo</div>
+        <div id="metresJumbo-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— m</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;font-size:0.82em;color:#FAF9F6;opacity:0.75;font-style:italic;">Per-jumbo metres assume 54,000m / 2,722 kg (12 micron PET, 3000mm). Adjust mentally if your spec differs.</div>
+  </div>
+</div>
+
+<h3>⚠️ Three Mistakes Process Engineers Make on Bare Film Waste</h3>
+
+<p><strong>Mistake 1 — Tracking only metallised waste.</strong> If your plant tracks output reject % but not bare film consumption %, you are missing half the leak. The Met operator is incentivised to push for output kgs and looks fine on the dashboard while bare film is bleeding upstream. Add bare film consumption tracking — Format 3 above — and the picture changes.</p>
+
+<p><strong>Mistake 2 — Not setting stop-diameter on the unwinder.</strong> This is a 5-minute PLC change worth ₹28 lakh/year per machine. The reason it doesn't get done at most plants: nobody owns the unwinder PLC settings. Process engineering thinks it is maintenance's job. Maintenance thinks it is OEM's job. Nobody does it. <strong>Make this a process engineering responsibility, written down.</strong></p>
+
+<p><strong>Mistake 3 — No incoming weighbridge check.</strong> "Supplier weight is reliable, we have used them for years." This is the most common excuse and the most expensive. A 0.3% inward gap on 250 MT/month consumption is 750 kg/month = ₹13.5 lakh/year. Check the weight. Always. After three months of consistent debit notes, every supplier sends accurate weights — which is the actual goal.</p>
+
+<h3>🎯 Where to Start at Your Plant</h3>
+
+<p>This is an 8-week rollout, not a one-day fix. Sequenced for maximum impact-to-effort ratio:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Diagnostic.</strong> Weigh 5 incoming consignments on plant weighbridge. Measure end-of-roll tail length on 30 jumbos (cut and weigh). Time start-up length on 30 cycles. You now have your baseline.</li>
+<li><strong>Week 2 — Set stop-diameter on unwinder PLC.</strong> Use the table in Source 5. Lock behind supervisor password. This single action captures the largest chunk of available savings.</li>
+<li><strong>Week 3-4 — Roll out Format 3 (Reconciliation).</strong> Met operator fills per jumbo. Daily review. Coach on start-up discipline.</li>
+<li><strong>Week 5-6 — Roll out Format 2 (Pre-Loading) and Format 1 (Inward).</strong> Unwinder operator and Stores. Start raising debit notes for &gt;0.5% inward gap.</li>
+<li><strong>Week 7-8 — Stabilise.</strong> Weekly review of all three formats. Set monthly target. Celebrate first month under target.</li>
+</ul>
+
+<p>Realistic outcome at 8 weeks: bare film waste from ~2% to ~1.2-1.3%. Realistic outcome at 6 months: ~1%. Realistic outcome forever: under 1% if Format 3 stays on the shop floor with operator names visible.</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">Bare film waste reduction completes the upstream half of metalliser yield improvement. Combined with the metallised-side and SMED work, a typical 2-machine plant recovers <strong>₹1.6 to ₹2.2 crore per year</strong>. The full series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/22-smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (Lever 2 deep dive)</li>
+<li><a href="/blog/23-when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (Lever 1 deep dive)</li>
+<li><a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% — operator-discipline playbook (downstream half)</li>
+<li><a href="/blog/25-2-smed-levers-process-engineers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><strong>This blog (#26):</strong> Bare Film Waste 2% → 1% — upstream yield playbook (you are here)</li>
+<li><strong>Blog #27 (coming next):</strong> Web Break Reduction at Metalliser — Target Zero kg (cross-departmental action)</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Bare film waste is a 3-owner problem (Stores, Unwinder operator, Met operator) and that is exactly why most plants miss it — no single role owns the number. Out of six sources, the biggest single recoverable lever is <strong>end-of-roll tail (500m → 150m)</strong> via stop-diameter setting on the unwinder PLC, worth ~₹28 lakh/year per machine alone. The second biggest is <strong>start-up length (300m → 120m)</strong> via Met operator discipline, worth another ~₹14 lakh/year. The format that closes the loop is the <strong>per-jumbo Reconciliation Sheet</strong> (Format 3) cross-referenced with Blog 24's metallised tracking format. If you only do one thing after reading this blog, set the stop-diameter on your unwinder PLC this week. The other ₹14-20 lakh follows once the format discipline is in place.
+</div>
+
+</div>
+
+<div class="hindi-section" lang="hi">
+<div class="hi-content">
+
+<h2>🎯 Bare Film Waste को 2% से 1% तक काटें — एक Shop-Floor Yield Playbook</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 18-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; April 2026 में published &nbsp;|&nbsp; Reference के लिए bookmark करें</p>
+
+<p>India के ज़्यादातर metalliser plants metallised waste को बहुत अच्छे से track करते हैं। Output kg, OD reject, slitter scrap — हर percentage point पर meeting होती है। पर अगर उसी plant से पूछो <em>metallisation से पहले कितना bare film waste हुआ</em>, जवाब आम तौर पर एक shrug होता है। यही gap है जहाँ हर महीने लाखों रुपए चुपचाप निकल जाते हैं, क्योंकि उस number का कोई owner नहीं है।</p>
+
+<p>मैंने 9+ साल metalliser plants के अंदर बिताए हैं और एक बात बताऊँगा जो ज़्यादातर process engineers hard way से सीखते हैं: <strong>bare film waste, metallised waste से एक अलग जानवर है।</strong> ये अलग stage पर है, अलग owners हैं (Stores, QC, Unwinder operator — सिर्फ़ Met operator नहीं), और metallisation OD tracker को ये दिखता ही नहीं। जो plants ये figure out कर लेते हैं, वो हर machine पर हर महीने ₹3-5 लाख recover करते हैं। जो नहीं करते, वो leak भरते रहते हैं।</p>
+
+<p>ये blog bare-film-side yield की है। ये metalliser improvement story का upstream half है। <a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent">Blog 24</a> ने metallised-side waste cover की (downstream half)। दोनों मिलकर पूरा yield gap recover करते हैं। <strong>दोनों पढ़ें, और दोनों के formats use करें।</strong></p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — दाँव पर क्या है</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Industry typical bare film waste:</strong> bare film input का ~2-2.5%</li>
+<li><strong>Achievable target:</strong> ~1% — discipline + machine settings के साथ</li>
+<li><strong>54,000m जumbo पर start-up पर:</strong> 300m typical → <strong>120m target</strong> (180m saving)</li>
+<li><strong>54,000m जumbo पर end-of-roll पर:</strong> 500m typical → <strong>150m target</strong> (350m saving)</li>
+<li><strong>Splice failure cost:</strong> 0 kg अगर joint चलता है, <strong>30-50 kg अगर fail हो जाए</strong> — binary, structural नहीं</li>
+<li><strong>Capex required:</strong> लगभग zero — तीन formats और unwinder पर एक stop-diameter setting</li>
+<li><strong>200 MT/month machine पर recovery:</strong> ~₹3.7 लाख/month direct material cost recovery</li>
+</ul>
+</div>
+
+<h3>📍 Bare Film Waste क्यों छुपा रहता है — और Track से ज़्यादा क्यों costs करता है</h3>
+
+<p>किसी भी metalliser hall में जाएँ और production sheet देखें। OD reject, sample, trim, और total metallised waste के columns मिलेंगे। जो लगभग कभी नहीं मिलेगा — bare film consumed vs bare film purchased का column। दो numbers दो अलग systems में रहते हैं — Stores inward track करता है, Production output track करती है, और कोई जumbo level पर reconcile नहीं करता।</p>
+
+<p>Inward और consumed के बीच का gap ही bare film waste है। ये छह जगह से accumulate होता है, metalliser के पहले और आसपास, और इनमें से लगभग कोई भी metallisation OD tracker पर नहीं दिखता। पाँच discipline और एक machine setting से reducible हैं। छठा — splice failure — binary है और reliability-driven है। सब छह सही करें और typical 2-2.5% bare film waste ~1% पर आ जाता है, बिना capex के।</p>
+
+<p>Ownership map matter करता है क्योंकि कोई single role अकेला इसे fix नहीं कर सकता:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Source</th><th>Owner</th><th>कहाँ दिखता है</th></tr>
+</thead>
+<tbody>
+<tr><td>1. Inward Gap (supplier vs weighed)</td><td>Stores + QC</td><td>Weighbridge log vs invoice</td></tr>
+<tr><td>2. Storage & Handling Damage</td><td>Warehouse + Material Handler</td><td>Reject jumbos + outer-layer discard</td></tr>
+<tr><td>3. Outer-Wrap Discard at Loading</td><td>Unwinder operator</td><td>Unwinder के पास wrap film bin</td></tr>
+<tr><td>4. Start-Up Length (300m → 120m)</td><td>Met operator</td><td>Slitter पर Bottom Waste</td></tr>
+<tr><td>5. End-of-Roll Tail (500m → 150m)</td><td>Met operator + machine setting</td><td>Used core पर बचा bare film</td></tr>
+<tr><td>6. Splice Failure (binary, 0 या 30-50 kg)</td><td>Unwinder op + supplier QC</td><td>Web break event + scrap roll</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;">
+<img src="bare-film-loss-map-hi.png" alt="Bare Film Loss Map — supplier से metalliser तक छह leakage points" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h3>🛠️ Source 1 — Inward Gap (Supplier Weight vs Weighed)</h3>
+
+<p>हर bare film consignment supplier-stated weight के साथ invoice पर आता है। लगभग कोई plant accept करने से पहले हर consignment अपनी weighbridge पर weigh नहीं करता। जो कुछ plants करते हैं, उन्हें consistent gap मिलता है — आम तौर पर 0.3% से 0.5% — supplier weight और actual weighed weight के बीच। 20 MT consignment पर वो 60 से 100 kg है, एक भी metre unwound होने से पहले।</p>
+
+<p>तीन discipline gaps इसे drive करते हैं:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>कोई incoming weighbridge check नहीं।</strong> Consignment supplier weight पर ही accept होती है। Plant के पास dispute करने को कोई number नहीं।</li>
+<li><strong>Core और packaging weight deduct नहीं।</strong> कुछ suppliers gross weight invoice करते हैं (core, wrap, और pallet सहित)। 6" या 8" wooden core 8-15 kg हो सकता है। 30 जumbos पर वो 240-450 kg "film" है जो असल में लकड़ी है।</li>
+<li><strong>Length tolerance abuse।</strong> Suppliers हर जumbo पर length quote करते हैं (e.g., 54,000m) पर actual length ±2% हो सकती है — कभी-कभी consistently कम। Length × thickness × width × density = weight match होना चाहिए; अगर नहीं होता, plant film के लिए pay कर रहा है जो वहाँ है ही नहीं।</li>
+</ul>
+
+<p><strong>Fix:</strong> weighbridge पर per-consignment Inward Inspection Format। छह columns: invoice no, supplier, claimed weight, weighed weight (core+packaging deducted net), length declared, gap %। अगर gap 0.5% से ज़्यादा है, debit note raise करें। तीन महीनों के consistent debit notes के बाद, supplier accuracy measurably improve होती है।</p>
+
+<p>ये margin recovery नहीं है — ये cost-of-goods correction है। पर इस list पर ये सबसे आसान 0.3-0.5% capture करना है, और इसका shop floor cost zero है।</p>
+
+<h3>🛠️ Source 2 — Storage और Handling Damage</h3>
+
+<p>Bare film उन तरीक़ों से fragile है जो handle न करने वालों को surprise करते हैं। एक jumbo जो hard floor पर 6 inches ऊँचाई से गिरे, उसकी inner layers में hairline crack बन सकती है जो metallisation के दौरान tear तक propagate हो जाए। Wall पर lean करके stored roll 48 hours में starring (axial misalignment) develop कर सकती है। Leaking roof के पास humid corner में stored jumbo moisture pick up करता है, जो edge waviness और slitter पर reject के रूप में दिखता है। ये सब damage बाहरी wrap से दिखाई नहीं देता।</p>
+
+<p>Typical loss: poorly managed warehouse में, हर machine पर हर महीने 1-2 jumbos incoming inspection पर outright reject होते हैं। 2,700 kg per जumbo और ₹180/kg पर, वो <strong>₹4.8-9.7 लाख/year per machine, किसी metalliser के film देखने से पहले ही</strong>।</p>
+
+<p>Discipline unglamorous पर proven है:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>हमेशा cradle पर vertical storage।</strong> कभी horizontal, कभी wall पर नहीं। Cradles ₹200-400 each।</li>
+<li><strong>Date stickers के साथ FIFO।</strong> 60 days से ज़्यादा पुराना bare film measurably ज़्यादा reject rates देता है। पुराना stock पहले use करें।</li>
+<li><strong>Forklift/crane rule: कभी core ends से अकेले lift न करें</strong> — हमेशा proper sling या boom। 2,700 kg jumbo को core ends से lift करने पर core crush और inner layers crack हो जाएँगी।</li>
+<li><strong>Receipt पर visual check।</strong> Telescoping (lateral slip), starring, edge nicks, dent — सब visible अगर कोई देखे। Receipt पर हर जumbo पर दस seconds 30 दिन बाद का reject रोक देते हैं।</li>
+</ul>
+
+<h3>🛠️ Source 3 — Loading पर Outer-Wrap Discard</h3>
+
+<p>जब Unwinder operator fresh jumbo load करता है, पहले 30 से 200 metres routinely peel off और discard होते हैं। Reason: outer layer dirty है, wrap-rub marks हैं, packaging से small dents हैं, या protrusions दिख रहे हैं। Operator judgment govern करता है कितना peel हो।</p>
+
+<p>Good operator <strong>30 metres या कम</strong> peel करता है — सिर्फ़ visibly affected outer wrap। Undisciplined operator <strong>150-200 metres "to be safe"</strong> peel करता है। 54,000m जumbo पर वो 0.06% और 0.37% का difference है — 6× swing पूरी तरह operator habit से।</p>
+
+<p>तीन behaviours disciplined operator को wasteful से अलग करते हैं:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Peel करते वक़्त नहीं, peel करने से पहले inspect करना।</strong> Disciplined operator wrap हटाता है, पहली layer 10 seconds देखता है, decide करता है 30m या 50m, और cleanly cut करता है। Undisciplined operator peel करता है और unroll करता है और peel करता है।</li>
+<li><strong>Downstream क्या acceptable है, ये पता होना।</strong> Light wrap-rub आम तौर पर ठीक metallise होता है। Soft surface scratch आम तौर पर ठीक metallise होता है। Edge nick या visible crease — वो हटाना है। इस knowledge के बिना, operators "ज़्यादा हटाओ" side पर err करते हैं।</li>
+<li><strong>Measured, estimated नहीं।</strong> Disciplined operator के unwinder पर metre counter या 30m और 100m पर paint mark होता है। वो mark पर cut करता है, feel से नहीं।</li>
+</ul>
+
+<p>30 जumbos/day पर, 30m और 200m outer-wrap discard का difference है <strong>हर दिन 5,100m bare film = ~258 kg/day = ~₹46,000/day at ₹180/kg</strong>। एक operator habit से।</p>
+
+<h3>🛠️ Source 4 — Start-Up Length (300m → 120m, सबसे बड़ा single Lever)</h3>
+
+<p>यहाँ metalliser हर cycle शुरू करता है। Film path threading, rewinder से joining, pumping down, sources energising, OD को target पर ramp करना। इस sequence के दौरान consumed film metalliser के perspective से bare-film waste है और slitter के perspective से "Bottom Waste at slitter" है (क्योंकि start-of-cycle wind core पर sit करता है, जो slit होने में last है)। Same metres, दो views।</p>
+
+<p>120m क्यों justified है और 300m क्यों नहीं — breakdown:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Disciplined operator</th><th>Undisciplined operator</th></tr>
+</thead>
+<tbody>
+<tr><td>Threading + joint pass</td><td>~20 m</td><td>~50-80 m</td></tr>
+<tr><td>OD ramp to target</td><td>~100 m</td><td>~200-220 m</td></tr>
+<tr><td><strong>Total start-up</strong></td><td><strong>120 m</strong></td><td><strong>250-300 m</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Undisciplined operator हर जumbo पर 180m ज़्यादा गँवाता है। 12 micron PET, 3000mm width पर वो <strong>~9 kg bare film per जumbo</strong> है। 30 जumbos/day पर = 270 kg/day = <strong>~₹48,000/day per machine सिर्फ़ start-up discipline से</strong>।</p>
+
+<p>तीन controllable factors:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Pre-pump-down preparation।</strong> Boats seated, wires aligned, clamps clean — chamber close से पहले verified, बाद में नहीं। Undisciplined operator chamber close करता है और OD ramp पर problem discover करता है, 100+ metres costing।</li>
+<li><strong>Confident OD ramp।</strong> Properly conditioned source bars 60-80m में target current hit करते हैं। Operators जो "ramp gently to be safe" करते हैं, बिना benefit के 200m तक stretch करते हैं।</li>
+<li><strong>Active first-200m monitoring।</strong> Disciplined operator पहले 200m तक in-line OD watch करता है और ज़रूरत हो तो correct करता है। Undisciplined operator recipe set करता है और देखना बंद कर देता है।</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">🔗 Blog 24 के साथ Cross-Reference</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#333;">यही 180m metres <strong>Blog 24 के per-jumbo metallised tracking format में "Ramp-Up Waste"</strong> के रूप में दिखते हैं (जहाँ ये सबसे बड़ा single contributor है — metallised waste savings का 43%)। Bare-film-side पर ये "Start-Up Length" है, unwinder पर tracked। दोनों side इसे catch करते हैं। <strong>Best practice: दोनों sides से track करें।</strong> अगर metalliser side 100m और slitter Bottom Waste 280m दिखाए, आपके पास measurement disagreement है जिसे investigate करना worth है — आम तौर पर metre-counter calibration issue या splice-pass over-counted।</p>
+</div>
+
+<h3>🛠️ Source 5 — End-of-Roll Tail (500m → 150m, Stop-Diameter Setting)</h3>
+
+<p>ये वो leak है जो plants को सबसे ज़्यादा shock करता है जब वो finally measure करते हैं। Jumbo के end पर operator unwinder रोकता है जब "roll empty लगता है।" 8" या 10" core पर, eye से "empty" आम तौर पर 200-300mm OD होता है — <strong>400-500 metres perfectly good bare film unmetallised छोड़ कर, scrap में core के साथ डाल दिया जाता है</strong>।</p>
+
+<p>ये क्यों reducible है: <strong>core wall thickness govern करता है core के कितना पास तक safely run कर सकते हैं</strong>। एक certain stop-diameter से नीचे, residual film core को reliably grip करने के लिए बहुत पतला है और tail-end break का risk है। पर वो minimum diameter operators के typical use से बहुत छोटा है। 8-12 micron film के लिए, <strong>150m remaining film काफ़ी buffer है</strong> — और corresponding stop-OD bare core से सिर्फ़ कुछ millimetres ऊपर है।</p>
+
+<p>Math, India के ज़्यादातर metalliser plants पर used तीन core sizes के लिए:</p>
+
+<div style="margin:24px 0;">
+<img src="stop-diameter-hi.png" alt="Stop-Diameter math diagram — core OD और remaining film calculation" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<details style="margin:20px 0;border:1px solid #e2ddd4;border-radius:12px;background:#FAF9F6;">
+<summary style="padding:14px 18px;cursor:pointer;font-weight:bold;color:#1A2744;background:#fff;border-radius:12px;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:0.98em;">
+<span>📊 पूरा Stop-Diameter Reference Table देखें (9 rows: 6"/8"/10" cores × 8/10/12 micron film)</span>
+<span style="color:#E85D26;font-size:1.2em;margin-left:12px;">▼</span>
+</summary>
+<div style="overflow-x:auto;padding:0 14px 14px 14px;">
+<table>
+<thead>
+<tr><th>Core size</th><th>Core OD</th><th>Film thickness</th><th>Stop-OD at <strong>150m</strong> (Target)</th><th>Stop-OD at <strong>500m</strong> (Typical)</th><th>Saving</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="3"><strong>6"</strong></td><td rowspan="3">178 mm</td><td>8 micron</td><td>182 mm</td><td>192 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>183 mm</td><td>195 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>184 mm</td><td>198 mm</td><td>350 m</td></tr>
+<tr><td rowspan="3"><strong>8"</strong></td><td rowspan="3">229 mm</td><td>8 micron</td><td>232 mm</td><td>240 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>233 mm</td><td>243 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>234 mm</td><td>245 mm</td><td>350 m</td></tr>
+<tr><td rowspan="3"><strong>10"</strong></td><td rowspan="3">280 mm</td><td>8 micron</td><td>283 mm</td><td>289 mm</td><td>350 m</td></tr>
+<tr><td>10 micron</td><td>283 mm</td><td>291 mm</td><td>350 m</td></tr>
+<tr><td>12 micron</td><td>284 mm</td><td>293 mm</td><td>350 m</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.9em;color:#5A5A5A;font-style:italic;margin:12px 0 0 0;">Math: D = √[d² + (4 × t × L) / π]। Core wall 13mm माना। आपके plant की wall thickness अलग हो तो core OD ±2mm adjust करें।</p>
+</div>
+</details>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.05em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#FAF9F6;">किसी भी row को देखें: Target stop-OD और Typical stop-OD का difference है <strong>सिर्फ़ 8-14 millimetres of roll diameter</strong>। Production speed पर spinning roll पर, इंसानी आँख ये difference <em>देख नहीं सकती</em>। दोनों rolls "लगभग empty" लगते हैं। यही reason है कि stop-diameter unwinder PLC पर set होना चाहिए और operator judgment पर नहीं छोड़ना चाहिए। Sensor cost &lt;₹15,000। Per machine annual recovery: <strong>~₹28 लाख at ₹180/kg, 12 mic PET, 30 jumbos/day</strong>।</p>
+</div>
+
+<p>12 micron PET, 3000mm width पर per-जumbo math: 350m × (3.0 × 0.012 × 1.40) = <strong>17.6 kg saved per जumbo</strong>। ₹180/kg पर = ₹3,170 per जumbo। 30 जumbos/day पर = ₹95,000/day = <strong>~₹28 लाख/month per machine सिर्फ़ इस single source से</strong>।</p>
+
+<p>Fix दो हिस्सों में:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Unwinder PLC में stop-diameter set करें</strong> (या अगर present नहीं है तो diameter sensor install करें)। ऊपर वाले table को setpoint reference की तरह use करें। Setpoint को supervisor password के पीछे lock करें — production के दौरान operators override न कर पाएँ।</li>
+<li><strong>Tail-end recovery train करें।</strong> जब stop-diameter पर alarm trip हो, operator cycle रोके, schedule पर chamber खोले, और बचा ~150m film small auxiliary core पर recover हो जाए next cycle की threading के लिए (next start-up पर Source 4 metres saving)। कुछ plants इसे fiddly समझकर नहीं करते। Math कहता है ये pay करता है।</li>
+</ul>
+
+<h3>🛠️ Source 6 — Splice Failure (Binary, Structural नहीं)</h3>
+
+<p>Bare film rolls में splices इसलिए होती हैं क्योंकि suppliers दो छोटी rolls को join करके full-length jumbo बनाते हैं, या base film production में breakage हुआ जिसे slitting के दौरान rejoin किया गया। हर bare film जumbo में 0-3 splices होती हैं। Metalliser पर splice failure इस list पर एक ऐसा source है जो gradual operator discipline से <strong>नहीं</strong> कम होता। ये binary है:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Outcome</th><th>Bare film loss</th><th>Frequency</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Joint metalliser से successfully pass हो जाए</strong></td><td>0 kg (सिर्फ़ brief OD dip)</td><td>~95-98% splices</td></tr>
+<tr><td><strong>Joint metalliser पर fail हो जाए (web break)</strong></td><td><strong>30-50 kg per failure</strong></td><td>~2-5% splices</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>30-50 kg क्यों? जब joint chamber के अंदर fail हो जाए, operator को vent करना है, chamber खोलना है, re-thread, re-join, re-pump, और OD फिर ramp करना है। Broken joint और rewinder के बीच का film (typically 100-200m unwound पर chamber में फँसा) cut और scrap हो जाता है। Plus next start-up और 120-150m bare film consume करता है। Total <strong>~600-1000 metres of film lost per failure</strong>, जो 12 mic PET 3000mm पर 30-50 kg है।</p>
+
+<p>इसलिए splice failure rate, splice count से कहीं ज़्यादा matter करता है। Disciplined splice handling वाला plant hundreds of jumbos में 0 splice failures चला सकता है। Sloppy splice handling वाला plant week में दो बार 30-50 kg गँवा सकता है — वो है <strong>₹40-72 लाख/year per machine</strong> सिर्फ़ इस एक event class से।</p>
+
+<p>तीन discipline points splice failure rate control करते हैं:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Receipt पर joint inspection।</strong> Wrap के बाहर से visible हर joint incoming inspection पर flag होनी चाहिए। Visible misalignment, weak tape adhesion, या non-overlap geometry वाली joint → jumbo reject करें या supplier से re-join कराएँ।</li>
+<li><strong>Splice pass पर speed reduction।</strong> Disciplined operator chamber की तरफ़ approaching known splice के लिए metalliser speed 30-50% कम करता है। ज़्यादातर metallisers में splice-detection sensor होता है; उसे use करें। अगर नहीं है, unwinder operator receipt पर roll के side पर paint से splice locations mark करे, और met operator को signal दे।</li>
+<li><strong>Joint geometry standard।</strong> Lap-splice with double-sided film tape पर insist करें (butt splice with single-side tape नहीं)। Lap length minimum 25-30mm। ये एक procurement standard है जो supplier agreement में लिखें।</li>
+</ul>
+
+<div style="background:#FAF9F6;border-left:4px solid #E85D26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>📌 Honest framing:</strong> Splices eliminate नहीं कर सकते — base film slitting हमेशा कुछ joined rolls produce करेगा। पर ऊपर वाले तीन points से failure <em>rate</em> 5% से 1% से कम तक drive कर सकते हैं। ये splice events पर अकेले per machine ₹40 लाख/year और ₹8 लाख/year का difference है।
+</div>
+
+<h3>📐 Structural Floor — क्या <em>नहीं</em> कम होगा</h3>
+
+<p>इस blog को honest रखने के लिए, यहाँ है जो <em>नहीं</em> कम होगा, चाहे आप कितने भी disciplined हो जाएँ:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>120m start-up length खुद।</strong> 20m threading + 100m OD ramp physics है, slack नहीं। Metallised quality compromise किए बिना इसके नीचे push नहीं कर सकते। "60m start-up" target करना fool's errand है और OD consistency damage करेगा।</li>
+<li><strong>150m end-of-roll tail।</strong> इसके नीचे, residual film core को reliably grip करने के लिए बहुत पतला है। Tail-break risk sharply rise करता है, और chamber में tail break 30-50 kg costs करता है (Source 6 territory)। 150m पर stop करें।</li>
+<li><strong>±0.3% inward weight tolerance।</strong> Best supplier भी zero error पर weigh नहीं कर सकता। Industry-standard weighbridge accuracy ±0.2-0.3% है। इसके परे push सिर्फ़ supplier change से, debit notes अकेले से नहीं।</li>
+</ul>
+
+<p>ये leak का floor है। इसके नीचे आप 0% lever पर political capital spend कर रहे हैं — Blog 24 के "trim is structural" warning वाला trap। <strong>Floor के ऊपर रहें; बाक़ी निचोड़ लें।</strong></p>
+
+<div style="margin:24px 0;">
+<img src="start-vs-end-loss-hi.png" alt="Start vs End loss visualisation — start पर 300m vs 120m और end पर 500m vs 150m" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h3>📋 3 Shop-Floor Formats — हर Owner के लिए एक</h3>
+
+<p>Bare film waste 3-owner problem है। Stores को start-up loss नहीं दिखता। Met operator को inward gap नहीं दिखता। Unwinder operator को stop-diameter discipline नहीं दिखता। <strong>हर owner के लिए एक format, तीनों month-end पर reconciled।</strong> ये इस blog का centrepiece artefact है।</p>
+
+<div style="margin:24px 0;">
+<img src="three-formats-hi.png" alt="Three shop-floor formats — Inward Inspection, Pre-Loading Check, Per-Jumbo Reconciliation" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 1 — Bare Film Inward Inspection Log (Stores + QC)</h4>
+<p>हर consignment के लिए weighbridge पर fill होगा। Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>क्या capture करता है</th><th>Action threshold</th></tr></thead>
+<tbody>
+<tr><td>Date / Invoice No.</td><td>Consignment identifier</td><td>—</td></tr>
+<tr><td>Supplier</td><td>Vendor name</td><td>—</td></tr>
+<tr><td>Claimed weight (kg)</td><td>Supplier invoice से</td><td>—</td></tr>
+<tr><td>Weighed weight (kg, net)</td><td>Plant weighbridge पर, core+packaging deducted</td><td>—</td></tr>
+<tr><td>Length declared (m)</td><td>Supplier invoice / sticker से</td><td>—</td></tr>
+<tr><td>Gap %</td><td>(Claimed − Weighed) / Claimed × 100</td><td><strong>&gt; 0.5% → debit note</strong></td></tr>
+<tr><td>Telescoping / Starring (Y/N)</td><td>Receipt पर visual</td><td>Y → quarantine</td></tr>
+<tr><td>Edge nick / dent (Y/N)</td><td>Receipt पर visual</td><td>Y → quarantine</td></tr>
+<tr><td>Joint count visible</td><td>Per जumbo, side पर mark</td><td>&gt; 3 → met operator को flag</td></tr>
+<tr><td>Accept / Reject</td><td>Final disposition</td><td>—</td></tr>
+<tr><td>QC signature</td><td>Accountability</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 2 — Bare Film Pre-Loading Check (Unwinder Operator)</h4>
+<p>Per जumbo fill होगा, unwinder पर loading से पहले। Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>क्या capture करता है</th><th>Action threshold</th></tr></thead>
+<tbody>
+<tr><td>Jumbo ID</td><td>Unique identifier</td><td>—</td></tr>
+<tr><td>Age in store (days)</td><td>Receipt date से आज तक</td><td><strong>&gt; 60 days → flag</strong></td></tr>
+<tr><td>Telescoping check (Y/N)</td><td>Lateral slip visible</td><td>Y → reject</td></tr>
+<tr><td>Edge condition</td><td>Nicks, dents, waviness</td><td>5mm dent से ज़्यादा → reject</td></tr>
+<tr><td>Outer-wrap discard (m)</td><td>Peel off length</td><td><strong>Target ≤ 30m</strong></td></tr>
+<tr><td>Joint count + locations marked</td><td>Roll side पर paint से mark</td><td>—</td></tr>
+<tr><td>Ready to load (tick)</td><td>Final go-ahead</td><td>—</td></tr>
+<tr><td>Operator signature</td><td>Accountability</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 style="color:#1A2744;margin-top:24px;">Format 3 — Bare Film Reconciliation Sheet (Met Operator, per जumbo)</h4>
+<p>हर जumbo cycle के end पर fill होगा। Columns:</p>
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Column</th><th>क्या capture करता है</th><th>Benchmark (12 mic PET, 54000m जumbo)</th></tr></thead>
+<tbody>
+<tr><td>Jumbo ID</td><td>Format 2 से linked</td><td>—</td></tr>
+<tr><td>Met operator name</td><td>Accountability</td><td>—</td></tr>
+<tr><td>Input bare weight (kg)</td><td>Format 1 ÷ jumbos से</td><td>~2,720 kg</td></tr>
+<tr><td><strong>Start-up length (m)</strong></td><td>Threading + ramp metres</td><td><strong>≤ 120 m</strong></td></tr>
+<tr><td>Splice events this jumbo</td><td>हर splice का count + pass/fail</td><td>0 fails</td></tr>
+<tr><td><strong>End-of-roll tail (m)</strong></td><td>Used core पर बचा film</td><td><strong>≤ 150 m</strong></td></tr>
+<tr><td>Output good metallised (kg)</td><td>Rewind weighbridge से</td><td>—</td></tr>
+<tr><td>Bare film waste (kg)</td><td>Input − output − Blog 24 format से metallised waste</td><td><strong>≤ 27 kg/jumbo</strong></td></tr>
+<tr><td>Reason if &gt; benchmark</td><td>Free-text root cause</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Reconciliation column वो discipline है जो loop close करता है। ये Blog 24 के Per-Jumbo Tracking Format (जो metallised-side losses capture करता है) के against cross-check करता है। जब numbers match न करें, आपको measurement gap या unmeasured loss source मिल गया — दोनों wins हैं।</p>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>📥 Free Downloadable Formats</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">ऊपर वाले तीनों formats vksTech.com पर printable A4 PDF के रूप में available हैं। Download करें, print करें, laminate करें, और shop floor पर रखें। कोई subscription नहीं, कोई email gate नहीं। Use करें, अपने plant के लिए modify करें, team के साथ share करें।</p>
+<p style="margin:0;"><a href="https://vksTech.com/formats/bare-film-waste" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ Bare Film Waste Formats (PDF) vksTech.com/formats/bare-film-waste पर download करें</a></p>
+</div>
+
+<h3>💰 Calculator — आपके Plant पर Leak कितना है?</h3>
+
+<p>नीचे कोई भी input edit करें। Calculator live update होगा। Default values 200 MT/month machine पर 12 micron PET चलाने वाले Indian metalliser plant के typical हैं।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:24px;margin:24px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Monthly metalliser production (MT)</label>
+      <input type="number" id="prodMT-hi" value="200" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Basic film price (₹/kg)</label>
+      <input type="number" id="basicPrice-hi" value="180" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Current bare film waste (%)</label>
+      <input type="number" id="currentPct-hi" value="2.0" min="0.1" max="10" step="0.1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Target bare film waste (%)</label>
+      <input type="number" id="targetPct-hi" value="1.0" min="0.1" max="10" step="0.1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.95em;">Finished metallised film price (₹/kg)</label>
+      <input type="number" id="finishedPrice-hi" value="220" min="1" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1.05em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;margin-top:16px;">
+    <div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:12px;">आपके RESULTS — LIVE</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">हर महीने Bare film saved</div>
+        <div id="kgMonth-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">हर साल Bare film saved</div>
+        <div id="kgYear-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Direct material recovery / month</div>
+        <div id="costMonth-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Direct material recovery / year</div>
+        <div id="costYear-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Revenue opportunity (metallised हो तो) / year</div>
+        <div id="revYear-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— ₹</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;">
+        <div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;">Per जumbo equivalent metres saved</div>
+        <div id="metresJumbo-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;margin-top:4px;">— m</div>
+      </div>
+    </div>
+    <div style="margin:14px 0 0 0;font-size:0.82em;color:#FAF9F6;opacity:0.75;font-style:italic;">Per-जumbo metres 54,000m / 2,722 kg (12 micron PET, 3000mm) मानकर। आपका spec अलग हो तो mentally adjust करें।</div>
+  </div>
+</div>
+
+<h3>⚠️ Bare Film Waste पर Process Engineers की 3 Mistakes</h3>
+
+<p><strong>Mistake 1 — सिर्फ़ metallised waste track करना।</strong> अगर आपका plant output reject % track करता है पर bare film consumption % नहीं, तो आप leak का half miss कर रहे हैं। Met operator output kgs push करने के लिए incentivised है और dashboard पर ठीक दिखता है जबकि bare film upstream bleed कर रहा है। Bare film consumption tracking add करें — ऊपर Format 3 — और picture बदल जाती है।</p>
+
+<p><strong>Mistake 2 — Unwinder पर stop-diameter set न करना।</strong> ये 5-minute PLC change है जो ₹28 लाख/year per machine worth है। ज़्यादातर plants में नहीं होता क्योंकि unwinder PLC settings का कोई owner नहीं। Process engineering सोचती है maintenance का काम है। Maintenance सोचता है OEM का काम है। कोई नहीं करता। <strong>इसे process engineering की responsibility बनाएँ, written down।</strong></p>
+
+<p><strong>Mistake 3 — कोई incoming weighbridge check नहीं।</strong> "Supplier weight reliable है, हम सालों से उन्हें use कर रहे हैं।" ये सबसे common excuse और सबसे expensive है। 250 MT/month consumption पर 0.3% inward gap = 750 kg/month = ₹13.5 लाख/year। Weight check करें। हमेशा। तीन महीनों के consistent debit notes के बाद, हर supplier accurate weights भेजने लगता है — जो actual goal है।</p>
+
+<h3>🎯 अपने Plant पर कहाँ से शुरू करें</h3>
+
+<p>ये एक 8-week rollout है, one-day fix नहीं। Maximum impact-to-effort ratio के लिए sequenced:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Diagnostic।</strong> Plant weighbridge पर 5 incoming consignments weigh करें। 30 jumbos पर end-of-roll tail length measure करें (cut और weigh)। 30 cycles पर start-up length time करें। आपको baseline मिल गया।</li>
+<li><strong>Week 2 — Unwinder PLC में stop-diameter set करें।</strong> Source 5 का table use करें। Supervisor password के पीछे lock करें। ये single action available savings का सबसे बड़ा chunk capture करता है।</li>
+<li><strong>Week 3-4 — Format 3 (Reconciliation) roll out करें।</strong> Met operator हर जumbo पर fill करे। Daily review। Start-up discipline पर coach।</li>
+<li><strong>Week 5-6 — Format 2 (Pre-Loading) और Format 1 (Inward) roll out करें।</strong> Unwinder operator और Stores। 0.5% से ज़्यादा inward gap पर debit notes raise करना शुरू करें।</li>
+<li><strong>Week 7-8 — Stabilise।</strong> तीनों formats की weekly review। Monthly target set करें। पहला month under target आए तो celebrate करें।</li>
+</ul>
+
+<p>Realistic outcome 8 weeks पर: bare film waste ~2% से ~1.2-1.3%। Realistic outcome 6 months पर: ~1%। Realistic outcome forever: 1% से कम अगर Format 3 operator names visible के साथ shop floor पर रहे।</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">Bare film waste reduction metalliser yield improvement का upstream half complete करता है। Metallised-side और SMED work के साथ combined, typical 2-machine plant <strong>₹1.6 से ₹2.2 करोड़ per year</strong> recover करता है। Full series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/22-smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (Lever 2 deep dive)</li>
+<li><a href="/blog/23-when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (Lever 1 deep dive)</li>
+<li><a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% — operator-discipline playbook (downstream half)</li>
+<li><a href="/blog/25-2-smed-levers-process-engineers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><strong>ये blog (#26):</strong> Bare Film Waste 2% → 1% — upstream yield playbook (आप यहाँ हैं)</li>
+<li><strong>Blog #27 (आगे आ रहा है):</strong> Web Break Reduction at Metalliser — Target Zero kg (cross-departmental action)</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Bare film waste 3-owner problem है (Stores, Unwinder operator, Met operator) और इसी कारण ज़्यादातर plants इसे miss करते हैं — कोई single role number own नहीं करता। छह sources में सबसे बड़ा single recoverable lever है <strong>end-of-roll tail (500m → 150m)</strong> unwinder PLC पर stop-diameter setting से, अकेले ~₹28 लाख/year per machine worth। दूसरा सबसे बड़ा है <strong>start-up length (300m → 120m)</strong> Met operator discipline से, और ~₹14 लाख/year worth। Loop close करने वाला format है <strong>per-जumbo Reconciliation Sheet</strong> (Format 3) Blog 24 के metallised tracking format के साथ cross-referenced। अगर इस blog के बाद सिर्फ़ एक चीज़ करें, इस week अपने unwinder PLC पर stop-diameter set करें। बाक़ी ₹14-20 लाख format discipline के बाद follow करते हैं।
+</div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+(function() {
+  function fmtINR(n) {
+    if (n === 0 || !isFinite(n)) return '0';
+    var abs = Math.abs(n);
+    if (abs >= 10000000) return '₹' + (n/10000000).toFixed(2) + ' Cr';
+    if (abs >= 100000) return '₹' + (n/100000).toFixed(2) + ' L';
+    if (abs >= 1000) return '₹' + (n/1000).toFixed(1) + 'K';
+    return '₹' + Math.round(n).toLocaleString('en-IN');
+  }
+  function fmtKg(n) {
+    if (!isFinite(n) || n === 0) return '0 kg';
+    if (n >= 1000) return (n/1000).toFixed(2) + ' MT';
+    return Math.round(n).toLocaleString('en-IN') + ' kg';
+  }
+  function fmtMetres(n) {
+    if (!isFinite(n)) return '— m';
+    return Math.round(n).toLocaleString('en-IN') + ' m';
+  }
+
+  function calc(suffix) {
+    var prodMT = parseFloat(document.getElementById('prodMT-' + suffix).value) || 0;
+    var basicPrice = parseFloat(document.getElementById('basicPrice-' + suffix).value) || 0;
+    var currentPct = parseFloat(document.getElementById('currentPct-' + suffix).value) || 0;
+    var targetPct = parseFloat(document.getElementById('targetPct-' + suffix).value) || 0;
+    var finishedPrice = parseFloat(document.getElementById('finishedPrice-' + suffix).value) || 0;
+
+    var outputKg = prodMT * 1000;
+    var currentDecimal = currentPct / 100;
+    var targetDecimal = targetPct / 100;
+
+    var inputCurrent = currentDecimal < 1 ? outputKg / (1 - currentDecimal) : 0;
+    var inputTarget = targetDecimal < 1 ? outputKg / (1 - targetDecimal) : 0;
+    var savedKgMonth = Math.max(0, inputCurrent - inputTarget);
+    var savedKgYear = savedKgMonth * 12;
+
+    var costMonth = savedKgMonth * basicPrice;
+    var costYear = savedKgYear * basicPrice;
+    var revYear = savedKgYear * finishedPrice;
+
+    // Per-jumbo math: 54000m / 2722kg (12mic PET 3000mm)
+    var jumbosMonth = inputCurrent / 2722;
+    var metresJumbo = jumbosMonth > 0 ? (savedKgMonth * 54000 / 2722) / jumbosMonth : 0;
+
+    document.getElementById('kgMonth-' + suffix).textContent = fmtKg(savedKgMonth);
+    document.getElementById('kgYear-' + suffix).textContent = fmtKg(savedKgYear);
+    document.getElementById('costMonth-' + suffix).textContent = fmtINR(costMonth);
+    document.getElementById('costYear-' + suffix).textContent = fmtINR(costYear);
+    document.getElementById('revYear-' + suffix).textContent = fmtINR(revYear);
+    document.getElementById('metresJumbo-' + suffix).textContent = fmtMetres(metresJumbo);
+  }
+
+  function bind(suffix) {
+    var ids = ['prodMT', 'basicPrice', 'currentPct', 'targetPct', 'finishedPrice'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() { calc(suffix); });
+        el.addEventListener('change', function() { calc(suffix); });
+      }
+    });
+    calc(suffix);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      bind('en'); bind('hi');
+    });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
