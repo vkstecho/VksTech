@@ -1,1 +1,740 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="general-common">
 
+<div class="article-body">
+
+<div style="margin:24px 0;">
+<img src="cover.png" alt="Film Roll Weight in 10 Seconds — The One Formula Every FP Professional Should Know" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div class="en-content">
+
+<h2>⚖️ Film Roll Weight in 10 Seconds — The Formula That Makes You Look Smart</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 12-min read &nbsp;|&nbsp; Universal Reference Tool &nbsp;|&nbsp; Published April 2026 &nbsp;|&nbsp; Bookmark this page</p>
+
+<p>Walk into any meeting at a flexible packaging plant. Someone says "we have 2,500 kg of stock at 12 mic spec." Half the room nods politely. The other half mentally converts: <em>at 3000mm width, 1.38 g/cc PET, that's about 50,300 metres — enough for 30 customer orders this week</em>. The second group <strong>looks smart</strong>. The first group is at the mercy of whoever speaks first.</p>
+
+<p>This is the formula that separates the two groups. It is the single most useful piece of arithmetic in flexible packaging — used by Stores, QC, Production, Slitting, Sales, and Procurement, every working day. Once it lives in your head, you stop being surprised by numbers other people throw around. You start <strong>catching the leaks</strong> they miss.</p>
+
+<p>This blog is the formula, the cheat sheet of densities, six worked examples, all four rearrangements (solve for Weight, Length, Width, or Thickness), and a built-in calculator at the end. Twelve minutes. You'll never need to ask "how many kg in this roll" — or any related question — again.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — What This Formula Unlocks</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Standard PET jumbo (54000m × 3000mm × 12μm):</strong> 2,683 kg</li>
+<li><strong>Standard BOPP jumbo (50000m × 3000mm × 20μm):</strong> 2,730 kg</li>
+<li><strong>Slit roll (5000m × 200mm × 12μm PET):</strong> 16.56 kg</li>
+<li><strong>Catch a 1.5% supplier weight gap on a 20 MT consignment:</strong> ₹2.19 lakh recovered</li>
+<li><strong>Time to do this calculation in your head with practice:</strong> under 10 seconds</li>
+<li><strong>Cost to learn this:</strong> the next 12 minutes</li>
+</ul>
+</div>
+
+<h3>📐 The Formula — One Line, Three Unit Conversions</h3>
+
+<p>Here it is. Memorise this one line and you have the entire blog in your pocket:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:24px;margin:24px 0;border-radius:12px;text-align:center;">
+<div style="font-family:'Courier New',monospace;font-size:1.6em;font-weight:bold;color:#1A2744;letter-spacing:1px;">
+Weight (kg) = L × W × μm × ρ ÷ 1,000,000
+</div>
+<div style="margin-top:14px;color:#5A5A5A;font-size:0.95em;">
+where &nbsp;L = Length (m), &nbsp;W = Width (mm), &nbsp;μm = Thickness (micron), &nbsp;ρ = Density (g/cc)
+</div>
+</div>
+
+<p>That divisor of 1,000,000 looks scary. It is not. It is just three unit conversions stacked together, because the inputs use three different units (metres, millimetres, microns) and the output is in kilograms. Let me walk you through where it comes from — once you see it, you never forget it:</p>
+
+<div style="margin:24px 0;">
+<img src="formula-derivation-en.png" alt="Visual derivation of film roll weight formula showing the three unit conversions" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Volume of the film</strong> = Length × Width × Thickness. If everything is in metres, volume is in cubic metres. But your length is in m, width is in mm, and thickness is in micron — so we have to convert.</li>
+<li><strong>Convert width:</strong> mm to m → divide by 1,000</li>
+<li><strong>Convert thickness:</strong> micron to m → divide by 1,000,000</li>
+<li><strong>Multiply by density</strong> (g/cc converts cleanly because 1 g/cc = 1,000 kg/m³, and the kg/m³ cancels with cubic metres to give kg)</li>
+</ul>
+
+<p>Stack those conversions: 1,000 × 1,000,000 ÷ 1,000 = 1,000,000. That is the divisor. So the formula simplifies to: <strong>multiply L, W, μm, ρ — divide by one million</strong>. Done.</p>
+
+<h3>📊 The Density Cheat Sheet — Memorise These Eight Numbers</h3>
+
+<p>The whole formula stands on density. Get the density wrong and your entire calculation is wrong. Here are the densities every FP professional should have in their head — same values used by the calculators on vksTech.com:</p>
+
+<div style="margin:24px 0;">
+<img src="density-cheat-sheet.png" alt="Common flexible packaging film densities cheat sheet" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Film type</th><th>Density (g/cc)</th><th>Memory hook</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>PET (BOPET)</strong></td><td><strong>1.38</strong></td><td>Polyester — heaviest common film. "One-three-eight"</td></tr>
+<tr><td><strong>BOPP</strong></td><td><strong>0.91</strong></td><td>Polypropylene biaxially oriented — lightest. "Nine-one"</td></tr>
+<tr><td><strong>CPP</strong></td><td><strong>0.90</strong></td><td>Cast polypropylene — slightly lighter than BOPP. "Nine-zero"</td></tr>
+<tr><td><strong>LDPE</strong></td><td><strong>0.92</strong></td><td>Low-density polyethylene. "Nine-two"</td></tr>
+<tr><td><strong>HDPE</strong></td><td><strong>0.96</strong></td><td>High-density polyethylene. "Nine-six"</td></tr>
+<tr><td><strong>LLDPE</strong></td><td><strong>0.92</strong></td><td>Linear low-density PE. Same as LDPE for our math.</td></tr>
+<tr><td><strong>BOPA / Nylon</strong></td><td><strong>1.14</strong></td><td>Polyamide — between PE family and PET.</td></tr>
+<tr><td><strong>PVC</strong></td><td><strong>1.38</strong></td><td>Same density as PET — different chemistry, same maths.</td></tr>
+<tr><td>Aluminium foil</td><td>2.70</td><td>Heavy. Comes up in laminate calculations.</td></tr>
+<tr><td>Paper</td><td>0.70 – 1.00</td><td>Varies hugely by GSM and treatment.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#FAF9F6;border-left:4px solid #E85D26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>📌 1.38 vs 1.40 — the PET density debate:</strong> Many engineers and operators on the shop floor use <strong>1.40</strong> for PET as a round number. The technically accurate value is <strong>1.38</strong> for biaxially oriented PET (BOPET) film. The difference is 1.45% — small in casual use, but on a 20 MT consignment that's <strong>290 kg = ₹52,200 at ₹180/kg</strong>. For internal estimation 1.40 is fine; for procurement disputes, supplier debit notes, and audit-grade calculations, use 1.38. The vksTech.com calculators use 1.38.
+</div>
+
+<h3>🧮 Four Worked Examples — From Routine to Procurement Catch</h3>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 1 — A Standard PET Jumbo</h4>
+<p>You receive a fresh PET jumbo. Spec on the sticker: <strong>54,000 m × 3000 mm × 12 micron PET</strong>. What should it weigh?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 54,000 × 3,000 × 12 × 1.38 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>2,683 kg</strong>
+</div>
+<p>If the supplier invoices anything significantly above 2,683 kg for this spec, raise it. If significantly below, also raise it — they may be giving you less metres than declared.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 2 — A BOPP Jumbo</h4>
+<p>BOPP plant sends a jumbo: <strong>50,000 m × 3000 mm × 20 micron BOPP</strong>. Density 0.91.</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 50,000 × 3,000 × 20 × 0.91 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>2,730 kg</strong>
+</div>
+<p>Notice — the BOPP jumbo is bigger in microns (20 vs 12 PET) but only marginally heavier (2,730 vs 2,683). This is because BOPP is much lighter density (0.91 vs 1.38). Forgetting this is the #1 reason engineers misjudge BOPP plant outputs against PET plant outputs.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 3 — A Slit Roll for a Customer</h4>
+<p>Customer ordered a slit roll: <strong>5,000 m × 200 mm × 12 micron PET</strong>. What should the slitter operator's weighbridge show?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 5,000 × 200 × 12 × 1.38 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>16.56 kg</strong>
+</div>
+<p>Now if the slitter operator's actual weighbridge reading is 17.2 kg or 15.9 kg, you instantly know something is off — either length is wrong, or there is a mix-up in width, or the core weight wasn't deducted. The number itself tells you to investigate.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 4 — Catching a Supplier ₹2.19 Lakh Leak</h4>
+<p>Procurement sends you a supplier invoice. It says: <strong>"20 MT, 7 jumbos, 12 micron PET, 3000mm width, 54,000m each"</strong>. Sounds reasonable. You do the formula in 10 seconds:</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+1 jumbo = 54,000 × 3,000 × 12 × 1.38 ÷ 1,000,000 = 2,683 kg<br>
+7 jumbos = 7 × 2,683 = <strong>18,779 kg</strong>
+</div>
+<p>The invoice claims 20,000 kg. Your formula says 18,779 kg. <strong>You are short by 1,221 kg = ₹2.19 lakh at ₹180/kg.</strong> Either the supplier overstated weight, understated metres per jumbo, or the consignment has a bonus 8th jumbo somewhere. Either way, you've earned a debit note in 10 seconds.</p>
+
+<p>This is the moment that turns you from "the engineer in the meeting" into "the engineer who catches things." It is also the moment that links directly back to <a href="/blog/26-cut-bare-film-waste-2-to-1-percent">Blog 26's Source 1 — the Inward Gap</a>. Without this formula, Format 1 (Inward Inspection Log) cannot identify a discrepancy. <strong>This is the formula that makes Format 1 work.</strong></p>
+
+<h3>🔄 All Four Rearrangements — One Formula, Four Faces</h3>
+
+<p>Here is the most useful trick: the same formula rearranges to solve for <em>any</em> of the four variables. If you know three, you can always find the fourth. This is what turns a "weight formula" into a complete toolkit.</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:20px;margin:24px 0;border-radius:12px;">
+<div style="display:grid;gap:14px;">
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">SOLVE FOR WEIGHT (when you know L, W, μm, ρ)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Weight (kg) = L × W × μm × ρ ÷ 1,000,000</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">SOLVE FOR LENGTH (when you know Weight, W, μm, ρ)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Length (m) = Weight × 1,000,000 ÷ (W × μm × ρ)</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">SOLVE FOR WIDTH (when you know Weight, L, μm, ρ)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Width (mm) = Weight × 1,000,000 ÷ (L × μm × ρ)</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">SOLVE FOR THICKNESS (when you know Weight, L, W, ρ)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Thickness (μm) = Weight × 1,000,000 ÷ (L × W × ρ)</div>
+</div>
+
+</div>
+</div>
+
+<p>Pattern recognition: <strong>to solve for any variable, divide Weight × 1,000,000 by the product of the other three.</strong> One trick, four answers.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 5 — Length from Weight (the customer call)</h4>
+<p>A customer says "I need 1,500 kg of 12 micron PET, 1500mm wide." How many metres do you slit?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Length = 1,500 × 1,000,000 ÷ (1,500 × 12 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1,500,000,000 ÷ 24,840<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>60,386 m</strong>
+</div>
+<p>You quote them — "1,500 kg means about 60,400 metres of slit roll. We can deliver that in 4 master rolls." Customer impressed. Sales closed in two minutes.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 6 — Width from Weight (the slitting QC catch)</h4>
+<p>A slit roll comes off the slitter. Customer order spec: <strong>5,000 m × 200 mm × 12 micron PET</strong>. Expected weight: 16.56 kg. The actual weighbridge shows <strong>16.50 kg</strong> — close, but not exact. Length and thickness are confirmed correct on the slitter readout. <em>What width was actually slit?</em></p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Width = 16.50 × 1,000,000 ÷ (5,000 × 12 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 16,500,000 ÷ 82,800<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>199.3 mm</strong>
+</div>
+<p>The slitter cut at 199.3mm instead of 200mm — a 0.7mm shortfall. On a 5,000m roll that's 60g. On a 3,000-roll month, that is <strong>180 kg of unbilled film at ₹180/kg = ₹32,400/month</strong> walking out the door because the slitter blade is set wrong. The formula caught it. Without this rearrangement, you would have written off the 60g as "weighbridge tolerance" and never investigated.</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 7 — Thickness from Weight (the under-gauging audit)</h4>
+<p>Supplier sends a PET jumbo invoiced as <strong>54,000 m × 3,000 mm × 12 micron</strong>. Plant weighbridge reads <strong>2,550 kg</strong>. Expected at spec was 2,683 kg (Example 1). Length is confirmed correct on the unwinder counter. Width is confirmed at 3,000mm. <em>What thickness did they actually deliver?</em></p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Thickness = 2,550 × 1,000,000 ÷ (54,000 × 3,000 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2,550,000,000 ÷ 223,560,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>11.41 micron</strong>
+</div>
+<p>Supplier billed for 12 micron, delivered 11.41 micron — a <strong>4.9% under-gauge</strong>. On this jumbo: 133 kg short = ₹23,940 at ₹180/kg. On a yearly contract of 250 MT, that's <strong>₹22 lakh/year</strong> walking into the supplier's bank account because nobody opened a calculator. Now you have a number that goes into a debit note <em>or</em> a contract renegotiation — your choice.</p>
+
+<p>Examples 6 and 7 are why this formula is not a "weight tool." It is a <strong>full QC and procurement audit tool</strong>. Three sides of the equation pin down the fourth — every time.</p>
+
+<h3>🎯 Five Roles, Five Places This Formula Saves You</h3>
+
+<div style="margin:24px 0;">
+<img src="five-roles-en.png" alt="Five places where the film weight formula saves you - Stores, Slitting, Sales, Procurement, Production" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<p><strong>1. Stores / QC — Inward verification.</strong> You weigh the consignment, calculate what it should weigh from supplier's declared length × width × micron, and raise debit notes when the gap exceeds 0.5%. This is Source 1 from Blog 26 in action. <strong>Annual recovery: ₹13.5 lakh on a 250 MT/month plant.</strong></p>
+
+<p><strong>2. Slitting — Per-roll target weight.</strong> Slitter operator gets a customer order spec. You hand them the target weight per slit roll. They tune cutter setup to hit that weight ±2%. No more under-weight rejects, no more over-weight giveaways. <strong>Annual recovery: ₹4-6 lakh per slitter.</strong></p>
+
+<p><strong>3. Sales — Live customer pricing.</strong> Customer asks "how many metres in 2 MT of 12 mic PET 1200mm?" You answer in 15 seconds: "About 100,700 metres." You quote price. Customer is impressed by speed and confidence. <strong>Conversion rate goes up. Lead time on quotes drops from 1 day to 1 minute.</strong></p>
+
+<p><strong>4. Procurement — Tender comparison.</strong> Three suppliers quote on 20 MT of 12 mic PET, 3000mm. Each quotes price per metre but actually delivers different metres per jumbo (52,000 / 54,000 / 53,500). You convert all three to ₹/kg and ₹/sqm using the formula. The cheapest per-metre supplier is suddenly the most expensive per-kg. <strong>Procurement decision flips. Savings: 3-5% on every consignment.</strong></p>
+
+<p><strong>5. Production / Process Engineering — Loss tracking.</strong> Operator says "we lost 350 metres at start-up." You instantly convert to kg using the per-metre formula (3000 × 12 × 1.38 / 1000 = 0.0497 kg/m). 350m × 0.0497 = 17.4 kg. At ₹180/kg = ₹3,130 lost. <strong>This is how the per-jumbo Format 3 from Blog 26 turns metres into actionable rupees.</strong></p>
+
+<h3>⚠️ Three Mistakes Engineers Make With This Formula</h3>
+
+<p><strong>Mistake 1 — Forgetting the unit conversions.</strong> "I'll just multiply length × width × thickness × density." Without the divisor of 1,000,000 your answer is off by a factor of a million. The most common form of this mistake is forgetting to convert width from mm to m, then realising the answer doesn't look right and panicking. <strong>The fix:</strong> always write the formula with the divisor on the side. ÷ 1,000,000 is non-negotiable.</p>
+
+<p><strong>Mistake 2 — Using the wrong density.</strong> Confusing PET density with BOPP density on a multilayer laminate calculation. Using 1.40 (industry shorthand) when site convention is 1.38. Forgetting that LDPE (0.92) and HDPE (0.96) are different. <strong>The fix:</strong> the density cheat sheet above. Print it, stick it on your laptop, refer to it until it lives in your head.</p>
+
+<p><strong>Mistake 3 — Confusing GSM and total weight.</strong> GSM (grams per square metre) is per-area, not per-length. GSM = micron × density (g/cc). For 12 micron PET, GSM = 12 × 1.38 = 16.56 g/sqm. To get total weight from GSM, you multiply by area in square metres (length × width), not by length alone. <strong>The fix:</strong> remember that GSM × area = weight, but micron × volume × density = weight. Two different tools for two different problems.</p>
+
+<h3>💰 Live Calculator — Try the Formula Right Here</h3>
+
+<p>Edit any input below. The calculator runs the formula live. Switch between forward (calculate weight from dimensions) and reverse (calculate length from weight) using the toggle at the top.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+  <div style="margin-bottom:16px;">
+    <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">What do you want to calculate?</label>
+    <select id="mode-en" style="width:100%;padding:12px;border:2px solid #1A2744;border-radius:8px;font-size:1em;background:#1A2744;color:#FAF9F6;font-weight:bold;cursor:pointer;">
+      <option value="weight">⚖️ Solve for WEIGHT (when L, W, μm, ρ known)</option>
+      <option value="length">📏 Solve for LENGTH (when Weight, W, μm, ρ known)</option>
+      <option value="width">↔️ Solve for WIDTH (when Weight, L, μm, ρ known)</option>
+      <option value="micron">📐 Solve for THICKNESS (when Weight, L, W, ρ known)</option>
+    </select>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Film type / density</label>
+      <select id="filmType-en" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+        <option value="1.38" selected>PET — 1.38 g/cc</option>
+        <option value="0.91">BOPP — 0.91 g/cc</option>
+        <option value="0.90">CPP — 0.90 g/cc</option>
+        <option value="0.92">LDPE — 0.92 g/cc</option>
+        <option value="0.96">HDPE — 0.96 g/cc</option>
+        <option value="0.92">LLDPE — 0.92 g/cc</option>
+        <option value="1.14">BOPA / Nylon — 1.14 g/cc</option>
+        <option value="1.38">PVC — 1.38 g/cc</option>
+        <option value="custom">Custom — enter density below</option>
+      </select>
+    </div>
+    <div id="customDensityWrap-en" style="grid-column:1/-1;display:none;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Custom density (g/cc)</label>
+      <input type="number" id="customDensity-en" value="1.00" min="0.1" max="10" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+
+    <div class="calc-field-en" data-field="weight">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Weight (kg)</label>
+      <input type="number" id="weight-en" value="2683" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-en" data-field="length">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Length (m)</label>
+      <input type="number" id="length-en" value="54000" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-en" data-field="width">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Width (mm)</label>
+      <input type="number" id="width-en" value="3000" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-en" data-field="micron">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Thickness (micron)</label>
+      <input type="number" id="micron-en" value="12" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+    <div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">RESULT — LIVE</div>
+    <div id="resultLabel-en" style="font-size:0.88em;color:#FAF9F6;opacity:0.9;">Total roll weight</div>
+    <div id="resultValue-en" style="font-size:2.2em;font-weight:bold;color:#E85D26;line-height:1.1;margin:6px 0;">— kg</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+      <div style="background:rgba(255,255,255,0.08);padding:10px 12px;border-radius:6px;">
+        <div style="font-size:0.78em;opacity:0.8;">Per-metre weight</div>
+        <div id="perMetre-en" style="font-size:1.05em;font-weight:bold;color:#E85D26;">— kg/m</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:10px 12px;border-radius:6px;">
+        <div style="font-size:0.78em;opacity:0.8;">GSM (g/sqm)</div>
+        <div id="gsm-en" style="font-size:1.05em;font-weight:bold;color:#E85D26;">—</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>🧮 More Free Calculators on vksTech.com</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">This is one of <strong>seven free calculators</strong> available on vksTech.com — alongside Roll OD, GSM ↔ Micron Conversion, Production Yield %, Machine Utilisation %, and Cost per Square Metre. All free, no email gate, no subscription.</p>
+<p style="margin:0;"><a href="https://vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ Browse all 7 calculators at vkstech.com/#calculators</a></p>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">This formula is the foundation under almost every operational improvement in the series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/22-smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (Lever 2 deep dive)</li>
+<li><a href="/blog/23-when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (Lever 1 deep dive)</li>
+<li><a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% — operator-discipline playbook</li>
+<li><a href="/blog/25-2-smed-levers-process-engineers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><a href="/blog/26-cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1% — upstream yield playbook</li>
+<li><strong>This blog (#27):</strong> Film Roll Weight Formula — the universal arithmetic (you are here)</li>
+<li><strong>Blog #28 (coming next):</strong> Web Break Reduction at Metalliser — Target Zero kg</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> One formula — <strong>Weight = L × W × μm × ρ ÷ 1,000,000</strong> — is the single most useful piece of arithmetic in flexible packaging. It runs procurement audits, customer quotes, slit roll targets, and waste tracking. The eight densities you must know are PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.96, LLDPE 0.92, BOPA 1.14, PVC 1.38. The version of you who calculates roll weight in 10 seconds catches ₹2-5 lakh of leaks per year that the version who doesn't, never sees. The calculator above runs the formula live. Bookmark this page. Refer to the density cheat sheet until it's in your head. After two weeks of practice, you'll be doing it mentally in under 10 seconds — and looking smart in every meeting.
+</div>
+
+</div>
+
+<div class="hindi-section" lang="hi">
+<div class="hi-content">
+
+<h2>⚖️ Film Roll Weight 10 Seconds में — वो Formula जो आपको Smart दिखाता है</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 12-min read &nbsp;|&nbsp; Universal Reference Tool &nbsp;|&nbsp; April 2026 में published &nbsp;|&nbsp; इस page को bookmark करें</p>
+
+<p>किसी भी flexible packaging plant की meeting में जाएँ। कोई कहता है "हमारे पास 12 mic spec पर 2,500 kg stock है।" आधा कमरा politely सिर हिलाता है। दूसरा आधा mentally convert करता है: <em>3000mm width पर, 1.38 g/cc PET density पर, वो लगभग 50,300 metres है — इस week के 30 customer orders के लिए काफ़ी</em>। दूसरा group <strong>smart दिखता है</strong>। पहला group जो पहले बोले उसके दया पर है।</p>
+
+<p>यही formula है जो दोनों groups को अलग करता है। ये flexible packaging में सबसे useful arithmetic का एक टुकड़ा है — Stores, QC, Production, Slitting, Sales, और Procurement द्वारा हर working day use होता है। एक बार ये आपके दिमाग़ में बैठ जाए, आप उन numbers से surprise होना बंद कर देते हैं जो दूसरे लोग उछालते हैं। आप उन <strong>leaks को catch करना शुरू करते हैं</strong> जो वो miss करते हैं।</p>
+
+<p>ये blog formula है, densities का cheat sheet है, छह worked examples हैं, सभी चार rearrangements (Weight, Length, Width, या Thickness solve करें), और end पर built-in calculator है। बारह minutes। आपको फिर कभी पूछना नहीं पड़ेगा "इस roll में कितने kg हैं" — या कोई related question।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — ये Formula क्या Unlock करता है</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Standard PET जumbo (54000m × 3000mm × 12μm):</strong> 2,683 kg</li>
+<li><strong>Standard BOPP जumbo (50000m × 3000mm × 20μm):</strong> 2,730 kg</li>
+<li><strong>Slit roll (5000m × 200mm × 12μm PET):</strong> 16.56 kg</li>
+<li><strong>20 MT consignment पर 1.5% supplier weight gap catch करें:</strong> ₹2.19 लाख recovered</li>
+<li><strong>Practice के साथ ये calculation दिमाग़ में करने का time:</strong> 10 seconds से कम</li>
+<li><strong>ये सीखने का cost:</strong> अगले 12 minutes</li>
+</ul>
+</div>
+
+<h3>📐 Formula — एक Line, तीन Unit Conversions</h3>
+
+<p>यहाँ है। इस एक line को memorise करें और पूरा blog आपकी जेब में है:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:24px;margin:24px 0;border-radius:12px;text-align:center;">
+<div style="font-family:'Courier New',monospace;font-size:1.6em;font-weight:bold;color:#1A2744;letter-spacing:1px;">
+Weight (kg) = L × W × μm × ρ ÷ 1,000,000
+</div>
+<div style="margin-top:14px;color:#5A5A5A;font-size:0.95em;">
+जहाँ &nbsp;L = Length (m), &nbsp;W = Width (mm), &nbsp;μm = Thickness (micron), &nbsp;ρ = Density (g/cc)
+</div>
+</div>
+
+<p>वो 1,000,000 का divisor डरावना लगता है। है नहीं। ये बस तीन unit conversions एक साथ हैं, क्योंकि inputs तीन अलग units (metres, millimetres, microns) में हैं और output kilograms में है। मैं आपको derivation दिखाता हूँ — एक बार दिख जाए, आप कभी नहीं भूलेंगे:</p>
+
+<div style="margin:24px 0;">
+<img src="formula-derivation-hi.png" alt="Film roll weight formula की visual derivation - तीन unit conversions" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Film का volume</strong> = Length × Width × Thickness। अगर सब कुछ metres में है, volume cubic metres में है। पर आपका length m में है, width mm में है, और thickness micron में है — तो हमें convert करना है।</li>
+<li><strong>Width convert करें:</strong> mm से m → 1,000 से divide करें</li>
+<li><strong>Thickness convert करें:</strong> micron से m → 1,000,000 से divide करें</li>
+<li><strong>Density से multiply करें</strong> (g/cc cleanly convert होता है क्योंकि 1 g/cc = 1,000 kg/m³, और kg/m³ cubic metres के साथ cancel होकर kg देता है)</li>
+</ul>
+
+<p>उन conversions को stack करें: 1,000 × 1,000,000 ÷ 1,000 = 1,000,000। यही divisor है। तो formula simplify हो जाता है: <strong>L, W, μm, ρ को multiply करें — एक million से divide करें</strong>। हो गया।</p>
+
+<h3>📊 Density Cheat Sheet — ये आठ Numbers Memorise करें</h3>
+
+<p>पूरा formula density पर खड़ा है। Density गलत हो जाए तो पूरी calculation गलत है। यहाँ हर FP professional के दिमाग़ में होने चाहिए वो densities — vksTech.com के calculators में same values use होती हैं:</p>
+
+<div style="margin:24px 0;">
+<img src="density-cheat-sheet.png" alt="Common flexible packaging film densities cheat sheet" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Film type</th><th>Density (g/cc)</th><th>Memory hook</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>PET (BOPET)</strong></td><td><strong>1.38</strong></td><td>Polyester — सबसे भारी common film। "एक-तीन-आठ"</td></tr>
+<tr><td><strong>BOPP</strong></td><td><strong>0.91</strong></td><td>Polypropylene biaxially oriented — सबसे हल्का। "नौ-एक"</td></tr>
+<tr><td><strong>CPP</strong></td><td><strong>0.90</strong></td><td>Cast polypropylene — BOPP से थोड़ा हल्का। "नौ-शून्य"</td></tr>
+<tr><td><strong>LDPE</strong></td><td><strong>0.92</strong></td><td>Low-density polyethylene। "नौ-दो"</td></tr>
+<tr><td><strong>HDPE</strong></td><td><strong>0.96</strong></td><td>High-density polyethylene। "नौ-छह"</td></tr>
+<tr><td><strong>LLDPE</strong></td><td><strong>0.92</strong></td><td>Linear low-density PE। हमारे math के लिए LDPE जैसा।</td></tr>
+<tr><td><strong>BOPA / Nylon</strong></td><td><strong>1.14</strong></td><td>Polyamide — PE family और PET के बीच।</td></tr>
+<tr><td><strong>PVC</strong></td><td><strong>1.38</strong></td><td>PET जैसा density — अलग chemistry, same maths।</td></tr>
+<tr><td>Aluminium foil</td><td>2.70</td><td>भारी। Laminate calculations में आता है।</td></tr>
+<tr><td>Paper</td><td>0.70 – 1.00</td><td>GSM और treatment के साथ बहुत vary करता है।</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#FAF9F6;border-left:4px solid #E85D26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>📌 1.38 vs 1.40 — PET density की बहस:</strong> Shop floor पर बहुत engineers और operators PET के लिए <strong>1.40</strong> use करते हैं round number के तौर पर। Technically accurate value <strong>1.38</strong> है biaxially oriented PET (BOPET) film के लिए। Difference 1.45% है — casual use में छोटा, पर 20 MT consignment पर वो <strong>290 kg = ₹52,200 at ₹180/kg</strong>। Internal estimation के लिए 1.40 ठीक है; procurement disputes, supplier debit notes, और audit-grade calculations के लिए 1.38 use करें। vksTech.com calculators 1.38 use करते हैं।
+</div>
+
+<h3>🧮 चार Worked Examples — Routine से Procurement Catch तक</h3>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 1 — एक Standard PET जumbo</h4>
+<p>आपको fresh PET जumbo मिलता है। Sticker पर spec: <strong>54,000 m × 3000 mm × 12 micron PET</strong>। Weight कितना होना चाहिए?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 54,000 × 3,000 × 12 × 1.38 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>2,683 kg</strong>
+</div>
+<p>अगर supplier इस spec के लिए 2,683 kg से significantly ज़्यादा invoice करता है, raise करें। अगर significantly कम भी, तो भी raise करें — वो शायद declared से कम metres दे रहे हैं।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 2 — एक BOPP जumbo</h4>
+<p>BOPP plant जumbo भेजता है: <strong>50,000 m × 3000 mm × 20 micron BOPP</strong>। Density 0.91।</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 50,000 × 3,000 × 20 × 0.91 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>2,730 kg</strong>
+</div>
+<p>देखें — BOPP जumbo microns में बड़ा है (20 vs 12 PET) पर सिर्फ़ marginally भारी (2,730 vs 2,683)। ये इसलिए कि BOPP बहुत हल्का density है (0.91 vs 1.38)। ये भूलना #1 reason है कि engineers BOPP plant outputs को PET plant outputs के against misjudge करते हैं।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 3 — Customer के लिए एक Slit Roll</h4>
+<p>Customer ने slit roll order किया: <strong>5,000 m × 200 mm × 12 micron PET</strong>। Slitter operator के weighbridge पर क्या show होना चाहिए?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Weight = 5,000 × 200 × 12 × 1.38 ÷ 1,000,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>16.56 kg</strong>
+</div>
+<p>अब अगर slitter operator का actual weighbridge reading 17.2 kg या 15.9 kg है, आपको instantly पता चल जाता है कुछ off है — या length ग़लत है, या width में mix-up है, या core weight deduct नहीं हुआ। Number ख़ुद आपको investigate करने को कहता है।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 4 — Supplier का ₹2.19 लाख Leak Catch करना</h4>
+<p>Procurement आपको supplier invoice भेजता है। उसमें लिखा है: <strong>"20 MT, 7 जumbos, 12 micron PET, 3000mm width, 54,000m each"</strong>। Reasonable लगता है। आप 10 seconds में formula करते हैं:</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+1 जumbo = 54,000 × 3,000 × 12 × 1.38 ÷ 1,000,000 = 2,683 kg<br>
+7 जumbos = 7 × 2,683 = <strong>18,779 kg</strong>
+</div>
+<p>Invoice claim करता है 20,000 kg। आपका formula कहता है 18,779 kg। <strong>आप 1,221 kg short हैं = ₹180/kg पर ₹2.19 लाख।</strong> या तो supplier ने weight overstate किया, या metres per जumbo understate किया, या consignment में कहीं bonus 8वाँ जumbo है। किसी भी case में, आपने 10 seconds में debit note earn कर लिया।</p>
+
+<p>यही वो moment है जो आपको "meeting में बैठा engineer" से "वो engineer जो चीज़ें catch करता है" बना देता है। ये वो moment भी है जो directly <a href="/blog/26-cut-bare-film-waste-2-to-1-percent">Blog 26 के Source 1 — Inward Gap</a> से link होता है। इस formula के बिना, Format 1 (Inward Inspection Log) discrepancy identify नहीं कर सकता। <strong>यही वो formula है जो Format 1 को काम करने लायक़ बनाता है।</strong></p>
+
+<h3>🔄 चारों Rearrangements — एक Formula, चार Faces</h3>
+
+<p>यहाँ है सबसे useful trick: same formula किसी भी चार variables में से एक के लिए solve करने को rearrange होता है। अगर आपको तीन पता हैं, आप हमेशा चौथा निकाल सकते हैं। यही "weight formula" को complete toolkit में बदलता है।</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:20px;margin:24px 0;border-radius:12px;">
+<div style="display:grid;gap:14px;">
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WEIGHT के लिए SOLVE (जब L, W, μm, ρ पता हों)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Weight (kg) = L × W × μm × ρ ÷ 1,000,000</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">LENGTH के लिए SOLVE (जब Weight, W, μm, ρ पता हों)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Length (m) = Weight × 1,000,000 ÷ (W × μm × ρ)</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WIDTH के लिए SOLVE (जब Weight, L, μm, ρ पता हों)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Width (mm) = Weight × 1,000,000 ÷ (L × μm × ρ)</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #0D8C7E;border-radius:6px;">
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">THICKNESS के लिए SOLVE (जब Weight, L, W, ρ पता हों)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.15em;font-weight:bold;color:#1A2744;margin-top:6px;">Thickness (μm) = Weight × 1,000,000 ÷ (L × W × ρ)</div>
+</div>
+
+</div>
+</div>
+
+<p>Pattern: <strong>किसी भी variable के लिए solve करना है तो Weight × 1,000,000 को बाक़ी तीन के product से divide करें।</strong> एक trick, चार जवाब।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 5 — Weight से Length (Customer का call)</h4>
+<p>Customer कहता है "मुझे 1,500 kg of 12 micron PET, 1500mm wide चाहिए।" आप कितने metres slit करेंगे?</p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Length = 1,500 × 1,000,000 ÷ (1,500 × 12 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1,500,000,000 ÷ 24,840<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>60,386 m</strong>
+</div>
+
+<p>आप quote करते हैं — "1,500 kg means about 60,400 metres of slit roll। हम वो 4 master rolls में deliver कर सकते हैं।" Customer impressed है। दो minutes में Sales close।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 6 — Weight से Width (Slitting QC catch)</h4>
+<p>Slitter से एक slit roll आता है। Customer order spec: <strong>5,000 m × 200 mm × 12 micron PET</strong>। Expected weight: 16.56 kg। Actual weighbridge show करता है <strong>16.50 kg</strong> — close, पर exact नहीं। Length और thickness slitter readout पर confirmed correct हैं। <em>तो actually width कितनी slit हुई?</em></p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Width = 16.50 × 1,000,000 ÷ (5,000 × 12 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 16,500,000 ÷ 82,800<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>199.3 mm</strong>
+</div>
+<p>Slitter ने 200mm की जगह 199.3mm cut किया — 0.7mm shortfall। 5,000m roll पर वो 60g है। महीने के 3,000 rolls पर, वो <strong>180 kg unbilled film at ₹180/kg = ₹32,400/month</strong> बाहर जा रहा है क्योंकि slitter blade ग़लत set है। Formula ने catch किया। इस rearrangement के बिना, आप उन 60g को "weighbridge tolerance" मानकर लिख देते और कभी investigate नहीं करते।</p>
+
+<h4 style="color:#1A2744;margin-top:24px;">Example 7 — Weight से Thickness (Under-gauging audit)</h4>
+<p>Supplier एक PET जumbo भेजता है, invoice पर <strong>54,000 m × 3,000 mm × 12 micron</strong>। Plant weighbridge reads <strong>2,550 kg</strong>। Spec पर expected था 2,683 kg (Example 1)। Length unwinder counter पर confirmed correct है। Width 3,000mm पर confirmed है। <em>Actually उन्होंने कौन सी thickness deliver की?</em></p>
+<div style="background:#FAF9F6;border:1px solid #1A2744;padding:14px 18px;margin:14px 0;border-radius:8px;font-family:'Courier New',monospace;font-size:0.95em;color:#1A2744;">
+Thickness = 2,550 × 1,000,000 ÷ (54,000 × 3,000 × 1.38)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2,550,000,000 ÷ 223,560,000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>11.41 micron</strong>
+</div>
+<p>Supplier ने 12 micron का bill किया, deliver की 11.41 micron — <strong>4.9% under-gauge</strong>। इस जumbo पर: 133 kg short = ₹180/kg पर ₹23,940। 250 MT के yearly contract पर, वो <strong>₹22 लाख/year</strong> supplier के bank में जा रहा है क्योंकि किसी ने calculator नहीं खोला। अब आपके पास एक number है जो debit note में जाता है <em>या</em> contract renegotiation में — आपकी choice।</p>
+
+<p>Examples 6 और 7 ही reason हैं कि ये formula "weight tool" नहीं है। ये एक <strong>full QC और procurement audit tool</strong> है। तीन sides चौथा pin करते हैं — हर बार।</p>
+
+<h3>🎯 पाँच Roles, पाँच जगह जहाँ ये Formula आपको बचाता है</h3>
+
+<div style="margin:24px 0;">
+<img src="five-roles-hi.png" alt="Five places where the film weight formula saves you - Stores, Slitting, Sales, Procurement, Production" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<p><strong>1. Stores / QC — Inward verification।</strong> आप consignment तौलते हैं, supplier के declared length × width × micron से calculate करते हैं कि weight कितना होना चाहिए, और 0.5% से ज़्यादा gap हो तो debit notes raise करते हैं। ये Blog 26 का Source 1 action में है। <strong>250 MT/month plant पर annual recovery: ₹13.5 लाख।</strong></p>
+
+<p><strong>2. Slitting — Per-roll target weight।</strong> Slitter operator को customer order spec मिलती है। आप उसे per slit roll target weight देते हैं। वो cutter setup tune करता है उस weight को ±2% पर hit करने के लिए। कोई under-weight rejects नहीं, कोई over-weight giveaways नहीं। <strong>Per slitter annual recovery: ₹4-6 लाख।</strong></p>
+
+<p><strong>3. Sales — Live customer pricing।</strong> Customer पूछता है "12 mic PET 1200mm के 2 MT में कितने metres?" आप 15 seconds में जवाब देते हैं: "लगभग 100,700 metres।" आप price quote करते हैं। Customer speed और confidence से impressed है। <strong>Conversion rate बढ़ता है। Quotes पर lead time 1 day से 1 minute पर आता है।</strong></p>
+
+<p><strong>4. Procurement — Tender comparison।</strong> तीन suppliers 20 MT of 12 mic PET, 3000mm पर quote करते हैं। हर एक per metre price quote करता है पर actually different metres per जumbo deliver करता है (52,000 / 54,000 / 53,500)। आप formula से सबको ₹/kg और ₹/sqm में convert करते हैं। सबसे सस्ता per-metre supplier अचानक सबसे महँगा per-kg हो जाता है। <strong>Procurement decision palatte हो जाता है। Savings: हर consignment पर 3-5%।</strong></p>
+
+<p><strong>5. Production / Process Engineering — Loss tracking।</strong> Operator कहता है "हमने start-up पर 350 metres गँवाए।" आप instantly per-metre formula use करके kg में convert करते हैं (3000 × 12 × 1.38 / 1000 = 0.0497 kg/m)। 350m × 0.0497 = 17.4 kg। ₹180/kg पर = ₹3,130 lost। <strong>यही तरीक़ा है जिससे Blog 26 का per-jumbo Format 3 metres को actionable rupees में बदलता है।</strong></p>
+
+<h3>⚠️ इस Formula के साथ Engineers की 3 Mistakes</h3>
+
+<p><strong>Mistake 1 — Unit conversions भूलना।</strong> "मैं बस length × width × thickness × density multiply कर दूँगा।" 1,000,000 के divisor के बिना आपका answer million के factor से off है। इस mistake का सबसे common form है width को mm से m convert करना भूल जाना, फिर realise करना कि answer सही नहीं लगता और panic करना। <strong>Fix:</strong> हमेशा divisor को side पर लिखकर formula लिखें। ÷ 1,000,000 non-negotiable है।</p>
+
+<p><strong>Mistake 2 — ग़लत density use करना।</strong> Multilayer laminate calculation पर PET density को BOPP density के साथ confuse करना। 1.40 (industry shorthand) use करना जब site convention 1.38 है। भूलना कि LDPE (0.92) और HDPE (0.96) अलग हैं। <strong>Fix:</strong> ऊपर वाला density cheat sheet। Print करें, laptop पर stick करें, refer करते रहें जब तक दिमाग़ में नहीं बैठ जाता।</p>
+
+<p><strong>Mistake 3 — GSM और total weight को confuse करना।</strong> GSM (grams per square metre) per-area है, per-length नहीं। GSM = micron × density (g/cc)। 12 micron PET के लिए, GSM = 12 × 1.38 = 16.56 g/sqm। GSM से total weight लेने के लिए, square metres में area से multiply करें (length × width), अकेले length से नहीं। <strong>Fix:</strong> याद रखें कि GSM × area = weight, पर micron × volume × density = weight। दो अलग problems के लिए दो अलग tools।</p>
+
+<h3>💰 Live Calculator — Formula यहीं Try करें</h3>
+
+<p>नीचे कोई भी input edit करें। Calculator formula live चलाता है। Forward (dimensions से weight calculate करें) और reverse (weight से length calculate करें) के बीच top पर toggle से switch करें।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+  <div style="margin-bottom:16px;">
+    <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">क्या calculate करना है?</label>
+    <select id="mode-hi" style="width:100%;padding:12px;border:2px solid #1A2744;border-radius:8px;font-size:1em;background:#1A2744;color:#FAF9F6;font-weight:bold;cursor:pointer;">
+      <option value="weight">⚖️ WEIGHT के लिए Solve (जब L, W, μm, ρ पता हों)</option>
+      <option value="length">📏 LENGTH के लिए Solve (जब Weight, W, μm, ρ पता हों)</option>
+      <option value="width">↔️ WIDTH के लिए Solve (जब Weight, L, μm, ρ पता हों)</option>
+      <option value="micron">📐 THICKNESS के लिए Solve (जब Weight, L, W, ρ पता हों)</option>
+    </select>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Film type / density</label>
+      <select id="filmType-hi" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+        <option value="1.38" selected>PET — 1.38 g/cc</option>
+        <option value="0.91">BOPP — 0.91 g/cc</option>
+        <option value="0.90">CPP — 0.90 g/cc</option>
+        <option value="0.92">LDPE — 0.92 g/cc</option>
+        <option value="0.96">HDPE — 0.96 g/cc</option>
+        <option value="0.92">LLDPE — 0.92 g/cc</option>
+        <option value="1.14">BOPA / Nylon — 1.14 g/cc</option>
+        <option value="1.38">PVC — 1.38 g/cc</option>
+        <option value="custom">Custom — नीचे density डालें</option>
+      </select>
+    </div>
+    <div id="customDensityWrap-hi" style="grid-column:1/-1;display:none;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Custom density (g/cc)</label>
+      <input type="number" id="customDensity-hi" value="1.00" min="0.1" max="10" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+
+    <div class="calc-field-hi" data-field="weight">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Weight (kg)</label>
+      <input type="number" id="weight-hi" value="2683" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-hi" data-field="length">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Length (m)</label>
+      <input type="number" id="length-hi" value="54000" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-hi" data-field="width">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Width (mm)</label>
+      <input type="number" id="width-hi" value="3000" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div class="calc-field-hi" data-field="micron">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Thickness (micron)</label>
+      <input type="number" id="micron-hi" value="12" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+    <div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">RESULT — LIVE</div>
+    <div id="resultLabel-hi" style="font-size:0.88em;color:#FAF9F6;opacity:0.9;">Total roll weight</div>
+    <div id="resultValue-hi" style="font-size:2.2em;font-weight:bold;color:#E85D26;line-height:1.1;margin:6px 0;">— kg</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+      <div style="background:rgba(255,255,255,0.08);padding:10px 12px;border-radius:6px;">
+        <div style="font-size:0.78em;opacity:0.8;">Per-metre weight</div>
+        <div id="perMetre-hi" style="font-size:1.05em;font-weight:bold;color:#E85D26;">— kg/m</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:10px 12px;border-radius:6px;">
+        <div style="font-size:0.78em;opacity:0.8;">GSM (g/sqm)</div>
+        <div id="gsm-hi" style="font-size:1.05em;font-weight:bold;color:#E85D26;">—</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>🧮 vksTech.com पर और Free Calculators</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">ये vksTech.com पर available <strong>सात free calculators</strong> में से एक है — Roll OD, GSM ↔ Micron Conversion, Production Yield %, Machine Utilisation %, और Cost per Square Metre के साथ। सब free, कोई email gate नहीं, कोई subscription नहीं।</p>
+<p style="margin:0;"><a href="https://vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ vksTech.com/#calculators पर सभी 7 calculators browse करें</a></p>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">ये formula series के लगभग हर operational improvement के नीचे की foundation है:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/22-smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (Lever 2 deep dive)</li>
+<li><a href="/blog/23-when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (Lever 1 deep dive)</li>
+<li><a href="/blog/24-cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% — operator-discipline playbook</li>
+<li><a href="/blog/25-2-smed-levers-process-engineers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><a href="/blog/26-cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1% — upstream yield playbook</li>
+<li><strong>ये blog (#27):</strong> Film Roll Weight Formula — universal arithmetic (आप यहाँ हैं)</li>
+<li><strong>Blog #28 (आगे आ रहा है):</strong> Web Break Reduction at Metalliser — Target Zero kg</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> एक formula — <strong>Weight = L × W × μm × ρ ÷ 1,000,000</strong> — flexible packaging में सबसे useful arithmetic का एक टुकड़ा है। ये procurement audits, customer quotes, slit roll targets, और waste tracking चलाता है। आपको पता होने वाली आठ densities हैं PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.96, LLDPE 0.92, BOPA 1.14, PVC 1.38। आपका वो version जो 10 seconds में roll weight calculate करता है, वो हर साल ₹2-5 लाख के leaks catch करता है जो उस version को कभी नहीं दिखते जो नहीं करता। ऊपर वाला calculator formula live चलाता है। इस page को bookmark करें। Density cheat sheet को तब तक refer करते रहें जब तक दिमाग़ में नहीं बैठ जाता। दो weeks practice के बाद, आप mentally 10 seconds से कम में करेंगे — और हर meeting में smart दिखेंगे।
+</div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+(function() {
+  function fmtKg(n) {
+    if (!isFinite(n) || n <= 0) return '— kg';
+    if (n >= 1000) return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' kg';
+    if (n >= 10) return n.toFixed(2) + ' kg';
+    return n.toFixed(3) + ' kg';
+  }
+  function fmtMetres(n) {
+    if (!isFinite(n) || n <= 0) return '— m';
+    return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' m';
+  }
+  function fmtMm(n) {
+    if (!isFinite(n) || n <= 0) return '— mm';
+    return n.toFixed(2) + ' mm';
+  }
+  function fmtMicron(n) {
+    if (!isFinite(n) || n <= 0) return '— μm';
+    return n.toFixed(2) + ' μm';
+  }
+  function fmtPerMetre(n) {
+    if (!isFinite(n) || n <= 0) return '— kg/m';
+    return n.toFixed(4) + ' kg/m';
+  }
+  function fmtGSM(n) {
+    if (!isFinite(n) || n <= 0) return '—';
+    return n.toFixed(2) + ' g/sqm';
+  }
+
+  function getDensity(suffix) {
+    var sel = document.getElementById('filmType-' + suffix);
+    if (!sel) return 1.38;
+    if (sel.value === 'custom') {
+      var c = document.getElementById('customDensity-' + suffix);
+      return c ? parseFloat(c.value) || 0 : 0;
+    }
+    return parseFloat(sel.value) || 0;
+  }
+
+  // Field config: which 3 inputs are visible per mode (the 4th is the answer)
+  var modeConfig = {
+    weight: { hide: 'weight', label: 'Total roll weight', formatter: fmtKg },
+    length: { hide: 'length', label: 'Total roll length', formatter: fmtMetres },
+    width:  { hide: 'width',  label: 'Slit / roll width',  formatter: fmtMm },
+    micron: { hide: 'micron', label: 'Film thickness',     formatter: fmtMicron }
+  };
+
+  function calc(suffix) {
+    var rho    = getDensity(suffix);
+    var weight = parseFloat(document.getElementById('weight-' + suffix).value) || 0;
+    var length = parseFloat(document.getElementById('length-' + suffix).value) || 0;
+    var width  = parseFloat(document.getElementById('width-'  + suffix).value) || 0;
+    var micron = parseFloat(document.getElementById('micron-' + suffix).value) || 0;
+
+    var mode = document.getElementById('mode-' + suffix).value;
+    var cfg = modeConfig[mode];
+    var result = 0;
+
+    if (mode === 'weight') {
+      result = (length * width * micron * rho) / 1000000;
+    } else if (mode === 'length') {
+      var d1 = width * micron * rho;
+      result = d1 > 0 ? (weight * 1000000) / d1 : 0;
+    } else if (mode === 'width') {
+      var d2 = length * micron * rho;
+      result = d2 > 0 ? (weight * 1000000) / d2 : 0;
+    } else if (mode === 'micron') {
+      var d3 = length * width * rho;
+      result = d3 > 0 ? (weight * 1000000) / d3 : 0;
+    }
+
+    document.getElementById('resultLabel-' + suffix).textContent = cfg.label;
+    document.getElementById('resultValue-' + suffix).textContent = cfg.formatter(result);
+
+    // Per-metre uses width × micron × ρ (always available even in width/micron modes — uses computed value)
+    var effWidth  = (mode === 'width')  ? result : width;
+    var effMicron = (mode === 'micron') ? result : micron;
+    var perMetre = (effWidth * effMicron * rho) / 1000000;
+    var gsm = effMicron * rho;
+    document.getElementById('perMetre-' + suffix).textContent = fmtPerMetre(perMetre);
+    document.getElementById('gsm-' + suffix).textContent = fmtGSM(gsm);
+  }
+
+  function applyMode(suffix) {
+    var mode = document.getElementById('mode-' + suffix).value;
+    var hideField = modeConfig[mode].hide;
+    var fields = document.querySelectorAll('.calc-field-' + suffix);
+    fields.forEach(function(el) {
+      el.style.display = (el.getAttribute('data-field') === hideField) ? 'none' : '';
+    });
+    calc(suffix);
+  }
+
+  function bind(suffix) {
+    var inputs = ['filmType', 'customDensity', 'weight', 'length', 'width', 'micron'];
+    inputs.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() {
+          if (id === 'filmType') {
+            var wrap = document.getElementById('customDensityWrap-' + suffix);
+            wrap.style.display = el.value === 'custom' ? '' : 'none';
+          }
+          calc(suffix);
+        });
+        el.addEventListener('change', function() { calc(suffix); });
+      }
+    });
+    var modeSel = document.getElementById('mode-' + suffix);
+    if (modeSel) {
+      modeSel.addEventListener('change', function() { applyMode(suffix); });
+    }
+    applyMode(suffix);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
