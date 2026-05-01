@@ -1634,8 +1634,10 @@ function cleanBlogContent(html, baseUrl) {
   // Strip full-page elements if someone uploaded a complete HTML page
   var temp = document.createElement('div');
   temp.innerHTML = html;
-  // Remove nav, header, footer, style, script, meta elements
-  temp.querySelectorAll('nav, header, footer, style, script, link, meta, title, .back-btn, .blog-footer, .share-bar').forEach(el => el.remove());
+  // Remove nav, header, footer, style, meta elements
+  // NOTE: <script> deliberately KEPT — calculator blogs (26, 28, 29, 30) need their <script>
+  // blocks to drive live inputs. The script is re-executed after innerHTML insertion below.
+  temp.querySelectorAll('nav, header, footer, style, link, meta, title, .back-btn, .blog-footer, .share-bar').forEach(el => el.remove());
   // Remove .article-hero (title/subtitle from standalone blog page - we render our own)
   temp.querySelectorAll('.article-hero').forEach(el => el.remove());
 
@@ -1773,7 +1775,20 @@ async function openBlog(id) {
   
   document.body.appendChild(overlay);
   overlay.scrollTop = 0;
-  
+
+  /* Re-execute any <script> tags inside the blog HTML.
+     Setting innerHTML does NOT run scripts — we must clone each one into a
+     fresh <script> element so calculators (Blogs 26, 28, 29, 30) wake up
+     and bind their input listeners. */
+  document.querySelectorAll('#blogBodyContent script').forEach(function(oldScript) {
+    var newScript = document.createElement('script');
+    Array.from(oldScript.attributes).forEach(function(attr) {
+      newScript.setAttribute(attr.name, attr.value);
+    });
+    newScript.text = oldScript.textContent || '';
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+
   // Apply language filter to blog content
   applyBlogLang(curLang);
   
