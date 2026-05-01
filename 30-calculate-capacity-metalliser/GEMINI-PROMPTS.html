@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 30 (Calculate Capacity of a Metalliser)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+    background: #FAF9F6;
+    color: #1A2744;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 18px 60px;
+  }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; line-height: 1.25; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  h3 { color: #1A2744; font-size: 1.05em; margin: 18px 0 8px 0; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; vertical-align: top; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+
+  .prompt-card {
+    background: #ffffff;
+    border: 2px solid #1A2744;
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+    margin: 22px 0;
+    box-shadow: 0 2px 6px rgba(26,39,68,0.06);
+  }
+  .prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2ddd4;
+  }
+  .prompt-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #1A2744;
+    margin: 0;
+  }
+  .prompt-meta {
+    font-size: 0.85em;
+    color: #5A5A5A;
+    margin: 4px 0 0 0;
+  }
+  .copy-btn {
+    background: #E85D26;
+    color: #ffffff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn:active { transform: translateY(1px); }
+  .copy-btn.copied { background: #0D8C7E; }
+
+  .prompt-body {
+    background: #FAF9F6;
+    border-left: 3px solid #E85D26;
+    padding: 12px 14px;
+    margin: 0;
+    border-radius: 4px;
+    font-size: 0.92em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #1A2744;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    line-height: 1.55;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+
+  .planb {
+    background: #fff7e0;
+    border-left: 3px solid #E85D26;
+    padding: 10px 14px;
+    margin: 12px 0 0 0;
+    font-size: 0.88em;
+    border-radius: 4px;
+  }
+
+  .checklist {
+    background: rgba(13,140,126,0.08);
+    border-left: 3px solid #0D8C7E;
+    padding: 12px 14px;
+    margin: 12px 0 0 0;
+    font-size: 0.9em;
+    border-radius: 4px;
+  }
+
+  .meta-band {
+    background: #1A2744;
+    color: #FAF9F6;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 0.92em;
+  }
+  .meta-band strong { color: #E85D26; }
+
+  code {
+    background: #f4ede2;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #1A2744;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #0D8C7E;
+    color: #ffffff;
+    padding: 12px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.35em; }
+    h2 { font-size: 1.1em; }
+    .prompt-header { flex-direction: column; align-items: stretch; }
+    .copy-btn { width: 100%; padding: 11px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 30</h1>
+<p class="meta"><em>How to Calculate Capacity of a Metalliser</em> — productivity engine<br>5 images required: 1 cover + 2 bilingual cycle-time anatomy + 2 bilingual capacity contrast</p>
+
+<div class="meta-band">
+<strong>How to use this page</strong><br>
+For each prompt below, tap <strong>📋 Copy Prompt</strong>. Open Google Gemini (or AI Studio with image generation enabled), <strong>attach <code>logo.png</code></strong> to the new turn, paste the prompt, and generate. Save the output with the <strong>exact filename</strong> shown. Place all images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference Table</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Hero cover — the capacity engine</td></tr>
+<tr><td>2A</td><td><code>cycle-time-anatomy-en.png</code></td><td>16:9</td><td>7-component cycle-time anatomy, English</td></tr>
+<tr><td>2B</td><td><code>cycle-time-anatomy-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3A</td><td><code>capacity-contrast-en.png</code></td><td>16:9</td><td>32 MT/day vs 14 MT/day capacity contrast, English</td></tr>
+<tr><td>3B</td><td><code>capacity-contrast-hi.png</code></td><td>16:9</td><td>Same as 3A in Hindi</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards (non-negotiable)</h2>
+<table>
+<thead><tr><th>Color</th><th>Hex</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>Navy</td><td><code>#1A2744</code></td><td>Headings, dark panels, primary text</td></tr>
+<tr><td>Orange</td><td><code>#E85D26</code></td><td>Accents, hero numbers, callouts</td></tr>
+<tr><td>Teal</td><td><code>#0D8C7E</code></td><td>Secondary, geometry/weight elements</td></tr>
+<tr><td>Cream</td><td><code>#FAF9F6</code></td><td>Backgrounds</td></tr>
+<tr><td>Grey</td><td><code>#5A5A5A</code></td><td>Subtitles, captions</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.92em;"><strong>Rules:</strong> No other colors. No photorealistic identifiable faces (back-view, hands-only, silhouette OK). No decorative clipart. WSJ / Bloomberg / HBR editorial style only.<br>
+<strong>Fonts:</strong> Inter, Söhne, Helvetica Neue (Latin); Hind, Mukta (Devanagari). Big numbers in Bebas Neue, Anton, or Oswald (heavy condensed).<br>
+<strong>Critical:</strong> PET density = <strong>1.38</strong> g/cc (matches Blog 27 convention across vksTech.com). Never 1.40.</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<p><strong>Filename:</strong> <code>cover.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hero image with the killer hero numbers <strong>32 MT/day vs 14 MT/day</strong>. Industrial documentary style, executive-grade.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image Prompt</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "How to Calculate Capacity of a Metalliser." This is the productivity engine of the metalliser series — the visual must convey engineering authority, mathematical precision, real shop floor presence.
+
+Composition — split scene 60/40:
+- LEFT 60%: a shop-floor view of a metalliser machine, shot from a low angle to emphasise scale. The chamber is closed and the deposition cycle is mid-run. Subtle steam/cooling vapour visible. Dim industrial lighting with warm orange highlights from the heat sources. A single operator silhouette at a control panel (back to camera, hands on the panel). Industrial documentary photography style, shallow depth of field, professional, NOT futuristic-sci-fi.
+- RIGHT 40%: a clean dark navy #1A2744 panel with subtle paper-grain texture.
+
+Text overlay on the navy panel:
+- Top eyebrow strip in orange #E85D26, all caps, small letterspacing: vksTech.com / PRODUCTIVITY ENGINE
+- Main title in white Inter Bold or Söhne Bold (3 lines, large): How to Calculate Capacity of a Metalliser
+- Subtitle in lighter grey #FAF9F6 italic: A 3-Step Engine — for any plant, any film, any product mix
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO NUMBERS — TWO numbers stacked vertically, very large (Bebas Neue or Anton, ~140 pt), with clear visual hierarchy:
+  - 32 MT/day in bright orange #E85D26, label below in tiny grey caps: STANDARD PET BASELINE
+  - Below it, 14 MT/day in white, label below in tiny orange caps: ALOX SAME MACHINE
+  - A small orange arrow connecting them, implying "same plant, different mix, half the capacity"
+- Bottom strip on the navy panel: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- In the bottom-right corner, place the attached VKS Tech logo at ~110×110 px with a thin white round backplate
+
+Mood: industrial, executive-grade, confident, not dramatic. Think The Wall Street Journal manufacturing feature meets a plant engineering quarterly. NOT cinematic, NOT sci-fi, NOT cartoonish. The reader should feel: "this is the page my plant manager pulls up when corporate asks about capacity."
+
+Strict colors: navy #1A2744, orange #E85D26, cream #FAF9F6, white. No red except orange. No green, no yellow.</div>
+
+<div class="planb"><strong>Plan B (if logo not embedded):</strong> Generate without the logo, then composite manually in Canva, Photopea, or GIMP — place <code>logo.png</code> at bottom-right at ~110×110 px on a white round backplate.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Cycle-Time Anatomy (English)</h2>
+<p><strong>Filename:</strong> <code>cycle-time-anatomy-en.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> The keeper image. Stacked bar showing 5 cycle components → 118.4 min/roll, three sequential calc boxes → 12 rolls/day. Print-ready as A3 cabin-wall poster.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Cycle-Time Anatomy</div>
+<div class="prompt-meta">Save as <code>cycle-time-anatomy-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial infographic. NOT photorealistic. NOT 3D. Pure flat infographic with crisp typography. Inspired by The Economist / Harvard Business Review methodology diagrams.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture (5% opacity max).
+
+Header zone (top 12%):
+- Eyebrow strip in orange #E85D26: small caps, letterspaced: METALLISER CYCLE-TIME ANATOMY
+- Title (navy #1A2744, large bold sans-serif): How One Roll Cycle Builds From 7 Components
+- Subtitle (grey #5A5A5A, regular weight): Setup + Vacuum-Heat + Run + Vent + Boat-Change overhead = Cycle time per roll. Then 1420 available minutes ÷ Cycle time = Rolls per day.
+
+Main visual zone (middle 65%) — split 50/50:
+
+LEFT HALF — vertical stacked-bar showing the 5 cycle-time components for ONE roll (12μm PET M2.2 baseline):
+Stack from BOTTOM to TOP, with proportional segment heights:
+1. (BOTTOM, largest segment, deep orange #E85D26): Run Time — 67.5 min (Length 54,000 ÷ Speed 800)
+2. (Setup, medium orange): Setup — 20 min
+3. (Vacuum-Heat, medium orange): Vacuum + Heating — 20 min
+4. (Vent, teal #0D8C7E): Vent — 10 min
+5. (Boat-Change, smallest sliver, light teal): Boat-Change overhead — 0.9 min (54,000 ÷ 600,000 × 10)
+
+Above the bar, in a navy #1A2744 rounded rectangle: TOTAL CYCLE = 118.4 min/roll (white text, bold)
+Each segment must show its own minutes value as a label inside or to the right of the segment, plus the component name.
+
+RIGHT HALF — three sequential calculation boxes stacked top-to-bottom:
+
+Box 1 (orange-tinted) — Available daily time:
+- Top tag (navy small caps): STEP A
+- Title: Available Minutes per Day
+- Formula: 1440 − 20 (source cleaning) = 1420 min
+
+Arrow down (orange) — symbolic divide
+
+Box 2 (teal-tinted) — Cycle time per roll:
+- Top tag: STEP B
+- Title: Cycle Time per Roll
+- Sum reading: 20 + 20 + 67.5 + 10 + 0.9 = 118.4 min
+
+Arrow down
+
+Box 3 (navy filled, white text) — Result:
+- Top tag (orange small caps): STEP C
+- Title (white): Rolls per Day
+- Hero number (Bebas Neue, very large, white): 12 rolls/day
+- Below (orange italic): = 1420 ÷ 118.4 (PET 12μm M2.2 baseline)
+
+Bottom callout strip (full-width, 8% of height):
+Navy #1A2744 background. Two-column split:
+- LEFT (orange #E85D26 text, bold): ⚡ Reader Insight:
+- RIGHT (white text): Run time is the largest segment but never alone reaches the headline number — the surrounding 50 minutes of non-running activity is what determines real rolls/day.
+
+Bottom-right corner of the entire image: place the attached VKS Tech logo at ~80×80 px on a small white circle/rounded-square backplate.
+
+Bottom-left corner: small grey footer text: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout. Component names in semibold, minute values in bold. Hero number (12 rolls/day) in heavy condensed font (Bebas Neue, Anton, Oswald).
+
+What to AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders, gradients beyond very subtle box shadows.</div>
+
+<div class="planb"><strong>Plan B:</strong> If logo is missing, composite manually after generation. Place at bottom-right at ~80×80 px.</div>
+
+<div class="checklist"><strong>Quality check before accepting:</strong>
+<ul>
+<li>All 5 cycle components present with correct minutes (67.5, 20, 20, 10, 0.9)</li>
+<li>Total = 118.4 min displayed prominently</li>
+<li>Three sequential calc boxes (A, B, C) on the right</li>
+<li>Result panel shows <strong>12 rolls/day</strong> as the hero</li>
+<li>1440 − 20 = 1420 visible</li>
+<li>Logo at bottom-right</li>
+<li>Run time is the largest segment in the stacked bar</li>
+</ul>
+</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Cycle-Time Anatomy (Hindi)</h2>
+<p><strong>Filename:</strong> <code>cycle-time-anatomy-hi.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hindi mirror of Image 2A. Component names stay in English (shop-floor convention). Numbers stay in English. Only title, subtitle, step titles, callout translate to Hindi.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Cycle-Time Anatomy</div>
+<div class="prompt-meta">Save as <code>cycle-time-anatomy-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial infographic with EXACTLY the same layout, colour palette, and structure as the English Cycle-Time Anatomy infographic. Component NAMES (Setup, Vacuum + Heating, Run Time, Vent, Boat-Change) stay in English because that's the shop-floor convention. Numbers stay in English numerals. Only title, subtitle, step titles, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow strip (orange #E85D26, English): METALLISER CYCLE-TIME ANATOMY
+- Title (Hindi, navy bold, large): एक Roll Cycle 7 Components से कैसे बनती है
+- Subtitle (Hindi, grey): Setup + Vacuum-Heat + Run + Vent + Boat-Change overhead = Cycle time per roll। फिर 1420 available minutes ÷ Cycle time = Rolls per day।
+
+Stacked bar (left half): identical to Image 2A — 5 segments with English component names + minute values (Run Time 67.5, Setup 20, Vacuum + Heating 20, Vent 10, Boat-Change 0.9). Top label: TOTAL CYCLE = 118.4 min/roll.
+
+Right side calc boxes:
+- Box 1: STEP A — Available Minutes per Day → 1440 − 20 = 1420 min
+- Box 2: STEP B — Cycle Time per Roll → 20 + 20 + 67.5 + 10 + 0.9 = 118.4 min
+- Box 3 (navy): STEP C — Rolls per Day → 12 rolls/day (= 1420 ÷ 118.4 — PET 12μm M2.2 baseline)
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Reader Insight:
+- RIGHT (white text, Hindi): Run time सबसे बड़ा segment है पर अकेले headline number तक कभी नहीं पहुँचता — आसपास के 50 minutes non-running activity असली rolls/day determine करते हैं।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A. Same colour palette, same fonts (Inter for English, Hind/Mukta for Hindi).</div>
+
+<div class="planb"><strong>Plan B for Hindi rendering issues:</strong> Use the same workflow as previous Hindi infographics — generate the EN version (Image 2A) first, then in Photopea/Canva replace the title, subtitle, and bottom callout with proper Devanagari text using Hind or Mukta font. Component names and numbers stay in English in both versions.</div>
+</div>
+
+<!-- IMAGE 3A -->
+<h2>Image 3A — Capacity Contrast (English)</h2>
+<p><strong>Filename:</strong> <code>capacity-contrast-en.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> The visual that wins capacity arguments. Two columns, same machine, two products: <strong>32 MT/day vs 14.4 MT/day</strong>. Delta strip below shows −17.6 MT = −55%.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Capacity Contrast</div>
+<div class="prompt-meta">Save as <code>capacity-contrast-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial comparison infographic. NOT photorealistic. NOT 3D. Pure flat infographic with crisp typography. Bloomberg Markets / Financial Times comparison-graphic aesthetic.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture (5% opacity max).
+
+Header zone (top 12%):
+- Eyebrow strip in orange #E85D26, small caps, letterspaced: SAME PLANT — DIFFERENT PRODUCT — HALF THE CAPACITY
+- Title (navy #1A2744, large bold sans-serif): One Machine. Two Products. Two Capacities.
+- Subtitle (grey #5A5A5A, regular): The ratecard quotes one number. Reality runs at the product mix's number.
+
+Main visual zone (middle 70%) — TWO LARGE COLUMNS side by side, each represents one product:
+
+LEFT COLUMN — PET 12μm M2.2 Standard (orange-themed):
+
+Top of column: a small navy tag chip — PRODUCT A. Below it, large label (navy bold): PET 12μm M2.2 Standard. Subtitle (grey small): baseline transparent metallised.
+
+Mid-column: 4 stat rows with values aligned right:
+- Cycle time: 118.4 min/roll
+- Rolls per day: 12 rolls
+- Roll weight: 2,683 kg
+- Boat-set life: 6 lakh m
+
+Bottom of column: a large hero panel with orange #E85D26 background, white text. Inside:
+- Small caps tag: DAILY CAPACITY
+- Big number (Bebas Neue / Anton, very large, ~120 pt, white): 32 MT/day
+
+CENTRE — vertical separator: a thin orange #E85D26 line with the symbol "vs" in a circle, mid-height. Optional small "same machine" tag above the separator.
+
+RIGHT COLUMN — PET 12μm AlOx (teal-themed):
+
+Top of column: a small navy tag chip — PRODUCT B. Below: large label: PET 12μm AlOx. Subtitle: aluminium-oxide special chemistry.
+
+Mid-column: 4 stat rows:
+- Cycle time: 147 min/roll
+- Rolls per day: 9.66 rolls
+- Roll weight: 1,490 kg
+- Boat-set life: 1.5 lakh m
+
+Bottom of column: hero panel with navy #1A2744 background, teal #0D8C7E text accents. Inside:
+- Small caps tag: DAILY CAPACITY
+- Big number (white, very large, same size as Product A's): 14.4 MT/day
+
+Below both columns — DELTA STRIP:
+A wide rounded rectangle, orange #E85D26 background. White text centred:
+- Small caps tag: CAPACITY DELTA
+- Heading: −17.6 MT/day = −55% (white, bold)
+- Subtext italic: same machine, same operators, same shift — the product mix moved the goalpost
+
+Bottom callout strip (8% of height):
+Navy #1A2744 background. Two-column split:
+- LEFT (orange bold): ⚡ Why this matters:
+- RIGHT (white): If your monthly capacity utilisation looks bad, check what mix you actually ran. The capacity number is whichever product was on the machine.
+
+Bottom-right corner: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif. Big numbers (32 MT/day, 14.4 MT/day, 55%) in Bebas Neue or Anton — heavy condensed. Both column hero panels must use IDENTICAL big-number sizes so the visual comparison is honest.
+
+What to AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders, drop shadows beyond very subtle, rainbow colours.</div>
+
+<div class="planb"><strong>Plan B:</strong> If logo missing, composite manually. If the two-column comparison is too cramped at 1600×900, fall back to slightly narrower columns with bigger gap between them — but never reduce the hero number sizes; those must stay dominant.</div>
+
+<div class="checklist"><strong>Quality check before accepting:</strong>
+<ul>
+<li>Two columns clearly comparable in layout</li>
+<li>Product A column orange-themed, Product B column teal/navy-themed</li>
+<li>Both DAILY CAPACITY hero numbers (32 MT/day and 14.4 MT/day) at SAME size</li>
+<li>Delta strip below shows −17.6 MT/day and −55%</li>
+<li>All 4 stat rows present in both columns</li>
+<li>Cycle times correct: 118.4 min vs 147 min</li>
+<li>Roll weights correct: 2,683 kg vs 1,490 kg</li>
+<li>No "Alubond" anywhere — must say AlOx</li>
+<li>Logo at bottom-right</li>
+</ul>
+</div>
+</div>
+
+<!-- IMAGE 3B -->
+<h2>Image 3B — Capacity Contrast (Hindi)</h2>
+<p><strong>Filename:</strong> <code>capacity-contrast-hi.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hindi mirror of Image 3A.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Capacity Contrast</div>
+<div class="prompt-meta">Save as <code>capacity-contrast-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial comparison infographic with EXACTLY the same layout, colour palette, and column structure as the English Capacity Contrast infographic. Numbers stay in English numerals. Product labels (PET 12μm M2.2 Standard, PET 12μm AlOx) stay in English. Only the title, subtitle, stat row labels, hero panel labels, delta strip, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow strip (orange #E85D26, English): SAME PLANT — DIFFERENT PRODUCT — HALF THE CAPACITY
+- Title (Hindi, navy bold, large): एक Machine. दो Products. दो Capacities.
+- Subtitle (Hindi, grey): Ratecard एक number quote करता है। Reality product mix के number पर चलती है।
+
+LEFT COLUMN — PET 12μm M2.2 Standard (orange-themed):
+- Tag: PRODUCT A
+- Label: PET 12μm M2.2 Standard (English)
+- Subtitle (Hindi small grey): baseline transparent metallised
+- 4 stat rows (English labels OK):
+  - Cycle time: 118.4 min/roll
+  - Rolls per day: 12 rolls
+  - Roll weight: 2,683 kg
+  - Boat-set life: 6 lakh m
+- Hero panel (orange bg, white text):
+  - Tag: DAILY CAPACITY
+  - Big number: 32 MT/day
+
+Centre separator: thin orange line with "vs" in a circle.
+
+RIGHT COLUMN — PET 12μm AlOx (teal-themed):
+- Tag: PRODUCT B
+- Label: PET 12μm AlOx
+- Subtitle (Hindi): aluminium-oxide special chemistry
+- 4 stat rows:
+  - Cycle time: 147 min/roll
+  - Rolls per day: 9.66 rolls
+  - Roll weight: 1,490 kg
+  - Boat-set life: 1.5 lakh m
+- Hero panel (navy bg):
+  - Tag: DAILY CAPACITY
+  - Big number (white): 14.4 MT/day
+
+Delta strip (orange bg, white text):
+- Tag: CAPACITY DELTA
+- Heading: −17.6 MT/day = −55%
+- Subtext italic (Hindi): same machine, same operators, same shift — product mix ने goalpost हिला दिया
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ ये क्यों matter करता है:
+- RIGHT (white text, Hindi): अगर आपकी monthly capacity utilisation खराब दिखती है, check करें actually क्या mix चला। Capacity number वही है जो product machine पर था।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 3A. Same colour palette, same fonts (Inter for English/numbers, Hind/Mukta for Hindi).</div>
+
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 3A first, replace Hindi text in Photopea/Canva using Hind or Mukta. Product labels, all stat numbers, and hero capacity numbers stay in English — only the surrounding prose changes.</div>
+</div>
+
+<h2>Review Checklist — 8-Point Check Before Publishing</h2>
+<ol>
+<li><strong>Brand colour discipline</strong> — only Navy / Orange / Teal / Cream / white / grey. No blue, no green outside teal, no yellow, no red other than the orange.</li>
+<li><strong>Typography quality</strong> — clean sans-serif (Inter / Söhne / Helvetica), big numbers in heavy condensed font (Bebas / Oswald / Anton).</li>
+<li><strong>Number accuracy (HARD)</strong> — Cycle anatomy: 67.5 / 20 / 20 / 10 / 0.9 → 118.4 min total → 12 rolls/day. Capacity contrast: <strong>32 MT/day vs 14.4 MT/day</strong>, delta −17.6 = −55%. Roll weights: 2,683 kg vs 1,490 kg.</li>
+<li><strong>Material name discipline</strong> — must say <strong>AlOx</strong> (not "Alubond"). PET density = <strong>1.38</strong> g/cc (matches Blog 27).</li>
+<li><strong>Hero number sizing parity</strong> — for Image 3A/3B: both DAILY CAPACITY numbers (32 and 14.4 MT/day) MUST be the same point size. Different sizes misrepresent the comparison.</li>
+<li><strong>Logo placement</strong> — bottom-right, ~80–110 px, on white backplate.</li>
+<li><strong>Information density vs scannability</strong> — cycle anatomy reads as "5 components stack to 118 min" in 5 seconds; contrast image reads as "32 vs 14" in 3 seconds.</li>
+<li><strong>No AI-tells</strong> — no distorted hands, garbled small text, AI watermarks, or unnatural plastic surfaces.</li>
+</ol>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong>Numbers come out wrong:</strong> Always overlay correct numbers in an editor afterward. AI image models are unreliable with numerics.</li>
+<li><strong>× symbol or − sign renders as box:</strong> Add to prompt: <em>Use Unicode multiplication × (U+00D7) and minus − (U+2212). If unable to render, use 'x' and '-' as substitutes.</em></li>
+<li><strong>Hindi renders as gibberish:</strong> Use Plan B — generate EN first, text-replace in Photopea/Canva using a real Devanagari font.</li>
+<li><strong>Decorative clutter (sparkles, hearts, confetti):</strong> Add: <em>STRICTLY no decorative elements, no clipart, no flourishes. WSJ / Bloomberg / HBR editorial style ONLY.</em></li>
+<li><strong>Logo gets ignored:</strong> Always have Plan B ready — composite manually.</li>
+</ul>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">30-calculate-capacity-metalliser/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── cycle-time-anatomy-en.png      (Image 2A)
+├── cycle-time-anatomy-hi.png      (Image 2B)
+├── capacity-contrast-en.png       (Image 3A)
+├── capacity-contrast-hi.png       (Image 3B)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() {
+        fallbackCopy(text, btn);
+      });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      } else {
+        showToast('✗ Copy failed — please select manually');
+      }
+    } catch (e) {
+      showToast('✗ Copy failed — please select manually');
+    }
+    document.body.removeChild(ta);
+  }
+
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = orig;
+    }, 1800);
+  }
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) {
+        copyText(target.textContent.trim(), btn);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

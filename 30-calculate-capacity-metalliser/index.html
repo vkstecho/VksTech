@@ -1,1 +1,753 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
 
+<div class="en-content">
+
+<h2>⚙️ How to Calculate Capacity of a Metalliser — A 3-Step Engine for Plant Managers</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 11-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; Published January 2025 &nbsp;|&nbsp; Bookmark for monthly capacity planning</p>
+
+<p>Capacity is the most-asked, least-understood number on a metalliser. Every plant has a "rated capacity" on the ratecard — usually a single MT/day figure quoted to customers, planners, and the corporate office. But that single number hides a moving truth: real capacity changes with product mix. Run a day of standard 12 micron PET and you get one capacity. Run a day of AlOx the next, and capacity drops by more than half. Same machine, same operators, same shift — different number.</p>
+
+<p>This blog gives you a 3-step engine to calculate your plant's <em>actual</em> capacity for any product mix. Eleven minutes. After this, when corporate asks "what's our metalliser capacity?", you'll have a defensible answer for any specific mix — not a single ratecard number that's right for nothing in particular.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The 3-Step Capacity Engine</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">STEP 1 — ROLLS PER DAY</div>
+<div style="font-family:monospace;font-size:0.92em;color:#FAF9F6;line-height:1.6;">
+Available min/day = 1440 − Planned Source Cleaning (~20 min)<br>
+Cycle time/roll = Setup + Vacuum-Heat + (Length÷Speed) + Vent + Boat-change overhead<br>
+<strong style="color:#E85D26;">Rolls/day = Available min ÷ Cycle time</strong>
+</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">STEP 2 — AVERAGE ROLL WEIGHT</div>
+<div style="font-family:monospace;font-size:0.92em;color:#FAF9F6;line-height:1.6;">
+<strong style="color:#0D8C7E;">Roll weight (kg) = Width(mm) × Length(m) × Micron × Density × 0.000001</strong><br>
+<span style="opacity:0.85;font-size:0.9em;">Densities: PET 1.38 &nbsp;•&nbsp; BOPP 0.91 &nbsp;•&nbsp; CPP 0.90 g/cc</span>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">STEP 3 — CAPACITY IN MT/DAY</div>
+<div style="font-size:1.05em;color:#FAF9F6;font-weight:bold;font-family:monospace;">Capacity (MT/day) = Rolls/day × Roll weight (kg) ÷ 1000</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">Baselines: PET 12μm M2.2 / 3000mm / 54,000m &nbsp;•&nbsp; BOPP 18μm M2.2 / 3000mm / 36,000m &nbsp;•&nbsp; CPP 22μm M2.2 / 3000mm / 24,000m</p>
+</div>
+
+<h3>📐 Step 1 — Compute Rolls per Day</h3>
+
+<p>The metalliser's productivity for any specific material is fully determined by seven cycle-time inputs plus one daily overhead. Get these seven numbers from your plant's logs and you can compute rolls per day for any material.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Input</th><th>Typical range</th><th>What it captures</th></tr></thead>
+<tbody>
+<tr><td><strong>1. Setup time per roll</strong></td><td>15-30 min</td><td>Loading new core, threading, web alignment, parameter set-up</td></tr>
+<tr><td><strong>2. Vacuum + Heating time</strong></td><td>15-25 min</td><td>Chamber pump-down + source-bar conditioning before deposition starts</td></tr>
+<tr><td><strong>3. Average line speed</strong></td><td>400-900 m/min</td><td>Steady-state metallisation speed for that material</td></tr>
+<tr><td><strong>4. Average jumbo length</strong></td><td>varies by film</td><td>The metallised film output per cycle (54,000m for 12μm PET baseline)</td></tr>
+<tr><td><strong>5. Vent time</strong></td><td>5-15 min</td><td>Chamber depressurisation between cycles</td></tr>
+<tr><td><strong>6. Boat change time</strong></td><td>5-15 min</td><td>Time to replace evaporation boats when boat-set life is reached</td></tr>
+<tr><td><strong>7. Length per boat-set</strong></td><td>varies by OD</td><td>How much metallised film one boat-set produces before replacement</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>And one daily overhead: <strong>Planned source cleaning</strong> — typically <strong>~20 minutes per 24 hours</strong>, scheduled once per day for cleaning the source bar to maintain deposition quality.</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;font-size:1em;color:#1A2744;font-weight:bold;">Available minutes per day = 1440 − Source Cleaning (20 min) = <span style="color:#E85D26;">1420 min</span></p>
+<p style="margin:0 0 8px 0;font-size:1em;color:#1A2744;font-weight:bold;">Cycle time per roll = Setup + Vacuum-Heat + (Length ÷ Speed) + Vent + (Length ÷ Boat-set life) × Boat-change time</p>
+<p style="margin:0;font-size:1em;color:#1A2744;font-weight:bold;"><span style="color:#E85D26;">Rolls per day = 1420 ÷ Cycle time per roll</span></p>
+</div>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Boat changes within a single jumbo:</strong> Most baseline materials (12μm PET at M2.2 with 5-6 lakh m boat-set life and 54,000m jumbos) have <em>zero</em> mid-cycle boat changes — one boat-set lasts 8-10 jumbos. The boat-change term in the formula naturally handles this: when length-per-boat-set is much greater than jumbo length, the term contributes near-zero. For shorter boat-set materials (high OD, AlOx), the term kicks in significantly.</p>
+
+<h3>📊 Boat-Set Life Reference Table</h3>
+
+<p>Boat-set life shortens as OD increases — thicker deposition wears the boats faster. Use this as a starting reference, but always measure your own plant's actual life:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>OD value / Material</th><th>Typical boat-set life</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>OD M2.2</strong> (Standard transparent)</td><td>5-6 lakh m</td><td>Baseline. Boat-set covers 8-10 baseline jumbos.</td></tr>
+<tr><td><strong>OD M2.5</strong></td><td>4-5 lakh m</td><td>Higher OD = thicker deposition = shorter life</td></tr>
+<tr><td><strong>OD M2.8</strong></td><td>3-4 lakh m</td><td>Heavy deposition. Boat-set covers ~6 jumbos.</td></tr>
+<tr><td><strong>AlOx (Aluminium Oxide)</strong></td><td>1-2 lakh m</td><td>Critical material. Boat-set covers 3-4 jumbos. Mid-cycle changes common.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🎯 Worked Example 1 — PET 12μm M2.2 Baseline</h3>
+
+<p>Plug your plant's numbers into the formula. Here's the validated baseline for a typical Indian flexible-packaging plant running standard 12 micron PET at M2.2:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Setup per roll: 20 min &nbsp;|&nbsp; Vacuum + Heating: 20 min &nbsp;|&nbsp; Vent: 10 min</li>
+<li>Average line speed: 800 m/min &nbsp;|&nbsp; Jumbo length: 54,000m</li>
+<li>Boat-set life: 6 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
+<li>Planned source cleaning: 20 min/day</li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Calculation:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Run time per roll = 54,000 ÷ 800 = <strong>67.5 min</strong></li>
+<li>Boat changes per roll = 54,000 ÷ 600,000 = 0.09 → contributes 0.9 min</li>
+<li>Cycle time per roll = 20 + 20 + 67.5 + 10 + 0.9 = <strong>118.4 min</strong></li>
+<li>Available time per day = 1440 − 20 = <strong>1420 min</strong></li>
+</ul>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.05em;">Rolls per day = 1420 ÷ 118.4 = <span style="color:#E85D26;">12 rolls/day</span></p>
+</div>
+
+<p>This 12 rolls/day matches the baseline number used as input throughout <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a> for equivalence factor derivation. The two blogs lock together: Blog 30 computes rolls/day; Blog 29 uses it to derive factors.</p>
+
+<h3>⚖️ Step 2 — Compute Average Roll Weight</h3>
+
+<p>Once rolls per day is known, the second step is to compute the average weight of each roll. The standard film-roll weight formula:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Roll weight (kg) = <span style="color:#E85D26;">Width(mm) × Length(m) × Micron × Density × 0.000001</span></p>
+</div>
+
+<p>Density values for common metalliser films (matches the convention used across vksTech.com calculators including <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a>):</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film</th><th>Density (g/cc)</th></tr></thead>
+<tbody>
+<tr><td><strong>PET</strong></td><td>1.38</td></tr>
+<tr><td><strong>BOPP</strong></td><td>0.91</td></tr>
+<tr><td><strong>CPP</strong></td><td>0.90</td></tr>
+</tbody>
+</table>
+</div>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Width assumption:</strong> "Width" in this formula is the <em>jumbo width metallised on the machine</em> — typically 3000mm for a standard metalliser. The sum of all slit widths for the day equals this jumbo width. So for daily capacity, use jumbo width directly (3000mm), not individual slit widths.</p>
+
+<p><strong>Worked example continued (12μm PET baseline):</strong></p>
+
+<ul style="margin:8px 0;padding-left:24px;line-height:1.8;">
+<li>Width = 3000mm &nbsp;|&nbsp; Length = 54,000m &nbsp;|&nbsp; Micron = 12 &nbsp;|&nbsp; Density = 1.38</li>
+<li>Roll weight = 3000 × 54,000 × 12 × 1.38 × 0.000001 = <strong>2,683 kg = 2.68 MT</strong></li>
+</ul>
+
+<h3>🎯 Step 3 — Compute Capacity in MT/Day</h3>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Capacity (MT/day) = <span style="color:#E85D26;">Rolls per day × Roll weight (kg) ÷ 1000</span></p>
+</div>
+
+<p><strong>For PET 12μm M2.2 baseline:</strong></p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 6px 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Capacity = 12 rolls/day × 2,683 kg/roll ÷ 1000 = <span style="color:#E85D26;">~32 MT/day</span></p>
+</div>
+
+<p>Most plants quote a single ratecard capacity number around this figure — and for the baseline product, this is correct. The trouble starts when product mix shifts. Watch what happens with the same plant on a different product.</p>
+
+<h3>⚡ Worked Example 2 — Same Plant, AlOx Product</h3>
+
+<p>Now compute capacity for the same plant running 12μm PET AlOx — special chemistry, slower speed, shorter jumbo, shorter boat-set life:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx):</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 15 min</li>
+<li>Average line speed: 400 m/min &nbsp;|&nbsp; Jumbo length: 30,000m</li>
+<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
+<li>Planned source cleaning: 20 min/day</li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 1 — Rolls/day:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Run time = 30,000 ÷ 400 = <strong>75 min</strong></li>
+<li>Boat changes per roll = 30,000 ÷ 150,000 = 0.20 → contributes 2 min</li>
+<li>Cycle time per roll = 30 + 25 + 75 + 15 + 2 = <strong>147 min</strong></li>
+<li>Rolls per day = 1420 ÷ 147 = <strong>9.66 rolls/day</strong></li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 2 — Roll weight:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Roll weight = 3000 × 30,000 × 12 × 1.38 × 0.000001 = <strong>1,490 kg = 1.49 MT</strong></li>
+</ul>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 9.66 × 1,490 ÷ 1000 = <span style="color:#E85D26;">~14.4 MT/day</span></p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift. Standard 12μm PET = <strong>32 MT/day</strong>. AlOx 12μm PET = <strong>14.4 MT/day</strong>. The plant's "real" capacity is whichever product is actually running. The single ratecard number is right for nothing — it's an average that fits no specific day's mix. If your monthly capacity utilisation looks bad, check what mix you actually ran. The capacity goal-post moved.</p>
+</div>
+
+<h3>💰 Live Calculator — Compute Your Plant's Capacity</h3>
+
+<p>Three steps. Enter your plant's numbers in Step 1 and Step 2 below. Calculator outputs rolls/day, roll weight, and daily capacity in MT.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 1 — CYCLE TIME INPUTS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Setup time per roll (min)</label>
+<input type="number" id="setup-en" placeholder="e.g., 20" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Vacuum + Heating time (min)</label>
+<input type="number" id="vacheat-en" placeholder="e.g., 20" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average line speed (m/min)</label>
+<input type="number" id="speed-en" placeholder="e.g., 800" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average jumbo length (m)</label>
+<input type="number" id="jumbo-en" placeholder="e.g., 54000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Vent time (min)</label>
+<input type="number" id="vent-en" placeholder="e.g., 10" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Boat change time (min)</label>
+<input type="number" id="boatchange-en" placeholder="e.g., 10" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Length per boat-set (m)</label>
+<input type="number" id="boatset-en" placeholder="e.g., 600000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Source cleaning time/day (min)</label>
+<input type="number" id="cleaning-en" placeholder="e.g., 20" min="0" step="0.1" value="20" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 2 — FILM PARAMETERS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmType-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET">PET (density 1.38 g/cc)</option>
+<option value="BOPP">BOPP (density 0.91 g/cc)</option>
+<option value="CPP">CPP (density 0.90 g/cc)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average jumbo width (mm)</label>
+<input type="number" id="width-en" placeholder="e.g., 3000" min="1" step="1" value="3000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average film micron</label>
+<input type="number" id="micron-en" placeholder="e.g., 12" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Material name (label only, optional)</label>
+<input type="text" id="matName-en" placeholder="e.g., 12μm PET M2.2" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Cycle time / roll</div>
+<div id="cycleTime-en" style="font-size:1.25em;font-weight:bold;color:#E85D26;">— min</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Rolls per day</div>
+<div id="rollsDay-en" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Roll weight</div>
+<div id="rollWt-en" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">— kg</div>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:10px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Daily Capacity</div>
+<div id="capacity-en" style="font-size:2em;font-weight:bold;color:#FAF9F6;">— MT/day</div>
+</div>
+
+<div id="interpretation-en" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;text-align:center;">
+Enter values above to see your plant's capacity for this material
+</div>
+</div>
+
+</div>
+
+<h3>🚨 Three Common Mistakes in Capacity Calculation</h3>
+
+<p><strong>Mistake 1 — Using OEM rated speed instead of measured average speed.</strong> The machine vendor's datasheet says the line can run at 950 m/min for 12μm M2.2. Your plant's measured sustainable rate is 800 m/min. If you use 950 in the formula, you'll compute ~14 rolls/day instead of the real ~12 — overstating capacity by ~17%. <strong>Fix:</strong> always pull line speed from your plant's logs, averaged over a representative month. The datasheet is a peak number; you need the operating average.</p>
+
+<p><strong>Mistake 2 — Forgetting vent time.</strong> Operators sometimes time setup-to-setup but exclude vent because it happens "between" cycles. The formula needs all non-running time accounted for. Skipping a 10-minute vent in a 118-minute cycle inflates rolls/day by ~9%. <strong>Fix:</strong> include every minute the chamber is not actively depositing — setup, vacuum-heat, vent, boat changes, source cleaning. The 24-hour day must absorb all of them.</p>
+
+<p><strong>Mistake 3 — Ignoring mid-cycle boat changes for short boat-set materials.</strong> For baseline 12μm M2.2 with 6 lakh m boat life and 54,000m jumbos, mid-cycle boat changes are negligible (one per ~10 jumbos). But for AlOx with 1.5 lakh m boat life and 30,000m jumbos, you get a boat change every 5th jumbo — meaningful overhead. Plants that built their capacity model around the baseline often forget to include the boat-change term, then wonder why AlOx capacity numbers don't match the floor reality. <strong>Fix:</strong> always include the boat-change term, even if it's near-zero for your baseline. The formula is general; the term self-corrects to near-zero when boat-set life is large.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Bonus mistake to watch:</strong> Using best-cycle data instead of monthly average. Best cycles bias rolls/day high, just like single best-day measurements bias equivalence factors high (see <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a>). Use 90-day averages for capacity that survives review-meeting scrutiny.</p>
+
+<h3>🎯 Where to Start at Your Plant</h3>
+
+<p>One-week rollout to know your plant's real capacity for any product:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Day 1-2 — Pull cycle-time logs.</strong> For each of your top 5 products by volume, pull the past 90 days of metalliser logs. Extract average values for the 7 cycle inputs.</li>
+<li><strong>Day 3 — Confirm planned source cleaning.</strong> Check if your plant runs a planned source-cleaning shift daily, weekly, or per-product-changeover. Convert to minutes per 24-hour equivalent (e.g., 140 min weekly = 20 min/day).</li>
+<li><strong>Day 4 — Run the 3-step engine.</strong> Use the calculator above. For each top-5 product, compute rolls/day, roll weight, and capacity in MT/day. Build a master capacity table.</li>
+<li><strong>Day 5 — Compare to ratecard.</strong> Your master capacity table will show capacity ranging from baseline-high to specialty-low. The ratecard number is somewhere in between — usually closer to baseline. Note the gap.</li>
+<li><strong>Day 6-7 — Forecast the upcoming month.</strong> Take next month's planned product mix, weight each product's capacity by its planned MT, and compute the <em>weighted average capacity</em>. That number is what your plant can actually deliver next month — not the ratecard number.</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">This blog is the productivity foundation that supports the rest of the series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/film-roll-weight-formula"><strong>Blog #27:</strong></a> Film Roll Weight Formula (used in Step 2 of this blog)</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent</li>
+<li><a href="/blog/calculate-equivalent-factor-any-material"><strong>Blog #29:</strong></a> Calculate Equivalent Factor for Any Material (uses rolls/day from this blog)</li>
+<li><strong>This blog (#30):</strong> How to Calculate Capacity of a Metalliser (you are here)</li>
+</ul>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Have a Question?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Stuck on how to measure any of the seven cycle inputs at your plant? Unsure how to extract average line speed from your shift logs? Want to discuss boat-set life for a specific OD? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — Vivek answers personally.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Metalliser capacity is not a single ratecard number — it's a function of product mix. The 3-step engine gives you a defensible capacity figure for any specific material: <strong>Step 1</strong> compute rolls/day from 7 cycle inputs (Setup + Vacuum-Heat + Run + Vent + Boat-change overhead, divided into 1420 available minutes); <strong>Step 2</strong> compute roll weight (Width × Length × Micron × Density × 0.000001); <strong>Step 3</strong> capacity in MT/day = Rolls × Roll weight ÷ 1000. Baseline 12μm PET M2.2 ≈ 32 MT/day; AlOx 12μm PET ≈ 14 MT/day on the same machine. Your plant's <em>real</em> capacity is whichever product is running. The 3-step engine, applied to your top-5 product mix, gives you a weighted forecast that survives any review meeting.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 Series complete.</strong> Blogs 28, 29, and 30 form a tight triangle: <strong>30 → 29 → 28</strong>. Blog 30 computes rolls/day from cycle inputs. Blog 29 turns rolls/day into equivalence factors. Blog 28 turns equivalence factors into Equivalent ₹/kg conversion cost. Together, they give you the full financial-controls toolkit for the metalliser — from shop-floor cycle data to monthly P&L.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>⚙️ Metalliser की Capacity कैसे Calculate करें — Plant-Manager के लिए 3-Step Engine</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 11-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; January 2025 में published &nbsp;|&nbsp; Monthly capacity planning के लिए bookmark करें</p>
+
+<p>Capacity Metalliser पर सबसे ज़्यादा पूछा जाने वाला, सबसे कम समझा जाने वाला number है। हर plant की एक "rated capacity" ratecard पर होती है — usually एक single MT/day figure जो customers, planners, और corporate office को quote होती है। पर वो single number एक moving truth छुपाता है: real capacity product mix के साथ बदलती है। एक दिन standard 12 micron PET चलाओ, एक capacity मिलती है। अगले दिन AlOx चलाओ, capacity आधी से कम हो जाती है। Same machine, same operators, same shift — different number।</p>
+
+<p>ये blog आपको एक 3-step engine देता है किसी भी product mix के लिए आपके plant की <em>actual</em> capacity calculate करने का। ग्यारह minutes। इसके बाद जब corporate पूछे "हमारी metalliser capacity क्या है?", आपके पास किसी भी specific mix के लिए defensible answer होगा — एक ratecard number नहीं जो किसी particular चीज़ के लिए सही नहीं है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — 3-Step Capacity Engine</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">STEP 1 — ROLLS PER DAY</div>
+<div style="font-family:monospace;font-size:0.92em;color:#FAF9F6;line-height:1.6;">
+Available min/day = 1440 − Planned Source Cleaning (~20 min)<br>
+Cycle time/roll = Setup + Vacuum-Heat + (Length÷Speed) + Vent + Boat-change overhead<br>
+<strong style="color:#E85D26;">Rolls/day = Available min ÷ Cycle time</strong>
+</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">STEP 2 — AVERAGE ROLL WEIGHT</div>
+<div style="font-family:monospace;font-size:0.92em;color:#FAF9F6;line-height:1.6;">
+<strong style="color:#0D8C7E;">Roll weight (kg) = Width(mm) × Length(m) × Micron × Density × 0.000001</strong><br>
+<span style="opacity:0.85;font-size:0.9em;">Densities: PET 1.38 &nbsp;•&nbsp; BOPP 0.91 &nbsp;•&nbsp; CPP 0.90 g/cc</span>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">STEP 3 — CAPACITY IN MT/DAY</div>
+<div style="font-size:1.05em;color:#FAF9F6;font-weight:bold;font-family:monospace;">Capacity (MT/day) = Rolls/day × Roll weight (kg) ÷ 1000</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">Baselines: PET 12μm M2.2 / 3000mm / 54,000m &nbsp;•&nbsp; BOPP 18μm M2.2 / 3000mm / 36,000m &nbsp;•&nbsp; CPP 22μm M2.2 / 3000mm / 24,000m</p>
+</div>
+
+<h3>📐 Step 1 — Rolls per Day Compute करें</h3>
+
+<p>किसी भी specific material के लिए metalliser की productivity पूरी तरह सात cycle-time inputs plus एक daily overhead से determined होती है। ये सात numbers अपने plant के logs से लें और किसी भी material के लिए rolls per day compute करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Input</th><th>Typical range</th><th>क्या capture करता है</th></tr></thead>
+<tbody>
+<tr><td><strong>1. Setup time per roll</strong></td><td>15-30 min</td><td>नया core load, threading, web alignment, parameter setup</td></tr>
+<tr><td><strong>2. Vacuum + Heating time</strong></td><td>15-25 min</td><td>Chamber pump-down + source-bar conditioning deposition शुरू होने से पहले</td></tr>
+<tr><td><strong>3. Average line speed</strong></td><td>400-900 m/min</td><td>उस material के लिए steady-state metallisation speed</td></tr>
+<tr><td><strong>4. Average jumbo length</strong></td><td>film के हिसाब से</td><td>हर cycle का metallised film output (12μm PET baseline के लिए 54,000m)</td></tr>
+<tr><td><strong>5. Vent time</strong></td><td>5-15 min</td><td>Cycles के बीच chamber depressurisation</td></tr>
+<tr><td><strong>6. Boat change time</strong></td><td>5-15 min</td><td>Boat-set life पूरी होने पर evaporation boats replace करने का time</td></tr>
+<tr><td><strong>7. Length per boat-set</strong></td><td>OD के हिसाब से</td><td>एक boat-set कितना metallised film produce करता है replacement से पहले</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>और एक daily overhead: <strong>Planned source cleaning</strong> — typically <strong>~20 minutes per 24 hours</strong>, source bar cleaning के लिए day में एक बार scheduled deposition quality maintain करने के लिए।</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;font-size:1em;color:#1A2744;font-weight:bold;">Available minutes per day = 1440 − Source Cleaning (20 min) = <span style="color:#E85D26;">1420 min</span></p>
+<p style="margin:0 0 8px 0;font-size:1em;color:#1A2744;font-weight:bold;">Cycle time per roll = Setup + Vacuum-Heat + (Length ÷ Speed) + Vent + (Length ÷ Boat-set life) × Boat-change time</p>
+<p style="margin:0;font-size:1em;color:#1A2744;font-weight:bold;"><span style="color:#E85D26;">Rolls per day = 1420 ÷ Cycle time per roll</span></p>
+</div>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Single jumbo के अंदर boat changes:</strong> ज़्यादातर baseline materials (12μm PET at M2.2 with 5-6 lakh m boat-set life और 54,000m जumbos) में <em>zero</em> mid-cycle boat changes होते हैं — एक boat-set 8-10 जumbos चलती है। Formula में boat-change term इसे naturally handle करता है: जब length-per-boat-set जumbo length से बहुत बड़ी हो, term near-zero contribute करता है। Shorter boat-set materials (high OD, AlOx) के लिए term significantly kick-in करता है।</p>
+
+<h3>📊 Boat-Set Life Reference Table</h3>
+
+<p>OD बढ़ने के साथ boat-set life कम होती है — thicker deposition boats को तेज़ी से wear करती है। इसे starting reference के रूप में use करें, पर हमेशा अपने plant की actual life measure करें:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>OD value / Material</th><th>Typical boat-set life</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>OD M2.2</strong> (Standard transparent)</td><td>5-6 lakh m</td><td>Baseline। Boat-set 8-10 baseline जumbos cover करती है।</td></tr>
+<tr><td><strong>OD M2.5</strong></td><td>4-5 lakh m</td><td>Higher OD = thicker deposition = shorter life</td></tr>
+<tr><td><strong>OD M2.8</strong></td><td>3-4 lakh m</td><td>Heavy deposition। Boat-set ~6 जumbos cover करती है।</td></tr>
+<tr><td><strong>AlOx (Aluminium Oxide)</strong></td><td>1-2 lakh m</td><td>Critical material। Boat-set 3-4 जumbos cover करती है। Mid-cycle changes common हैं।</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>🎯 Worked Example 1 — PET 12μm M2.2 Baseline</h3>
+
+<p>अपने plant के numbers formula में plug करें। Standard 12 micron PET at M2.2 चलाने वाले typical Indian flexible-packaging plant का validated baseline:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Setup per roll: 20 min &nbsp;|&nbsp; Vacuum + Heating: 20 min &nbsp;|&nbsp; Vent: 10 min</li>
+<li>Average line speed: 800 m/min &nbsp;|&nbsp; जumbo length: 54,000m</li>
+<li>Boat-set life: 6 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
+<li>Planned source cleaning: 20 min/day</li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Calculation:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Run time per roll = 54,000 ÷ 800 = <strong>67.5 min</strong></li>
+<li>Boat changes per roll = 54,000 ÷ 600,000 = 0.09 → contributes 0.9 min</li>
+<li>Cycle time per roll = 20 + 20 + 67.5 + 10 + 0.9 = <strong>118.4 min</strong></li>
+<li>Available time per day = 1440 − 20 = <strong>1420 min</strong></li>
+</ul>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.05em;">Rolls per day = 1420 ÷ 118.4 = <span style="color:#E85D26;">12 rolls/day</span></p>
+</div>
+
+<p>ये 12 rolls/day वही baseline number है जो <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a> में equivalence factor derivation के लिए input के रूप में throughout use हुआ। दोनों blogs lock together: Blog 30 rolls/day compute करती है; Blog 29 इसे factors derive करने के लिए use करती है।</p>
+
+<h3>⚖️ Step 2 — Average Roll Weight Compute करें</h3>
+
+<p>Rolls per day पता चलने के बाद, second step है हर roll का average weight compute करना। Standard film-roll weight formula:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Roll weight (kg) = <span style="color:#E85D26;">Width(mm) × Length(m) × Micron × Density × 0.000001</span></p>
+</div>
+
+<p>Common metalliser films के लिए density values (vksTech.com calculators across <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> सहित use होने वाले convention के साथ match करते हैं):</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film</th><th>Density (g/cc)</th></tr></thead>
+<tbody>
+<tr><td><strong>PET</strong></td><td>1.38</td></tr>
+<tr><td><strong>BOPP</strong></td><td>0.91</td></tr>
+<tr><td><strong>CPP</strong></td><td>0.90</td></tr>
+</tbody>
+</table>
+</div>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Width assumption:</strong> इस formula में "Width" वो <em>जumbo width है जो machine पर metallised हो रही है</em> — typically standard metalliser के लिए 3000mm। दिन के सारे slit widths का sum इस जumbo width के बराबर होता है। तो daily capacity के लिए जumbo width directly use करें (3000mm), individual slit widths नहीं।</p>
+
+<p><strong>Worked example continued (12μm PET baseline):</strong></p>
+
+<ul style="margin:8px 0;padding-left:24px;line-height:1.8;">
+<li>Width = 3000mm &nbsp;|&nbsp; Length = 54,000m &nbsp;|&nbsp; Micron = 12 &nbsp;|&nbsp; Density = 1.38</li>
+<li>Roll weight = 3000 × 54,000 × 12 × 1.38 × 0.000001 = <strong>2,683 kg = 2.68 MT</strong></li>
+</ul>
+
+<h3>🎯 Step 3 — Capacity in MT/Day Compute करें</h3>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Capacity (MT/day) = <span style="color:#E85D26;">Rolls per day × Roll weight (kg) ÷ 1000</span></p>
+</div>
+
+<p><strong>PET 12μm M2.2 baseline के लिए:</strong></p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 6px 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Capacity = 12 rolls/day × 2,683 kg/roll ÷ 1000 = <span style="color:#E85D26;">~32 MT/day</span></p>
+</div>
+
+<p>ज़्यादातर plants इस figure के around एक single ratecard capacity number quote करते हैं — और baseline product के लिए, ये correct है। Trouble तब शुरू होती है जब product mix shift होती है। देखिए same plant पर different product के साथ क्या होता है।</p>
+
+<h3>⚡ Worked Example 2 — Same Plant, AlOx Product</h3>
+
+<p>अब same plant के लिए 12μm PET AlOx चलाते हुए capacity compute करें — special chemistry, slower speed, shorter जumbo, shorter boat-set life:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx):</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 15 min</li>
+<li>Average line speed: 400 m/min &nbsp;|&nbsp; जumbo length: 30,000m</li>
+<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
+<li>Planned source cleaning: 20 min/day</li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 1 — Rolls/day:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Run time = 30,000 ÷ 400 = <strong>75 min</strong></li>
+<li>Boat changes per roll = 30,000 ÷ 150,000 = 0.20 → contributes 2 min</li>
+<li>Cycle time per roll = 30 + 25 + 75 + 15 + 2 = <strong>147 min</strong></li>
+<li>Rolls per day = 1420 ÷ 147 = <strong>9.66 rolls/day</strong></li>
+</ul>
+<p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 2 — Roll weight:</strong></p>
+<ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
+<li>Roll weight = 3000 × 30,000 × 12 × 1.38 × 0.000001 = <strong>1,490 kg = 1.49 MT</strong></li>
+</ul>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 9.66 × 1,490 ÷ 1000 = <span style="color:#E85D26;">~14.4 MT/day</span></p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift। Standard 12μm PET = <strong>32 MT/day</strong>। AlOx 12μm PET = <strong>14.4 MT/day</strong>। Plant की "real" capacity वही है जो product actually चल रहा है। Single ratecard number किसी भी चीज़ के लिए सही नहीं है — ये एक average है जो किसी specific दिन की mix पर fit नहीं होता। अगर आपकी monthly capacity utilisation खराब दिखती है, check करें actually क्या mix चला। Capacity goal-post move हुआ।</p>
+</div>
+
+<h3>💰 Live Calculator — अपने Plant की Capacity Compute करें</h3>
+
+<p>तीन steps। Step 1 और Step 2 में अपने plant के numbers डालें। Calculator rolls/day, roll weight, और daily capacity in MT output करता है।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 1 — CYCLE TIME INPUTS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Setup time per roll (min)</label>
+<input type="number" id="setup-hi" placeholder="e.g., 20" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Vacuum + Heating time (min)</label>
+<input type="number" id="vacheat-hi" placeholder="e.g., 20" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average line speed (m/min)</label>
+<input type="number" id="speed-hi" placeholder="e.g., 800" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average जumbo length (m)</label>
+<input type="number" id="jumbo-hi" placeholder="e.g., 54000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Vent time (min)</label>
+<input type="number" id="vent-hi" placeholder="e.g., 10" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Boat change time (min)</label>
+<input type="number" id="boatchange-hi" placeholder="e.g., 10" min="0" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Length per boat-set (m)</label>
+<input type="number" id="boatset-hi" placeholder="e.g., 600000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Source cleaning time/day (min)</label>
+<input type="number" id="cleaning-hi" placeholder="e.g., 20" min="0" step="0.1" value="20" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 2 — FILM PARAMETERS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmType-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET">PET (density 1.38 g/cc)</option>
+<option value="BOPP">BOPP (density 0.91 g/cc)</option>
+<option value="CPP">CPP (density 0.90 g/cc)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average जumbo width (mm)</label>
+<input type="number" id="width-hi" placeholder="e.g., 3000" min="1" step="1" value="3000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Average film micron</label>
+<input type="number" id="micron-hi" placeholder="e.g., 12" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Material name (label only, optional)</label>
+<input type="text" id="matName-hi" placeholder="e.g., 12μm PET M2.2" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Cycle time / roll</div>
+<div id="cycleTime-hi" style="font-size:1.25em;font-weight:bold;color:#E85D26;">— min</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Rolls per day</div>
+<div id="rollsDay-hi" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Roll weight</div>
+<div id="rollWt-hi" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">— kg</div>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:10px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Daily Capacity</div>
+<div id="capacity-hi" style="font-size:2em;font-weight:bold;color:#FAF9F6;">— MT/day</div>
+</div>
+
+<div id="interpretation-hi" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;text-align:center;">
+ऊपर values डालें इस material के लिए अपने plant की capacity देखने के लिए
+</div>
+</div>
+
+</div>
+
+<h3>🚨 Capacity Calculation में 3 Common Mistakes</h3>
+
+<p><strong>Mistake 1 — Measured average speed की जगह OEM rated speed use करना।</strong> Machine vendor की datasheet कहती है कि line 12μm M2.2 के लिए 950 m/min पर run कर सकती है। आपके plant की measured sustainable rate 800 m/min है। अगर formula में 950 use करते हैं, ~14 rolls/day compute होगा real ~12 की जगह — capacity ~17% overstate होगी। <strong>Fix:</strong> हमेशा अपने plant के logs से representative month average line speed pull करें। Datasheet peak number है; आपको operating average चाहिए।</p>
+
+<p><strong>Mistake 2 — Vent time भूलना।</strong> Operators sometimes setup-to-setup time करते हैं पर vent exclude कर देते हैं क्योंकि वो cycles के "between" होती है। Formula को सब non-running time account करना है। 118-minute cycle में 10-minute vent skip करने से rolls/day ~9% inflate होती है। <strong>Fix:</strong> हर वो minute include करें जब chamber actively deposit नहीं कर रहा — setup, vacuum-heat, vent, boat changes, source cleaning। 24-hour day को सबको absorb करना है।</p>
+
+<p><strong>Mistake 3 — Short boat-set materials के लिए mid-cycle boat changes ignore करना।</strong> Baseline 12μm M2.2 के लिए 6 lakh m boat life और 54,000m जumbos के साथ, mid-cycle boat changes negligible हैं (हर ~10 जumbos में एक)। पर AlOx के लिए 1.5 lakh m boat life और 30,000m जumbos के साथ, हर 5th जumbo पर एक boat change मिलता है — meaningful overhead। Plants जो अपना capacity model baseline के around बनाते हैं, वो अक्सर boat-change term include करना भूल जाते हैं, फिर हैरान होते हैं कि AlOx capacity numbers floor reality से match क्यों नहीं करते। <strong>Fix:</strong> हमेशा boat-change term include करें, चाहे आपके baseline के लिए near-zero क्यों न हो। Formula general है; जब boat-set life बड़ी होती है, term self-correct होकर near-zero हो जाता है।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Bonus mistake to watch:</strong> Monthly average की जगह best-cycle data use करना। Best cycles rolls/day high bias करते हैं, just like single best-day measurements equivalence factors high bias करते हैं (देखें <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a>)। Review-meeting scrutiny survive करने वाली capacity के लिए 90-day averages use करें।</p>
+
+<h3>🎯 अपने Plant पर कहाँ से शुरू करें</h3>
+
+<p>किसी भी product के लिए अपने plant की real capacity जानने के लिए one-week rollout:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Day 1-2 — Cycle-time logs pull करें।</strong> अपने top 5 products by volume के लिए, पिछले 90 days के metalliser logs pull करें। 7 cycle inputs के average values extract करें।</li>
+<li><strong>Day 3 — Planned source cleaning confirm करें।</strong> Check करें आपके plant में planned source-cleaning shift daily, weekly, या per-product-changeover होती है। 24-hour equivalent में minutes में convert करें (e.g., 140 min weekly = 20 min/day)।</li>
+<li><strong>Day 4 — 3-step engine run करें।</strong> ऊपर का calculator use करें। हर top-5 product के लिए rolls/day, roll weight, और capacity in MT/day compute करें। Master capacity table बनाएँ।</li>
+<li><strong>Day 5 — Ratecard से compare करें।</strong> आपकी master capacity table baseline-high से specialty-low तक capacity range दिखाएगी। Ratecard number कहीं बीच में होगा — usually baseline के closer। Gap note करें।</li>
+<li><strong>Day 6-7 — Upcoming month forecast करें।</strong> अगले month का planned product mix लें, हर product की capacity को उसकी planned MT से weight करें, और <em>weighted average capacity</em> compute करें। वो number है जो आपका plant actually next month deliver कर सकता है — ratecard number नहीं।</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">ये blog productivity foundation है जो series के बाक़ी हिस्से को support करती है:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/film-roll-weight-formula"><strong>Blog #27:</strong></a> Film Roll Weight Formula (इस blog के Step 2 में use हुआ)</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent</li>
+<li><a href="/blog/calculate-equivalent-factor-any-material"><strong>Blog #29:</strong></a> Calculate Equivalent Factor for Any Material (इस blog का rolls/day use करता है)</li>
+<li><strong>ये blog (#30):</strong> Metalliser की Capacity कैसे Calculate करें (आप यहाँ हैं)</li>
+</ul>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 कोई सवाल है?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">सात cycle inputs में से किसी को अपने plant पर measure करने में अटक गए? Shift logs से average line speed कैसे extract करें — confused? किसी specific OD के लिए boat-set life पर discuss करना है? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — Vivek personally answer करते हैं।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Metalliser capacity एक single ratecard number नहीं है — ये product mix का function है। 3-step engine आपको किसी भी specific material के लिए defensible capacity figure देता है: <strong>Step 1</strong> 7 cycle inputs से rolls/day compute करें (Setup + Vacuum-Heat + Run + Vent + Boat-change overhead, 1420 available minutes में divide); <strong>Step 2</strong> roll weight compute करें (Width × Length × Micron × Density × 0.000001); <strong>Step 3</strong> capacity in MT/day = Rolls × Roll weight ÷ 1000। Baseline 12μm PET M2.2 ≈ 32 MT/day; AlOx 12μm PET ≈ 14 MT/day same machine पर। आपके plant की <em>real</em> capacity वही है जो product चल रहा है। 3-step engine, top-5 product mix पर apply करके, आपको weighted forecast देता है जो किसी भी review meeting को survive करता है।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 Series complete.</strong> Blogs 28, 29, और 30 एक tight triangle बनाते हैं: <strong>30 → 29 → 28</strong>। Blog 30 cycle inputs से rolls/day compute करती है। Blog 29 rolls/day को equivalence factors में convert करती है। Blog 28 equivalence factors को Equivalent ₹/kg conversion cost में convert करती है। मिलकर, ये metalliser के लिए complete financial-controls toolkit देते हैं — shop-floor cycle data से monthly P&L तक।</p>
+
+</div>
+
+<script>
+(function() {
+  var DENSITY = { PET: 1.38, BOPP: 0.91, CPP: 0.90 };
+
+  function fmt(n, suffix, decimals) {
+    if (!isFinite(n) || n <= 0) return '— ' + (suffix || '');
+    return n.toFixed(decimals !== undefined ? decimals : 2) + (suffix ? ' ' + suffix : '');
+  }
+
+  function calc(suffix) {
+    var setup = parseFloat(document.getElementById('setup-' + suffix).value) || 0;
+    var vacheat = parseFloat(document.getElementById('vacheat-' + suffix).value) || 0;
+    var speed = parseFloat(document.getElementById('speed-' + suffix).value) || 0;
+    var jumbo = parseFloat(document.getElementById('jumbo-' + suffix).value) || 0;
+    var vent = parseFloat(document.getElementById('vent-' + suffix).value) || 0;
+    var boatchange = parseFloat(document.getElementById('boatchange-' + suffix).value) || 0;
+    var boatset = parseFloat(document.getElementById('boatset-' + suffix).value) || 0;
+    var cleaning = parseFloat(document.getElementById('cleaning-' + suffix).value) || 0;
+    var film = document.getElementById('filmType-' + suffix).value;
+    var width = parseFloat(document.getElementById('width-' + suffix).value) || 0;
+    var micron = parseFloat(document.getElementById('micron-' + suffix).value) || 0;
+    var matName = document.getElementById('matName-' + suffix).value || 'this material';
+    var density = DENSITY[film] || 1.38;
+
+    // Step 1: rolls/day
+    var runTime = (speed > 0 && jumbo > 0) ? (jumbo / speed) : 0;
+    var boatChangesPerRoll = (boatset > 0 && jumbo > 0) ? (jumbo / boatset) : 0;
+    var boatOverhead = boatChangesPerRoll * boatchange;
+    var cycleTime = setup + vacheat + runTime + vent + boatOverhead;
+    var availableMin = 1440 - cleaning;
+    var rollsDay = (cycleTime > 0 && availableMin > 0) ? (availableMin / cycleTime) : 0;
+
+    // Step 2: roll weight
+    var rollWt = width * jumbo * micron * density * 0.000001;
+
+    // Step 3: capacity
+    var capacity = rollsDay * rollWt / 1000;
+
+    document.getElementById('cycleTime-' + suffix).textContent = fmt(cycleTime, 'min', 1);
+    document.getElementById('rollsDay-' + suffix).textContent = fmt(rollsDay, '', 2);
+    document.getElementById('rollWt-' + suffix).textContent = fmt(rollWt, 'kg', 0);
+    document.getElementById('capacity-' + suffix).textContent = fmt(capacity, 'MT/day', 2);
+
+    var interp = document.getElementById('interpretation-' + suffix);
+    if (capacity > 0) {
+      if (suffix === 'en') {
+        interp.textContent = 'Your plant produces ' + capacity.toFixed(2) + ' MT/day of ' + matName + ' (' + rollsDay.toFixed(1) + ' rolls/day × ' + rollWt.toFixed(0) + ' kg/roll).';
+      } else {
+        interp.textContent = 'आपका plant ' + matName + ' का ' + capacity.toFixed(2) + ' MT/day produce करता है (' + rollsDay.toFixed(1) + ' rolls/day × ' + rollWt.toFixed(0) + ' kg/roll)।';
+      }
+    } else {
+      if (suffix === 'en') {
+        interp.textContent = 'Fill all inputs above to see your plant\'s capacity for this material.';
+      } else {
+        interp.textContent = 'Capacity देखने के लिए ऊपर सभी inputs भरें।';
+      }
+    }
+  }
+
+  function bind(suffix) {
+    var ids = ['setup','vacheat','speed','jumbo','vent','boatchange','boatset','cleaning','filmType','width','micron','matName'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() { calc(suffix); });
+        el.addEventListener('change', function() { calc(suffix); });
+      }
+    });
+    calc(suffix);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
