@@ -1,1 +1,957 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
 
+<div class="article-body">
+
+<div style="margin:24px 0;">
+<img src="cover.png" alt="The Complete Guide to Metalliser Conversion Cost — Actual vs Equivalent" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div class="en-content">
+
+<h2>💰 The Complete Guide to Metalliser Conversion Cost — Actual vs Equivalent</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 18-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; Published January 2025 &nbsp;|&nbsp; Bookmark for monthly review</p>
+
+<p>Every metalliser plant manager in India tracks one number obsessively: <strong>Conversion Cost in ₹/kg</strong>. It is the single number that decides whether the plant is making money or losing it, whether the team gets a bonus or a memo, whether next quarter's budget gets approved or cut. And yet — at most plants — that number is calculated in a way that quietly works against the team running it.</p>
+
+<p>Not arithmetically wrong. The formula is right. The problem is more subtle and more expensive: most plants report only the <strong>Actual Conversion Cost</strong>, which compares this month's ₹/kg to last month's ₹/kg as if the product mix were the same. It almost never is. A month spent running easy products (12 micron PET at OD M2.2) will look like a hero month; a month spent running difficult products (8 micron PET, AlOx, OD M2.8) will look like a disaster — even if the team did the harder month <em>better</em>. If you have ever sat in a quarterly review where the numbers said one thing and your gut said another, this is why.</p>
+
+<p>This blog walks you through every cost head that builds up the metalliser conversion cost, the difference between Actual and Equivalent, why the equivalent number protects you and your team, and a fully worked example using real January 2025 plant data. The numbers in this blog are real — pulled from a working metalliser plant — and you can plug your own numbers into the live calculator at the end. Eighteen minutes. After this you will walk into your next review with the right two numbers in hand, not just one.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>What this blog covers vs what's in Blog #29:</strong> This blog covers <em>what</em> Equivalent Conversion Cost is, why it matters, and how to compute it once you have your equivalence factors. The actual <em>derivation</em> of those factors — how to calculate the OD, Material, Micron, Width, and Length equivalence factors for any material (PET, BOPP, CPP, Nylon, others) at your plant — is a whole topic on its own and is covered in <strong>Blog #29: How to Calculate the Equivalent Factor for Any Material</strong> (coming next). For this blog, we use the factors as given inputs from the engineering team and focus on what to <em>do</em> with them.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — January 2025 Plant Reference</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Slit Output (Prime/A Grade Material):</strong> 663 MT actual / <strong>990 MT equivalent</strong> (1.49× multiplier)</li>
+<li><strong>Actual Conversion Cost:</strong> <strong>₹15.59/kg</strong></li>
+<li><strong>Equivalent Conversion Cost:</strong> <strong>₹12.13/kg</strong> — what same effort would cost on baseline product</li>
+<li><strong>Target Conversion Cost:</strong> ₹10.84/kg (gap of ₹1.29/kg vs equivalent)</li>
+<li><strong>Annual gap at 8000 MT:</strong> ₹1.03 crore between equivalent and target</li>
+<li><strong>The illusion you avoid:</strong> reporting only Actual makes a high-difficulty month look 28% worse than it really was</li>
+</ul>
+</div>
+
+<h3>🏗️ Cost Head #1 — The Eight Building Blocks of Conversion Cost</h3>
+
+<p>Conversion Cost is not one number. It is the sum of eight cost heads, each tracked separately, each with its own owner. Get this list memorised first; everything else in this blog refers back to it:</p>
+
+<div style="margin:24px 0;">
+<img src="cost-build-up-en.png" alt="The eight cost heads that build up metalliser conversion cost" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>#</th><th>Cost Head</th><th>Jan Actual ₹/kg</th><th>Jan Eqv ₹/kg</th><th>Target ₹/kg</th><th>Owner</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Wire</strong></td><td>3.70</td><td>3.41</td><td>3.05</td><td>Met operator + procurement</td></tr>
+<tr><td>2</td><td><strong>Boat</strong></td><td>3.28</td><td>2.40</td><td>1.87</td><td>Met operator + procurement</td></tr>
+<tr><td colspan="2" style="background:#f5f2ec;"><strong>Sub-total: Raw Material (Wire + Boat)</strong></td><td style="background:#f5f2ec;"><strong>6.98</strong></td><td style="background:#f5f2ec;"><strong>5.81</strong></td><td style="background:#f5f2ec;"><strong>4.92</strong></td><td style="background:#f5f2ec;">—</td></tr>
+<tr><td>3</td><td><strong>Wastage Loss</strong> (Bare + Met Film)</td><td>1.81</td><td>1.67</td><td>1.00</td><td>Met op + Slit op</td></tr>
+<tr><td>4</td><td><strong>B-Grade Loss</strong></td><td>0.024</td><td>0.022</td><td>0.00</td><td>Met op + QC</td></tr>
+<tr><td>5</td><td><strong>Manpower</strong></td><td>1.00</td><td>0.67</td><td>0.80</td><td>HR / Production head</td></tr>
+<tr><td>6</td><td><strong>Power</strong></td><td>5.14</td><td>3.45</td><td>3.56</td><td>Met op + Maintenance</td></tr>
+<tr><td>7</td><td><strong>Consumables & Spares</strong></td><td>0.38</td><td>0.26</td><td>0.30</td><td>Stores + Maintenance</td></tr>
+<tr><td>8</td><td><strong>Indirect Expense</strong></td><td>0.26</td><td>0.26</td><td>0.26</td><td>Plant overhead</td></tr>
+<tr><td colspan="2" style="background:#f5f2ec;"><strong>Sub-total: Conversion (ex-RM)</strong></td><td style="background:#f5f2ec;"><strong>8.61</strong></td><td style="background:#f5f2ec;"><strong>6.33</strong></td><td style="background:#f5f2ec;"><strong>5.92</strong></td><td style="background:#f5f2ec;">—</td></tr>
+<tr><td colspan="2" style="background:#1A2744;color:#FAF9F6;"><strong>TOTAL Conversion Cost</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>15.59</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>12.13</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>10.84</strong></td><td style="background:#1A2744;">—</td></tr>
+<tr><td>+</td><td>Packing & Freight</td><td>1.67</td><td>1.67</td><td>1.67</td><td>Logistics</td></tr>
+<tr><td>−</td><td>Scrap Wire/Aluminium Sale</td><td>(0.55)</td><td>(0.55)</td><td>—</td><td>Stores</td></tr>
+<tr><td colspan="2" style="background:#1A2744;color:#FAF9F6;"><strong>Final Cost with Packing & Scrap Sale</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>16.71</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>13.26</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>12.51</strong></td><td style="background:#1A2744;">—</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Three things to notice from this table before we go deeper:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Power is the biggest single line</strong> — ₹5.14/kg actual, more than wire and boat combined. If you only had time to fix one cost head this month, fix power consumption.</li>
+<li><strong>The Equivalent column is always lower than Actual</strong> when the plant ran a difficult mix. This is the whole point of equivalence — see the section below.</li>
+<li><strong>Indirect Expense doesn't change between Actual and Equivalent</strong> because it's a fixed plant overhead allocated per kg. Everything else is variable.</li>
+</ul>
+
+<h3>📐 The Formula — How Conversion Cost is Built</h3>
+
+<p>Each cost head follows the same pattern: <strong>quantity consumed × rate ÷ output produced</strong>. Here are the four formulas you actually use most:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:20px;margin:24px 0;border-radius:12px;">
+<div style="display:grid;gap:14px;">
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WIRE COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Wire kg consumed × Wire rate (₹/kg) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">BOAT COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Boats consumed (pcs) × Boat rate (₹/pc) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">POWER COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Power units consumed × Power rate (₹/unit) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WASTAGE COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Wastage % × Base film rate (₹/kg)</div>
+</div>
+
+</div>
+</div>
+
+<p>Manpower, Consumables, and Indirect Expense are typically <strong>fixed ₹/kg allocations</strong> — set at the start of the year by Finance, allocated equally across every kg produced. They do not vary with shift-by-shift performance, only with the absolute level of plant activity.</p>
+
+<h3>⚖️ Cost Head #2 — Why "Actual" Is the Wrong Number to Report Alone</h3>
+
+<p>Here is the core insight that this blog exists for. <strong>Actual Conversion Cost compares months as if every kilogram requires the same effort.</strong> In real plants, every kilogram does <em>not</em> require the same effort:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>A 12 micron film is faster to metallise than an 8 micron film (8μm needs more careful handling, slower speeds, higher rejection rate)</li>
+<li>An OD M2.2 product runs faster than an OD M2.8 product (higher OD = thicker aluminium deposition = needs more wire, more boats, slower line speed for proper coverage)</li>
+<li>An AlOx (Aluminium Oxide) product is a critical material — slow line speed, tighter QC, and special non-standard width and length metallised, which dramatically increases setup time per cycle. The combined penalty pushes its equivalence factor to 3.00×.</li>
+<li>A reverse-coated product takes ~2× the boats and special handling</li>
+</ul>
+
+<p>Here is what happens in practice. Imagine your plant runs 30% AlOx + 25% 8 micron mix in January, and your peer plant down the road runs 90% standard 12 micron PET in the same month. Your Actual ₹/kg will be higher. Your peer's will be lower. The corporate review meeting will spend forty minutes asking why your plant's "cost discipline slipped" — and zero minutes recognising that your team just delivered a much harder product mix. Reporting only Actual punishes plants for running difficult orders. Over the next two quarters, your team quietly learns to push back on difficult orders. The salesforce stops bringing AlOx enquiries to your plant. Eventually you become the "easy products only" plant — and at that point you have lost competitive position permanently. The Actual-only number is what starts that drift.</p>
+
+<p>The fix is <strong>Equivalent Conversion Cost</strong>: compute the cost as if every kg ran the baseline difficulty. The baseline at this plant is <strong>PET_12_M2.2</strong> — 12 micron PET at OD M2.2, standard transparent metallised. Everything else is multiplied up to reflect the additional effort. With Equivalent reporting in place, the conversation in that review meeting changes from "why did your cost go up?" to "your equivalent cost is on track despite a 30% AlOx month — well done." That is the conversation you want to be having.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.05em;">⚡ The Killer Insight</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#FAF9F6;">In January 2025, this plant produced <strong>665 MT actual</strong> output. But because the mix was difficult (AlOx, thinner micron, higher OD), the equivalent output was <strong>990 MT</strong> — a <strong>1.49× multiplier</strong>. So the same total spend of ₹103.4 lakh divided by 665 MT = ₹15.59/kg actual, but divided by 990 MT = ₹12.13/kg equivalent. That ₹3.46 difference is not a saving — it is the <em>true picture</em>. Hide it and you will mis-judge every month.</p>
+</div>
+
+<h3>🎯 Cost Head #3 — How Equivalent Output Is Built (the concept)</h3>
+
+<p>The whole game of Equivalent Conversion Cost rests on one question: <strong>what is one MT of difficult product worth, in baseline-MT terms?</strong> If your plant ran 1 MT of a difficult AlOx product this month and your competitor next door ran 1 MT of standard 12μm transparent, you both made "1 MT" — but the work is wildly different. The equivalence factor is the multiplier that converts your difficult MT into the equivalent baseline MT that the *same effort* would have produced.</p>
+
+<div style="margin:24px 0;">
+<img src="equivalence-factors-en.png" alt="The five equivalence factors that level the playing field" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<p>Every metallisation plant works with five distinct equivalence factors, and they stack — you multiply them together to get the combined factor for any material code:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.85;">
+<li><strong>OD Equivalence</strong> — based on Optical Density (the metallisation thickness/coverage value, M2.2 vs M2.5 vs M2.8). Higher OD means more wire/boat consumption + slower line speed for proper coverage.</li>
+<li><strong>Special Material Equivalence</strong> — based on chemistry (Standard Transparent vs Reverse Coat vs AlOx vs others). Special chemistry needs slower speeds, tighter QC, and specialty handling.</li>
+<li><strong>Micron Equivalence</strong> — based on film thickness (12μm baseline vs 10μm vs 8μm). Thinner film breaks more, runs slower, demands tighter tension control.</li>
+<li><strong>Width Equivalence</strong> — based on slit width vs standard 3000mm. Narrower-than-baseline runs trigger more slitter changeovers per MT.</li>
+<li><strong>Length Equivalence</strong> — based on jumbo length vs the standard 54,000m for 12μm PET. Shorter jumbo = more metalliser changeovers per MT = more pump-down cycles, more start-up ramps, more lost cycle time.</li>
+</ul>
+
+<p>For example, an AlOx product picks up its 3.00× factor through Special Material Equivalence — the combination of slow line speed, special non-standard width/length metallised, and increased setup time per cycle. A Reverse/Release Coat (RC) product picks up 2.17× through the same Special Material route, including its shorter jumbo length (typically 24,000–48,000m vs the standard 54,000m). An 8 micron PET picks up 1.875× Micron Equivalence because the line speed is roughly 88% slower. An OD M2.8 product picks up 1.44× OD Equivalence because thicker deposition takes longer.</p>
+
+<p>These numbers are not theoretical. They are calibrated against real per-day MT output for each material code at a working plant. <strong>The exact derivation — how to arrive at 1.24×, 1.875×, 3.00×, 2.17× and how to do the same calculation for any new material your plant takes on (whether PET, BOPP, CPP, Nylon, or anything else) — is a topic with enough depth to deserve its own blog.</strong></p>
+
+<div style="background:linear-gradient(135deg, #E85D26 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #FAF9F6;">
+<p style="margin:0 0 8px 0;color:#FAF9F6;font-size:1.05em;"><strong>📅 Coming Next — Blog #29</strong></p>
+<p style="margin:0 0 8px 0;color:#FAF9F6;line-height:1.7;"><strong>How to Calculate the Equivalent Factor for Any Material</strong> — the deep dive on derivation. We will walk through where 1.24×, 1.875×, 3.00×, 2.17× actually come from based on real plant run-rate data, and you will learn how to derive your own factors for any new material your plant takes on. PET, BOPP, CPP, Nylon — the methodology is the same.</p>
+<p style="margin:8px 0 0 0;color:#FAF9F6;font-size:0.92em;font-style:italic;">For this blog, we accept these factors as given inputs from the engineering team and focus on how to <em>use</em> them in monthly reviews and budget conversations.</p>
+</div>
+
+<p>For the worked example below, here are the seven material codes that the reference plant ran in January 2025, with their combined equivalence factors as inputs:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Material Code</th><th>Material Type</th><th>Combined Eqv Factor</th><th>Daily Output (MT/day)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>PET_12_M2.2</strong></td><td>Standard 12μm, OD M2.2 (baseline)</td><td><strong>1.00×</strong></td><td>36</td></tr>
+<tr><td><strong>PET_12_M2.5</strong></td><td>Standard 12μm, OD M2.5</td><td><strong>1.24×</strong></td><td>29</td></tr>
+<tr><td><strong>PET_12_M2.8</strong></td><td>Standard 12μm, OD M2.8</td><td><strong>1.44×</strong></td><td>25</td></tr>
+<tr><td><strong>PET_10_M2.2</strong></td><td>Standard 10μm, OD M2.2</td><td><strong>1.20×</strong></td><td>30</td></tr>
+<tr><td><strong>PET_8_M2.2</strong></td><td>Standard 8μm, OD M2.2</td><td><strong>1.875×</strong></td><td>19</td></tr>
+<tr><td><strong>PET_12_M0.3_AlOx</strong></td><td>AlOx 12μm — critical (special width/length, slow speed)</td><td><strong>3.00×</strong></td><td>12</td></tr>
+<tr><td><strong>PET_12_M2.2_RC</strong></td><td>Reverse/Release Coat 12μm (special chemistry, jumbo 24,000–48,000m)</td><td><strong>2.17×</strong></td><td>16</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice the relationship: <strong>as the combined factor goes up, the actual MT/day output goes down</strong> — exactly because difficult products take more time per MT. AlOx runs at 12 MT/day vs the baseline 36 MT/day, which is a 3× drop, matching its 3.00× factor. The numbers self-reconcile against measured run rates.</p>
+
+<p>Read the table as: <strong>1 MT of PET_8_M2.2 counts as 1.875 MT of baseline equivalent production. 1 MT of PET_12_M0.3_AlOx (AlOx) counts as 3.00 MT.</strong> Your plant did the work of 1.875 or 3.00 MT — it should not be judged on the 1 MT actual.</p>
+
+<h3>📊 Worked Example — January 2025 Plant Reconciliation</h3>
+
+<p>Now we put everything together. Below is the full conversion cost reconciliation for the reference plant in January 2025 — start with raw consumption numbers, end with three numbers (Actual, Equivalent, Target) that you can defend in any review. The math is straightforward; the value is in the side-by-side comparison.</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+
+<p style="margin:0 0 10px 0;"><strong style="color:#1A2744;">Step 1 — Outputs:</strong></p>
+<ul style="margin:0 0 14px 0;padding-left:22px;line-height:1.7;">
+<li>Slit Output (Prime/A Grade Material): <strong>665 MT actual</strong></li>
+<li>Equivalent Output: <strong>990 MT</strong> (= 665 × 1.49 multiplier from product mix)</li>
+</ul>
+
+<p style="margin:0 0 10px 0;"><strong style="color:#1A2744;">Step 2 — Wire & Boat (₹333.40/kg wire effective, ₹1,180/pc boat effective):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Wire: 7,380 kg consumed = 11.10 kg/MT actual = 7.45 kg/MT equivalent<br>
+Boat: 1,850 pcs consumed = 2.78 pcs/MT actual = 1.87 pcs/MT equivalent<br>
+Wire ₹/kg actual: <strong>3.70</strong> &nbsp; |&nbsp; Equivalent: <strong>3.41</strong> &nbsp; |&nbsp; Target: 3.05<br>
+Boat ₹/kg actual: <strong>3.28</strong> &nbsp; |&nbsp; Equivalent: <strong>2.40</strong> &nbsp; |&nbsp; Target: 1.87
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 3 — Power (414,119 units consumed @ ₹8.25/unit):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Power ₹/kg actual = 414,119 × 8.25 ÷ 664,981 = <strong>₹5.14/kg</strong><br>
+Power ₹/kg equivalent = 5.14 ÷ 1.49 multiplier = <strong>₹3.45/kg</strong>
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 4 — Wastage (1.81% slitter waste @ ₹100/kg base film rate):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Wastage ₹/kg actual = 1.81% × ₹100 = <strong>₹1.81/kg</strong><br>
+Wastage ₹/kg equivalent = <strong>₹1.67/kg</strong>
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 5 — Fixed allocations (Manpower, C&S, Indirect):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Manpower: ₹1.00/kg actual / ₹0.67/kg equivalent<br>
+Consumables & Spares: ₹0.38/kg actual / ₹0.26/kg equivalent<br>
+Indirect: ₹0.26/kg (same for both)
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 6 — Sum it all up:</strong></p>
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:1em;line-height:1.7;">
+<strong style="color:#E85D26;">Actual Conv Cost</strong> = 3.70 + 3.28 + 5.14 + 1.81 + 0.024 + 1.00 + 0.38 + 0.26 = <strong style="color:#E85D26;">₹15.59/kg</strong><br><br>
+<strong style="color:#E85D26;">Equivalent Conv Cost</strong> = 3.41 + 2.40 + 3.45 + 1.67 + 0.022 + 0.67 + 0.26 + 0.26 = <strong style="color:#E85D26;">₹12.13/kg</strong><br><br>
+<strong style="color:#E85D26;">Target Conv Cost</strong> = <strong style="color:#E85D26;">₹10.84/kg</strong> &nbsp;→&nbsp; gap to close: <strong>₹1.29/kg</strong>
+</div>
+
+</div>
+
+<p>The story this tells: the January team performed at <strong>₹12.13/kg equivalent</strong>, ₹1.29/kg above target. Not great, but not a disaster either. If you walked into a review reporting only the Actual ₹15.59/kg, the gap would look like ₹4.75/kg — and management would likely launch an emergency cost-reduction project that might not be needed. The Equivalent number tells you something more useful: the <em>real</em> gap is in <strong>power, wire, and boat</strong> — power is ₹3.45 vs target ₹3.56 (actually below target!), wire is ₹3.41 vs ₹3.05, boat is ₹2.40 vs ₹1.87. That is a focused improvement plan you can build a quarter around. The Actual-only number would have sent you and your team chasing the wrong things for three months.</p>
+
+<p>This is a level-headed conclusion: <strong>focus the next month on wire and boat consumption per equivalent MT</strong>, not on a panicked plant-wide cost cut.</p>
+
+<h3>🚨 Three Mistakes Plant Managers Make With Conversion Cost</h3>
+
+<p><strong>Mistake 1 — Reporting only Actual.</strong> Without Equivalent, every difficult-mix month looks like a failure and every easy-mix month looks like a triumph. Eventually your team chases easy product mix instead of doing difficult work better. Salesforce loses the freedom to take valuable difficult orders. <strong>Fix:</strong> always report Actual <em>and</em> Equivalent side by side. The gap between them tells you about product mix; the gap between Equivalent and Target tells you about plant performance.</p>
+
+<p><strong>Mistake 2 — Using stale equivalence factors.</strong> The factors (1.24×, 1.44×, 1.875×, 3.00×, 2.17×) are calibrated to the plant's actual run rates, jumbo lengths, and material recipes. If the plant retrofits a faster source bar, switches to a thinner-film recipe, or starts running BOPP/CPP/Nylon alongside PET, the factors shift. <strong>Fix:</strong> review the factors annually. Compare actual MT/day per material code over the past year vs the factor you're using. Adjust if the gap is more than 10%. The full derivation methodology — the one you will use to recalibrate or to derive a factor for a new material — is in Blog #29.</p>
+
+<p><strong>Mistake 3 — Treating Equivalent as the "soft" number.</strong> Some Finance heads dismiss Equivalent as "an excuse for poor performance." This is exactly backwards. Equivalent is the <em>harder</em> number to game — you can't make Equivalent look better by pushing the salesforce to take only easy orders, because the easy orders themselves carry a 1.00× factor and won't help your equivalent denominator. <strong>Fix:</strong> change the conversation in your next review by leading with both numbers in this order — "Equivalent is ₹12.13/kg, on track. Actual is ₹15.59/kg, reflecting the AlOx/8μm mix we ran." If your finance team pushes back, ask them this: "Would you prefer the plant team to refuse AlOx orders next quarter so the Actual looks better?" The answer is always no, which proves Equivalent is the right number to manage against.</p>
+
+<h3>💰 Live Calculator — Compute Your Plant's Conversion Cost</h3>
+
+<p>Edit any input below. The calculator runs the full Actual + Equivalent + Target comparison live. Default values are the January 2025 reference plant data.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.9em;color:#1A2744;border-radius:6px;"><strong>How to use:</strong> In the <strong>Production Mix table</strong>, add one row for each material type your plant ran this period. Enter its name, the actual quantity in MT, and its Equivalence Factor. The calculator sums up Actual MT and Equivalent MT, then runs the full Conversion Cost comparison. Don't know your factors? Blog #29 (coming next) explains how to derive them for any material.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.9em;color:#1A2744;border-radius:6px;"><strong>Calculator note:</strong> This calculator uses the simplified model — Equivalent ₹/kg = Actual ÷ Multiplier (except Indirect, which stays fixed). Real plant Excel models often use a hybrid baseline + over-target formula per cost head, which can shift individual line values by ±₹0.5/kg. The total equivalent number is directionally correct and good enough for first-pass plant analysis.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;">PRODUCTION MIX — ADD ONE ROW PER MATERIAL</div>
+      <button type="button" id="addRow-en" style="background:#E85D26;color:#fff;border:none;padding:6px 12px;border-radius:4px;font-weight:bold;font-size:0.85em;cursor:pointer;">+ Add Row</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;color:#FAF9F6;font-size:0.85em;">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.2);">
+            <th style="text-align:left;padding:6px 4px;font-weight:bold;color:#E85D26;">Material Name / Code</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Qty (MT)</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Eqv Factor</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Eqv MT</th>
+            <th style="width:30px;"></th>
+          </tr>
+        </thead>
+        <tbody id="materialRows-en">
+          <!-- Rows added dynamically -->
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #E85D26;font-weight:bold;">
+            <td style="padding:8px 4px;">TOTAL</td>
+            <td style="text-align:right;padding:8px 4px;color:#E85D26;" id="totalActualMT-en">— MT</td>
+            <td style="text-align:right;padding:8px 4px;color:#FAF9F6;opacity:0.6;" id="avgFactor-en">—×</td>
+            <td style="text-align:right;padding:8px 4px;color:#0D8C7E;" id="totalEqvMT-en">— MT</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Wire consumed (kg)</label>
+      <input type="number" id="wireKg-en" value="7380" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Wire rate (₹/kg)</label>
+      <input type="number" id="wireRate-en" value="333.40" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Boats consumed (pcs)</label>
+      <input type="number" id="boatPcs-en" value="1850" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Boat rate (₹/pc)</label>
+      <input type="number" id="boatRate-en" value="1180" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Power consumed (units)</label>
+      <input type="number" id="powerUnits-en" value="414119" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Power rate (₹/unit)</label>
+      <input type="number" id="powerRate-en" value="8.25" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Slitter Wastage (%)</label>
+      <input type="number" id="wastage-en" value="1.81" min="0" max="20" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Base film rate (₹/kg)</label>
+      <input type="number" id="filmRate-en" value="100" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Manpower allocation (₹/kg)</label>
+      <input type="number" id="manpower-en" value="1.00" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Consumables & Spares (₹/kg)</label>
+      <input type="number" id="consumables-en" value="0.38" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Indirect Expense (₹/kg, fixed)</label>
+      <input type="number" id="indirect-en" value="0.26" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+    <div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;">
+        <div style="font-size:0.78em;opacity:0.85;">Total Actual</div>
+        <div id="totalActual-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;">— ₹/kg</div>
+      </div>
+      <div style="background:rgba(13,140,126,0.15);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;">
+        <div style="font-size:0.78em;opacity:0.85;">Total Equivalent</div>
+        <div id="totalEqv-en" style="font-size:1.5em;font-weight:bold;color:#0D8C7E;">— ₹/kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:12px;border-radius:6px;border-left:3px solid #FAF9F6;">
+        <div style="font-size:0.78em;opacity:0.85;">Mix Difficulty Gap</div>
+        <div id="mixGap-en" style="font-size:1.5em;font-weight:bold;color:#FAF9F6;">— ₹/kg</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.05);padding:14px;border-radius:6px;">
+      <div style="font-size:0.85em;color:#E85D26;font-weight:bold;margin-bottom:8px;">BREAKDOWN BY COST HEAD (Actual / Equivalent)</div>
+      <div id="breakdown-en" style="font-family:'Courier New',monospace;font-size:0.85em;line-height:1.85;color:#FAF9F6;">—</div>
+    </div>
+  </div>
+</div>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>🧮 More Free Calculators on vksTech.com</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">This is one of <strong>seven free calculators</strong> on vksTech.com — alongside Film Roll Weight, Roll OD, GSM ↔ Micron Conversion, Production Yield %, Machine Utilisation %, and Cost per Square Metre. All free, no email gate, no subscription.</p>
+<p style="margin:0;"><a href="https://vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ Browse all 7 calculators at vkstech.com/#calculators</a></p>
+</div>
+
+<h3>🎯 Where to Start at Your Plant</h3>
+
+<p>If you read this blog and want to introduce the Actual + Equivalent reporting at your plant, this is the 6-week rollout that works:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Map your material codes.</strong> List every material code your plant produces. Tag each with its OD, micron, material type, jumbo length, and slit width. If you run mixed films (PET + BOPP + CPP + Nylon), do this for each film type — the equivalence framework is the same; only the baseline shifts.</li>
+<li><strong>Week 2 — Calibrate the equivalence factors.</strong> Use the table in this blog as a starting point, but compare against your plant's last 12 months of MT/day per material. Adjust within ±20% if needed. For the full derivation methodology — including how to handle BOPP/CPP/Nylon and any new material codes — see <strong>Blog #29: How to Calculate the Equivalent Factor for Any Material</strong>.</li>
+<li><strong>Week 3 — Build the monthly conversion cost format.</strong> One row per cost head, three columns (Actual / Equivalent / Target). Owner, formula, and source data column.</li>
+<li><strong>Week 4 — First run on last month's data.</strong> Compute Equivalent retroactively for the past month. Discuss the gap with the production team — they should recognise their effort in the Equivalent number. This is the moment when the team realises that someone is finally measuring what they actually do.</li>
+<li><strong>Week 5-6 — Roll into monthly review.</strong> Add Equivalent to the standard plant performance dashboard. Replace "actual vs target" with "actual vs equivalent vs target." The conversation will change immediately. So will the willingness of the salesforce to bring difficult orders to your plant.</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">This conversion cost framework is the financial counterpart to the operational improvements covered earlier in the series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (drives Boat consumption down)</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (drives Power and Boat consumption down)</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% (drives Wastage Loss head down)</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1% (drives Wastage Loss head down)</li>
+<li><strong>This blog (#28):</strong> Conversion Cost — Actual vs Equivalent (you are here)</li>
+<li><strong>Blog #29 (coming next):</strong> How to Calculate the Equivalent Factor for Any Material — the deep dive into where 1.24×, 1.875×, 3.00× actually come from, and how to derive them for any new material at your plant</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Conversion Cost is built from <strong>eight cost heads</strong>: Wire, Boat, Wastage, B-Grade, Manpower, Power, Consumables, and Indirect. Reporting only the Actual ₹/kg punishes plants for running difficult product mix and rewards them for running easy mix — a slow poison that eventually drives the plant towards "easy products only." The fix is the <strong>Equivalent Conversion Cost</strong>, computed by multiplying actual output by combined equivalence factors (built from OD, Special Material, Micron, Width, and Length components) so that 1 MT of difficult product counts as 1.5–3.0 MT of baseline. The gap between Actual and Equivalent tells you about product-mix difficulty; the gap between Equivalent and Target tells you about real plant performance. Report both, in that order, in every monthly review. The January 2025 reference plant ran ₹15.59/kg actual vs ₹12.13/kg equivalent vs ₹10.84/kg target — the real ₹1.29/kg gap to close, not the illusory ₹4.75/kg gap. That distinction is the difference between focused improvement and panic. For the full method to derive the equivalence factors for any material your plant runs — PET, BOPP, CPP, Nylon, or anything new — see <strong>Blog #29 (coming next)</strong>.
+</div>
+
+</div>
+
+<div class="hindi-section" lang="hi">
+<div class="hi-content">
+
+<h2>💰 Metalliser Conversion Cost की पूरी Guide — Actual vs Equivalent</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 18-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; January 2025 में published &nbsp;|&nbsp; Monthly review के लिए bookmark करें</p>
+
+<p>India के हर metalliser plant manager एक number obsessively track करते हैं: <strong>Conversion Cost ₹/kg में</strong>। ये वो single number है जो decide करता है कि plant पैसा कमा रहा है या गँवा रहा है, team को bonus मिलेगा या memo, अगले quarter का budget approve होगा या cut। और फिर भी — ज़्यादातर plants पर — वो number ऐसे calculate होता है जो चुपचाप उसी team के against काम करता है जो plant चलाती है।</p>
+
+<p>Arithmetically ग़लत नहीं। Formula सही है। Problem ज़्यादा subtle और ज़्यादा expensive है: ज़्यादातर plants सिर्फ़ <strong>Actual Conversion Cost</strong> report करते हैं, जो इस महीने के ₹/kg को पिछले महीने के ₹/kg से ऐसे compare करता है जैसे product mix same हो। लगभग कभी नहीं होता। आसान products (12 micron PET at OD M2.2) चलाने वाला महीना hero महीना दिखेगा; मुश्किल products (8 micron PET, AlOx, OD M2.8) चलाने वाला महीना disaster दिखेगा — चाहे team ने मुश्किल महीना <em>बेहतर</em> ही किया हो। अगर आप कभी ऐसी quarterly review में बैठे हैं जहाँ numbers कुछ कहते थे और आपका gut कुछ और — यही reason है।</p>
+
+<p>ये blog आपको हर cost head जो metalliser conversion cost बनाता है, Actual और Equivalent का difference, क्यों equivalent number आपकी और आपकी team की protect करता है, और real January 2025 plant data के साथ fully worked example से walk through करेगा। इस blog के numbers real हैं — एक working metalliser plant से pulled — और आप अपने numbers को end पर live calculator में plug कर सकते हैं। अठारह minutes। इसके बाद आप अगली review में सही दो numbers लेकर जाएँगे, सिर्फ़ एक नहीं।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>ये blog क्या cover करता है vs Blog #29 में क्या है:</strong> ये blog cover करता है कि Equivalent Conversion Cost <em>क्या</em> है, क्यों matter करता है, और एक बार equivalence factors मिल जाएँ तो उसे कैसे compute करें। उन factors का actual <em>derivation</em> — किसी भी material (PET, BOPP, CPP, Nylon, others) के लिए OD, Material, Micron, Width, और Length equivalence factors कैसे calculate करें — एक अलग पूरा topic है और <strong>Blog #29: किसी भी Material के लिए Equivalent Factor कैसे Calculate करें</strong> (आगे आ रहा है) में cover होता है। इस blog के लिए, हम engineering team से इन factors को given inputs मानते हैं और focus करते हैं उन्हें use कैसे करें।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 Quick Numbers — January 2025 Plant Reference</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li><strong>Slit Output (Prime/A Grade Material):</strong> 663 MT actual / <strong>990 MT equivalent</strong> (1.49× multiplier)</li>
+<li><strong>Actual Conversion Cost:</strong> <strong>₹15.59/kg</strong></li>
+<li><strong>Equivalent Conversion Cost:</strong> <strong>₹12.13/kg</strong> — same effort baseline product पर क्या cost करता</li>
+<li><strong>Target Conversion Cost:</strong> ₹10.84/kg (equivalent vs target gap ₹1.29/kg)</li>
+<li><strong>8000 MT पर annual gap:</strong> equivalent और target के बीच ₹1.03 करोड़</li>
+<li><strong>जो illusion आप avoid करते हैं:</strong> सिर्फ़ Actual report करना high-difficulty महीने को 28% worse दिखाता है</li>
+</ul>
+</div>
+
+<h3>🏗️ Cost Head #1 — Conversion Cost के आठ Building Blocks</h3>
+
+<p>Conversion Cost एक number नहीं है। ये आठ cost heads का sum है, हर एक separately tracked, हर एक का अपना owner। पहले इस list को memorise करें; इस blog का बाक़ी सब इसी पर refer करता है:</p>
+
+<div style="margin:24px 0;">
+<img src="cost-build-up-hi.png" alt="आठ cost heads जो metalliser conversion cost बनाते हैं" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>#</th><th>Cost Head</th><th>Jan Actual ₹/kg</th><th>Jan Eqv ₹/kg</th><th>Target ₹/kg</th><th>Owner</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Wire</strong></td><td>3.70</td><td>3.41</td><td>3.05</td><td>Met operator + procurement</td></tr>
+<tr><td>2</td><td><strong>Boat</strong></td><td>3.28</td><td>2.40</td><td>1.87</td><td>Met operator + procurement</td></tr>
+<tr><td colspan="2" style="background:#f5f2ec;"><strong>Sub-total: Raw Material (Wire + Boat)</strong></td><td style="background:#f5f2ec;"><strong>6.98</strong></td><td style="background:#f5f2ec;"><strong>5.81</strong></td><td style="background:#f5f2ec;"><strong>4.92</strong></td><td style="background:#f5f2ec;">—</td></tr>
+<tr><td>3</td><td><strong>Wastage Loss</strong> (Bare + Met Film)</td><td>1.81</td><td>1.67</td><td>1.00</td><td>Met op + Slit op</td></tr>
+<tr><td>4</td><td><strong>B-Grade Loss</strong></td><td>0.024</td><td>0.022</td><td>0.00</td><td>Met op + QC</td></tr>
+<tr><td>5</td><td><strong>Manpower</strong></td><td>1.00</td><td>0.67</td><td>0.80</td><td>HR / Production head</td></tr>
+<tr><td>6</td><td><strong>Power</strong></td><td>5.14</td><td>3.45</td><td>3.56</td><td>Met op + Maintenance</td></tr>
+<tr><td>7</td><td><strong>Consumables & Spares</strong></td><td>0.38</td><td>0.26</td><td>0.30</td><td>Stores + Maintenance</td></tr>
+<tr><td>8</td><td><strong>Indirect Expense</strong></td><td>0.26</td><td>0.26</td><td>0.26</td><td>Plant overhead</td></tr>
+<tr><td colspan="2" style="background:#f5f2ec;"><strong>Sub-total: Conversion (ex-RM)</strong></td><td style="background:#f5f2ec;"><strong>8.61</strong></td><td style="background:#f5f2ec;"><strong>6.33</strong></td><td style="background:#f5f2ec;"><strong>5.92</strong></td><td style="background:#f5f2ec;">—</td></tr>
+<tr><td colspan="2" style="background:#1A2744;color:#FAF9F6;"><strong>TOTAL Conversion Cost</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>15.59</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>12.13</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>10.84</strong></td><td style="background:#1A2744;">—</td></tr>
+<tr><td>+</td><td>Packing & Freight</td><td>1.67</td><td>1.67</td><td>1.67</td><td>Logistics</td></tr>
+<tr><td>−</td><td>Scrap Wire/Aluminium Sale</td><td>(0.55)</td><td>(0.55)</td><td>—</td><td>Stores</td></tr>
+<tr><td colspan="2" style="background:#1A2744;color:#FAF9F6;"><strong>Final Cost with Packing & Scrap Sale</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>16.71</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>13.26</strong></td><td style="background:#1A2744;color:#E85D26;"><strong>12.51</strong></td><td style="background:#1A2744;">—</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Deeper जाने से पहले इस table से तीन चीज़ें notice करें:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Power सबसे बड़ी single line है</strong> — ₹5.14/kg actual, wire और boat combined से भी ज़्यादा। अगर इस महीने सिर्फ़ एक cost head fix करने का time है, power consumption fix करें।</li>
+<li><strong>Equivalent column हमेशा Actual से कम है</strong> जब plant ने मुश्किल mix चलाया हो। यही equivalence का पूरा point है — नीचे का section देखें।</li>
+<li><strong>Indirect Expense Actual और Equivalent में नहीं बदलता</strong> क्योंकि ये fixed plant overhead है per kg allocate होता है। बाक़ी सब variable है।</li>
+</ul>
+
+<h3>📐 Formula — Conversion Cost कैसे बनता है</h3>
+
+<p>हर cost head same pattern follow करता है: <strong>quantity consumed × rate ÷ output produced</strong>। यहाँ चार formulas हैं जो आप actually सबसे ज़्यादा use करते हैं:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:20px;margin:24px 0;border-radius:12px;">
+<div style="display:grid;gap:14px;">
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WIRE COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Wire kg consumed × Wire rate (₹/kg) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">BOAT COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Boats consumed (pcs) × Boat rate (₹/pc) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">POWER COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Power units consumed × Power rate (₹/unit) ÷ Output kg</div>
+</div>
+
+<div style="background:#fff;padding:14px 18px;border-left:4px solid #E85D26;border-radius:6px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">WASTAGE COST (₹/kg of output)</div>
+<div style="font-family:'Courier New',monospace;font-size:1.05em;font-weight:bold;color:#1A2744;margin-top:6px;">= Wastage % × Base film rate (₹/kg)</div>
+</div>
+
+</div>
+</div>
+
+<p>Manpower, Consumables, और Indirect Expense typically <strong>fixed ₹/kg allocations</strong> होते हैं — साल की शुरुआत में Finance set करता है, हर produced kg पर equally allocate। ये shift-by-shift performance के साथ vary नहीं करते, सिर्फ़ plant activity के absolute level के साथ।</p>
+
+<h3>⚖️ Cost Head #2 — "Actual" अकेला report करना ग़लत क्यों है</h3>
+
+<p>यहाँ है core insight जिसके लिए ये blog है। <strong>Actual Conversion Cost महीनों को ऐसे compare करता है जैसे हर kilogram same effort require करता हो।</strong> Real plants में, हर kilogram <em>same</em> effort require नहीं करता:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>12 micron film 8 micron film से faster metallise होती है (8μm को ज़्यादा careful handling, slower speeds, higher rejection rate चाहिए)</li>
+<li>OD M2.2 product OD M2.8 product से faster चलता है (higher OD = thicker aluminium deposition = ज़्यादा wire, ज़्यादा boats, proper coverage के लिए slower line speed)</li>
+<li>AlOx (Aluminium Oxide) एक critical material है — slow line speed, tighter QC, और special non-standard width और length metallised होती है, जो हर cycle पर setup time को बहुत बढ़ा देती है। Combined penalty equivalence factor को 3.00× तक push करती है।</li>
+<li>Reverse-coated product ~2× boats और special handling लेता है</li>
+</ul>
+
+<p>Practice में क्या होता है इसको imagine करें। मान लीजिए आपका plant January में 30% AlOx + 25% 8 micron mix चलाता है, और road पर आगे का peer plant उसी महीने 90% standard 12 micron PET चलाता है। आपकी Actual ₹/kg ज़्यादा होगी। आपके peer की कम। Corporate review meeting चालीस minutes पूछेगी कि आपके plant की "cost discipline क्यों फिसली" — और zero minute recognise करेगी कि आपकी team ने बहुत harder product mix deliver किया। सिर्फ़ Actual report करना plants को difficult orders चलाने पर punish करता है। अगले दो quarters में, आपकी team चुपचाप सीख जाती है कि difficult orders पर push back करो। Salesforce आपके plant पर AlOx enquiries लाना बंद कर देती है। आख़िर में आप "easy products only" plant बन जाते हैं — और उस point पर आपने competitive position permanently खो दी। Actual-only number ही ये drift शुरू करता है।</p>
+
+<p>Fix है <strong>Equivalent Conversion Cost</strong>: cost ऐसे compute करें जैसे हर kg baseline difficulty चला हो। इस plant पर baseline है <strong>PET_12_M2.2</strong> — 12 micron PET at OD M2.2, standard transparent metallised। बाक़ी सब additional effort reflect करने के लिए multiplied up होता है। Equivalent reporting in place हो जाए, तो उस review meeting का conversation "आपका cost क्यों बढ़ा?" से बदलकर "30% AlOx महीने के बावजूद आपका equivalent cost on track है — well done" हो जाता है। यही conversation आप चाहते हैं।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.05em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;line-height:1.7;color:#FAF9F6;">January 2025 में, इस plant ने <strong>665 MT actual</strong> output produce किया। पर mix मुश्किल था (AlOx, thinner micron, higher OD), इसलिए equivalent output था <strong>990 MT</strong> — एक <strong>1.49× multiplier</strong>। तो same total spend ₹103.4 lakh ÷ 665 MT = ₹15.59/kg actual, पर ÷ 990 MT = ₹12.13/kg equivalent। वो ₹3.46 का difference saving नहीं है — वो <em>true picture</em> है। उसे hide करें और आप हर महीना mis-judge करेंगे।</p>
+</div>
+
+<h3>🎯 Cost Head #3 — Equivalent Output कैसे बनता है (concept)</h3>
+
+<p>Equivalent Conversion Cost का पूरा खेल एक question पर टिका है: <strong>1 MT difficult product baseline-MT में कितने का है?</strong> अगर आपके plant ने इस महीने 1 MT AlOx चलाया और बगल वाले plant ने 1 MT standard 12μm transparent — दोनों ने "1 MT" बनाया, पर मेहनत बहुत अलग है। Equivalence factor वो multiplier है जो आपके difficult MT को उस equivalent baseline MT में convert करता है जो *same effort* में बनता।</p>
+
+<div style="margin:24px 0;">
+<img src="equivalence-factors-hi.png" alt="पाँच equivalence factors जो level playing field बनाते हैं" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<p>हर metallisation plant पर पाँच distinct equivalence factors होते हैं, और ये stack होते हैं — किसी material code के लिए combined factor निकालने के लिए इन्हें multiply करते हैं:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.85;">
+<li><strong>OD Equivalence</strong> — Optical Density पर based (metallisation की thickness/coverage value, M2.2 vs M2.5 vs M2.8)। Higher OD = ज़्यादा wire/boat consumption + proper coverage के लिए slower line speed।</li>
+<li><strong>Special Material Equivalence</strong> — chemistry पर based (Standard Transparent vs Reverse Coat vs AlOx vs others)। Special chemistry के लिए slower speeds, tighter QC, और specialty handling चाहिए।</li>
+<li><strong>Micron Equivalence</strong> — film thickness पर based (12μm baseline vs 10μm vs 8μm)। पतली film ज़्यादा break होती है, slower चलती है, tighter tension control demand करती है।</li>
+<li><strong>Width Equivalence</strong> — slit width vs standard 3000mm पर based। Narrower-than-baseline runs per MT ज़्यादा slitter changeovers trigger करते हैं।</li>
+<li><strong>Length Equivalence</strong> — जumbo length vs 12μm PET के standard 54,000m पर based। Shorter जumbo = per MT ज़्यादा metalliser changeovers = ज़्यादा pump-down cycles, ज़्यादा start-up ramps, ज़्यादा lost cycle time।</li>
+</ul>
+
+<p>उदाहरण के तौर पर, AlOx product अपना 3.00× factor Special Material Equivalence के through pick करता है — slow line speed, special non-standard width/length metallised, और हर cycle पर बढ़ा हुआ setup time का combination। Reverse/Release Coat (RC) product 2.17× same Special Material route से pick करता है, जिसमें इसकी shorter जumbo length (typically 24,000–48,000m vs standard 54,000m) भी included है। 8 micron PET 1.875× Micron Equivalence pick करता है क्योंकि line speed roughly 88% slower है। OD M2.8 product 1.44× OD Equivalence pick करता है क्योंकि thicker deposition में ज़्यादा time लगता है।</p>
+
+<p>ये numbers theoretical नहीं हैं। ये एक working plant पर हर material code के real per-day MT output के against calibrated हैं। <strong>Exact derivation — 1.24×, 1.875×, 3.00×, 2.17× कहाँ से आते हैं और किसी नए material के लिए (PET, BOPP, CPP, Nylon, या कुछ भी) कैसे same calculation करें — एक ऐसा topic है जिसकी अपनी blog deserve है।</strong></p>
+
+<div style="background:linear-gradient(135deg, #E85D26 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #FAF9F6;">
+<p style="margin:0 0 8px 0;color:#FAF9F6;font-size:1.05em;"><strong>📅 Coming Next — Blog #29</strong></p>
+<p style="margin:0 0 8px 0;color:#FAF9F6;line-height:1.7;"><strong>किसी भी Material के लिए Equivalent Factor कैसे Calculate करें</strong> — derivation का deep dive। हम walk through करेंगे कि 1.24×, 1.875×, 3.00×, 2.17× actually real plant run-rate data के basis पर कहाँ से आते हैं, और आप सीखेंगे कि अपने plant पर किसी भी नए material के लिए अपने factors कैसे derive करें। PET, BOPP, CPP, Nylon — methodology वही है।</p>
+<p style="margin:8px 0 0 0;color:#FAF9F6;font-size:0.92em;font-style:italic;">इस blog के लिए, हम engineering team से इन factors को given inputs मानते हैं और focus करते हैं कि इन्हें monthly reviews और budget conversations में कैसे <em>use</em> करें।</p>
+</div>
+
+<p>नीचे worked example के लिए, यहाँ January 2025 में reference plant के सात material codes हैं, उनके combined equivalence factors with inputs:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Material Code</th><th>Material Type</th><th>Combined Eqv Factor</th><th>Daily Output (MT/day)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>PET_12_M2.2</strong></td><td>Standard 12μm, OD M2.2 (baseline)</td><td><strong>1.00×</strong></td><td>36</td></tr>
+<tr><td><strong>PET_12_M2.5</strong></td><td>Standard 12μm, OD M2.5</td><td><strong>1.24×</strong></td><td>29</td></tr>
+<tr><td><strong>PET_12_M2.8</strong></td><td>Standard 12μm, OD M2.8</td><td><strong>1.44×</strong></td><td>25</td></tr>
+<tr><td><strong>PET_10_M2.2</strong></td><td>Standard 10μm, OD M2.2</td><td><strong>1.20×</strong></td><td>30</td></tr>
+<tr><td><strong>PET_8_M2.2</strong></td><td>Standard 8μm, OD M2.2</td><td><strong>1.875×</strong></td><td>19</td></tr>
+<tr><td><strong>PET_12_M0.3_AlOx</strong></td><td>AlOx 12μm — critical (special width/length, slow speed)</td><td><strong>3.00×</strong></td><td>12</td></tr>
+<tr><td><strong>PET_12_M2.2_RC</strong></td><td>Reverse/Release Coat 12μm (special chemistry, jumbo 24,000–48,000m)</td><td><strong>2.17×</strong></td><td>16</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Relationship notice करें: <strong>जैसे combined factor बढ़ता है, actual MT/day output घटता है</strong> — exactly इसलिए क्योंकि difficult products को per MT ज़्यादा time लगता है। AlOx 12 MT/day पर चलता है vs baseline 36 MT/day, यानी 3× drop, उसके 3.00× factor से match करता है। Numbers measured run rates के against self-reconcile करते हैं।</p>
+
+<p>Table को ऐसे पढ़ें: <strong>1 MT PET_8_M2.2 = 1.875 MT baseline equivalent production। 1 MT PET_12_M0.3_AlOx (AlOx) = 3.00 MT।</strong> आपके plant ने 1.875 या 3.00 MT का काम किया — 1 MT actual पर judge नहीं होना चाहिए।</p>
+
+<h3>📊 Worked Example — January 2025 Plant Reconciliation</h3>
+
+<p>अब सब कुछ साथ रखते हैं। नीचे January 2025 में reference plant के लिए full conversion cost reconciliation है — raw consumption numbers से शुरू, तीन numbers (Actual, Equivalent, Target) पर end जो आप किसी भी review में defend कर सकें। Math straightforward है; value side-by-side comparison में है।</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+
+<p style="margin:0 0 10px 0;"><strong style="color:#1A2744;">Step 1 — Outputs:</strong></p>
+<ul style="margin:0 0 14px 0;padding-left:22px;line-height:1.7;">
+<li>Slit Output (Prime/A Grade Material): <strong>665 MT actual</strong></li>
+<li>Equivalent Output: <strong>990 MT</strong> (= 665 × 1.49 multiplier product mix से)</li>
+</ul>
+
+<p style="margin:0 0 10px 0;"><strong style="color:#1A2744;">Step 2 — Wire & Boat (₹333.40/kg wire effective, ₹1,180/pc boat effective):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Wire: 7,380 kg consumed = 11.10 kg/MT actual = 7.45 kg/MT equivalent<br>
+Boat: 1,850 pcs consumed = 2.78 pcs/MT actual = 1.87 pcs/MT equivalent<br>
+Wire ₹/kg actual: <strong>3.70</strong> &nbsp; |&nbsp; Equivalent: <strong>3.41</strong> &nbsp; |&nbsp; Target: 3.05<br>
+Boat ₹/kg actual: <strong>3.28</strong> &nbsp; |&nbsp; Equivalent: <strong>2.40</strong> &nbsp; |&nbsp; Target: 1.87
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 3 — Power (414,119 units consumed @ ₹8.25/unit):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Power ₹/kg actual = 414,119 × 8.25 ÷ 664,981 = <strong>₹5.14/kg</strong><br>
+Power ₹/kg equivalent = 5.14 ÷ 1.49 multiplier = <strong>₹3.45/kg</strong>
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 4 — Wastage (1.81% slitter waste @ ₹100/kg base film rate):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Wastage ₹/kg actual = 1.81% × ₹100 = <strong>₹1.81/kg</strong><br>
+Wastage ₹/kg equivalent = <strong>₹1.67/kg</strong>
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 5 — Fixed allocations (Manpower, C&S, Indirect):</strong></p>
+<div style="background:#fff;padding:12px 16px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:0.9em;color:#1A2744;line-height:1.6;">
+Manpower: ₹1.00/kg actual / ₹0.67/kg equivalent<br>
+Consumables & Spares: ₹0.38/kg actual / ₹0.26/kg equivalent<br>
+Indirect: ₹0.26/kg (दोनों के लिए same)
+</div>
+
+<p style="margin:14px 0 10px 0;"><strong style="color:#1A2744;">Step 6 — सब Sum करें:</strong></p>
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:6px 0;border-radius:6px;font-family:'Courier New',monospace;font-size:1em;line-height:1.7;">
+<strong style="color:#E85D26;">Actual Conv Cost</strong> = 3.70 + 3.28 + 5.14 + 1.81 + 0.024 + 1.00 + 0.38 + 0.26 = <strong style="color:#E85D26;">₹15.59/kg</strong><br><br>
+<strong style="color:#E85D26;">Equivalent Conv Cost</strong> = 3.41 + 2.40 + 3.45 + 1.67 + 0.022 + 0.67 + 0.26 + 0.26 = <strong style="color:#E85D26;">₹12.13/kg</strong><br><br>
+<strong style="color:#E85D26;">Target Conv Cost</strong> = <strong style="color:#E85D26;">₹10.84/kg</strong> &nbsp;→&nbsp; gap to close: <strong>₹1.29/kg</strong>
+</div>
+
+</div>
+
+<p>ये story बताती है: January team ने <strong>₹12.13/kg equivalent</strong> पर perform किया, target से ₹1.29/kg ऊपर। Great नहीं, पर disaster भी नहीं। अगर आप review में सिर्फ़ Actual ₹15.59/kg report करते, gap ₹4.75/kg दिखता — और management likely emergency cost-reduction project launch कर देता जो शायद ज़रूरी न हो। Equivalent number आपको कुछ ज़्यादा useful बताता है: <em>real</em> gap है <strong>power, wire, और boat</strong> में — power ₹3.45 vs target ₹3.56 (actually target से नीचे!), wire ₹3.41 vs ₹3.05, boat ₹2.40 vs ₹1.87। यही focused improvement plan है जिसके around आप पूरा quarter build कर सकते हैं। Actual-only number आपको और आपकी team को तीन महीने ग़लत चीज़ों के पीछे भगा देता।</p>
+
+<p>ये level-headed conclusion है: <strong>अगले महीने का focus wire और boat consumption per equivalent MT पर रखें</strong>, panicked plant-wide cost cut पर नहीं।</p>
+
+<h3>🚨 Plant Managers की Conversion Cost के साथ 3 Mistakes</h3>
+
+<p><strong>Mistake 1 — सिर्फ़ Actual report करना।</strong> Equivalent के बिना, हर difficult-mix month failure जैसा दिखता है और हर easy-mix month triumph जैसा। आख़िर में आपकी team मुश्किल काम बेहतर करने की जगह easy product mix chase करना शुरू कर देती है। Salesforce valuable difficult orders लेने की freedom खो देती है। <strong>Fix:</strong> हमेशा Actual <em>और</em> Equivalent side by side report करें। उनके बीच का gap product mix के बारे में बताता है; Equivalent और Target के बीच का gap plant performance के बारे में बताता है।</p>
+
+<p><strong>Mistake 2 — Stale equivalence factors use करना।</strong> Factors (1.24×, 1.44×, 1.875×, 3.00×, 2.17×) plant के actual run rates, jumbo lengths, और material recipes पर calibrated हैं। अगर plant faster source bar retrofit करता है, thinner-film recipe पर switch करता है, या PET के साथ BOPP/CPP/Nylon चलाना शुरू करता है — factors shift हो जाते हैं। <strong>Fix:</strong> factors को annually review करें। पिछले साल हर material code पर actual MT/day vs आप जो factor use कर रहे हैं, compare करें। 10% से ज़्यादा gap हो तो adjust करें। पूरी derivation methodology — जो आप recalibrate करने के लिए या नए material के लिए factor derive करने के लिए use करेंगे — Blog #29 में है।</p>
+
+<p><strong>Mistake 3 — Equivalent को "soft" number मानना।</strong> कुछ Finance heads Equivalent को "poor performance का excuse" समझकर dismiss करते हैं। ये exactly backwards है। Equivalent को game करना ज़्यादा <em>मुश्किल</em> है — आप salesforce पर सिर्फ़ easy orders लेने का pressure डालकर Equivalent को better नहीं बना सकते, क्योंकि easy orders का खुद का factor 1.00× है और वो आपके equivalent denominator में help नहीं करते। <strong>Fix:</strong> अगली review में conversation बदलें — दोनों numbers इसी order में lead करें: "Equivalent ₹12.13/kg है, on track। Actual ₹15.59/kg है, जो हमने जो AlOx/8μm mix चलाया उसे reflect करता है।" अगर finance team push back करे, ये पूछें: "क्या आप चाहेंगे कि plant team अगले quarter AlOx orders refuse करे ताकि Actual better दिखे?" Answer हमेशा no होगा, यही prove करता है कि Equivalent ही right number है manage करने के लिए।</p>
+
+<h3>💰 Live Calculator — अपने Plant की Conversion Cost Compute करें</h3>
+
+<p>नीचे कोई भी input edit करें। Calculator full Actual + Equivalent + Target comparison live चलाता है। Default values January 2025 reference plant data हैं।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.9em;color:#1A2744;border-radius:6px;"><strong>कैसे use करें:</strong> <strong>Production Mix table</strong> में, हर material type के लिए जो आपका plant इस period में चलाया है एक row add करें। उसका name, MT में actual quantity, और Equivalence Factor डालें। Calculator Actual MT और Equivalent MT sum करता है, फिर full Conversion Cost comparison run करता है। Factors नहीं पता? Blog #29 (आगे आ रहा है) explain करता है किसी भी material के लिए कैसे derive करें।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.9em;color:#1A2744;border-radius:6px;"><strong>Calculator note:</strong> ये calculator simplified model use करता है — Equivalent ₹/kg = Actual ÷ Multiplier (Indirect को छोड़कर, जो fixed रहता है)। Real plant Excel models अक्सर per cost head hybrid baseline + over-target formula use करते हैं, जो individual line values को ±₹0.5/kg shift कर सकता है। Total equivalent number directionally correct है और first-pass plant analysis के लिए काफ़ी अच्छा है।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;">PRODUCTION MIX — हर material के लिए एक row</div>
+      <button type="button" id="addRow-hi" style="background:#E85D26;color:#fff;border:none;padding:6px 12px;border-radius:4px;font-weight:bold;font-size:0.85em;cursor:pointer;">+ Row Add करें</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;color:#FAF9F6;font-size:0.85em;">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.2);">
+            <th style="text-align:left;padding:6px 4px;font-weight:bold;color:#E85D26;">Material Name / Code</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Qty (MT)</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Eqv Factor</th>
+            <th style="text-align:right;padding:6px 4px;font-weight:bold;color:#E85D26;width:90px;">Eqv MT</th>
+            <th style="width:30px;"></th>
+          </tr>
+        </thead>
+        <tbody id="materialRows-hi">
+          <!-- Rows added dynamically -->
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid #E85D26;font-weight:bold;">
+            <td style="padding:8px 4px;">TOTAL</td>
+            <td style="text-align:right;padding:8px 4px;color:#E85D26;" id="totalActualMT-hi">— MT</td>
+            <td style="text-align:right;padding:8px 4px;color:#FAF9F6;opacity:0.6;" id="avgFactor-hi">—×</td>
+            <td style="text-align:right;padding:8px 4px;color:#0D8C7E;" id="totalEqvMT-hi">— MT</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Wire consumed (kg)</label>
+      <input type="number" id="wireKg-hi" value="7380" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Wire rate (₹/kg)</label>
+      <input type="number" id="wireRate-hi" value="333.40" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Boats consumed (pcs)</label>
+      <input type="number" id="boatPcs-hi" value="1850" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Boat rate (₹/pc)</label>
+      <input type="number" id="boatRate-hi" value="1180" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Power consumed (units)</label>
+      <input type="number" id="powerUnits-hi" value="414119" min="0" step="1" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Power rate (₹/unit)</label>
+      <input type="number" id="powerRate-hi" value="8.25" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Slitter Wastage (%)</label>
+      <input type="number" id="wastage-hi" value="1.81" min="0" max="20" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Base film rate (₹/kg)</label>
+      <input type="number" id="filmRate-hi" value="100" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Manpower allocation (₹/kg)</label>
+      <input type="number" id="manpower-hi" value="1.00" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div>
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Consumables & Spares (₹/kg)</label>
+      <input type="number" id="consumables-hi" value="0.38" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+    <div style="grid-column:1/-1;">
+      <label style="display:block;font-weight:bold;color:#1A2744;margin-bottom:6px;font-size:0.92em;">Indirect Expense (₹/kg, fixed)</label>
+      <input type="number" id="indirect-hi" value="0.26" min="0" step="0.01" style="width:100%;padding:10px;border:2px solid #1A2744;border-radius:6px;font-size:1em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+    </div>
+  </div>
+
+  <div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+    <div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;">
+        <div style="font-size:0.78em;opacity:0.85;">Total Actual</div>
+        <div id="totalActual-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;">— ₹/kg</div>
+      </div>
+      <div style="background:rgba(13,140,126,0.15);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;">
+        <div style="font-size:0.78em;opacity:0.85;">Total Equivalent</div>
+        <div id="totalEqv-hi" style="font-size:1.5em;font-weight:bold;color:#0D8C7E;">— ₹/kg</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);padding:12px;border-radius:6px;border-left:3px solid #FAF9F6;">
+        <div style="font-size:0.78em;opacity:0.85;">Mix Difficulty Gap</div>
+        <div id="mixGap-hi" style="font-size:1.5em;font-weight:bold;color:#FAF9F6;">— ₹/kg</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.05);padding:14px;border-radius:6px;">
+      <div style="font-size:0.85em;color:#E85D26;font-weight:bold;margin-bottom:8px;">BREAKDOWN BY COST HEAD (Actual / Equivalent)</div>
+      <div id="breakdown-hi" style="font-family:'Courier New',monospace;font-size:0.85em;line-height:1.85;color:#FAF9F6;">—</div>
+    </div>
+  </div>
+</div>
+
+<div style="background:linear-gradient(135deg, #0D8C7E 0%, #1A2744 100%);color:#FAF9F6;padding:20px;margin:24px 0;border-radius:10px;border-left:5px solid #E85D26;">
+<p style="margin:0 0 8px 0;color:#E85D26;font-size:1.05em;"><strong>🧮 vksTech.com पर और Free Calculators</strong></p>
+<p style="margin:0 0 12px 0;color:#FAF9F6;line-height:1.7;">ये vksTech.com पर <strong>सात free calculators</strong> में से एक है — Film Roll Weight, Roll OD, GSM ↔ Micron Conversion, Production Yield %, Machine Utilisation %, और Cost per Square Metre के साथ। सब free, कोई email gate नहीं, कोई subscription नहीं।</p>
+<p style="margin:0;"><a href="https://vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;text-decoration:underline;">→ vksTech.com/#calculators पर सभी 7 calculators browse करें</a></p>
+</div>
+
+<h3>🎯 अपने Plant पर कहाँ से शुरू करें</h3>
+
+<p>अगर आप ये blog पढ़कर अपने plant पर Actual + Equivalent reporting introduce करना चाहते हैं, ये 6-week rollout काम करता है:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Material codes map करें।</strong> हर material code list करें जो आपका plant produce करता है। हर एक को OD, micron, material type, jumbo length, और slit width के साथ tag करें। अगर आप mixed films (PET + BOPP + CPP + Nylon) चलाते हैं, तो हर film type के लिए ये करें — equivalence framework वही है; सिर्फ़ baseline shift होता है।</li>
+<li><strong>Week 2 — Equivalence factors calibrate करें।</strong> इस blog के table को starting point use करें, पर अपने plant के पिछले 12 महीनों के MT/day per material के against compare करें। ज़रूरत हो तो ±20% में adjust करें। पूरी derivation methodology — including BOPP/CPP/Nylon और किसी भी नए material code को कैसे handle करें — के लिए <strong>Blog #29: किसी भी Material के लिए Equivalent Factor कैसे Calculate करें</strong> देखें।</li>
+<li><strong>Week 3 — Monthly conversion cost format build करें।</strong> हर cost head के लिए एक row, तीन columns (Actual / Equivalent / Target)। Owner, formula, और source data column।</li>
+<li><strong>Week 4 — पिछले महीने के data पर पहला run।</strong> पिछले महीने के लिए Equivalent retroactively compute करें। Production team के साथ gap discuss करें — उन्हें Equivalent number में अपनी effort recognize होनी चाहिए। यही वो moment है जब team realize करती है कि finally कोई measure कर रहा है जो वो actually करते हैं।</li>
+<li><strong>Week 5-6 — Monthly review में roll करें।</strong> Standard plant performance dashboard में Equivalent add करें। "Actual vs target" को "actual vs equivalent vs target" से replace करें। Conversation immediately बदलेगी। Salesforce की willingness भी बदलेगी difficult orders आपके plant पर लाने की।</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">ये conversion cost framework series में पहले cover हुए operational improvements का financial counterpart है:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study (Boat consumption नीचे drives करता है)</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study (Power और Boat consumption नीचे drives करता है)</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9% (Wastage Loss head नीचे drives करता है)</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub — strategic overview</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1% (Wastage Loss head नीचे drives करता है)</li>
+<li><strong>ये blog (#28):</strong> Conversion Cost — Actual vs Equivalent (आप यहाँ हैं)</li>
+<li><strong>Blog #29 (आगे आ रहा है):</strong> किसी भी Material के लिए Equivalent Factor कैसे Calculate करें — 1.24×, 1.875×, 3.00× actually कहाँ से आते हैं इसका deep dive, और अपने plant पर किसी नए material के लिए कैसे derive करें</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Conversion Cost <strong>आठ cost heads</strong> से बनता है: Wire, Boat, Wastage, B-Grade, Manpower, Power, Consumables, और Indirect। सिर्फ़ Actual ₹/kg report करना plants को difficult product mix चलाने पर punish करता है और easy mix चलाने पर reward — एक slow poison जो आख़िर में plant को "easy products only" की तरफ़ drive करता है। Fix है <strong>Equivalent Conversion Cost</strong>, जो actual output को combined equivalence factors से (OD, Special Material, Micron, Width, और Length components से बने) multiply करके compute होता है ताकि 1 MT difficult product 1.5–3.0 MT baseline count हो। Actual और Equivalent के बीच का gap product-mix difficulty के बारे में बताता है; Equivalent और Target के बीच का gap real plant performance के बारे में बताता है। दोनों report करें, इसी order में, हर monthly review में। January 2025 reference plant ने ₹15.59/kg actual vs ₹12.13/kg equivalent vs ₹10.84/kg target run किया — real ₹1.29/kg gap to close, illusory ₹4.75/kg gap नहीं। यही distinction focused improvement और panic के बीच का difference है। आपके plant पर जो भी material चलते हों — PET, BOPP, CPP, Nylon, या कुछ नया — उनके equivalence factors derive करने की पूरी method के लिए <strong>Blog #29 (आगे आ रहा है)</strong> देखें।
+</div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+(function() {
+  function fmt(n, suffix) {
+    if (!isFinite(n) || n === 0) return '— ' + (suffix || '');
+    return '₹' + n.toFixed(2) + ' ' + (suffix || '');
+  }
+  function fmtMT(n) {
+    if (!isFinite(n) || n <= 0) return '— MT';
+    return n.toFixed(1) + ' MT';
+  }
+
+  // Default material mix per suffix (calibrated to ~1.49 multiplier per January 2025 narrative)
+  var defaultRows = [
+    { name: 'PET_12_M2.2 (Std 12μ, baseline)', qty: 245, factor: 1.00 },
+    { name: 'PET_12_M2.5 (Std 12μ, 2.5 OD)',   qty: 100, factor: 1.24 },
+    { name: 'PET_12_M2.8 (Std 12μ, 2.8 OD)',   qty: 70,  factor: 1.44 },
+    { name: 'PET_10_M2.2 (Std 10μ)',            qty: 75,  factor: 1.20 },
+    { name: 'PET_8_M2.2 (Std 8μ)',             qty: 55,  factor: 1.875 },
+    { name: 'PET_12_M0.3_AlOx (AlOx)',             qty: 70,  factor: 3.00 },
+    { name: 'PET_12_M2.2_RC (Reverse/Release Coat)',        qty: 50,  factor: 2.17 }
+  ];
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function renderRow(suffix, row, idx) {
+    var tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
+    tr.innerHTML =
+      '<td style="padding:5px 4px;"><input type="text" class="mat-name-' + suffix + '" value="' + escapeHtml(row.name) + '" style="width:100%;padding:6px;border:1px solid rgba(255,255,255,0.3);border-radius:4px;background:#fff7e0;color:#1A2744;font-size:0.85em;"></td>' +
+      '<td style="padding:5px 4px;"><input type="number" class="mat-qty-' + suffix + '" value="' + row.qty + '" min="0" step="1" style="width:100%;padding:6px;border:1px solid rgba(255,255,255,0.3);border-radius:4px;background:#fff7e0;color:#1A2744;font-weight:bold;font-size:0.85em;text-align:right;"></td>' +
+      '<td style="padding:5px 4px;"><input type="number" class="mat-factor-' + suffix + '" value="' + row.factor + '" min="0.1" max="10" step="0.01" style="width:100%;padding:6px;border:1px solid rgba(255,255,255,0.3);border-radius:4px;background:#fff7e0;color:#1A2744;font-weight:bold;font-size:0.85em;text-align:right;"></td>' +
+      '<td class="mat-eqv-' + suffix + '" style="padding:5px 4px;text-align:right;color:#0D8C7E;font-weight:bold;">— MT</td>' +
+      '<td style="padding:5px 4px;text-align:center;"><button type="button" class="mat-del-' + suffix + '" style="background:transparent;border:none;color:#E85D26;font-size:1.2em;cursor:pointer;font-weight:bold;" title="Remove row">×</button></td>';
+    return tr;
+  }
+
+  function rebuildRows(suffix, rows) {
+    var tbody = document.getElementById('materialRows-' + suffix);
+    tbody.innerHTML = '';
+    rows.forEach(function(r, idx) {
+      tbody.appendChild(renderRow(suffix, r, idx));
+    });
+    bindRowEvents(suffix);
+    calc(suffix);
+  }
+
+  function bindRowEvents(suffix) {
+    var tbody = document.getElementById('materialRows-' + suffix);
+    var inputs = tbody.querySelectorAll('input');
+    inputs.forEach(function(el) {
+      el.addEventListener('input', function() { calc(suffix); });
+      el.addEventListener('change', function() { calc(suffix); });
+    });
+    var dels = tbody.querySelectorAll('.mat-del-' + suffix);
+    dels.forEach(function(btn, i) {
+      btn.addEventListener('click', function() {
+        var row = btn.closest('tr');
+        if (row) row.parentNode.removeChild(row);
+        calc(suffix);
+      });
+    });
+  }
+
+  function getTotals(suffix) {
+    var qtys = document.querySelectorAll('.mat-qty-' + suffix);
+    var factors = document.querySelectorAll('.mat-factor-' + suffix);
+    var eqvCells = document.querySelectorAll('.mat-eqv-' + suffix);
+    var totalActualMT = 0;
+    var totalEqvMT = 0;
+    for (var i = 0; i < qtys.length; i++) {
+      var q = parseFloat(qtys[i].value) || 0;
+      var f = parseFloat(factors[i].value) || 0;
+      var eqv = q * f;
+      if (eqvCells[i]) eqvCells[i].textContent = fmtMT(eqv);
+      totalActualMT += q;
+      totalEqvMT += eqv;
+    }
+    return { actualMT: totalActualMT, eqvMT: totalEqvMT };
+  }
+
+  function calc(suffix) {
+    var totals = getTotals(suffix);
+    var output = totals.actualMT;
+    var eqvOutput = totals.eqvMT;
+    var mult = output > 0 ? eqvOutput / output : 1;
+
+    document.getElementById('totalActualMT-' + suffix).textContent = fmtMT(output);
+    document.getElementById('totalEqvMT-' + suffix).textContent = fmtMT(eqvOutput);
+    document.getElementById('avgFactor-' + suffix).textContent = (output > 0 ? mult.toFixed(2) : '—') + '×';
+
+    var wireKg = parseFloat(document.getElementById('wireKg-' + suffix).value) || 0;
+    var wireRate = parseFloat(document.getElementById('wireRate-' + suffix).value) || 0;
+    var boatPcs = parseFloat(document.getElementById('boatPcs-' + suffix).value) || 0;
+    var boatRate = parseFloat(document.getElementById('boatRate-' + suffix).value) || 0;
+    var powerUnits = parseFloat(document.getElementById('powerUnits-' + suffix).value) || 0;
+    var powerRate = parseFloat(document.getElementById('powerRate-' + suffix).value) || 0;
+    var wastagePct = parseFloat(document.getElementById('wastage-' + suffix).value) || 0;
+    var filmRate = parseFloat(document.getElementById('filmRate-' + suffix).value) || 0;
+    var manpower = parseFloat(document.getElementById('manpower-' + suffix).value) || 0;
+    var consumables = parseFloat(document.getElementById('consumables-' + suffix).value) || 0;
+    var indirect = parseFloat(document.getElementById('indirect-' + suffix).value) || 0;
+
+    var outputKg = output * 1000;
+    if (outputKg <= 0 || mult <= 0) {
+      document.getElementById('totalActual-' + suffix).textContent = '— ₹/kg';
+      document.getElementById('totalEqv-' + suffix).textContent = '— ₹/kg';
+      document.getElementById('mixGap-' + suffix).textContent = '— ₹/kg';
+      document.getElementById('breakdown-' + suffix).innerHTML = 'Add at least one material row to see results';
+      return;
+    }
+
+    var wireA   = wireKg * wireRate / outputKg;
+    var boatA   = boatPcs * boatRate / outputKg;
+    var powerA  = powerUnits * powerRate / outputKg;
+    var wasteA  = wastagePct * filmRate / 100;
+    var bgradeA = 0.024;
+    var manA    = manpower;
+    var consA   = consumables;
+    var indA    = indirect;
+    var totalA  = wireA + boatA + powerA + wasteA + bgradeA + manA + consA + indA;
+
+    var wireE = wireA / mult, boatE = boatA / mult, powerE = powerA / mult;
+    var wasteE = wasteA / mult, bgradeE = bgradeA / mult;
+    var manE = manA / mult, consE = consA / mult, indE = indA;
+    var totalE = wireE + boatE + powerE + wasteE + bgradeE + manE + consE + indE;
+    var gap = totalA - totalE;
+
+    document.getElementById('totalActual-' + suffix).textContent = fmt(totalA, '/kg');
+    document.getElementById('totalEqv-' + suffix).textContent = fmt(totalE, '/kg');
+    document.getElementById('mixGap-' + suffix).textContent = fmt(gap, '/kg');
+
+    var rows = [
+      ['Wire',           wireA,  wireE],
+      ['Boat',           boatA,  boatE],
+      ['Power',          powerA, powerE],
+      ['Wastage',        wasteA, wasteE],
+      ['B-Grade',        bgradeA, bgradeE],
+      ['Manpower',       manA,   manE],
+      ['Cons & Spares',  consA,  consE],
+      ['Indirect',       indA,   indE]
+    ];
+    var html = '';
+    rows.forEach(function(r) {
+      html += r[0].padEnd(16, ' ') + ' ' + ('₹' + r[1].toFixed(2)).padStart(7, ' ') + ' / ' + ('₹' + r[2].toFixed(2)).padStart(7, ' ') + '<br>';
+    });
+    html += '<span style="color:#E85D26;">' + 'TOTAL'.padEnd(16, ' ') + ' ' + ('₹' + totalA.toFixed(2)).padStart(7, ' ') + ' / ' + ('₹' + totalE.toFixed(2)).padStart(7, ' ') + '</span>';
+    document.getElementById('breakdown-' + suffix).innerHTML = html;
+  }
+
+  function bind(suffix) {
+    rebuildRows(suffix, defaultRows.slice());
+    var ids = ['wireKg','wireRate','boatPcs','boatRate','powerUnits','powerRate','wastage','filmRate','manpower','consumables','indirect'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() { calc(suffix); });
+        el.addEventListener('change', function() { calc(suffix); });
+      }
+    });
+    var addBtn = document.getElementById('addRow-' + suffix);
+    if (addBtn) {
+      addBtn.addEventListener('click', function() {
+        var tbody = document.getElementById('materialRows-' + suffix);
+        var newRow = { name: '', qty: 0, factor: 1.00 };
+        tbody.appendChild(renderRow(suffix, newRow, tbody.children.length));
+        bindRowEvents(suffix);
+        calc(suffix);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
