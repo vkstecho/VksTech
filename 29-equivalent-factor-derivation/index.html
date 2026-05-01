@@ -1,1 +1,758 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
 
+<div class="en-content">
+
+<h2>🧮 How to Calculate the Equivalent Factor for Any Material — A Plant-Manager's Derivation Playbook</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 11-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; Published January 2025 &nbsp;|&nbsp; Bookmark for annual factor reviews</p>
+
+<p>If you read <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28 on Conversion Cost</a>, you saw equivalence factors used as inputs — 1.24× for OD M2.5, 1.875× for 8 micron, 3.00× for AlOx, and so on. The natural next question every plant manager asks is: <em>where do those numbers actually come from?</em> Can I trust them? Can I derive them for my own plant? Can I derive them for a new material my plant just started running?</p>
+
+<p>This blog is the answer. It walks through the derivation methodology for all five equivalence factors, applied to PET, BOPP, CPP, and any other film your plant runs. Eleven minutes. After this, when someone in a review asks "where does that 1.875× come from?" — you'll have the formula on the back of an envelope, and you'll be able to recompute it for any material in two minutes.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>What this blog covers vs Blog #30:</strong> This blog teaches you how to derive equivalence <em>factors</em> from your plant's rolls/day numbers. The method to <em>compute</em> rolls/day from cycle-time inputs (setup, vacuum, speed, vent, boat-change overhead) is the next blog — <strong>Blog #30: How to Calculate Number of Rolls per Day from Metalliser</strong>. If you don't yet have rolls/day for each material, build that first using Blog #30, then come back here to derive the factors.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The 5 Equivalence Factors</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">PRODUCTIVITY-DERIVED — measure rolls/day</div>
+<table style="width:100%;border-collapse:collapse;font-size:0.92em;">
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>1. OD Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(speed penalty at higher OD)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_OD</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>2. Micron Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(weight + speed penalty)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_micron</td></tr>
+<tr><td style="padding:5px 0;"><strong>3. Material Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(RC, AlOx, special chemistry)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_material</td></tr>
+</table>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">GEOMETRY-DERIVED — direct dimensional ratios</div>
+<table style="width:100%;border-collapse:collapse;font-size:0.92em;">
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>4. Width Eqv</strong></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#0D8C7E;font-weight:bold;">Target Width ÷ Actual Width</td></tr>
+<tr><td style="padding:5px 0;"><strong>5. Length Eqv</strong></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#0D8C7E;font-weight:bold;">Target Length ÷ Actual Length</td></tr>
+</table>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">COMBINED</div>
+<div style="font-size:1.05em;color:#FAF9F6;font-weight:bold;font-family:monospace;">OD × Micron × Material × Width × Length</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">Baselines: PET 12μm M2.2 / 3000mm / 54,000m &nbsp;•&nbsp; BOPP 18μm M2.2 / 3000mm / 36,000m &nbsp;•&nbsp; CPP 22μm M2.2 / 3000mm / 24,000m</p>
+</div>
+
+<h3>📐 The Universal Productivity Formula — One Equation, Three Factors</h3>
+
+<p>Three of the five factors (OD, Micron, Material) are productivity-based. They all use the same formula. Once you understand it once, you understand all three. Here it is:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.15em;color:#1A2744;font-weight:bold;">Productivity Eqv Factor = <span style="color:#E85D26;">Baseline Rolls/Day</span> ÷ <span style="color:#0D8C7E;">This Material's Rolls/Day</span></p>
+</div>
+
+<p>The logic is simple: if your plant's most-run reference material produces 12 rolls per 24-hour day, and a difficult variant of the same material produces only 9.6 rolls per 24-hour day — then 1 roll of the difficult material represents 12/9.6 = 1.25× the work of one baseline roll. That ratio is the equivalence factor.</p>
+
+<p>This formula applies identically whether you're computing OD Eqv (varying OD value, same micron and material), Micron Eqv (varying micron, same OD and material), or Material Eqv (varying chemistry, same micron and OD). The "what's varying" changes; the formula doesn't.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Important:</strong> "Rolls per day" here is the <em>maximum sustainable run rate</em> for that specific material on a 24-hour clock — the rate when the line is running cleanly with no extraordinary downtime. For how to compute this number from your plant's cycle-time data, see <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a>.</p>
+
+<h3>🎯 Factor 1 — OD Equivalence (Speed-Penalty for Thicker Deposition)</h3>
+
+<p>Higher OD (Optical Density) means more aluminium deposited per square metre, which means slower line speed for proper coverage. For PET 12 micron, the typical relationship looks like this:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>OD value</th><th>What's happening</th><th>OD Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>M2.2</strong></td><td>Baseline. Standard transparent metallised. Normal line speed.</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>M2.5</strong></td><td>Thicker deposition. Line speed drops; rolls/day drops proportionally more (extra stabilisation time).</td><td><strong>~1.25×</strong></td></tr>
+<tr><td><strong>M2.8</strong></td><td>Heavy deposition. Significantly slower line speed and more rejection at QC.</td><td><strong>~1.44×</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>How to derive your plant's OD Eqv:</strong></p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>Run your baseline material (12μm PET at OD M2.2 for the standard PET case) for a full day at maximum sustainable rate. Record the rolls produced. Call this <strong>R_base</strong>.</li>
+<li>Run your higher-OD material (e.g., 12μm at M2.5) for a full day at its maximum sustainable rate. Record the rolls produced. Call this <strong>R_M2.5</strong>.</li>
+<li>Compute: <strong>OD Eqv (M2.5) = R_base ÷ R_M2.5</strong></li>
+</ol>
+
+<p>If your baseline runs 12 rolls/day and your M2.5 runs 9.6 rolls/day, your OD Eqv for M2.5 = 12 ÷ 9.6 = <strong>1.25×</strong>. If your numbers are different (because your machine, recipe, or operators are different), your factor is different — that is exactly why you derive it locally instead of borrowing.</p>
+
+<h3>🎯 Factor 2 — Micron Equivalence (Weight + Speed Penalty for Thinner Film)</h3>
+
+<p>Thinner film means less weight per metre and lower line speed. Both reduce rolls/day output. The same productivity formula applies. Typical PET values:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Micron</th><th>What's happening</th><th>Micron Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>12 micron</strong> (baseline)</td><td>Reference. Standard handling, normal speed.</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>10 micron</strong></td><td>Mostly weight effect. Speed penalty smaller.</td><td><strong>~1.20×</strong></td></tr>
+<tr><td><strong>8 micron</strong></td><td>Weight + significant speed penalty (more web breaks, tighter tension).</td><td><strong>~1.875×</strong></td></tr>
+<tr><td><strong>7 micron</strong></td><td>Similar regime to 8μm; very slow, very break-prone.</td><td><strong>~1.88× (measure in your plant)</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>The 1.875× number for 8μm has a story worth knowing:</strong> if you only counted the weight effect (12μm/8μm = 1.5×), you'd undercount the difficulty. The rolls/day actually drops more than weight alone would predict, because thinner film also forces slower line speed. The <em>measured</em> ratio R_base/R_8μm typically lands at ~1.875× — combining both effects. This is why we always derive from rolls/day, never from theoretical weight ratios.</p>
+
+<p><strong>Derivation steps</strong> (identical to OD):</p>
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>Measure R_base for your 12μm baseline.</li>
+<li>Measure R_micron for your 8μm (or 10μm, or whatever) at its maximum sustainable rate.</li>
+<li>Compute: <strong>Micron Eqv = R_base ÷ R_micron</strong></li>
+</ol>
+
+<h3>🎯 Factor 3 — Material Equivalence (Chemistry + Special Handling Penalty)</h3>
+
+<p>Special chemistry products (Reverse/Release Coat, AlOx, and others) demand slower speeds, tighter QC, and often special non-standard width or length metallised. Their rolls/day drops sharply vs the standard transparent baseline.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Material</th><th>What's special</th><th>Material Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>Standard Transparent</strong></td><td>Baseline metallisation recipe.</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>Reverse/Release Coat (RC)</strong></td><td>Special chemistry, slower speed, jumbo length 24,000–48,000m (vs 54,000m for standard).</td><td><strong>~2.17×</strong></td></tr>
+<tr><td><strong>AlOx (Aluminium Oxide)</strong></td><td>Critical material, slow line speed, special non-standard width and length, increased setup time per cycle.</td><td><strong>~3.00×</strong></td></tr>
+<tr><td><strong>Heat-Seal coated, White-Pigmented, Holographic, Anti-fog, etc.</strong></td><td>Use the methodology — measure rolls/day for your plant.</td><td><strong>(derive locally)</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Derivation:</strong> Same formula. Measure R_base for your standard transparent, measure R_RC for your reverse-coat material, compute ratio. The same for AlOx, holographic, white pigmented, or any new specialty product your plant takes on.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>One factor, three penalties:</strong> Material Eqv often combines effects that you might be tempted to split into separate sub-factors — special width, special length, slow speed, longer setup. Resist the urge. The rolls/day measurement captures all of them automatically. That's why the productivity ratio is so powerful — it's atheoretical and self-correcting.</p>
+
+<h3>📏 Factors 4 and 5 — Width and Length Equivalence (Direct Geometric Ratios)</h3>
+
+<p>These two factors are not productivity-derived. They are computed directly from dimensions, because every metre of jumbo length and every mm of width that <em>doesn't</em> match the baseline triggers an extra changeover somewhere — a slitter changeover for narrower width, a metalliser changeover for shorter jumbo length.</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;font-size:1.05em;color:#1A2744;font-weight:bold;">Width Equivalence = <span style="color:#E85D26;">Target Width</span> ÷ <span style="color:#0D8C7E;">Actual Width</span></p>
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Length Equivalence = <span style="color:#E85D26;">Target Length</span> ÷ <span style="color:#0D8C7E;">Actual Length</span></p>
+</div>
+
+<p><strong>Worked example:</strong> Standard PET line targets 3000mm width and 54,000m length. A jumbo runs at 1500mm × 27,000m.</p>
+
+<ul style="margin:8px 0 8px 0;padding-left:24px;line-height:1.8;">
+<li>Width Eqv = 3000 ÷ 1500 = <strong>2.00×</strong></li>
+<li>Length Eqv = 54,000 ÷ 27,000 = <strong>2.00×</strong></li>
+<li>Combined geometry contribution = 2.00 × 2.00 = <strong>4.00×</strong></li>
+</ul>
+
+<p>That single jumbo represents 4× the changeover work of a baseline jumbo, before you've even applied OD, Micron, or Material factors on top. This is correct — and this is exactly the part of plant work that an "Actual ₹/kg" report fails to recognise.</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>The honest caveat:</strong> Width and Length Eqv stack to large numbers fast. A 1500mm × 18,000m jumbo of AlOx 8μm could touch 8–10× combined factor. That number is mathematically correct but politically explosive in a review. Be ready to show the decomposition: "this 9.0× breaks down as Width 2.0 × Length 3.0 × Material 1.5 — and here are the actual changeover counts that justify each piece." If you can't show the decomposition, expect challenge.</p>
+
+<h3>🎬 Combining the Five — One Worked Example, End to End</h3>
+
+<p>Suppose your plant ran a special product this month: <strong>8μm reverse-coat PET, OD M2.5, slit at 2000mm × 36,000m jumbo length.</strong> Compute its combined equivalence factor:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs from your plant:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Baseline (12μm M2.2 standard transparent at 3000mm × 54,000m): R_base rolls/day</li>
+<li>Same product at M2.5 instead of M2.2: R_M2.5 → <strong>OD Eqv = R_base / R_M2.5</strong> (assume 1.25×)</li>
+<li>Same product at 8μm instead of 12μm: R_8μm → <strong>Micron Eqv = R_base / R_8μm</strong> (assume 1.875×)</li>
+<li>Same product as RC instead of standard: R_RC → <strong>Material Eqv = R_base / R_RC</strong> (assume 2.17×)</li>
+<li>Width Eqv = 3000 / 2000 = <strong>1.50×</strong></li>
+<li>Length Eqv = 54,000 / 36,000 = <strong>1.50×</strong></li>
+</ul>
+<p style="margin:8px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.05em;">Combined Eqv = 1.25 × 1.875 × 2.17 × 1.50 × 1.50 = <span style="color:#E85D26;">~11.4×</span></p>
+</div>
+
+<p>Yes, 11.4× is high. Yes, it's correct. One MT of this product equates to 11.4 MT of baseline-equivalent production for conversion cost purposes. If your plant's salesforce keeps bringing this product to the table and your Actual ₹/kg keeps "looking bad," this 11.4× is exactly why — and it's exactly why you should be reporting Equivalent ₹/kg alongside Actual.</p>
+
+<h3>🌐 Same Methodology, Different Films — BOPP and CPP</h3>
+
+<p>Everything above applies identically to BOPP and CPP. Only the baseline shifts. Here are the standard baselines:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film</th><th>Baseline Micron</th><th>Baseline OD</th><th>Baseline Width</th><th>Baseline Jumbo Length</th></tr></thead>
+<tbody>
+<tr><td><strong>PET</strong></td><td>12 micron</td><td>M2.2</td><td>3000mm</td><td>54,000m</td></tr>
+<tr><td><strong>BOPP</strong></td><td>18 micron</td><td>M2.2</td><td>3000mm</td><td>36,000m</td></tr>
+<tr><td><strong>CPP</strong></td><td>22 micron</td><td>M2.2</td><td>3000mm</td><td>24,000m</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>For BOPP:</strong> a 25 micron M2.2 standard run picks up Micron Eqv = R_baseline_BOPP / R_25μm_BOPP (typically below 1.0 since 25μm is heavier and easier than 18μm baseline). A 15 micron BOPP at M2.5 picks up Micron Eqv > 1 (thinner than baseline) plus OD Eqv > 1. Same productivity formula, BOPP-specific baseline.</p>
+
+<p><strong>For CPP:</strong> baseline is 22μm M2.2 with a 24,000m jumbo. A 30μm CPP at M2.2 standard is below baseline difficulty; an 18μm at M2.5 is above. The width and length geometric formulas use the CPP baselines (3000mm, 24,000m).</p>
+
+<p><strong>The methodology is universal.</strong> Pick the baseline for your film type, measure rolls/day for that film at baseline conditions, then derive every variant by ratio. The numbers are different across films; the math is the same.</p>
+
+<h3>💰 Live Calculator — Derive Factors for Your Plant</h3>
+
+<p>Plug in your plant's numbers below. Calculator computes all five factors and the combined factor. If you don't yet have rolls/day numbers, build them using the calculator in <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> first.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 1 — SELECT BASELINE</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmType-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET">PET (12μm, 3000mm, 54,000m baseline)</option>
+<option value="BOPP">BOPP (18μm, 3000mm, 36,000m baseline)</option>
+<option value="CPP">CPP (22μm, 3000mm, 24,000m baseline)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Baseline rolls/day at baseline conditions</label>
+<input type="number" id="rollsBase-en" placeholder="e.g., 12" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 2 — THIS MATERIAL'S CONDITIONS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Rolls/day for this OD value (vary OD, hold rest)</label>
+<input type="number" id="rollsOD-en" placeholder="e.g., 9.6 (for M2.5)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Rolls/day for this micron (vary micron, hold rest)</label>
+<input type="number" id="rollsMicron-en" placeholder="e.g., 6.4 (for 8μm)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Rolls/day for this material (vary chemistry, hold rest)</label>
+<input type="number" id="rollsMat-en" placeholder="e.g., 5.5 (for RC)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Material name (label only, optional)</label>
+<input type="text" id="matName-en" placeholder="e.g., RC, AlOx, Heat-Seal" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Actual width (mm)</label>
+<input type="number" id="actualWidth-en" placeholder="e.g., 1500" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Actual jumbo length (m)</label>
+<input type="number" id="actualLength-en" placeholder="e.g., 27000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;">
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">OD Eqv</div>
+<div id="odEqv-en" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Micron Eqv</div>
+<div id="micronEqv-en" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Material Eqv</div>
+<div id="matEqv-en" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Width Eqv</div>
+<div id="widthEqv-en" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">—×</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Length Eqv</div>
+<div id="lengthEqv-en" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">—×</div>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:10px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Combined Equivalence Factor</div>
+<div id="combinedEqv-en" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—×</div>
+</div>
+
+<div id="interpretation-en" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;text-align:center;">
+Enter values above to see interpretation
+</div>
+</div>
+
+</div>
+
+<h3>🔄 When to Recalibrate Your Factors</h3>
+
+<p>Equivalence factors are not "set once and forget." They drift with your plant's reality. Recalibrate whenever any of these triggers fires:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Machine retrofit or major maintenance</strong> — new source bar, new winder, new chamber upgrade. Run rates change; factors change.</li>
+<li><strong>Film vendor change</strong> — different bare film stock can run at different speeds and have different break rates.</li>
+<li><strong>New product code added</strong> — derive its factor from rolls/day data within the first month of running it.</li>
+<li><strong>Annual minimum</strong> — even with no triggers, recompute every factor against the past 12 months of run data once a year. If any factor has drifted more than 10%, update it.</li>
+</ul>
+
+<p>This connects directly back to <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28's Mistake #2 — using stale equivalence factors</a>. A factor that was right two years ago can quietly become wrong, and your equivalent conversion cost number drifts with it.</p>
+
+<h3>🚨 Three Common Mistakes in Factor Derivation</h3>
+
+<p><strong>Mistake 1 — Using OEM datasheet speeds instead of measured plant speeds.</strong> The machine vendor's datasheet says the line can run at 950 m/min for 12μm M2.2. Your plant's measured sustainable rate is 800 m/min. If you derive your baseline rolls/day from 950 m/min, you'll overestimate baseline and every factor will look smaller than reality, making difficult products appear easier than they are. <strong>Fix:</strong> always derive from <em>measured</em> rolls/day on your floor, not from datasheets.</p>
+
+<p><strong>Mistake 2 — Using a single best day instead of a steady-state average.</strong> Best-day numbers reflect an idealised run with no anomalies. Real plants run with normal frictions. If you use best-day for baseline and steady-state for difficult materials, you'll inflate the factors. <strong>Fix:</strong> use the average of the past 90 days (or top-3-month average if you want a capability benchmark, but apply it consistently — same window for baseline and for the variant material).</p>
+
+<p><strong>Mistake 3 — Forgetting setup, vent, and boat-change overhead in rolls/day.</strong> If you compute rolls/day as just (jumbo length / speed), you'll get an inflated number. The 24-hour day must absorb setup, vacuum-heating, vent, and boat-change time too. <strong>Fix:</strong> use the full cycle-time formula in <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> — it accounts for every minute lost to non-running activity.</p>
+
+<h3>🎯 Where to Start at Your Plant</h3>
+
+<p>Two-week rollout to derive your plant's complete factor set:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Identify your baseline.</strong> For each film type your plant runs (PET, BOPP, CPP, others), identify the most-run combination. For most Indian plants, this is PET 12μm M2.2 standard transparent at 3000mm × 54,000m. For BOPP-heavy plants, it's 18μm M2.2; for CPP, 22μm M2.2.</li>
+<li><strong>Week 1 — Measure baseline rolls/day.</strong> Pull the past 90 days of production logs. Compute average sustainable rolls/day for each film at its baseline. This is your R_base for each film.</li>
+<li><strong>Week 2 — Measure variant rolls/day.</strong> For each material code your plant runs (different ODs, different microns, different chemistries), pull 30+ days of run data and compute its rolls/day. Apply the productivity formula to get OD Eqv, Micron Eqv, Material Eqv.</li>
+<li><strong>Week 2 — Compute geometry factors.</strong> For each commonly-slit width and each commonly-run jumbo length, compute Width Eqv and Length Eqv directly from the dimensional ratios.</li>
+<li><strong>Week 2 — Build a master factor table.</strong> One row per material code (or per code+width+length combination). Five factor columns + combined column. This becomes your authoritative input table for the Equivalent Conversion Cost calculator from <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a>.</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">This blog is one piece of the metalliser financial-controls series:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent (uses the factors from this blog)</li>
+<li><strong>This blog (#29):</strong> How to Calculate the Equivalent Factor for Any Material (you are here)</li>
+<li><strong>Blog #30 (coming next):</strong> How to Calculate Number of Rolls per Day from Metalliser — the productivity engine that feeds the rolls/day inputs of this blog</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Five equivalence factors level the playing field for difficult vs easy product mix. Three are derived from the universal productivity formula <strong>(Baseline rolls/day ÷ This material's rolls/day)</strong> — applied to OD, Micron, and Material variations. Two are direct geometric ratios — <strong>Width Eqv = Target ÷ Actual</strong> and <strong>Length Eqv = Target ÷ Actual</strong>. The combined factor multiplies all five together. Baselines: PET 12μm M2.2 3000mm 54,000m; BOPP 18μm M2.2 3000mm 36,000m; CPP 22μm M2.2 3000mm 24,000m. The methodology is universal — only the baseline shifts. Recalibrate annually or whenever your plant has a machine retrofit, vendor change, or new product code. With this derivation framework in hand, your Equivalent Conversion Cost number from <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> stops being a borrowed number and becomes a defensible plant-specific KPI.
+</div>
+
+<p style="margin-top:20px;"><strong>📅 Coming next in this series:</strong> <em>"Blog #30 — How to Calculate Number of Rolls per Day from Metalliser"</em>. The seven-input productivity formula that powers every rolls/day number in this blog. If you don't yet have measured rolls/day for your plant's materials, that blog gives you the formula to compute them from cycle-time data — setup, vacuum-heating, line speed, jumbo length, vent, boat-change overhead.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>🧮 किसी भी Material के लिए Equivalent Factor कैसे Calculate करें — Plant-Manager की Derivation Playbook</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 11-min read &nbsp;|&nbsp; Real Plant Methodology &nbsp;|&nbsp; January 2025 में published &nbsp;|&nbsp; Annual factor reviews के लिए bookmark करें</p>
+
+<p>अगर आपने <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28 — Conversion Cost</a> पढ़ी है, तो आपने equivalence factors inputs के रूप में use होते देखे होंगे — OD M2.5 के लिए 1.24×, 8 micron के लिए 1.875×, AlOx के लिए 3.00×, और इसी तरह। हर plant manager का natural अगला सवाल है: <em>ये numbers आते कहाँ से हैं?</em> क्या मैं इन पर trust कर सकता हूँ? क्या मैं अपने plant के लिए derive कर सकता हूँ? क्या मैं अपने plant के नए material के लिए भी derive कर सकता हूँ?</p>
+
+<p>ये blog उसी का answer है। इसमें पाँचों equivalence factors की derivation methodology PET, BOPP, CPP, और किसी भी film पर apply होती है। ग्यारह minutes। इसके बाद जब कोई review में पूछे "1.875× कहाँ से आया?" — आपके पास envelope-back formula होगा, और आप किसी भी material के लिए दो minutes में recompute कर सकेंगे।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>ये blog क्या cover करता है vs Blog #30:</strong> ये blog सिखाता है कि अपने plant के rolls/day numbers से equivalence <em>factors</em> कैसे derive करें। Cycle-time inputs (setup, vacuum, speed, vent, boat-change overhead) से rolls/day <em>compute</em> करने का method अगली blog में है — <strong>Blog #30: Metalliser से Rolls per Day कैसे Calculate करें</strong>। अगर अभी तक हर material के लिए rolls/day numbers नहीं हैं, पहले Blog #30 use करके बनाएँ, फिर यहाँ वापस आकर factors derive करें।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — 5 Equivalence Factors</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">PRODUCTIVITY-DERIVED — rolls/day measure करें</div>
+<table style="width:100%;border-collapse:collapse;font-size:0.92em;">
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>1. OD Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(higher OD पर speed penalty)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_OD</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>2. Micron Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(weight + speed penalty)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_micron</td></tr>
+<tr><td style="padding:5px 0;"><strong>3. Material Eqv</strong> <span style="color:#FAF9F6;opacity:0.7;font-size:0.88em;">(RC, AlOx, special chemistry)</span></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#E85D26;font-weight:bold;">R_base ÷ R_material</td></tr>
+</table>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">GEOMETRY-DERIVED — direct dimensional ratios</div>
+<table style="width:100%;border-collapse:collapse;font-size:0.92em;">
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:5px 0;"><strong>4. Width Eqv</strong></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#0D8C7E;font-weight:bold;">Target Width ÷ Actual Width</td></tr>
+<tr><td style="padding:5px 0;"><strong>5. Length Eqv</strong></td><td style="text-align:right;padding:5px 0;font-family:monospace;color:#0D8C7E;font-weight:bold;">Target Length ÷ Actual Length</td></tr>
+</table>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">COMBINED</div>
+<div style="font-size:1.05em;color:#FAF9F6;font-weight:bold;font-family:monospace;">OD × Micron × Material × Width × Length</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">Baselines: PET 12μm M2.2 / 3000mm / 54,000m &nbsp;•&nbsp; BOPP 18μm M2.2 / 3000mm / 36,000m &nbsp;•&nbsp; CPP 22μm M2.2 / 3000mm / 24,000m</p>
+</div>
+
+<h3>📐 Universal Productivity Formula — एक Equation, तीन Factors</h3>
+
+<p>पाँच में से तीन factors (OD, Micron, Material) productivity-based हैं। तीनों same formula use करते हैं। एक बार समझ लिया तो तीनों समझ में आ जाएँगे। Formula ये है:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;text-align:center;">
+<p style="margin:0;font-size:1.15em;color:#1A2744;font-weight:bold;">Productivity Eqv Factor = <span style="color:#E85D26;">Baseline Rolls/Day</span> ÷ <span style="color:#0D8C7E;">This Material's Rolls/Day</span></p>
+</div>
+
+<p>Logic simple है: अगर आपके plant का most-run reference material 24-hour day में 12 rolls produce करता है, और उसी material का difficult variant सिर्फ़ 9.6 rolls produce करता है — तो difficult material का 1 roll = baseline material के 1 roll का 12/9.6 = 1.25× काम है। यही ratio equivalence factor है।</p>
+
+<p>ये formula identically apply होता है — चाहे आप OD Eqv compute कर रहे हों (OD value vary हो रही है, micron और material same), Micron Eqv (micron vary, OD और material same), या Material Eqv (chemistry vary, micron और OD same)। "क्या vary हो रहा है" बदलता है; formula नहीं।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Important:</strong> "Rolls per day" यहाँ उस specific material के लिए <em>maximum sustainable run rate</em> है 24-hour clock पर — जब line cleanly चल रही हो बिना extraordinary downtime के। ये number cycle-time data से कैसे compute करें, इसके लिए <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> देखें।</p>
+
+<h3>🎯 Factor 1 — OD Equivalence (Thicker Deposition के लिए Speed Penalty)</h3>
+
+<p>Higher OD (Optical Density) मतलब per square metre ज़्यादा aluminium deposit, मतलब proper coverage के लिए slower line speed। PET 12 micron के लिए typical relationship इस तरह है:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>OD value</th><th>क्या हो रहा है</th><th>OD Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>M2.2</strong></td><td>Baseline। Standard transparent metallised। Normal line speed।</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>M2.5</strong></td><td>Thicker deposition। Line speed गिरती है; rolls/day proportionally ज़्यादा गिरते हैं (extra stabilisation time)।</td><td><strong>~1.25×</strong></td></tr>
+<tr><td><strong>M2.8</strong></td><td>Heavy deposition। Significantly slower line speed और QC पर ज़्यादा rejection।</td><td><strong>~1.44×</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>अपने plant की OD Eqv कैसे derive करें:</strong></p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>अपना baseline material (Standard PET case के लिए 12μm PET at OD M2.2) पूरे दिन maximum sustainable rate पर चलाएँ। Produced rolls record करें। इसे <strong>R_base</strong> कहें।</li>
+<li>अपना higher-OD material (e.g., 12μm at M2.5) पूरे दिन maximum sustainable rate पर चलाएँ। Produced rolls record करें। इसे <strong>R_M2.5</strong> कहें।</li>
+<li>Compute करें: <strong>OD Eqv (M2.5) = R_base ÷ R_M2.5</strong></li>
+</ol>
+
+<p>अगर आपका baseline 12 rolls/day है और M2.5 9.6 rolls/day, आपकी OD Eqv for M2.5 = 12 ÷ 9.6 = <strong>1.25×</strong>। अगर आपके numbers अलग हैं (क्योंकि आपका machine, recipe, या operators अलग हैं), आपका factor अलग है — बस इसी कारण आप borrow नहीं करते, locally derive करते हैं।</p>
+
+<h3>🎯 Factor 2 — Micron Equivalence (Thinner Film के लिए Weight + Speed Penalty)</h3>
+
+<p>Thinner film मतलब per metre कम weight और lower line speed। दोनों rolls/day output reduce करते हैं। Same productivity formula apply होता है। PET के typical values:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Micron</th><th>क्या हो रहा है</th><th>Micron Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>12 micron</strong> (baseline)</td><td>Reference। Standard handling, normal speed।</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>10 micron</strong></td><td>ज़्यादातर weight effect। Speed penalty छोटा।</td><td><strong>~1.20×</strong></td></tr>
+<tr><td><strong>8 micron</strong></td><td>Weight + significant speed penalty (ज़्यादा web breaks, tighter tension)।</td><td><strong>~1.875×</strong></td></tr>
+<tr><td><strong>7 micron</strong></td><td>8μm जैसा regime; बहुत slow, बहुत break-prone।</td><td><strong>~1.88× (अपने plant में measure करें)</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>8μm के लिए 1.875× number की story जानने लायक़ है:</strong> अगर सिर्फ़ weight effect count करते (12μm/8μm = 1.5×), तो difficulty undercount होती। Rolls/day actually weight से ज़्यादा गिरते हैं, क्योंकि thinner film slower line speed force करती है। <em>Measured</em> ratio R_base/R_8μm typically ~1.875× पर land करता है — दोनों effects combine करते हुए। यही reason है कि हम हमेशा rolls/day से derive करते हैं, theoretical weight ratios से कभी नहीं।</p>
+
+<p><strong>Derivation steps</strong> (OD जैसे ही):</p>
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>अपने 12μm baseline के लिए R_base measure करें।</li>
+<li>अपने 8μm (या 10μm, या जो भी) के लिए R_micron maximum sustainable rate पर measure करें।</li>
+<li>Compute करें: <strong>Micron Eqv = R_base ÷ R_micron</strong></li>
+</ol>
+
+<h3>🎯 Factor 3 — Material Equivalence (Chemistry + Special Handling Penalty)</h3>
+
+<p>Special chemistry products (Reverse/Release Coat, AlOx, और बाक़ी) slower speeds, tighter QC, और अक्सर special non-standard width या length metallised demand करते हैं। उनके rolls/day standard transparent baseline से तेज़ी से गिरते हैं।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Material</th><th>क्या special है</th><th>Material Eqv Factor (typical)</th></tr></thead>
+<tbody>
+<tr><td><strong>Standard Transparent</strong></td><td>Baseline metallisation recipe।</td><td><strong>1.00× (baseline)</strong></td></tr>
+<tr><td><strong>Reverse/Release Coat (RC)</strong></td><td>Special chemistry, slower speed, jumbo length 24,000–48,000m (vs standard के 54,000m)।</td><td><strong>~2.17×</strong></td></tr>
+<tr><td><strong>AlOx (Aluminium Oxide)</strong></td><td>Critical material, slow line speed, special non-standard width और length, हर cycle का setup time बढ़ा हुआ।</td><td><strong>~3.00×</strong></td></tr>
+<tr><td><strong>Heat-Seal coated, White-Pigmented, Holographic, Anti-fog, etc.</strong></td><td>Methodology use करें — अपने plant के लिए rolls/day measure करें।</td><td><strong>(locally derive करें)</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Derivation:</strong> Same formula। अपने standard transparent के लिए R_base measure करें, अपने reverse-coat material के लिए R_RC measure करें, ratio compute करें। AlOx, holographic, white pigmented, या किसी भी नए specialty product के लिए वही।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>एक factor, तीन penalties:</strong> Material Eqv अक्सर वो effects combine करता है जिन्हें आप अलग sub-factors में बाँटना चाह सकते हैं — special width, special length, slow speed, longer setup। मत बाँटें। Rolls/day measurement automatically सब capture कर लेता है। यही productivity ratio की power है — atheoretical और self-correcting।</p>
+
+<h3>📏 Factors 4 और 5 — Width और Length Equivalence (Direct Geometric Ratios)</h3>
+
+<p>ये दो factors productivity-derived नहीं हैं। ये directly dimensions से compute होते हैं, क्योंकि हर metre जumbo length और हर mm width जो baseline से <em>match नहीं करता</em> कहीं न कहीं extra changeover trigger करता है — narrower width के लिए slitter changeover, shorter जumbo length के लिए metalliser changeover।</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;font-size:1.05em;color:#1A2744;font-weight:bold;">Width Equivalence = <span style="color:#E85D26;">Target Width</span> ÷ <span style="color:#0D8C7E;">Actual Width</span></p>
+<p style="margin:0;font-size:1.05em;color:#1A2744;font-weight:bold;">Length Equivalence = <span style="color:#E85D26;">Target Length</span> ÷ <span style="color:#0D8C7E;">Actual Length</span></p>
+</div>
+
+<p><strong>Worked example:</strong> Standard PET line 3000mm width और 54,000m length target करती है। एक जumbo 1500mm × 27,000m पर चलता है।</p>
+
+<ul style="margin:8px 0 8px 0;padding-left:24px;line-height:1.8;">
+<li>Width Eqv = 3000 ÷ 1500 = <strong>2.00×</strong></li>
+<li>Length Eqv = 54,000 ÷ 27,000 = <strong>2.00×</strong></li>
+<li>Combined geometry contribution = 2.00 × 2.00 = <strong>4.00×</strong></li>
+</ul>
+
+<p>वो single जumbo baseline जumbo का 4× changeover work represent करता है, इससे पहले कि आप OD, Micron, या Material factors apply करें। ये correct है — और यही plant work का वो हिस्सा है जिसे "Actual ₹/kg" report recognise नहीं कर पाती।</p>
+
+<p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Honest caveat:</strong> Width और Length Eqv बड़े numbers में जल्दी stack हो जाते हैं। 1500mm × 18,000m जumbo of AlOx 8μm 8–10× combined factor छू सकता है। ये number mathematically correct है पर review में politically explosive है। Decomposition दिखाने के लिए तैयार रहें: "ये 9.0× breaks down इस तरह — Width 2.0 × Length 3.0 × Material 1.5 — और ये actual changeover counts हैं जो हर piece justify करते हैं।" अगर decomposition नहीं दिखा सकते, challenge expect करें।</p>
+
+<h3>🎬 पाँचों को Combine करें — एक Worked Example, End to End</h3>
+
+<p>मान लीजिए आपके plant ने इस महीने एक special product चलाया: <strong>8μm reverse-coat PET, OD M2.5, slit at 2000mm × 36,000m जumbo length।</strong> इसका combined equivalence factor compute करें:</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>आपके plant के Inputs:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>Baseline (12μm M2.2 standard transparent at 3000mm × 54,000m): R_base rolls/day</li>
+<li>Same product M2.2 की जगह M2.5 पर: R_M2.5 → <strong>OD Eqv = R_base / R_M2.5</strong> (मान लें 1.25×)</li>
+<li>Same product 12μm की जगह 8μm पर: R_8μm → <strong>Micron Eqv = R_base / R_8μm</strong> (मान लें 1.875×)</li>
+<li>Same product standard की जगह RC पर: R_RC → <strong>Material Eqv = R_base / R_RC</strong> (मान लें 2.17×)</li>
+<li>Width Eqv = 3000 / 2000 = <strong>1.50×</strong></li>
+<li>Length Eqv = 54,000 / 36,000 = <strong>1.50×</strong></li>
+</ul>
+<p style="margin:8px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.05em;">Combined Eqv = 1.25 × 1.875 × 2.17 × 1.50 × 1.50 = <span style="color:#E85D26;">~11.4×</span></p>
+</div>
+
+<p>हाँ, 11.4× ज़्यादा है। हाँ, सही है। 1 MT इस product का conversion cost purposes के लिए 11.4 MT baseline-equivalent production है। अगर आपकी salesforce ये product लाती रहती है और आपकी Actual ₹/kg "खराब दिखती रहती है" — यही 11.4× exact reason है — और इसीलिए आपको Equivalent ₹/kg Actual के साथ report करनी चाहिए।</p>
+
+<h3>🌐 Same Methodology, अलग Films — BOPP और CPP</h3>
+
+<p>ऊपर सब BOPP और CPP पर identically apply होता है। सिर्फ़ baseline shift होता है। Standard baselines:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film</th><th>Baseline Micron</th><th>Baseline OD</th><th>Baseline Width</th><th>Baseline जumbo Length</th></tr></thead>
+<tbody>
+<tr><td><strong>PET</strong></td><td>12 micron</td><td>M2.2</td><td>3000mm</td><td>54,000m</td></tr>
+<tr><td><strong>BOPP</strong></td><td>18 micron</td><td>M2.2</td><td>3000mm</td><td>36,000m</td></tr>
+<tr><td><strong>CPP</strong></td><td>22 micron</td><td>M2.2</td><td>3000mm</td><td>24,000m</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>BOPP के लिए:</strong> 25 micron M2.2 standard run Micron Eqv pick करता है = R_baseline_BOPP / R_25μm_BOPP (typically 1.0 से नीचे क्योंकि 25μm 18μm baseline से heavier और easier है)। 15 micron BOPP at M2.5 Micron Eqv > 1 (baseline से thinner) plus OD Eqv > 1 pick करता है। Same productivity formula, BOPP-specific baseline।</p>
+
+<p><strong>CPP के लिए:</strong> baseline 22μm M2.2 with 24,000m जumbo है। 30μm CPP at M2.2 standard baseline difficulty से नीचे है; 18μm at M2.5 ऊपर है। Width और length geometric formulas CPP baselines (3000mm, 24,000m) use करते हैं।</p>
+
+<p><strong>Methodology universal है।</strong> अपनी film type के लिए baseline pick करें, उस film के लिए baseline conditions पर rolls/day measure करें, फिर हर variant ratio से derive करें। Numbers films के across अलग हैं; math वही है।</p>
+
+<h3>💰 Live Calculator — अपने Plant के लिए Factors Derive करें</h3>
+
+<p>नीचे अपने plant के numbers plug करें। Calculator पाँचों factors और combined factor compute करता है। अगर अभी तक rolls/day numbers नहीं हैं, पहले <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> के calculator से बनाएँ।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 1 — BASELINE SELECT करें</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmType-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET">PET (12μm, 3000mm, 54,000m baseline)</option>
+<option value="BOPP">BOPP (18μm, 3000mm, 36,000m baseline)</option>
+<option value="CPP">CPP (22μm, 3000mm, 24,000m baseline)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Baseline conditions पर rolls/day</label>
+<input type="number" id="rollsBase-hi" placeholder="e.g., 12" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">STEP 2 — इस MATERIAL की CONDITIONS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">इस OD value के लिए rolls/day</label>
+<input type="number" id="rollsOD-hi" placeholder="e.g., 9.6 (M2.5 के लिए)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">इस micron के लिए rolls/day</label>
+<input type="number" id="rollsMicron-hi" placeholder="e.g., 6.4 (8μm के लिए)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">इस material के लिए rolls/day</label>
+<input type="number" id="rollsMat-hi" placeholder="e.g., 5.5 (RC के लिए)" min="0.1" step="0.1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Material name (label only, optional)</label>
+<input type="text" id="matName-hi" placeholder="e.g., RC, AlOx, Heat-Seal" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Actual width (mm)</label>
+<input type="number" id="actualWidth-hi" placeholder="e.g., 1500" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Actual जumbo length (m)</label>
+<input type="number" id="actualLength-hi" placeholder="e.g., 27000" min="1" step="1" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RESULTS — LIVE</div>
+
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px;">
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">OD Eqv</div>
+<div id="odEqv-hi" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Micron Eqv</div>
+<div id="micronEqv-hi" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Material Eqv</div>
+<div id="matEqv-hi" style="font-size:1.25em;font-weight:bold;color:#E85D26;">—×</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Width Eqv</div>
+<div id="widthEqv-hi" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">—×</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.72em;opacity:0.85;">Length Eqv</div>
+<div id="lengthEqv-hi" style="font-size:1.25em;font-weight:bold;color:#0D8C7E;">—×</div>
+</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:10px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Combined Equivalence Factor</div>
+<div id="combinedEqv-hi" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—×</div>
+</div>
+
+<div id="interpretation-hi" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;text-align:center;">
+ऊपर values डालें interpretation देखने के लिए
+</div>
+</div>
+
+</div>
+
+<h3>🔄 अपने Factors कब Recalibrate करें</h3>
+
+<p>Equivalence factors "एक बार set कर दिए, भूल गए" वाले नहीं हैं। ये आपके plant की reality के साथ drift होते हैं। इन triggers में से कोई भी fire हो — recalibrate करें:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Machine retrofit या major maintenance</strong> — नया source bar, नया winder, नया chamber upgrade। Run rates बदलते हैं; factors बदलते हैं।</li>
+<li><strong>Film vendor change</strong> — अलग bare film stock अलग speeds पर run कर सकती है और अलग break rates हो सकती हैं।</li>
+<li><strong>नया product code add हुआ</strong> — चलाने के पहले महीने के अंदर rolls/day data से उसका factor derive करें।</li>
+<li><strong>Annual minimum</strong> — कोई trigger न हो तब भी, साल में एक बार पिछले 12 महीनों के run data के against हर factor recompute करें। अगर कोई factor 10% से ज़्यादा drift हुआ, update करें।</li>
+</ul>
+
+<p>ये directly <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28 की Mistake #2 — stale equivalence factors use करना</a> से connect होता है। दो साल पहले सही factor चुपचाप ग़लत हो सकता है, और आपका equivalent conversion cost number उसके साथ drift करता है।</p>
+
+<h3>🚨 Factor Derivation में 3 Common Mistakes</h3>
+
+<p><strong>Mistake 1 — Measured plant speeds की जगह OEM datasheet speeds use करना।</strong> Machine vendor की datasheet कहती है कि line 12μm M2.2 के लिए 950 m/min पर run कर सकती है। आपके plant की measured sustainable rate 800 m/min है। अगर आप 950 m/min से baseline rolls/day derive करते हैं, आप baseline overestimate कर देंगे और हर factor reality से छोटा दिखेगा, difficult products easier दिखाएगा। <strong>Fix:</strong> हमेशा अपने floor पर <em>measured</em> rolls/day से derive करें, datasheets से नहीं।</p>
+
+<p><strong>Mistake 2 — Steady-state average की जगह single best day use करना।</strong> Best-day numbers बिना anomalies के idealised run reflect करते हैं। Real plants normal frictions के साथ चलते हैं। अगर baseline के लिए best-day और difficult materials के लिए steady-state use करें, factors inflate हो जाएँगे। <strong>Fix:</strong> पिछले 90 days का average use करें (या top-3-month average अगर capability benchmark चाहिए, पर consistently apply करें — baseline और variant material दोनों के लिए same window)।</p>
+
+<p><strong>Mistake 3 — Rolls/day में setup, vent, और boat-change overhead भूलना।</strong> अगर rolls/day सिर्फ़ (jumbo length / speed) compute करते हैं, inflated number मिलेगा। 24-hour day को setup, vacuum-heating, vent, और boat-change time भी absorb करना है। <strong>Fix:</strong> <a href="/blog/calculate-rolls-per-day-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> का full cycle-time formula use करें — ये non-running activity में lost हर minute account करता है।</p>
+
+<h3>🎯 अपने Plant पर कहाँ से शुरू करें</h3>
+
+<p>अपने plant के complete factor set derive करने के लिए दो-week rollout:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — अपना baseline identify करें।</strong> हर film type जो आपका plant चलाता है (PET, BOPP, CPP, others) के लिए most-run combination identify करें। ज़्यादातर Indian plants के लिए ये PET 12μm M2.2 standard transparent at 3000mm × 54,000m है। BOPP-heavy plants के लिए 18μm M2.2; CPP के लिए 22μm M2.2।</li>
+<li><strong>Week 1 — Baseline rolls/day measure करें।</strong> पिछले 90 days के production logs pull करें। हर film के लिए baseline पर average sustainable rolls/day compute करें। ये हर film के लिए आपका R_base है।</li>
+<li><strong>Week 2 — Variant rolls/day measure करें।</strong> हर material code जो आपका plant चलाता है (अलग ODs, अलग microns, अलग chemistries) के लिए 30+ days run data pull करें और rolls/day compute करें। OD Eqv, Micron Eqv, Material Eqv के लिए productivity formula apply करें।</li>
+<li><strong>Week 2 — Geometry factors compute करें।</strong> हर commonly-slit width और हर commonly-run जumbo length के लिए dimensional ratios से directly Width Eqv और Length Eqv compute करें।</li>
+<li><strong>Week 2 — Master factor table बनाएँ।</strong> हर material code (या code+width+length combination) के लिए एक row। पाँच factor columns + combined column। ये <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> के Equivalent Conversion Cost calculator के लिए authoritative input table बन जाता है।</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">ये blog metalliser financial-controls series का एक हिस्सा है:</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent (इस blog के factors use करता है)</li>
+<li><strong>ये blog (#29):</strong> किसी भी Material के लिए Equivalent Factor कैसे Calculate करें (आप यहाँ हैं)</li>
+<li><strong>Blog #30 (आगे आ रहा है):</strong> Metalliser से Rolls per Day कैसे Calculate करें — productivity engine जो इस blog के rolls/day inputs feed करता है</li>
+</ul>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> पाँच equivalence factors difficult vs easy product mix के लिए level playing field बनाते हैं। तीन universal productivity formula <strong>(Baseline rolls/day ÷ This material's rolls/day)</strong> से derive होते हैं — OD, Micron, और Material variations पर apply। दो direct geometric ratios हैं — <strong>Width Eqv = Target ÷ Actual</strong> और <strong>Length Eqv = Target ÷ Actual</strong>। Combined factor पाँचों को multiply करता है। Baselines: PET 12μm M2.2 3000mm 54,000m; BOPP 18μm M2.2 3000mm 36,000m; CPP 22μm M2.2 3000mm 24,000m। Methodology universal है — सिर्फ़ baseline shift होता है। Annually recalibrate करें या जब भी आपके plant पर machine retrofit, vendor change, या new product code हो। इस derivation framework के साथ, <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> का Equivalent Conversion Cost number borrowed number नहीं रहता, defensible plant-specific KPI बन जाता है।
+</div>
+
+<p style="margin-top:20px;"><strong>📅 Series में next आ रहा है:</strong> <em>"Blog #30 — Metalliser से Rolls per Day कैसे Calculate करें"</em>। Seven-input productivity formula जो इस blog के हर rolls/day number को power करता है। अगर अभी तक अपने plant के materials के लिए measured rolls/day नहीं हैं, वो blog cycle-time data से compute करने का formula देगी — setup, vacuum-heating, line speed, jumbo length, vent, boat-change overhead।</p>
+
+</div>
+
+<script>
+(function() {
+  function fmt(n) {
+    if (!isFinite(n) || n <= 0) return '—×';
+    return n.toFixed(2) + '×';
+  }
+
+  // PET, BOPP, CPP baselines
+  var baselines = {
+    PET:  { width: 3000, length: 54000, micron: 12 },
+    BOPP: { width: 3000, length: 36000, micron: 18 },
+    CPP:  { width: 3000, length: 24000, micron: 22 }
+  };
+
+  function calc(suffix) {
+    var film = document.getElementById('filmType-' + suffix).value;
+    var base = baselines[film];
+    var rollsBase = parseFloat(document.getElementById('rollsBase-' + suffix).value) || 0;
+    var rollsOD = parseFloat(document.getElementById('rollsOD-' + suffix).value) || 0;
+    var rollsMicron = parseFloat(document.getElementById('rollsMicron-' + suffix).value) || 0;
+    var rollsMat = parseFloat(document.getElementById('rollsMat-' + suffix).value) || 0;
+    var matName = document.getElementById('matName-' + suffix).value || 'this material';
+    var actualWidth = parseFloat(document.getElementById('actualWidth-' + suffix).value) || 0;
+    var actualLength = parseFloat(document.getElementById('actualLength-' + suffix).value) || 0;
+
+    var odEqv = (rollsBase > 0 && rollsOD > 0) ? (rollsBase / rollsOD) : 0;
+    var micronEqv = (rollsBase > 0 && rollsMicron > 0) ? (rollsBase / rollsMicron) : 0;
+    var matEqv = (rollsBase > 0 && rollsMat > 0) ? (rollsBase / rollsMat) : 0;
+    var widthEqv = (actualWidth > 0) ? (base.width / actualWidth) : 0;
+    var lengthEqv = (actualLength > 0) ? (base.length / actualLength) : 0;
+
+    var combined = 0;
+    var anyMissing = false;
+    [odEqv, micronEqv, matEqv, widthEqv, lengthEqv].forEach(function(f) {
+      if (f <= 0) anyMissing = true;
+    });
+
+    if (!anyMissing) {
+      combined = odEqv * micronEqv * matEqv * widthEqv * lengthEqv;
+    }
+
+    document.getElementById('odEqv-' + suffix).textContent = fmt(odEqv);
+    document.getElementById('micronEqv-' + suffix).textContent = fmt(micronEqv);
+    document.getElementById('matEqv-' + suffix).textContent = fmt(matEqv);
+    document.getElementById('widthEqv-' + suffix).textContent = fmt(widthEqv);
+    document.getElementById('lengthEqv-' + suffix).textContent = fmt(lengthEqv);
+    document.getElementById('combinedEqv-' + suffix).textContent = fmt(combined);
+
+    var interp = document.getElementById('interpretation-' + suffix);
+    if (combined > 0) {
+      if (suffix === 'en') {
+        interp.textContent = '1 MT of ' + matName + ' counts as ' + combined.toFixed(2) + ' MT of ' + film + ' baseline-equivalent production for conversion cost purposes.';
+      } else {
+        interp.textContent = '1 MT ' + matName + ' = ' + combined.toFixed(2) + ' MT ' + film + ' baseline-equivalent production (conversion cost के लिए)।';
+      }
+    } else {
+      if (suffix === 'en') {
+        interp.textContent = 'Fill all 6 inputs above to see the combined factor.';
+      } else {
+        interp.textContent = 'Combined factor देखने के लिए ऊपर सभी 6 inputs भरें।';
+      }
+    }
+  }
+
+  function bind(suffix) {
+    var ids = ['filmType','rollsBase','rollsOD','rollsMicron','rollsMat','matName','actualWidth','actualLength'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() { calc(suffix); });
+        el.addEventListener('change', function() { calc(suffix); });
+      }
+    });
+    calc(suffix);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>

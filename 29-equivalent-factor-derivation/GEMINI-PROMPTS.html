@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 29 (Equivalent Factor Derivation)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', sans-serif;
+    background: #FAF9F6;
+    color: #1A2744;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 18px 60px;
+  }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; line-height: 1.25; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  h3 { color: #1A2744; font-size: 1.05em; margin: 18px 0 8px 0; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; vertical-align: top; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+
+  .prompt-card {
+    background: #ffffff;
+    border: 2px solid #1A2744;
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+    margin: 22px 0;
+    box-shadow: 0 2px 6px rgba(26,39,68,0.06);
+  }
+  .prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2ddd4;
+  }
+  .prompt-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #1A2744;
+    margin: 0;
+  }
+  .prompt-meta {
+    font-size: 0.85em;
+    color: #5A5A5A;
+    margin: 4px 0 0 0;
+  }
+  .copy-btn {
+    background: #E85D26;
+    color: #ffffff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn:active { transform: translateY(1px); }
+  .copy-btn.copied { background: #0D8C7E; }
+
+  .prompt-body {
+    background: #FAF9F6;
+    border-left: 3px solid #E85D26;
+    padding: 12px 14px;
+    margin: 0;
+    border-radius: 4px;
+    font-size: 0.92em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #1A2744;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    line-height: 1.55;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+
+  .planb {
+    background: #fff7e0;
+    border-left: 3px solid #E85D26;
+    padding: 10px 14px;
+    margin: 12px 0 0 0;
+    font-size: 0.88em;
+    border-radius: 4px;
+  }
+
+  .checklist {
+    background: rgba(13,140,126,0.08);
+    border-left: 3px solid #0D8C7E;
+    padding: 12px 14px;
+    margin: 12px 0 0 0;
+    font-size: 0.9em;
+    border-radius: 4px;
+  }
+
+  .meta-band {
+    background: #1A2744;
+    color: #FAF9F6;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 0.92em;
+  }
+  .meta-band strong { color: #E85D26; }
+
+  code {
+    background: #f4ede2;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #1A2744;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #0D8C7E;
+    color: #ffffff;
+    padding: 12px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.35em; }
+    h2 { font-size: 1.1em; }
+    .prompt-header { flex-direction: column; align-items: stretch; }
+    .copy-btn { width: 100%; padding: 11px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 29</h1>
+<p class="meta"><em>How to Calculate the Equivalent Factor for Any Material</em> — derivation playbook<br>5 images required: 1 cover + 2 bilingual derivation flowchart + 2 bilingual worked example</p>
+
+<div class="meta-band">
+<strong>How to use this page</strong><br>
+For each prompt below, tap <strong>📋 Copy Prompt</strong>. Open Google Gemini (or AI Studio with image generation enabled), <strong>attach <code>logo.png</code></strong> to the new turn, paste the prompt, and generate. Save the output with the <strong>exact filename</strong> shown. Place all images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference Table</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Hero cover — derivation playbook</td></tr>
+<tr><td>2A</td><td><code>derivation-flow-en.png</code></td><td>16:9</td><td>5-factor derivation flowchart, English</td></tr>
+<tr><td>2B</td><td><code>derivation-flow-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3A</td><td><code>worked-example-en.png</code></td><td>16:9</td><td>11.4× combined worked example, English</td></tr>
+<tr><td>3B</td><td><code>worked-example-hi.png</code></td><td>16:9</td><td>Same as 3A in Hindi</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards (non-negotiable)</h2>
+<table>
+<thead><tr><th>Color</th><th>Hex</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>Navy</td><td><code>#1A2744</code></td><td>Headings, dark panels, primary text</td></tr>
+<tr><td>Orange</td><td><code>#E85D26</code></td><td>Accents, hero numbers, callouts</td></tr>
+<tr><td>Teal</td><td><code>#0D8C7E</code></td><td>Secondary, productivity factors</td></tr>
+<tr><td>Cream</td><td><code>#FAF9F6</code></td><td>Backgrounds</td></tr>
+<tr><td>Grey</td><td><code>#5A5A5A</code></td><td>Subtitles, captions</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.92em;"><strong>Rules:</strong> No other colors. No photorealistic identifiable faces (back-view, hands-only, silhouette OK). No decorative clipart. WSJ / Bloomberg / HBR editorial style only.<br>
+<strong>Fonts:</strong> Inter, Söhne, Helvetica Neue (Latin); Hind, Mukta (Devanagari). Hero formulas in Bebas Neue, Anton, or Oswald (heavy condensed).</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<p><strong>Filename:</strong> <code>cover.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hero image that signals "this is the derivation reference manual." Should feel like a textbook chapter cover — authoritative, clean, technical.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image Prompt</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "How to Calculate the Equivalent Factor for Any Material." This is a reference / derivation guide — the visual must convey "formulas, methodology, defensible math" — not "case study" or "drama."
+
+Composition — split scene 50/50:
+- LEFT 50%: a clean engineering-desk scene shot from above. Visible: a notebook with handwritten formulas (visible as legible: "R_base ÷ R_M2.5 = 1.25×"), a calculator, a printed material-code table, a coffee mug, a pencil. Soft natural daylight from the left. Industrial documentary photography style, shallow depth of field, NOT staged-perfect — slight notebook wear, real engineering desk.
+- RIGHT 50%: a clean dark navy #1A2744 panel with subtle paper-grain texture.
+
+Text overlay on the navy panel:
+- Top eyebrow strip in orange #E85D26, all caps, small letterspacing: vksTech.com / DERIVATION PLAYBOOK
+- Main title in white Inter Bold or Söhne Bold (3 lines, large): How to Calculate the Equivalent Factor for Any Material
+- Subtitle in lighter grey #FAF9F6 italic: PET, BOPP, CPP — one method, every film, defensible from first principles
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO FORMULA — display the core formula prominently, in Bebas Neue or similar heavy condensed font, large (~80 pt):
+  - "Productivity Eqv = R_baseline ÷ R_material" (in white)
+  - Below it, smaller orange caps: THE UNIVERSAL FORMULA
+  - Below that, slightly smaller white text: × Width Eqv × Length Eqv
+- Bottom strip on the navy panel: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- In the bottom-right corner, place the attached VKS Tech logo at ~110×110 px with a thin white round backplate
+
+Mood: technical, authoritative, reference-grade. Think MIT Technology Review meets a plant-engineering textbook. NOT cinematic, NOT motivational, NOT cluttered. The reader should feel: "this is the page I tear out and pin to my office wall."
+
+Strict colors: navy #1A2744, orange #E85D26, cream #FAF9F6, white. No red except orange. No green, no yellow.</div>
+
+<div class="planb"><strong>Plan B (if logo not embedded):</strong> Generate without the logo, then composite manually in Canva, Photopea, or GIMP — place <code>logo.png</code> at bottom-right at ~110×110 px on a white round backplate.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Derivation Flow Diagram (English)</h2>
+<p><strong>Filename:</strong> <code>derivation-flow-en.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Show the entire 5-factor derivation methodology as a single flowchart. <strong>Must be defensible at a corporate review meeting</strong> — the kind of visual a plant manager pulls up to show their CFO "here is how we derive every number."</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Derivation Flowchart</div>
+<div class="prompt-meta">Save as <code>derivation-flow-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial flowchart-infographic. NOT photorealistic. NOT 3D. Pure flat infographic with crisp typography. Inspired by Harvard Business Review / MIT Sloan Management Review methodology diagrams.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture (5% opacity max).
+
+Header zone (top 12%):
+- Eyebrow strip in orange #E85D26: small caps, letterspaced: DERIVATION METHODOLOGY
+- Title (navy #1A2744, large bold sans-serif): How to Calculate the Equivalent Factor — Step by Step
+- Subtitle (grey #5A5A5A, regular weight): Three productivity factors derived as rolls/day ratios. Two geometric factors derived as direct dimensional ratios. Multiply all five.
+
+Main visual zone (middle 75%) — three horizontal lanes:
+
+LANE 1 (top, takes 40% of vertical space) — PRODUCTIVITY-DERIVED FACTORS (orange theme):
+Title above the lane, in orange #E85D26 bold caps: PRODUCTIVITY-DERIVED — measure rolls/day
+Three boxes side by side, each a rounded rectangle with thin navy border:
+
+- BOX 1 — OD Equivalence
+  - Header tag (small, navy): FACTOR 1
+  - Title (navy bold): OD Equivalence
+  - Formula (orange #E85D26, large, in monospaced or Bebas font): R_base ÷ R_M2.5
+  - Worked example below (small grey): If R_base = 12 rolls/day at M2.2, R_M2.5 = 9.6 rolls/day → 1.25×
+
+- BOX 2 — Micron Equivalence
+  - Header tag: FACTOR 2
+  - Title: Micron Equivalence
+  - Formula: R_base ÷ R_micron
+  - Worked example: If R_base = 12 rolls/day at 12μm, R_8μm = 6.4 rolls/day → 1.875×
+
+- BOX 3 — Material Equivalence
+  - Header tag: FACTOR 3
+  - Title: Material Equivalence
+  - Formula: R_base ÷ R_material
+  - Worked example: If R_base = 12 rolls/day for standard, R_AlOx = 4 rolls/day → 3.00×
+
+LANE 2 (middle, takes 30% of vertical space) — GEOMETRY-DERIVED FACTORS (teal theme):
+Title above the lane, in teal #0D8C7E bold caps: GEOMETRY-DERIVED — direct dimensional ratios
+Two boxes side by side, slightly larger than Lane 1 boxes:
+
+- BOX 4 — Width Equivalence
+  - Header tag (small, navy): FACTOR 4
+  - Title (navy bold): Width Equivalence
+  - Formula (teal #0D8C7E, large): Target Width ÷ Actual Width
+  - Worked example: 3000mm ÷ 1500mm = 2.00×
+
+- BOX 5 — Length Equivalence
+  - Header tag: FACTOR 5
+  - Title: Length Equivalence
+  - Formula: Target Length ÷ Actual Length
+  - Worked example: 54,000m ÷ 27,000m = 2.00×
+
+LANE 3 (bottom, takes 20% of vertical space) — COMBINED FACTOR:
+Single wide rounded rectangle, navy #1A2744 background, white text:
+- Header tag in orange (small caps): COMBINED EQUIVALENCE FACTOR
+- Formula (large, white, bold, Bebas Neue): OD × Micron × Material × Width × Length
+- Below formula (smaller, orange italic): Worked example combining all five (8μm RC PET at OD M2.5, 2000mm × 36,000m): 1.25 × 1.875 × 2.17 × 1.50 × 1.50 = ~11.4×
+
+Connecting visual: between Lane 1+2 and Lane 3, draw a thin orange #E85D26 arrow flowing downward from the 5 boxes into the Combined factor box, signalling "all five multiply together."
+
+Bottom callout strip (full-width, 8% of height):
+Cream background with thin orange top border. Two-column split:
+- LEFT (orange #E85D26 text, bold): ⚡ Cross-film note:
+- RIGHT (navy text): Same methodology applies to BOPP (18μm baseline) and CPP (22μm baseline) — only the baseline shifts.
+
+Bottom-right corner of the entire image: place the attached VKS Tech logo at ~80×80 px on a small white circle/rounded-square backplate.
+
+Bottom-left corner: small grey footer text: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout for body text. Formulas in Bebas Neue, Oswald, or Anton (heavy condensed). Box headers semibold, formulas bold. Subtitle in regular weight.
+
+What to AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders, gradients beyond very subtle box shadows, drop shadows that look heavy.</div>
+
+<div class="planb"><strong>Plan B (if logo missing):</strong> Composite manually after generation. Place at bottom-right at ~80×80 px.</div>
+
+<div class="checklist"><strong>Quality check before accepting:</strong>
+<ul>
+<li>All 5 factor boxes present with correct formulas</li>
+<li>Worked examples arithmetically correct (1.25×, 1.875×, 3.00×, 2.00×, 2.00×)</li>
+<li>Combined factor box shows the multiplication = ~11.4×</li>
+<li>Cross-film note at bottom mentions BOPP and CPP</li>
+<li>Logo present at bottom-right</li>
+<li>Lane 1 (Productivity) is in <strong>orange theme</strong>, Lane 2 (Geometry) is in <strong>teal theme</strong>, Lane 3 (Combined) is in <strong>navy</strong></li>
+</ul>
+</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Derivation Flow Diagram (Hindi)</h2>
+<p><strong>Filename:</strong> <code>derivation-flow-hi.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hindi mirror of Image 2A. Same layout, formulas stay in English (universal), descriptive labels in Hindi.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Derivation Flowchart</div>
+<div class="prompt-meta">Save as <code>derivation-flow-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial flowchart-infographic with EXACTLY the same layout, colour palette, and structure as the English Derivation Flow infographic. All formulas (R_base ÷ R_M2.5, OD × Micron × Material × Width × Length, etc.) stay in English/symbolic notation because formulas are universal. Numbers stay in English numerals. Descriptive labels and worked-example sentences translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow strip (orange #E85D26, English): DERIVATION METHODOLOGY
+- Title (Hindi, navy bold, large): Equivalent Factor कैसे Calculate करें — Step by Step
+- Subtitle (Hindi, grey): तीन productivity factors rolls/day ratios से derive। दो geometric factors direct dimensional ratios से derive। पाँचों को multiply करें।
+
+Lane 1 — PRODUCTIVITY-DERIVED (orange theme):
+Title above lane (orange caps, Hindi+English mix): PRODUCTIVITY-DERIVED — rolls/day measure करें
+
+Box 1 — OD Equivalence:
+- Title (navy): OD Equivalence
+- Formula: R_base ÷ R_M2.5 (English)
+- Worked example (Hindi mix): अगर R_base = 12 rolls/day at M2.2, R_M2.5 = 9.6 rolls/day → 1.25×
+
+Box 2 — Micron Equivalence:
+- Formula: R_base ÷ R_micron
+- Worked example: अगर R_base = 12 rolls/day at 12μm, R_8μm = 6.4 rolls/day → 1.875×
+
+Box 3 — Material Equivalence:
+- Formula: R_base ÷ R_material
+- Worked example: अगर R_base = 12 rolls/day for standard, R_AlOx = 4 rolls/day → 3.00×
+
+Lane 2 — GEOMETRY-DERIVED (teal theme):
+Title above lane (teal caps, Hindi+English mix): GEOMETRY-DERIVED — direct dimensional ratios
+
+Box 4 — Width Equivalence:
+- Formula: Target Width ÷ Actual Width
+- Worked example: 3000mm ÷ 1500mm = 2.00×
+
+Box 5 — Length Equivalence:
+- Formula: Target Length ÷ Actual Length
+- Worked example: 54,000m ÷ 27,000m = 2.00×
+
+Lane 3 — COMBINED FACTOR (navy box):
+- Header tag (orange caps): COMBINED EQUIVALENCE FACTOR
+- Formula (large white): OD × Micron × Material × Width × Length
+- Below formula (orange italic, Hindi): पाँचों को combine करते हुए worked example (8μm RC PET at OD M2.5, 2000mm × 36,000m): 1.25 × 1.875 × 2.17 × 1.50 × 1.50 = ~11.4×
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Cross-film note:
+- RIGHT (navy text, Hindi): Same methodology BOPP (18μm baseline) और CPP (22μm baseline) पर apply होती है — सिर्फ़ baseline shift होता है।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A. Same colour palette, same fonts (Inter for English/numbers/formulas, Hind/Mukta for Hindi).</div>
+
+<div class="planb"><strong>Plan B for Hindi rendering issues:</strong> Most image-gen models render Devanagari incorrectly. Recommended workflow: Generate the EN version (Image 2A) first and confirm it's good. Use that as a base in Photopea/Canva. Replace the title, subtitle, lane titles, worked-example descriptors, and bottom callout with Hindi rendered through a proper Devanagari source (Google Fonts Hind/Mukta, or simply type into Photopea with the right font installed). This produces cleaner Hindi text than asking the model to render it directly.</div>
+</div>
+
+<!-- IMAGE 3A -->
+<h2>Image 3A — Combined Worked Example (English)</h2>
+<p><strong>Filename:</strong> <code>worked-example-en.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Show the 5 equivalence factors <em>applied to one real product</em>, stepping through the multiplication, and landing on the headline answer of <strong>11.4×</strong>. The flowchart (Image 2A) shows the <em>method</em>; this image shows the <em>answer</em>. The most defensible visual in a CFO conversation.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Combined Worked Example</div>
+<div class="prompt-meta">Save as <code>worked-example-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial worked-example infographic. NOT photorealistic. NOT 3D. Pure flat infographic with crisp typography. Harvard Business Review / Bloomberg Markets educational poster aesthetic. The visual must read like a textbook worked example — calm, confident, mathematically self-consistent.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture (5% opacity max).
+
+Header zone (top 12%):
+- Eyebrow strip in orange #E85D26, small caps, letterspaced: WORKED EXAMPLE — ALL FIVE FACTORS APPLIED
+- Title (navy #1A2744, large bold sans-serif): One Real Product. Five Factors. One Answer.
+- Subtitle (grey #5A5A5A, regular weight): Walking through 1 MT of an 8μm Reverse-Coat PET at OD M2.5, slit at 2000mm × 36,000m. Same five-factor method, real plant numbers.
+
+PRODUCT CARD (~12% of vertical space, full-width strip below the header):
+A wide rounded rectangle, white background, thin navy #1A2744 border. Inside, a horizontal strip showing the product specification as 4 inline tag-pills:
+- Pill 1 (orange tinted): Film: 8 micron PET
+- Pill 2 (orange tinted): OD: M2.5
+- Pill 3 (teal tinted): Width: 2000mm
+- Pill 4 (teal tinted): Length: 36,000m
+
+Above the pills, in a small navy caps tag: PRODUCT SPEC (left-aligned).
+To the right of the pills, in a small italic grey: Material code: PET_8_M2.5_RC
+
+MAIN VISUAL ZONE (middle 55%) — five factor bubbles in a horizontal multiplication flow:
+
+Five circular or rounded-square "bubbles" arranged left-to-right, with bold orange × symbols between each. Each bubble is ~150 px wide, with consistent visual weight.
+
+- Bubble 1 (orange-tinted) — OD Eqv
+  - Top label (small navy): FACTOR 1
+  - Big number (Bebas Neue or Anton, very large, orange #E85D26): 1.25×
+  - Below number (small grey caps): OD EQV
+  - Tiny tagline below (italic, smaller): (M2.2 → M2.5)
+
+- × separator in bold orange
+
+- Bubble 2 (orange-tinted) — Micron Eqv
+  - Top label: FACTOR 2
+  - Big number: 1.875×
+  - Below: MICRON EQV
+  - Tagline: (12μm → 8μm)
+
+- × separator
+
+- Bubble 3 (orange-tinted) — Material Eqv
+  - Top label: FACTOR 3
+  - Big number: 2.17×
+  - Below: MATERIAL EQV
+  - Tagline: (Standard → RC)
+
+- × separator
+
+- Bubble 4 (teal-tinted) — Width Eqv
+  - Top label: FACTOR 4
+  - Big number (teal #0D8C7E): 1.50×
+  - Below: WIDTH EQV
+  - Tagline: (3000 ÷ 2000)
+
+- × separator
+
+- Bubble 5 (teal-tinted) — Length Eqv
+  - Top label: FACTOR 5
+  - Big number (teal): 1.50×
+  - Below: LENGTH EQV
+  - Tagline: (54,000 ÷ 36,000)
+
+Below the row of bubbles, draw a thin orange #E85D26 arrow flowing downward into the result panel.
+
+RESULT PANEL (~18% of vertical space, full-width navy #1A2744 block):
+- Left side (60% of width):
+  - Small orange caps tag: COMBINED EQUIVALENCE FACTOR
+  - Below it, a single huge number in Bebas Neue or Anton (white, ~140 pt): 11.4×
+  - Below the number, a single line in white italic: 1 MT of this product = 11.4 MT of baseline-equivalent production
+- Right side (40% of width):
+  - Small orange caps tag: USE THIS NUMBER IN
+  - Below: a clean white-bordered card titled Equivalent Conversion Cost (Blog #28)
+  - One short line below the card: "Plug 11.4× into the Conversion Cost calculator to convert this product's true contribution to the plant's monthly Equivalent ₹/kg."
+
+Bottom callout strip (full-width, 8% of height):
+Cream background, thin orange top border. Two-column split:
+- LEFT (orange #E85D26 text, bold): ⚡ Why this matters:
+- RIGHT (navy text): Without the 11.4× factor, 1 MT of this product unfairly drags your Actual ₹/kg up. With it, your Equivalent ₹/kg correctly recognises the plant's real work.
+
+Bottom-right corner of the entire image: place the attached VKS Tech logo at ~80×80 px on a small white circle/rounded-square backplate.
+
+Bottom-left corner: small grey footer text: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout. Big factor numbers in Bebas Neue, Anton, or Oswald (heavy condensed). The 11.4× hero number must be the largest typography on the entire image — visually dominant, the eye should land there last after walking the multiplication chain.
+
+What to AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders, gradients beyond very subtle box shadows, drop shadows that look heavy, rainbow colours.</div>
+
+<div class="planb"><strong>Plan B:</strong> If logo missing, composite manually after generation. If the 5-bubble horizontal layout is too cramped on the canvas, fall back to a 5-cell horizontal row with rectangular boxes instead of circular bubbles — same content, simpler shapes.</div>
+
+<div class="checklist"><strong>Quality check before accepting:</strong>
+<ul>
+<li>All 5 factor bubbles present in correct order (1.25 → 1.875 → 2.17 → 1.50 → 1.50)</li>
+<li>Bubbles 1-3 are <strong>orange-themed</strong> (productivity), bubbles 4-5 are <strong>teal-themed</strong> (geometry)</li>
+<li>× symbols visible between each bubble</li>
+<li>Result panel shows <strong>11.4×</strong> as the hero number</li>
+<li>Interpretation line: "1 MT of this product = 11.4 MT of baseline-equivalent production"</li>
+<li>Cross-reference to Blog #28 visible</li>
+<li>Material code shown as <code>PET_8_M2.5_RC</code> (NOT old <code>G08...</code> format)</li>
+<li>Logo at bottom-right</li>
+<li>11.4× is visually the largest type element in the image</li>
+</ul>
+</div>
+</div>
+
+<!-- IMAGE 3B -->
+<h2>Image 3B — Combined Worked Example (Hindi)</h2>
+<p><strong>Filename:</strong> <code>worked-example-hi.png</code> &nbsp;•&nbsp; <strong>Dimensions:</strong> 1600×900 px (16:9)<br>
+<strong>Goal:</strong> Hindi mirror of Image 3A. Same layout, factor numbers and material code stay in English (universal), descriptive labels in Hindi.</p>
+
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Combined Worked Example</div>
+<div class="prompt-meta">Save as <code>worked-example-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial worked-example infographic with EXACTLY the same layout, colour palette, bubble structure, and result panel as the English Combined Worked Example infographic. All factor numbers (1.25×, 1.875×, 2.17×, 1.50×, 1.50×, 11.4×), the material code (PET_8_M2.5_RC), the 4 product spec values (8 micron, M2.5, 2000mm, 36,000m), and the multiplication symbols stay in English/symbolic notation. Only the title, subtitle, factor labels, taglines, result interpretation, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow strip (orange #E85D26, English): WORKED EXAMPLE — ALL FIVE FACTORS APPLIED
+- Title (Hindi, navy bold, large): एक Real Product. पाँच Factors. एक Answer.
+- Subtitle (Hindi, grey): एक 8μm Reverse-Coat PET, OD M2.5, 2000mm × 36,000m जumbo के 1 MT पर walk through। वही पाँच-factor method, real plant numbers।
+
+Product card:
+- Tag (Hindi navy caps): PRODUCT SPEC
+- 4 pills: Film: 8 micron PET | OD: M2.5 | Width: 2000mm | Length: 36,000m (English values)
+- To right (Hindi italic grey): Material code: PET_8_M2.5_RC
+
+Five factor bubbles (numbers and × symbols stay English):
+
+Bubble 1 (orange) — OD Eqv:
+- Tag: FACTOR 1
+- Big number: 1.25×
+- Label below: OD EQV
+- Tagline (Hindi): (M2.2 → M2.5)
+
+Bubble 2 (orange) — Micron Eqv:
+- Tag: FACTOR 2
+- Big number: 1.875×
+- Label: MICRON EQV
+- Tagline: (12μm → 8μm)
+
+Bubble 3 (orange) — Material Eqv:
+- Tag: FACTOR 3
+- Big number: 2.17×
+- Label: MATERIAL EQV
+- Tagline (Hindi): (Standard → RC)
+
+Bubble 4 (teal) — Width Eqv:
+- Tag: FACTOR 4
+- Big number (teal): 1.50×
+- Label: WIDTH EQV
+- Tagline: (3000 ÷ 2000)
+
+Bubble 5 (teal) — Length Eqv:
+- Tag: FACTOR 5
+- Big number (teal): 1.50×
+- Label: LENGTH EQV
+- Tagline: (54,000 ÷ 36,000)
+
+Result panel (navy #1A2744):
+- Left side:
+  - Tag (orange caps): COMBINED EQUIVALENCE FACTOR
+  - Hero number (white, very large): 11.4×
+  - Below (Hindi italic, white): इस product का 1 MT = 11.4 MT baseline-equivalent production
+- Right side:
+  - Tag (orange caps): USE THIS NUMBER IN
+  - Card title: Equivalent Conversion Cost (Blog #28)
+  - Below card (Hindi): "11.4× को Conversion Cost calculator में plug करें और इस product के plant के monthly Equivalent ₹/kg में true contribution देखें।"
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ ये क्यों matter करता है:
+- RIGHT (navy text, Hindi): 11.4× factor के बिना, इस product का 1 MT आपकी Actual ₹/kg को unfairly ऊपर खींचता है। इसके साथ, आपकी Equivalent ₹/kg plant के real काम को correctly recognise करती है।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 3A. Same colour palette, same fonts (Inter for English/numbers, Hind/Mukta for Hindi).</div>
+
+<div class="planb"><strong>Plan B for Hindi rendering issues:</strong> Use the same workflow as Image 2B's Plan B: generate the EN version (Image 3A) first, then in Photopea/Canva replace the title, subtitle, taglines, result interpretation, and bottom callout with proper Devanagari text using a Hind or Mukta font. The five factor numbers, the 11.4× result, and the product spec pills all stay in English in both versions, so the work to "translate" is minimal — mostly just the surrounding prose.</div>
+</div>
+
+<h2>Review Checklist — 8-Point Check Before Publishing</h2>
+<ol>
+<li><strong>Brand colour discipline</strong> — only Navy / Orange / Teal / Cream / white / grey. No blue, no green outside teal, no yellow, no red other than the orange.</li>
+<li><strong>Typography quality</strong> — clean sans-serif (Inter / Söhne / Helvetica), formulas in heavy condensed font (Bebas / Oswald / Anton).</li>
+<li><strong>Formula accuracy (HARD)</strong> — every formula must be syntactically correct: <code>R_base ÷ R_OD</code>, <code>Target Width ÷ Actual Width</code>, etc. Worked numbers: 1.25× / 1.875× / 3.00× / 2.00× / 2.00× / ~11.4×.</li>
+<li><strong>Material name discipline</strong> — must say <strong>AlOx</strong> (not "Alubond"), <strong>Reverse/Release Coat</strong> or RC, material codes in <code>PET_12_M2.2</code> format.</li>
+<li><strong>Productivity-vs-Geometry color discipline</strong> — Lane 1 (OD/Micron/Material) <strong>orange-themed</strong>, Lane 2 (Width/Length) <strong>teal-themed</strong>, Lane 3 (Combined) <strong>navy</strong>.</li>
+<li><strong>Logo placement</strong> — bottom-right, ~80–110 px, on white backplate.</li>
+<li><strong>Information density vs scannability</strong> — 5 boxes readable in 5 seconds; Combined formula is the visual punch line.</li>
+<li><strong>No AI-tells</strong> — no distorted hands, garbled small text, AI watermarks, or unnatural plastic surfaces.</li>
+</ol>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong>Formulas come out garbled / mathematically wrong:</strong> Always overlay correct formulas in an image editor afterward. Treat generated formulas as placeholders, not truth.</li>
+<li><strong>× symbol renders as box:</strong> Add to prompt: <em>Use Unicode multiplication symbol × (U+00D7). If unable to render, use 'x' as substitute.</em></li>
+<li><strong>Numbers come out wrong:</strong> Always overlay correct numbers in an image editor.</li>
+<li><strong>Hindi renders as gibberish:</strong> Use Plan B — generate EN first, text-replace in Photopea/Canva using a real Devanagari font.</li>
+<li><strong>Decorative clutter (sparkles, hearts, confetti):</strong> Add: <em>STRICTLY no decorative elements, no clipart, no flourishes. WSJ / Bloomberg / HBR editorial style ONLY.</em></li>
+<li><strong>Logo gets ignored:</strong> Always have Plan B ready — composite manually.</li>
+</ul>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">29-equivalent-factor-derivation/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── derivation-flow-en.png         (Image 2A)
+├── derivation-flow-hi.png         (Image 2B)
+├── worked-example-en.png          (Image 3A)
+├── worked-example-hi.png          (Image 3B)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+
+  function copyText(text, btn) {
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() {
+        fallbackCopy(text, btn);
+      });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      } else {
+        showToast('✗ Copy failed — please select manually');
+      }
+    } catch (e) {
+      showToast('✗ Copy failed — please select manually');
+    }
+    document.body.removeChild(ta);
+  }
+
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = orig;
+    }, 1800);
+  }
+
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) {
+        copyText(target.textContent.trim(), btn);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
