@@ -283,6 +283,8 @@ section{position:relative;z-index:1;}
 .calc-card.open .calc-head{background:linear-gradient(135deg,rgba(232,93,38,.03),rgba(13,140,126,.03));border-bottom:1px solid var(--border);}
 .calc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 22px;}
 .calc-card.open .calc-body{max-height:500px;padding:18px 22px;}
+/* Tall calculator variant — for multi-section calcs like Met M/C Capacity */
+.calc-card.calc-tall.open .calc-body{max-height:1400px;}
 .calc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .calc-row.c1{grid-template-columns:1fr;}
 .calc-row.c3{grid-template-columns:1fr 1fr 1fr;}
@@ -751,7 +753,7 @@ body.sp-hidden::after{
     <div class="calc-grid">
 
       <!-- 1. FILM ROLL WEIGHT -->
-      <div class="calc-card reveal d1">
+      <div class="calc-card reveal d1" id="calc-roll-weight">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚖️</span><div class="calc-info"><h3 data-i="c1_t">Film Roll Weight</h3><p>W = L × W/1000 × μm/10⁶ × ρ</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cw-type" onchange="calcWeight()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
@@ -761,7 +763,7 @@ body.sp-hidden::after{
       </div>
 
       <!-- 2. ROLL LENGTH FROM WEIGHT -->
-      <div class="calc-card reveal d2">
+      <div class="calc-card reveal d2" id="calc-roll-length">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📏</span><div class="calc-info"><h3 data-i="c2_t">Roll Length from Weight</h3><p>L = W / (W/1000 × μm/10⁶ × ρ)</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cl-type" onchange="calcLength()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
@@ -771,7 +773,7 @@ body.sp-hidden::after{
       </div>
 
       <!-- 3. ROLL OD -->
-      <div class="calc-card reveal d3">
+      <div class="calc-card reveal d3" id="calc-roll-od">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm/1000)/π + Core²)</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
@@ -780,7 +782,7 @@ body.sp-hidden::after{
       </div>
 
       <!-- 4. GSM ↔ MICRON -->
-      <div class="calc-card reveal">
+      <div class="calc-card reveal" id="calc-gsm-micron">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚗️</span><div class="calc-info"><h3 data-i="c4_t">GSM ↔ Micron Conversion</h3><p>GSM = Micron × Density (g/cm³)</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cg-type" onchange="calcGSM()"><option value="1.38">PET — 1.38 g/cm³</option><option value="0.91">BOPP — 0.91 g/cm³</option><option value="0.90">CPP — 0.90 g/cm³</option><option value="0.92">LDPE — 0.92 g/cm³</option></select></div></div>
@@ -790,7 +792,7 @@ body.sp-hidden::after{
       </div>
 
       <!-- 5. YIELD % -->
-      <div class="calc-card reveal">
+      <div class="calc-card reveal" id="calc-yield">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📊</span><div class="calc-info"><h3 data-i="c5_t">Production Yield %</h3><p>Yield = (Output ÷ Input) × 100</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row"><div class="calc-field"><label>Input Weight (kg)</label><input type="number" id="cy-in" placeholder="500" oninput="calcYield()"></div><div class="calc-field"><label>Output Weight (kg)</label><input type="number" id="cy-out" placeholder="472" oninput="calcYield()"></div></div>
@@ -799,7 +801,7 @@ body.sp-hidden::after{
       </div>
 
       <!-- 6. MACHINE UTILISATION -->
-      <div class="calc-card reveal">
+      <div class="calc-card reveal" id="calc-machine-utilisation">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c6_t">Machine Utilisation %</h3><p>Running ÷ Shift × 100</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c3"><div class="calc-field"><label>Shift (min)</label><input type="number" id="cm-shift" value="720" oninput="calcUtil()"></div><div class="calc-field"><label>Setup (min)</label><input type="number" id="cm-setup" placeholder="45" oninput="calcUtil()"></div><div class="calc-field"><label>Downtime (min)</label><input type="number" id="cm-dt" placeholder="30" oninput="calcUtil()"></div></div>
@@ -808,11 +810,42 @@ body.sp-hidden::after{
       </div>
 
       <!-- 7. COST PER SQM -->
-      <div class="calc-card reveal">
+      <div class="calc-card reveal" id="calc-cost-sqm">
         <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">💰</span><div class="calc-info"><h3 data-i="c7_t">Cost per Square Meter</h3><p>₹/sqm = ₹/kg × GSM ÷ 1000</p></div><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option></select></div></div>
           <div class="calc-result"><div><div class="val" id="cs-res">—</div><div class="sub" id="cs-sub"></div></div><div class="unit">₹/sqm</div></div>
+        </div>
+      </div>
+
+      <!-- 8. MET M/C CAPACITY (3-step engine — see Blog 30) -->
+      <div class="calc-card reveal calc-tall" id="calc-met-capacity">
+        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚙️</span><div class="calc-info"><h3>Met M/C Capacity</h3><p>3-Step: Cycle → Rolls/day → MT/day</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
+            <strong>Step 1:</strong> Rolls/day = (1440 − Source cleaning) ÷ Cycle time<br>
+            <strong>Step 2:</strong> Roll wt = W × L × μm × ρ × 0.000001<br>
+            <strong>Step 3:</strong> Capacity = Rolls/day × Roll wt ÷ 1000
+          </div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Film Parameters</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Film Type</label><select id="mc-film" onchange="calcMetCapacity()"><option value="1.38">PET — 1.38</option><option value="0.91">BOPP — 0.91</option><option value="0.90">CPP — 0.90</option></select></div>
+            <div class="calc-field"><label>Width (mm)</label><input type="number" id="mc-width" value="3000" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Micron (μm)</label><input type="number" id="mc-micron" placeholder="12" oninput="calcMetCapacity()"></div>
+          </div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase;">Cycle Inputs (per Roll)</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Setup (min)</label><input type="number" id="mc-setup" placeholder="20" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Vacuum+Heat (min)</label><input type="number" id="mc-vacheat" placeholder="20" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Vent (min)</label><input type="number" id="mc-vent" placeholder="10" oninput="calcMetCapacity()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Line Speed (m/min)</label><input type="number" id="mc-speed" placeholder="800" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Jumbo Length (m)</label><input type="number" id="mc-jumbo" placeholder="54000" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Boat Change (min)</label><input type="number" id="mc-boatchange" placeholder="10" oninput="calcMetCapacity()"></div>
+          </div>
+          <div class="calc-row"><div class="calc-field"><label>Boat-Set Life (m)</label><input type="number" id="mc-boatset" placeholder="600000" oninput="calcMetCapacity()"></div><div class="calc-field"><label>Source Cleaning/day (min)</label><input type="number" id="mc-cleaning" value="20" oninput="calcMetCapacity()"></div></div>
+          <div class="calc-result"><div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub"></div></div><div class="unit">MT/day</div></div>
         </div>
       </div>
 
@@ -1365,6 +1398,42 @@ function calcSqm(){
   document.getElementById('cs-sub').textContent='₹'+rate+'/kg × '+gsm.toFixed(2)+' GSM ÷ 1000';
 }
 
+/* Met M/C Capacity — 3-step engine (matches Blog 30 methodology).
+   Step 1: Rolls/day from 7 cycle inputs + source cleaning overhead
+   Step 2: Roll weight from film geometry × density
+   Step 3: Capacity = Rolls/day × Roll weight ÷ 1000 */
+function calcMetCapacity(){
+  if(!_calcCheck(['mc-width','mc-micron','mc-setup','mc-vacheat','mc-vent','mc-speed','mc-jumbo','mc-boatchange','mc-boatset','mc-cleaning'],'mc-res','mc-sub')) return;
+  var density=parseFloat(document.getElementById('mc-film').value);
+  var width=parseFloat(document.getElementById('mc-width').value);
+  var micron=parseFloat(document.getElementById('mc-micron').value);
+  var setup=parseFloat(document.getElementById('mc-setup').value);
+  var vacheat=parseFloat(document.getElementById('mc-vacheat').value);
+  var vent=parseFloat(document.getElementById('mc-vent').value);
+  var speed=parseFloat(document.getElementById('mc-speed').value);
+  var jumbo=parseFloat(document.getElementById('mc-jumbo').value);
+  var boatchange=parseFloat(document.getElementById('mc-boatchange').value);
+  var boatset=parseFloat(document.getElementById('mc-boatset').value);
+  var cleaning=parseFloat(document.getElementById('mc-cleaning').value);
+  /* Step 1 — Rolls per day */
+  var runTime = jumbo / speed;
+  var boatOverhead = (jumbo / boatset) * boatchange;
+  var cycleTime = setup + vacheat + runTime + vent + boatOverhead;
+  var availableMin = 1440 - cleaning;
+  if(cycleTime <= 0 || availableMin <= 0){
+    document.getElementById('mc-res').textContent='Invalid';
+    document.getElementById('mc-sub').textContent='Check inputs';
+    return;
+  }
+  var rollsDay = availableMin / cycleTime;
+  /* Step 2 — Roll weight */
+  var rollKg = width * jumbo * micron * density * 0.000001;
+  /* Step 3 — Capacity in MT/day */
+  var capacity = rollsDay * rollKg / 1000;
+  document.getElementById('mc-res').textContent = capacity.toFixed(2);
+  document.getElementById('mc-sub').textContent = rollsDay.toFixed(2)+' rolls/day × '+Math.round(rollKg).toLocaleString('en-IN')+' kg/roll · cycle '+cycleTime.toFixed(1)+' min';
+}
+
 /* ═══════════════════════════════════════
    CALCULATOR COPY BUTTONS
    Auto-injects a "Copy" button into every .calc-result block.
@@ -1899,6 +1968,31 @@ function _tryOpenBlogFromHash(_retries){
 }
 window.addEventListener('load', function(){ setTimeout(_tryOpenBlogFromHash, 400); });
 window.addEventListener('hashchange', _tryOpenBlogFromHash);
+
+/* ═══════════════════════════════════════════════════════════
+   CALCULATOR DEEPLINKS — open a specific calculator from URL hash.
+   URLs like vkstech.com/#calc-met-capacity auto-expand that card
+   and smooth-scroll to it. Works on initial load and on hashchange.
+   ═══════════════════════════════════════════════════════════ */
+function _tryOpenCalcFromHash(){
+  var h = (location.hash || '').replace(/^#/, '');
+  if(!h || h.indexOf('calc-') !== 0) return;
+  var card = document.getElementById(h);
+  if(!card || !card.classList.contains('calc-card')) return;
+  /* Close any other open card (matches toggleCalc behavior) */
+  document.querySelectorAll('.calc-card.open').forEach(function(c){
+    if(c !== card) c.classList.remove('open');
+  });
+  /* Open target */
+  card.classList.add('open');
+  /* Smooth-scroll into view with a small offset for the sticky navbar */
+  setTimeout(function(){
+    var y = card.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({top: y, behavior: 'smooth'});
+  }, 120);
+}
+window.addEventListener('load', function(){ setTimeout(_tryOpenCalcFromHash, 450); });
+window.addEventListener('hashchange', _tryOpenCalcFromHash);
 
 /* ═══════════════════════════════════════════════════════════
    BLOG Q&A — reader side (question form + answered list)
