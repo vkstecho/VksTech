@@ -762,7 +762,7 @@ body.sp-hidden::after{
       <div class="calc-card reveal d1" id="calc-roll-weight">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">⚖️</span><div class="calc-info"><h3 data-i="c1_t">Film Roll Weight</h3><p>W = L × W/1000 × μm/10⁶ × ρ</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cw-type" onchange="calcWeight()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cw-type" onchange="calcWeight()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option><option value="800">Paper — 800 kg/m³</option></select></div></div>
           <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="cw-len" placeholder="10000" oninput="calcWeight()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cw-wid" placeholder="1500" oninput="calcWeight()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cw-mic" placeholder="12" oninput="calcWeight()"></div></div>
           <div class="calc-result"><div><div class="val" id="cw-res">—</div><div class="sub" id="cw-sub"></div></div><div class="unit">Kg</div></div>
         </div>
@@ -772,7 +772,7 @@ body.sp-hidden::after{
       <div class="calc-card reveal d2" id="calc-roll-length">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">📏</span><div class="calc-info"><h3 data-i="c2_t">Roll Length from Weight</h3><p>L = W / (W/1000 × μm/10⁶ × ρ)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cl-type" onchange="calcLength()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cl-type" onchange="calcLength()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option><option value="800">Paper — 800 kg/m³</option></select></div></div>
           <div class="calc-row c3"><div class="calc-field"><label>Weight (kg)</label><input type="number" id="cl-wt" placeholder="25" oninput="calcLength()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cl-wid" placeholder="1500" oninput="calcLength()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cl-mic" placeholder="12" oninput="calcLength()"></div></div>
           <div class="calc-result"><div><div class="val" id="cl-res">—</div><div class="sub" id="cl-sub"></div></div><div class="unit">Meters</div></div>
         </div>
@@ -780,7 +780,7 @@ body.sp-hidden::after{
 
       <!-- 3. ROLL OD -->
       <div class="calc-card reveal d3" id="calc-roll-od">
-        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm/1000)/π + Core²)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm)/π + Core²)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
           <div class="calc-result"><div><div class="val" id="co-res">—</div><div class="sub" id="co-sub"></div></div><div class="unit">mm</div></div>
@@ -791,7 +791,7 @@ body.sp-hidden::after{
       <div class="calc-card reveal" id="calc-gsm-micron">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">⚗️</span><div class="calc-info"><h3 data-i="c4_t">GSM ↔ Micron Conversion</h3><p>GSM = Micron × Density (g/cm³)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cg-type" onchange="calcGSM()"><option value="1.38">PET — 1.38 g/cm³</option><option value="0.91">BOPP — 0.91 g/cm³</option><option value="0.90">CPP — 0.90 g/cm³</option><option value="0.92">LDPE — 0.92 g/cm³</option></select></div></div>
+          <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cg-type" onchange="calcGSM()"><option value="1.38">PET — 1.38 g/cm³</option><option value="0.91">BOPP — 0.91 g/cm³</option><option value="0.90">CPP — 0.90 g/cm³</option><option value="0.92">LDPE — 0.92 g/cm³</option><option value="0.80">Paper — 0.80 g/cm³</option></select></div></div>
           <div class="calc-row"><div class="calc-field"><label>Micron → GSM</label><input type="number" id="cg-mic" placeholder="12" oninput="calcGSM()"></div><div class="calc-field"><label>GSM → Micron</label><input type="number" id="cg-gsm" placeholder="16.56" oninput="calcGSMr()"></div></div>
           <div class="calc-result"><div><div class="val" id="cg-res">—</div><div class="sub" id="cg-sub"></div></div><div class="unit" id="cg-unit">GSM</div></div>
         </div>
@@ -819,7 +819,7 @@ body.sp-hidden::after{
       <div class="calc-card reveal" id="calc-cost-sqm">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">💰</span><div class="calc-info"><h3 data-i="c7_t">Cost per Square Meter</h3><p>₹/sqm = ₹/kg × GSM ÷ 1000</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option></select></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option><option value="0.92">LDPE</option><option value="0.80">Paper</option></select></div></div>
           <div class="calc-result"><div><div class="val" id="cs-res">—</div><div class="sub" id="cs-sub"></div></div><div class="unit">₹/sqm</div></div>
         </div>
       </div>
@@ -835,7 +835,7 @@ body.sp-hidden::after{
           </div>
           <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Film Parameters</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Film Type</label><select id="mc-film" onchange="calcMetCapacity()"><option value="1.38">PET — 1.38</option><option value="0.91">BOPP — 0.91</option><option value="0.90">CPP — 0.90</option></select></div>
+            <div class="calc-field"><label>Film Type</label><select id="mc-film" onchange="calcMetCapacity()"><option value="1.38">PET — 1.38</option><option value="0.91">BOPP — 0.91</option><option value="0.90">CPP — 0.90</option><option value="0.92">LDPE — 0.92</option><option value="0.80">Paper — 0.80</option></select></div>
             <div class="calc-field"><label>Width (mm)</label><input type="number" id="mc-width" value="3000" oninput="calcMetCapacity()"></div>
             <div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="mc-micron" placeholder="12" oninput="calcMetCapacity()"></div>
           </div>
@@ -1405,7 +1405,8 @@ function calcLength(){
 function calcOD(){
   if(!_calcCheck(['co-len','co-mic','co-core'],'co-res','co-sub')) return;
   var l=parseFloat(document.getElementById('co-len').value),m=parseFloat(document.getElementById('co-mic').value),c=parseFloat(document.getElementById('co-core').value);
-  var od=Math.sqrt((4*l*(m/1000))/Math.PI+(c*c));
+  /* OD² = Core² + 4·L·μm/π   (L in m, μm gives film cross-section in mm²) */
+  var od=Math.sqrt((4*l*m)/Math.PI+(c*c));
   document.getElementById('co-res').textContent=od.toFixed(1);
   document.getElementById('co-sub').textContent='Core '+c+'mm → OD '+od.toFixed(1)+'mm';
 }
