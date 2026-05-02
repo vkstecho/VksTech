@@ -9,7 +9,7 @@
 | 1 | `cover.png` | 16:9 | Hero cover — the capacity engine |
 | 2A | `cycle-time-anatomy-en.png` | 16:9 | The 7-component cycle-time anatomy, English |
 | 2B | `cycle-time-anatomy-hi.png` | 16:9 | Same as 2A in Hindi |
-| 3A | `capacity-contrast-en.png` | 16:9 | 32 MT/day baseline vs 14 MT/day AlOx, English |
+| 3A | `capacity-contrast-en.png` | 16:9 | 32 MT/day baseline vs 12 MT/day AlOx, English |
 | 3B | `capacity-contrast-hi.png` | 16:9 | Same as 3A in Hindi |
 
 ## How to use this file
@@ -63,7 +63,7 @@
 > - HORIZONTAL DIVIDER (orange `#E85D26`, 2 px thin)
 > - HERO NUMBERS — TWO numbers stacked vertically, very large (Bebas Neue or Anton, ~140 pt), with clear visual hierarchy:
 >   - **32 MT/day** in bright orange `#E85D26`, label below in tiny grey caps: STANDARD PET BASELINE
->   - Below it, **14 MT/day** in white, label below in tiny orange caps: ALOX SAME MACHINE
+>   - Below it, **12 MT/day** in white, label below in tiny orange caps: ALOX SAME MACHINE
 >   - A small orange arrow connecting them, implying "same plant, different mix, half the capacity"
 > - Bottom strip on the navy panel: small text — **Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging**
 > - In the **bottom-right corner**, place the attached VKS Tech logo at ~110×110 px with a thin white round backplate
@@ -206,7 +206,7 @@ Use the same workflow as previous Hindi infographics: generate the EN version (I
 
 **Save as:** `capacity-contrast-en.png`
 **Dimensions:** 1600×900 px (16:9)
-**Goal:** Side-by-side dramatic contrast: same plant, same machine, two products → 32 MT/day vs 14 MT/day. **The single visual a plant manager pulls up when corporate asks "why did capacity drop this month?"**
+**Goal:** Side-by-side dramatic contrast: same plant, same machine, two products → 32 MT/day vs 12 MT/day. **The single visual a plant manager pulls up when corporate asks "why did capacity drop this month?"**
 
 ### Prompt
 
@@ -244,19 +244,19 @@ Use the same workflow as previous Hindi infographics: generate the EN version (I
 > Top of column: a small navy tag chip — PRODUCT B. Below: large label: **PET 12μm AlOx**. Subtitle: *aluminium-oxide special chemistry*.
 >
 > Mid-column: 4 stat rows:
-> - Cycle time: **147 min/roll**
-> - Rolls per day: **9.66 rolls**
-> - Roll weight: **1,490 kg**
+> - Cycle time: **139.4 min/roll**
+> - Rolls per day: **8.61 rolls**
+> - Roll weight: **1,407 kg**
 > - Boat-set life: **1.5 lakh m**
 >
 > Bottom of column: hero panel with navy `#1A2744` background, teal `#0D8C7E` text accents. Inside:
 > - Small caps tag: DAILY CAPACITY
-> - Big number (white, very large, same size as Product A's): **14.4 MT/day**
+> - Big number (white, very large, same size as Product A's): **12.1 MT/day**
 >
 > **Below both columns — DELTA STRIP:**
 > A wide rounded rectangle, orange `#E85D26` background. White text centred:
 > - Small caps tag: CAPACITY DELTA
-> - Heading: **−17.6 MT/day = −55%** (white, bold)
+> - Heading: **−20.1 MT/day = −62%** (white, bold)
 > - Subtext italic: *same machine, same operators, same shift — the product mix moved the goalpost*
 >
 > **Bottom callout strip (8% of height):**
@@ -267,7 +267,7 @@ Use the same workflow as previous Hindi infographics: generate the EN version (I
 > **Bottom-right corner:** VKS Tech logo at ~80×80 px on white backplate.
 > **Bottom-left:** small grey footer: *vkstech.com — Free Calculators. Real Plant Methodology.*
 >
-> **Typography:** Inter or Söhne sans-serif. Big numbers (32 MT/day, 14.4 MT/day, 55%) in Bebas Neue or Anton — heavy condensed. Both column hero panels must use IDENTICAL big-number sizes so the visual comparison is honest.
+> **Typography:** Inter or Söhne sans-serif. Big numbers (32 MT/day, 12.1 MT/day, 62%) in Bebas Neue or Anton — heavy condensed. Both column hero panels must use IDENTICAL big-number sizes so the visual comparison is honest.
 >
 > **What to AVOID:** clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders, drop shadows beyond very subtle, rainbow colours.
 
@@ -279,11 +279,11 @@ If logo missing, composite manually. If the two-column comparison is too cramped
 
 - Two columns clearly comparable in layout
 - Product A column orange-themed, Product B column teal/navy-themed
-- Both DAILY CAPACITY hero numbers (32 MT/day and 14.4 MT/day) at SAME size
-- Delta strip below shows −17.6 MT/day and −55%
+- Both DAILY CAPACITY hero numbers (32 MT/day and 12.1 MT/day) at SAME size
+- Delta strip below shows −20.1 MT/day and −62%
 - All 4 stat rows present in both columns
-- Cycle times correct: 118.4 min vs 147 min
-- Roll weights correct: 2,683 kg vs 1,490 kg
+- Cycle times correct: 118.4 min vs 139.4 min
+- Roll weights correct: 2,683 kg vs 1,407 kg
 - No "Alubond" anywhere — must say AlOx
 - Logo at bottom-right
 
@@ -328,17 +328,17 @@ If logo missing, composite manually. If the two-column comparison is too cramped
 > - Label: PET 12μm AlOx
 > - Subtitle (Hindi): *aluminium-oxide special chemistry*
 > - 4 stat rows:
->   - Cycle time: 147 min/roll
->   - Rolls per day: 9.66 rolls
->   - Roll weight: 1,490 kg
+>   - Cycle time: 139.4 min/roll
+>   - Rolls per day: 8.61 rolls
+>   - Roll weight: 1,407 kg
 >   - Boat-set life: 1.5 lakh m
 > - Hero panel (navy bg):
 >   - Tag: DAILY CAPACITY
->   - Big number (white): **14.4 MT/day**
+>   - Big number (white): **12.1 MT/day**
 >
 > **Delta strip (orange bg, white text):**
 > - Tag: CAPACITY DELTA
-> - Heading: **−17.6 MT/day = −55%**
+> - Heading: **−20.1 MT/day = −62%**
 > - Subtext italic (Hindi): *same machine, same operators, same shift — product mix ने goalpost हिला दिया*
 >
 > **Bottom callout (Hindi):**
@@ -386,10 +386,10 @@ Every number must be exact. Spot-check:
 
 **Capacity contrast (Image 3A/3B):**
 - Product A (PET M2.2): 118.4 min/roll, 12 rolls, 2,683 kg, 6 lakh m, **32 MT/day**
-- Product B (AlOx): 147 min/roll, 9.66 rolls, 1,490 kg, 1.5 lakh m, **14.4 MT/day**
-- Delta: −17.6 MT/day = −55%
+- Product B (AlOx): 139.4 min/roll, 8.61 rolls, 1,407 kg, 1.5 lakh m, **12.1 MT/day**
+- Delta: −20.1 MT/day = −62%
 
-**Cover:** 32 MT/day, 14 MT/day, hero numbers same family.
+**Cover:** 32 MT/day, 12 MT/day, hero numbers same family.
 
 ### 4. Material name discipline
 
@@ -400,7 +400,7 @@ Every number must be exact. Spot-check:
 
 ### 5. Hero number sizing
 
-For Image 3A/3B specifically: both column DAILY CAPACITY numbers (32 MT/day and 14.4 MT/day) **must be the same point size**. Different sizes would visually misrepresent the comparison.
+For Image 3A/3B specifically: both column DAILY CAPACITY numbers (32 MT/day and 12.1 MT/day) **must be the same point size**. Different sizes would visually misrepresent the comparison.
 
 ### 6. Logo placement
 

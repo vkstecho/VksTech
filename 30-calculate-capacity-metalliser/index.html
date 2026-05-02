@@ -157,33 +157,35 @@ Cycle time/roll = Setup + Vacuum-Heat + (Length÷Speed) + Vent + Boat-change ove
 
 <h3>⚡ Worked Example 2 — Same Plant, AlOx Product</h3>
 
-<p>Now compute capacity for the same plant running 12μm PET AlOx — special chemistry, slower speed, shorter jumbo, shorter boat-set life:</p>
+<p>Now compute capacity for the same plant running 12μm PET AlOx — special chemistry, narrower jumbo, much heavier boat-change overhead, and a daily source-cleaning load that eats four hours of the day:</p>
 
 <div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
-<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx):</strong></p>
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx — real plant data):</strong></p>
 <ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
-<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 15 min</li>
-<li>Average line speed: 400 m/min &nbsp;|&nbsp; Jumbo length: 30,000m</li>
-<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
-<li>Planned source cleaning: 20 min/day</li>
+<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 10 min</li>
+<li>Average line speed: 600 m/min &nbsp;|&nbsp; Jumbo length: 36,000m</li>
+<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; <strong>Boat-change time: 60 min</strong> (oxide chemistry destroys boats faster, full clean-out needed)</li>
+<li>Jumbo width: 2,360mm (AlOx slits run narrower than standard PET)</li>
+<li><strong>Planned source cleaning: 240 min/day</strong> (4 hours/day for AlOx — vs 20 min/day for standard PET)</li>
 </ul>
 <p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 1 — Rolls/day:</strong></p>
 <ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
-<li>Run time = 30,000 ÷ 400 = <strong>75 min</strong></li>
-<li>Boat changes per roll = 30,000 ÷ 150,000 = 0.20 → contributes 2 min</li>
-<li>Cycle time per roll = 30 + 25 + 75 + 15 + 2 = <strong>147 min</strong></li>
-<li>Rolls per day = 1420 ÷ 147 = <strong>9.66 rolls/day</strong></li>
+<li>Run time = 36,000 ÷ 600 = <strong>60 min</strong></li>
+<li>Boat changes per roll = 36,000 ÷ 150,000 = 0.24 → contributes <strong>14.4 min</strong></li>
+<li>Cycle time per roll = 30 + 25 + 60 + 10 + 14.4 = <strong>139.4 min</strong></li>
+<li>Available time per day = 1440 − 240 = <strong>1200 min</strong> (only 20 hours of productive time)</li>
+<li>Rolls per day = 1200 ÷ 139.4 = <strong>8.61 rolls/day</strong></li>
 </ul>
 <p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 2 — Roll weight:</strong></p>
 <ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
-<li>Roll weight = 3000 × 30,000 × 12 × 1.38 × 0.000001 = <strong>1,490 kg = 1.49 MT</strong></li>
+<li>Roll weight = 2,360 × 36,000 × 12 × 1.38 × 0.000001 = <strong>1,407 kg = 1.41 MT</strong></li>
 </ul>
-<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 9.66 × 1,490 ÷ 1000 = <span style="color:#E85D26;">~14.4 MT/day</span></p>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 8.61 × 1,407 ÷ 1000 = <span style="color:#E85D26;">~12.1 MT/day</span></p>
 </div>
 
 <div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
 <strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
-<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift. Standard 12μm PET = <strong>32 MT/day</strong>. AlOx 12μm PET = <strong>14.4 MT/day</strong>. The plant's "real" capacity is whichever product is actually running. The single ratecard number is right for nothing — it's an average that fits no specific day's mix. If your monthly capacity utilisation looks bad, check what mix you actually ran. The capacity goal-post moved.</p>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift. Standard 12μm PET = <strong>32 MT/day</strong>. AlOx 12μm PET = <strong>12.1 MT/day</strong>. Capacity drops by <strong>62%</strong> on the same physical line — more than half the throughput gone. Three things destroy AlOx capacity simultaneously: boat-change time jumps from 10 min to 60 min (6× longer because oxide chemistry erodes boats aggressively), source cleaning balloons from 20 min/day to 240 min/day (4 hours, gone), and jumbo width drops from 3000mm to 2360mm. The single ratecard number is right for nothing — it's an average that fits no specific day's mix. If your monthly capacity utilisation looks bad, check what mix you actually ran. The capacity goal-post moved.</p>
 </div>
 
 <h3>💰 Live Calculator — Compute Your Plant's Capacity</h3>
@@ -292,7 +294,7 @@ Enter values above to see your plant's capacity for this material
 
 <p><strong>Mistake 2 — Forgetting vent time.</strong> Operators sometimes time setup-to-setup but exclude vent because it happens "between" cycles. The formula needs all non-running time accounted for. Skipping a 10-minute vent in a 118-minute cycle inflates rolls/day by ~9%. <strong>Fix:</strong> include every minute the chamber is not actively depositing — setup, vacuum-heat, vent, boat changes, source cleaning. The 24-hour day must absorb all of them.</p>
 
-<p><strong>Mistake 3 — Ignoring mid-cycle boat changes for short boat-set materials.</strong> For baseline 12μm M2.2 with 6 lakh m boat life and 54,000m jumbos, mid-cycle boat changes are negligible (one per ~10 jumbos). But for AlOx with 1.5 lakh m boat life and 30,000m jumbos, you get a boat change every 5th jumbo — meaningful overhead. Plants that built their capacity model around the baseline often forget to include the boat-change term, then wonder why AlOx capacity numbers don't match the floor reality. <strong>Fix:</strong> always include the boat-change term, even if it's near-zero for your baseline. The formula is general; the term self-corrects to near-zero when boat-set life is large.</p>
+<p><strong>Mistake 3 — Ignoring mid-cycle boat changes for short boat-set materials.</strong> For baseline 12μm M2.2 with 6 lakh m boat life and 54,000m jumbos, mid-cycle boat changes are negligible (one per ~10 jumbos). But for AlOx with 1.5 lakh m boat life and 36,000m jumbos plus 60-min boat-change time, you get ~0.24 boat changes per jumbo and 14.4 minutes of boat overhead per roll — almost as much as the entire setup or vent stage. Plants that built their capacity model around the baseline often forget to include the boat-change term, then wonder why AlOx capacity numbers don't match the floor reality. <strong>Fix:</strong> always include the boat-change term, even if it's near-zero for your baseline. The formula is general; the term self-corrects to near-zero when boat-set life is large.</p>
 
 <p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Bonus mistake to watch:</strong> Using best-cycle data instead of monthly average. Best cycles bias rolls/day high, just like single best-day measurements bias equivalence factors high (see <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a>). Use 90-day averages for capacity that survives review-meeting scrutiny.</p>
 
@@ -493,33 +495,35 @@ Cycle time/roll = Setup + Vacuum-Heat + (Length÷Speed) + Vent + Boat-change ove
 
 <h3>⚡ Worked Example 2 — Same Plant, AlOx Product</h3>
 
-<p>अब same plant के लिए 12μm PET AlOx चलाते हुए capacity compute करें — special chemistry, slower speed, shorter जumbo, shorter boat-set life:</p>
+<p>अब same plant के लिए 12μm PET AlOx चलाते हुए capacity compute करें — special chemistry, narrower जumbo, बहुत भारी boat-change overhead, और daily source-cleaning load जो दिन के 4 घंटे खा जाती है:</p>
 
 <div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
-<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx):</strong></p>
+<p style="margin:0 0 10px 0;color:#1A2744;"><strong>Inputs (AlOx — real plant data):</strong></p>
 <ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
-<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 15 min</li>
-<li>Average line speed: 400 m/min &nbsp;|&nbsp; जumbo length: 30,000m</li>
-<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; Boat-change time: 10 min</li>
-<li>Planned source cleaning: 20 min/day</li>
+<li>Setup per roll: 30 min &nbsp;|&nbsp; Vacuum + Heating: 25 min &nbsp;|&nbsp; Vent: 10 min</li>
+<li>Average line speed: 600 m/min &nbsp;|&nbsp; जumbo length: 36,000m</li>
+<li>Boat-set life: 1.5 lakh m &nbsp;|&nbsp; <strong>Boat-change time: 60 min</strong> (oxide chemistry boats को तेज़ी से erode करती है, पूरा clean-out चाहिए)</li>
+<li>जumbo width: 2,360mm (AlOx slits standard PET से narrower चलते हैं)</li>
+<li><strong>Planned source cleaning: 240 min/day</strong> (AlOx के लिए 4 घंटे/दिन — vs standard PET के लिए 20 min/day)</li>
 </ul>
 <p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 1 — Rolls/day:</strong></p>
 <ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
-<li>Run time = 30,000 ÷ 400 = <strong>75 min</strong></li>
-<li>Boat changes per roll = 30,000 ÷ 150,000 = 0.20 → contributes 2 min</li>
-<li>Cycle time per roll = 30 + 25 + 75 + 15 + 2 = <strong>147 min</strong></li>
-<li>Rolls per day = 1420 ÷ 147 = <strong>9.66 rolls/day</strong></li>
+<li>Run time = 36,000 ÷ 600 = <strong>60 min</strong></li>
+<li>Boat changes per roll = 36,000 ÷ 150,000 = 0.24 → contributes <strong>14.4 min</strong></li>
+<li>Cycle time per roll = 30 + 25 + 60 + 10 + 14.4 = <strong>139.4 min</strong></li>
+<li>Available time per day = 1440 − 240 = <strong>1200 min</strong> (केवल 20 घंटे productive time)</li>
+<li>Rolls per day = 1200 ÷ 139.4 = <strong>8.61 rolls/day</strong></li>
 </ul>
 <p style="margin:0 0 6px 0;color:#1A2744;"><strong>Step 2 — Roll weight:</strong></p>
 <ul style="margin:0 0 8px 0;padding-left:24px;line-height:1.7;">
-<li>Roll weight = 3000 × 30,000 × 12 × 1.38 × 0.000001 = <strong>1,490 kg = 1.49 MT</strong></li>
+<li>Roll weight = 2,360 × 36,000 × 12 × 1.38 × 0.000001 = <strong>1,407 kg = 1.41 MT</strong></li>
 </ul>
-<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 9.66 × 1,490 ÷ 1000 = <span style="color:#E85D26;">~14.4 MT/day</span></p>
+<p style="margin:6px 0 0 0;color:#1A2744;font-weight:bold;font-size:1.1em;">Step 3 — Capacity = 8.61 × 1,407 ÷ 1000 = <span style="color:#E85D26;">~12.1 MT/day</span></p>
 </div>
 
 <div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
 <strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
-<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift। Standard 12μm PET = <strong>32 MT/day</strong>। AlOx 12μm PET = <strong>14.4 MT/day</strong>। Plant की "real" capacity वही है जो product actually चल रहा है। Single ratecard number किसी भी चीज़ के लिए सही नहीं है — ये एक average है जो किसी specific दिन की mix पर fit नहीं होता। अगर आपकी monthly capacity utilisation खराब दिखती है, check करें actually क्या mix चला। Capacity goal-post move हुआ।</p>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew, same shift। Standard 12μm PET = <strong>32 MT/day</strong>। AlOx 12μm PET = <strong>12.1 MT/day</strong>। Same physical line पर capacity <strong>62%</strong> गिर जाती है — आधे से ज़्यादा throughput गायब। तीन चीज़ें एक साथ AlOx capacity destroy करती हैं: boat-change time 10 min से 60 min हो जाता है (6× longer क्योंकि oxide chemistry boats को aggressively erode करती है), source cleaning 20 min/day से 240 min/day बढ़ जाती है (4 घंटे, गायब), और jumbo width 3000mm से 2360mm गिर जाती है। Single ratecard number किसी भी चीज़ के लिए सही नहीं है। अगर आपकी monthly capacity utilisation खराब दिखती है, check करें actually क्या mix चला। Capacity goal-post move हुआ।</p>
 </div>
 
 <h3>💰 Live Calculator — अपने Plant की Capacity Compute करें</h3>
@@ -628,7 +632,7 @@ Cycle time/roll = Setup + Vacuum-Heat + (Length÷Speed) + Vent + Boat-change ove
 
 <p><strong>Mistake 2 — Vent time भूलना।</strong> Operators sometimes setup-to-setup time करते हैं पर vent exclude कर देते हैं क्योंकि वो cycles के "between" होती है। Formula को सब non-running time account करना है। 118-minute cycle में 10-minute vent skip करने से rolls/day ~9% inflate होती है। <strong>Fix:</strong> हर वो minute include करें जब chamber actively deposit नहीं कर रहा — setup, vacuum-heat, vent, boat changes, source cleaning। 24-hour day को सबको absorb करना है।</p>
 
-<p><strong>Mistake 3 — Short boat-set materials के लिए mid-cycle boat changes ignore करना।</strong> Baseline 12μm M2.2 के लिए 6 lakh m boat life और 54,000m जumbos के साथ, mid-cycle boat changes negligible हैं (हर ~10 जumbos में एक)। पर AlOx के लिए 1.5 lakh m boat life और 30,000m जumbos के साथ, हर 5th जumbo पर एक boat change मिलता है — meaningful overhead। Plants जो अपना capacity model baseline के around बनाते हैं, वो अक्सर boat-change term include करना भूल जाते हैं, फिर हैरान होते हैं कि AlOx capacity numbers floor reality से match क्यों नहीं करते। <strong>Fix:</strong> हमेशा boat-change term include करें, चाहे आपके baseline के लिए near-zero क्यों न हो। Formula general है; जब boat-set life बड़ी होती है, term self-correct होकर near-zero हो जाता है।</p>
+<p><strong>Mistake 3 — Short boat-set materials के लिए mid-cycle boat changes ignore करना।</strong> Baseline 12μm M2.2 के लिए 6 lakh m boat life और 54,000m जumbos के साथ, mid-cycle boat changes negligible हैं (हर ~10 जumbos में एक)। पर AlOx के लिए 1.5 lakh m boat life, 36,000m जumbos और 60-min boat-change time के साथ, ~0.24 boat changes per जumbo और 14.4 minutes का boat overhead per roll मिलता है — almost पूरे setup या vent stage जितना। Plants जो अपना capacity model baseline के around बनाते हैं, वो अक्सर boat-change term include करना भूल जाते हैं, फिर हैरान होते हैं कि AlOx capacity numbers floor reality से match क्यों नहीं करते। <strong>Fix:</strong> हमेशा boat-change term include करें, चाहे आपके baseline के लिए near-zero क्यों न हो। Formula general है; जब boat-set life बड़ी होती है, term self-correct होकर near-zero हो जाता है।</p>
 
 <p style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Bonus mistake to watch:</strong> Monthly average की जगह best-cycle data use करना। Best cycles rolls/day high bias करते हैं, just like single best-day measurements equivalence factors high bias करते हैं (देखें <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a>)। Review-meeting scrutiny survive करने वाली capacity के लिए 90-day averages use करें।</p>
 
