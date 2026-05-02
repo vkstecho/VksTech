@@ -280,6 +280,12 @@ section{position:relative;z-index:1;}
 .calc-head p{font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px;}
 .calc-arrow{font-size:.8rem;color:var(--muted);transition:transform .3s;flex-shrink:0;}
 .calc-card.open .calc-arrow{transform:rotate(180deg);}
+/* Copy-link icon button on each calc-head */
+.calc-share{background:transparent;border:1px solid var(--border);color:var(--navy);font-size:.95rem;width:32px;height:32px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;margin-right:8px;flex-shrink:0;transition:all .15s ease;font-family:inherit;padding:0;}
+.calc-share:hover{background:rgba(232,93,38,.08);border-color:var(--orange);color:var(--orange);}
+.calc-share.copied{background:#0D8C7E;border-color:#0D8C7E;color:#fff;}
+.calc-share-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#0D8C7E;color:#fff;padding:11px 20px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.2);font-weight:bold;font-size:.92rem;transition:transform .3s ease,opacity .3s ease;opacity:0;pointer-events:none;z-index:10000;}
+.calc-share-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 .calc-card.open .calc-head{background:linear-gradient(135deg,rgba(232,93,38,.03),rgba(13,140,126,.03));border-bottom:1px solid var(--border);}
 .calc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 22px;}
 .calc-card.open .calc-body{max-height:500px;padding:18px 22px;}
@@ -754,36 +760,36 @@ body.sp-hidden::after{
 
       <!-- 1. FILM ROLL WEIGHT -->
       <div class="calc-card reveal d1" id="calc-roll-weight">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚖️</span><div class="calc-info"><h3 data-i="c1_t">Film Roll Weight</h3><p>W = L × W/1000 × μm/10⁶ × ρ</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">⚖️</span><div class="calc-info"><h3 data-i="c1_t">Film Roll Weight</h3><p>W = L × W/1000 × μm/10⁶ × ρ</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cw-type" onchange="calcWeight()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
-          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="cw-len" placeholder="10000" oninput="calcWeight()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cw-wid" placeholder="1500" oninput="calcWeight()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cw-mic" placeholder="12" oninput="calcWeight()"></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="cw-len" placeholder="10000" oninput="calcWeight()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cw-wid" placeholder="1500" oninput="calcWeight()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cw-mic" placeholder="12" oninput="calcWeight()"></div></div>
           <div class="calc-result"><div><div class="val" id="cw-res">—</div><div class="sub" id="cw-sub"></div></div><div class="unit">Kg</div></div>
         </div>
       </div>
 
       <!-- 2. ROLL LENGTH FROM WEIGHT -->
       <div class="calc-card reveal d2" id="calc-roll-length">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📏</span><div class="calc-info"><h3 data-i="c2_t">Roll Length from Weight</h3><p>L = W / (W/1000 × μm/10⁶ × ρ)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">📏</span><div class="calc-info"><h3 data-i="c2_t">Roll Length from Weight</h3><p>L = W / (W/1000 × μm/10⁶ × ρ)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cl-type" onchange="calcLength()"><option value="1380">PET — 1380 kg/m³</option><option value="910">BOPP — 910 kg/m³</option><option value="900">CPP — 900 kg/m³</option><option value="920">LDPE — 920 kg/m³</option></select></div></div>
-          <div class="calc-row c3"><div class="calc-field"><label>Weight (kg)</label><input type="number" id="cl-wt" placeholder="25" oninput="calcLength()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cl-wid" placeholder="1500" oninput="calcLength()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cl-mic" placeholder="12" oninput="calcLength()"></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Weight (kg)</label><input type="number" id="cl-wt" placeholder="25" oninput="calcLength()"></div><div class="calc-field"><label>Width (mm)</label><input type="number" id="cl-wid" placeholder="1500" oninput="calcLength()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cl-mic" placeholder="12" oninput="calcLength()"></div></div>
           <div class="calc-result"><div><div class="val" id="cl-res">—</div><div class="sub" id="cl-sub"></div></div><div class="unit">Meters</div></div>
         </div>
       </div>
 
       <!-- 3. ROLL OD -->
       <div class="calc-card reveal d3" id="calc-roll-od">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm/1000)/π + Core²)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm/1000)/π + Core²)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
           <div class="calc-result"><div><div class="val" id="co-res">—</div><div class="sub" id="co-sub"></div></div><div class="unit">mm</div></div>
         </div>
       </div>
 
       <!-- 4. GSM ↔ MICRON -->
       <div class="calc-card reveal" id="calc-gsm-micron">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚗️</span><div class="calc-info"><h3 data-i="c4_t">GSM ↔ Micron Conversion</h3><p>GSM = Micron × Density (g/cm³)</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">⚗️</span><div class="calc-info"><h3 data-i="c4_t">GSM ↔ Micron Conversion</h3><p>GSM = Micron × Density (g/cm³)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c1"><div class="calc-field"><label>Film Type</label><select id="cg-type" onchange="calcGSM()"><option value="1.38">PET — 1.38 g/cm³</option><option value="0.91">BOPP — 0.91 g/cm³</option><option value="0.90">CPP — 0.90 g/cm³</option><option value="0.92">LDPE — 0.92 g/cm³</option></select></div></div>
           <div class="calc-row"><div class="calc-field"><label>Micron → GSM</label><input type="number" id="cg-mic" placeholder="12" oninput="calcGSM()"></div><div class="calc-field"><label>GSM → Micron</label><input type="number" id="cg-gsm" placeholder="16.56" oninput="calcGSMr()"></div></div>
@@ -793,7 +799,7 @@ body.sp-hidden::after{
 
       <!-- 5. YIELD % -->
       <div class="calc-card reveal" id="calc-yield">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">📊</span><div class="calc-info"><h3 data-i="c5_t">Production Yield %</h3><p>Yield = (Output ÷ Input) × 100</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">📊</span><div class="calc-info"><h3 data-i="c5_t">Production Yield %</h3><p>Yield = (Output ÷ Input) × 100</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row"><div class="calc-field"><label>Input Weight (kg)</label><input type="number" id="cy-in" placeholder="500" oninput="calcYield()"></div><div class="calc-field"><label>Output Weight (kg)</label><input type="number" id="cy-out" placeholder="472" oninput="calcYield()"></div></div>
           <div class="calc-result"><div><div class="val" id="cy-res">—</div><div class="sub" id="cy-sub"></div></div><div class="unit">%</div></div>
@@ -802,7 +808,7 @@ body.sp-hidden::after{
 
       <!-- 6. MACHINE UTILISATION -->
       <div class="calc-card reveal" id="calc-machine-utilisation">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c6_t">Machine Utilisation %</h3><p>Running ÷ Shift × 100</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c6_t">Machine Utilisation %</h3><p>Running ÷ Shift × 100</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div class="calc-row c3"><div class="calc-field"><label>Shift (min)</label><input type="number" id="cm-shift" value="720" oninput="calcUtil()"></div><div class="calc-field"><label>Setup (min)</label><input type="number" id="cm-setup" placeholder="45" oninput="calcUtil()"></div><div class="calc-field"><label>Downtime (min)</label><input type="number" id="cm-dt" placeholder="30" oninput="calcUtil()"></div></div>
           <div class="calc-result"><div><div class="val" id="cm-res">—</div><div class="sub" id="cm-sub"></div></div><div class="unit">%</div></div>
@@ -811,16 +817,16 @@ body.sp-hidden::after{
 
       <!-- 7. COST PER SQM -->
       <div class="calc-card reveal" id="calc-cost-sqm">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">💰</span><div class="calc-info"><h3 data-i="c7_t">Cost per Square Meter</h3><p>₹/sqm = ₹/kg × GSM ÷ 1000</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">💰</span><div class="calc-info"><h3 data-i="c7_t">Cost per Square Meter</h3><p>₹/sqm = ₹/kg × GSM ÷ 1000</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Micron (μm)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option></select></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Rate (₹/kg)</label><input type="number" id="cs-rate" placeholder="180" oninput="calcSqm()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cs-mic" placeholder="12" oninput="calcSqm()"></div><div class="calc-field"><label>Film Type</label><select id="cs-type" onchange="calcSqm()"><option value="1.38">PET</option><option value="0.91">BOPP</option><option value="0.90">CPP</option></select></div></div>
           <div class="calc-result"><div><div class="val" id="cs-res">—</div><div class="sub" id="cs-sub"></div></div><div class="unit">₹/sqm</div></div>
         </div>
       </div>
 
       <!-- 8. MET M/C CAPACITY (3-step engine — see Blog 30) -->
       <div class="calc-card reveal calc-tall" id="calc-met-capacity">
-        <div class="calc-head" onclick="toggleCalc(this)"><span class="calc-emoji">⚙️</span><div class="calc-info"><h3>Met M/C Capacity</h3><p>3-Step: Cycle → Rolls/day → MT/day</p></div><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">⚙️</span><div class="calc-info"><h3 data-i="c8_t">Met M/C Capacity</h3><p data-i="c8_s">3-Step: Cycle → Rolls/day → MT/day</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
             <strong>Step 1:</strong> Rolls/day = (1440 − Source cleaning) ÷ Cycle time<br>
@@ -831,7 +837,7 @@ body.sp-hidden::after{
           <div class="calc-row c3">
             <div class="calc-field"><label>Film Type</label><select id="mc-film" onchange="calcMetCapacity()"><option value="1.38">PET — 1.38</option><option value="0.91">BOPP — 0.91</option><option value="0.90">CPP — 0.90</option></select></div>
             <div class="calc-field"><label>Width (mm)</label><input type="number" id="mc-width" value="3000" oninput="calcMetCapacity()"></div>
-            <div class="calc-field"><label>Micron (μm)</label><input type="number" id="mc-micron" placeholder="12" oninput="calcMetCapacity()"></div>
+            <div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="mc-micron" placeholder="12" oninput="calcMetCapacity()"></div>
           </div>
           <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase;">Cycle Inputs (per Roll)</div>
           <div class="calc-row c3">
@@ -1225,7 +1231,7 @@ const HI = {
   ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
   ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
   pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद",
-  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
+  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
 };
 
 const EN = {
@@ -1260,7 +1266,7 @@ const EN = {
   ppl_title:"The People Behind <span>This Journey</span>",
   ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
   pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks",
-  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
+  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
 };
 
 let curLang = localStorage.getItem('vkstech_lang') || 'en';
@@ -1306,13 +1312,56 @@ document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
 /* ═══════════════════════════════════════
    CALCULATORS — Film Roll Industry
    ═══════════════════════════════════════ */
-function toggleCalc(head){
+function toggleCalc(head, evt){
+  /* Ignore if click came from the share button */
+  if(evt && evt.target && evt.target.closest('.calc-share')) return;
   var card = head.parentElement;
   var wasOpen = card.classList.contains('open');
   // Close all others
   document.querySelectorAll('.calc-card.open').forEach(function(c){c.classList.remove('open');});
   // Toggle clicked
   if(!wasOpen) card.classList.add('open');
+  /* Update URL bar so the deep-link shareable URL reflects the current state.
+     Uses replaceState to avoid cluttering browser history with every tap. */
+  if(card.id && history && history.replaceState){
+    var newHash = !wasOpen ? '#' + card.id : '#calculators';
+    if(location.hash !== newHash){
+      history.replaceState(null, '', location.pathname + location.search + newHash);
+    }
+  }
+}
+/* Copy a shareable deep-link to the calculator to clipboard. */
+function copyCalcLink(btn, evt){
+  if(evt){ evt.stopPropagation(); evt.preventDefault(); }
+  var card = btn.closest('.calc-card');
+  if(!card || !card.id) return;
+  var url = location.protocol + '//' + location.host + location.pathname + '#' + card.id;
+  function done(){
+    btn.classList.add('copied');
+    btn.innerHTML = '✓';
+    var t = document.getElementById('calcShareToast');
+    if(!t){
+      t = document.createElement('div');
+      t.id = 'calcShareToast';
+      t.className = 'calc-share-toast';
+      document.body.appendChild(t);
+    }
+    var lang = (typeof curLang !== 'undefined' && curLang === 'hi') ? 'hi' : 'en';
+    t.textContent = lang === 'hi' ? '✓ Calculator link copy हो गया' : '✓ Calculator link copied';
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1800);
+    setTimeout(function(){ btn.classList.remove('copied'); btn.innerHTML = '🔗'; }, 1800);
+  }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = url; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done, fallback);
+  } else { fallback(); }
 }
 /* Helper: validate required fields, highlight missing ones, return true if all filled */
 function _calcCheck(ids, resId, subId, waitingMsg){
