@@ -1,1 +1,756 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
 
+<div class="en-content">
+
+<h2>🔬 AlOx vs Metallised PET — When to Use Which (And Why EPR April 2026 Forces You to Decide)</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 16-min read &nbsp;|&nbsp; Plant + Brand Owner Strategic Decision &nbsp;|&nbsp; Published May 2026 &nbsp;|&nbsp; Bookmark for the EPR conversation</p>
+
+<p>On April 1, 2026, India's Plastic Waste Management (Amendment) Rules went live. Multi-layered plastic packaging — the kind every metallised structure sits in — is now Category III, the most expensive <strong>EPR (Extended Producer Responsibility)</strong> category. Brand owners are calling converters and asking the same question: "Can we move off MLP without losing barrier performance?" The honest technical answer is yes, often, by switching from metallised PET to AlOx PET. But that switch is not free — it cuts your metalliser's capacity by 62% on the same line and triples your conversion cost per kg. This blog gives plant managers, converters, and procurement teams the full decision framework: when AlOx pays off, when metallised PET still wins, and how to model the EPR-vs-capacity-vs-cost trade-off honestly.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The 4-Lens Decision</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Decision Helper →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 1 — BARRIER (technical fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Both deliver foil-class barrier (OTR &lt;1, WVTR &lt;1). Met PET wins on light barrier; AlOx wins on transparency.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 2 — RECYCLABILITY (EPR fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">AlOx in mono-PET → Category II Flexible (10% recycled content). Met PET in PET/AL/PE → Category III MLP (5% but ~3-4× higher EC rate).</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 3 — PLANT CAPACITY (operational fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Same machine: <strong>32 MT/day Met PET → 12 MT/day AlOx</strong> (−62%). AlOx eats 2.66× the line-time per kg.</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">LENS 4 — TOTAL COST (financial fit)</div>
+<div style="font-size:1em;color:#FAF9F6;font-weight:bold;">Conversion cost ₹15.59 → ₹46.77/kg (3×). EPR liability drop on Cat II ↔ Cat III often offsets this for high-volume MLP brands.</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">All numbers from the same plant, same machine, same crew — locked across <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;">Blog #28</a>, <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;">#29</a>, and <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;">#30</a>.</p>
+</div>
+
+<h3>📜 The April 2026 Pivot — Why This Decision Is on Every Brand Owner's Desk</h3>
+
+<p>For more than a decade, the standard high-barrier flexible-packaging structure for snacks, coffee, dry foods, and pharma in India has been a 3-to-5-layer laminate built around metallised PET — typically <strong>PET 12μm + Met-PET 12μm + PE 50μm</strong>, sometimes with foil or printing layers added. This structure delivers excellent barrier (OTR &lt;1, WVTR &lt;1) at low cost, has been refined over decades, and runs on every metalliser line in the country.</p>
+
+<p>It also happens to be impossible to recycle through any mainstream Indian plastic waste channel.</p>
+
+<p>That gap between "engineering-perfect" and "recyclable" never mattered much, until the Ministry of Environment, Forest and Climate Change notified the <strong>Plastic Waste Management (Amendment) Rules, 2026</strong> via G.S.R. 237(E) on 31 March 2026. The amendment took effect 1 April 2026 and changed the rules of the game in three ways:</p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Mandatory recycled content</strong> in plastic packaging, by category, with phased increases through FY 2027-28</li>
+<li><strong>Category-specific Environmental Compensation (EC) rates</strong> for shortfalls — and Category III MLP got the steepest rates</li>
+<li><strong>Independent verification</strong> by Registered Environment Auditors, replacing self-declaration with audited claims</li>
+</ol>
+
+<p>For a brand owner shipping FMCG sachets in PET/Met-PET/PE, that single notification reclassified their packaging into the most expensive EPR category. The natural question — "what do we switch to?" — has only one technically defensible answer for high-barrier transparent applications: <strong>AlOx-coated PET in a mono-PET structure</strong>.</p>
+
+<div style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Quick definitions:</strong> <strong>MLP (Multi-Layered Plastic)</strong> = packaging that combines two or more different polymer types (PET + PE, or PET + foil + PE, etc.) bonded together; recyclers cannot separate the layers, so the whole structure goes to landfill or incineration. <strong>Mono-material</strong> = packaging where all layers are the same polymer family (all-PET, or all-PE, or all-PP) and can be recycled together as a single feedstock.</div>
+
+<h3>🔬 The Two Films — What They Actually Are</h3>
+
+<p>Both metallised PET and AlOx PET are made on the same vacuum metalliser, but the chemistry inside the chamber is different.</p>
+
+<p><strong>Metallised PET</strong> is the classic process. PET base film passes through a vacuum chamber. Aluminium wire is fed onto a heated tungsten boat at ~1500°C. The aluminium evaporates as pure metal vapor and condenses on the moving film as a continuous metallic layer, typically 30-50 nm thick (controlled by Optical Density, OD M2.2 or M2.5). The result is the familiar opaque silver film — high reflectance, very low oxygen and moisture transmission, near-zero light penetration. Industry workhorse since the 1970s.</p>
+
+<p><strong>AlOx PET</strong> uses the same machine but introduces a controlled flow of oxygen into the chamber during evaporation. The aluminium vapor reacts with the oxygen mid-flight and deposits as <strong>aluminium oxide (Al₂O₃) — a transparent ceramic</strong>, not a metal. The deposited layer is also 30-50 nm thick but has a completely different character: glass-clear, slightly hazier (max 2.5%), with optical transmittance around 90%. Barrier performance is comparable to metallised PET (OTR ~1, WVTR ~1) — both films deliver foil-class numbers from a layer that's a few atoms thick.</p>
+
+<p>The recyclability gap appears in how each film gets used in a finished package. Metallised PET is almost always laminated to a sealant layer (PE or CPP) that is a different polymer family — creating an MLP. AlOx PET, because of its transparency and chemistry, can be laminated to PET sealants (mono-PET structures) or used as the barrier layer in mono-PE packaging (with AlOx-coated PE), preserving the single-polymer recycling pathway.</p>
+
+<h3>📊 Barrier Performance — Side by Side</h3>
+
+<p>The tactical question every converter faces: does AlOx actually deliver the barrier we built around metallised PET? The honest answer is yes for almost everything except high-light-sensitive products.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Property</th><th>Metallised PET 12μm</th><th>AlOx PET 12μm</th><th>Winner</th></tr></thead>
+<tbody>
+<tr><td><strong>OTR</strong> (cc/m²/day)</td><td>&lt;1</td><td>~1</td><td>Tie</td></tr>
+<tr><td><strong>WVTR</strong> (g/m²/day)</td><td>&lt;1</td><td>~1</td><td>Tie</td></tr>
+<tr><td><strong>Light barrier</strong></td><td>~0% transmission (opaque)</td><td>~90% transmission</td><td>Met PET</td></tr>
+<tr><td><strong>UV barrier</strong></td><td>Excellent</td><td>Poor (needs UV inhibitor)</td><td>Met PET</td></tr>
+<tr><td><strong>Transparency</strong></td><td>None (silver mirror)</td><td>Glass-clear, haze ≤2.5%</td><td>AlOx</td></tr>
+<tr><td><strong>Metal detection</strong></td><td>Triggers metal detectors</td><td>Passes — no metal</td><td>AlOx</td></tr>
+<tr><td><strong>Microwave-able</strong></td><td>No (sparks)</td><td>Yes</td><td>AlOx</td></tr>
+<tr><td><strong>Flex-crack resistance</strong></td><td>Moderate (metal cracks)</td><td>Better (ceramic flexes)</td><td>AlOx</td></tr>
+<tr><td><strong>Recyclability in mono-PET</strong></td><td>No (multi-layer)</td><td>Yes (&lt;5% non-PET content)</td><td>AlOx</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The decision rule that emerges: if your product needs <strong>light protection</strong> (sensitive oils, vitamins, photo-sensitive pharma), metallised PET stays. If your product needs <strong>oxygen/moisture barrier with see-through capability</strong> (snacks where consumers want to see contents, microwaveable retort, premium dry foods, mono-material recyclable packaging), AlOx wins.</p>
+
+<h3>⚙️ Operational Reality — Same Machine, Different Numbers</h3>
+
+<p>This is where most converters get blindsided. The lab tests confirm AlOx works. The brand owner approves the trial. Production starts — and the metalliser's monthly output collapses. The reason is not equipment failure; it is the cumulative effect of every cycle parameter changing simultaneously.</p>
+
+<p>Below is the side-by-side from the same plant, same line, same crew running both products in different campaigns. The standard PET baseline matches <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a>; the AlOx column is real plant data.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Parameter</th><th>Met PET 12μm M2.2</th><th>AlOx PET 12μm</th><th>Δ</th></tr></thead>
+<tbody>
+<tr><td>Setup per roll</td><td>20 min</td><td>30 min</td><td>+50%</td></tr>
+<tr><td>Vacuum + Heating</td><td>20 min</td><td>25 min</td><td>+25%</td></tr>
+<tr><td>Average line speed</td><td>800 m/min</td><td>600 m/min</td><td>−25%</td></tr>
+<tr><td>Average jumbo length</td><td>54,000m</td><td>36,000m</td><td>−33%</td></tr>
+<tr><td>Average jumbo width</td><td>3,000mm</td><td>2,360mm</td><td>−21%</td></tr>
+<tr><td>Vent</td><td>10 min</td><td>10 min</td><td>=</td></tr>
+<tr><td><strong>Boat-change time</strong></td><td>10 min</td><td><strong>60 min</strong></td><td><strong>+500%</strong></td></tr>
+<tr><td>Boat-set life</td><td>6 lakh m</td><td>1.5 lakh m</td><td>−75%</td></tr>
+<tr><td><strong>Source cleaning/day</strong></td><td>20 min</td><td><strong>240 min</strong></td><td><strong>+1100%</strong></td></tr>
+<tr><td>Cycle time per roll</td><td>118.4 min</td><td>139.4 min</td><td>+18%</td></tr>
+<tr><td>Available time per day</td><td>1,420 min</td><td>1,200 min</td><td>−15%</td></tr>
+<tr><td>Rolls per day</td><td>12</td><td>8.61</td><td>−28%</td></tr>
+<tr><td>Roll weight</td><td>2,683 kg</td><td>1,407 kg</td><td>−48%</td></tr>
+<tr><td><strong>Daily capacity</strong></td><td><strong>32.17 MT/day</strong></td><td><strong>12.11 MT/day</strong></td><td><strong>−62%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew. AlOx capacity is <strong>37% of metallised PET capacity</strong>. Three operational changes destroy throughput simultaneously: <strong>(a)</strong> boat changes balloon from 10 min to 60 min — oxide chemistry burns boats six times faster, requiring full clean-out instead of swap; <strong>(b)</strong> source cleaning explodes from 20 min/day to 240 min/day (4 hours, every day) because oxide deposits coat the chamber walls and need aggressive scraping; <strong>(c)</strong> jumbo width drops from 3000mm to 2360mm because edge uniformity is harder to maintain on a transparent ceramic. None of these limits show up on the metalliser vendor's datasheet. They only appear after 60 days of running AlOx campaigns at scale.</p>
+</div>
+
+<h3>💰 The EPR Math — When AlOx Pays Off</h3>
+
+<p>The capacity hit and the conversion-cost hit are real. AlOx triples the per-kg conversion cost on the metalliser (from ~₹15.59/kg actual on standard PET to ~₹46.77/kg actual on AlOx — 3× the equivalence factor we derived in <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a>). For a converter looking at metalliser P&L in isolation, AlOx looks terrible.</p>
+
+<p>But the EPR liability landscape changes the math. The April 2026 amendment classifies plastic packaging into four categories. The two that matter for this comparison:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>EPR Category</th><th>What it covers</th><th>Recycled content target</th><th>Indicative EC rate (shortfall)</th></tr></thead>
+<tbody>
+<tr><td><strong>Category II</strong> Flexible mono-material</td><td>Mono-PET, mono-PE, mono-PP flexible packaging</td><td>10% (FY26-27) → 20% (FY27-28)</td><td>~₹3-5/kg</td></tr>
+<tr><td><strong>Category III</strong> Multi-Layered Plastic (MLP)</td><td>PET/AL/PE laminates, metallised PET in multi-polymer structures</td><td>5% (FY26-27) → 10% (FY27-28)</td><td>~₹15-20/kg</td></tr>
+</tbody>
+</table>
+</div>
+
+<p style="font-size:0.88em;color:#5A5A5A;font-style:italic;">EC rates are indicative ranges from CPCB EPR marketplace activity in early 2026; actual rates fluctuate. Verify current rates via the CPCB portal before any compliance modeling.</p>
+
+<p>For a brand owner shipping <strong>500 MT/year of MLP-based snack packaging</strong>, the math at 100% EPR shortfall (worst case, no recycled content procured):</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;color:#1A2744;"><strong>Scenario A — Stay with metallised PET / MLP (Category III):</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>EPR shortfall liability: 500 MT × 1000 kg × ₹17.50/kg (mid-range) = <strong>₹87.5 lakh/year</strong></li>
+<li>Conversion cost (metallised PET): 500 × 1000 × ₹15.59 = ₹77.95 lakh/year</li>
+<li><strong>Total: ₹1.65 crore/year</strong></li>
+</ul>
+<p style="margin:0 0 8px 0;color:#1A2744;"><strong>Scenario B — Switch to AlOx mono-PET (Category II):</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>EPR shortfall liability: 500 × 1000 × ₹4/kg (mid-range) = <strong>₹20 lakh/year</strong></li>
+<li>Conversion cost (AlOx): 500 × 1000 × ₹46.77 = ₹2.34 crore/year</li>
+<li><strong>Total: ₹2.54 crore/year</strong></li>
+</ul>
+<p style="margin:0;color:#1A2744;font-weight:bold;font-size:1.05em;">Pure EPR delta: <span style="color:#0D8C7E;">−₹67.5 lakh/year</span> · Conversion cost delta: <span style="color:#E85D26;">+₹1.56 crore/year</span> · Net: <span style="color:#E85D26;">+₹89 lakh/year more expensive on AlOx</span></p>
+</div>
+
+<p>At first glance, AlOx loses badly. But this naive model misses three realities that flip the answer for high-volume brands:</p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Recycled content is procurable, not just penalty-payable.</strong> A brand can buy EPR certificates from compliant recyclers — Category II certificates trade at ₹3-5/kg, Category III at ₹15-20/kg. A converter who switches half their volume to mono-PET reduces their certificate purchase cost by 70% on the switched portion.</li>
+<li><strong>The conversion-cost delta is largely a metalliser-line problem.</strong> If the brand owner negotiates with multiple metalliser plants, the cost premium of AlOx normalizes to ~1.8-2× over time as more lines become AlOx-capable. The 3× number is today's reality, not 2027's.</li>
+<li><strong>Brand-value premium for "recyclable" labelling.</strong> Modern e-commerce and modern-trade buyers pay 5-8% retail premium for visibly recyclable packaging — a number that, on FMCG margins, often dwarfs the EPR + conversion cost delta combined.</li>
+</ol>
+
+<p>The honest framing: AlOx is not a cost-saving move on the metalliser. It is a strategic move that trades higher line cost for lower regulatory risk and a higher brand premium. Whether the math works depends on volume, product positioning, and how seriously the brand takes 2027 EPR target tightening (Cat II 10% → 20%, Cat III 5% → 10%).</p>
+
+<h3>✅ When Metallised PET Still Wins</h3>
+
+<p>AlOx is the future of mono-material flexible packaging, but metallised PET is not going away — and for some applications, it shouldn't. Stay with metallised PET when:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Light barrier is non-negotiable.</strong> Vitamins, fish oil, edible oils, light-sensitive pharmaceuticals, photo film. AlOx fails the UV-blocking test by definition.</li>
+<li><strong>Metalised aesthetics are part of the brand identity.</strong> Premium tobacco, ghee tins, gift packs — the silver mirror finish is the design choice.</li>
+<li><strong>Cost-driven low-margin SKUs.</strong> Mass-market sachets at ₹5 retail can't absorb a 3× conversion cost premium even with EPR savings.</li>
+<li><strong>Brand owner has a working PCR strategy for MLP.</strong> If the brand has secured supply of recycled MLP feedstock at viable prices, the EPR pressure on Category III is offset and metallised PET stays viable.</li>
+<li><strong>Target shelf life &gt; 12 months in extreme conditions.</strong> AlOx flex-crack performance is good but multi-year retort applications still favour foil-or-metal barriers.</li>
+</ul>
+
+<h3>🌟 When AlOx Wins</h3>
+
+<p>Switch to AlOx (in a mono-PET or mono-PE structure) when:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Product visibility is a buying decision.</strong> Premium snacks, dry fruits, organic foods, microwaveable meals — consumer wants to see the product before purchase.</li>
+<li><strong>Brand has made a public mono-material commitment.</strong> Once a brand has pledged "100% recyclable by 2027" in its sustainability report, AlOx becomes the only path to high-barrier mono-material.</li>
+<li><strong>Microwaveable / metal-detector applications.</strong> Ready-meals and pharma both increasingly demand non-metallic barrier.</li>
+<li><strong>Volume is high enough to absorb the conversion premium.</strong> Brands shipping &gt;1000 MT/year see EPR savings + brand premium starting to net positive against the conversion cost premium.</li>
+<li><strong>The customer is in EU or US export markets.</strong> EU PPWR (Packaging and Packaging Waste Regulation) and US state-level EPR (California, Oregon) already mandate mono-material on tighter timelines than India. AlOx is a single design that satisfies all three regulatory regimes.</li>
+</ul>
+
+<h3>🎯 Live Decision Helper — Which Film for Your Application?</h3>
+
+<p>Five inputs — light barrier requirement, recyclability priority, annual volume, conversion cost ceiling, target market. Output: recommended structure with reasoning.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR APPLICATION INPUTS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Light barrier required?</label>
+<select id="lightbar-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="critical">Critical (UV-sensitive product)</option>
+<option value="moderate" selected>Moderate (some light protection)</option>
+<option value="none">Not needed (transparency preferred)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Recyclability priority</label>
+<select id="recyc-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="high">High (mono-material commitment)</option>
+<option value="medium" selected>Medium (will move when affordable)</option>
+<option value="low">Low (cost is king)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Annual volume (MT/year)</label>
+<input type="number" id="volume-en" placeholder="e.g., 500" min="1" step="1" value="500" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Target market</label>
+<select id="market-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="india">India (domestic)</option>
+<option value="export">Export (EU/US/global)</option>
+<option value="both" selected>Both (mixed)</option>
+</select>
+</div>
+<div style="grid-column:1/-1;">
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Conversion cost ceiling (₹/kg, max acceptable)</label>
+<input type="number" id="ccap-en" placeholder="e.g., 30" min="1" step="0.1" value="30" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RECOMMENDATION — LIVE</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:12px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Recommended structure</div>
+<div id="rec-en" style="font-size:1.5em;font-weight:bold;color:#E85D26;">—</div>
+<div id="rec-sub-en" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;margin-top:6px;">Fill inputs to see recommendation</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">EPR liability/yr</div>
+<div id="epr-en" style="font-size:1em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">Conversion cost/yr</div>
+<div id="cnv-en" style="font-size:1em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">Total / kg</div>
+<div id="ttl-en" style="font-size:1em;font-weight:bold;color:#0D8C7E;">—</div>
+</div>
+</div>
+
+<div id="reason-en" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;">
+Reasoning will appear here based on your inputs.
+</div>
+</div>
+
+</div>
+
+<h3>🚀 Where to Start at Your Plant</h3>
+
+<p>Whether you are a converter exploring AlOx capability or a brand owner running a switch evaluation, here is the practical 4-week sequence:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Demand-side audit.</strong> Pull the SKU list. For each SKU, classify under EPR Category II, III, or IV. Sum annual volume per category. Apply current EC rates. This is your baseline EPR liability if you change nothing.</li>
+<li><strong>Week 2 — Technical fit assessment.</strong> For each MLP SKU, check the 4-lens framework above (light barrier, transparency, microwave, shelf life). Classify as "AlOx-feasible" or "Met-PET-permanent". Most snack and dry food SKUs will be AlOx-feasible; most pharmaceutical and oil/vitamin SKUs will be Met-PET-permanent.</li>
+<li><strong>Week 3 — Plant capacity model.</strong> Use the <a href="/#calc-met-capacity" style="color:#E85D26;font-weight:bold;">Met M/C Capacity calculator</a> to model what happens to your monthly output if AlOx volume rises from 0% to 30% to 50% of mix. The capacity drop is the operational constraint that determines how fast you can switch.</li>
+<li><strong>Week 4 — Financial scenario.</strong> Use the Decision Helper above on each AlOx-feasible SKU at production volumes. Build the year 1 / year 3 net cost picture. Most brands find a "switch 30% of MLP to AlOx by 2027" pathway is financially defensible — the 100% switch rarely is, the 0% switch fails the EPR-trajectory test.</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 The Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">This blog ties the entire series together — financial framework + capacity engine + the strategic decision driving 2026.</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/film-roll-weight-formula"><strong>Blog #27:</strong></a> Film Roll Weight Formula</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent</li>
+<li><a href="/blog/calculate-equivalent-factor-any-material"><strong>Blog #29:</strong></a> Calculate Equivalent Factor for Any Material</li>
+<li><a href="/blog/calculate-capacity-metalliser"><strong>Blog #30:</strong></a> How to Calculate Capacity of a Metalliser</li>
+<li><strong>This blog (#31):</strong> AlOx vs Metallised PET — The EPR Decision (you are here)</li>
+</ul>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Have a Question?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Trying to model the EPR cost for your specific product mix? Wondering whether your line can run AlOx at all? Negotiating with a converter on AlOx vs Met PET pricing? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — Vivek answers personally.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> AlOx PET and Metallised PET are made on the same machine but are not interchangeable choices. <strong>Metallised PET</strong> is the right answer when light barrier matters, when product is light-sensitive, or when the brand has a working PCR strategy for MLP feedstock. <strong>AlOx PET</strong> is the right answer when product visibility, microwave-ability, mono-material recyclability, or EU/US export compliance drives the structure. The EPR April 2026 amendment shifted the economics — Category III MLP now carries ~₹17.5/kg shortfall liability vs ~₹4/kg for Category II mono-material, a 4× delta. For brands shipping &gt;1000 MT/year with public sustainability commitments, AlOx mono-PET starts to net out positive. For low-margin mass-market SKUs, Met PET stays. The plant pays a real price either way: AlOx cuts metalliser capacity by 62% (32 → 12 MT/day) and triples conversion cost (₹15.59 → ₹46.77/kg). The Decision Helper above lets you model your own SKU honestly across all 4 lenses.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> The next blog in this series goes deeper on the operational side: <strong>Blog #32 — The 5 Met Downtimes</strong> — exactly where your 1,420 daily minutes go on standard PET, and the 240-min source-cleaning reality on AlOx campaigns. After that, OEE for Metallisers (Blog #33) closes the productivity loop by combining capacity, downtime, and waste into a single number plant managers can defend in any review meeting.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>🔬 AlOx vs Metallised PET — कब कौन सा इस्तेमाल करें (और क्यों EPR April 2026 आपको decide करने पर मजबूर करता है)</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 16-min read &nbsp;|&nbsp; Plant + Brand Owner Strategic Decision &nbsp;|&nbsp; May 2026 में published &nbsp;|&nbsp; EPR conversation के लिए bookmark करें</p>
+
+<p>1 April 2026 को India का Plastic Waste Management (Amendment) Rules लागू हो गया। Multi-layered plastic packaging — जिस तरह की हर metallised structure होती है — अब Category III है, सबसे महंगी <strong>EPR (Extended Producer Responsibility)</strong> category। Brand owners converters को call कर रहे हैं और एक ही सवाल पूछ रहे हैं: "क्या हम MLP से बिना barrier performance गँवाए हट सकते हैं?" Honest technical answer है हाँ, अक्सर, metallised PET से AlOx PET पर switch करके। पर वो switch free नहीं है — वो आपकी metalliser की capacity same line पर 62% काट देता है और conversion cost per kg को triple कर देता है। ये blog plant managers, converters, और procurement teams को पूरा decision framework देता है: कब AlOx pay off करता है, कब metallised PET अब भी जीतता है, और EPR-vs-capacity-vs-cost trade-off को honestly कैसे model करें।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — 4-Lens Decision</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Decision Helper पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 1 — BARRIER (technical fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">दोनों foil-class barrier deliver करते हैं (OTR &lt;1, WVTR &lt;1)। Met PET light barrier पर जीतता है; AlOx transparency पर।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 2 — RECYCLABILITY (EPR fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">AlOx in mono-PET → Category II Flexible (10% recycled content)। Met PET in PET/AL/PE → Category III MLP (5% पर ~3-4× higher EC rate)।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">LENS 3 — PLANT CAPACITY (operational fit)</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Same machine: <strong>32 MT/day Met PET → 12 MT/day AlOx</strong> (−62%)। AlOx 2.66× line-time per kg खाता है।</div>
+</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:12px 14px;border-radius:6px;text-align:center;border:1px solid rgba(255,255,255,0.15);">
+<div style="font-size:0.78em;opacity:0.85;margin-bottom:4px;">LENS 4 — TOTAL COST (financial fit)</div>
+<div style="font-size:1em;color:#FAF9F6;font-weight:bold;">Conversion cost ₹15.59 → ₹46.77/kg (3×)। EPR liability drop on Cat II ↔ Cat III high-volume MLP brands के लिए इसे offset कर देता है।</div>
+</div>
+
+<p style="margin:14px 0 0 0;font-size:0.88em;color:#FAF9F6;opacity:0.8;font-style:italic;">सारे numbers same plant, same machine, same crew से — <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;">Blog #28</a>, <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;">#29</a>, और <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;">#30</a> पर locked।</p>
+</div>
+
+<h3>📜 April 2026 का Pivot — क्यों ये decision हर brand owner के desk पर है</h3>
+
+<p>एक दशक से ज़्यादा, snacks, coffee, dry foods, और pharma के लिए India में standard high-barrier flexible-packaging structure metallised PET के around 3-to-5-layer laminate रही है — typically <strong>PET 12μm + Met-PET 12μm + PE 50μm</strong>, sometimes foil या printing layers के साथ। ये structure low cost पर excellent barrier (OTR &lt;1, WVTR &lt;1) देती है, decades में refine हुई है, और देश की हर metalliser line पर चलती है।</p>
+
+<p>और ये किसी भी mainstream Indian plastic waste channel से recycle करना impossible भी है।</p>
+
+<p>"engineering-perfect" और "recyclable" के बीच का वो gap कभी ज़्यादा matter नहीं किया, जब तक Ministry of Environment, Forest and Climate Change ने 31 March 2026 को G.S.R. 237(E) के through <strong>Plastic Waste Management (Amendment) Rules, 2026</strong> notify नहीं किया। Amendment 1 April 2026 से प्रभावी हुआ और तीन तरह से game के rules बदल दिए:</p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Mandatory recycled content</strong> plastic packaging में, by category, FY 2027-28 तक phased increases के साथ</li>
+<li><strong>Category-specific Environmental Compensation (EC) rates</strong> shortfalls के लिए — और Category III MLP को सबसे steep rates मिले</li>
+<li><strong>Independent verification</strong> Registered Environment Auditors द्वारा, self-declaration की जगह audited claims</li>
+</ol>
+
+<p>FMCG sachets PET/Met-PET/PE में ship करने वाले brand owner के लिए, उस single notification ने उनकी packaging को सबसे महंगी EPR category में reclassify कर दिया। Natural सवाल — "हम क्या switch करें?" — का high-barrier transparent applications के लिए केवल एक technically defensible answer है: <strong>AlOx-coated PET in a mono-PET structure</strong>।</p>
+
+<div style="background:#fff7e0;border-left:3px solid #E85D26;padding:10px 14px;margin:14px 0;font-size:0.92em;color:#1A2744;border-radius:6px;"><strong>Quick definitions:</strong> <strong>MLP (Multi-Layered Plastic)</strong> = packaging जो दो या ज़्यादा अलग polymer types (PET + PE, या PET + foil + PE, etc.) को bond करती है; recyclers layers separate नहीं कर सकते, इसलिए पूरी structure landfill या incineration में जाती है। <strong>Mono-material</strong> = packaging जहाँ सारे layers same polymer family (all-PET, या all-PE, या all-PP) के हों और एक single feedstock के रूप में recycle हो सकें।</div>
+
+<h3>🔬 दोनों Films — असल में क्या हैं</h3>
+
+<p>दोनों metallised PET और AlOx PET same vacuum metalliser पर बनती हैं, पर chamber के अंदर chemistry अलग है।</p>
+
+<p><strong>Metallised PET</strong> classic process है। PET base film vacuum chamber से गुज़रती है। Aluminium wire को heated tungsten boat पर ~1500°C पर feed किया जाता है। Aluminium pure metal vapor के रूप में evaporate होता है और moving film पर continuous metallic layer के रूप में condense होता है, typically 30-50 nm thick (Optical Density, OD M2.2 या M2.5 से controlled)। Result familiar opaque silver film है — high reflectance, बहुत कम oxygen और moisture transmission, near-zero light penetration। 1970s से industry workhorse।</p>
+
+<p><strong>AlOx PET</strong> same machine use करता है पर evaporation के दौरान chamber में controlled oxygen flow introduce करता है। Aluminium vapor mid-flight में oxygen के साथ react करता है और <strong>aluminium oxide (Al₂O₃) — एक transparent ceramic</strong> के रूप में deposit होता है, metal नहीं। Deposited layer भी 30-50 nm thick है पर पूरी तरह अलग character के साथ: glass-clear, थोड़ी ज़्यादा hazy (max 2.5%), optical transmittance ~90%। Barrier performance metallised PET के comparable (OTR ~1, WVTR ~1) — दोनों films कुछ atoms thick layer से foil-class numbers देती हैं।</p>
+
+<p>Recyclability gap इस बात में दिखता है कि हर film finished package में कैसे use होती है। Metallised PET लगभग हमेशा sealant layer (PE या CPP) से laminate होती है जो different polymer family है — MLP create करती है। AlOx PET, अपनी transparency और chemistry की वजह से, PET sealants (mono-PET structures) से laminate हो सकती है या mono-PE packaging में barrier layer (AlOx-coated PE के साथ) के रूप में use हो सकती है, single-polymer recycling pathway preserve करती है।</p>
+
+<h3>📊 Barrier Performance — Side by Side</h3>
+
+<p>हर converter का tactical सवाल: क्या AlOx actually वो barrier deliver करता है जो हमने metallised PET के around बनाई थी? Honest answer है हाँ, लगभग हर चीज़ के लिए except high-light-sensitive products।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Property</th><th>Metallised PET 12μm</th><th>AlOx PET 12μm</th><th>Winner</th></tr></thead>
+<tbody>
+<tr><td><strong>OTR</strong> (cc/m²/day)</td><td>&lt;1</td><td>~1</td><td>Tie</td></tr>
+<tr><td><strong>WVTR</strong> (g/m²/day)</td><td>&lt;1</td><td>~1</td><td>Tie</td></tr>
+<tr><td><strong>Light barrier</strong></td><td>~0% transmission (opaque)</td><td>~90% transmission</td><td>Met PET</td></tr>
+<tr><td><strong>UV barrier</strong></td><td>Excellent</td><td>Poor (UV inhibitor चाहिए)</td><td>Met PET</td></tr>
+<tr><td><strong>Transparency</strong></td><td>None (silver mirror)</td><td>Glass-clear, haze ≤2.5%</td><td>AlOx</td></tr>
+<tr><td><strong>Metal detection</strong></td><td>Metal detectors trigger करता है</td><td>Pass — कोई metal नहीं</td><td>AlOx</td></tr>
+<tr><td><strong>Microwave-able</strong></td><td>नहीं (sparks)</td><td>हाँ</td><td>AlOx</td></tr>
+<tr><td><strong>Flex-crack resistance</strong></td><td>Moderate (metal cracks)</td><td>Better (ceramic flexes)</td><td>AlOx</td></tr>
+<tr><td><strong>Recyclability in mono-PET</strong></td><td>नहीं (multi-layer)</td><td>हाँ (&lt;5% non-PET content)</td><td>AlOx</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Decision rule जो emerge होता है: अगर आपके product को <strong>light protection</strong> चाहिए (sensitive oils, vitamins, photo-sensitive pharma), metallised PET रहता है। अगर आपके product को <strong>oxygen/moisture barrier with see-through capability</strong> चाहिए (snacks जहाँ consumers contents देखना चाहते हैं, microwaveable retort, premium dry foods, mono-material recyclable packaging), AlOx जीतता है।</p>
+
+<h3>⚙️ Operational Reality — Same Machine, Different Numbers</h3>
+
+<p>यहाँ ज़्यादातर converters blindsided हो जाते हैं। Lab tests confirm करते हैं AlOx काम करता है। Brand owner trial approve करता है। Production शुरू होता है — और metalliser का monthly output collapse हो जाता है। Reason equipment failure नहीं है; ये हर cycle parameter के एक साथ बदलने का cumulative effect है।</p>
+
+<p>नीचे same plant, same line, same crew दोनों products अलग campaigns में चलाते हुए side-by-side है। Standard PET baseline <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> से match करती है; AlOx column real plant data है।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Parameter</th><th>Met PET 12μm M2.2</th><th>AlOx PET 12μm</th><th>Δ</th></tr></thead>
+<tbody>
+<tr><td>Setup per roll</td><td>20 min</td><td>30 min</td><td>+50%</td></tr>
+<tr><td>Vacuum + Heating</td><td>20 min</td><td>25 min</td><td>+25%</td></tr>
+<tr><td>Average line speed</td><td>800 m/min</td><td>600 m/min</td><td>−25%</td></tr>
+<tr><td>Average जumbo length</td><td>54,000m</td><td>36,000m</td><td>−33%</td></tr>
+<tr><td>Average जumbo width</td><td>3,000mm</td><td>2,360mm</td><td>−21%</td></tr>
+<tr><td>Vent</td><td>10 min</td><td>10 min</td><td>=</td></tr>
+<tr><td><strong>Boat-change time</strong></td><td>10 min</td><td><strong>60 min</strong></td><td><strong>+500%</strong></td></tr>
+<tr><td>Boat-set life</td><td>6 lakh m</td><td>1.5 lakh m</td><td>−75%</td></tr>
+<tr><td><strong>Source cleaning/day</strong></td><td>20 min</td><td><strong>240 min</strong></td><td><strong>+1100%</strong></td></tr>
+<tr><td>Cycle time per roll</td><td>118.4 min</td><td>139.4 min</td><td>+18%</td></tr>
+<tr><td>Available time per day</td><td>1,420 min</td><td>1,200 min</td><td>−15%</td></tr>
+<tr><td>Rolls per day</td><td>12</td><td>8.61</td><td>−28%</td></tr>
+<tr><td>Roll weight</td><td>2,683 kg</td><td>1,407 kg</td><td>−48%</td></tr>
+<tr><td><strong>Daily capacity</strong></td><td><strong>32.17 MT/day</strong></td><td><strong>12.11 MT/day</strong></td><td><strong>−62%</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚡ Killer Insight</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Same machine, same crew। AlOx capacity metallised PET capacity का <strong>37%</strong> है। तीन operational changes throughput को एक साथ destroy करते हैं: <strong>(a)</strong> boat changes 10 min से 60 min हो जाते हैं — oxide chemistry boats को छह गुना तेज़ी से जलाती है, swap नहीं full clean-out चाहिए; <strong>(b)</strong> source cleaning 20 min/day से 240 min/day हो जाती है (4 घंटे, हर रोज़) क्योंकि oxide deposits chamber walls को coat करते हैं और aggressive scraping चाहिए; <strong>(c)</strong> jumbo width 3000mm से 2360mm गिर जाती है क्योंकि transparent ceramic पर edge uniformity maintain करना मुश्किल है। इनमें से कोई limit metalliser vendor की datasheet पर नहीं दिखती। ये सिर्फ़ AlOx campaigns को scale पर 60 दिन चलाने के बाद दिखती हैं।</p>
+</div>
+
+<h3>💰 EPR Math — कब AlOx Pay Off करता है</h3>
+
+<p>Capacity hit और conversion-cost hit real हैं। AlOx metalliser पर per-kg conversion cost triple कर देता है (standard PET पर ~₹15.59/kg actual से AlOx पर ~₹46.77/kg actual — 3× equivalence factor जो हमने <a href="/blog/calculate-equivalent-factor-any-material" style="color:#E85D26;font-weight:bold;">Blog #29</a> में derive किया)। अकेले metalliser P&L देखने वाले converter के लिए, AlOx terrible दिखता है।</p>
+
+<p>पर EPR liability landscape math को बदल देता है। April 2026 amendment plastic packaging को चार categories में classify करता है। दो जो इस comparison के लिए matter करते हैं:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>EPR Category</th><th>क्या cover करता है</th><th>Recycled content target</th><th>Indicative EC rate (shortfall)</th></tr></thead>
+<tbody>
+<tr><td><strong>Category II</strong> Flexible mono-material</td><td>Mono-PET, mono-PE, mono-PP flexible packaging</td><td>10% (FY26-27) → 20% (FY27-28)</td><td>~₹3-5/kg</td></tr>
+<tr><td><strong>Category III</strong> Multi-Layered Plastic (MLP)</td><td>PET/AL/PE laminates, multi-polymer structures में metallised PET</td><td>5% (FY26-27) → 10% (FY27-28)</td><td>~₹15-20/kg</td></tr>
+</tbody>
+</table>
+</div>
+
+<p style="font-size:0.88em;color:#5A5A5A;font-style:italic;">EC rates early 2026 की CPCB EPR marketplace activity से indicative ranges हैं; actual rates fluctuate करते हैं। किसी भी compliance modeling से पहले CPCB portal से current rates verify करें।</p>
+
+<p><strong>500 MT/year MLP-based snack packaging</strong> ship करने वाले brand owner के लिए, 100% EPR shortfall पर math (worst case, कोई recycled content procure नहीं):</p>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:14px 0;border-radius:10px;">
+<p style="margin:0 0 8px 0;color:#1A2744;"><strong>Scenario A — Metallised PET / MLP (Category III) के साथ रहें:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>EPR shortfall liability: 500 MT × 1000 kg × ₹17.50/kg (mid-range) = <strong>₹87.5 lakh/year</strong></li>
+<li>Conversion cost (metallised PET): 500 × 1000 × ₹15.59 = ₹77.95 lakh/year</li>
+<li><strong>Total: ₹1.65 crore/year</strong></li>
+</ul>
+<p style="margin:0 0 8px 0;color:#1A2744;"><strong>Scenario B — AlOx mono-PET (Category II) पर switch:</strong></p>
+<ul style="margin:0 0 12px 0;padding-left:24px;line-height:1.7;">
+<li>EPR shortfall liability: 500 × 1000 × ₹4/kg (mid-range) = <strong>₹20 lakh/year</strong></li>
+<li>Conversion cost (AlOx): 500 × 1000 × ₹46.77 = ₹2.34 crore/year</li>
+<li><strong>Total: ₹2.54 crore/year</strong></li>
+</ul>
+<p style="margin:0;color:#1A2744;font-weight:bold;font-size:1.05em;">Pure EPR delta: <span style="color:#0D8C7E;">−₹67.5 lakh/year</span> · Conversion cost delta: <span style="color:#E85D26;">+₹1.56 crore/year</span> · Net: <span style="color:#E85D26;">+₹89 lakh/year AlOx पर ज़्यादा महंगा</span></p>
+</div>
+
+<p>पहली नज़र में AlOx बुरी तरह हारता है। पर ये naive model तीन realities miss करता है जो high-volume brands के लिए answer flip कर देती हैं:</p>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Recycled content procurable है, सिर्फ़ penalty-payable नहीं।</strong> Brand compliant recyclers से EPR certificates खरीद सकती है — Category II certificates ₹3-5/kg पर trade करते हैं, Category III ₹15-20/kg पर। जो converter आधा volume mono-PET पर switch करता है, switched portion पर certificate purchase cost 70% कम हो जाती है।</li>
+<li><strong>Conversion-cost delta मुख्यतः metalliser-line problem है।</strong> अगर brand owner multiple metalliser plants से negotiate करे, AlOx का cost premium time के साथ ~1.8-2× पर normalize होगा क्योंकि ज़्यादा lines AlOx-capable हो रही हैं। 3× number आज की reality है, 2027 की नहीं।</li>
+<li><strong>"Recyclable" labelling के लिए brand-value premium।</strong> Modern e-commerce और modern-trade buyers visibly recyclable packaging के लिए 5-8% retail premium देते हैं — एक number जो FMCG margins पर अक्सर EPR + conversion cost delta combined से बड़ा है।</li>
+</ol>
+
+<p>Honest framing: AlOx metalliser पर cost-saving move नहीं है। ये एक strategic move है जो higher line cost को lower regulatory risk और higher brand premium के बदले trade करता है। Math काम करेगा या नहीं ये volume, product positioning, और brand 2027 EPR target tightening (Cat II 10% → 20%, Cat III 5% → 10%) को कितनी seriously लेता है, इस पर depend करता है।</p>
+
+<h3>✅ कब Metallised PET अब भी जीतता है</h3>
+
+<p>AlOx mono-material flexible packaging का future है, पर metallised PET जा नहीं रहा — और कुछ applications के लिए, जाना भी नहीं चाहिए। Metallised PET के साथ रहें जब:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Light barrier non-negotiable है।</strong> Vitamins, fish oil, edible oils, light-sensitive pharmaceuticals, photo film। AlOx UV-blocking test by definition fail करता है।</li>
+<li><strong>Metalised aesthetics brand identity का हिस्सा हैं।</strong> Premium tobacco, ghee tins, gift packs — silver mirror finish design choice है।</li>
+<li><strong>Cost-driven low-margin SKUs।</strong> ₹5 retail पर mass-market sachets EPR savings के साथ भी 3× conversion cost premium absorb नहीं कर सकते।</li>
+<li><strong>Brand owner के पास MLP के लिए working PCR strategy है।</strong> अगर brand ने viable prices पर recycled MLP feedstock supply secure की है, Category III पर EPR pressure offset होती है और metallised PET viable रहती है।</li>
+<li><strong>Target shelf life &gt; 12 months extreme conditions में।</strong> AlOx flex-crack performance अच्छी है पर multi-year retort applications अब भी foil-or-metal barriers favour करती हैं।</li>
+</ul>
+
+<h3>🌟 कब AlOx जीतता है</h3>
+
+<p>AlOx पर switch करें (mono-PET या mono-PE structure में) जब:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Product visibility buying decision है।</strong> Premium snacks, dry fruits, organic foods, microwaveable meals — consumer purchase से पहले product देखना चाहता है।</li>
+<li><strong>Brand ने public mono-material commitment की है।</strong> एक बार brand ने अपनी sustainability report में "100% recyclable by 2027" pledge कर दी, AlOx high-barrier mono-material का एकमात्र path बन जाता है।</li>
+<li><strong>Microwaveable / metal-detector applications।</strong> Ready-meals और pharma दोनों increasingly non-metallic barrier demand करते हैं।</li>
+<li><strong>Volume conversion premium absorb करने के लिए काफ़ी है।</strong> &gt;1000 MT/year ship करने वाले brands EPR savings + brand premium को conversion cost premium के against net positive होते देखते हैं।</li>
+<li><strong>Customer EU या US export markets में है।</strong> EU PPWR (Packaging and Packaging Waste Regulation) और US state-level EPR (California, Oregon) पहले से India से tighter timelines पर mono-material mandate करते हैं। AlOx single design है जो तीनों regulatory regimes satisfy करता है।</li>
+</ul>
+
+<h3>🎯 Live Decision Helper — आपके Application के लिए कौन सी Film?</h3>
+
+<p>पाँच inputs — light barrier requirement, recyclability priority, annual volume, conversion cost ceiling, target market। Output: recommended structure with reasoning।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR APPLICATION INPUTS</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Light barrier required?</label>
+<select id="lightbar-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="critical">Critical (UV-sensitive product)</option>
+<option value="moderate" selected>Moderate (some light protection)</option>
+<option value="none">Not needed (transparency preferred)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Recyclability priority</label>
+<select id="recyc-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="high">High (mono-material commitment)</option>
+<option value="medium" selected>Medium (will move when affordable)</option>
+<option value="low">Low (cost is king)</option>
+</select>
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Annual volume (MT/year)</label>
+<input type="number" id="volume-hi" placeholder="e.g., 500" min="1" step="1" value="500" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Target market</label>
+<select id="market-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="india">India (domestic)</option>
+<option value="export">Export (EU/US/global)</option>
+<option value="both" selected>Both (mixed)</option>
+</select>
+</div>
+<div style="grid-column:1/-1;">
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Conversion cost ceiling (₹/kg, max acceptable)</label>
+<input type="number" id="ccap-hi" placeholder="e.g., 30" min="1" step="0.1" value="30" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">RECOMMENDATION — LIVE</div>
+
+<div style="background:rgba(255,255,255,0.08);padding:14px;border-radius:6px;border-left:4px solid #FAF9F6;text-align:center;margin-bottom:12px;">
+<div style="font-size:0.85em;opacity:0.85;margin-bottom:4px;">Recommended structure</div>
+<div id="rec-hi" style="font-size:1.5em;font-weight:bold;color:#E85D26;">—</div>
+<div id="rec-sub-hi" style="font-size:0.88em;color:#FAF9F6;opacity:0.85;font-style:italic;margin-top:6px;">Recommendation देखने के लिए inputs भरें</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">EPR liability/yr</div>
+<div id="epr-hi" style="font-size:1em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:10px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">Conversion cost/yr</div>
+<div id="cnv-hi" style="font-size:1em;font-weight:bold;color:#E85D26;">—</div>
+</div>
+<div style="background:rgba(13,140,126,0.15);padding:10px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">Total / kg</div>
+<div id="ttl-hi" style="font-size:1em;font-weight:bold;color:#0D8C7E;">—</div>
+</div>
+</div>
+
+<div id="reason-hi" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;">
+आपके inputs पर based reasoning यहाँ दिखेगी।
+</div>
+</div>
+
+</div>
+
+<h3>🚀 अपने Plant पर कहाँ से शुरू करें</h3>
+
+<p>चाहे आप converter हों AlOx capability explore करते हुए या brand owner switch evaluation चलाते हुए, यहाँ practical 4-week sequence है:</p>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Week 1 — Demand-side audit।</strong> SKU list pull करें। हर SKU को EPR Category II, III, या IV के under classify करें। Annual volume per category sum करें। Current EC rates apply करें। ये आपकी baseline EPR liability है अगर आप कुछ नहीं बदलते।</li>
+<li><strong>Week 2 — Technical fit assessment।</strong> हर MLP SKU के लिए, ऊपर का 4-lens framework check करें (light barrier, transparency, microwave, shelf life)। "AlOx-feasible" या "Met-PET-permanent" classify करें। ज़्यादातर snack और dry food SKUs AlOx-feasible होंगे; ज़्यादातर pharmaceutical और oil/vitamin SKUs Met-PET-permanent होंगे।</li>
+<li><strong>Week 3 — Plant capacity model।</strong> <a href="/#calc-met-capacity" style="color:#E85D26;font-weight:bold;">Met M/C Capacity calculator</a> use करें ये model करने के लिए कि अगर AlOx volume mix का 0% से 30% से 50% तक बढ़े तो आपके monthly output का क्या होगा। Capacity drop operational constraint है जो determine करता है आप कितनी तेज़ी से switch कर सकते हैं।</li>
+<li><strong>Week 4 — Financial scenario।</strong> ऊपर का Decision Helper हर AlOx-feasible SKU पर production volumes में use करें। Year 1 / Year 3 net cost picture बनाएँ। ज़्यादातर brands पाते हैं कि "30% MLP को 2027 तक AlOx पर switch" pathway financially defensible है — 100% switch shायद ही, 0% switch EPR-trajectory test fail करता है।</li>
+</ul>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#1A2744;font-size:1.05em;">📚 Full Metalliser Process Engineering Series</strong>
+<p style="margin:10px 0 0 0;line-height:1.8;color:#333;">ये blog पूरी series को tie करती है — financial framework + capacity engine + 2026 driving strategic decision।</p>
+<ul style="margin:12px 0 0 0;padding-left:22px;line-height:1.85;color:#333;">
+<li><a href="/blog/smed-boat-change-2017-case-study"><strong>Blog #22:</strong></a> Boat-Set SMED — 2017 case study</li>
+<li><a href="/blog/when-no-scope-roll-changeover-2016-case-study"><strong>Blog #23:</strong></a> Inter-Cycle SMED — 2016 case study</li>
+<li><a href="/blog/cut-metallised-waste-1-8-to-0-9-percent"><strong>Blog #24:</strong></a> Metallised Waste 1.8% → 0.9%</li>
+<li><a href="/blog/hub-cut-metalliser-downtime-2-smed-levers"><strong>Blog #25:</strong></a> 2 SMED Levers Hub</li>
+<li><a href="/blog/cut-bare-film-waste-2-to-1-percent"><strong>Blog #26:</strong></a> Bare Film Waste 2% → 1%</li>
+<li><a href="/blog/film-roll-weight-formula"><strong>Blog #27:</strong></a> Film Roll Weight Formula</li>
+<li><a href="/blog/conversion-cost-metalliser-actual-vs-equivalent"><strong>Blog #28:</strong></a> Conversion Cost — Actual vs Equivalent</li>
+<li><a href="/blog/calculate-equivalent-factor-any-material"><strong>Blog #29:</strong></a> Calculate Equivalent Factor for Any Material</li>
+<li><a href="/blog/calculate-capacity-metalliser"><strong>Blog #30:</strong></a> Metalliser की Capacity कैसे Calculate करें</li>
+<li><strong>ये blog (#31):</strong> AlOx vs Metallised PET — EPR Decision (आप यहाँ हैं)</li>
+</ul>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 कोई सवाल है?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">अपने specific product mix के लिए EPR cost model करने की कोशिश कर रहे हैं? सोच रहे हैं आपकी line AlOx चला सकती है या नहीं? Converter से AlOx vs Met PET pricing पर negotiate कर रहे हैं? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — Vivek personally answer करते हैं।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> AlOx PET और Metallised PET same machine पर बनती हैं पर interchangeable choices नहीं हैं। <strong>Metallised PET</strong> सही answer है जब light barrier matter करता है, जब product light-sensitive है, या जब brand के पास MLP feedstock के लिए working PCR strategy है। <strong>AlOx PET</strong> सही answer है जब product visibility, microwave-ability, mono-material recyclability, या EU/US export compliance structure drive करते हैं। EPR April 2026 amendment ने economics shift कर दी — Category III MLP अब ~₹17.5/kg shortfall liability carry करती है vs Category II mono-material के लिए ~₹4/kg, 4× delta। &gt;1000 MT/year ship करने वाले brands के लिए public sustainability commitments के साथ, AlOx mono-PET net positive होने लगता है। Low-margin mass-market SKUs के लिए, Met PET रहता है। Plant या तो तरह real price pay करता है: AlOx metalliser capacity 62% (32 → 12 MT/day) काटता है और conversion cost (₹15.59 → ₹46.77/kg) triple करता है। ऊपर का Decision Helper आपको अपना SKU सारे 4 lenses across honestly model करने देता है।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Series का अगला blog operational side पर deeper जाता है: <strong>Blog #32 — 5 Met Downtimes</strong> — exactly कहाँ आपके 1,420 daily minutes standard PET पर जाते हैं, और AlOx campaigns पर 240-min source-cleaning reality। उसके बाद, OEE for Metallisers (Blog #33) capacity, downtime, और waste को एक single number में combine करके productivity loop close करता है जो plant managers किसी भी review meeting में defend कर सकें।</p>
+
+</div>
+
+<script>
+(function() {
+  /* AlOx vs Met PET decision logic.
+     Inputs: light barrier need, recyclability priority, volume (MT/yr), target market, conversion cost ceiling.
+     Outputs: recommended structure + EPR liability + conversion cost + reasoning. */
+
+  var MET_PET_CONV = 15.59;  /* ₹/kg actual conversion cost (Blog 28) */
+  var ALOX_CONV = 46.77;     /* ₹/kg actual conversion cost (Blog 29 3x factor) */
+  var CAT3_EC = 17.50;       /* ₹/kg mid-range EC rate for MLP shortfall */
+  var CAT2_EC = 4.00;        /* ₹/kg mid-range EC rate for Cat II shortfall */
+
+  function fmt(n, prefix, suffix, decimals) {
+    if (!isFinite(n) || n < 0) return '—';
+    var d = decimals !== undefined ? decimals : 2;
+    var s = n.toFixed(d);
+    /* Indian comma format for lakh/crore amounts */
+    if (n >= 100000) {
+      var inLakhs = n / 100000;
+      if (inLakhs >= 100) {
+        s = (inLakhs/100).toFixed(2) + ' Cr';
+      } else {
+        s = inLakhs.toFixed(2) + ' L';
+      }
+    } else {
+      s = Math.round(n).toLocaleString('en-IN');
+    }
+    return (prefix||'') + s + (suffix||'');
+  }
+
+  function decide(suffix) {
+    var lightbar = document.getElementById('lightbar-' + suffix).value;
+    var recyc = document.getElementById('recyc-' + suffix).value;
+    var volume = parseFloat(document.getElementById('volume-' + suffix).value) || 0;
+    var market = document.getElementById('market-' + suffix).value;
+    var ccap = parseFloat(document.getElementById('ccap-' + suffix).value) || 0;
+
+    var recommendation, reason, conv, epr, total_per_kg;
+    var kg_per_year = volume * 1000;
+
+    /* HARD RULES — these dominate everything else */
+    /* Rule 1: critical light barrier → Metallised PET only */
+    if (lightbar === 'critical') {
+      recommendation = 'Metallised PET (MLP)';
+      conv = kg_per_year * MET_PET_CONV;
+      epr = kg_per_year * CAT3_EC;
+      total_per_kg = MET_PET_CONV + CAT3_EC;
+      reason = (suffix === 'en')
+        ? 'Critical light barrier rules out AlOx — its 90% transparency cannot protect UV-sensitive products. Stay with Metallised PET in MLP structure. Pursue Category III recycled-content procurement to reduce EPR exposure.'
+        : 'Critical light barrier AlOx को rule out करता है — इसकी 90% transparency UV-sensitive products को protect नहीं कर सकती। MLP structure में Metallised PET के साथ रहें। Category III recycled-content procurement pursue करें EPR exposure कम करने के लिए।';
+    }
+    /* Rule 2: export market + high recyc → AlOx (regulatory forces it) */
+    else if (market === 'export' && recyc !== 'low') {
+      recommendation = 'AlOx mono-PET';
+      conv = kg_per_year * ALOX_CONV;
+      epr = kg_per_year * CAT2_EC;
+      total_per_kg = ALOX_CONV + CAT2_EC;
+      reason = (suffix === 'en')
+        ? 'EU PPWR and US state EPR mandate mono-material on tighter timelines than India. AlOx mono-PET is the only structure that satisfies India + EU + US compliance simultaneously. Capacity hit on the metalliser is a known cost — plan for 2.66× line-time per kg.'
+        : 'EU PPWR और US state EPR India से tighter timelines पर mono-material mandate करते हैं। AlOx mono-PET एकमात्र structure है जो India + EU + US compliance एक साथ satisfy करता है। Metalliser पर capacity hit known cost है — 2.66× line-time per kg के लिए plan करें।';
+    }
+    /* Rule 3: high recyclability priority + decent volume → AlOx */
+    else if (recyc === 'high' && volume >= 200) {
+      recommendation = 'AlOx mono-PET';
+      conv = kg_per_year * ALOX_CONV;
+      epr = kg_per_year * CAT2_EC;
+      total_per_kg = ALOX_CONV + CAT2_EC;
+      reason = (suffix === 'en')
+        ? 'High recyclability commitment with serious volume. AlOx mono-PET aligns with public sustainability pledges and 2027 EPR target tightening (Cat II 10%→20%). Conversion cost premium offset partially by Cat II EPR liability drop and brand-premium uplift.'
+        : 'High recyclability commitment with serious volume। AlOx mono-PET public sustainability pledges और 2027 EPR target tightening (Cat II 10%→20%) के साथ align करता है। Conversion cost premium Cat II EPR liability drop और brand-premium uplift से partially offset।';
+    }
+    /* Rule 4: cost-king + low recyc → Metallised PET */
+    else if (recyc === 'low' && lightbar !== 'none') {
+      recommendation = 'Metallised PET (MLP)';
+      conv = kg_per_year * MET_PET_CONV;
+      epr = kg_per_year * CAT3_EC;
+      total_per_kg = MET_PET_CONV + CAT3_EC;
+      reason = (suffix === 'en')
+        ? 'Cost-driven decision; low recyclability priority. Metallised PET MLP delivers lowest conversion cost. The Category III EPR exposure is real (~₹17.50/kg shortfall) — budget for it or procure Cat III certificates from compliant recyclers.'
+        : 'Cost-driven decision; low recyclability priority। Metallised PET MLP lowest conversion cost देती है। Category III EPR exposure real है (~₹17.50/kg shortfall) — इसके लिए budget करें या compliant recyclers से Cat III certificates procure करें।';
+    }
+    /* Rule 5: transparency wanted (no light barrier needed) → AlOx */
+    else if (lightbar === 'none') {
+      recommendation = 'AlOx mono-PET';
+      conv = kg_per_year * ALOX_CONV;
+      epr = kg_per_year * CAT2_EC;
+      total_per_kg = ALOX_CONV + CAT2_EC;
+      reason = (suffix === 'en')
+        ? 'Transparency preferred and no light-barrier need. AlOx is the natural fit — see-through high-barrier in a recyclable mono-PET structure. The conversion cost premium is real but supported by product visibility and Cat II EPR savings.'
+        : 'Transparency preferred और कोई light-barrier need नहीं। AlOx natural fit है — recyclable mono-PET structure में see-through high-barrier। Conversion cost premium real है पर product visibility और Cat II EPR savings से supported।';
+    }
+    /* Rule 6: default split scenario — recommend partial migration */
+    else {
+      recommendation = 'Hybrid (50% AlOx + 50% Met PET)';
+      var alox_kg = kg_per_year * 0.5;
+      var met_kg = kg_per_year * 0.5;
+      conv = alox_kg * ALOX_CONV + met_kg * MET_PET_CONV;
+      epr = alox_kg * CAT2_EC + met_kg * CAT3_EC;
+      total_per_kg = (conv + epr) / kg_per_year;
+      reason = (suffix === 'en')
+        ? 'Mixed signals — moderate light barrier need + moderate recyclability priority. A 50/50 hybrid migration spreads the risk: keep light-sensitive SKUs on Met PET, move see-through SKUs to AlOx. Re-evaluate quarterly as 2027 EPR targets tighten.'
+        : 'Mixed signals — moderate light barrier need + moderate recyclability priority। 50/50 hybrid migration risk spread करता है: light-sensitive SKUs Met PET पर रखें, see-through SKUs AlOx पर move करें। 2027 EPR targets tighten होते हुए quarterly re-evaluate करें।';
+    }
+
+    /* Conversion cost ceiling check — overlay warning if exceeded */
+    if (ccap > 0 && total_per_kg > ccap) {
+      reason += (suffix === 'en')
+        ? ' ⚠️ Total per-kg cost (₹' + total_per_kg.toFixed(2) + ') exceeds your ceiling of ₹' + ccap.toFixed(2) + '/kg. Consider negotiating with multiple converters or accepting partial EPR shortfall to stay within budget.'
+        : ' ⚠️ Total per-kg cost (₹' + total_per_kg.toFixed(2) + ') आपके ceiling ₹' + ccap.toFixed(2) + '/kg से ज़्यादा है। Multiple converters से negotiate करें या budget में रहने के लिए partial EPR shortfall accept करें।';
+    }
+
+    document.getElementById('rec-' + suffix).textContent = recommendation;
+    document.getElementById('rec-sub-' + suffix).textContent = (suffix === 'en')
+      ? 'For ' + volume.toLocaleString('en-IN') + ' MT/year volume'
+      : volume.toLocaleString('en-IN') + ' MT/year volume के लिए';
+    document.getElementById('epr-' + suffix).textContent = volume > 0 ? '₹' + fmt(epr) : '—';
+    document.getElementById('cnv-' + suffix).textContent = volume > 0 ? '₹' + fmt(conv) : '—';
+    document.getElementById('ttl-' + suffix).textContent = volume > 0 ? '₹' + total_per_kg.toFixed(2) : '—';
+    document.getElementById('reason-' + suffix).textContent = reason;
+  }
+
+  function bind(suffix) {
+    var ids = ['lightbar','recyc','volume','market','ccap'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + suffix);
+      if (el) {
+        el.addEventListener('input', function() { decide(suffix); });
+        el.addEventListener('change', function() { decide(suffix); });
+      }
+    });
+    decide(suffix);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
