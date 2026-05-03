@@ -583,14 +583,34 @@ async function fetchAndPreview(){
     const html = await r.text();
     const meta = parseBlogHtml(html);
 
-    /* Build cover URL — resolve relative to folder */
+    /* Build cover URL — resolve relative to folder.
+       Priority:
+       1. <img src="..."> in the HTML body (handled by parseBlogHtml → meta.cover)
+       2. Common cover filenames in the folder (cover.png/jpg/jpeg/webp, then OG variants)
+       3. Nothing — admin shows "no cover" warning */
     let coverUrl = '';
+    let coverSource = '';
     if (meta.cover){
       if (/^https?:\/\//i.test(meta.cover)){
         coverUrl = meta.cover;
       } else {
         const clean = meta.cover.replace(/^\.?\/+/, '');
         coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
+      }
+      coverSource = 'from HTML <img>';
+    } else {
+      /* Fallback: scan folder files for a conventional cover image */
+      const coverNames = ['cover.png','cover.jpg','cover.jpeg','cover.webp',
+                          'og-image.png','og-image.jpg','og.png','og.jpg',
+                          'thumbnail.png','thumbnail.jpg','hero.png','hero.jpg'];
+      const lowerFiles = files.map(f => ({ orig: f.name, lower: f.name.toLowerCase() }));
+      for (const candidate of coverNames){
+        const match = lowerFiles.find(f => f.lower === candidate);
+        if (match){
+          coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${match.orig}`;
+          coverSource = 'auto-detected from folder file: ' + match.orig;
+          break;
+        }
       }
     }
 
@@ -618,8 +638,8 @@ async function fetchAndPreview(){
       : '<div style="background:#e6f7ed;border-left:3px solid var(--green);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:.82rem">✅ All metadata found cleanly.</div>';
 
     const coverHtml = coverUrl
-      ? '<div style="display:flex;gap:14px;align-items:flex-start;margin-top:6px"><img src="'+escH(coverUrl)+'" alt="Cover" style="width:140px;height:auto;border-radius:8px;border:1px solid var(--border)"><div style="flex:1;font-size:.78rem;color:var(--muted);word-break:break-all">'+escH(coverUrl)+'</div></div>'
-      : '<div style="color:var(--muted);font-style:italic">No cover image detected</div>';
+      ? '<div style="display:flex;gap:14px;align-items:flex-start;margin-top:6px"><img src="'+escH(coverUrl)+'" alt="Cover" style="width:140px;height:auto;border-radius:8px;border:1px solid var(--border)"><div style="flex:1;font-size:.78rem;color:var(--muted);word-break:break-all">'+escH(coverUrl)+(coverSource ? '<br><small style="color:var(--teal);font-style:italic">✓ '+escH(coverSource)+'</small>' : '')+'</div></div>'
+      : '<div style="color:var(--muted);font-style:italic">No cover image detected. Tip: name a file <code>cover.png</code> in the folder, OR add <code>&lt;img src="cover.png"&gt;</code> at the top of your blog HTML.</div>';
 
     previewContent.innerHTML =
       '<table style="width:100%;border-collapse:collapse">'+
@@ -649,6 +669,32 @@ function parseBlogHtml(html){
   const metaCat = doc.querySelector('meta[name="category"]');
   if (metaCat && metaCat.getAttribute('content')){
     out.category = metaCat.getAttribute('content').trim().toLowerCase();
+    /* Normalize known wrong/legacy category values to canonical ones */
+    const catAliases = {
+      'flexible-packaging': 'packaging',
+      'flexible_packaging': 'packaging',
+      'flexible packaging': 'packaging',
+      'flex-pack': 'packaging',
+      'fp': 'packaging',
+      'manufacturing-excellence': 'manufacturing',
+      'manufacturing_excellence': 'manufacturing',
+      'excel-formulas': 'excel',
+      'excel-and-formulas': 'excel',
+      'career-growth': 'career',
+      'career-and-growth': 'career',
+      'tech-tools': 'tech',
+      'tech-and-tools': 'tech'
+    };
+    if (catAliases[out.category]){
+      out.warnings.push('Category "' + out.category + '" was auto-normalized to "' + catAliases[out.category] + '". Update <meta name="category"> in your HTML to avoid this.');
+      out.category = catAliases[out.category];
+    }
+    /* Validate against known list */
+    const validCategories = ['packaging','excel','career','tech','manufacturing'];
+    if (!validCategories.includes(out.category)){
+      out.warnings.push('Unknown category "' + out.category + '". Valid: ' + validCategories.join(', ') + '. Defaulting to "manufacturing".');
+      out.category = 'manufacturing';
+    }
   } else {
     out.warnings.push('No <meta name="category"> found — will default to "manufacturing". Add it to the HTML for correct tagging.');
     out.category = 'manufacturing';
