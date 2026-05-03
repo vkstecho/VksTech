@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 34 (OTR & WVTR Explained)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
+  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
+  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
+  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
+  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn.copied { background: #0D8C7E; }
+  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
+  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
+  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .meta-band strong { color: #E85D26; }
+  .upgrade-band { background: rgba(13,140,126,0.12); border: 1px solid #0D8C7E; color: #1A2744; padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .upgrade-band strong { color: #0D8C7E; }
+  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 34</h1>
+<p class="meta"><em>OTR & WVTR — The Two Numbers That Decide What Your Package Can Hold</em><br>6 images: 1 cover + 2 bilingual concept diagrams + 2 bilingual data viz + 1 standalone cheat sheet</p>
+
+<div class="upgrade-band">
+<strong>Standards used:</strong> All prompts include <code>IMAGE SPEC:</code> line inside the prompt body so Gemini honors the dimensions when copy-pasted. OTR is colour-coded orange across all images; WVTR is colour-coded teal. Image 4 is the standalone bookmark-able cheat sheet — designed to be saved on phone and printed on A4.
+</div>
+
+<div class="meta-band">
+<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 6 images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Cover — molecules (O₂ + H₂O) leaking through film + the killer 3-tier comparison</td></tr>
+<tr><td>2A</td><td><code>barrier-concept-en.png</code></td><td>16:9</td><td>OTR/WVTR concept diagram — definitions, units, test conditions (English)</td></tr>
+<tr><td>2B</td><td><code>barrier-concept-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3A</td><td><code>food-product-matrix-en.png</code></td><td>16:9</td><td>10 food products → barrier requirement bar chart (English)</td></tr>
+<tr><td>3B</td><td><code>food-product-matrix-hi.png</code></td><td>16:9</td><td>Same as 3A in Hindi</td></tr>
+<tr><td>4</td><td><code>cheat-sheet.png</code></td><td>4:5 portrait</td><td><strong>STANDALONE CHEAT SHEET</strong> — 16 substrate reference, printable</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards</h2>
+<p><strong>Colors:</strong> Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>. No others.<br>
+<strong>Convention:</strong> OTR = orange across all 6 images. WVTR = teal across all 6 images.<br>
+<strong>Fonts:</strong> Inter / Söhne (Latin); Hind / Mukta (Devanagari); Bebas Neue / Anton for big numbers.<br>
+<strong>Critical numbers:</strong> Bare PET <strong>110/40</strong> · Met PET <strong>&lt;1/&lt;1</strong> · Foil <strong>0/0</strong> · OTR test: <strong>23°C/0% RH</strong> · WVTR test: <strong>38°C/90% RH</strong>.</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. The output must be widescreen landscape. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized for fast loading (target file size 400-700 KB). No JPEG artifacts, no blur, no fuzzy edges on text.
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "OTR & WVTR — The Two Numbers That Decide What Your Package Can Hold."
+
+Composition — left two-thirds is a barrier-permeation visual, right one-third is a hero text panel.
+
+LEFT TWO-THIRDS — barrier permeation visual:
+
+A horizontal stage on a clean cream #FAF9F6 background with subtle paper-grain texture. The visual shows a vertical cross-section of a flexible film barrier with two types of molecules attempting to pass through:
+
+- Center of stage: A vertical translucent film panel rendered in pale silver-grey, roughly 60% of stage height, with a subtle metallic shine (representing a metallised film). The film is stylised as a thin vertical rectangle. Above the film, label "FLEXIBLE PACKAGING FILM" in tiny navy caps.
+- Left of the film: Floating O₂ molecules rendered as orange #E85D26 filled circles with a smaller "O₂" label inside each. Show 5-7 O₂ molecules approaching the film from the left, with motion arrows. One or two molecules shown getting through to the right side (representing OTR), labelled with a small tag "OTR — slow leak".
+- Right of the film: A package of food (a stylised flat-vector snack pouch shape with simple silhouette of a chip/biscuit visible) sitting alone, with one or two H₂O molecules (teal #0D8C7E filled circles with "H₂O" label) approaching from the right side and trying to enter through the film, labelled "WVTR — slow leak". Some H₂O molecules also passing through, going inward toward the food.
+
+Above the entire visual, a single line of text in tiny navy caps centred: EVERY PACKAGE IS A SLOW LEAK. THESE TWO NUMBERS MEASURE HOW SLOW.
+
+Below the visual, two small badges side by side, centred:
+- Left badge: orange #E85D26 background, white text, "OTR = OXYGEN cc/m²/day"
+- Right badge: teal #0D8C7E background, white text, "WVTR = WATER VAPOUR g/m²/day"
+
+RIGHT ONE-THIRD — navy #1A2744 editorial panel with subtle paper-grain texture:
+- Top eyebrow strip in orange #E85D26, all caps, small letterspacing: vksTech.com / FLEXIBLE PACKAGING
+- Main title in white Inter Bold or Söhne Bold (3-4 lines, large): OTR & WVTR
+- Subtitle (smaller italic, grey): The two numbers that decide what your package can hold.
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO STAT BLOCK — three rows showing the substrate progression:
+  - Bare PET: OTR 110 (in orange) / WVTR 40 (in teal)
+  - Met PET: OTR <1 (in orange) / WVTR <1 (in teal)
+  - Foil: OTR 0 (in orange) / WVTR 0 (in teal)
+  Each row in Bebas Neue at ~50 pt for the numbers, with substrate name in a small white caps tag to the left.
+- Small text below: 200× barrier improvement from a 0.04 μm aluminium layer
+- Bottom strip: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- In the bottom-right corner of this panel, place the attached VKS Tech logo at ~100×100 px on a thin white round backplate
+
+Mood: technical, authoritative, the cover of a reference document an engineer would bookmark. NOT a marketing brochure. NOT decorative. Reads like a Scientific American or Nature feature header.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No red except orange. No green outside teal. No yellow.</div>
+<div class="planb"><strong>Plan B:</strong> If the molecule visuals look weak, simplify to abstract dots (orange dots = O₂, teal dots = H₂O) with motion arrows. The colour-coding (orange for OTR, teal for WVTR) carries the meaning.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Barrier Concept Diagram (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Barrier Concept</div>
+<div class="prompt-meta">Save as <code>barrier-concept-en.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No JPEG artifacts, no blur on text.
+
+Create a clean flat-vector editorial concept-diagram. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. The Economist / Harvard Business Review methodology-diagram style.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header zone (top 10%):
+- Eyebrow strip in orange #E85D26, small caps, letterspaced: THE TWO NUMBERS, EXPLAINED
+- Title (navy #1A2744, large bold sans-serif): What OTR and WVTR Actually Measure
+- Subtitle (grey #5A5A5A): Definitions, units, test conditions, and what 'good' looks like.
+
+Main visual zone (middle 80%) — TWO PANELS side by side, 50/50 split:
+
+LEFT PANEL — OTR (orange-themed):
+- Top tag (orange #E85D26 filled rounded rectangle, white caps): OTR — OXYGEN TRANSMISSION RATE
+- Below tag, a small flat-vector cross-section illustration: a vertical translucent film, with 3-4 orange #E85D26 filled circles (O₂ molecules) on left side approaching, 1 small circle visible on the right (transmitted). Tiny caption below: "How much O₂ leaks through 1 m² per day"
+- Definition box (light orange tinted background, navy text): The volume of oxygen that passes through 1 m² of film in 24 hours.
+- Test conditions row (4 small data tiles in a row):
+  - "23°C" (temperature)
+  - "0% RH" (humidity)
+  - "cc/m²/day" (units)
+  - "Lower = better" (interpretation)
+- Reference values (3-line list, big numbers):
+  - Bare PET 12μm → 110 (in orange Bebas Neue ~40 pt)
+  - Metallised PET → <1 (in orange ~40 pt)
+  - Aluminium foil → 0 (in orange ~40 pt)
+
+RIGHT PANEL — WVTR (teal-themed):
+- Top tag (teal #0D8C7E filled rounded rectangle, white caps): WVTR — WATER VAPOUR TRANSMISSION RATE
+- Below tag, a small flat-vector cross-section: a vertical translucent film, with 3-4 teal #0D8C7E filled circles (H₂O molecules) on left side approaching, 1 small circle visible on the right. Tiny caption: "How much H₂O leaks through 1 m² per day"
+- Definition box (light teal tinted background, navy text): The mass of water vapour that passes through 1 m² of film in 24 hours.
+- Test conditions row (4 small data tiles):
+  - "38°C"
+  - "90% RH"
+  - "g/m²/day"
+  - "Lower = better"
+- Reference values:
+  - Bare PET 12μm → 40 (in teal ~40 pt)
+  - Metallised PET → <1 (in teal ~40 pt)
+  - Aluminium foil → 0 (in teal ~40 pt)
+
+Bottom callout strip (full-width, 8% of height):
+Navy #1A2744 background. Two-column split:
+- LEFT (orange/teal alternating bold): ⚡ Quick rule:
+- RIGHT (white text): OTR is the oxygen number, WVTR is the water number. Both in 'per square metre per day'. Both: lower = better. Both reported on every legitimate film spec sheet.
+
+Bottom-right corner: VKS Tech logo at ~80×80 px on white circle backplate.
+Bottom-left corner: small grey footer text: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout. OTR/WVTR tag chips in semibold caps. Reference number values in heavy condensed font (Bebas Neue, Anton, Oswald).
+
+AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders.</div>
+<div class="planb"><strong>Plan B:</strong> If molecule visuals look weak, simplify to coloured dots with arrows showing direction. Colour code (orange for O₂, teal for H₂O) carries the meaning.</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Barrier Concept Diagram (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Barrier Concept</div>
+<div class="prompt-meta">Save as <code>barrier-concept-hi.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
+
+Create a flat-vector editorial concept-diagram with EXACTLY the same layout, colour palette, and structure as the English Barrier Concept Diagram. Numbers (110, 40, <1, 0), units (cc/m²/day, g/m²/day, °C, RH%), abbreviations (OTR, WVTR, O₂, H₂O), and substrate names (Bare PET, Metallised PET, Aluminium foil) stay in English. Only title, subtitle, definition boxes, captions, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange #E85D26, English): THE TWO NUMBERS, EXPLAINED
+- Title (Hindi, navy bold, large): OTR और WVTR Actually क्या Measure करते हैं
+- Subtitle (Hindi, grey): Definitions, units, test conditions, और 'good' कैसा दिखता है।
+
+LEFT PANEL — OTR (orange-themed):
+- Tag (English): OTR — OXYGEN TRANSMISSION RATE
+- Caption (Hindi): "1 m² से per day कितना O₂ leak होता है"
+- Definition box (Hindi, navy text): Oxygen का volume जो 1 m² film से 24 hours में pass होता है।
+- Test conditions row (English): 23°C / 0% RH / cc/m²/day / "Lower = better"
+- Reference values (substrate names English, numbers English):
+  - Bare PET 12μm → 110
+  - Metallised PET → <1
+  - Aluminium foil → 0
+
+RIGHT PANEL — WVTR (teal-themed):
+- Tag (English): WVTR — WATER VAPOUR TRANSMISSION RATE
+- Caption (Hindi): "1 m² से per day कितना H₂O leak होता है"
+- Definition box (Hindi, navy text): Water vapour का mass जो 1 m² film से 24 hours में pass होता है।
+- Test conditions row (English): 38°C / 90% RH / g/m²/day / "Lower = better"
+- Reference values:
+  - Bare PET 12μm → 40
+  - Metallised PET → <1
+  - Aluminium foil → 0
+
+Bottom callout (Hindi):
+- LEFT (orange/teal alternating bold): ⚡ Quick rule:
+- RIGHT (white text, Hindi): OTR oxygen का number है, WVTR water का। दोनों 'per square metre per day' में। दोनों: lower = better। दोनों हर legitimate film spec sheet पर reported।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 2A first, replace title, subtitle, captions, definition boxes, and bottom callout with proper Devanagari text using Hind or Mukta font in Photopea/Canva. Numbers, abbreviations, units, substrate names stay in English.</div>
+</div>
+
+<!-- IMAGE 3A -->
+<h2>Image 3A — Food-Product Matrix (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Food-Product Matrix</div>
+<div class="prompt-meta">Save as <code>food-product-matrix-en.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3a">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges. Output as PNG, web-optimized (target file size 300-600 KB).
+
+Create a clean flat-vector editorial data infographic. NOT photorealistic. NOT 3D. Bloomberg Markets / Financial Times style.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header zone (top 10%):
+- Eyebrow strip in orange #E85D26, small caps, letterspaced: THE PRODUCT-BARRIER MATRIX
+- Title (navy #1A2744, large bold sans-serif): What Different Foods Actually Need
+- Subtitle (grey #5A5A5A): OTR (orange) and WVTR (teal) targets for 10 common Indian food products. Lower = stricter barrier required.
+
+Main visual zone (middle 80%) — A horizontal grouped bar chart:
+
+10 rows, one per food product. Each row shows the product name on the left, then two horizontal bars: an orange bar for OTR (logarithmic scale, since values span 0.1 to 100) and a teal bar for WVTR (similar log scale 0.5 to 5). Bar lengths represent the maximum acceptable value (longer bar = looser requirement = easier).
+
+Products listed top to bottom (sorted from strictest to loosest barrier):
+
+1. Milk (UHT) — OTR bar at value 0.1 (very short orange) / WVTR at 0.5 (very short teal)
+2. Coffee (ground) — OTR 0.3 / WVTR 1
+3. Pharma tablets — OTR 0.5 / WVTR 0.5
+4. Namkeen / chips — OTR 1 / WVTR 1
+5. Chocolate — OTR 2 / WVTR 1
+6. Spices (ground) — OTR 2 / WVTR 1
+7. Biscuits — OTR 5 / WVTR 1
+8. Atta / wheat flour — OTR 50 / WVTR 3
+9. Rice / pulses — OTR 100 / WVTR 5
+10. Sugar / salt — OTR 500 / WVTR 10
+
+Each row also has the OTR and WVTR numeric values shown to the right of the bars in their respective colours (orange for OTR, teal for WVTR), in semibold.
+
+A vertical dashed line at OTR = 1 with label "FOIL-CLASS REQUIRED" (in tiny navy caps along the line). Another vertical dashed line at OTR = 50 with label "BARE LAMINATE OK".
+
+Bottom callout strip (8%):
+Navy #1A2744 background, two-column split:
+- LEFT (orange #E85D26 bold): ⚡ The hierarchy:
+- RIGHT (white text): Top 4 products (Milk, Coffee, Pharma, Snacks) need metallised structures. Middle 3 (Chocolate, Spices, Biscuits) need metallised but cheaper grade. Bottom 3 (Atta, Rice, Sugar) need only basic laminates. Spec accordingly.
+
+Bottom-right corner: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left corner: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif. Product names in semibold. Numeric values in regular weight.
+
+AVOID: clipart, cartoons, 3D, decorative borders, drop shadows beyond very subtle, rainbow colours.</div>
+<div class="planb"><strong>Plan B:</strong> If logarithmic bars look confusing, switch to a simple table format with three columns: Food product / OTR target / WVTR target. The data is still legible.</div>
+</div>
+
+<!-- IMAGE 3B -->
+<h2>Image 3B — Food-Product Matrix (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Food-Product Matrix</div>
+<div class="prompt-meta">Save as <code>food-product-matrix-hi.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3b">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
+
+Create a flat-vector editorial data infographic with EXACTLY the same layout as the English Food-Product Matrix. Numbers, units, food product names, and chart axis labels stay in English. Only title, subtitle, vertical line labels, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange, English): THE PRODUCT-BARRIER MATRIX
+- Title (Hindi, navy bold): Different Foods को Actually क्या चाहिए
+- Subtitle (Hindi, grey): 10 common Indian food products के लिए OTR (orange) और WVTR (teal) targets। Lower = stricter barrier required।
+
+Bar chart: Identical layout. All 10 product names, OTR/WVTR values, and bar lengths same as Image 3A.
+
+Vertical dashed line labels (Hindi):
+- At OTR = 1: "FOIL-CLASS REQUIRED" (English, kept short)
+- At OTR = 50: "BARE LAMINATE OK" (English, kept short)
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Hierarchy:
+- RIGHT (white text, Hindi): Top 4 products (Milk, Coffee, Pharma, Snacks) को metallised structures चाहिए। Middle 3 (Chocolate, Spices, Biscuits) को metallised पर cheaper grade। Bottom 3 (Atta, Rice, Sugar) को सिर्फ़ basic laminates चाहिए। Accordingly spec करें।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 3A.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate 3A first; replace Hindi text in Photopea/Canva using Hind or Mukta. Numbers, food names, and units stay in English.</div>
+</div>
+
+<!-- IMAGE 4 — CHEAT SHEET -->
+<h2>Image 4 — Substrate Cheat Sheet (Standalone Bookmark)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">📋 Substrate Cheat Sheet (PORTRAIT)</div>
+<div class="prompt-meta">Save as <code>cheat-sheet.png</code> · 1200×1500 portrait · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-4">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-4">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1200 pixels wide by 1500 pixels tall, 4:5 portrait aspect ratio. This is a vertical (portrait) format, NOT landscape. Do NOT generate square (1:1) or landscape formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 400-700 KB). Designed to be saved as a phone wallpaper or printed on A4 paper.
+
+Create a clean, professional, bookmark-quality reference cheat sheet — the kind of one-page printable that operators on a flexible packaging shop floor would tape to the wall next to their Mocon machine. NOT a marketing brochure. A working tool.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture.
+
+Header zone (top 12% of image):
+- VKS Tech logo (the attached logo.png) at top-left, ~100×100 px
+- To the right of the logo, two-line header:
+  - Eyebrow line in orange #E85D26 small caps: VKSTECH.COM REFERENCE CHEAT SHEET
+  - Main title in navy #1A2744 bold large: OTR & WVTR — 16 Substrate Reference
+- Below the title, a thin orange #E85D26 horizontal divider
+
+Body zone (middle 76% of image) — a clean table with the 16 substrates:
+
+Each row:
+- Substrate name (left, navy bold)
+- OTR value in orange #E85D26 semibold (cc/m²/day)
+- WVTR value in teal #0D8C7E semibold (g/m²/day)
+- Brief 2-3 word verdict tag (right, grey small italic)
+
+Header row at the top of the table:
+| SUBSTRATE | OTR | WVTR | NOTES |
+
+Substrates (top to bottom — sorted from worst to best barrier):
+1. Paper (kraft, uncoated) — ∞ — ∞ — No barrier
+2. Bare LDPE 50μm — 7,800 — 18 — Sealant only
+3. Bare BOPP 20μm — 2,400 — 6 — Cheap, leaks O₂
+4. Bare CPP 30μm — 2,000 — 8 — Sealing layer
+5. Bare HDPE 50μm — 2,000 — 8 — Stiffer than LDPE
+6. PLA (compostable) 30μm — 300 — 300 — Biodegradable, niche
+7. Bare PET 12μm — 110 — 40 — Strong, weak barrier
+8. Nylon (BOPA) 15μm — 40 — 200 — Pierce-resistant
+9. Metallised BOPP 20μm — 1.0 — 0.8 — Cheap met grade
+10. SiOx PET 12μm — 1.0 — 0.8 — Transparent silicon
+11. AlOx PET 12μm — 0.7 — 0.5 — Transparent, mono-PET
+12. PVDC coating — 0.5 — 1.0 — Legacy, phasing out
+13. Metallised PET 12μm — 0.5 — 0.5 — Industry workhorse  (highlight this row with a subtle orange #E85D26 background tint)
+14. EVOH 15μm (in laminate) — 0.1 (dry) — 30 — Best O₂, weak H₂O
+15. Aluminium foil 9μm — 0 — 0 — Perfect, heavy
+16. Glass jar — 0 — 0 — Perfect, breaks
+
+Footer zone (bottom 12% of image):
+Three columns:
+- LEFT: A small orange-themed key showing "ORANGE = OTR (oxygen barrier)"
+- CENTER: A small teal-themed key showing "TEAL = WVTR (water vapour barrier)"
+- RIGHT: A small navy panel: Test conditions: OTR @ 23°C/0% RH (cc/m²/day). WVTR @ 38°C/90% RH (g/m²/day). Lower = better.
+
+Above the footer columns, a thin orange divider.
+
+Bottom-most strip with grey small caps: vkstech.com — More calculators, more cheat sheets, real-plant methodology · Vivek Kumar | M.Tech NIT Uttarakhand
+
+Mood: clean, dense, useful, professional. The kind of reference doc a real engineer would print and use. NOT decorative. NOT spaced out. Information density is a feature.
+
+Typography: Inter or Söhne sans-serif throughout. Numbers in semibold. Substrate names bold navy.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No others.
+
+AVOID: decorative borders, clipart, drop shadows, gradients, 3D effects.</div>
+<div class="planb"><strong>Plan B:</strong> If the table format looks cramped at 1200×1500, increase row height by reducing substrate count to 12 (drop SiOx, PVDC, PLA, HDPE — less common in Indian flexible packaging). The remaining 12 still cover 95% of real-world structures.</div>
+</div>
+
+<h2>Review Checklist (8-Point)</h2>
+<ol>
+<li><strong>Brand colours</strong> — Navy / Orange / Teal / Cream / white / grey only. OTR consistently orange across all images, WVTR consistently teal.</li>
+<li><strong>Typography</strong> — Inter/Söhne sans-serif; big numbers in Bebas/Anton.</li>
+<li><strong>Number accuracy (HARD)</strong> — Cover: Bare PET 110/40, Met PET &lt;1/&lt;1, Foil 0/0. Concept 2A/2B: same 3-tier values + 23°C/0%RH and 38°C/90%RH. Matrix 3A/3B: 10 food products with correct OTR/WVTR. Cheat sheet: 16 substrates correct.</li>
+<li><strong>Source attribution</strong> — Mocon Ox-Tran / ASTM E96 mentioned where appropriate.</li>
+<li><strong>Image format and file size</strong> — Images 1, 2A, 2B, 3A, 3B at 1600×900 widescreen PNG (300-700 KB). Image 4 at 1200×1500 portrait PNG (400-700 KB).</li>
+<li><strong>Logo placement</strong> — bottom-right (Images 1-3) or top-left (Image 4 cheat sheet), ~80–110 px.</li>
+<li><strong>Information density</strong> — cover 5 sec, concept diagram 10 sec, matrix 5 sec, cheat sheet dense by design.</li>
+<li><strong>No AI-tells</strong> — no faces, no distorted hands, no garbled small text.</li>
+</ol>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">34-otr-wvtr-explained/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── barrier-concept-en.png         (Image 2A)
+├── barrier-concept-hi.png         (Image 2B)
+├── food-product-matrix-en.png     (Image 3A)
+├── food-product-matrix-hi.png     (Image 3B)
+├── cheat-sheet.png                (Image 4 — STANDALONE BOOKMARK)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) { markCopied(btn); showToast('✓ Prompt copied to clipboard'); }
+      else { showToast('✗ Copy failed — please select manually'); }
+    } catch (e) { showToast('✗ Copy failed — please select manually'); }
+    document.body.removeChild(ta);
+  }
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) copyText(target.textContent.trim(), btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>

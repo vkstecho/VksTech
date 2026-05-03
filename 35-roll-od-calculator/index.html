@@ -1,0 +1,413 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="general-common">
+
+<div class="en-content">
+
+<h2>📏 Roll OD Calculator — The 30-Second Answer to "Will This Jumbo Fit?"</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; The Operator's Tool for Pre-Run Planning, Customer Spec Translation, and Stockroom Audits &nbsp;|&nbsp; Published May 2026</p>
+
+<p>Every flexible packaging operator has faced this moment: a fresh jumbo arrives at the slitter, you go to mount it on the unwind chuck, and the OD doesn't fit. Now there is a 20-minute panic — find a different chuck, or call the warehouse to swap rolls, or worst case, partial-unwind the jumbo onto a smaller core. All of it because no one calculated the expected outer diameter before the roll left the metalliser. This blog explains the formula behind the <a href="https://www.vkstech.com/#calc-roll-od" style="color:#E85D26;font-weight:bold;">free Roll OD calculator on vkstech.com</a> — what it computes, why operators need it, the six real situations where it earns its place on the shop floor, and a bonus section on the inverse problem (when the customer specifies an OD and you need the length).</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The Formula in 30 Seconds</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>OD = √( (4 × L × μm) / π + Core² )</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Where L = length in metres, μm = thickness in microns, Core = inner core OD in mm. Output OD is in mm.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Typical metalliser jumbo: PET 12μm, 30,000 m, 152 mm core. <strong>Predicted OD = 694 mm</strong>. Run-time math: most slitter chucks handle 800-900 mm — comfortable fit. If the customer needed 50,000 m on the same core, OD would jump to 887 mm — borderline, check chuck capacity first.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHEN TO USE IT</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Six situations: pre-run jumbo planning, slitter chuck fit-check, customer spec translation, stockroom audit, pallet/container layout planning, splice-vs-changeover decision. Each one explained below with worked examples.</div>
+</div>
+</div>
+
+<h3>📐 Why the Formula Works — The Geometry in One Page</h3>
+
+<p>A roll of film wound on a core is geometrically a hollow cylinder. The film material occupies the annular ring between the core OD and the outer OD. If you unrolled the entire film and laid it flat, its cross-sectional area (length × thickness, viewed end-on) would equal the area of that annular ring. That single conservation-of-area principle gives you the formula.</p>
+
+<p>Step by step: the cross-sectional area of the annular ring is (π/4) × (OD² − Core²). The cross-sectional area of the unrolled film, viewed from the end, is L × μm — but with units carefully matched (L in mm, μm converted to mm). Setting them equal: (π/4) × (OD² − Core²) = L × μm. Rearranging: OD² = (4 × L × μm) / π + Core². Take the square root of both sides and you get the formula at the top of this page. The unit-handling collapses neatly when L is in metres and μm stays in microns — the conversions cancel out.</p>
+
+<p>What the formula assumes: <strong>perfect winding with no air gaps, no telescoping, no caliper variation, no slip between layers</strong>. In real life, freshly metallised film will wind slightly looser than this calculation suggests, and the actual OD typically comes out 1-3% larger than the formula predicts. That margin is small enough to ignore for planning purposes, but worth knowing if you are working close to a chuck-OD limit.</p>
+
+<h3>🛠️ The Six Real Situations Operators Use This For</h3>
+
+<p><strong>1. Pre-run jumbo planning.</strong> Before a metalliser cycle starts, the supervisor knows the planned length, micron, and core size. Plug into the formula and you get the expected OD. If that number exceeds the slitter unwind chuck capacity downstream, you have caught the problem early — change the plan to a shorter jumbo, or route the roll to a slitter with a bigger chuck. Catching this before the cycle saves a 20-minute panic at slitting time.</p>
+
+<p><strong>2. Slitter chuck fit-check.</strong> Every slitter unwind has a maximum OD it can mount. Common limits are 600 mm (smaller machines), 800 mm (standard), 900 mm (large industrial). When a jumbo arrives at the slitter and the operator is unsure whether it will fit, a quick OD calculation answers it. If the calculated OD is over the limit, partial unwind to a smaller second roll before mounting saves the cycle.</p>
+
+<p><strong>3. Customer spec translation.</strong> Customers do not always specify rolls in the same units producers think in. A converter might say "I need 600 mm OD rolls of 25-micron BOPP, 76 mm core" — but the metalliser plans in meters. The inverse formula (covered in the bonus section below) converts that 600 mm OD into the actual length you need to wind. Without this translation, planning misses the spec and either over-produces (wasted film) or under-produces (short delivery).</p>
+
+<p><strong>4. Stockroom audit.</strong> An old roll sits in stock with no length label, no weight tag, just the visible OD and core. The reverse calculation gives an estimated remaining length without unwinding or weighing. Useful for inventory reconciliation before year-end, or for finding a partial roll that matches a small-quantity order.</p>
+
+<p><strong>5. Pallet and container layout planning.</strong> Large orders ship on wooden pallets or in shipping containers. Knowing the OD of every roll in the order before production allows warehousing to plan the stacking layout — how many rolls per pallet layer, which face up, where the dunnage goes. A surprise on roll OD at the dispatch dock is nobody's friend.</p>
+
+<p><strong>6. Splice-vs-changeover decision.</strong> Mid-cycle, a metalliser operator notices the boats are running low and a splice is needed to finish the planned length. The question: will splicing add enough OD to push the final roll past the downstream slitter's chuck capacity? Calculate the projected OD from the actual length-so-far plus the splice-to-end length. If the result exceeds the chuck limit, change the boat-set instead of splicing. The calculator turns a judgment call into a number.</p>
+
+<h3>🧮 Roll OD Calculator (Embedded)</h3>
+
+<p>Use the inline calculator below for the standard direction (length → OD). For the reverse direction (OD → length) see the bonus section. For the same calculator with shareable links and other related tools, use the <a href="https://www.vkstech.com/#calc-roll-od" style="color:#E85D26;font-weight:bold;">full version on vkstech.com</a>.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Length (m)</label>
+<input type="number" id="lenIn-en" placeholder="e.g., 30000" min="0" step="1" value="30000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="thkIn-en" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Core OD (mm)</label>
+<input type="number" id="coreIn-en" placeholder="e.g., 152" min="0" step="1" value="152" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Common cores: 76 mm (3 inch — printing/slit rolls), 152 mm (6 inch — metalliser jumbos).</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.15);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">PREDICTED OD</div>
+<div id="odOut-en" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">millimetres</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">RADIAL FILM THICKNESS</div>
+<div id="radOut-en" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">mm of film around core</div>
+</div>
+</div>
+
+<div id="chuckCheck-en" style="font-size:0.92em;color:#FAF9F6;line-height:1.5;background:rgba(255,255,255,0.05);padding:12px 14px;border-radius:6px;font-style:italic;">
+Enter values to see chuck-fit guidance and applied formula.
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-roll-od" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ Open the full calculator on vkstech.com (with shareable links and 6 other tools)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Roll OD Predictions</h3>
+
+<p>The table below covers the most common length-thickness combinations Indian flexible-packaging plants run. Bookmark or screenshot for shop-floor reference.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Length</th><th>Thickness</th><th>Core</th><th>Predicted OD</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>30,000 m</td><td>12 μm</td><td>152 mm</td><td><strong>694 mm</strong></td><td>Standard met jumbo</td></tr>
+<tr><td>PET</td><td>50,000 m</td><td>12 μm</td><td>152 mm</td><td><strong>887 mm</strong></td><td>Large met jumbo (chuck-limit territory)</td></tr>
+<tr><td>PET</td><td>20,000 m</td><td>12 μm</td><td>76 mm</td><td><strong>558 mm</strong></td><td>Printing roll</td></tr>
+<tr><td>BOPP</td><td>25,000 m</td><td>18 μm</td><td>152 mm</td><td><strong>772 mm</strong></td><td>Bare BOPP jumbo</td></tr>
+<tr><td>BOPP</td><td>18,000 m</td><td>25 μm</td><td>76 mm</td><td><strong>761 mm</strong></td><td>Heavier-gauge slit roll</td></tr>
+<tr><td>CPP</td><td>12,000 m</td><td>30 μm</td><td>152 mm</td><td><strong>694 mm</strong></td><td>Sealing-layer roll</td></tr>
+<tr><td>LDPE</td><td>6,000 m</td><td>50 μm</td><td>76 mm</td><td><strong>623 mm</strong></td><td>Small slit roll</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice how PET at 30,000 m (12 μm) and CPP at 12,000 m (30 μm) both come to exactly 694 mm. That is not coincidence — both have the same total film volume per unit width (12 × 30,000 = 30 × 12,000 = 360,000 μm·m). The OD only depends on this product, not on how it splits between length and thickness. Useful intuition for swapping micron specs at the planning stage.</p>
+
+<h3>🔄 Bonus — The Inverse Problem (Length from OD)</h3>
+
+<p>The Roll OD calculator solves the most common direction (length → OD), but operators frequently need the inverse: a customer specifies the rolls they want in OD, and the planning team needs to translate that into the length each roll will hold. The formula is the same equation rearranged:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>L = π × (OD² − Core²) / (4 × μm)</strong>
+</div>
+
+<p>Three worked examples:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Customer requirement</th><th>OD wanted</th><th>Core</th><th>Thickness</th><th>Calculated length</th></tr></thead>
+<tbody>
+<tr><td>Converter wants 25 μm BOPP rolls at 600 mm OD on 76 mm core</td><td>600 mm</td><td>76 mm</td><td>25 μm</td><td><strong>11,128 m per roll</strong></td></tr>
+<tr><td>Customer wants 12 μm PET rolls at 800 mm OD on 152 mm core</td><td>800 mm</td><td>152 mm</td><td>12 μm</td><td><strong>40,376 m per roll</strong></td></tr>
+<tr><td>Slitter chuck max 900 mm — what's the longest 12 μm met PET we can wind on 152 mm core?</td><td>900 mm</td><td>152 mm</td><td>12 μm</td><td><strong>51,502 m max</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The third example is particularly useful as a chuck-capacity ceiling. Once an operator knows the maximum jumbo length their slitter can accept for a given micron and core, they can communicate that ceiling back to production planning as a hard limit — preventing over-spec'd jumbos from being produced in the first place.</p>
+
+<h3>⚠️ Three Common Mistakes</h3>
+
+<p><strong>1. Ignoring winding tightness variation.</strong> The formula assumes perfect winding. Real metalliser-wound film is 1-3% looser. If you are calculating a borderline OD against a chuck limit, add a 3% safety margin to the result before deciding whether the roll fits.</p>
+
+<p><strong>2. Forgetting the unit conversion in the inverse formula.</strong> When solving for length from OD, the result comes out in mm because OD and core are in mm. Most operators want the answer in metres, so divide by 1000 — or trust that the calculator handles it for you. The inline calculator above does this automatically.</p>
+
+<p><strong>3. Confusing core OD with core ID.</strong> Some warehouses tag cores by inner diameter (the hole the chuck enters), others by outer diameter (the surface the film winds on). The formula uses outer core diameter. A 76 mm core almost always means 76 mm OD with 70-72 mm ID; a 152 mm core means 152 mm OD with 145-150 mm ID. When in doubt, measure with calipers across the outside of the core, not the inside.</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog explains the Roll OD calculator. <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> covers the related Roll Weight calculator. <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> covers the Metalliser Capacity calculator. <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> handles the cost side. The full set of free calculators (Weight, Length, OD, GSM↔Micron, Yield, Utilisation, Cost/sqm, Capacity) is at <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Working with a non-standard core size? Have a chuck-fit problem the calculator does not solve cleanly? Want to discuss winding-tightness corrections for your specific film type? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Roll OD = √( (4 × L × μm) / π + Core² ). Predicts the outer diameter of any film roll from its length, thickness, and core size. Operators use it for six things: pre-run jumbo planning, slitter chuck fit-check, customer spec translation, stockroom audits, pallet/container layout, and splice-vs-changeover decisions. Standard met jumbo (PET 12 μm, 30,000 m, 152 mm core) → 694 mm OD. Push to 50,000 m and OD jumps to 887 mm — borderline for most chucks. Inverse formula (L = π × (OD² − Core²) / (4 × μm)) translates customer OD specs into production lengths. Common mistakes: ignoring 1-3% winding looseness, confusing core OD with core ID, forgetting unit conversions in the inverse direction. Use the inline calculator above or the full version at vkstech.com/#calc-roll-od for shareable links and integration with other film calculators.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> Blog 36 — <strong>Cost Per Square Metre Calculator</strong> — explains why suppliers quote in ₹/kg but customers think in ₹/sqm, and why the conversion changes which film actually wins on price. Same calculator-deep-dive format as this blog.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>📏 Roll OD Calculator — "क्या ये Jumbo Fit होगा?" का 30-Second Answer</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; Pre-Run Planning, Customer Spec Translation, और Stockroom Audits के लिए Operator's Tool &nbsp;|&nbsp; May 2026 में published</p>
+
+<p>हर flexible packaging operator ने ये moment face किया है: fresh jumbo slitter पर आता है, आप उसे unwind chuck पर mount करने जाते हैं, और OD fit नहीं होता। अब 20-minute panic है — दूसरा chuck ढूँढो, या warehouse को call करो rolls swap करने के लिए, या worst case, jumbo को partial-unwind करो छोटे core पर। ये सब क्योंकि किसी ने expected outer diameter calculate नहीं किया roll के metalliser से निकलने से पहले। ये blog उस formula को explain करता है जो <a href="https://www.vkstech.com/#calc-roll-od" style="color:#E85D26;font-weight:bold;">vkstech.com पर free Roll OD calculator</a> के पीछे है — क्या compute करता है, operators को क्यों चाहिए, छह real situations जहाँ shop floor पर ये काम आता है, और एक bonus section inverse problem पर (जब customer OD specify करे और आपको length चाहिए)।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Formula 30 Seconds में</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>OD = √( (4 × L × μm) / π + Core² )</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">जहाँ L = length metres में, μm = thickness microns में, Core = inner core OD mm में। Output OD mm में।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Typical metalliser jumbo: PET 12μm, 30,000 m, 152 mm core। <strong>Predicted OD = 694 mm</strong>। Run-time math: ज़्यादातर slitter chucks 800-900 mm handle करते हैं — comfortable fit। अगर customer को same core पर 50,000 m चाहिए, OD 887 mm पर jump करता है — borderline, पहले chuck capacity check करें।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">कब Use करें</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">छह situations: pre-run jumbo planning, slitter chuck fit-check, customer spec translation, stockroom audit, pallet/container layout planning, splice-vs-changeover decision। हर एक नीचे worked examples के साथ explain किया।</div>
+</div>
+</div>
+
+<h3>📐 Formula क्यों काम करता है — Geometry एक Page में</h3>
+
+<p>Core पर wound film का roll geometrically hollow cylinder है। Film material core OD और outer OD के बीच annular ring में occupy करता है। अगर आप पूरी film unroll करके flat करें, उसका cross-sectional area (length × thickness, end-on viewed) उस annular ring के area के बराबर होगा। यही single conservation-of-area principle आपको formula देता है।</p>
+
+<p>Step by step: annular ring का cross-sectional area (π/4) × (OD² − Core²) है। Unrolled film का cross-sectional area, end से viewed, L × μm है — पर units carefully matched (L mm में, μm mm में convert)। Equal set करें: (π/4) × (OD² − Core²) = L × μm। Rearrange: OD² = (4 × L × μm) / π + Core²। दोनों sides का square root लें और formula मिल जाएगा। Unit-handling neatly collapse होती है जब L metres में और μm microns में रहे — conversions cancel हो जाती हैं।</p>
+
+<p>Formula क्या assume करता है: <strong>perfect winding, no air gaps, no telescoping, no caliper variation, no slip between layers</strong>। Real life में, freshly metallised film थोड़ा slightly looser wind होती है formula से, और actual OD typically 1-3% larger आता है formula prediction से। वो margin planning purposes के लिए ignore करने के लिए small है, पर जानने worth है अगर आप chuck-OD limit के close काम कर रहे हैं।</p>
+
+<h3>🛠️ छह Real Situations जहाँ Operators इसे Use करते हैं</h3>
+
+<p><strong>1. Pre-run jumbo planning।</strong> Metalliser cycle शुरू होने से पहले, supervisor planned length, micron, और core size जानता है। Formula में plug करें expected OD मिल जाता है। अगर वो number downstream slitter unwind chuck capacity exceed करता है, problem early catch हो गई — plan को shorter jumbo में change करें, या roll को बड़ा chuck वाले slitter पर route करें। Cycle से पहले catch करना slitting time पर 20-minute panic बचाता है।</p>
+
+<p><strong>2. Slitter chuck fit-check।</strong> हर slitter unwind का maximum OD है जो mount कर सकता है। Common limits: 600 mm (smaller machines), 800 mm (standard), 900 mm (large industrial)। जब jumbo slitter पर आता है और operator unsure है fit होगा या नहीं, quick OD calculation answer देती है। अगर calculated OD limit के ऊपर है, mount करने से पहले partial unwind करके smaller second roll बनाएँ — cycle बचेगा।</p>
+
+<p><strong>3. Customer spec translation।</strong> Customers हमेशा rolls को same units में specify नहीं करते जिनमें producers सोचते हैं। Converter कह सकता है "मुझे 25-micron BOPP के 600 mm OD rolls चाहिए, 76 mm core" — पर metalliser meters में plan करता है। Inverse formula (नीचे bonus section में) उस 600 mm OD को actual length में convert करता है जो आपको wind करनी है। बिना इस translation के, planning spec miss कर देती है — या तो over-produce (wasted film) या under-produce (short delivery)।</p>
+
+<p><strong>4. Stockroom audit।</strong> पुराना roll stock में पड़ा है बिना length label, बिना weight tag, सिर्फ़ visible OD और core के साथ। Reverse calculation estimated remaining length देती है बिना unwind या weighing के। Year-end inventory reconciliation के लिए useful, या small-quantity order match करने के लिए partial roll ढूँढने में।</p>
+
+<p><strong>5. Pallet और container layout planning।</strong> Large orders wooden pallets या shipping containers में ship होते हैं। Production से पहले order में हर roll का OD जानना warehousing को stacking layout plan करने देता है — per pallet layer कितने rolls, कौन सी face up, dunnage कहाँ। Dispatch dock पर roll OD पर surprise किसी का friend नहीं है।</p>
+
+<p><strong>6. Splice-vs-changeover decision।</strong> Mid-cycle, metalliser operator notice करता है boats low हो रहे हैं और splice चाहिए planned length finish करने के लिए। Question: क्या splicing इतना OD add करेगा कि final roll downstream slitter की chuck capacity के past चली जाए? Actual length-so-far plus splice-to-end length से projected OD calculate करें। अगर result chuck limit exceed करता है, splice के बजाय boat-set change करें। Calculator judgment call को number में बदलता है।</p>
+
+<h3>🧮 Roll OD Calculator (Embedded)</h3>
+
+<p>नीचे inline calculator standard direction (length → OD) के लिए use करें। Reverse direction (OD → length) के लिए bonus section देखें। Same calculator shareable links और दूसरे related tools के साथ <a href="https://www.vkstech.com/#calc-roll-od" style="color:#E85D26;font-weight:bold;">vkstech.com पर full version</a> पर है।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Length (m)</label>
+<input type="number" id="lenIn-hi" placeholder="e.g., 30000" min="0" step="1" value="30000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="thkIn-hi" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Core OD (mm)</label>
+<input type="number" id="coreIn-hi" placeholder="e.g., 152" min="0" step="1" value="152" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Common cores: 76 mm (3 inch — printing/slit rolls), 152 mm (6 inch — metalliser jumbos)।</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.15);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">PREDICTED OD</div>
+<div id="odOut-hi" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">millimetres</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">RADIAL FILM THICKNESS</div>
+<div id="radOut-hi" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">mm of film around core</div>
+</div>
+</div>
+
+<div id="chuckCheck-hi" style="font-size:0.92em;color:#FAF9F6;line-height:1.5;background:rgba(255,255,255,0.05);padding:12px 14px;border-radius:6px;font-style:italic;">
+Values enter करें chuck-fit guidance और applied formula देखने के लिए।
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-roll-od" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ vkstech.com पर full calculator खोलें (shareable links और 6 दूसरे tools के साथ)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Roll OD Predictions</h3>
+
+<p>नीचे की table सबसे common length-thickness combinations cover करती है जो Indian flexible-packaging plants run करते हैं। Shop-floor reference के लिए bookmark या screenshot करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Length</th><th>Thickness</th><th>Core</th><th>Predicted OD</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>30,000 m</td><td>12 μm</td><td>152 mm</td><td><strong>694 mm</strong></td><td>Standard met jumbo</td></tr>
+<tr><td>PET</td><td>50,000 m</td><td>12 μm</td><td>152 mm</td><td><strong>887 mm</strong></td><td>Large met jumbo (chuck-limit territory)</td></tr>
+<tr><td>PET</td><td>20,000 m</td><td>12 μm</td><td>76 mm</td><td><strong>558 mm</strong></td><td>Printing roll</td></tr>
+<tr><td>BOPP</td><td>25,000 m</td><td>18 μm</td><td>152 mm</td><td><strong>772 mm</strong></td><td>Bare BOPP jumbo</td></tr>
+<tr><td>BOPP</td><td>18,000 m</td><td>25 μm</td><td>76 mm</td><td><strong>761 mm</strong></td><td>Heavier-gauge slit roll</td></tr>
+<tr><td>CPP</td><td>12,000 m</td><td>30 μm</td><td>152 mm</td><td><strong>694 mm</strong></td><td>Sealing-layer roll</td></tr>
+<tr><td>LDPE</td><td>6,000 m</td><td>50 μm</td><td>76 mm</td><td><strong>623 mm</strong></td><td>Small slit roll</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice करें कैसे PET 30,000 m (12 μm) पर और CPP 12,000 m (30 μm) पर दोनों exactly 694 mm आते हैं। ये coincidence नहीं — दोनों का per unit width same total film volume है (12 × 30,000 = 30 × 12,000 = 360,000 μm·m)। OD सिर्फ़ इसी product पर depend करता है, length और thickness में कैसे split होता है इस पर नहीं। Planning stage पर micron specs swap करने के लिए useful intuition।</p>
+
+<h3>🔄 Bonus — Inverse Problem (OD से Length)</h3>
+
+<p>Roll OD calculator सबसे common direction (length → OD) solve करता है, पर operators को frequently inverse चाहिए: customer OD में rolls specify करता है, और planning team को उसे हर roll की length में translate करना है। Formula same equation rearranged है:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>L = π × (OD² − Core²) / (4 × μm)</strong>
+</div>
+
+<p>तीन worked examples:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Customer requirement</th><th>OD wanted</th><th>Core</th><th>Thickness</th><th>Calculated length</th></tr></thead>
+<tbody>
+<tr><td>Converter को 25 μm BOPP rolls 600 mm OD पर 76 mm core पर चाहिए</td><td>600 mm</td><td>76 mm</td><td>25 μm</td><td><strong>11,128 m per roll</strong></td></tr>
+<tr><td>Customer को 12 μm PET rolls 800 mm OD पर 152 mm core पर चाहिए</td><td>800 mm</td><td>152 mm</td><td>12 μm</td><td><strong>40,376 m per roll</strong></td></tr>
+<tr><td>Slitter chuck max 900 mm — 152 mm core पर 12 μm met PET की longest length क्या wind कर सकते हैं?</td><td>900 mm</td><td>152 mm</td><td>12 μm</td><td><strong>51,502 m max</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>तीसरा example chuck-capacity ceiling के लिए particularly useful है। एक बार operator जान गया उनका slitter given micron और core के लिए maximum jumbo length क्या accept करेगा, वो वो ceiling production planning को hard limit के रूप में communicate कर सकते हैं — over-spec'd jumbos पहले produce ही नहीं होंगे।</p>
+
+<h3>⚠️ तीन Common Mistakes</h3>
+
+<p><strong>1. Winding tightness variation ignore करना।</strong> Formula perfect winding assume करता है। Real metalliser-wound film 1-3% looser है। अगर आप borderline OD calculate कर रहे हैं chuck limit के against, decide करने से पहले result में 3% safety margin add करें कि roll fit होगा या नहीं।</p>
+
+<p><strong>2. Inverse formula में unit conversion भूलना।</strong> जब OD से length solve करते हैं, result mm में आता है क्योंकि OD और core mm में हैं। ज़्यादातर operators answer metres में चाहते हैं, तो 1000 से divide करें — या trust करें कि calculator handle कर रहा है। ऊपर का inline calculator ये automatically करता है।</p>
+
+<p><strong>3. Core OD को core ID से confuse करना।</strong> कुछ warehouses cores को inner diameter (chuck जिस hole में जाता है) से tag करते हैं, दूसरे outer diameter (जिस surface पर film wind होती है) से। Formula outer core diameter use करता है। 76 mm core almost always 76 mm OD with 70-72 mm ID; 152 mm core means 152 mm OD with 145-150 mm ID। Doubt में, calipers से outside measure करें, inside नहीं।</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> ये blog Roll OD calculator explain करता है। <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> related Roll Weight calculator cover करता है। <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> Metalliser Capacity calculator cover करता है। <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> cost side handle करता है। Free calculators का full set (Weight, Length, OD, GSM↔Micron, Yield, Utilisation, Cost/sqm, Capacity) <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Non-standard core size के साथ काम कर रहे हैं? Chuck-fit problem है जो calculator cleanly solve नहीं करता? अपने specific film type के लिए winding-tightness corrections discuss करना चाहते हैं? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Roll OD = √( (4 × L × μm) / π + Core² )। किसी भी film roll का outer diameter उसकी length, thickness, और core size से predict करता है। Operators इसे छह चीज़ों के लिए use करते हैं: pre-run jumbo planning, slitter chuck fit-check, customer spec translation, stockroom audits, pallet/container layout, और splice-vs-changeover decisions। Standard met jumbo (PET 12 μm, 30,000 m, 152 mm core) → 694 mm OD। 50,000 m तक push करें और OD 887 mm पर jump होता है — ज़्यादातर chucks के लिए borderline। Inverse formula (L = π × (OD² − Core²) / (4 × μm)) customer OD specs को production lengths में translate करता है। Common mistakes: 1-3% winding looseness ignore करना, core OD को core ID से confuse करना, inverse direction में unit conversions भूलना। ऊपर का inline calculator use करें या vkstech.com/#calc-roll-od पर full version shareable links और दूसरे film calculators के साथ।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Blog 36 — <strong>Cost Per Square Metre Calculator</strong> — explain करेगा क्यों suppliers ₹/kg में quote करते हैं पर customers ₹/sqm में सोचते हैं, और conversion कैसे change करती है कौन सी film actually price पर जीतती है। Same calculator-deep-dive format इस blog की तरह।</p>
+
+</div>
+
+<script>
+(function() {
+  function calcOD(length_m, thickness_um, core_mm) {
+    return Math.sqrt((4 * length_m * thickness_um) / Math.PI + core_mm * core_mm);
+  }
+
+  function calc(lang) {
+    var L = parseFloat(document.getElementById('lenIn-' + lang).value) || 0;
+    var t = parseFloat(document.getElementById('thkIn-' + lang).value) || 0;
+    var c = parseFloat(document.getElementById('coreIn-' + lang).value) || 0;
+
+    if(L <= 0 || t <= 0 || c <= 0) {
+      document.getElementById('odOut-' + lang).textContent = '—';
+      document.getElementById('radOut-' + lang).textContent = '—';
+      var defMsg = lang === 'hi' ? 'Values enter करें chuck-fit guidance देखने के लिए।' : 'Enter values to see chuck-fit guidance and applied formula.';
+      document.getElementById('chuckCheck-' + lang).textContent = defMsg;
+      return;
+    }
+
+    var od = calcOD(L, t, c);
+    var radial = (od - c) / 2;
+
+    document.getElementById('odOut-' + lang).textContent = od.toFixed(0);
+    document.getElementById('radOut-' + lang).textContent = radial.toFixed(0);
+
+    // Chuck-fit guidance
+    var msg;
+    if(lang === 'hi') {
+      if(od <= 600) {
+        msg = '✅ ' + od.toFixed(0) + ' mm OD comfortably fits में 600/800/900 mm chucks। Splice भी allow करता है।  Formula: OD = √((4 × ' + L + ' × ' + t + ')/π + ' + c + '²) = ' + od.toFixed(0) + ' mm।';
+      } else if(od <= 800) {
+        msg = '✅ ' + od.toFixed(0) + ' mm OD 800 mm और 900 mm chucks में fits। Splice headroom limited है।  Formula: OD = √((4 × ' + L + ' × ' + t + ')/π + ' + c + '²) = ' + od.toFixed(0) + ' mm।';
+      } else if(od <= 900) {
+        msg = '⚠️ ' + od.toFixed(0) + ' mm OD borderline है — सिर्फ़ 900 mm chuck पर fits। Real winding 1-3% looser होती है, तो check ' + (od * 1.03).toFixed(0) + ' mm safety margin।';
+      } else {
+        msg = '❌ ' + od.toFixed(0) + ' mm OD ज़्यादातर slitter chucks (max 900 mm) से बड़ा है। Length कम करें या बड़ा chuck वाले slitter पर route करें।';
+      }
+    } else {
+      if(od <= 600) {
+        msg = '✅ ' + od.toFixed(0) + ' mm OD comfortably fits in 600/800/900 mm chucks. Splice headroom available.  Formula: OD = √((4 × ' + L + ' × ' + t + ')/π + ' + c + '²) = ' + od.toFixed(0) + ' mm.';
+      } else if(od <= 800) {
+        msg = '✅ ' + od.toFixed(0) + ' mm OD fits in 800 mm and 900 mm chucks. Splice headroom limited.  Formula: OD = √((4 × ' + L + ' × ' + t + ')/π + ' + c + '²) = ' + od.toFixed(0) + ' mm.';
+      } else if(od <= 900) {
+        msg = '⚠️ ' + od.toFixed(0) + ' mm OD borderline — fits only on 900 mm chuck. Real winding is 1-3% looser; design with safety margin to ' + (od * 1.03).toFixed(0) + ' mm.';
+      } else {
+        msg = '❌ ' + od.toFixed(0) + ' mm OD exceeds most slitter chucks (max 900 mm). Reduce length or route to a larger-chuck slitter.';
+      }
+    }
+    document.getElementById('chuckCheck-' + lang).textContent = msg;
+  }
+
+  function bind(lang) {
+    var ids = ['lenIn', 'thkIn', 'coreIn'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + lang);
+      if(el) {
+        el.addEventListener('input', function() { calc(lang); });
+        el.addEventListener('change', function() { calc(lang); });
+      }
+    });
+    calc(lang);
+  }
+
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
