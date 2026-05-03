@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog 41 GEMINI Prompts — EPR Survival Guide | VKS Tech</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+  background: #FAF9F6;
+  color: #1A2744;
+  line-height: 1.6;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+header {
+  background: #1A2744;
+  color: #FAF9F6;
+  padding: 28px 32px;
+  border-radius: 14px;
+  margin-bottom: 28px;
+  border-top: 5px solid #E85D26;
+}
+header h1 {
+  font-size: 1.8em;
+  margin-bottom: 8px;
+  color: #FAF9F6;
+}
+header .subtitle {
+  color: #E85D26;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+header .meta {
+  color: rgba(250,249,246,0.7);
+  font-size: 0.88em;
+  margin-top: 12px;
+}
+
+.brand-bar {
+  background: #0D8C7E;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.92em;
+}
+.brand-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
+
+.card {
+  background: #fff;
+  border: 2px solid #1A2744;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(26,39,68,0.08);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #FAF9F6;
+}
+.card-header-left { flex: 1; min-width: 250px; }
+.card-num {
+  display: inline-block;
+  background: #E85D26;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.card-title { font-size: 1.25em; color: #1A2744; }
+.card-meta {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 4px;
+  font-family: monospace;
+}
+
+.copy-btn {
+  background: #E85D26;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.copy-btn:hover { background: #cc4d1f; transform: translateY(-1px); }
+.copy-btn.copied { background: #0D8C7E; }
+
+pre {
+  background: #1A2744;
+  color: #FAF9F6;
+  padding: 18px 22px;
+  border-radius: 8px;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.86em;
+  line-height: 1.65;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+pre::-webkit-scrollbar { height: 8px; }
+pre::-webkit-scrollbar-track { background: #2a3754; }
+pre::-webkit-scrollbar-thumb { background: #E85D26; border-radius: 4px; }
+
+.checklist {
+  background: #fff;
+  border-left: 5px solid #0D8C7E;
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+}
+.checklist h3 { color: #0D8C7E; margin-bottom: 12px; }
+.checklist ul { list-style: none; padding-left: 0; }
+.checklist li {
+  padding: 8px 0;
+  padding-left: 28px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.checklist li:before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: #E85D26;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.warning {
+  background: #fff5f0;
+  border-left: 5px solid #E85D26;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+}
+.warning strong { color: #E85D26; }
+
+footer {
+  background: #1A2744;
+  color: #FAF9F6;
+  padding: 18px 24px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.88em;
+}
+footer a { color: #E85D26; text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  header h1 { font-size: 1.4em; }
+  .card { padding: 18px; }
+  pre { font-size: 0.8em; padding: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+<h1>🎨 Blog 41 — GEMINI Image Prompts</h1>
+<div class="subtitle">EPR JUST WENT LIVE — A PLANT ENGINEER'S 90-DAY SURVIVAL GUIDE</div>
+<div class="meta">4 images to generate · Click "Copy Prompt" on any card to copy to clipboard · Paste into Gemini / ChatGPT / Imagen / your image generator</div>
+</header>
+
+<div class="brand-bar">
+<span><strong>VKS TECH</strong> · Brand colours: Navy #1A2744 · Orange #E85D26 · Teal #0D8C7E · Cream #FAF9F6</span>
+<span>🌐 <a href="https://vksTech.com">vksTech.com</a></span>
+</div>
+
+<!-- IMAGE 1: COVER -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<span class="card-num">IMAGE 1 OF 4</span>
+<div class="card-title">📸 Cover Image</div>
+<div class="card-meta">cover.png  ·  16:9 ratio (1600×900)</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-1', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-1">Create a professional editorial-quality cover image for a flexible packaging industry blog post titled "EPR Just Went Live — A Plant Engineer's 90-Day Survival Guide for Flexible Packaging."
+
+LAYOUT (split into 3 horizontal zones):
+
+LEFT ZONE (40% width): A government-style document folder labelled "PLASTIC WASTE MANAGEMENT (AMENDMENT) RULES, 2026" with an official red-stamp "EFFECTIVE 1 APRIL 2026" diagonal across it. The document sits on a light navy (#1A2744) background. Show the Indian Government Gazette of India seal at the top of the folder (stylized, not literal).
+
+CENTER ZONE (35% width): Vertical strip showing 4 plastic packaging categories stacked top-to-bottom:
+  - Cat I (Rigid): icon of a PET bottle — orange (#E85D26) accent
+  - Cat II (Flexible): icon of a metallised film roll/pouch — light orange
+  - Cat III (Multi-layered): icon of a laminate cross-section — orange-mid
+  - Cat IV (Compostable): icon of a leaf-marked package — teal (#0D8C7E)
+Each category has a small "%" badge showing the FY 2025-26 target: 30% / 10% / 5% / 100%
+
+RIGHT ZONE (25% width): A clean white badge titled "FREE DOWNLOADS" in bold orange (#E85D26), with 3 checkmark items below:
+  ✓ Compliance Master Tracker
+  ✓ Category Reference Card
+  ✓ QR Code Spec Sheet
+
+TOP STRIP (full width, 60px): Navy (#1A2744) banner with white text: "VKS TECH" on left, "EPR Compliance Survival Guide" centered, the date "April 2026" on right. Top-left corner has the VKS Tech logo.
+
+BOTTOM STRIP (full width, 40px): Teal (#0D8C7E) thin band with "https://vksTech.com  |  Plant Engineer's 90-Day Roadmap" in white.
+
+STYLE: Modern editorial infographic. Clean sans-serif typography (Inter or Helvetica feel). Subtle paper texture on the document folder. No people, no real company logos other than VKS Tech. The whole image should communicate "regulatory urgency + practical toolkit" — serious but approachable.
+
+Use only these colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No other colors.
+
+Watermark "vksTech.com" small in lower-right corner, semi-transparent.</pre>
+</div>
+
+<!-- IMAGE 2A: 4 CATEGORIES EN -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<span class="card-num">IMAGE 2 OF 4</span>
+<div class="card-title">🏷️ 4 Plastic Categories Diagram (English)</div>
+<div class="card-meta">epr-categories-en.png  ·  16:9 ratio (1600×900)</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-2a', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-2a">Create a clean infographic titled "The 4 Plastic Categories Under PWM Rules 2026" for a flexible packaging compliance blog.
+
+LAYOUT: 2x2 grid of category cards, each occupying 25% of the image.
+
+CARD 1 (top-left) — CATEGORY I — RIGID
+  Background: light pink-orange (#FFE5E0)
+  Header bar: orange (#E85D26)
+  Icon: clean line illustration of a PET bottle + jar + cap
+  Examples text: "Bottles · Jars · Containers · Caps · Trays"
+  Substrates: "PET · HDPE · PP · PVC"
+  PCR Target box (orange): "30% (2025-26) → 60% by 2028-29"
+
+CARD 2 (top-right) — CATEGORY II — FLEXIBLE
+  Background: light orange (#FCE5D7)
+  Header bar: orange (#E85D26)
+  Icon: clean line illustration of a metallised film roll + pouch
+  Examples text: "Films · Pouches · Sachets · Carry bags"
+  Substrates: "PET-Met · BOPP · CPP · LDPE"
+  PCR Target box: "10% (2025-26) → 20% from 2027-28"
+  Add a small star/badge "MOST FP PLANT OUTPUT" in corner
+
+CARD 3 (bottom-left) — CATEGORY III — MULTI-LAYERED
+  Background: light orange-mid (#FFE0CC)
+  Header bar: dark orange (#CC8800)
+  Icon: cross-section showing 3 layers (plastic + foil + plastic)
+  Examples text: "Laminates with foil/paper layers"
+  Substrates: "PET-Met-PE · Paper-PE · Alu-Foil-PE"
+  PCR Target box: "5% (2025-26) → 10% from 2027-28"
+
+CARD 4 (bottom-right) — CATEGORY IV — COMPOSTABLE
+  Background: light teal (#D9EDE9)
+  Header bar: teal (#0D8C7E)
+  Icon: leaf symbol on a package
+  Examples text: "Certified compostable plastics"
+  Substrates: "PLA · PBAT · Starch-based"
+  PCR Target box (teal): "100% target since 2023-24"
+
+TOP HEADER (full width, 80px): Navy (#1A2744) with white text:
+"THE 4 PLASTIC CATEGORIES — RECYCLED CONTENT TARGETS"
+Small VKS Tech logo top-left.
+
+BOTTOM FOOTER (full width, 50px): Teal (#0D8C7E) with white text:
+"Source: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
+
+STYLE: Clean infographic with thin gray dividers between cards. Modern sans-serif. Icons should be flat, line-art style (not 3D, not photo-realistic). No people. No real brand logos.
+
+Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white, and the 4 light category background colors above.
+
+Watermark "vksTech.com" lower-right, semi-transparent.</pre>
+</div>
+
+<!-- IMAGE 2B: 4 CATEGORIES HI -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<span class="card-num">IMAGE 3 OF 4</span>
+<div class="card-title">🏷️ 4 Plastic Categories Diagram (Hindi)</div>
+<div class="card-meta">epr-categories-hi.png  ·  16:9 ratio (1600×900)</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-2b', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-2b">Create the same infographic as the English version but with all text in Hindi (Devanagari script). Use Noto Sans Devanagari or similar clean font.
+
+TITLE (top header): "PWM Rules 2026 के तहत 4 Plastic Categories"
+
+CARD 1 — CATEGORY I — कठोर (RIGID)
+  Examples: "बोतलें · जार · कंटेनर · ढक्कन · ट्रे"
+  Substrates: "PET · HDPE · PP · PVC"
+  PCR Target box: "30% (2025-26) → 60% तक 2028-29"
+
+CARD 2 — CATEGORY II — लचीला (FLEXIBLE)
+  Examples: "फिल्म · पाउच · सैशे · कैरी बैग"
+  Substrates: "PET-Met · BOPP · CPP · LDPE"
+  PCR Target box: "10% (2025-26) → 20% 2027-28 से"
+  Badge: "ज़्यादातर FP प्लांट आउटपुट"
+
+CARD 3 — CATEGORY III — बहु-स्तरीय (MULTI-LAYERED)
+  Examples: "Foil/paper layers वाले laminates"
+  Substrates: "PET-Met-PE · Paper-PE · Alu-Foil-PE"
+  PCR Target box: "5% (2025-26) → 10% 2027-28 से"
+
+CARD 4 — CATEGORY IV — कम्पोस्टेबल (COMPOSTABLE)
+  Examples: "Certified compostable plastics"
+  Substrates: "PLA · PBAT · Starch-based"
+  PCR Target box: "100% target 2023-24 से"
+
+TOP HEADER: "4 PLASTIC CATEGORIES — RECYCLED CONTENT लक्ष्य"
+
+BOTTOM FOOTER: "स्रोत: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
+
+LAYOUT: 2x2 grid of category cards. Same colors and styling as the English version:
+  Card 1 (Cat I Rigid): light pink-orange #FFE5E0 background, orange #E85D26 header, PET bottle/jar icon
+  Card 2 (Cat II Flexible): light orange #FCE5D7 background, orange #E85D26 header, film roll icon
+  Card 3 (Cat III Multi-layered): light orange-mid #FFE0CC background, dark orange #CC8800 header, laminate cross-section icon
+  Card 4 (Cat IV Compostable): light teal #D9EDE9 background, teal #0D8C7E header, leaf symbol icon
+
+Top header: Navy #1A2744 with white text. Bottom footer: Teal #0D8C7E with white text.
+
+STYLE: Clean infographic with thin gray dividers. Modern sans-serif Devanagari + Latin font mix. Flat line-art icons. No people, no real brand logos.
+
+Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white, and the 4 light category background colors above.
+
+Watermark "vksTech.com" lower-right, semi-transparent.</pre>
+</div>
+
+<!-- IMAGE 3: 90-DAY ROADMAP -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<span class="card-num">IMAGE 4 OF 4</span>
+<div class="card-title">🗓️ 90-Day Roadmap Cheat Sheet</div>
+<div class="card-meta">epr-90-day-roadmap.png  ·  4:5 portrait (1200×1500) — printable A4</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-3', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-3">Create a vertical "cheat sheet" infographic titled "EPR 90-Day Compliance Roadmap for FP Plants" suitable for printing on A4 and pinning to a plant noticeboard.
+
+LAYOUT (top to bottom):
+
+TOP HEADER (full width, 120px):
+  Navy (#1A2744) banner with VKS Tech logo top-left,
+  Title in white bold: "EPR COMPLIANCE — 90-DAY ROADMAP"
+  Subtitle in cream (#FAF9F6): "For Indian Flexible Packaging Plants"
+
+PHASE 1 (Days 1-15) — orange (#E85D26) timeline marker:
+  Icon: A clipboard with "REGISTER" stamp
+  Heading: "DAY 1-15 — REGISTER ON CPCB"
+  Bullets:
+    • Register on CPCB EPR portal (cpcb.nic.in)
+    • Upload Certificate of Incorporation, GST, last 3 yrs tonnage
+    • No turnover exemption — all PIBOs must register
+
+PHASE 2 (Days 15-30) — orange:
+  Icon: Sorting boxes labelled I, II, III, IV
+  Heading: "DAY 15-30 — CLASSIFY EVERY SKU"
+  Bullets:
+    • Tag every product master with EPR Category
+    • Cat II flexible = most metalliser/slitter output
+    • Use VKS Tech SKU Classifier (Format 1)
+
+PHASE 3 (Days 15-45) — teal (#0D8C7E):
+  Icon: QR code symbol on a film roll
+  Heading: "DAY 15-45 — AUDIT QR CODE PRINTING"
+  Bullets:
+    • QR mandatory since 1 July 2025
+    • Resin code + thickness (µ) + manufacturer ID
+    • 5-min scannability test per batch (Format 3)
+
+PHASE 4 (Days 30-60) — teal:
+  Icon: Bar chart trending up
+  Heading: "DAY 30-60 — TRACK TONNAGE & ONBOARD SUPPLIERS"
+  Bullets:
+    • Monthly tonnage by Category in Format 1 Tab 2
+    • Identify CPCB-registered recycled content vendors
+    • EOL certificates NOT accepted — verify with CPCB
+
+PHASE 5 (Days 60-90) — orange:
+  Icon: Calendar with 31 OCT highlighted
+  Heading: "DAY 60-90 — FILE HALF-YEARLY RETURN"
+  Bullets:
+    • First return due 31 OCTOBER 2026 (covers Apr-Sep)
+    • Submit at least 2 weeks before deadline
+    • Use Filing Checklist (Format 1 Tab 4)
+
+DANGER BOX (red-orange #C5320E background, white text):
+  "⚠ PENALTIES — ₹10,000 to ₹15 LAKH per violation
+   + DAILY FINES under Section 15 of EPA, 1986"
+
+CARRY-FORWARD BOX (teal background, white text):
+  "💡 RELIEF — 2025-26 shortfall can carry up to 3 years
+   if at least 1/3 of deficit is cleared annually"
+
+BOTTOM FOOTER (navy, full width):
+  "vksTech.com | Free Industrial Toolkit | Built by a plant engineer for plant engineers | © VKS TECH — Vivek Kumar"
+
+STYLE: Modern timeline / roadmap infographic. Each phase has a numbered circle on a vertical line connecting all 5 phases. Clean, minimal, uses ample white space (cream #FAF9F6 background). Icons are flat line-art.
+
+Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, red-orange #C5320E (danger box only), white.
+
+Watermark "vksTech.com" lower-right, semi-transparent.</pre>
+</div>
+
+<div class="checklist">
+<h3>📋 Publishing Checklist</h3>
+<ul>
+<li>Save each image as PNG (lossless, no JPEG compression artifacts)</li>
+<li>Verify all text is legible at thumbnail size — especially the cover</li>
+<li>Confirm <code>vksTech.com</code> watermark is visible on each image</li>
+<li>Place all 4 PNG files in the same folder as <code>index.html</code></li>
+<li>Check the blog page render — covers should auto-load in the admin/CMS</li>
+<li>Verify the Hindi image renders Devanagari correctly (regenerate if garbled)</li>
+</ul>
+</div>
+
+<div class="warning">
+<strong>⚠ If Gemini garbles Hindi text:</strong> AI image generators frequently mishandle Devanagari script. If <code>epr-categories-hi.png</code> comes out wrong, generate the English version (Image 2) first, then open it in Figma / Canva / Photoshop and manually replace the text fields with the Hindi text given in the prompt. This manual fallback ensures Devanagari accuracy.
+</div>
+
+<footer>
+🌐 <a href="https://vksTech.com">vksTech.com</a> &nbsp;|&nbsp; Built by Vivek Kumar (Privacy Papa) — M.Tech NIT Uttarakhand &nbsp;|&nbsp; 9+ Yrs Flexible Packaging
+<br>
+© VKS TECH &nbsp;|&nbsp; Free Industrial Toolkit &nbsp;|&nbsp; Share freely, do not resell
+</footer>
+
+</div>
+
+<script>
+function copyPrompt(elementId, btn) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = btn.innerText;
+    btn.innerText = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(err => {
+    // Fallback: select text
+    const range = document.createRange();
+    range.selectNode(document.getElementById(elementId));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    btn.innerText = '⚠ Select & Ctrl+C';
+    setTimeout(() => { btn.innerText = '📋 Copy Prompt'; }, 3000);
+  });
+}
+</script>
+
+</body>
+</html>
