@@ -780,9 +780,10 @@ body.sp-hidden::after{
 
       <!-- 3. ROLL OD -->
       <div class="calc-card reveal d3" id="calc-roll-od">
-        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm)/π + Core²)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🎯</span><div class="calc-info"><h3 data-i="c3_t">Roll OD (Outer Diameter)</h3><p>OD = √((4×L×μm)/π + (Core ID + 2×Wall)²)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
-          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div><div class="calc-field"><label>Core OD (mm)</label><input type="number" id="co-core" placeholder="76" oninput="calcOD()"></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Length (m)</label><input type="number" id="co-len" placeholder="10000" oninput="calcOD()"></div><div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="co-mic" placeholder="12" oninput="calcOD()"></div></div>
+          <div class="calc-row c3"><div class="calc-field"><label>Core ID (mm)</label><input type="number" id="co-cid" placeholder="76" oninput="calcOD()"></div><div class="calc-field"><label>Core Wall Thickness (mm)</label><input type="number" id="co-wall" placeholder="10" oninput="calcOD()"></div></div>
           <div class="calc-result"><div><div class="val" id="co-res">—</div><div class="sub" id="co-sub"></div></div><div class="unit">mm</div></div>
         </div>
       </div>
@@ -1403,12 +1404,18 @@ function calcLength(){
   document.getElementById('cl-sub').textContent=wt+'kg → '+Math.round(len).toLocaleString()+' meters';
 }
 function calcOD(){
-  if(!_calcCheck(['co-len','co-mic','co-core'],'co-res','co-sub')) return;
-  var l=parseFloat(document.getElementById('co-len').value),m=parseFloat(document.getElementById('co-mic').value),c=parseFloat(document.getElementById('co-core').value);
-  /* OD² = Core² + 4·L·μm/π   (L in m, μm gives film cross-section in mm²) */
-  var od=Math.sqrt((4*l*m)/Math.PI+(c*c));
+  if(!_calcCheck(['co-len','co-mic','co-cid','co-wall'],'co-res','co-sub')) return;
+  var l=parseFloat(document.getElementById('co-len').value),
+      m=parseFloat(document.getElementById('co-mic').value),
+      cid=parseFloat(document.getElementById('co-cid').value),
+      wall=parseFloat(document.getElementById('co-wall').value);
+  /* Compute Core OD internally from inner diameter + 2× wall thickness */
+  var coreOD = cid + 2*wall;
+  /* OD² = CoreOD² + 4·L·μm/π   (L in m, μm gives film cross-section in mm²) */
+  var od=Math.sqrt((4*l*m)/Math.PI+(coreOD*coreOD));
   document.getElementById('co-res').textContent=od.toFixed(1);
-  document.getElementById('co-sub').textContent='Core '+c+'mm → OD '+od.toFixed(1)+'mm';
+  /* Subtitle hides the computed Core OD per requirement — just shows the inputs going in */
+  document.getElementById('co-sub').textContent='ID '+cid+'mm + Wall '+wall+'mm × 2 → Roll OD '+od.toFixed(1)+'mm';
 }
 function calcGSM(){
   if(!_calcCheck(['cg-mic'],'cg-res','cg-sub')) return;
