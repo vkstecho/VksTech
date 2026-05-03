@@ -697,7 +697,7 @@ body.sp-hidden::after{
 <!-- COMPANIES -->
 <div class="cos">
   <div class="container">
-    <div class="section-label" style="text-align:center;" data-i="cos_label">9 Years Across India's Flexible Packaging Leaders</div>
+    <div class="section-label" style="text-align:center;" data-i="cos_label">9 Years in India's Flexible Packaging Industry</div>
     <div class="cos-row">
       <div class="cob"><strong>UFlex Limited</strong><small>Noida, Uttar Pradesh</small></div>
       <div class="cob"><strong>JPFL Films Pvt. Ltd.</strong><small>Nashik, Maharashtra</small></div>
@@ -950,10 +950,13 @@ body.sp-hidden::after{
         </div>
         <div class="fg"><label data-i="fl_title">App Title *</label><input type="text" id="rt" placeholder="Give your idea a name"/></div>
         <div class="fg"><label data-i="fl_desc">Describe the Problem *</label><textarea id="rd" rows="4" placeholder="What problem do you face? What should the app do?"></textarea></div>
-        <!-- Honeypot: humans never see/fill this; bots do -->
-        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;">
-          <label>Website (leave this empty)</label>
-          <input type="text" id="rhp" name="website" tabindex="-1" autocomplete="off"/>
+        <!-- Honeypot: humans never see/fill this; bots do.
+             aria-hidden + tabindex=-1 + screen-reader-friendly hidden text means
+             real users (sighted, screen-reader, mobile) never encounter it,
+             but bots filling all visible fields will trip it. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;" tabindex="-1">
+          <label for="rhp" aria-hidden="true">Leave blank</label>
+          <input type="text" id="rhp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"/>
         </div>
         <button class="sbtn" onclick="submitReq()" data-i="submit_btn">Send My App Request 🚀</button>
       </div>
@@ -1029,8 +1032,8 @@ body.sp-hidden::after{
     <div class="fi">
       <div class="fc"><h4>VKS Tech</h4><p style="font-size:.84rem;color:rgba(255,255,255,.4);line-height:1.75;">Built by Vivek Kumar — a mechanical engineer who turned 9 years of industry experience into tools that genuinely help people.</p></div>
       <div class="fc"><h4>Apps</h4><a href="https://glsmp.vkstech.com" target="_blank">MET Power</a><a href="https://pp.vkstech.com" target="_blank">Plan Power</a><a href="https://fpjob.vkstech.com" target="_blank">FP Job</a><a href="https://fitsutra.vkstech.com" target="_blank">FitSutra</a><a href="https://moneyflow.vkstech.com" target="_blank">MoneyFlow</a></div>
-      <div class="fc"><h4>Explore</h4><a href="#industry-apps">Industry Apps</a><a href="#personal-apps">Personal Apps</a><a href="#blog">Blog</a><a href="#about">About</a></div>
-      <div class="fc"><h4>Contact</h4><a href="#request-app">Request an App</a><a href="https://vkstech.com">vkstech.com</a></div>
+      <div class="fc"><h4>Explore</h4><a href="/#industry-apps">Industry Apps</a><a href="/#calculators">Calculators</a><a href="/#personal-apps">Personal Apps</a><a href="/blog">Blog</a><a href="/people">People</a><a href="/#about">About</a></div>
+      <div class="fc"><h4>Contact</h4><a href="/#request-app">Request an App</a><a href="https://vkstech.com">vkstech.com</a></div>
     </div>
     <div class="fb">
       <span>© <span id="copyYear">2026</span> VKSTech. All Rights Reserved.</span>
@@ -1207,7 +1210,7 @@ const HI = {
   hero_sub:"फ्लेक्सिबल पैकेजिंग में काम करने वाले हर पेशेवर के लिए — ऑपरेटर से लेकर प्लांट हेड तक। बनाया है <strong>विवेक कुमार</strong> ने (M.Tech, NIT उत्तराखंड), UFlex, JPFL और GLS Polyfilms में 9 साल के अनुभव से।",
   hero_btn1:"कैलकुलेटर आज़माएँ →", hero_btn2:"सभी ऐप्स देखें",
   stat1:"कैलकुलेटर", stat2:"प्रकाशित लेख", stat3:"लाइव ऐप्स", stat4:"मुफ़्त",
-  cos_label:"भारत की शीर्ष फ्लेक्सिबल पैकेजिंग कंपनियों में 9 साल",
+  cos_label:"भारत के फ्लेक्सिबल पैकेजिंग उद्योग में 9 साल",
   ind_label:"🏭 फ्लेक्सिबल पैकेजिंग उद्योग", ind_title:"<span>पैकेजिंग पेशेवरों</span> के लिए ऐप्स",
   ind_sub:"उत्पादन, गुणवत्ता नियंत्रण और तकनीकी भूमिकाओं में 9 साल के व्यावहारिक अनुभव से निर्मित।",
   per_label:"🎯 व्यक्तिगत और जीवनशैली", per_title:"मनोरंजन, उत्पादकता और <span>व्यक्तिगत उपकरण</span>",
@@ -1242,7 +1245,7 @@ const EN = {
   hero_sub:"A toolkit for everyone working in flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) over 9 years at UFlex, JPFL, and GLS Polyfilms.",
   hero_btn1:"Try a Calculator →", hero_btn2:"See All Apps",
   stat1:"Calculators", stat2:"Articles Published", stat3:"Apps Live", stat4:"Free",
-  cos_label:"9 Years Across India's Flexible Packaging Leaders",
+  cos_label:"9 Years in India's Flexible Packaging Industry",
   ind_label:"🏭 Flexible Packaging Industry", ind_title:"Apps for <span>Packaging Professionals</span>",
   ind_sub:"Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.",
   per_label:"🎯 Personal & Lifestyle", per_title:"Fun, Productivity & <span>Personal Tools</span>",
