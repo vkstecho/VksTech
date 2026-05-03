@@ -1,0 +1,406 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
+
+<div class="en-content">
+
+<h2>🏭 Machine Utilisation % Calculator — The Metric Most Plant Managers Confuse with OEE</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; The Running-Time Number That Sets the Ceiling on Everything Else &nbsp;|&nbsp; Published May 2026 &nbsp;|&nbsp; Metalliser-focused</p>
+
+<p>A metalliser shift is 8 hours, 480 minutes. The operator logs 30 minutes of setup, 60 minutes of unplanned downtime (boat-change overrun, vacuum trip, cooling water issue). Running time: 480 − 30 − 60 = 390 minutes. Utilisation: 390 ÷ 480 = 81.3%. That single number — running time as a fraction of total shift time — sets the ceiling on everything else the machine can produce. Increase utilisation by 5 points and capacity goes up by 5 points. Lose 5 points to a recurring electrical issue and capacity drops by 5 points. Yet most metalliser operators cannot explain the difference between utilisation and OEE, and most plant managers track utilisation in ways that hide the real losses. This blog explains the formula behind the <a href="https://www.vkstech.com/#calc-utilisation" style="color:#E85D26;font-weight:bold;">free Machine Utilisation % calculator on vkstech.com</a> — what it computes, the six real situations metalliser supervisors use it for, and why the definitional choices matter more than the math.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The Formula in 30 Seconds</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Utilisation % = (Running time ÷ Shift time) × 100</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Where Running time = Shift time − Setup − Downtime. All values in the same unit (typically minutes). Utilisation only measures whether the machine was running; it says nothing about speed or quality.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">8-hour metalliser shift (480 min) with 45 min setup and 60 min downtime. Running = 480 − 45 − 60 = 375 min. <strong>Utilisation = (375 ÷ 480) × 100 = 78.1%.</strong> Below the 85% benchmark for a healthy metalliser shift. Investigate downtime breakdown.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">UTILISATION ≠ OEE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">OEE = Utilisation × Performance × Quality. Utilisation alone misses speed losses and quality losses. A machine running at 50% of rated speed but never stopping has 100% utilisation but ~50% OEE. Confusing the two is the most common reporting error in flex-pack plants.</div>
+</div>
+</div>
+
+<h3>📐 What Utilisation Measures (and What It Doesn't)</h3>
+
+<p>Utilisation answers exactly one question: of the total time the machine was scheduled to run, what fraction was it actually running? It does not answer how fast it was running, whether the output was good, or whether the planned production target was met. It is the time-based component of equipment effectiveness, not the whole story. The Overall Equipment Effectiveness (OEE) metric multiplies utilisation by performance (actual speed ÷ rated speed) and quality (good output ÷ total output) to give a single number. Utilisation is one of those three legs.</p>
+
+<p>This matters because two metallisers can have identical utilisation and very different productivity. Machine A runs 85% of the time at 100% of rated speed with 99% quality — OEE = 84%. Machine B runs 85% of the time at 70% of rated speed with 92% quality — OEE = 55%. Same utilisation, dramatically different real output. A plant manager who tracks only utilisation thinks both machines are equally well run. A plant manager who tracks utilisation, performance, and quality separately can identify exactly where Machine B is losing.</p>
+
+<p>That said, utilisation is the easiest of the three to measure (clock running vs not running, simple stopwatch logic), the most directly actionable (every minute of downtime has a clear cause), and the foundation of capacity planning (covered in <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a>). Start with utilisation. Layer on performance and quality once utilisation is being measured consistently.</p>
+
+<h3>🛠️ The Six Real Situations Metalliser Supervisors Use This For</h3>
+
+<p><strong>1. Daily shift report.</strong> The base case. Every shift logs setup, downtime, and running. Utilisation is the headline number on the shift report. Trended week over week, it shows whether the team's discipline is improving or slipping. Most metalliser department reviews start with the utilisation chart.</p>
+
+<p><strong>2. Downtime root-cause investigation.</strong> Utilisation drops 6 points week-over-week. The drop must be explainable — vacuum pump degradation, cooling water issue, operator changeover, electrical trip. Tracking utilisation forces the team to categorise downtime, which forces the root cause to surface. The number is the trigger; the categorisation is the value.</p>
+
+<p><strong>3. Boat-change SMED tracking.</strong> Boat-change duration is one of the largest single contributors to setup time. Reducing boat-change from 30 minutes to 15 minutes raises utilisation by ~3 percentage points on a 12-hour shift (covered in <a href="/blog/smed-boat-change-2017-case-study" style="color:#E85D26;font-weight:bold;">Blog #22</a>). The utilisation number quantifies the SMED win in capacity terms.</p>
+
+<p><strong>4. Capacity planning.</strong> The capacity calculator (<a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a>) takes utilisation as a key input. If actual utilisation is 80% but the capacity model assumes 90%, the plant chronically under-delivers against plan. Tracking actual utilisation feeds the model with realistic numbers.</p>
+
+<p><strong>5. Maintenance scheduling.</strong> Planned PM (preventive maintenance) is downtime, but it is "good" downtime — it prevents larger unplanned losses. Tracking utilisation by category (planned PM vs unplanned breakdown vs operator-cause) reveals whether the PM schedule is right-sized. Too much PM crushes utilisation; too little PM creates breakdown spikes.</p>
+
+<p><strong>6. Inter-shift comparison.</strong> Day shift utilisation 87%, night shift utilisation 79%. The 8-point gap is unlikely to be machine-related (same equipment) — it is operator skill, supervisor presence, or attention level differences. The number identifies the gap; investigation finds the cause.</p>
+
+<h3>🧮 Machine Utilisation % Calculator (Embedded)</h3>
+
+<p>The calculator below takes shift duration, setup time, and downtime in minutes and returns running time and utilisation percentage. For shareable links and other related tools, use the <a href="https://www.vkstech.com/#calc-utilisation" style="color:#E85D26;font-weight:bold;">full version on vkstech.com</a>.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS (in minutes)</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Shift time (min)</label>
+<input type="number" id="shiftIn-en" placeholder="e.g., 480" min="0" step="1" value="480" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Setup time (min)</label>
+<input type="number" id="setupIn-en" placeholder="e.g., 45" min="0" step="1" value="45" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Downtime (min)</label>
+<input type="number" id="downIn-en" placeholder="e.g., 60" min="0" step="1" value="60" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Common shift values: 8 hr = 480 min, 12 hr = 720 min, 24 hr = 1440 min. Setup includes job changeover and start-up. Downtime includes all unplanned stoppage.</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.18);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">RUNNING TIME</div>
+<div id="runOut-en" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">minutes</div>
+</div>
+<div style="background:rgba(232,93,38,0.18);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">UTILISATION</div>
+<div id="utilOut-en" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+</div>
+
+<div id="formulaOut-en" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Enter values to see worked formula and benchmark comparison.
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-utilisation" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ Open the full calculator on vkstech.com (with shareable links and 6 other tools)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Typical Metalliser Shift Scenarios</h3>
+
+<p>The table below shows typical utilisation outcomes for common metalliser shift patterns. Bookmark for shift-end review meetings.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Shift scenario</th><th>Shift</th><th>Setup</th><th>Downtime</th><th>Running</th><th>Utilisation</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Excellent 8-hr shift</td><td>480 min</td><td>30 min</td><td>20 min</td><td>430 min</td><td><strong>89.6%</strong></td><td>Top quartile</td></tr>
+<tr><td>Average 8-hr shift</td><td>480 min</td><td>45 min</td><td>60 min</td><td>375 min</td><td><strong>78.1%</strong></td><td>Median</td></tr>
+<tr><td>Poor 8-hr shift (breakdown)</td><td>480 min</td><td>60 min</td><td>180 min</td><td>240 min</td><td><strong>50.0%</strong></td><td>Investigate</td></tr>
+<tr><td>Standard 12-hr shift</td><td>720 min</td><td>60 min</td><td>60 min</td><td>600 min</td><td><strong>83.3%</strong></td><td>On benchmark</td></tr>
+<tr><td>12-hr with mid-cycle issue</td><td>720 min</td><td>90 min</td><td>180 min</td><td>450 min</td><td><strong>62.5%</strong></td><td>Below average</td></tr>
+<tr><td>24-hr day reference</td><td>1440 min</td><td>90 min</td><td>120 min</td><td>1230 min</td><td><strong>85.4%</strong></td><td>Healthy day</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The 8-hour and 12-hour shifts behave differently because the proportional impact of fixed setup time changes. A 30-minute setup is 6.3% of an 8-hour shift but only 4.2% of a 12-hour shift. Plants on 12-hour shifts therefore look "more utilised" in headline numbers even when actual machine performance is the same. Always compare like-for-like shift durations when benchmarking.</p>
+
+<h3>🔄 Bonus — Three Definitions of Setup, Downtime, and Their Effect on Utilisation</h3>
+
+<p>The same shift can produce three different utilisation numbers depending on how setup and downtime are defined. The choice changes everything.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Running = Shift − Setup − Downtime</strong>
+</div>
+
+<p>Three definitions, three answers, one underlying shift:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Definition</th><th>Setup includes</th><th>Downtime includes</th><th>Sample utilisation*</th></tr></thead>
+<tbody>
+<tr><td><strong>Strict (operator-friendly)</strong></td><td>Only first-roll setup</td><td>Only unplanned breakdown</td><td><strong>91%</strong></td></tr>
+<tr><td><strong>Standard (most plants)</strong></td><td>All changeover + start-up</td><td>All unplanned + boat changes</td><td><strong>78%</strong></td></tr>
+<tr><td><strong>Strict (capacity-planning)</strong></td><td>All non-running time including PM</td><td>All non-running time including breaks</td><td><strong>65%</strong></td></tr>
+</tbody>
+</table>
+<p style="font-size:0.85em;color:#5A5A5A;padding:0 14px 12px 14px;font-style:italic;">*Same 8-hour shift with same actual events, just categorised differently. The "right" definition is the one your plant uses consistently across shifts and across time. Inconsistency is the real enemy.</p>
+</div>
+
+<p>Most plants converge on the "Standard" definition because it gives a number high enough to be motivating but low enough to spotlight real problems. The strictest definition is honest but demoralising. The loosest definition flatters everyone and identifies nothing. Pick one, document it, and stick with it for at least a year before considering a change.</p>
+
+<h3>⚠️ Three Common Mistakes</h3>
+
+<p><strong>1. Confusing utilisation with OEE.</strong> Utilisation is the time component only. OEE multiplies utilisation by performance and quality. A metalliser running at 90% utilisation but 70% of rated speed and 95% quality has OEE = 0.90 × 0.70 × 0.95 = 60%. Reporting "90% utilisation" without the other two factors hides the real machine effectiveness. Always state which metric you mean.</p>
+
+<p><strong>2. Including planned PM in downtime without flagging it.</strong> Planned preventive maintenance is downtime in the formula, but it is "good" downtime. A shift with 60 minutes of scheduled PM has lower utilisation than a shift without PM, even though the PM prevents larger unplanned losses. Most plants either (a) report utilisation excluding PM or (b) report it including PM but flag the PM portion. Never silently include or exclude — make the choice visible.</p>
+
+<p><strong>3. Averaging utilisation across shifts hides individual problems.</strong> Plant-week average 82% looks fine. But that masks Day Shift = 87%, Night Shift = 79%, Maintenance Shift = 75%. The 12-point spread across shifts is the actionable insight. Always report by shift, then average. The average alone is a comfort number, not a management tool.</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog explains the Machine Utilisation % calculator. <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> covers the Metalliser Capacity calculator that takes utilisation as a key input. <a href="/blog/smed-boat-change-2017-case-study" style="color:#E85D26;font-weight:bold;">Blog #22</a> and <a href="/blog/when-no-scope-roll-changeover-2016-case-study" style="color:#E85D26;font-weight:bold;">Blog #23</a> cover SMED case studies that directly improve utilisation by reducing setup/changeover. <a href="/blog/hub-cut-metalliser-downtime-2-smed-levers" style="color:#E85D26;font-weight:bold;">Blog #25</a> is the SMED hub. The full set of free calculators is at <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Disagree with how planned PM should be classified? Working in a plant where utilisation definitions are inconsistent across shifts? Want to discuss how to roll out OEE on top of utilisation? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Utilisation % = (Running time ÷ Shift time) × 100, where Running = Shift − Setup − Downtime. Measures only whether the machine was running, not how fast or whether the output was good. OEE = Utilisation × Performance × Quality — utilisation is one of three legs. Benchmarks for metalliser shifts: ≥85% excellent, 78-83% average, ≤75% investigate. The same shift produces different utilisation numbers depending on what counts as setup vs downtime vs PM — pick one definition and stick with it. Common mistakes: confusing utilisation with OEE (the most reported error in flex-pack), including planned PM without flagging it, and averaging across shifts in a way that hides shift-to-shift variation. Use the inline calculator above or the full version at vkstech.com/#calc-utilisation.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> The calculator-explainer series continues — next up is the Roll Length from Weight calculator, or the Met M/C Capacity calculator deep-dive (which builds on this one). Tell me which you want next.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>🏭 Machine Utilisation % Calculator — वो Metric जिसे ज़्यादातर Plant Managers OEE से Confuse करते हैं</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; Running-Time Number जो बाक़ी सब के लिए Ceiling Set करता है &nbsp;|&nbsp; May 2026 में published &nbsp;|&nbsp; Metalliser-focused</p>
+
+<p>एक metalliser shift 8 hours, 480 minutes का है। Operator 30 minutes setup, 60 minutes unplanned downtime (boat-change overrun, vacuum trip, cooling water issue) log करता है। Running time: 480 − 30 − 60 = 390 minutes। Utilisation: 390 ÷ 480 = 81.3%। वो single number — running time as fraction of total shift time — machine जो भी produce कर सकती है उस पर ceiling set करता है। Utilisation 5 points से बढ़ाएँ और capacity 5 points से जाती है। Recurring electrical issue पर 5 points lose करें और capacity 5 points से drop होती है। फिर भी ज़्यादातर metalliser operators utilisation और OEE के बीच का difference explain नहीं कर सकते, और ज़्यादातर plant managers utilisation को इस तरह track करते हैं जो real losses छिपाता है। ये blog उस formula को explain करता है जो <a href="https://www.vkstech.com/#calc-utilisation" style="color:#E85D26;font-weight:bold;">vkstech.com पर free Machine Utilisation % calculator</a> के पीछे है — क्या compute करता है, छह real situations जहाँ metalliser supervisors use करते हैं, और क्यों definitional choices math से ज़्यादा matter करती हैं।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Formula 30 Seconds में</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Utilisation % = (Running time ÷ Shift time) × 100</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">जहाँ Running time = Shift time − Setup − Downtime। सब values same unit (typically minutes) में। Utilisation सिर्फ़ measure करता है कि machine running थी या नहीं; speed या quality के बारे में कुछ नहीं कहता।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">8-hour metalliser shift (480 min) with 45 min setup और 60 min downtime। Running = 480 − 45 − 60 = 375 min। <strong>Utilisation = (375 ÷ 480) × 100 = 78.1%।</strong> Healthy metalliser shift के 85% benchmark से नीचे। Downtime breakdown investigate करें।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">UTILISATION ≠ OEE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">OEE = Utilisation × Performance × Quality। Utilisation अकेला speed losses और quality losses miss करता है। एक machine जो 50% rated speed पर चल रही है पर कभी रुकती नहीं उसकी 100% utilisation है पर ~50% OEE। दोनों को confuse करना flex-pack plants में सबसे common reporting error है।</div>
+</div>
+</div>
+
+<h3>📐 Utilisation क्या Measure करता है (और क्या नहीं)</h3>
+
+<p>Utilisation exactly एक question का answer देता है: total time जो machine scheduled थी run होने को, उसका कितना fraction actually running था? ये नहीं answer करता कि कितनी fast running थी, output good था या नहीं, या planned production target met था। ये equipment effectiveness का time-based component है, whole story नहीं। Overall Equipment Effectiveness (OEE) metric utilisation को performance (actual speed ÷ rated speed) और quality (good output ÷ total output) से multiply करता है single number देने के लिए। Utilisation उन तीन legs में से एक है।</p>
+
+<p>ये matter करता है क्योंकि दो metallisers का identical utilisation और very different productivity हो सकती है। Machine A 85% time पर 100% rated speed पर 99% quality के साथ run करती है — OEE = 84%। Machine B 85% time पर 70% rated speed पर 92% quality के साथ run करती है — OEE = 55%। Same utilisation, dramatically different real output। एक plant manager जो सिर्फ़ utilisation track करता है सोचता है दोनों machines equally well run हैं। एक plant manager जो utilisation, performance, और quality separately track करता है exactly identify कर सकता है कहाँ Machine B losing है।</p>
+
+<p>उससे कहा, utilisation तीनों में से सबसे easy है measure करना (clock running vs not running, simple stopwatch logic), सबसे directly actionable (हर minute downtime का clear cause है), और capacity planning का foundation है (<a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> में cover)। Utilisation से start करें। Utilisation को consistently measure होने के बाद performance और quality layer करें।</p>
+
+<h3>🛠️ छह Real Situations जहाँ Metalliser Supervisors इसे Use करते हैं</h3>
+
+<p><strong>1. Daily shift report।</strong> Base case। हर shift setup, downtime, और running log करती है। Shift report पर utilisation headline number है। Week over week trended, ये दिखाता है team की discipline improve हो रही है या slip। ज़्यादातर metalliser department reviews utilisation chart से start होती हैं।</p>
+
+<p><strong>2. Downtime root-cause investigation।</strong> Utilisation week-over-week 6 points drop होता है। Drop को explainable होना चाहिए — vacuum pump degradation, cooling water issue, operator changeover, electrical trip। Utilisation track करना team को downtime categorise करने पर force करता है, जो root cause को surface करने पर force करता है। Number trigger है; categorisation value है।</p>
+
+<p><strong>3. Boat-change SMED tracking।</strong> Boat-change duration setup time के सबसे बड़े single contributors में से एक है। Boat-change को 30 minutes से 15 minutes reduce करना 12-hour shift पर utilisation को ~3 percentage points से raise करता है (<a href="/blog/smed-boat-change-2017-case-study" style="color:#E85D26;font-weight:bold;">Blog #22</a> में cover)। Utilisation number SMED win को capacity terms में quantify करता है।</p>
+
+<p><strong>4. Capacity planning।</strong> Capacity calculator (<a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a>) utilisation को key input के रूप में लेता है। अगर actual utilisation 80% है पर capacity model 90% assume करता है, plant chronically plan के against under-deliver करता है। Actual utilisation track करना model को realistic numbers feed करता है।</p>
+
+<p><strong>5. Maintenance scheduling।</strong> Planned PM (preventive maintenance) downtime है, पर "good" downtime है — ये बड़े unplanned losses prevent करता है। Utilisation को category से track करना (planned PM vs unplanned breakdown vs operator-cause) reveal करता है कि PM schedule right-sized है। बहुत ज़्यादा PM utilisation crush करता है; बहुत कम PM breakdown spikes create करता है।</p>
+
+<p><strong>6. Inter-shift comparison।</strong> Day shift utilisation 87%, night shift utilisation 79%। 8-point gap likely नहीं machine-related (same equipment) — operator skill, supervisor presence, या attention level differences हैं। Number gap identify करता है; investigation cause find करती है।</p>
+
+<h3>🧮 Machine Utilisation % Calculator (Embedded)</h3>
+
+<p>नीचे calculator shift duration, setup time, और downtime minutes में लेता है और running time और utilisation percentage return करता है। Shareable links और दूसरे related tools के लिए, <a href="https://www.vkstech.com/#calc-utilisation" style="color:#E85D26;font-weight:bold;">vkstech.com पर full version</a> use करें।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS (minutes में)</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Shift time (min)</label>
+<input type="number" id="shiftIn-hi" placeholder="e.g., 480" min="0" step="1" value="480" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Setup time (min)</label>
+<input type="number" id="setupIn-hi" placeholder="e.g., 45" min="0" step="1" value="45" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Downtime (min)</label>
+<input type="number" id="downIn-hi" placeholder="e.g., 60" min="0" step="1" value="60" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Common shift values: 8 hr = 480 min, 12 hr = 720 min, 24 hr = 1440 min। Setup में job changeover और start-up शामिल। Downtime में सब unplanned stoppage शामिल।</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.18);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">RUNNING TIME</div>
+<div id="runOut-hi" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">minutes</div>
+</div>
+<div style="background:rgba(232,93,38,0.18);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">UTILISATION</div>
+<div id="utilOut-hi" style="font-size:2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+</div>
+
+<div id="formulaOut-hi" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Values enter करें worked formula और benchmark comparison देखने के लिए।
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-utilisation" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ vkstech.com पर full calculator खोलें (shareable links और 6 दूसरे tools के साथ)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Typical Metalliser Shift Scenarios</h3>
+
+<p>नीचे की table common metalliser shift patterns के लिए typical utilisation outcomes दिखाती है। Shift-end review meetings के लिए bookmark करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Shift scenario</th><th>Shift</th><th>Setup</th><th>Downtime</th><th>Running</th><th>Utilisation</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Excellent 8-hr shift</td><td>480 min</td><td>30 min</td><td>20 min</td><td>430 min</td><td><strong>89.6%</strong></td><td>Top quartile</td></tr>
+<tr><td>Average 8-hr shift</td><td>480 min</td><td>45 min</td><td>60 min</td><td>375 min</td><td><strong>78.1%</strong></td><td>Median</td></tr>
+<tr><td>Poor 8-hr shift (breakdown)</td><td>480 min</td><td>60 min</td><td>180 min</td><td>240 min</td><td><strong>50.0%</strong></td><td>Investigate</td></tr>
+<tr><td>Standard 12-hr shift</td><td>720 min</td><td>60 min</td><td>60 min</td><td>600 min</td><td><strong>83.3%</strong></td><td>On benchmark</td></tr>
+<tr><td>12-hr with mid-cycle issue</td><td>720 min</td><td>90 min</td><td>180 min</td><td>450 min</td><td><strong>62.5%</strong></td><td>Below average</td></tr>
+<tr><td>24-hr day reference</td><td>1440 min</td><td>90 min</td><td>120 min</td><td>1230 min</td><td><strong>85.4%</strong></td><td>Healthy day</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>8-hour और 12-hour shifts differently behave करते हैं क्योंकि fixed setup time का proportional impact change होता है। 30-minute setup 8-hour shift का 6.3% है पर 12-hour shift का सिर्फ़ 4.2%। 12-hour shifts वाले plants therefore headline numbers में "more utilised" लगते हैं even जब actual machine performance same है। Benchmarking करते हुए हमेशा like-for-like shift durations compare करें।</p>
+
+<h3>🔄 Bonus — Setup, Downtime के तीन Definitions और उनका Utilisation पर Effect</h3>
+
+<p>Same shift तीन different utilisation numbers produce कर सकती है depending पर setup और downtime कैसे defined हैं। Choice सब कुछ change करती है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Running = Shift − Setup − Downtime</strong>
+</div>
+
+<p>तीन definitions, तीन answers, एक underlying shift:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Definition</th><th>Setup includes</th><th>Downtime includes</th><th>Sample utilisation*</th></tr></thead>
+<tbody>
+<tr><td><strong>Strict (operator-friendly)</strong></td><td>Only first-roll setup</td><td>Only unplanned breakdown</td><td><strong>91%</strong></td></tr>
+<tr><td><strong>Standard (most plants)</strong></td><td>All changeover + start-up</td><td>All unplanned + boat changes</td><td><strong>78%</strong></td></tr>
+<tr><td><strong>Strict (capacity-planning)</strong></td><td>All non-running time including PM</td><td>All non-running time including breaks</td><td><strong>65%</strong></td></tr>
+</tbody>
+</table>
+<p style="font-size:0.85em;color:#5A5A5A;padding:0 14px 12px 14px;font-style:italic;">*Same 8-hour shift with same actual events, सिर्फ़ differently categorised। "Right" definition वो है जो आपका plant shifts across और time across consistently use करता है। Inconsistency real enemy है।</p>
+</div>
+
+<p>ज़्यादातर plants "Standard" definition पर converge होते हैं क्योंकि ये number high enough देता है motivating होने के लिए पर low enough real problems spotlight करने के लिए। Strictest definition honest है पर demoralising। Loosest definition सबको flatter करती है और कुछ identify नहीं करती। एक pick करें, document करें, और कम से कम एक year के लिए change consider करने से पहले उसी पर stick रहें।</p>
+
+<h3>⚠️ तीन Common Mistakes</h3>
+
+<p><strong>1. Utilisation को OEE से confuse करना।</strong> Utilisation सिर्फ़ time component है। OEE utilisation को performance और quality से multiply करता है। 90% utilisation पर पर 70% rated speed और 95% quality पर running metalliser का OEE = 0.90 × 0.70 × 0.95 = 60% है। बाक़ी दो factors के बिना "90% utilisation" report करना real machine effectiveness छिपाता है। हमेशा state करें कौन सा metric mean कर रहे हैं।</p>
+
+<p><strong>2. Planned PM को flag किए बिना downtime में include करना।</strong> Planned preventive maintenance formula में downtime है, पर "good" downtime है। 60 minutes scheduled PM वाली shift का utilisation PM के बिना shift से कम है, even though PM बड़े unplanned losses prevent करता है। ज़्यादातर plants या तो (a) PM excluding utilisation report करते हैं या (b) PM including report करते हैं पर PM portion flag करते हैं। कभी silently include या exclude नहीं — choice visible बनाएँ।</p>
+
+<p><strong>3. Shifts across utilisation average करना individual problems छिपाता है।</strong> Plant-week average 82% fine लगती है। पर वो mask करता है Day Shift = 87%, Night Shift = 79%, Maintenance Shift = 75%। Shifts across 12-point spread actionable insight है। हमेशा shift से report करें, फिर average। Average अकेला comfort number है, management tool नहीं।</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> ये blog Machine Utilisation % calculator explain करता है। <a href="/blog/calculate-capacity-metalliser" style="color:#E85D26;font-weight:bold;">Blog #30</a> Metalliser Capacity calculator cover करता है जो utilisation को key input के रूप में लेता है। <a href="/blog/smed-boat-change-2017-case-study" style="color:#E85D26;font-weight:bold;">Blog #22</a> और <a href="/blog/when-no-scope-roll-changeover-2016-case-study" style="color:#E85D26;font-weight:bold;">Blog #23</a> SMED case studies cover करते हैं जो directly setup/changeover reduce करके utilisation improve करते हैं। <a href="/blog/hub-cut-metalliser-downtime-2-smed-levers" style="color:#E85D26;font-weight:bold;">Blog #25</a> SMED hub है। Free calculators का full set <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Planned PM कैसे classify होनी चाहिए से disagree करते हैं? ऐसे plant में काम कर रहे हैं जहाँ utilisation definitions shifts across inconsistent हैं? Discuss करना चाहते हैं utilisation के top पर OEE कैसे roll out करें? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Utilisation % = (Running time ÷ Shift time) × 100, जहाँ Running = Shift − Setup − Downtime। सिर्फ़ measure करता है machine running थी या नहीं, कितनी fast नहीं या output good था या नहीं। OEE = Utilisation × Performance × Quality — utilisation तीन legs में से एक है। Metalliser shifts के लिए benchmarks: ≥85% excellent, 78-83% average, ≤75% investigate। Same shift different utilisation numbers produce करती है depending पर setup vs downtime vs PM क्या count है — एक definition pick करें और उसी पर stick रहें। Common mistakes: utilisation को OEE से confuse करना (flex-pack में सबसे reported error), planned PM को flag किए बिना include करना, और shifts across इस तरह average करना जो shift-to-shift variation छिपाए। Inline calculator ऊपर use करें या vkstech.com/#calc-utilisation पर full version।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Calculator-explainer series जारी है — अगला है Roll Length from Weight calculator, या Met M/C Capacity calculator deep-dive (जो इस पर build करता है)। बताएँ कौन सा next चाहिए।</p>
+
+</div>
+
+<script>
+(function() {
+  function calc(lang) {
+    var shift = parseFloat(document.getElementById('shiftIn-' + lang).value) || 0;
+    var setup = parseFloat(document.getElementById('setupIn-' + lang).value) || 0;
+    var down = parseFloat(document.getElementById('downIn-' + lang).value) || 0;
+
+    if(shift <= 0) {
+      document.getElementById('runOut-' + lang).textContent = '—';
+      document.getElementById('utilOut-' + lang).textContent = '—';
+      var defMsg = lang === 'hi' ? 'Shift, setup, downtime values enter करें।' : 'Enter values to see worked formula and benchmark comparison.';
+      document.getElementById('formulaOut-' + lang).textContent = defMsg;
+      return;
+    }
+
+    var running = shift - setup - down;
+    if(running < 0) running = 0;
+    var util = (running / shift) * 100;
+
+    document.getElementById('runOut-' + lang).textContent = running.toFixed(0);
+    document.getElementById('utilOut-' + lang).textContent = util.toFixed(1);
+
+    var verdict;
+    if(lang === 'hi') {
+      if(util >= 85) verdict = 'Excellent — top quartile। Plant capability ceiling के पास।';
+      else if(util >= 78) verdict = 'On benchmark — healthy metalliser shift।';
+      else if(util >= 70) verdict = 'Below average — downtime breakdown investigate करें।';
+      else verdict = 'Poor — major losses। Root cause urgently identify करें।';
+
+      var msg = 'Running = ' + shift + ' − ' + setup + ' − ' + down + ' = ' + running.toFixed(0) + ' min।  ' +
+                'Utilisation = (' + running.toFixed(0) + ' ÷ ' + shift + ') × 100 = ' + util.toFixed(1) + '%।  ' + verdict;
+      document.getElementById('formulaOut-' + lang).textContent = msg;
+    } else {
+      if(util >= 85) verdict = 'Excellent — top quartile. Near plant capability ceiling.';
+      else if(util >= 78) verdict = 'On benchmark — healthy metalliser shift.';
+      else if(util >= 70) verdict = 'Below average — investigate downtime breakdown.';
+      else verdict = 'Poor — major losses. Identify root cause urgently.';
+
+      var msg = 'Running = ' + shift + ' − ' + setup + ' − ' + down + ' = ' + running.toFixed(0) + ' min.  ' +
+                'Utilisation = (' + running.toFixed(0) + ' ÷ ' + shift + ') × 100 = ' + util.toFixed(1) + '%.  ' + verdict;
+      document.getElementById('formulaOut-' + lang).textContent = msg;
+    }
+  }
+
+  function bind(lang) {
+    var ids = ['shiftIn', 'setupIn', 'downIn'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + lang);
+      if(el) {
+        el.addEventListener('input', function() { calc(lang); });
+        el.addEventListener('change', function() { calc(lang); });
+      }
+    });
+    calc(lang);
+  }
+
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>

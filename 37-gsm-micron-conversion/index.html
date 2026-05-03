@@ -1,0 +1,472 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="general-common">
+
+<div class="en-content">
+
+<h2>⚗️ GSM ↔ Micron Conversion — The Two-Way Bridge Between How Suppliers Quote and How Labs Measure</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; The Underlying Conversion Behind Cost, Yield, and Spec Discussions &nbsp;|&nbsp; Published May 2026</p>
+
+<p>An incoming roll arrives at the lab. The technician weighs a 100mm × 100mm coupon, gets 0.166 grams, divides by area, reports 16.6 GSM. The procurement team has a spec sheet that says "PET 12μm." The customer's print job specifies a film "around 16 GSM." Three departments, three different units describing the same film. This blog explains the formula behind the <a href="https://www.vkstech.com/#calc-gsm-micron" style="color:#E85D26;font-weight:bold;">free GSM ↔ Micron Conversion calculator on vkstech.com</a> — what it computes, why both directions matter, the six real situations where the conversion is the difference between a good decision and a bad one, and how density quietly drives the entire equation.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The Two Directions in 30 Seconds</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORWARD: MICRON → GSM</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>GSM = Micron × Density</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Use this when you have a thickness spec and need the area-weight. Density values: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">INVERSE: GSM → MICRON</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Micron = GSM ÷ Density</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Use this when the lab measured GSM and you want to back-calculate the implied thickness. Useful for incoming inspection and downgauge analysis.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">PET 12μm × 1.38 = <strong>16.56 GSM</strong>. The lab measures 16.6 — close enough. If the lab measured 14.5 GSM and the spec says 12μm PET, the actual thickness is 14.5 ÷ 1.38 = <strong>10.5 μm</strong> — your supplier shipped a downgauged film. The conversion catches it.</div>
+</div>
+</div>
+
+<h3>📐 Why Density is the Quiet Star of This Formula</h3>
+
+<p>Micron measures thickness — how thick the film is, end-on. GSM measures area-weight — how many grams of material occupy 1 square metre of film. The two are related by density (g/cm³), which says how heavy a unit volume of the polymer is. PET (1.38 g/cm³) is dense for a plastic — almost as dense as water. BOPP (0.91 g/cm³) is light — actually less dense than water, which is why scrap BOPP floats and scrap PET sinks. The same micron of PET and BOPP gives different GSM because the same volume of material weighs different amounts.</p>
+
+<p>This single fact is the reason GSM and micron are not interchangeable. A 12μm PET film and a 12μm BOPP film have the same physical thickness but different GSM (16.56 vs 10.92). A 16 GSM PET film and a 16 GSM BOPP film have the same area-weight but different thicknesses (11.6μm vs 17.6μm). Whether you compare in GSM or in micron changes which film looks "thinner." And if you skip the density step entirely and just compare microns across polymers, you are comparing the wrong thing.</p>
+
+<p><strong>What density values to use:</strong> PET 1.38, BOPP 0.91 (some specialty grades 0.89-0.92), CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80 (kraft, varies a lot by sizing and coating), Nylon BOPA 1.14, EVOH 1.20. For laminates, use a weighted average of the layer densities — but for spec-sheet conversations, single-layer densities are what matter 90% of the time.</p>
+
+<h3>🛠️ The Six Real Situations Where This Conversion Matters</h3>
+
+<p><strong>1. Incoming material inspection.</strong> The QC lab weighs a coupon and gets a GSM number. The purchase order specified microns. The conversion lets QC say "this matches your 12μm PET spec to within 1%" or "this is actually 10μm — the supplier downgauged without notice." Without the conversion, the GSM number is just a number, not a spec compliance check.</p>
+
+<p><strong>2. Downgauging analysis.</strong> Engineering proposes "let's go from 12μm PET to 10μm PET to save cost." The cost-per-kg might stay the same, but the GSM drops from 16.56 to 13.8 — and that GSM drop is exactly the cost saving (in ₹/sqm). The conversion turns a thickness change into a procurement number.</p>
+
+<p><strong>3. Customer spec translation.</strong> One customer sends a tech spec in GSM ("we need 17 GSM PET"). Another sends it in micron ("we need 12μm PET"). Both might mean the same thing, or they might be shopping for different products. The converter has to translate both into the same units before comparing or quoting.</p>
+
+<p><strong>4. Substrate substitution.</strong> A customer asks "can you replace PET with BOPP at the same GSM?" The PET film is 12μm / 16.56 GSM. To match GSM with BOPP, you need 16.56 ÷ 0.91 = 18.2μm — significantly thicker. The conversion makes the trade-off visible: same area-weight, more bulk, possibly different mechanical properties.</p>
+
+<p><strong>5. Cost-per-sqm calculations.</strong> The cost calculator (covered in <a href="/blog/cost-per-sqm-calculator" style="color:#E85D26;font-weight:bold;">Blog #36</a>) needs GSM as an input. If the supplier quoted in micron and the customer thinks in ₹/sqm, this conversion is the first of the two steps. Skipping it is the most common procurement error.</p>
+
+<p><strong>6. Print plate planning.</strong> Print pre-press teams sometimes spec films in GSM (because ink consumption is per area, not per thickness). Production teams spec in micron (because that is what unwinds, slits, and seals). The two teams need to be talking about the same film — the conversion is the translation layer.</p>
+
+<h3>🧮 GSM ↔ Micron Calculator (Embedded)</h3>
+
+<p>The calculator below has both directions in one tool. Toggle between Micron → GSM (Mode A) and GSM → Micron (Mode B). For shareable links and other related tools, use the <a href="https://www.vkstech.com/#calc-gsm-micron" style="color:#E85D26;font-weight:bold;">full version on vkstech.com</a>.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="display:flex;gap:8px;margin-bottom:14px;">
+<button id="modeA-en" onclick="switchMode_en('A')" style="flex:1;padding:10px;border:2px solid #1A2744;border-radius:6px;font-weight:bold;cursor:pointer;background:#1A2744;color:#FAF9F6;font-family:inherit;font-size:0.95em;">📐 Mode A — Micron → GSM</button>
+<button id="modeB-en" onclick="switchMode_en('B')" style="flex:1;padding:10px;border:2px solid #1A2744;border-radius:6px;font-weight:bold;cursor:pointer;background:#FAF9F6;color:#1A2744;font-family:inherit;font-size:0.95em;">⚖️ Mode B — GSM → Micron</button>
+</div>
+
+<div id="paneA-en">
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUT</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="micInA-en" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmA-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+
+<div id="paneB-en" style="display:none;">
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUT</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">GSM (g/m²)</label>
+<input type="number" id="gsmInB-en" placeholder="e.g., 16.6" min="0" step="0.1" value="16.6" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmB-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="background:rgba(13,140,126,0.18);padding:18px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;margin-bottom:12px;">
+<div id="outLabel-en" style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">CONVERTED VALUE</div>
+<div id="outVal-en" style="font-size:2.2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div id="outUnit-en" style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">—</div>
+</div>
+
+<div id="formulaOut-en" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Enter a value to see the worked formula and check against the spec.
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-gsm-micron" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ Open the full calculator on vkstech.com (with shareable links and 6 other tools)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Films</h3>
+
+<p>The table below covers the most common micron specs Indian flexible-packaging plants run, with their corresponding GSM. Bookmark or screenshot for spec-discussion meetings.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Density (g/cm³)</th><th>Micron</th><th>GSM</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>1.38</td><td>8 μm</td><td><strong>11.04</strong></td><td>Premium downgauged metallised</td></tr>
+<tr><td>PET</td><td>1.38</td><td>12 μm</td><td><strong>16.56</strong></td><td>Standard metallised PET base</td></tr>
+<tr><td>PET</td><td>1.38</td><td>23 μm</td><td><strong>31.74</strong></td><td>Heavy-duty laminate base</td></tr>
+<tr><td>PET</td><td>1.38</td><td>36 μm</td><td><strong>49.68</strong></td><td>Strapping, industrial</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>15 μm</td><td><strong>13.65</strong></td><td>Lightweight clear film</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>18 μm</td><td><strong>16.38</strong></td><td>Standard snack laminate base</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>25 μm</td><td><strong>22.75</strong></td><td>Premium snacks, label face</td></tr>
+<tr><td>CPP</td><td>0.90</td><td>30 μm</td><td><strong>27.00</strong></td><td>Sealing layer</td></tr>
+<tr><td>LDPE</td><td>0.92</td><td>50 μm</td><td><strong>46.00</strong></td><td>Standard sealant layer</td></tr>
+<tr><td>LDPE</td><td>0.92</td><td>80 μm</td><td><strong>73.60</strong></td><td>Heavy-duty sealant</td></tr>
+<tr><td>Paper</td><td>0.80</td><td>80 μm</td><td><strong>64.00</strong></td><td>Kraft laminate base</td></tr>
+<tr><td>Nylon (BOPA)</td><td>1.14</td><td>15 μm</td><td><strong>17.10</strong></td><td>Pierce-resistant outer layer</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice the BOPP 18μm row (16.38 GSM) and the PET 12μm row (16.56 GSM) — almost identical area-weight, very different micron. This is exactly why suppliers cannot quote "BOPP at PET prices" without specifying the gauge. Both films use the same amount of material per square metre, but the BOPP option is half-again as thick. Mechanical properties, sealing performance, and machine handling all change.</p>
+
+<h3>🔄 Bonus — Why You Sometimes See "Yield" Instead of GSM or Micron</h3>
+
+<p>A third unit shows up in industry conversations: yield, in <strong>sqm per kg</strong>. It is the inverse of GSM, scaled. Yield = 1000 ÷ GSM. PET 12μm has GSM 16.56, so yield = 60.4 sqm/kg. BOPP 18μm has GSM 16.38, so yield = 61.1 sqm/kg. When a supplier says "this film yields 60 sqm per kg," they are stating GSM = 16.7 g/m² in disguise. Useful for cost engineers because <strong>cost per sqm = cost per kg ÷ yield</strong> — but procurement teams who default to thinking in micron-or-GSM sometimes find yield confusing. The calculator covers all three views.</p>
+
+<h3>⚠️ Three Common Mistakes</h3>
+
+<p><strong>1. Using a generic "1.0" or "1.4" density for all polymers.</strong> The density values vary by 35-70% across common flexible packaging materials. Using the wrong density introduces a corresponding error directly into the GSM. PET (1.38) and Paper (0.80) differ by 73% — confusing them in a spreadsheet flips a 16.56 GSM result into a 9.6 GSM result.</p>
+
+<p><strong>2. Confusing density (g/cm³) with specific gravity (dimensionless).</strong> They are numerically identical for water-based references, but the units matter when you build formulas. The GSM × Micron formula needs density expressed as g/cm³ (which is the same as kg/dm³). Using kg/m³ (a value 1000× larger, like "1380" for PET) without unit conversion is a common spreadsheet error.</p>
+
+<p><strong>3. Forgetting that laminates are sums.</strong> A 3-ply laminate of PET 12 + foil 9 + LDPE 50 has total GSM = (12 × 1.38) + (9 × 2.70) + (50 × 0.92) = 16.56 + 24.30 + 46.00 = 86.86 GSM. The single-layer formula applied to each layer separately, then summed. (Note: aluminium density is 2.70 g/cm³.) Trying to use the formula on the laminate as a whole with an "average density" gives wrong answers.</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog explains the GSM ↔ Micron Conversion calculator. <a href="/blog/cost-per-sqm-calculator" style="color:#E85D26;font-weight:bold;">Blog #36</a> covers the Cost per Square Metre calculator that uses GSM as its key input. <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> covers Roll Weight, which combines GSM with width and length. <a href="/blog/roll-od-calculator" style="color:#E85D26;font-weight:bold;">Blog #35</a> explains the Roll OD calculator. The full set of free calculators is at <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Working with a polymer not in the dropdown? Need to handle a specialty grade with non-standard density? Want to discuss laminate calculations? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> GSM = Micron × Density, and Micron = GSM ÷ Density. The two-way conversion is the bridge between how labs measure film (area-weight, GSM), how suppliers quote film (thickness, micron), and how customers cost film (area, sqm). Density values to memorize: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14. Worked benchmarks: PET 12μm = 16.56 GSM, BOPP 18μm = 16.38 GSM (same area-weight, different thickness), LDPE 50μm = 46.00 GSM. Six real situations where the conversion matters: incoming inspection, downgauging analysis, customer spec translation, substrate substitution, cost-per-sqm calculations, and print plate planning. Common mistakes: using a generic density (35-70% error possible), confusing density units (g/cm³ vs kg/m³), and treating laminates as single layers (sum the layer GSMs separately). Use the inline calculator above or the full version at vkstech.com/#calc-gsm-micron.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> Blog 38 — <strong>Production Yield % Calculator</strong> — explains the deceptively simple input/output formula and why it gets misapplied so often. Same calculator-deep-dive format as this blog.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>⚗️ GSM ↔ Micron Conversion — Suppliers कैसे Quote करते हैं और Labs कैसे Measure करते हैं के बीच Two-Way Bridge</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; Cost, Yield, और Spec Discussions के पीछे Underlying Conversion &nbsp;|&nbsp; May 2026 में published</p>
+
+<p>एक incoming roll lab में आता है। Technician 100mm × 100mm coupon weigh करता है, 0.166 grams मिलते हैं, area से divide करता है, 16.6 GSM report करता है। Procurement team के पास spec sheet है जो कहती है "PET 12μm।" Customer का print job एक film "around 16 GSM" specify करता है। तीन departments, तीन different units same film describe करते हुए। ये blog उस formula को explain करता है जो <a href="https://www.vkstech.com/#calc-gsm-micron" style="color:#E85D26;font-weight:bold;">vkstech.com पर free GSM ↔ Micron Conversion calculator</a> के पीछे है — क्या compute करता है, दोनों directions क्यों matter करते हैं, छह real situations जहाँ conversion good और bad decision के बीच का difference है, और density कैसे quietly पूरे equation को drive करती है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — दो Directions 30 Seconds में</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORWARD: MICRON → GSM</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>GSM = Micron × Density</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">तब use करें जब thickness spec हो और area-weight चाहिए। Density values: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">INVERSE: GSM → MICRON</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Micron = GSM ÷ Density</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">तब use करें जब lab ने GSM measure की है और implied thickness back-calculate करनी है। Incoming inspection और downgauge analysis के लिए useful।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">PET 12μm × 1.38 = <strong>16.56 GSM</strong>। Lab 16.6 measure करती है — close enough। अगर lab 14.5 GSM measure करे और spec 12μm PET कहे, actual thickness 14.5 ÷ 1.38 = <strong>10.5 μm</strong> है — आपके supplier ने downgauged film भेजी है। Conversion catch कर लेता है।</div>
+</div>
+</div>
+
+<h3>📐 Density क्यों इस Formula का Quiet Star है</h3>
+
+<p>Micron thickness measure करता है — film कितनी thick है, end-on। GSM area-weight measure करता है — कितने grams material 1 square metre film में हैं। दोनों density (g/cm³) से related हैं, जो बताती है कि polymer का unit volume कितना heavy है। PET (1.38 g/cm³) plastic के लिए dense है — almost पानी जितना। BOPP (0.91 g/cm³) light है — actually पानी से कम dense, यही कारण है कि scrap BOPP तैरता है और scrap PET डूबता है। Same micron of PET और BOPP different GSM देते हैं क्योंकि same volume of material का weight different होता है।</p>
+
+<p>यही single fact reason है कि GSM और micron interchangeable नहीं हैं। 12μm PET film और 12μm BOPP film का same physical thickness है पर different GSM (16.56 vs 10.92)। 16 GSM PET film और 16 GSM BOPP film का same area-weight है पर different thicknesses (11.6μm vs 17.6μm)। GSM या micron में compare करना change करता है कि कौन सी film "thinner" लगती है। और अगर density step skip करके सिर्फ़ polymers across microns compare करते हैं, आप ग़लत चीज़ compare कर रहे हैं।</p>
+
+<p><strong>क्या density values use करें:</strong> PET 1.38, BOPP 0.91 (कुछ specialty grades 0.89-0.92), CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80 (kraft, sizing और coating से बहुत vary करता है), Nylon BOPA 1.14, EVOH 1.20। Laminates के लिए, layer densities का weighted average use करें — पर spec-sheet conversations के लिए, single-layer densities ही 90% time matter करती हैं।</p>
+
+<h3>🛠️ छह Real Situations जहाँ ये Conversion Matter करती है</h3>
+
+<p><strong>1. Incoming material inspection।</strong> QC lab coupon weigh करती है GSM number मिलता है। Purchase order microns में specify करता है। Conversion QC को कहने देता है "ये आपके 12μm PET spec को 1% within match करता है" या "ये actually 10μm है — supplier ने बिना notice के downgauge किया।" Conversion के बिना, GSM number सिर्फ़ number है, spec compliance check नहीं।</p>
+
+<p><strong>2. Downgauging analysis।</strong> Engineering propose करती है "12μm PET से 10μm PET चलें cost saves होगी।" Cost-per-kg same रह सकती है, पर GSM 16.56 से 13.8 drop होती है — और वो GSM drop exactly cost saving है (₹/sqm में)। Conversion thickness change को procurement number में बदलता है।</p>
+
+<p><strong>3. Customer spec translation।</strong> एक customer tech spec GSM में भेजता है ("हमें 17 GSM PET चाहिए")। दूसरा micron में भेजता है ("हमें 12μm PET चाहिए")। दोनों same चीज़ mean कर सकते हैं, या different products shop कर रहे हैं। Converter को compare या quote करने से पहले दोनों को same units में translate करना है।</p>
+
+<p><strong>4. Substrate substitution।</strong> Customer पूछता है "क्या आप PET को BOPP से same GSM पर replace कर सकते हैं?" PET film 12μm / 16.56 GSM है। BOPP से GSM match करने के लिए, 16.56 ÷ 0.91 = 18.2μm चाहिए — significantly thicker। Conversion trade-off visible बनाता है: same area-weight, ज़्यादा bulk, possibly different mechanical properties।</p>
+
+<p><strong>5. Cost-per-sqm calculations।</strong> Cost calculator (<a href="/blog/cost-per-sqm-calculator" style="color:#E85D26;font-weight:bold;">Blog #36</a> में cover किया) को GSM input के रूप में चाहिए। अगर supplier micron में quote करे और customer ₹/sqm में सोचे, ये conversion दोनों steps में से पहला है। Skip करना सबसे common procurement error है।</p>
+
+<p><strong>6. Print plate planning।</strong> Print pre-press teams कभी films को GSM में spec करती हैं (क्योंकि ink consumption per area है, per thickness नहीं)। Production teams micron में spec करती हैं (क्योंकि वो जो unwinds, slits, और seals होता है)। दोनों teams को same film के बारे में बात करनी है — conversion translation layer है।</p>
+
+<h3>🧮 GSM ↔ Micron Calculator (Embedded)</h3>
+
+<p>नीचे calculator के दोनों directions एक tool में हैं। Micron → GSM (Mode A) और GSM → Micron (Mode B) के बीच toggle करें। Shareable links और दूसरे related tools के लिए, <a href="https://www.vkstech.com/#calc-gsm-micron" style="color:#E85D26;font-weight:bold;">vkstech.com पर full version</a> use करें।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="display:flex;gap:8px;margin-bottom:14px;">
+<button id="modeA-hi" onclick="switchMode_hi('A')" style="flex:1;padding:10px;border:2px solid #1A2744;border-radius:6px;font-weight:bold;cursor:pointer;background:#1A2744;color:#FAF9F6;font-family:inherit;font-size:0.95em;">📐 Mode A — Micron → GSM</button>
+<button id="modeB-hi" onclick="switchMode_hi('B')" style="flex:1;padding:10px;border:2px solid #1A2744;border-radius:6px;font-weight:bold;cursor:pointer;background:#FAF9F6;color:#1A2744;font-family:inherit;font-size:0.95em;">⚖️ Mode B — GSM → Micron</button>
+</div>
+
+<div id="paneA-hi">
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUT</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="micInA-hi" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmA-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+
+<div id="paneB-hi" style="display:none;">
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUT</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">GSM (g/m²)</label>
+<input type="number" id="gsmInB-hi" placeholder="e.g., 16.6" min="0" step="0.1" value="16.6" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmB-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="background:rgba(13,140,126,0.18);padding:18px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;margin-bottom:12px;">
+<div id="outLabel-hi" style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">CONVERTED VALUE</div>
+<div id="outVal-hi" style="font-size:2.2em;font-weight:bold;color:#FAF9F6;">—</div>
+<div id="outUnit-hi" style="font-size:0.7em;color:#FAF9F6;opacity:0.7;">—</div>
+</div>
+
+<div id="formulaOut-hi" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Value enter करें worked formula और spec check देखने के लिए।
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-gsm-micron" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ vkstech.com पर full calculator खोलें (shareable links और 6 दूसरे tools के साथ)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Films</h3>
+
+<p>नीचे की table सबसे common micron specs cover करती है जो Indian flexible-packaging plants run करते हैं, उनके corresponding GSM के साथ। Spec-discussion meetings के लिए bookmark या screenshot करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Density (g/cm³)</th><th>Micron</th><th>GSM</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>1.38</td><td>8 μm</td><td><strong>11.04</strong></td><td>Premium downgauged metallised</td></tr>
+<tr><td>PET</td><td>1.38</td><td>12 μm</td><td><strong>16.56</strong></td><td>Standard metallised PET base</td></tr>
+<tr><td>PET</td><td>1.38</td><td>23 μm</td><td><strong>31.74</strong></td><td>Heavy-duty laminate base</td></tr>
+<tr><td>PET</td><td>1.38</td><td>36 μm</td><td><strong>49.68</strong></td><td>Strapping, industrial</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>15 μm</td><td><strong>13.65</strong></td><td>Lightweight clear film</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>18 μm</td><td><strong>16.38</strong></td><td>Standard snack laminate base</td></tr>
+<tr><td>BOPP</td><td>0.91</td><td>25 μm</td><td><strong>22.75</strong></td><td>Premium snacks, label face</td></tr>
+<tr><td>CPP</td><td>0.90</td><td>30 μm</td><td><strong>27.00</strong></td><td>Sealing layer</td></tr>
+<tr><td>LDPE</td><td>0.92</td><td>50 μm</td><td><strong>46.00</strong></td><td>Standard sealant layer</td></tr>
+<tr><td>LDPE</td><td>0.92</td><td>80 μm</td><td><strong>73.60</strong></td><td>Heavy-duty sealant</td></tr>
+<tr><td>Paper</td><td>0.80</td><td>80 μm</td><td><strong>64.00</strong></td><td>Kraft laminate base</td></tr>
+<tr><td>Nylon (BOPA)</td><td>1.14</td><td>15 μm</td><td><strong>17.10</strong></td><td>Pierce-resistant outer layer</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice करें BOPP 18μm row (16.38 GSM) और PET 12μm row (16.56 GSM) — almost identical area-weight, very different micron। यही exactly reason है कि suppliers gauge specify किए बिना "BOPP at PET prices" quote नहीं कर सकते। दोनों films per square metre same material use करते हैं, पर BOPP option half-again as thick है। Mechanical properties, sealing performance, और machine handling सब change होते हैं।</p>
+
+<h3>🔄 Bonus — Industry में GSM या Micron की जगह "Yield" क्यों दिखता है</h3>
+
+<p>एक तीसरी unit industry conversations में show होती है: yield, <strong>sqm per kg</strong> में। ये GSM का inverse है, scaled। Yield = 1000 ÷ GSM। PET 12μm का GSM 16.56 है, तो yield = 60.4 sqm/kg। BOPP 18μm का GSM 16.38 है, तो yield = 61.1 sqm/kg। जब supplier कहता है "ये film 60 sqm per kg yield करती है," वो disguise में GSM = 16.7 g/m² state कर रहा है। Cost engineers के लिए useful क्योंकि <strong>cost per sqm = cost per kg ÷ yield</strong> — पर procurement teams जो micron-or-GSM में सोचने में default होती हैं कभी yield को confusing पाती हैं। Calculator तीनों views cover करता है।</p>
+
+<h3>⚠️ तीन Common Mistakes</h3>
+
+<p><strong>1. सब polymers के लिए generic "1.0" या "1.4" density use करना।</strong> Density values common flexible packaging materials में 35-70% vary करती हैं। ग़लत density use करना directly GSM में corresponding error introduce करता है। PET (1.38) और Paper (0.80) 73% differ करते हैं — spreadsheet में confuse करना 16.56 GSM result को 9.6 GSM में flip कर देता है।</p>
+
+<p><strong>2. Density (g/cm³) को specific gravity (dimensionless) से confuse करना।</strong> वो water-based references के लिए numerically identical हैं, पर units matter करती हैं जब आप formulas build करते हैं। GSM × Micron formula को density g/cm³ में expressed चाहिए (जो kg/dm³ के बराबर है)। Without unit conversion kg/m³ (1000× larger value, PET के लिए "1380") use करना common spreadsheet error है।</p>
+
+<p><strong>3. ये भूलना कि laminates sums हैं।</strong> PET 12 + foil 9 + LDPE 50 का 3-ply laminate का total GSM = (12 × 1.38) + (9 × 2.70) + (50 × 0.92) = 16.56 + 24.30 + 46.00 = 86.86 GSM। Single-layer formula हर layer पर separately apply, फिर sum। (Note: aluminium density 2.70 g/cm³ है।) Whole laminate पर "average density" से formula use करने की कोशिश ग़लत answers देती है।</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> ये blog GSM ↔ Micron Conversion calculator explain करता है। <a href="/blog/cost-per-sqm-calculator" style="color:#E85D26;font-weight:bold;">Blog #36</a> Cost per Square Metre calculator cover करता है जो GSM को key input use करता है। <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> Roll Weight cover करता है, जो GSM को width और length के साथ combine करता है। <a href="/blog/roll-od-calculator" style="color:#E85D26;font-weight:bold;">Blog #35</a> Roll OD calculator explain करता है। Free calculators का full set <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Dropdown में नहीं किसी polymer के साथ काम कर रहे हैं? Non-standard density वाले specialty grade handle करना है? Laminate calculations discuss करना चाहते हैं? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> GSM = Micron × Density, और Micron = GSM ÷ Density। Two-way conversion bridge है labs कैसे film measure करती हैं (area-weight, GSM), suppliers कैसे film quote करते हैं (thickness, micron), और customers कैसे film cost करते हैं (area, sqm) के बीच। Density values याद रखें: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14। Worked benchmarks: PET 12μm = 16.56 GSM, BOPP 18μm = 16.38 GSM (same area-weight, different thickness), LDPE 50μm = 46.00 GSM। छह real situations जहाँ conversion matter करती है: incoming inspection, downgauging analysis, customer spec translation, substrate substitution, cost-per-sqm calculations, और print plate planning। Common mistakes: generic density use करना (35-70% error possible), density units confuse करना (g/cm³ vs kg/m³), और laminates को single layers की तरह treat करना (layer GSMs separately sum करें)। Inline calculator ऊपर use करें या vkstech.com/#calc-gsm-micron पर full version।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Blog 38 — <strong>Production Yield % Calculator</strong> — explain करेगा deceptively simple input/output formula और क्यों इसे इतनी बार misapply किया जाता है। Same calculator-deep-dive format इस blog की तरह।</p>
+
+</div>
+
+<script>
+(function() {
+  var densities = {
+    PET: 1.38, BOPP: 0.91, CPP: 0.90, LDPE: 0.92,
+    HDPE: 0.95, Paper: 0.80, Nylon: 1.14
+  };
+
+  var currentMode = { en: 'A', hi: 'A' };
+
+  window.switchMode_en = function(mode) { switchMode('en', mode); };
+  window.switchMode_hi = function(mode) { switchMode('hi', mode); };
+
+  function switchMode(lang, mode) {
+    currentMode[lang] = mode;
+    var btnA = document.getElementById('modeA-' + lang);
+    var btnB = document.getElementById('modeB-' + lang);
+    var paneA = document.getElementById('paneA-' + lang);
+    var paneB = document.getElementById('paneB-' + lang);
+    if(mode === 'A') {
+      btnA.style.background = '#1A2744'; btnA.style.color = '#FAF9F6';
+      btnB.style.background = '#FAF9F6'; btnB.style.color = '#1A2744';
+      paneA.style.display = 'block'; paneB.style.display = 'none';
+    } else {
+      btnA.style.background = '#FAF9F6'; btnA.style.color = '#1A2744';
+      btnB.style.background = '#1A2744'; btnB.style.color = '#FAF9F6';
+      paneA.style.display = 'none'; paneB.style.display = 'block';
+    }
+    calc(lang);
+  }
+
+  function calc(lang) {
+    var msg, label, val, unit;
+
+    if(currentMode[lang] === 'A') {
+      var um = parseFloat(document.getElementById('micInA-' + lang).value) || 0;
+      var film = document.getElementById('filmA-' + lang).value;
+      var d = densities[film] || 1.0;
+
+      if(um <= 0) {
+        document.getElementById('outVal-' + lang).textContent = '—';
+        document.getElementById('outUnit-' + lang).textContent = '—';
+        document.getElementById('outLabel-' + lang).textContent = lang === 'hi' ? 'CONVERTED GSM' : 'CONVERTED GSM';
+        var defMsg = lang === 'hi' ? 'Thickness enter करें GSM देखने के लिए।' : 'Enter thickness to calculate GSM.';
+        document.getElementById('formulaOut-' + lang).textContent = defMsg;
+        return;
+      }
+      var gsm = um * d;
+      label = lang === 'hi' ? 'CONVERTED GSM' : 'CONVERTED GSM';
+      val = gsm.toFixed(2);
+      unit = 'g/m²';
+      msg = lang === 'hi' ?
+        'GSM = ' + um + ' μm × ' + d.toFixed(2) + ' g/cm³ = ' + gsm.toFixed(2) + ' g/m²।  ' +
+          '1 m² ' + film + ' film का weight ' + gsm.toFixed(2) + ' grams है।' :
+        'GSM = ' + um + ' μm × ' + d.toFixed(2) + ' g/cm³ = ' + gsm.toFixed(2) + ' g/m².  ' +
+          '1 m² of ' + film + ' film weighs ' + gsm.toFixed(2) + ' grams.';
+    } else {
+      var gsm_in = parseFloat(document.getElementById('gsmInB-' + lang).value) || 0;
+      var film = document.getElementById('filmB-' + lang).value;
+      var d = densities[film] || 1.0;
+
+      if(gsm_in <= 0) {
+        document.getElementById('outVal-' + lang).textContent = '—';
+        document.getElementById('outUnit-' + lang).textContent = '—';
+        document.getElementById('outLabel-' + lang).textContent = lang === 'hi' ? 'CONVERTED MICRON' : 'CONVERTED MICRON';
+        var defMsg = lang === 'hi' ? 'GSM enter करें micron देखने के लिए।' : 'Enter GSM to calculate micron.';
+        document.getElementById('formulaOut-' + lang).textContent = defMsg;
+        return;
+      }
+      var um = gsm_in / d;
+      label = lang === 'hi' ? 'CONVERTED MICRON' : 'CONVERTED MICRON';
+      val = um.toFixed(2);
+      unit = 'μm';
+      msg = lang === 'hi' ?
+        'Micron = ' + gsm_in + ' g/m² ÷ ' + d.toFixed(2) + ' g/cm³ = ' + um.toFixed(2) + ' μm।  ' +
+          'मतलब ' + film + ' film at ' + gsm_in + ' GSM ' + um.toFixed(2) + ' microns thick है।' :
+        'Micron = ' + gsm_in + ' g/m² ÷ ' + d.toFixed(2) + ' g/cm³ = ' + um.toFixed(2) + ' μm.  ' +
+          'Implies ' + film + ' film at ' + gsm_in + ' GSM is ' + um.toFixed(2) + ' microns thick.';
+    }
+    document.getElementById('outLabel-' + lang).textContent = label;
+    document.getElementById('outVal-' + lang).textContent = val;
+    document.getElementById('outUnit-' + lang).textContent = unit;
+    document.getElementById('formulaOut-' + lang).textContent = msg;
+  }
+
+  function bind(lang) {
+    var ids = ['micInA', 'filmA', 'gsmInB', 'filmB'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + lang);
+      if(el) {
+        el.addEventListener('input', function() { calc(lang); });
+        el.addEventListener('change', function() { calc(lang); });
+      }
+    });
+    calc(lang);
+  }
+
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>

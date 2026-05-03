@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 37 (GSM ↔ Micron Conversion)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
+  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
+  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
+  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
+  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn.copied { background: #0D8C7E; }
+  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
+  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
+  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .meta-band strong { color: #E85D26; }
+  .upgrade-band { background: rgba(13,140,126,0.12); border: 1px solid #0D8C7E; color: #1A2744; padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .upgrade-band strong { color: #0D8C7E; }
+  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 37</h1>
+<p class="meta"><em>GSM ↔ Micron Conversion — The Two-Way Bridge Between How Suppliers Quote and How Labs Measure</em><br>4 images: 1 cover + 2 bilingual concept diagrams + 1 standalone cheat sheet</p>
+
+<div class="upgrade-band">
+<strong>What's different in this blog:</strong> Bidirectional toggle calculator (Mode A: μm→GSM, Mode B: GSM→μm). All prompts include <code>IMAGE SPEC:</code> line inside the prompt body. Convention: <strong>orange = micron side</strong>, <strong>teal = GSM side</strong> — used consistently across cover, flow diagram, and cheat sheet.
+</div>
+
+<div class="meta-band">
+<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 4 images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Cover — bidirectional bridge between Micron and GSM via density</td></tr>
+<tr><td>2A</td><td><code>conversion-flow-en.png</code></td><td>16:9</td><td>Same micron, different GSM — density is the reason (English)</td></tr>
+<tr><td>2B</td><td><code>conversion-flow-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3</td><td><code>gsm-cheat-sheet.png</code></td><td>4:5 portrait</td><td><strong>STANDALONE CHEAT SHEET</strong> — 12 micron→GSM conversions + 7 polymer densities</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards</h2>
+<p><strong>Colors:</strong> Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>. No others.<br>
+<strong>Convention:</strong> Orange = Micron (μm) side. Teal = GSM (g/m²) side.<br>
+<strong>Fonts:</strong> Inter / Söhne (Latin); Hind / Mukta (Devanagari); Bebas Neue / Anton for big numbers.<br>
+<strong>Critical numbers:</strong> PET 12μm = <strong>16.56 GSM</strong> · BOPP 18μm = <strong>16.38 GSM</strong> (counter-intuitive: nearly identical area-weight, very different micron) · Densities: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14.</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. The output must be widescreen landscape. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized for fast loading (target file size 400-700 KB). No JPEG artifacts, no blur, no fuzzy edges on text.
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "GSM ↔ Micron Conversion — The Two-Way Bridge."
+
+Composition — left two-thirds is the bidirectional bridge visual, right one-third is the hero text panel.
+
+LEFT TWO-THIRDS — bidirectional bridge visual:
+
+A horizontal stage on a clean cream #FAF9F6 background with subtle paper-grain texture. The visual shows Micron and GSM as two equal-weight panels connected by a central density bridge:
+
+- LEFT SIDE — MICRON (orange-themed):
+  - Top tag (small navy caps): MICRON (μm)
+  - Visual: A simplified flat-vector film cross-section, viewed end-on. A long horizontal line representing the film, with a thickness dimension arrow on the left labelled "12 μm" in orange #E85D26 bold. Below the cross-section, a caption "How thick the film is."
+  - Below the visual, big number block: 12 (Bebas Neue, ~120pt, in orange) above tiny label "μm thickness"
+
+- CENTRE — DENSITY BRIDGE:
+  - A vertical navy #1A2744 rounded rectangle panel
+  - Top: "× ÷" symbols in white
+  - Middle: "DENSITY" in white caps, large
+  - Below: "PET 1.38 g/cm³" in orange
+  - Two large arrows pointing in opposite directions (top arrow says "GSM = μm × ρ →"; bottom arrow says "← μm = GSM ÷ ρ")
+
+- RIGHT SIDE — GSM (teal-themed):
+  - Top tag (small navy caps): GSM (g/m²)
+  - Visual: A simplified flat-vector 1m × 1m square (representing 1 square metre), viewed top-down. The square has a label inside "1 m²" and below it a small badge "16.56 g" in teal bold.
+  - Below the visual, big number block: 16.56 (Bebas Neue, ~120pt, in teal) above tiny label "GSM"
+
+Above the entire visual, a single line of text in tiny navy caps centred: TWO UNITS, ONE FILM. DENSITY IS THE BRIDGE.
+
+Below the visual, the formulas displayed prominently in a centred horizontal box:
+Box style: navy #1A2744 background, white monospace text in TWO LINES: GSM = Micron × Density / Micron = GSM ÷ Density
+
+RIGHT ONE-THIRD — navy #1A2744 editorial panel with subtle paper-grain texture:
+- Top eyebrow strip in orange #E85D26, all caps, small letterspacing: vksTech.com / FREE CALCULATORS
+- Main title in white Inter Bold or Söhne Bold (3-4 lines, large): GSM ↔ Micron Conversion
+- Subtitle (smaller italic, grey): The two-way bridge between how labs measure and how suppliers quote.
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO STAT BLOCK — three rows showing the counter-intuitive comparison:
+  - PET 12μm (white, ~40pt): → 16.56 GSM
+  - BOPP 18μm (white, ~40pt): → 16.38 GSM
+  - Same area-weight, (white italic, smaller): very different thickness
+- Small text below: Densities used: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14
+- Bottom strip: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- In the bottom-right corner of this panel, place the attached VKS Tech logo at ~100×100 px on a thin white round backplate
+
+Mood: technical, useful, like the cover of an engineering reference card. NOT decorative. NOT marketing.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No red except orange. No green outside teal. No yellow.</div>
+<div class="planb"><strong>Plan B:</strong> If the dual-direction visual looks weak, simplify to two large coloured circles (orange "12 μm" on left, teal "16.56 GSM" on right) connected by an orange↔teal arrow with "× 1.38" / "÷ 1.38" labels.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Conversion Flow Diagram (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Conversion Flow Diagram</div>
+<div class="prompt-meta">Save as <code>conversion-flow-en.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB).
+
+Create a clean flat-vector editorial concept-diagram. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. The Economist / Harvard Business Review methodology-diagram style.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header (top 12%):
+- Eyebrow (orange #E85D26, small caps): WHY MICRON ≠ GSM
+- Title (navy #1A2744, large bold sans-serif): Same Micron, Different GSM — Density is the Reason
+- Subtitle (grey #5A5A5A): PET is 50% denser than BOPP. Same thickness, different area-weight.
+
+Main visual zone (middle 76%) — 2 ROWS, 3 COLUMNS each:
+
+Row layout (top row — PET, bottom row — BOPP):
+Each row has three panels: MICRON → DENSITY → GSM
+
+TOP ROW (PET, navy-themed accent):
+- LEFT panel: Big "12 μm" in orange Bebas Neue, ~80pt. Below: "PET — same thickness as bottom row"
+- CENTRE panel (orange bridge): "× 1.38" in white on orange #E85D26 rounded rectangle. Below: "PET density (g/cm³)"
+- RIGHT panel: Big "16.56" in teal Bebas Neue, ~80pt. Below: "GSM (g/m²) — high"
+
+BOTTOM ROW (BOPP, lighter accent):
+- LEFT panel: Big "12 μm" in orange Bebas Neue, ~80pt. Below: "BOPP — same thickness as top row"
+- CENTRE panel (orange bridge): "× 0.91" in white on orange #E85D26 rounded rectangle. Below: "BOPP density (g/cm³)"
+- RIGHT panel: Big "10.92" in teal Bebas Neue, ~80pt. Below: "GSM (g/m²) — lower"
+
+Between the two rows, in the middle column, a small navy bracket connecting them with the text: "Same micron — Different GSM"
+
+Below the rows — DENSITY REFERENCE STRIP (full width, navy background):
+Navy #1A2744 background. Single horizontal row of small density tiles in white Bebas Neue:
+Title in orange caps: COMMON FLEXIBLE PACKAGING DENSITIES (g/cm³)
+Then: PET = 1.38 · BOPP = 0.91 · CPP = 0.90 · LDPE = 0.92 · HDPE = 0.95 · Paper = 0.80 · Nylon = 1.14
+
+Bottom callout (8%):
+Navy #1A2744 background, two-column split:
+- LEFT (orange #E85D26 bold): ⚡ Why this matters:
+- RIGHT (white text): A 12μm spec across two polymers is two different products. Specs in micron alone — without polymer or density — are ambiguous.
+
+Bottom-right: VKS Tech logo at ~80×80 px on white circle backplate.
+Bottom-left: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout. Big numbers in Bebas Neue / Anton / Oswald. Tag chips in semibold caps.
+
+AVOID: clipart, cartoons, hand-drawn elements, photorealism, 3D effects, decorative borders.</div>
+<div class="planb"><strong>Plan B:</strong> If the 2-row 3-column grid looks too busy, simplify to a single horizontal flow with PET on top and BOPP below, sharing a vertical density column in the middle.</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Conversion Flow Diagram (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Conversion Flow Diagram</div>
+<div class="prompt-meta">Save as <code>conversion-flow-hi.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
+
+Create a flat-vector editorial concept-diagram with EXACTLY the same layout, colour palette, and structure as the English Conversion Flow Diagram. Numbers (12 μm, 1.38, 0.91, 16.56, 10.92, all densities), units (μm, g/cm³, GSM, g/m²), and material names (PET, BOPP, CPP, LDPE, HDPE, Paper, Nylon) stay in English. Only title, subtitle, panel sub-labels, the inter-row bracket text, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange #E85D26, English): WHY MICRON ≠ GSM
+- Title (Hindi, navy bold, large): Same Micron, Different GSM — Density है Reason
+- Subtitle (Hindi, grey): PET BOPP से 50% denser है। Same thickness, different area-weight।
+
+TOP ROW (PET):
+- LEFT panel: "12 μm" big number, Hindi sub-label: "PET — bottom row के same thickness"
+- CENTRE bridge: "× 1.38", Hindi sub-label: "PET density (g/cm³)"
+- RIGHT panel: "16.56" big number, Hindi sub-label: "GSM (g/m²) — high"
+
+BOTTOM ROW (BOPP):
+- LEFT panel: "12 μm" big number, Hindi sub-label: "BOPP — top row के same thickness"
+- CENTRE bridge: "× 0.91", Hindi sub-label: "BOPP density (g/cm³)"
+- RIGHT panel: "10.92" big number, Hindi sub-label: "GSM (g/m²) — lower"
+
+Inter-row bracket (Hindi): Same micron — Different GSM
+
+DENSITY REFERENCE STRIP (English text in navy panel): COMMON FLEXIBLE PACKAGING DENSITIES (g/cm³): PET = 1.38 · BOPP = 0.91 · CPP = 0.90 · LDPE = 0.92 · HDPE = 0.95 · Paper = 0.80 · Nylon = 1.14
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ ये क्यों matter करता है:
+- RIGHT (white text, Hindi): दो polymers across 12μm spec दो different products हैं। Polymer या density के बिना micron में specs ambiguous हैं।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 2A first, then replace title, subtitle, sub-labels, bracket text, and bottom callout with Devanagari text using Hind or Mukta font in Photopea/Canva. Numbers, units, and material names stay in English.</div>
+</div>
+
+<!-- IMAGE 3 -->
+<h2>Image 3 — GSM Cheat Sheet (Standalone Bookmark)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">📋 GSM Cheat Sheet (PORTRAIT)</div>
+<div class="prompt-meta">Save as <code>gsm-cheat-sheet.png</code> · 1200×1500 portrait · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1200 pixels wide by 1500 pixels tall, 4:5 portrait aspect ratio. This is a vertical (portrait) format, NOT landscape. Do NOT generate square (1:1) or landscape formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 400-700 KB).
+
+Create a clean, professional, bookmark-quality reference cheat sheet — the kind of one-page printable that lab technicians in flexible packaging would tape next to their precision balance. NOT a marketing brochure. A working tool.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture.
+
+Header zone (top 12% of image):
+- VKS Tech logo (the attached logo.png) at top-left, ~100×100 px
+- To the right of the logo, two-line header:
+  - Eyebrow line in orange #E85D26 small caps: VKSTECH.COM REFERENCE CHEAT SHEET
+  - Main title in navy #1A2744 bold large: Micron → GSM Quick Reference
+- Below the title, a thin orange #E85D26 horizontal divider
+
+Body zone (middle 76% of image) — TWO sections:
+
+TOP SECTION — 12-row Micron→GSM conversion table:
+Title above the table (navy bold, small): COMMON CONVERSIONS
+
+Each row of the table:
+- Film type (left, navy bold)
+- Micron (semibold, in orange #E85D26)
+- Density (semibold, smaller)
+- GSM (right-aligned, large, in teal #0D8C7E bold)
+
+Header row at top: | FILM | μm | DENSITY | GSM |
+
+Rows (12 entries):
+1. PET — 8 — 1.38 — 11.04
+2. PET — 12 — 1.38 — 16.56
+3. PET — 23 — 1.38 — 31.74
+4. PET — 36 — 1.38 — 49.68
+5. BOPP — 15 — 0.91 — 13.65
+6. BOPP — 18 — 0.91 — 16.38
+7. BOPP — 25 — 0.91 — 22.75
+8. CPP — 30 — 0.90 — 27.00
+9. LDPE — 50 — 0.92 — 46.00
+10. LDPE — 80 — 0.92 — 73.60
+11. Paper — 80 — 0.80 — 64.00
+12. Nylon (BOPA) — 15 — 1.14 — 17.10
+
+MIDDLE DIVIDER STRIP — small orange horizontal line.
+
+BOTTOM SECTION — Density Reference (single horizontal row of 7 small tiles):
+Title above (navy bold, small): POLYMER DENSITIES (g/cm³)
+
+7 small tiles in a row, each navy #1A2744 rounded rectangle with orange-tinted top stripe:
+- PET — 1.38
+- BOPP — 0.91
+- CPP — 0.90
+- LDPE — 0.92
+- HDPE — 0.95
+- Paper — 0.80
+- Nylon — 1.14
+
+Big number in white Bebas Neue, ~50 pt. Material name in tiny orange caps above.
+
+Footer zone (bottom 12% of image):
+Three columns:
+- LEFT: A small orange-themed key showing "ORANGE = MICRON (μm)"
+- CENTER: A small teal-themed key showing "TEAL = GSM (g/m²)"
+- RIGHT: A small navy panel: Forward: GSM = μm × density · Inverse: μm = GSM ÷ density · Yield: 1000 ÷ GSM = sqm/kg
+
+Above the footer columns, a thin orange divider.
+
+Bottom-most strip with grey small caps: vkstech.com — More calculators, more cheat sheets, real-plant methodology · Vivek Kumar | M.Tech NIT Uttarakhand
+
+Mood: clean, dense, useful, professional. Information density is a feature.
+
+Typography: Inter or Söhne sans-serif throughout. Micron values in orange. GSM values in teal Bebas Neue or bold. Density values in white Bebas Neue.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No others.
+
+AVOID: decorative borders, clipart, drop shadows, gradients, 3D effects.</div>
+<div class="planb"><strong>Plan B:</strong> If the 12-row table looks cramped at 1200×1500, drop the BOPP 25 and the LDPE 80 rows (least common). The 10 remaining rows still cover 95% of typical specs.</div>
+</div>
+
+<h2>Review Checklist (8-Point)</h2>
+<ol>
+<li><strong>Brand colours</strong> — Navy / Orange / Teal / Cream / white / grey only. Orange = Micron; teal = GSM.</li>
+<li><strong>Typography</strong> — Inter/Söhne sans-serif; big numbers in Bebas/Anton; formulas in monospace.</li>
+<li><strong>Number accuracy (HARD)</strong> — Cover: PET 12μm→16.56, BOPP 18μm→16.38, both formulas. Flow 2A/2B: PET 12μm × 1.38 = 16.56; BOPP 12μm × 0.91 = 10.92; all 7 densities. Cheat sheet: 12 GSM values + 7 densities.</li>
+<li><strong>Image format</strong> — Images 1, 2A, 2B at 1600×900 widescreen PNG (300-700 KB). Image 3 at 1200×1500 portrait PNG (400-700 KB).</li>
+<li><strong>Logo placement</strong> — bottom-right (Images 1-2) or top-left (Image 3 cheat sheet), ~80–110 px.</li>
+<li><strong>Information density</strong> — cover 5 sec, flow diagram 10 sec, cheat sheet dense by design.</li>
+<li><strong>No AI-tells</strong> — no faces, no distorted hands, no garbled small text.</li>
+</ol>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">37-gsm-micron-conversion/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── conversion-flow-en.png         (Image 2A)
+├── conversion-flow-hi.png         (Image 2B)
+├── gsm-cheat-sheet.png            (Image 3 — STANDALONE BOOKMARK)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) { markCopied(btn); showToast('✓ Prompt copied to clipboard'); }
+      else { showToast('✗ Copy failed — please select manually'); }
+    } catch (e) { showToast('✗ Copy failed — please select manually'); }
+    document.body.removeChild(ta);
+  }
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) copyText(target.textContent.trim(), btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>

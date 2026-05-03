@@ -1,0 +1,438 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="general-common">
+
+<div class="en-content">
+
+<h2>📊 Production Yield % Calculator — The Deceptively Simple Formula That Hides 18% of Your Output</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; The Single Number That Tells You What Came Out vs What Went In &nbsp;|&nbsp; Published May 2026</p>
+
+<p>A 5,000 kg metalliser jumbo enters the slitter. The slitter outputs 4,830 kg of customer-ready rolls. Yield is 96.6%. Easy. But that same jumbo's journey continues — 4,830 kg goes to lamination (output 4,720 kg, yield 97.7%), then to printing (output 4,490 kg, yield 95.1%), then to pouching (output 4,150 kg, yield 92.4%). The end-to-end yield is not the sum of the four stages or the average — it is the product: 96.6% × 97.7% × 95.1% × 92.4% = 83.0%. The customer pays for 5,000 kg of jumbo input but receives 4,150 kg of finished pouches. <strong>17% of every kilogram bought becomes scrap, edge trim, or process waste somewhere along the chain.</strong> This blog explains the formula behind the <a href="https://www.vkstech.com/#calc-yield" style="color:#E85D26;font-weight:bold;">free Production Yield % calculator on vkstech.com</a> — what it computes, the seven real situations operators and supervisors use it for, and why the simplest formula in flex-pack production is also the most often misapplied.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The Formula in 30 Seconds</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Yield % = (Output ÷ Input) × 100</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Where Input = what went into the process (kg, m, sqm, rolls — any unit, as long as input and output use the same one), Output = what came out as good, customer-acceptable product. Loss % = 100 − Yield %.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Metalliser cycle: 5,000 kg of jumbo PET enters, 4,900 kg of acceptable metallised film exits. <strong>Yield = (4,900 ÷ 5,000) × 100 = 98.0%. Loss = 2.0% = 100 kg.</strong> If 100 kg of waste at ₹140/kg conversion cost = ₹14,000 lost per cycle. Multiply by ~30 cycles per month per machine = ₹4.2 lakh/month/machine in yield losses alone.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE COMPOUND TRAP</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">End-to-end yield is the <strong>product</strong> of stage yields, not the sum or average. Five stages at 95% each = 0.95⁵ = 77.4% end-to-end. Plant managers who report "average stage yield 95%" are hiding the real number.</div>
+</div>
+</div>
+
+<h3>📐 Why "Just Divide Output by Input" is Harder Than It Sounds</h3>
+
+<p>The formula has three pieces, each with a definitional choice that changes the answer. <strong>Input</strong>: do you count the gross weight loaded onto the machine, or do you count after first-roll setup waste? <strong>Output</strong>: does "good" mean shipped to customer, or accepted by QC, or just produced (regardless of whether it was rejected later)? <strong>Boundary</strong>: where does the process start and end? A "metalliser yield" can mean only the metalliser cycle, or it can mean the metalliser-plus-pre-slit waste, or the metalliser cycle plus all tail-end downgrades caught in slitting.</p>
+
+<p>None of these choices is wrong. But two plants comparing yield numbers have to use the same definitions, otherwise the comparison is meaningless. Most plants pick one definition and stick with it for trend analysis — improvement over time within a single plant is more valuable than absolute comparison across plants. The calculator below assumes the simplest definition: input is what enters the process, output is what is acceptable as it leaves the process, both in the same unit (typically kg).</p>
+
+<p>The unit you pick matters too. Yield in <strong>kg</strong> tells you the mass-conversion efficiency. Yield in <strong>metres</strong> tells you the length-conversion efficiency (different from kg if there are micron-thickness changes between input and output). Yield in <strong>rolls</strong> tells you the count-conversion efficiency (useful for slitting if input rolls are split into multiple output rolls). Most plants standardise on kg because that is what production planning, costing, and inventory all run on.</p>
+
+<h3>🛠️ The Seven Real Situations Operators Use This For</h3>
+
+<p><strong>1. Daily shift performance.</strong> The simplest use. End of every shift, the operator reports input weight (or length), output weight, and the formula gives yield. Trended over weeks, this is the single most-watched number in any flex-pack production review.</p>
+
+<p><strong>2. Boat-set life optimization.</strong> Within a metalliser cycle, yield is highest at the start (fresh boats, stable conditions) and degrades toward the end (boat consumption, vapor instability). Tracking yield by hour-of-cycle tells you when to schedule the next boat change. The yield curve is the cost-of-stretching-cycle data.</p>
+
+<p><strong>3. Substrate trial evaluation.</strong> A new film is being trialed. Standard run yields 96%. Trial run yields 91%. The 5-percentage-point gap is what the engineering team has to either solve (process tweaks) or build into the costing (acceptable trade-off for the new substrate's other benefits). The formula quantifies the gap.</p>
+
+<p><strong>4. Operator-vs-operator comparison.</strong> Same machine, same shift duration, same product spec, three operators across three shifts. Yields are 96.5%, 94.8%, 92.1%. The 4.4-point spread is operator-skill or operator-attention, not equipment. The number identifies the training gap.</p>
+
+<p><strong>5. End-of-month financial close.</strong> Procurement bought 100 tonnes of substrate. Production reported 92 tonnes of finished output. The 8% gap shows up in inventory reconciliation. If accounted for as yield loss, it goes to cost of goods sold. If unaccounted for, it sits as inventory variance and triggers an audit. The formula closes the books cleanly.</p>
+
+<p><strong>6. Compound yield analysis (multi-stage).</strong> For end-to-end yield, multiply each stage's yield together. Five stages at 95% each = 77.4%. Five stages at 97% each = 85.9%. Even small per-stage improvements compound dramatically. The formula identifies where the compound multiplier hurts most.</p>
+
+<p><strong>7. Sales-to-procurement reconciliation.</strong> Sales books 5,000 kg of customer order. Procurement buys 5,500 kg of substrate, expecting ~9% yield loss. If actual yield is 95% (loss 5%), production over-buys by 4 percentage points and inventory bloats. If actual yield is 85% (loss 15%), production under-buys and the order ships short. The formula sets the buffer.</p>
+
+<h3>🧮 Production Yield % Calculator (Embedded)</h3>
+
+<p>The calculator below calculates yield, loss percentage, and absolute loss quantity from your input and output values. Works in any consistent unit (kg, metres, sqm, rolls). For shareable links and other related tools, use the <a href="https://www.vkstech.com/#calc-yield" style="color:#E85D26;font-weight:bold;">full version on vkstech.com</a>.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Input quantity</label>
+<input type="number" id="inputIn-en" placeholder="e.g., 5000" min="0" step="1" value="5000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Output quantity</label>
+<input type="number" id="outputIn-en" placeholder="e.g., 4900" min="0" step="1" value="4900" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Unit</label>
+<select id="unitIn-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="kg" selected>kg</option>
+<option value="m">metres</option>
+<option value="sqm">sqm</option>
+<option value="rolls">rolls</option>
+<option value="pieces">pieces</option>
+</select>
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Input = what went into the process. Output = what came out acceptable. Use the same unit on both sides.</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.18);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">YIELD</div>
+<div id="yieldOut-en" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">LOSS</div>
+<div id="lossPctOut-en" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">LOSS QUANTITY</div>
+<div id="lossQtyOut-en" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div id="lossUnitOut-en" style="font-size:0.65em;opacity:0.7;">—</div>
+</div>
+</div>
+
+<div id="formulaOut-en" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Enter input and output to see the worked formula and yield interpretation.
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-yield" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ Open the full calculator on vkstech.com (with shareable links and 6 other tools)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Typical Yield Benchmarks</h3>
+
+<p>The table below shows typical yield ranges for common flexible-packaging stages. "Good" means the top quartile of plants in India; "Average" is the median; "Poor" is the bottom quartile. Bookmark for benchmarking conversations.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Process stage</th><th>Good (top 25%)</th><th>Average</th><th>Poor (bottom 25%)</th><th>Main loss source</th></tr></thead>
+<tbody>
+<tr><td>Metalliser (PET 12μm)</td><td><strong>≥ 98%</strong></td><td>96-97%</td><td>≤ 95%</td><td>Pinholes, source cleaning waste</td></tr>
+<tr><td>Slitting (bare)</td><td><strong>≥ 98%</strong></td><td>96-97%</td><td>≤ 94%</td><td>Edge trim, splice waste</td></tr>
+<tr><td>Slitting (metallised)</td><td><strong>≥ 97%</strong></td><td>95-96%</td><td>≤ 93%</td><td>Edge trim, scratch rejection</td></tr>
+<tr><td>Lamination (PET+LDPE)</td><td><strong>≥ 98%</strong></td><td>97%</td><td>≤ 95%</td><td>Set-up waste, splice losses</td></tr>
+<tr><td>Printing (8-color rotogravure)</td><td><strong>≥ 96%</strong></td><td>94-95%</td><td>≤ 92%</td><td>Make-ready, registration scrap</td></tr>
+<tr><td>Pouching (form-fill-seal)</td><td><strong>≥ 95%</strong></td><td>93-94%</td><td>≤ 91%</td><td>Seal rejection, weighing tolerance</td></tr>
+<tr><td>End-to-end (5 stages combined)</td><td><strong>≥ 88%</strong></td><td>82-85%</td><td>≤ 78%</td><td>Compound effect of all above</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The end-to-end row is the punchline of this whole blog. <strong>Even a "good" flex-pack plant loses 12% of every kilogram of substrate between metalliser and finished pouch.</strong> An "average" plant loses 15-18%. A "poor" plant loses more than 22%. The cumulative cost of yield loss across the supply chain is bigger than most plants realise — typically 8-15% of total conversion cost — because each percentage point compounds across five stages.</p>
+
+<h3>🔄 Bonus — Loss in Rupees, Not Just Percent</h3>
+
+<p>Yield as a percentage is half the picture. The other half is yield-loss-in-money. The conversion is straightforward but rarely done at the operator level:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Loss ₹/cycle = Loss kg × (Substrate ₹/kg + Conversion ₹/kg)</strong>
+</div>
+
+<p>Three worked examples, using a typical Indian metalliser:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Scenario</th><th>Loss kg</th><th>Substrate cost</th><th>Conversion cost</th><th>Loss ₹ per cycle</th></tr></thead>
+<tbody>
+<tr><td>Good cycle (98% yield, 100 kg loss)</td><td>100 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹19,000</strong></td></tr>
+<tr><td>Average cycle (96% yield, 200 kg loss)</td><td>200 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹38,000</strong></td></tr>
+<tr><td>Poor cycle (94% yield, 300 kg loss)</td><td>300 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹57,000</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The ₹38,000 difference between a "good" cycle and a "poor" cycle is per single 5,000 kg cycle. Most metallisers run 25-30 cycles per month. The annual difference between a 98%-yield operator and a 94%-yield operator on a single machine is ₹38,000 × 30 cycles × 12 months = ₹1.4 crore. Operator-skill matters in flex-pack at a level few plant managers fully internalise.</p>
+
+<h3>⚠️ Three Common Mistakes</h3>
+
+<p><strong>1. Averaging stage yields instead of multiplying.</strong> If a five-stage process has yields of 95%, 96%, 97%, 95%, and 96%, the end-to-end is NOT the average (95.8%) but the product (0.95 × 0.96 × 0.97 × 0.95 × 0.96 = 80.5%). The compound multiplier is brutal — even small per-stage drops cascade. Plant managers who report "average yield" are reporting a number that is structurally optimistic.</p>
+
+<p><strong>2. Comparing yield numbers across plants without standardising the definition.</strong> One plant counts setup waste as input loss; another counts it as separate downtime. Their yield numbers will differ by 2-4 percentage points for identical actual performance. Always anchor benchmarking to a clearly-stated definition. Within-plant trends are reliable; across-plant comparisons need a standardised methodology.</p>
+
+<p><strong>3. Mixing units between input and output.</strong> Input in kilograms, output in metres — meaningless number. The formula requires input and output in the SAME unit. The most common offender: input weight in kg but output count in rolls. Convert one to the other (using roll weight, blog #27) before applying the yield formula.</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog explains the Production Yield % calculator. <a href="/blog/cut-metallised-waste-1-8-to-0-9-percent" style="color:#E85D26;font-weight:bold;">Blog #24</a> covers the case study of cutting metallised waste from 1.8% to 0.9% (a yield improvement story). <a href="/blog/cut-bare-film-waste-2-to-1-percent" style="color:#E85D26;font-weight:bold;">Blog #26</a> covers the same for bare film waste. <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> handles how yield losses flow into conversion cost. The full set of free calculators is at <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Disagree with the benchmark numbers? Working in a process stage not in the table? Want to discuss how to set up yield tracking that survives operator pushback? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Yield % = (Output ÷ Input) × 100. Loss % = 100 − Yield %. The formula's simplicity hides three definitional choices (what counts as input, what counts as good output, where the process boundary sits) that change the answer. Multi-stage end-to-end yield is the PRODUCT of stage yields, not the sum or average — five stages at 95% each compounds to 77.4%, not 95%. Benchmark ranges (Indian flex-pack): metalliser 96-98%, slitting 96-97%, lamination 97-98%, printing 94-96%, pouching 93-95%, end-to-end 82-88%. Loss in rupees: 1% yield gap on a 5,000 kg cycle costs ₹9,500-19,000 depending on substrate and conversion cost. Common mistakes: averaging stage yields instead of multiplying, comparing across plants without standardising the definition, and mixing units between input and output. Use the inline calculator above or the full version at vkstech.com/#calc-yield.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> Blog 39 — <strong>Machine Utilisation % Calculator</strong> — covers the running-time-to-shift-time ratio, the metric that most operators confuse with OEE and that most plant managers track wrong. Same calculator-deep-dive format.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>📊 Production Yield % Calculator — वो Deceptively Simple Formula जो आपके 18% Output को छिपाता है</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; एक Number जो बताता है क्या आया vs क्या गया &nbsp;|&nbsp; May 2026 में published</p>
+
+<p>5,000 kg metalliser jumbo slitter में जाता है। Slitter 4,830 kg customer-ready rolls देता है। Yield 96.6% है। आसान। पर उसी jumbo की journey continue होती है — 4,830 kg lamination में जाते हैं (output 4,720 kg, yield 97.7%), फिर printing (output 4,490 kg, yield 95.1%), फिर pouching (output 4,150 kg, yield 92.4%)। End-to-end yield चारों stages का sum या average नहीं है — product है: 96.6% × 97.7% × 95.1% × 92.4% = 83.0%। Customer 5,000 kg jumbo input के पैसे देता है पर 4,150 kg finished pouches receive करता है। <strong>हर खरीदे गए kilogram का 17% कहीं chain में scrap, edge trim, या process waste बनता है।</strong> ये blog उस formula को explain करता है जो <a href="https://www.vkstech.com/#calc-yield" style="color:#E85D26;font-weight:bold;">vkstech.com पर free Production Yield % calculator</a> के पीछे है — क्या compute करता है, सात real situations जहाँ operators और supervisors use करते हैं, और क्यों flex-pack production का सबसे simple formula सबसे ज़्यादा misapplied भी है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Formula 30 Seconds में</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>Yield % = (Output ÷ Input) × 100</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">जहाँ Input = process में क्या गया (kg, m, sqm, rolls — कोई भी unit, बस input और output same use करें), Output = क्या good, customer-acceptable product के रूप में बाहर आया। Loss % = 100 − Yield %।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Metalliser cycle: 5,000 kg jumbo PET enters, 4,900 kg acceptable metallised film exits। <strong>Yield = (4,900 ÷ 5,000) × 100 = 98.0%। Loss = 2.0% = 100 kg।</strong> अगर 100 kg waste ₹140/kg conversion cost पर = ₹14,000 lost per cycle। ~30 cycles per month per machine से multiply करें = ₹4.2 lakh/month/machine सिर्फ़ yield losses में।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">COMPOUND TRAP</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">End-to-end yield stage yields का <strong>product</strong> है, sum या average नहीं। पाँच stages 95% each = 0.95⁵ = 77.4% end-to-end। Plant managers जो "average stage yield 95%" report करते हैं असली number छिपा रहे हैं।</div>
+</div>
+</div>
+
+<h3>📐 "Just Output को Input से Divide करो" इतना मुश्किल क्यों है</h3>
+
+<p>Formula के तीन pieces हैं, हर एक में definitional choice है जो answer change करती है। <strong>Input</strong>: machine पर loaded gross weight count करते हैं, या first-roll setup waste के बाद? <strong>Output</strong>: "good" का मतलब customer को shipped, या QC accepted, या बस produced (regardless कि बाद में reject हुआ)? <strong>Boundary</strong>: process कहाँ start और end होता है? "Metalliser yield" का मतलब सिर्फ़ metalliser cycle हो सकता है, या metalliser-plus-pre-slit waste, या metalliser cycle plus slitting में पकड़े गए सब tail-end downgrades।</p>
+
+<p>इनमें से कोई choice ग़लत नहीं है। पर दो plants जो yield numbers compare कर रहे हैं उन्हें same definitions use करनी होंगी, वरना comparison meaningless है। ज़्यादातर plants एक definition pick करके trend analysis के लिए उसी पर stick रहते हैं — single plant के अंदर improvement over time absolute comparison across plants से ज़्यादा valuable है। नीचे का calculator simplest definition assume करता है: input वो है जो process में enter होता है, output वो है जो process से acceptable exit होता है, दोनों same unit में (typically kg)।</p>
+
+<p>Unit जो आप pick करते हैं भी matter करती है। <strong>kg</strong> में yield mass-conversion efficiency बताता है। <strong>metres</strong> में yield length-conversion efficiency बताता है (kg से अलग अगर input और output के बीच micron-thickness changes हैं)। <strong>rolls</strong> में yield count-conversion efficiency बताता है (slitting के लिए useful अगर input rolls multiple output rolls में split होते हैं)। ज़्यादातर plants kg पर standardise करते हैं क्योंकि production planning, costing, और inventory सब उसी पर चलते हैं।</p>
+
+<h3>🛠️ सात Real Situations जहाँ Operators इसे Use करते हैं</h3>
+
+<p><strong>1. Daily shift performance।</strong> Simplest use। हर shift के end पर, operator input weight (या length), output weight report करता है, और formula yield देता है। Weeks पर trended, ये किसी भी flex-pack production review में सबसे ज़्यादा watched number है।</p>
+
+<p><strong>2. Boat-set life optimization।</strong> Metalliser cycle के अंदर, yield start पर highest होता है (fresh boats, stable conditions) और end की तरफ़ degrade होता है (boat consumption, vapor instability)। Hour-of-cycle से yield track करना बताता है कब next boat change schedule करें। Yield curve cost-of-stretching-cycle data है।</p>
+
+<p><strong>3. Substrate trial evaluation।</strong> नई film trial हो रही है। Standard run yields 96%। Trial run yields 91%। 5-percentage-point gap वो है जो engineering team को या तो solve करना है (process tweaks) या costing में build करना है (नई substrate के दूसरे benefits के लिए acceptable trade-off)। Formula gap quantify करता है।</p>
+
+<p><strong>4. Operator-vs-operator comparison।</strong> Same machine, same shift duration, same product spec, तीन operators across तीन shifts। Yields 96.5%, 94.8%, 92.1%। 4.4-point spread operator-skill या operator-attention है, equipment नहीं। Number training gap identify करता है।</p>
+
+<p><strong>5. End-of-month financial close।</strong> Procurement ने 100 tonnes substrate buy किया। Production ने 92 tonnes finished output report किया। 8% gap inventory reconciliation में show होता है। अगर yield loss के रूप में accounted किया, cost of goods sold में जाता है। अगर unaccounted, inventory variance की तरह बैठता है और audit trigger करता है। Formula books cleanly close करता है।</p>
+
+<p><strong>6. Compound yield analysis (multi-stage)।</strong> End-to-end yield के लिए, हर stage का yield together multiply करें। पाँच stages 95% each = 77.4%। पाँच stages 97% each = 85.9%। Even small per-stage improvements dramatically compound होते हैं। Formula identify करता है कहाँ compound multiplier सबसे ज़्यादा hurt करता है।</p>
+
+<p><strong>7. Sales-to-procurement reconciliation।</strong> Sales 5,000 kg customer order book करती है। Procurement 5,500 kg substrate buy करता है, ~9% yield loss expect करते हुए। अगर actual yield 95% है (loss 5%), production 4 percentage points से over-buy करती है और inventory bloat होती है। अगर actual yield 85% है (loss 15%), production under-buy करती है और order short ship होता है। Formula buffer set करता है।</p>
+
+<h3>🧮 Production Yield % Calculator (Embedded)</h3>
+
+<p>नीचे calculator आपके input और output values से yield, loss percentage, और absolute loss quantity calculate करता है। किसी भी consistent unit (kg, metres, sqm, rolls) में काम करता है। Shareable links और दूसरे related tools के लिए, <a href="https://www.vkstech.com/#calc-yield" style="color:#E85D26;font-weight:bold;">vkstech.com पर full version</a> use करें।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Input quantity</label>
+<input type="number" id="inputIn-hi" placeholder="e.g., 5000" min="0" step="1" value="5000" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Output quantity</label>
+<input type="number" id="outputIn-hi" placeholder="e.g., 4900" min="0" step="1" value="4900" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Unit</label>
+<select id="unitIn-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="kg" selected>kg</option>
+<option value="m">metres</option>
+<option value="sqm">sqm</option>
+<option value="rolls">rolls</option>
+<option value="pieces">pieces</option>
+</select>
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Input = process में क्या गया। Output = क्या acceptable बाहर आया। दोनों sides पर same unit use करें।</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+<div style="background:rgba(13,140,126,0.18);padding:14px;border-radius:6px;border-left:4px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">YIELD</div>
+<div id="yieldOut-hi" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">LOSS</div>
+<div id="lossPctOut-hi" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">%</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:14px;border-radius:6px;border-left:4px solid #E85D26;text-align:center;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px;">LOSS QUANTITY</div>
+<div id="lossQtyOut-hi" style="font-size:1.8em;font-weight:bold;color:#FAF9F6;">—</div>
+<div id="lossUnitOut-hi" style="font-size:0.65em;opacity:0.7;">—</div>
+</div>
+</div>
+
+<div id="formulaOut-hi" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:6px;font-style:italic;">
+Input और output enter करें worked formula और yield interpretation देखने के लिए।
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-yield" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ vkstech.com पर full calculator खोलें (shareable links और 6 दूसरे tools के साथ)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Typical Yield Benchmarks</h3>
+
+<p>नीचे की table common flexible-packaging stages के लिए typical yield ranges दिखाती है। "Good" का मतलब India में plants का top quartile; "Average" median है; "Poor" bottom quartile। Benchmarking conversations के लिए bookmark करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Process stage</th><th>Good (top 25%)</th><th>Average</th><th>Poor (bottom 25%)</th><th>Main loss source</th></tr></thead>
+<tbody>
+<tr><td>Metalliser (PET 12μm)</td><td><strong>≥ 98%</strong></td><td>96-97%</td><td>≤ 95%</td><td>Pinholes, source cleaning waste</td></tr>
+<tr><td>Slitting (bare)</td><td><strong>≥ 98%</strong></td><td>96-97%</td><td>≤ 94%</td><td>Edge trim, splice waste</td></tr>
+<tr><td>Slitting (metallised)</td><td><strong>≥ 97%</strong></td><td>95-96%</td><td>≤ 93%</td><td>Edge trim, scratch rejection</td></tr>
+<tr><td>Lamination (PET+LDPE)</td><td><strong>≥ 98%</strong></td><td>97%</td><td>≤ 95%</td><td>Set-up waste, splice losses</td></tr>
+<tr><td>Printing (8-color rotogravure)</td><td><strong>≥ 96%</strong></td><td>94-95%</td><td>≤ 92%</td><td>Make-ready, registration scrap</td></tr>
+<tr><td>Pouching (form-fill-seal)</td><td><strong>≥ 95%</strong></td><td>93-94%</td><td>≤ 91%</td><td>Seal rejection, weighing tolerance</td></tr>
+<tr><td>End-to-end (5 stages combined)</td><td><strong>≥ 88%</strong></td><td>82-85%</td><td>≤ 78%</td><td>Compound effect of all above</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>End-to-end row इस पूरे blog का punchline है। <strong>Even एक "good" flex-pack plant metalliser और finished pouch के बीच हर kilogram substrate का 12% lose करता है।</strong> "Average" plant 15-18% lose करता है। "Poor" plant 22% से ज़्यादा। Supply chain across yield loss की cumulative cost ज़्यादातर plants जो realise करते हैं उससे बड़ी होती है — typically total conversion cost का 8-15% — क्योंकि हर percentage point पाँच stages पर compound होता है।</p>
+
+<h3>🔄 Bonus — Loss in Rupees, सिर्फ़ Percent में नहीं</h3>
+
+<p>Percentage के रूप में yield half picture है। दूसरा half yield-loss-in-money है। Conversion straightforward है पर operator level पर rarely किया जाता है:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Loss ₹/cycle = Loss kg × (Substrate ₹/kg + Conversion ₹/kg)</strong>
+</div>
+
+<p>तीन worked examples, typical Indian metalliser use करते हुए:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Scenario</th><th>Loss kg</th><th>Substrate cost</th><th>Conversion cost</th><th>Loss ₹ per cycle</th></tr></thead>
+<tbody>
+<tr><td>Good cycle (98% yield, 100 kg loss)</td><td>100 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹19,000</strong></td></tr>
+<tr><td>Average cycle (96% yield, 200 kg loss)</td><td>200 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹38,000</strong></td></tr>
+<tr><td>Poor cycle (94% yield, 300 kg loss)</td><td>300 kg</td><td>₹140/kg PET</td><td>₹50/kg metalliser</td><td><strong>₹57,000</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>"Good" cycle और "poor" cycle के बीच ₹38,000 difference single 5,000 kg cycle के लिए है। ज़्यादातर metallisers 25-30 cycles per month run करते हैं। Single machine पर 98%-yield operator और 94%-yield operator के बीच annual difference है ₹38,000 × 30 cycles × 12 months = ₹1.4 crore। Operator-skill flex-pack में उस level पर matter करती है जो few plant managers fully internalise करते हैं।</p>
+
+<h3>⚠️ तीन Common Mistakes</h3>
+
+<p><strong>1. Stage yields multiply करने के बजाय average करना।</strong> अगर पाँच-stage process के yields 95%, 96%, 97%, 95%, और 96% हैं, end-to-end average (95.8%) नहीं है पर product (0.95 × 0.96 × 0.97 × 0.95 × 0.96 = 80.5%) है। Compound multiplier brutal है — even small per-stage drops cascade करते हैं। Plant managers जो "average yield" report करते हैं structurally optimistic number report कर रहे हैं।</p>
+
+<p><strong>2. Definition standardise किए बिना plants across yield numbers compare करना।</strong> एक plant setup waste को input loss count करता है; दूसरा separate downtime count करता है। उनके yield numbers identical actual performance के लिए 2-4 percentage points से differ होंगे। Benchmarking को हमेशा clearly-stated definition पर anchor करें। Within-plant trends reliable हैं; across-plant comparisons को standardised methodology चाहिए।</p>
+
+<p><strong>3. Input और output के बीच units mix करना।</strong> Input kilograms में, output metres में — meaningless number। Formula को input और output SAME unit में चाहिए। सबसे common offender: input weight kg में पर output count rolls में। Yield formula apply करने से पहले एक को दूसरे में convert करें (roll weight, blog #27 use करके)।</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> ये blog Production Yield % calculator explain करता है। <a href="/blog/cut-metallised-waste-1-8-to-0-9-percent" style="color:#E85D26;font-weight:bold;">Blog #24</a> metallised waste 1.8% से 0.9% cut करने की case study cover करता है (एक yield improvement story)। <a href="/blog/cut-bare-film-waste-2-to-1-percent" style="color:#E85D26;font-weight:bold;">Blog #26</a> bare film waste के लिए same cover करता है। <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> handle करता है कैसे yield losses conversion cost में flow होते हैं। Free calculators का full set <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Benchmark numbers से disagree करते हैं? Table में नहीं किसी process stage में काम कर रहे हैं? Discuss करना चाहते हैं operator pushback survive करने वाली yield tracking कैसे setup करें? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Yield % = (Output ÷ Input) × 100। Loss % = 100 − Yield %। Formula की simplicity तीन definitional choices छिपाती है (input क्या count है, good output क्या count है, process boundary कहाँ बैठता है) जो answer change करती हैं। Multi-stage end-to-end yield stage yields का PRODUCT है, sum या average नहीं — पाँच stages 95% each compound होकर 77.4% होते हैं, 95% नहीं। Benchmark ranges (Indian flex-pack): metalliser 96-98%, slitting 96-97%, lamination 97-98%, printing 94-96%, pouching 93-95%, end-to-end 82-88%। Loss in rupees: 5,000 kg cycle पर 1% yield gap substrate और conversion cost depending पर ₹9,500-19,000 cost करता है। Common mistakes: stage yields multiply करने के बजाय average करना, definition standardise किए बिना plants across compare करना, और input और output के बीच units mix करना। Inline calculator ऊपर use करें या vkstech.com/#calc-yield पर full version।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Blog 39 — <strong>Machine Utilisation % Calculator</strong> — running-time-to-shift-time ratio cover करता है, वो metric जिसे ज़्यादातर operators OEE से confuse करते हैं और ज़्यादातर plant managers ग़लत track करते हैं। Same calculator-deep-dive format।</p>
+
+</div>
+
+<script>
+(function() {
+  function calc(lang) {
+    var inp = parseFloat(document.getElementById('inputIn-' + lang).value) || 0;
+    var out = parseFloat(document.getElementById('outputIn-' + lang).value) || 0;
+    var unit = document.getElementById('unitIn-' + lang).value;
+
+    if(inp <= 0 || out <= 0) {
+      document.getElementById('yieldOut-' + lang).textContent = '—';
+      document.getElementById('lossPctOut-' + lang).textContent = '—';
+      document.getElementById('lossQtyOut-' + lang).textContent = '—';
+      document.getElementById('lossUnitOut-' + lang).textContent = '—';
+      var defMsg = lang === 'hi' ? 'Input और output values enter करें।' : 'Enter input and output to see the worked formula and yield interpretation.';
+      document.getElementById('formulaOut-' + lang).textContent = defMsg;
+      return;
+    }
+
+    var yld = (out / inp) * 100;
+    var lossPct = 100 - yld;
+    var lossQty = inp - out;
+
+    document.getElementById('yieldOut-' + lang).textContent = yld.toFixed(2);
+    document.getElementById('lossPctOut-' + lang).textContent = lossPct.toFixed(2);
+    document.getElementById('lossQtyOut-' + lang).textContent = lossQty.toFixed(0);
+    document.getElementById('lossUnitOut-' + lang).textContent = unit;
+
+    var verdict;
+    if(lang === 'hi') {
+      if(yld >= 98) verdict = 'Excellent — top quartile range में।';
+      else if(yld >= 95) verdict = 'Good — average range के ऊपर।';
+      else if(yld >= 92) verdict = 'Average — improvement potential है।';
+      else if(yld >= 88) verdict = 'Below average — investigate करें।';
+      else verdict = 'Poor — significant loss source identify करें।';
+      
+      var msg = 'Yield = (' + out + ' ÷ ' + inp + ') × 100 = ' + yld.toFixed(2) + '%।  ' +
+                'Loss = ' + inp + ' − ' + out + ' = ' + lossQty.toFixed(0) + ' ' + unit + ' = ' + lossPct.toFixed(2) + '%।  ' + verdict;
+      document.getElementById('formulaOut-' + lang).textContent = msg;
+    } else {
+      if(yld >= 98) verdict = 'Excellent — top quartile range.';
+      else if(yld >= 95) verdict = 'Good — above average range.';
+      else if(yld >= 92) verdict = 'Average — improvement potential exists.';
+      else if(yld >= 88) verdict = 'Below average — investigate.';
+      else verdict = 'Poor — identify significant loss sources.';
+
+      var msg = 'Yield = (' + out + ' ÷ ' + inp + ') × 100 = ' + yld.toFixed(2) + '%.  ' +
+                'Loss = ' + inp + ' − ' + out + ' = ' + lossQty.toFixed(0) + ' ' + unit + ' = ' + lossPct.toFixed(2) + '%.  ' + verdict;
+      document.getElementById('formulaOut-' + lang).textContent = msg;
+    }
+  }
+
+  function bind(lang) {
+    var ids = ['inputIn', 'outputIn', 'unitIn'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + lang);
+      if(el) {
+        el.addEventListener('input', function() { calc(lang); });
+        el.addEventListener('change', function() { calc(lang); });
+      }
+    });
+    calc(lang);
+  }
+
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
