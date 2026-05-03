@@ -1,0 +1,432 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="general-common">
+
+<div class="en-content">
+
+<h2>💰 Cost Per Square Metre Calculator — Why ₹/kg is the Wrong Way to Compare Films</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; The Conversion That Changes Which Film Actually Wins on Price &nbsp;|&nbsp; Published May 2026</p>
+
+<p>A converter calls a film supplier and asks for a quote. Supplier responds: "PET 12μm at ₹120/kg, BOPP 18μm at ₹150/kg." The converter does mental math, decides PET is cheaper, places the order. Three weeks later at the spec review meeting, the customer asks the obvious follow-up: "what is the cost per square metre of pouch?" — and the answer turns out to be that the BOPP option was barely more expensive per pouch (₹2.46/sqm vs PET's ₹1.99/sqm at ₹120/kg, but BOPP at the same ₹120/kg would have been ₹1.97/sqm — actually winning). The supplier quoted in ₹/kg, the customer thinks in ₹/sqm, and nobody did the conversion. This blog explains the formula behind the <a href="https://www.vkstech.com/#calc-cost-sqm" style="color:#E85D26;font-weight:bold;">free Cost per Square Metre calculator on vkstech.com</a> — what it computes, why ₹/kg is misleading on its own, the five real procurement situations where it changes the decision, and a bonus section on the inverse problem (when the customer specifies a ₹/sqm target and you need the ₹/kg ceiling).</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — The Formula in 30 Seconds</strong>
+<a href="#calc-en" onclick="event.preventDefault(); document.getElementById('calc-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Calculator →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>₹/sqm = ₹/kg × GSM ÷ 1000</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">Where GSM = grams per square metre = Micron × Density (g/cm³). Densities: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, Paper 0.80.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">PET 12μm @ ₹120/kg → GSM = 12 × 1.38 = 16.6 → <strong>₹1.99/sqm</strong>. Same supplier quotes BOPP 18μm @ ₹150/kg → GSM = 16.4 → <strong>₹2.46/sqm</strong>. PET wins by ₹0.47/sqm — even though both films have nearly identical GSM, the lower ₹/kg of PET dominates. Supplier ratecard alone would have hidden this.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHEN TO USE IT</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Five situations: supplier quote comparison, customer pouch-cost negotiation, micron downgauging analysis, sales team training, and procurement budget planning. Each one explained below with worked examples.</div>
+</div>
+</div>
+
+<h3>📐 Why ₹/kg Hides the Truth</h3>
+
+<p>Suppliers quote in ₹/kg because that is how they buy raw material and bill production. The packaging customer, on the other hand, makes pouches that have a measurable area — a 30g namkeen pouch is roughly 200 sqcm of film, a 500g atta bag is roughly 1000 sqcm. The customer's question is always "how much does my pouch cost?" — which translates to ₹/sqm, never ₹/kg. The two units only converge when both sides do the GSM conversion in the middle.</p>
+
+<p>The conversion has two steps. First, calculate GSM (grams per square metre) from the film's micron and density. A 12-micron film of PET (density 1.38 g/cm³) has GSM = 12 × 1.38 = 16.56. A 12-micron film of BOPP (density 0.91 g/cm³) has GSM = 12 × 0.91 = 10.92 — significantly less material per square metre, even at the same micron. Second, multiply rate (₹/kg) by GSM and divide by 1000 to get ₹/sqm.</p>
+
+<p>The reason ₹/kg comparisons mislead is that <strong>different polymers have different densities</strong>. PET is 50% denser than BOPP. So even when both films are quoted at the same ₹/kg, PET delivers fewer square metres per kilogram than BOPP — and a "cheaper" PET on ₹/kg basis can come out more expensive on ₹/sqm basis. Or vice versa. Without the conversion, no procurement decision is reliable.</p>
+
+<h3>🛠️ The Five Real Situations Procurement Teams Use This For</h3>
+
+<p><strong>1. Supplier quote comparison.</strong> Three suppliers quote three films at three different ₹/kg rates with three different microns. The only fair comparison is ₹/sqm — the cost of covering 1 square metre of customer's pouch. Without this conversion, procurement defaults to "lowest ₹/kg wins" which is wrong roughly half the time when materials and microns differ.</p>
+
+<p><strong>2. Customer pouch-cost negotiation.</strong> The customer asks "what does my packaging cost?" — and they mean per pouch, which means per sqm of film. The sales team needs to convert the supplier's ₹/kg quote into the customer's ₹/sqm reality, on the spot. Two team members with calculators arrive at the same answer; one with a calculator, the other guessing, end up with different commitments and a credibility problem.</p>
+
+<p><strong>3. Micron downgauging analysis.</strong> The customer wants to reduce film cost. Engineering proposes downgauging from 12 μm PET to 10 μm PET — same material, thinner. The savings show up as ₹/sqm reduction, not ₹/kg (the rate per kg often goes up slightly when downgauging because thinner film is harder to make). The calculator quantifies whether the downgauging actually saves money for the customer.</p>
+
+<p><strong>4. Sales team training.</strong> New sales hires often arrive without flexible packaging fluency. Teaching them the formula on day one — and making them practice the supplier-quote-to-customer-cost translation 20 times — is the difference between a salesperson who can hold a customer conversation and one who cannot. The calculator is the practice tool.</p>
+
+<p><strong>5. Procurement budget planning.</strong> Annual purchase plans run in tonnes and rupees: "we will buy 5,000 tonnes at average ₹140/kg, that's ₹70 crores." But the operations team thinks in jumbo lengths and finished pouches. Translating the budget plan into ₹/sqm by major substrate gives the operations team a number they can sanity-check against actual production costs.</p>
+
+<h3>🧮 Cost per Square Metre Calculator (Embedded)</h3>
+
+<p>Use the inline calculator below for the standard direction (₹/kg + micron → ₹/sqm). For the reverse direction (₹/sqm target → ₹/kg ceiling) see the bonus section. For the same calculator with shareable links and other related tools, use the <a href="https://www.vkstech.com/#calc-cost-sqm" style="color:#E85D26;font-weight:bold;">full version on vkstech.com</a>.</p>
+
+<div id="calc-en" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Rate (₹/kg)</label>
+<input type="number" id="rateIn-en" placeholder="e.g., 120" min="0" step="1" value="120" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="micIn-en" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmIn-en" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Densities are typical industry values. Specific grades may vary ±2%.</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">GSM</div>
+<div id="gsmOut-en" style="font-size:1.4em;font-weight:bold;color:#E85D26;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">g/m²</div>
+</div>
+<div style="background:rgba(13,140,126,0.18);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">COST PER SQ METRE</div>
+<div id="sqmOut-en" style="font-size:1.6em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">₹/sqm</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">YIELD</div>
+<div id="yieldOut-en" style="font-size:1.4em;font-weight:bold;color:#E85D26;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">sqm per kg</div>
+</div>
+</div>
+
+<div id="formulaOut-en" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:12px 14px;border-radius:6px;font-style:italic;">
+Enter values to see the worked formula and cost interpretation.
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-cost-sqm" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ Open the full calculator on vkstech.com (with shareable links and 6 other tools)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Film Costs</h3>
+
+<p>The table below covers common ₹/kg rates that Indian flexible-packaging procurement teams see today (May 2026 reference levels). Bookmark or screenshot for negotiation conversations.</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Thickness</th><th>GSM</th><th>Rate (₹/kg)</th><th>Cost (₹/sqm)</th><th>Yield (sqm/kg)</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>12 μm</td><td>16.6</td><td>₹120</td><td><strong>₹1.99</strong></td><td>60.4</td></tr>
+<tr><td>PET</td><td>12 μm</td><td>16.6</td><td>₹140</td><td><strong>₹2.32</strong></td><td>60.4</td></tr>
+<tr><td>BOPP</td><td>18 μm</td><td>16.4</td><td>₹150</td><td><strong>₹2.46</strong></td><td>61.1</td></tr>
+<tr><td>BOPP</td><td>25 μm</td><td>22.8</td><td>₹145</td><td><strong>₹3.30</strong></td><td>43.9</td></tr>
+<tr><td>CPP</td><td>30 μm</td><td>27.0</td><td>₹140</td><td><strong>₹3.78</strong></td><td>37.0</td></tr>
+<tr><td>LDPE</td><td>50 μm</td><td>46.0</td><td>₹110</td><td><strong>₹5.06</strong></td><td>21.7</td></tr>
+<tr><td>LDPE</td><td>80 μm</td><td>73.6</td><td>₹108</td><td><strong>₹7.95</strong></td><td>13.6</td></tr>
+<tr><td>Paper</td><td>80 μm (kraft)</td><td>64.0</td><td>₹75</td><td><strong>₹4.80</strong></td><td>15.6</td></tr>
+<tr><td>Nylon (BOPA)</td><td>15 μm</td><td>17.1</td><td>₹280</td><td><strong>₹4.79</strong></td><td>58.5</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The most striking row is Nylon BOPA: it has nearly the same GSM as PET 12μm (17.1 vs 16.6), but its premium ₹280/kg rate makes its ₹/sqm cost more than double PET's. Customers asking for nylon's puncture-resistance need to know the ₹/sqm consequence before committing. The calculator turns supplier ratecard differences into customer-visible economics in one step.</p>
+
+<h3>🔄 Bonus — The Inverse Problem (₹/kg from ₹/sqm Target)</h3>
+
+<p>The Cost per Square Metre calculator solves the most common direction (rate → cost), but procurement frequently needs the inverse: a customer specifies "I will not pay more than ₹2.50/sqm for the laminate," and the buying team needs to translate that into the ₹/kg ceiling each substrate must hit. The formula is the same equation rearranged:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Max ₹/kg = (Max ₹/sqm × 1000) ÷ GSM</strong>
+</div>
+
+<p>Three worked examples:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Customer ceiling</th><th>Film spec</th><th>GSM</th><th>Max ₹/kg supplier can quote</th></tr></thead>
+<tbody>
+<tr><td>₹2.50/sqm</td><td>PET 12μm (density 1.38)</td><td>16.6</td><td><strong>≤ ₹150.97/kg</strong></td></tr>
+<tr><td>₹3.00/sqm</td><td>BOPP 20μm (density 0.91)</td><td>18.2</td><td><strong>≤ ₹164.84/kg</strong></td></tr>
+<tr><td>₹5.00/sqm</td><td>LDPE 50μm (density 0.92)</td><td>46.0</td><td><strong>≤ ₹108.70/kg</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>This inverse direction is particularly useful when going into supplier negotiations with a hard customer-side budget. The procurement team walks in knowing exactly the ₹/kg below which they need quotes — and walks out with a yes-or-no answer, not a "let me check and get back to you."</p>
+
+<h3>⚠️ Three Common Mistakes</h3>
+
+<p><strong>1. Using a wrong density.</strong> The density inputs in the calculator are typical values for standard grades. Specialty grades — high-clarity BOPP, voided PET, talc-filled CPP — can vary by ±5%. If your supplier provides a spec sheet with the actual density, use that. The error from a wrong density flows directly into ₹/sqm with the same percentage magnitude.</p>
+
+<p><strong>2. Forgetting that laminates are sums, not single films.</strong> A 3-ply laminate of PET 12 + foil 9 + LDPE 50 has a total ₹/sqm equal to the sum of the three individual ₹/sqm values, plus the lamination cost adder (typically ₹0.50-1.50/sqm depending on adhesive system). Using this calculator on each layer separately and summing gives a defensible base; ignoring the lamination cost gives a number 20-30% too low.</p>
+
+<p><strong>3. Comparing ₹/sqm without normalising for barrier or print.</strong> A bare PET 12μm at ₹1.99/sqm is not the same product as a printed and metallised PET 12μm at ₹2.50/sqm — even though the math comes from the same formula. Apples-to-apples comparison requires identical substrate, identical print, identical metallisation. The calculator gives you the substrate-level cost; the converter has to add the value-add costs (printing, metallisation, lamination) separately to get the finished-laminate ₹/sqm.</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog explains the Cost per Square Metre calculator. <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> covers the related Roll Weight calculator. <a href="/blog/roll-od-calculator" style="color:#E85D26;font-weight:bold;">Blog #35</a> explains the Roll OD calculator. <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> covers the conversion cost framework that builds on top of ₹/sqm. The full set of free calculators (Weight, Length, OD, GSM↔Micron, Yield, Utilisation, Cost/sqm, Capacity) is at <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Working with a non-standard polymer density? Negotiating a multi-layer laminate quote and not sure how to compare? Want to discuss how to build the printing and metallisation cost adders on top of the substrate ₹/sqm? <strong>Drop your question in the Q&A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> ₹/sqm = ₹/kg × GSM ÷ 1000, where GSM = Micron × Density. Suppliers quote in ₹/kg because that is how they buy raw material, but customers think in ₹/sqm because that is how they cost a pouch. The conversion has two steps: GSM from micron×density, then ₹/sqm = ₹/kg × GSM ÷ 1000. Densities to remember: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, Paper 0.80. Worked benchmarks: PET 12μm @ ₹120/kg = ₹1.99/sqm. BOPP 18μm @ ₹150/kg = ₹2.46/sqm. LDPE 50μm @ ₹110/kg = ₹5.06/sqm. Inverse formula (Max ₹/kg = Max ₹/sqm × 1000 ÷ GSM) translates customer-side budget into supplier-side ceiling — useful for negotiations. Common mistakes: using a wrong density for specialty grades (±5% error), forgetting laminate layers sum (each layer's ₹/sqm + lamination cost adder), and comparing ₹/sqm across different print/metallisation specs (apples-to-apples requires identical structure). Use the inline calculator above or the full version at vkstech.com/#calc-cost-sqm.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> The calculator-explainer series continues — next up is the GSM ↔ Micron Conversion calculator (the building block underneath this entire blog), or the Production Yield % calculator (the simplest one but the most often misapplied). Tell me which you want next.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>💰 Cost Per Square Metre Calculator — Films Compare करने के लिए ₹/kg क्यों Wrong Way है</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 9-min read &nbsp;|&nbsp; वो Conversion जो Change करती है कौन सी Film Actually Price पर जीतती है &nbsp;|&nbsp; May 2026 में published</p>
+
+<p>एक converter film supplier को call करता है और quote माँगता है। Supplier respond करता है: "PET 12μm ₹120/kg, BOPP 18μm ₹150/kg।" Converter mental math करता है, decide करता है PET cheaper है, order place करता है। तीन हफ़्तों बाद spec review meeting में, customer obvious follow-up पूछता है: "मेरे pouch की cost per square metre क्या है?" — और answer ये निकलता है कि BOPP option per pouch barely ज़्यादा expensive था (₹2.46/sqm vs PET का ₹1.99/sqm @ ₹120/kg, पर BOPP को same ₹120/kg पर quote करते तो ₹1.97/sqm — actually जीतता)। Supplier ₹/kg में quote करता है, customer ₹/sqm में सोचता है, और कोई conversion नहीं करता। ये blog उस formula को explain करता है जो <a href="https://www.vkstech.com/#calc-cost-sqm" style="color:#E85D26;font-weight:bold;">vkstech.com पर free Cost per Square Metre calculator</a> के पीछे है — क्या compute करता है, ₹/kg अकेला क्यों misleading है, पाँच real procurement situations जहाँ decision बदलता है, और एक bonus section inverse problem पर (जब customer ₹/sqm target specify करे और आपको ₹/kg ceiling चाहिए)।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Formula 30 Seconds में</strong>
+<a href="#calc-hi" onclick="event.preventDefault(); document.getElementById('calc-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Calculator पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">FORMULA</div>
+<div style="font-size:1em;color:#FAF9F6;line-height:1.6;font-family:Menlo,Consolas,monospace;text-align:center;padding:8px 0;"><strong>₹/sqm = ₹/kg × GSM ÷ 1000</strong></div>
+<div style="font-size:0.85em;color:#FAF9F6;opacity:0.85;line-height:1.5;">जहाँ GSM = grams per square metre = Micron × Density (g/cm³)। Densities: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, Paper 0.80।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">REAL EXAMPLE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">PET 12μm @ ₹120/kg → GSM = 12 × 1.38 = 16.6 → <strong>₹1.99/sqm</strong>। Same supplier BOPP 18μm @ ₹150/kg quote करता है → GSM = 16.4 → <strong>₹2.46/sqm</strong>। PET ₹0.47/sqm से जीतता है — दोनों films का GSM nearly identical होने के बावजूद, PET का lower ₹/kg dominate करता है। Supplier ratecard अकेला ये hide कर देता।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">कब Use करें</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">पाँच situations: supplier quote comparison, customer pouch-cost negotiation, micron downgauging analysis, sales team training, और procurement budget planning। हर एक नीचे worked examples के साथ explain किया।</div>
+</div>
+</div>
+
+<h3>📐 ₹/kg Truth क्यों Hide करता है</h3>
+
+<p>Suppliers ₹/kg में quote करते हैं क्योंकि वो raw material इसी तरह buy करते हैं और production bill करते हैं। Packaging customer, उल्टा, pouches बनाता है जिनका measurable area है — 30g namkeen pouch roughly 200 sqcm film है, 500g atta bag roughly 1000 sqcm है। Customer का question हमेशा "मेरे pouch की कितनी cost है?" — जो ₹/sqm में translate होता है, ₹/kg में नहीं। दोनों units सिर्फ़ तब converge होती हैं जब दोनों sides बीच में GSM conversion करें।</p>
+
+<p>Conversion के दो steps हैं। पहले, film के micron और density से GSM (grams per square metre) calculate करें। 12-micron PET film (density 1.38 g/cm³) का GSM = 12 × 1.38 = 16.56। 12-micron BOPP film (density 0.91 g/cm³) का GSM = 12 × 0.91 = 10.92 — significantly कम material per square metre, same micron पर भी। दूसरे, rate (₹/kg) को GSM से multiply करें और 1000 से divide करें ₹/sqm पाने के लिए।</p>
+
+<p>₹/kg comparisons mislead करने का reason ये है कि <strong>different polymers की different densities हैं</strong>। PET BOPP से 50% denser है। तो जब दोनों films same ₹/kg पर quote होती हैं, PET प्रति kilogram कम square metres deliver करता है BOPP से — और "cheaper" PET ₹/kg basis पर ₹/sqm basis पर ज़्यादा expensive निकल सकता है। या vice versa। Conversion के बिना, कोई procurement decision reliable नहीं है।</p>
+
+<h3>🛠️ पाँच Real Situations जहाँ Procurement Teams इसे Use करती हैं</h3>
+
+<p><strong>1. Supplier quote comparison।</strong> तीन suppliers तीन films को तीन different ₹/kg rates पर different microns में quote करते हैं। केवल fair comparison ₹/sqm है — customer के pouch के 1 square metre cover करने की cost। इस conversion के बिना, procurement default "lowest ₹/kg wins" पर जाती है जो लगभग आधे time ग़लत होती है जब materials और microns differ करते हैं।</p>
+
+<p><strong>2. Customer pouch-cost negotiation।</strong> Customer पूछता है "मेरी packaging कितनी cost करती है?" — और उसका मतलब per pouch, यानी per sqm of film। Sales team को supplier के ₹/kg quote को customer के ₹/sqm reality में convert करना है, on the spot। Calculators वाले दो team members same answer पर पहुँचते हैं; एक calculator वाला, दूसरा guess करता हुआ, different commitments और credibility problem के साथ खत्म होते हैं।</p>
+
+<p><strong>3. Micron downgauging analysis।</strong> Customer film cost कम करना चाहता है। Engineering 12 μm PET से 10 μm PET downgauge propose करती है — same material, thinner। Savings ₹/sqm reduction की तरह दिखती हैं, ₹/kg नहीं (per kg rate often slightly जाता है downgauging में क्योंकि thinner film बनाना hard है)। Calculator quantify करता है कि downgauging actually customer के लिए money saves करता है या नहीं।</p>
+
+<p><strong>4. Sales team training।</strong> New sales hires often flexible packaging fluency के बिना आते हैं। Day one पर formula सिखाना — और 20 बार supplier-quote-to-customer-cost translation practice कराना — एक salesperson जो customer conversation hold कर सके और एक जो न कर सके के बीच का difference है। Calculator practice tool है।</p>
+
+<p><strong>5. Procurement budget planning।</strong> Annual purchase plans tonnes और rupees में चलते हैं: "हम 5,000 tonnes buy करेंगे average ₹140/kg पर, यानी ₹70 crores।" पर operations team jumbo lengths और finished pouches में सोचती है। Budget plan को major substrate के हिसाब से ₹/sqm में translate करना operations team को number देता है जो वो actual production costs के against sanity-check कर सकें।</p>
+
+<h3>🧮 Cost per Square Metre Calculator (Embedded)</h3>
+
+<p>नीचे inline calculator standard direction (₹/kg + micron → ₹/sqm) के लिए use करें। Reverse direction (₹/sqm target → ₹/kg ceiling) के लिए bonus section देखें। Same calculator shareable links और दूसरे related tools के साथ <a href="https://www.vkstech.com/#calc-cost-sqm" style="color:#E85D26;font-weight:bold;">vkstech.com पर full version</a> पर है।</p>
+
+<div id="calc-hi" style="background:#FAF9F6;border:2px solid #1A2744;border-radius:12px;padding:20px;margin:24px 0;">
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 16px;border-radius:8px;margin-bottom:14px;">
+<div style="font-size:0.85em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:10px;">YOUR INPUTS</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Rate (₹/kg)</label>
+<input type="number" id="rateIn-hi" placeholder="e.g., 120" min="0" step="1" value="120" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Thickness (μm)</label>
+<input type="number" id="micIn-hi" placeholder="e.g., 12" min="0" step="0.1" value="12" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+</div>
+<div>
+<label style="display:block;font-size:0.82em;color:#FAF9F6;opacity:0.9;margin-bottom:4px;">Film type</label>
+<select id="filmIn-hi" style="width:100%;padding:8px;border:1px solid #FAF9F6;border-radius:4px;font-size:0.95em;background:#fff7e0;color:#1A2744;font-weight:bold;">
+<option value="PET" selected>PET (1.38)</option>
+<option value="BOPP">BOPP (0.91)</option>
+<option value="CPP">CPP (0.90)</option>
+<option value="LDPE">LDPE (0.92)</option>
+<option value="HDPE">HDPE (0.95)</option>
+<option value="Paper">Paper (0.80)</option>
+<option value="Nylon">Nylon BOPA (1.14)</option>
+</select>
+</div>
+</div>
+<div style="font-size:0.72em;color:#FAF9F6;opacity:0.7;margin-top:8px;font-style:italic;">Densities typical industry values हैं। Specific grades ±2% vary कर सकते हैं।</div>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px;border-radius:8px;">
+<div style="font-size:0.82em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:14px;">CALCULATED OUTPUT</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">GSM</div>
+<div id="gsmOut-hi" style="font-size:1.4em;font-weight:bold;color:#E85D26;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">g/m²</div>
+</div>
+<div style="background:rgba(13,140,126,0.18);padding:12px;border-radius:6px;border-left:3px solid #0D8C7E;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">COST PER SQ METRE</div>
+<div id="sqmOut-hi" style="font-size:1.6em;font-weight:bold;color:#FAF9F6;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">₹/sqm</div>
+</div>
+<div style="background:rgba(232,93,38,0.15);padding:12px;border-radius:6px;border-left:3px solid #E85D26;text-align:center;">
+<div style="font-size:0.7em;opacity:0.85;">YIELD</div>
+<div id="yieldOut-hi" style="font-size:1.4em;font-weight:bold;color:#E85D26;">—</div>
+<div style="font-size:0.65em;opacity:0.7;">sqm per kg</div>
+</div>
+</div>
+
+<div id="formulaOut-hi" style="font-size:0.85em;color:#FAF9F6;opacity:0.9;line-height:1.5;background:rgba(255,255,255,0.05);padding:12px 14px;border-radius:6px;font-style:italic;">
+Values enter करें worked formula और cost interpretation देखने के लिए।
+</div>
+</div>
+
+<a href="https://www.vkstech.com/#calc-cost-sqm" target="_blank" rel="noopener" style="display:block;background:#E85D26;color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:bold;text-align:center;margin-top:14px;font-size:1em;">↗ vkstech.com पर full calculator खोलें (shareable links और 6 दूसरे tools के साथ)</a>
+</div>
+
+<h3>📊 Quick-Look Reference — Common Film Costs</h3>
+
+<p>नीचे की table common ₹/kg rates cover करती है जो Indian flexible-packaging procurement teams आज देख रही हैं (May 2026 reference levels)। Negotiation conversations के लिए bookmark या screenshot करें।</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Film type</th><th>Thickness</th><th>GSM</th><th>Rate (₹/kg)</th><th>Cost (₹/sqm)</th><th>Yield (sqm/kg)</th></tr></thead>
+<tbody>
+<tr><td>PET</td><td>12 μm</td><td>16.6</td><td>₹120</td><td><strong>₹1.99</strong></td><td>60.4</td></tr>
+<tr><td>PET</td><td>12 μm</td><td>16.6</td><td>₹140</td><td><strong>₹2.32</strong></td><td>60.4</td></tr>
+<tr><td>BOPP</td><td>18 μm</td><td>16.4</td><td>₹150</td><td><strong>₹2.46</strong></td><td>61.1</td></tr>
+<tr><td>BOPP</td><td>25 μm</td><td>22.8</td><td>₹145</td><td><strong>₹3.30</strong></td><td>43.9</td></tr>
+<tr><td>CPP</td><td>30 μm</td><td>27.0</td><td>₹140</td><td><strong>₹3.78</strong></td><td>37.0</td></tr>
+<tr><td>LDPE</td><td>50 μm</td><td>46.0</td><td>₹110</td><td><strong>₹5.06</strong></td><td>21.7</td></tr>
+<tr><td>LDPE</td><td>80 μm</td><td>73.6</td><td>₹108</td><td><strong>₹7.95</strong></td><td>13.6</td></tr>
+<tr><td>Paper</td><td>80 μm (kraft)</td><td>64.0</td><td>₹75</td><td><strong>₹4.80</strong></td><td>15.6</td></tr>
+<tr><td>Nylon (BOPA)</td><td>15 μm</td><td>17.1</td><td>₹280</td><td><strong>₹4.79</strong></td><td>58.5</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>सबसे striking row Nylon BOPA है: इसका GSM PET 12μm के लगभग same है (17.1 vs 16.6), पर इसका premium ₹280/kg rate इसकी ₹/sqm cost को PET से दोगुना से ज़्यादा बना देता है। Customers जो nylon की puncture-resistance माँग रहे हैं उन्हें commit करने से पहले ₹/sqm consequence जानने की ज़रूरत है। Calculator supplier ratecard differences को customer-visible economics में एक step में बदलता है।</p>
+
+<h3>🔄 Bonus — Inverse Problem (₹/sqm Target से ₹/kg)</h3>
+
+<p>Cost per Square Metre calculator सबसे common direction (rate → cost) solve करता है, पर procurement frequently inverse चाहती है: customer specify करता है "मैं laminate के लिए ₹2.50/sqm से ज़्यादा नहीं दूँगा," और buying team को उसे हर substrate को hit करने वाले ₹/kg ceiling में translate करना है। Formula same equation rearranged है:</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:14px 18px;margin:14px 0;border-radius:8px;text-align:center;font-family:Menlo,Consolas,monospace;font-size:1.1em;">
+<strong>Max ₹/kg = (Max ₹/sqm × 1000) ÷ GSM</strong>
+</div>
+
+<p>तीन worked examples:</p>
+
+<div style="overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead><tr><th>Customer ceiling</th><th>Film spec</th><th>GSM</th><th>Max ₹/kg supplier quote कर सकता है</th></tr></thead>
+<tbody>
+<tr><td>₹2.50/sqm</td><td>PET 12μm (density 1.38)</td><td>16.6</td><td><strong>≤ ₹150.97/kg</strong></td></tr>
+<tr><td>₹3.00/sqm</td><td>BOPP 20μm (density 0.91)</td><td>18.2</td><td><strong>≤ ₹164.84/kg</strong></td></tr>
+<tr><td>₹5.00/sqm</td><td>LDPE 50μm (density 0.92)</td><td>46.0</td><td><strong>≤ ₹108.70/kg</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>ये inverse direction तब particularly useful है जब hard customer-side budget के साथ supplier negotiations में जा रहे हैं। Procurement team exactly जानती हुई जाती है कि किस ₹/kg के नीचे quotes चाहिए — और yes-or-no answer के साथ बाहर आती है, "let me check and get back to you" के साथ नहीं।</p>
+
+<h3>⚠️ तीन Common Mistakes</h3>
+
+<p><strong>1. ग़लत density use करना।</strong> Calculator में density inputs standard grades के typical values हैं। Specialty grades — high-clarity BOPP, voided PET, talc-filled CPP — ±5% vary कर सकती हैं। अगर आपका supplier actual density के साथ spec sheet provide करता है, उसे use करें। ग़लत density से आने वाली error directly ₹/sqm में same percentage magnitude से flow होती है।</p>
+
+<p><strong>2. ये भूलना कि laminates sums हैं, single films नहीं।</strong> PET 12 + foil 9 + LDPE 50 का 3-ply laminate का total ₹/sqm तीनों individual ₹/sqm values के sum के बराबर है, plus lamination cost adder (typically ₹0.50-1.50/sqm depending on adhesive system)। हर layer पर इस calculator का use करना और sum करना defensible base देता है; lamination cost ignore करना 20-30% कम number देता है।</p>
+
+<p><strong>3. ₹/sqm को barrier या print के लिए normalise किए बिना compare करना।</strong> Bare PET 12μm @ ₹1.99/sqm same product नहीं है printed और metallised PET 12μm @ ₹2.50/sqm — same formula से math आने के बावजूद। Apples-to-apples comparison identical substrate, identical print, identical metallisation चाहिए। Calculator आपको substrate-level cost देता है; converter को finished-laminate ₹/sqm पाने के लिए value-add costs (printing, metallisation, lamination) separately add करनी हैं।</p>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> ये blog Cost per Square Metre calculator explain करता है। <a href="/blog/film-roll-weight-formula" style="color:#E85D26;font-weight:bold;">Blog #27</a> related Roll Weight calculator cover करता है। <a href="/blog/roll-od-calculator" style="color:#E85D26;font-weight:bold;">Blog #35</a> Roll OD calculator explain करता है। <a href="/blog/conversion-cost-metalliser-actual-vs-equivalent" style="color:#E85D26;font-weight:bold;">Blog #28</a> conversion cost framework cover करता है जो ₹/sqm के top पर build करता है। Free calculators का full set (Weight, Length, OD, GSM↔Micron, Yield, Utilisation, Cost/sqm, Capacity) <a href="https://www.vkstech.com/#calculators" style="color:#E85D26;font-weight:bold;">vkstech.com/#calculators</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Non-standard polymer density के साथ काम कर रहे हैं? Multi-layer laminate quote negotiate कर रहे हैं और sure नहीं कैसे compare करें? Discuss करना चाहते हैं substrate ₹/sqm के top पर printing और metallisation cost adders कैसे build करें? <strong>अपना सवाल इस page के bottom पर Q&A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> ₹/sqm = ₹/kg × GSM ÷ 1000, जहाँ GSM = Micron × Density। Suppliers ₹/kg में quote करते हैं क्योंकि वो raw material इसी तरह buy करते हैं, पर customers ₹/sqm में सोचते हैं क्योंकि pouch की cost इसी तरह आती है। Conversion के दो steps: GSM micron×density से, फिर ₹/sqm = ₹/kg × GSM ÷ 1000। Densities याद रखें: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, Paper 0.80। Worked benchmarks: PET 12μm @ ₹120/kg = ₹1.99/sqm। BOPP 18μm @ ₹150/kg = ₹2.46/sqm। LDPE 50μm @ ₹110/kg = ₹5.06/sqm। Inverse formula (Max ₹/kg = Max ₹/sqm × 1000 ÷ GSM) customer-side budget को supplier-side ceiling में translate करता है — negotiations के लिए useful। Common mistakes: specialty grades के लिए ग़लत density use करना (±5% error), laminate layers sum होना भूलना (हर layer का ₹/sqm + lamination cost adder), और different print/metallisation specs पर ₹/sqm compare करना (apples-to-apples identical structure चाहिए)। Inline calculator ऊपर use करें या vkstech.com/#calc-cost-sqm पर full version।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Calculator-explainer series जारी है — अगला है GSM ↔ Micron Conversion calculator (इस पूरे blog का underlying building block), या Production Yield % calculator (सबसे simple पर सबसे ज़्यादा misapplied)। बताएँ कौन सा next चाहिए।</p>
+
+</div>
+
+<script>
+(function() {
+  var densities = {
+    PET: 1.38, BOPP: 0.91, CPP: 0.90, LDPE: 0.92,
+    HDPE: 0.95, Paper: 0.80, Nylon: 1.14
+  };
+
+  function calc(lang) {
+    var rate = parseFloat(document.getElementById('rateIn-' + lang).value) || 0;
+    var um = parseFloat(document.getElementById('micIn-' + lang).value) || 0;
+    var film = document.getElementById('filmIn-' + lang).value;
+    var d = densities[film] || 1.0;
+
+    if(rate <= 0 || um <= 0) {
+      document.getElementById('gsmOut-' + lang).textContent = '—';
+      document.getElementById('sqmOut-' + lang).textContent = '—';
+      document.getElementById('yieldOut-' + lang).textContent = '—';
+      var defMsg = lang === 'hi' ? 'Values enter करें worked formula देखने के लिए।' : 'Enter values to see the worked formula and cost interpretation.';
+      document.getElementById('formulaOut-' + lang).textContent = defMsg;
+      return;
+    }
+
+    var gsm = um * d;
+    var sqm_cost = rate * gsm / 1000;
+    var yield_per_kg = 1000 / gsm;
+
+    document.getElementById('gsmOut-' + lang).textContent = gsm.toFixed(1);
+    document.getElementById('sqmOut-' + lang).textContent = '₹' + sqm_cost.toFixed(2);
+    document.getElementById('yieldOut-' + lang).textContent = yield_per_kg.toFixed(1);
+
+    // Formula breakdown + interpretation
+    var msg;
+    if(lang === 'hi') {
+      msg = 'GSM = ' + um + ' × ' + d.toFixed(2) + ' = ' + gsm.toFixed(1) + ' g/m²।  ' +
+            '₹/sqm = ' + rate + ' × ' + gsm.toFixed(1) + ' ÷ 1000 = ₹' + sqm_cost.toFixed(2) + ' per sqm।  ' +
+            '1 kg ' + film + ' film से ' + yield_per_kg.toFixed(1) + ' sqm coverage मिलता है।';
+    } else {
+      msg = 'GSM = ' + um + ' × ' + d.toFixed(2) + ' = ' + gsm.toFixed(1) + ' g/m².  ' +
+            '₹/sqm = ' + rate + ' × ' + gsm.toFixed(1) + ' ÷ 1000 = ₹' + sqm_cost.toFixed(2) + ' per sqm.  ' +
+            '1 kg of ' + film + ' film yields ' + yield_per_kg.toFixed(1) + ' sqm of coverage.';
+    }
+    document.getElementById('formulaOut-' + lang).textContent = msg;
+  }
+
+  function bind(lang) {
+    var ids = ['rateIn', 'micIn', 'filmIn'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id + '-' + lang);
+      if(el) {
+        el.addEventListener('input', function() { calc(lang); });
+        el.addEventListener('change', function() { calc(lang); });
+      }
+    });
+    calc(lang);
+  }
+
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { bind('en'); bind('hi'); });
+  } else {
+    bind('en'); bind('hi');
+  }
+})();
+</script>
