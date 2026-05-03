@@ -93,8 +93,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <details style="margin-top:10px;font-size:.78rem">
 <summary style="cursor:pointer;color:var(--muted)">Can't find your folder? Type it manually</summary>
-<input type="text" id="gFolderManual" placeholder="e.g. metalliser-budget-blog (if not in the list above)" oninput="this.value=this.value.replace(/[^a-z0-9\-_\/]/gi,'')" style="margin-top:8px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit">
-<div style="font-size:.7rem;color:#999;margin-top:4px">Useful if GitHub's API rate limit was hit, or for sub-paths like <code>blogs/my-folder</code>.</div>
+<input type="text" id="gFolderManual" placeholder="folder name or full GitHub URL" oninput="this.value=this.value.replace(/[^a-zA-Z0-9\-_\/:.]/g,'')" style="margin-top:8px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit">
+<div style="font-size:.7rem;color:#999;margin-top:4px">Useful if GitHub's API rate limit was hit. Accepts: <code>folder-name</code>, <code>blogs/my-folder</code>, or full URL like <code>https://github.com/vkstecho/VksTech/tree/main/folder-name</code>.</div>
 </details>
 </div>
 
@@ -357,52 +357,41 @@ function firstMatch(root, selectors){
 async function loadGithubFolders(){
   const select = document.getElementById('gFolderSelect');
   const showAll = document.getElementById('gShowAll').checked;
+  /* Force cache refresh when user clicks the Refresh button.
+     Distinguished from initial load by checking if cache is empty. */
+  const isManualRefresh = !!_ghTreeCache;
+  const forceRefresh = isManualRefresh;
 
   select.innerHTML = '<option value="">⏳ Scanning GitHub repo...</option>';
   ghFoldersLoaded = true;
 
   try{
-    /* Step 1: list everything at repo root */
-    const rootApi = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/?ref=${GH_BRANCH}`;
-    const r = await fetch(rootApi);
-    if (!r.ok){
-      if (r.status === 403){
-        select.innerHTML = '<option value="">⚠️ GitHub rate limit — use manual entry below</option>';
-        return;
-      }
-      throw new Error('GitHub API HTTP '+r.status);
-    }
-    const items = await r.json();
-    const dirs = items.filter(i => i.type === 'dir').map(i => i.name);
+    /* ONE API call gets the entire repo tree.
+       Cached for 10 minutes — subsequent renders use the cache. */
+    const tree = await loadGithubTree(forceRefresh);
+    const folderNames = Object.keys(tree.byFolder);
 
-    if (dirs.length === 0){
-      select.innerHTML = '<option value="">📭 No folders found in repo root</option>';
+    if (folderNames.length === 0){
+      select.innerHTML = '<option value="">📭 No folders found in repo</option>';
       return;
     }
 
-    /* Step 2: for each folder, check if it contains a .html file (= blog folder).
-       Run in parallel but limit concurrency so we don't hammer GitHub. */
-    select.innerHTML = '<option value="">⏳ Checking ' + dirs.length + ' folders...</option>';
+    /* Filter: only folders containing at least one .html file = blog folders */
     const blogFolders = [];
-    const CONCURRENCY = 5;
-    for (let i = 0; i < dirs.length; i += CONCURRENCY){
-      const batch = dirs.slice(i, i + CONCURRENCY);
-      const results = await Promise.all(batch.map(async (folder) => {
-        try{
-          const files = await listGithubFolder(folder);
-          const html = pickBestHtml(files);
-          return html ? { folder, htmlFile: html.name, totalFiles: files.length } : null;
-        }catch(e){ return null; }
-      }));
-      results.forEach(x => { if (x) blogFolders.push(x); });
-    }
+    folderNames.forEach(folder => {
+      const files = tree.byFolder[folder];
+      const html = pickBestHtml(files);
+      if (html){
+        blogFolders.push({ folder, htmlFile: html.name, totalFiles: files.length });
+      }
+    });
 
     if (blogFolders.length === 0){
       select.innerHTML = '<option value="">📭 No blog folders found (no folder with .html file)</option>';
       return;
     }
 
-    /* Step 3: fetch already-published github_paths so we can tag folders */
+    /* Fetch already-published github_paths so we can tag folders */
     const { data: publishedRows } = await sb.from('blogs').select('github_path').not('github_path','is',null);
     const publishedFolders = new Set();
     (publishedRows || []).forEach(row => {
@@ -411,7 +400,7 @@ async function loadGithubFolders(){
       }
     });
 
-    /* Step 4: build dropdown */
+    /* Build dropdown */
     blogFolders.sort((a,b) => a.folder.localeCompare(b.folder));
     const opts = ['<option value="">— Select a folder —</option>'];
     let newCount = 0, pubCount = 0;
@@ -419,36 +408,105 @@ async function loadGithubFolders(){
       const isPub = publishedFolders.has(folder);
       if (isPub){ pubCount++; }
       else { newCount++; }
-      if (!showAll && isPub) return;  // hide already-published when checkbox unticked
+      if (!showAll && isPub) return;
       const tag = isPub ? ' [already published]' : ' (NEW)';
       opts.push('<option value="'+escH(folder)+'">📁 '+escH(folder)+' — '+escH(htmlFile)+' + '+(totalFiles-1)+' other files'+tag+'</option>');
     });
     select.innerHTML = opts.join('');
 
-    /* Summary message */
+    /* Summary message — note "1 API call" so user knows rate limit isn't a worry now */
+    const cacheAge = Math.floor((Date.now() - tree.fetchedAt) / 1000);
+    const cacheNote = cacheAge < 5 ? ' • fresh from GitHub' : ' • from cache (' + cacheAge + 's old)';
+    const truncatedNote = tree.truncated ? ' ⚠️ Tree truncated (huge repo)' : '';
     const msg = showAll
-      ? 'Loaded '+blogFolders.length+' folders ('+newCount+' new, '+pubCount+' already published)'
-      : 'Loaded '+newCount+' new folders'+(pubCount ? ' ('+pubCount+' already published, hidden)' : '');
+      ? '✅ Loaded '+blogFolders.length+' folders ('+newCount+' new, '+pubCount+' published)' + cacheNote + truncatedNote
+      : '✅ Loaded '+newCount+' new folders ('+pubCount+' already published, hidden)' + cacheNote + truncatedNote;
     toast(msg);
-  }catch(e){
-    select.innerHTML = '<option value="">❌ '+escH(e.message)+'</option>';
-    toast('Could not load GitHub folders — use manual entry', true);
+  }catch(err){
+    console.error('GitHub folder load error:', err);
+    if (err.rateLimit){
+      select.innerHTML = '<option value="">⚠️ GitHub rate limit — try again in a few minutes</option>';
+      toast('GitHub rate limit hit. Wait a few minutes and click Refresh.', true);
+    } else {
+      select.innerHTML = '<option value="">⚠️ Could not load — '+escH(err.message||'unknown error')+'</option>';
+      toast('Could not load GitHub folders: ' + (err.message || 'unknown'), true);
+    }
   }
 }
 
 /* List all files in a GitHub folder using the public API.
    Returns array of {name, size, download_url} or throws. */
-async function listGithubFolder(folder){
-  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${folder}?ref=${GH_BRANCH}`;
+/* ════════════════════════════════════════════════════════════
+   GITHUB TREES API — single-call repo scan
+   ════════════════════════════════════════════════════════════
+   The contents API needs 1 call per folder. With 30 folders
+   that's 30+ calls per page load — and GitHub's anonymous
+   rate limit is 60/hour total. So we hit the limit fast.
+
+   The Trees API returns the ENTIRE repo tree in ONE call.
+   We cache the result for 10 minutes per session, so even
+   reloading the admin page costs zero API calls within the
+   cache window. Manual "Refresh" forces a re-fetch. */
+let _ghTreeCache = null;
+let _ghTreeCacheAt = 0;
+const TREE_CACHE_MS = 10 * 60 * 1000;  // 10 minutes
+
+async function loadGithubTree(forceRefresh){
+  const fresh = !forceRefresh && _ghTreeCache && (Date.now() - _ghTreeCacheAt) < TREE_CACHE_MS;
+  if (fresh) return _ghTreeCache;
+
+  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/trees/${GH_BRANCH}?recursive=1`;
   const r = await fetch(apiUrl);
   if (!r.ok){
-    if (r.status === 404) throw new Error('Folder not found on GitHub: '+folder);
-    if (r.status === 403) throw new Error('GitHub rate limit reached — wait a minute and try again');
-    throw new Error('GitHub API error: HTTP '+r.status);
+    if (r.status === 403){
+      const err = new Error('GitHub rate limit reached — wait a minute and try again');
+      err.rateLimit = true;
+      throw err;
+    }
+    if (r.status === 404) throw new Error('Repo not found: ' + GH_OWNER + '/' + GH_REPO);
+    throw new Error('GitHub API error: HTTP ' + r.status);
   }
-  const items = await r.json();
-  if (!Array.isArray(items)) throw new Error('Path exists but is not a folder');
-  return items.filter(i => i.type === 'file');
+  const data = await r.json();
+  if (!data.tree) throw new Error('Unexpected GitHub API response');
+
+  /* Group entries by top-level folder. Each entry from Trees API has:
+       path: "folder-name/file.html" or "file-at-root.html"
+       type: "blob" (file) or "tree" (folder)
+       size: bytes (for blobs)
+     We index files-by-folder so listGithubFolder() becomes free. */
+  const byFolder = {};
+  data.tree.forEach(entry => {
+    if (entry.type !== 'blob') return;
+    const slash = entry.path.indexOf('/');
+    if (slash === -1) return;  /* root-level file, skip */
+    const folder = entry.path.substring(0, slash);
+    const file = entry.path.substring(slash + 1);
+    /* Only consider direct children, not nested sub-folders */
+    if (file.indexOf('/') > -1) return;
+    if (!byFolder[folder]) byFolder[folder] = [];
+    byFolder[folder].push({ name: file, size: entry.size || 0 });
+  });
+
+  _ghTreeCache = { byFolder, fetchedAt: Date.now(), truncated: !!data.truncated };
+  _ghTreeCacheAt = Date.now();
+  return _ghTreeCache;
+}
+
+/* Drop-in replacement: returns files for one folder.
+   Used by fetchAndPreview() and others. Now uses cached tree (zero API). */
+async function listGithubFolder(folder){
+  const tree = await loadGithubTree(false);
+  const files = tree.byFolder[folder];
+  if (!files || files.length === 0){
+    /* Maybe cache is stale and folder was just added — try one fresh fetch */
+    const freshTree = await loadGithubTree(true);
+    const fresh = freshTree.byFolder[folder];
+    if (!fresh || fresh.length === 0){
+      throw new Error('Folder not found on GitHub: ' + folder);
+    }
+    return fresh;
+  }
+  return files;
 }
 
 /* Pick the best HTML file from a file list.
@@ -465,7 +523,22 @@ function pickBestHtml(files){
 async function fetchAndPreview(){
   /* Read folder from dropdown first, fall back to manual input */
   const fromDropdown = document.getElementById('gFolderSelect').value;
-  const fromManual = (document.getElementById('gFolderManual').value || '').trim().replace(/^\/|\/$/g,'');
+  let fromManual = (document.getElementById('gFolderManual').value || '').trim().replace(/^\/|\/$/g,'');
+
+  /* If user pasted a full GitHub URL (e.g. https://github.com/owner/repo/tree/main/folder-name),
+     extract just the folder portion. Handle both URL and plain folder-name cases. */
+  if (fromManual.indexOf('github.com') > -1 || fromManual.indexOf('://') > -1){
+    /* Look for /tree/<branch>/<folder> pattern */
+    const m = fromManual.match(/\/tree\/[^/]+\/(.+?)(?:\/|$)/);
+    if (m && m[1]){
+      fromManual = m[1].replace(/\/$/, '');
+    } else {
+      /* Fallback: take the last non-empty path segment */
+      const parts = fromManual.split('/').filter(Boolean);
+      fromManual = parts[parts.length - 1] || '';
+    }
+  }
+
   const folder = fromDropdown || fromManual;
 
   const previewBox = document.getElementById('gPreview');
