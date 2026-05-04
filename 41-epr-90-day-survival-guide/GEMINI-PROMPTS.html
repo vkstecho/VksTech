@@ -39,6 +39,54 @@ header .meta {
   font-size: 0.88em;
   margin-top: 12px;
 }
+header .style-banner {
+  background: #E85D26;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 0.92em;
+  display: inline-block;
+}
+
+.workflow-box {
+  background: #fff;
+  border: 3px solid #0D8C7E;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-bottom: 24px;
+}
+.workflow-box h3 {
+  color: #0D8C7E;
+  margin-bottom: 12px;
+  font-size: 1.1em;
+}
+.workflow-box ol {
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+.workflow-box li {
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+.workflow-box li strong { color: #1A2744; }
+.workflow-box code {
+  background: #1A2744;
+  color: #FAF9F6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+.workflow-box .note {
+  background: #FAF9F6;
+  border-left: 3px solid #E85D26;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 0.88em;
+  color: #5A5A5A;
+  border-radius: 4px;
+}
 
 .brand-bar {
   background: #0D8C7E;
@@ -54,13 +102,62 @@ header .meta {
 }
 .brand-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
 
-.card {
+.summary-table {
   background: #fff;
   border: 2px solid #1A2744;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+.summary-table h3 {
+  color: #1A2744;
+  margin-bottom: 12px;
+  font-size: 1.05em;
+}
+.summary-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+.summary-table th, .summary-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.summary-table th {
+  background: #1A2744;
+  color: #fff;
+  font-weight: 600;
+}
+.summary-table td:first-child {
+  font-weight: 700;
+  color: #E85D26;
+  width: 40px;
+  text-align: center;
+}
+.summary-table .dim-cell {
+  font-family: monospace;
+  font-weight: 700;
+  color: #0D8C7E;
+}
+.summary-table .logo-cell {
+  font-weight: 600;
+  color: #E85D26;
+  font-size: 0.85em;
+}
+
+.card {
+  background: #fff;
+  border: 3px solid #E85D26;
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 22px;
   box-shadow: 0 2px 8px rgba(26,39,68,0.08);
+}
+.card.first-card {
+  border-color: #0D8C7E;
+  border-width: 4px;
 }
 .card-header {
   display: flex;
@@ -73,6 +170,7 @@ header .meta {
   border-bottom: 2px solid #FAF9F6;
 }
 .card-header-left { flex: 1; min-width: 250px; }
+.badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
 .card-num {
   display: inline-block;
   background: #E85D26;
@@ -82,14 +180,46 @@ header .meta {
   padding: 4px 10px;
   border-radius: 4px;
   letter-spacing: 0.5px;
-  margin-bottom: 6px;
+}
+.card-num.style-photo {
+  background: #1A2744;
+}
+.card-num.style-attach {
+  background: #0D8C7E;
 }
 .card-title { font-size: 1.25em; color: #1A2744; }
-.card-meta {
-  font-size: 0.85em;
-  color: #666;
+.card-concept {
+  font-size: 0.88em;
+  color: #5A5A5A;
   margin-top: 4px;
+  font-style: italic;
+}
+.logo-instr {
+  background: #FAF9F6;
+  border-left: 3px solid #E85D26;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 0.86em;
+  color: #1A2744;
+  border-radius: 4px;
+}
+.logo-instr.attach {
+  background: #D9EDE9;
+  border-left-color: #0D8C7E;
+}
+.logo-instr strong { color: #E85D26; }
+.logo-instr.attach strong { color: #0D8C7E; }
+
+.dim-callout {
+  display: inline-block;
+  background: #E85D26;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-top: 8px;
   font-family: monospace;
+  font-weight: 700;
+  font-size: 0.9em;
+  color: #fff;
 }
 
 .copy-btn {
@@ -182,259 +312,377 @@ footer a:hover { text-decoration: underline; }
 <header>
 <h1>🎨 Blog 41 — GEMINI Image Prompts</h1>
 <div class="subtitle">EPR JUST WENT LIVE — A PLANT ENGINEER'S 90-DAY SURVIVAL GUIDE</div>
-<div class="meta">4 images to generate · Click "Copy Prompt" on any card to copy to clipboard · Paste into Gemini / ChatGPT / Imagen / your image generator</div>
+<div class="meta">4 images · Click "Copy Prompt" on any card to copy to clipboard · Paste into Gemini</div>
+<div class="style-banner">📸 ALL 4 IMAGES = PHOTO-REALISTIC (no infographics, no cartoons, no 3D renders)</div>
 </header>
+
+<!-- WORKFLOW BOX -->
+<div class="workflow-box">
+<h3>🎯 Workflow — How to Use These Prompts</h3>
+<ol>
+<li><strong>Open a fresh Gemini chat</strong> for this blog (one chat per blog — keeps the logo context loaded across all 4 images).</li>
+<li><strong>For Image 1 (cover):</strong> 📎 <strong>Upload <code>logo.png</code> as an attachment</strong> along with the prompt. Gemini will use the actual logo image embedded in the cover.</li>
+<li><strong>For Images 2, 3, 4:</strong> Stay in the SAME Gemini chat — the prompts reference the logo Gemini already saw in Image 1. <strong>No need to re-upload</strong> the logo.</li>
+<li><strong>Verify each output:</strong> logo present at top-left, dimensions correct, photo-realistic.</li>
+</ol>
+<div class="note"><strong>⚠ If Gemini still warps the logo:</strong> AI generators are inconsistent with embedded logos. If the output logo looks distorted, generate the image without the logo (skip that part of the prompt) and paste the real <code>logo.png</code> in Canva/Figma afterwards — 30 seconds, perfect logo every time.</div>
+</div>
 
 <div class="brand-bar">
 <span><strong>VKS TECH</strong> · Brand colours: Navy #1A2744 · Orange #E85D26 · Teal #0D8C7E · Cream #FAF9F6</span>
 <span>🌐 <a href="https://vksTech.com">vksTech.com</a></span>
 </div>
 
-<!-- IMAGE 1: COVER -->
-<div class="card">
+<!-- DIMENSIONS SUMMARY TABLE -->
+<div class="summary-table">
+<h3>📐 Image Dimensions, Photo Concept & Logo Source</h3>
+<table>
+<thead>
+<tr><th>#</th><th>Filename</th><th>Dimensions</th><th>Photo concept</th><th>Logo source</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>cover.png</td><td class="dim-cell">1600 × 900 px</td><td>Plant supervisor inspecting metallised roll</td><td class="logo-cell">📎 Upload logo.png</td></tr>
+<tr><td>2</td><td>epr-categories-en.png</td><td class="dim-cell">1600 × 900 px</td><td>Top-down flat-lay of 4 plastic samples (English)</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>3</td><td>epr-categories-hi.png</td><td class="dim-cell">1600 × 900 px</td><td>Top-down flat-lay of 4 plastic samples (Hindi)</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>4</td><td>epr-90-day-roadmap.png</td><td class="dim-cell">1200 × 1500 px</td><td>Top-down engineer's desk with sticky notes</td><td class="logo-cell">Same chat — reuse</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- IMAGE 1: COVER (FIRST CARD - HIGHLIGHTED) -->
+<div class="card first-card">
 <div class="card-header">
 <div class="card-header-left">
+<div class="badges">
 <span class="card-num">IMAGE 1 OF 4</span>
-<div class="card-title">📸 Cover Image</div>
-<div class="card-meta">cover.png  ·  16:9 ratio (1600×900)</div>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+<span class="card-num style-attach">📎 ATTACH LOGO HERE</span>
+</div>
+<div class="card-title">Cover — Plant Supervisor Portrait</div>
+<div class="card-concept">A real plant engineer in navy uniform inspecting a metallised film roll on the shop floor. Tablet showing EPR dashboard in the corner.</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr attach"><strong>📎 LOGO ACTION:</strong> Upload <code>logo.png</code> as an attachment WITH this prompt. Gemini will place it in the top-left of the title overlay.</div>
 </div>
 <button class="copy-btn" onclick="copyPrompt('prompt-1', this)">📋 Copy Prompt</button>
 </div>
-<pre id="prompt-1">Create a professional editorial-quality cover image for a flexible packaging industry blog post titled "EPR Just Went Live — A Plant Engineer's 90-Day Survival Guide for Flexible Packaging."
+<pre id="prompt-1">ATTACHED IMAGE: A logo file (logo.png) is attached to this prompt. This is the VKS Tech brand logo. USE THIS LOGO AS-IS in the output image — do NOT redraw it, do NOT modify it, do NOT recreate it. Place the actual attached logo image into the output exactly as provided.
 
-LAYOUT (split into 3 horizontal zones):
+Generate a photo-realistic editorial cover image at 1600 × 900 pixels (16:9 ratio) for a flexible packaging industry blog post.
 
-LEFT ZONE (40% width): A government-style document folder labelled "PLASTIC WASTE MANAGEMENT (AMENDMENT) RULES, 2026" with an official red-stamp "EFFECTIVE 1 APRIL 2026" diagonal across it. The document sits on a light navy (#1A2744) background. Show the Indian Government Gazette of India seal at the top of the folder (stylized, not literal).
+SCENE: Inside a modern Indian flexible packaging plant. Mid-shot of a male plant supervisor in his late 30s, wearing a navy blue half-sleeve uniform shirt with a small white name patch (no readable text on the patch), light industrial safety helmet pushed back on his head, no eyewear. He is standing in front of a slitter or metalliser machine (out of focus in the background) and is holding up a large silver-metallised flexible film roll at chest height, examining it. His expression is focused, professional, calm — the look of a competent engineer doing his job.
 
-CENTER ZONE (35% width): Vertical strip showing 4 plastic packaging categories stacked top-to-bottom:
-  - Cat I (Rigid): icon of a PET bottle — orange (#E85D26) accent
-  - Cat II (Flexible): icon of a metallised film roll/pouch — light orange
-  - Cat III (Multi-layered): icon of a laminate cross-section — orange-mid
-  - Cat IV (Compostable): icon of a leaf-marked package — teal (#0D8C7E)
-Each category has a small "%" badge showing the FY 2025-26 target: 30% / 10% / 5% / 100%
+FOREGROUND (lower-right corner): A tablet computer on a small workstation table, screen visible at an angle, showing a clean Excel-style dashboard with the title "EPR COMPLIANCE TRACKER" in navy and orange. The tablet screen is slightly visible but not the main focus.
 
-RIGHT ZONE (25% width): A clean white badge titled "FREE DOWNLOADS" in bold orange (#E85D26), with 3 checkmark items below:
-  ✓ Compliance Master Tracker
-  ✓ Category Reference Card
-  ✓ QR Code Spec Sheet
+BACKGROUND: Soft-focus industrial setting — visible (but blurred) winding machine, rolls of film stacked in the background, fluorescent overhead lighting casting a slight cool tone. Use a shallow depth-of-field effect (f/2.8 photographic feel) so the supervisor and the roll are sharp, the background is creamy bokeh.
 
-TOP STRIP (full width, 60px): Navy (#1A2744) banner with white text: "VKS TECH" on left, "EPR Compliance Survival Guide" centered, the date "April 2026" on right. Top-left corner has the VKS Tech logo.
+LIGHTING: Industrial fluorescent overhead with a warm key light from camera left highlighting the supervisor's face and the silver roll. The metallised surface should reflect light realistically — that distinctive silver-aluminium gleam. No harsh shadows.
 
-BOTTOM STRIP (full width, 40px): Teal (#0D8C7E) thin band with "https://vksTech.com  |  Plant Engineer's 90-Day Roadmap" in white.
+COLOUR PALETTE: The shop floor has natural industrial colours (gray machinery, beige floor, off-white walls). The supervisor's uniform is navy blue (matches brand). The film roll is silver-metallic.
 
-STYLE: Modern editorial infographic. Clean sans-serif typography (Inter or Helvetica feel). Subtle paper texture on the document folder. No people, no real company logos other than VKS Tech. The whole image should communicate "regulatory urgency + practical toolkit" — serious but approachable.
+TEXT OVERLAY (top-left corner, on a semi-transparent navy #1A2744 panel with rounded corners, padding 24px):
+  Place the ATTACHED VKS Tech logo image as-is at the LEFT edge of this panel, sized to approximately 80×80 pixels. Use the actual attached logo image — do NOT redraw it.
+  To the RIGHT of the logo, place the text:
+    Line 1 (small, orange #E85D26, uppercase, letter-spaced): "VKS TECH | MAY 2026"
+    Line 2 (large, white, bold, sans-serif like Inter or Helvetica): "EPR JUST WENT LIVE"
+    Line 3 (medium, white, regular weight): "A Plant Engineer's 90-Day Survival Guide"
 
-Use only these colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No other colors.
+BOTTOM-RIGHT BADGE (small, teal #0D8C7E pill, white text):
+  "📥 3 FREE DOWNLOADS INSIDE"
 
-Watermark "vksTech.com" small in lower-right corner, semi-transparent.</pre>
+WATERMARK: "vksTech.com" in small white letters, lower-right corner, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE ATTACHED LOGO AS-IS — do not redraw, modify, or recreate it. Place the actual logo image file into the output.
+- Do NOT show any real company logos OTHER than the attached VKS Tech logo
+- Do NOT show readable brand names or product labels on machinery, walls, or the film roll
+- Do NOT show any readable text on the name patch, machinery, or background
+- Do NOT include other people in the frame
+- The film roll should be plain silver-metallised, no printing on it
+- Photo-realistic — like a professional industrial photographer's editorial shot, NOT cartoon, NOT 3D render, NOT illustration
+- Shot on a Sony A7 IV with 50mm f/1.4 lens, professional industrial photography, magazine editorial quality
+- Image dimensions exactly 1600 × 900 pixels</pre>
 </div>
 
-<!-- IMAGE 2A: 4 CATEGORIES EN -->
+<!-- IMAGE 2: CATEGORIES EN -->
 <div class="card">
 <div class="card-header">
 <div class="card-header-left">
+<div class="badges">
 <span class="card-num">IMAGE 2 OF 4</span>
-<div class="card-title">🏷️ 4 Plastic Categories Diagram (English)</div>
-<div class="card-meta">epr-categories-en.png  ·  16:9 ratio (1600×900)</div>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
 </div>
-<button class="copy-btn" onclick="copyPrompt('prompt-2a', this)">📋 Copy Prompt</button>
+<div class="card-title">4 Plastic Categories — Real Samples Flat-lay (English)</div>
+<div class="card-concept">Top-down product photo of 4 actual plastic items (PET bottle, metallised pouch, multi-layer laminate, compostable bag) in a 2x2 grid with small printed reference cards.</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses the logo from Image 1 in the same Gemini chat. <strong>No re-upload needed</strong> — just stay in the same chat.</div>
 </div>
-<pre id="prompt-2a">Create a clean infographic titled "The 4 Plastic Categories Under PWM Rules 2026" for a flexible packaging compliance blog.
+<button class="copy-btn" onclick="copyPrompt('prompt-2', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-2">USE THE SAME VKS TECH LOGO from the previous image (Image 1) in this chat. Place that exact logo as-is in this output — do NOT redraw it, modify it, or recreate it.
 
-LAYOUT: 2x2 grid of category cards, each occupying 25% of the image.
+Generate a photo-realistic top-down flat-lay product photography image at 1600 × 900 pixels (16:9 ratio) for a flexible packaging compliance blog. Style: clean, editorial, like an Instagram product photo or a magazine spread.
 
-CARD 1 (top-left) — CATEGORY I — RIGID
-  Background: light pink-orange (#FFE5E0)
-  Header bar: orange (#E85D26)
-  Icon: clean line illustration of a PET bottle + jar + cap
-  Examples text: "Bottles · Jars · Containers · Caps · Trays"
-  Substrates: "PET · HDPE · PP · PVC"
-  PCR Target box (orange): "30% (2025-26) → 60% by 2028-29"
+SETUP: Top-down (90-degree overhead) view of 4 real plastic packaging samples laid out in a 2x2 grid on a clean cream-coloured (#FAF9F6) seamless paper or matte cream tabletop background. Each sample sits in its own quadrant of the image with about 40px of margin from the edges and 30px between samples.
 
-CARD 2 (top-right) — CATEGORY II — FLEXIBLE
-  Background: light orange (#FCE5D7)
-  Header bar: orange (#E85D26)
-  Icon: clean line illustration of a metallised film roll + pouch
-  Examples text: "Films · Pouches · Sachets · Carry bags"
-  Substrates: "PET-Met · BOPP · CPP · LDPE"
-  PCR Target box: "10% (2025-26) → 20% from 2027-28"
-  Add a small star/badge "MOST FP PLANT OUTPUT" in corner
+THE 4 PLASTIC SAMPLES:
 
-CARD 3 (bottom-left) — CATEGORY III — MULTI-LAYERED
-  Background: light orange-mid (#FFE0CC)
-  Header bar: dark orange (#CC8800)
-  Icon: cross-section showing 3 layers (plastic + foil + plastic)
-  Examples text: "Laminates with foil/paper layers"
-  Substrates: "PET-Met-PE · Paper-PE · Alu-Foil-PE"
-  PCR Target box: "5% (2025-26) → 10% from 2027-28"
+QUADRANT 1 (top-left) — CATEGORY I — RIGID
+  A clear empty PET water bottle (500ml size, no label, transparent), photographed from directly above. Lying on its side, cap visible.
+  Place a small printed card next to the bottle (white card, 80×120px, navy #1A2744 border) with text:
+    "CATEGORY I — RIGID"
+    "PCR Target: 30% (2025-26)"
+    "→ 60% by 2028-29"
+  Card text: navy header bar, black body text, sans-serif font.
 
-CARD 4 (bottom-right) — CATEGORY IV — COMPOSTABLE
-  Background: light teal (#D9EDE9)
-  Header bar: teal (#0D8C7E)
-  Icon: leaf symbol on a package
-  Examples text: "Certified compostable plastics"
-  Substrates: "PLA · PBAT · Starch-based"
-  PCR Target box (teal): "100% target since 2023-24"
+QUADRANT 2 (top-right) — CATEGORY II — FLEXIBLE
+  A real silver metallised flexible film pouch or sachet (around 100×150mm size, plain silver, no printing) lying flat. Could be a snack-sized metallised pouch.
+  Place an identical-style card next to the pouch with text:
+    "CATEGORY II — FLEXIBLE"
+    "PCR Target: 10% (2025-26)"
+    "→ 20% from 2027-28"
+    "⭐ MOST FP PLANT OUTPUT"
+  Card has a small orange #E85D26 corner accent for the star badge.
 
-TOP HEADER (full width, 80px): Navy (#1A2744) with white text:
-"THE 4 PLASTIC CATEGORIES — RECYCLED CONTENT TARGETS"
-Small VKS Tech logo top-left.
+QUADRANT 3 (bottom-left) — CATEGORY III — MULTI-LAYERED
+  A multi-layer laminate cross-section sample showing visible layers (like a cut piece of toothpaste tube material or a stand-up pouch material with visible foil layer). The cross-section should reveal silver foil sandwiched between plastic layers.
+  Place an identical card with text:
+    "CATEGORY III — MULTI-LAYERED"
+    "PCR Target: 5% (2025-26)"
+    "→ 10% from 2027-28"
+  Card has a dark orange #CC8800 accent.
 
-BOTTOM FOOTER (full width, 50px): Teal (#0D8C7E) with white text:
-"Source: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
+QUADRANT 4 (bottom-right) — CATEGORY IV — COMPOSTABLE
+  A natural-looking compostable plastic bag or pouch — slightly textured, off-white or light brown colour suggesting plant-based material (PLA or starch-based). Has a subtle leaf icon embossed or printed faintly.
+  Place an identical card with text:
+    "CATEGORY IV — COMPOSTABLE"
+    "PCR Target: 100% since 2023-24"
+    "Certified IS 17088"
+  Card has a teal #0D8C7E accent.
 
-STYLE: Clean infographic with thin gray dividers between cards. Modern sans-serif. Icons should be flat, line-art style (not 3D, not photo-realistic). No people. No real brand logos.
+LIGHTING: Soft, diffused, natural daylight (like a photography softbox from above). The plastic surfaces should show realistic specular highlights — the PET bottle has a glossy reflection, the metallised pouch has the silver-aluminium gleam, the laminate shows the foil layer subtly, the compostable bag has a matte natural finish. NO harsh shadows.
 
-Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white, and the 4 light category background colors above.
+CAMERA: Direct top-down view (90 degrees), shot on a Canon R5 with 50mm macro lens, f/8 aperture for sharpness across the plane.
 
-Watermark "vksTech.com" lower-right, semi-transparent.</pre>
+TEXT OVERLAY:
+
+TOP HEADER (full width, 80px tall, semi-transparent navy #1A2744 band overlay across the top of the image):
+  Place the SAME VKS Tech logo (from Image 1 in this chat) at the FAR LEFT of the header band, sized to approximately 60×60 pixels. Use the actual logo as-is.
+  To the RIGHT of the logo, white text, bold, centered: "THE 4 PLASTIC CATEGORIES — RECYCLED CONTENT TARGETS"
+
+BOTTOM FOOTER (full width, 50px, semi-transparent teal #0D8C7E band):
+  White text, centered: "Source: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
+
+WATERMARK: "vksTech.com" in small white text, lower-right corner, 60% opacity (positioned outside the footer band).
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1 in this chat — same logo, same as-is treatment
+- Photo-realistic — actual product photography style, NOT illustration, NOT 3D render
+- Real plastic samples, not drawn or generated objects — they should look like physical items photographed
+- No real brand logos OTHER than the VKS Tech logo, no readable barcode, no real product labels on any sample
+- Cards beside each sample should be small, clean, and look like printed reference cards
+- Cream/off-white background (#FAF9F6) — clean, no clutter
+- Image dimensions exactly 1600 × 900 pixels</pre>
 </div>
 
-<!-- IMAGE 2B: 4 CATEGORIES HI -->
+<!-- IMAGE 3: CATEGORIES HI -->
 <div class="card">
 <div class="card-header">
 <div class="card-header-left">
+<div class="badges">
 <span class="card-num">IMAGE 3 OF 4</span>
-<div class="card-title">🏷️ 4 Plastic Categories Diagram (Hindi)</div>
-<div class="card-meta">epr-categories-hi.png  ·  16:9 ratio (1600×900)</div>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
 </div>
-<button class="copy-btn" onclick="copyPrompt('prompt-2b', this)">📋 Copy Prompt</button>
-</div>
-<pre id="prompt-2b">Create the same infographic as the English version but with all text in Hindi (Devanagari script). Use Noto Sans Devanagari or similar clean font.
-
-TITLE (top header): "PWM Rules 2026 के तहत 4 Plastic Categories"
-
-CARD 1 — CATEGORY I — कठोर (RIGID)
-  Examples: "बोतलें · जार · कंटेनर · ढक्कन · ट्रे"
-  Substrates: "PET · HDPE · PP · PVC"
-  PCR Target box: "30% (2025-26) → 60% तक 2028-29"
-
-CARD 2 — CATEGORY II — लचीला (FLEXIBLE)
-  Examples: "फिल्म · पाउच · सैशे · कैरी बैग"
-  Substrates: "PET-Met · BOPP · CPP · LDPE"
-  PCR Target box: "10% (2025-26) → 20% 2027-28 से"
-  Badge: "ज़्यादातर FP प्लांट आउटपुट"
-
-CARD 3 — CATEGORY III — बहु-स्तरीय (MULTI-LAYERED)
-  Examples: "Foil/paper layers वाले laminates"
-  Substrates: "PET-Met-PE · Paper-PE · Alu-Foil-PE"
-  PCR Target box: "5% (2025-26) → 10% 2027-28 से"
-
-CARD 4 — CATEGORY IV — कम्पोस्टेबल (COMPOSTABLE)
-  Examples: "Certified compostable plastics"
-  Substrates: "PLA · PBAT · Starch-based"
-  PCR Target box: "100% target 2023-24 से"
-
-TOP HEADER: "4 PLASTIC CATEGORIES — RECYCLED CONTENT लक्ष्य"
-
-BOTTOM FOOTER: "स्रोत: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
-
-LAYOUT: 2x2 grid of category cards. Same colors and styling as the English version:
-  Card 1 (Cat I Rigid): light pink-orange #FFE5E0 background, orange #E85D26 header, PET bottle/jar icon
-  Card 2 (Cat II Flexible): light orange #FCE5D7 background, orange #E85D26 header, film roll icon
-  Card 3 (Cat III Multi-layered): light orange-mid #FFE0CC background, dark orange #CC8800 header, laminate cross-section icon
-  Card 4 (Cat IV Compostable): light teal #D9EDE9 background, teal #0D8C7E header, leaf symbol icon
-
-Top header: Navy #1A2744 with white text. Bottom footer: Teal #0D8C7E with white text.
-
-STYLE: Clean infographic with thin gray dividers. Modern sans-serif Devanagari + Latin font mix. Flat line-art icons. No people, no real brand logos.
-
-Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white, and the 4 light category background colors above.
-
-Watermark "vksTech.com" lower-right, semi-transparent.</pre>
-</div>
-
-<!-- IMAGE 3: 90-DAY ROADMAP -->
-<div class="card">
-<div class="card-header">
-<div class="card-header-left">
-<span class="card-num">IMAGE 4 OF 4</span>
-<div class="card-title">🗓️ 90-Day Roadmap Cheat Sheet</div>
-<div class="card-meta">epr-90-day-roadmap.png  ·  4:5 portrait (1200×1500) — printable A4</div>
+<div class="card-title">4 Plastic Categories — Real Samples Flat-lay (Hindi)</div>
+<div class="card-concept">Same photo as Image 2 — 4 real plastic samples — but with reference cards in Devanagari (Hindi).</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses the logo from Image 1 in the same Gemini chat.</div>
 </div>
 <button class="copy-btn" onclick="copyPrompt('prompt-3', this)">📋 Copy Prompt</button>
 </div>
-<pre id="prompt-3">Create a vertical "cheat sheet" infographic titled "EPR 90-Day Compliance Roadmap for FP Plants" suitable for printing on A4 and pinning to a plant noticeboard.
+<pre id="prompt-3">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is — do NOT redraw it.
 
-LAYOUT (top to bottom):
+Generate the same photo-realistic top-down flat-lay as Image 2 (4 plastic samples in a 2x2 grid on cream background) but with all label cards in Hindi (Devanagari script).
 
-TOP HEADER (full width, 120px):
-  Navy (#1A2744) banner with VKS Tech logo top-left,
-  Title in white bold: "EPR COMPLIANCE — 90-DAY ROADMAP"
-  Subtitle in cream (#FAF9F6): "For Indian Flexible Packaging Plants"
+DIMENSIONS: 1600 × 900 pixels (16:9 ratio).
 
-PHASE 1 (Days 1-15) — orange (#E85D26) timeline marker:
-  Icon: A clipboard with "REGISTER" stamp
-  Heading: "DAY 1-15 — REGISTER ON CPCB"
-  Bullets:
-    • Register on CPCB EPR portal (cpcb.nic.in)
-    • Upload Certificate of Incorporation, GST, last 3 yrs tonnage
-    • No turnover exemption — all PIBOs must register
+SETUP: Identical to Image 2 — same 4 samples (PET bottle, metallised pouch, multi-layer laminate, compostable bag), same flat-lay top-down view, same lighting, same cream background.
 
-PHASE 2 (Days 15-30) — orange:
-  Icon: Sorting boxes labelled I, II, III, IV
-  Heading: "DAY 15-30 — CLASSIFY EVERY SKU"
-  Bullets:
-    • Tag every product master with EPR Category
-    • Cat II flexible = most metalliser/slitter output
-    • Use VKS Tech SKU Classifier (Format 1)
+LABEL CARDS (each card 80×120px next to its sample, white background with category-coloured accent):
 
-PHASE 3 (Days 15-45) — teal (#0D8C7E):
-  Icon: QR code symbol on a film roll
-  Heading: "DAY 15-45 — AUDIT QR CODE PRINTING"
-  Bullets:
-    • QR mandatory since 1 July 2025
-    • Resin code + thickness (µ) + manufacturer ID
-    • 5-min scannability test per batch (Format 3)
+QUADRANT 1 — CATEGORY I — कठोर (RIGID)
+  Card text:
+    "CATEGORY I — कठोर"
+    "PCR लक्ष्य: 30% (2025-26)"
+    "→ 60% तक 2028-29"
+  Navy #1A2744 accent.
 
-PHASE 4 (Days 30-60) — teal:
-  Icon: Bar chart trending up
-  Heading: "DAY 30-60 — TRACK TONNAGE & ONBOARD SUPPLIERS"
-  Bullets:
-    • Monthly tonnage by Category in Format 1 Tab 2
-    • Identify CPCB-registered recycled content vendors
-    • EOL certificates NOT accepted — verify with CPCB
+QUADRANT 2 — CATEGORY II — लचीला (FLEXIBLE)
+  Card text:
+    "CATEGORY II — लचीला"
+    "PCR लक्ष्य: 10% (2025-26)"
+    "→ 20% 2027-28 से"
+    "⭐ ज़्यादातर FP प्लांट आउटपुट"
+  Orange #E85D26 corner accent.
 
-PHASE 5 (Days 60-90) — orange:
-  Icon: Calendar with 31 OCT highlighted
-  Heading: "DAY 60-90 — FILE HALF-YEARLY RETURN"
-  Bullets:
-    • First return due 31 OCTOBER 2026 (covers Apr-Sep)
-    • Submit at least 2 weeks before deadline
-    • Use Filing Checklist (Format 1 Tab 4)
+QUADRANT 3 — CATEGORY III — बहु-स्तरीय (MULTI-LAYERED)
+  Card text:
+    "CATEGORY III — बहु-स्तरीय"
+    "PCR लक्ष्य: 5% (2025-26)"
+    "→ 10% 2027-28 से"
+  Dark orange #CC8800 accent.
 
-DANGER BOX (red-orange #C5320E background, white text):
-  "⚠ PENALTIES — ₹10,000 to ₹15 LAKH per violation
-   + DAILY FINES under Section 15 of EPA, 1986"
+QUADRANT 4 — CATEGORY IV — कम्पोस्टेबल (COMPOSTABLE)
+  Card text:
+    "CATEGORY IV — कम्पोस्टेबल"
+    "PCR लक्ष्य: 100% 2023-24 से"
+    "Certified IS 17088"
+  Teal #0D8C7E accent.
 
-CARRY-FORWARD BOX (teal background, white text):
-  "💡 RELIEF — 2025-26 shortfall can carry up to 3 years
-   if at least 1/3 of deficit is cleared annually"
+TOP HEADER (semi-transparent navy band):
+  Place the SAME VKS Tech logo (from Image 1 in this chat) at the FAR LEFT of the band, sized to approximately 60×60 pixels. Use the actual logo as-is.
+  To the right: "4 PLASTIC CATEGORIES — RECYCLED CONTENT लक्ष्य"
 
-BOTTOM FOOTER (navy, full width):
-  "vksTech.com | Free Industrial Toolkit | Built by a plant engineer for plant engineers | © VKS TECH — Vivek Kumar"
+BOTTOM FOOTER (semi-transparent teal band): "स्रोत: Plastic Waste Management (Amendment) Rules, 2026 (G.S.R. 237(E)) | vksTech.com"
 
-STYLE: Modern timeline / roadmap infographic. Each phase has a numbered circle on a vertical line connecting all 5 phases. Clean, minimal, uses ample white space (cream #FAF9F6 background). Icons are flat line-art.
+LIGHTING, CAMERA, COLOUR PALETTE: Identical to Image 2.
 
-Use only: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, red-orange #C5320E (danger box only), white.
+WATERMARK: "vksTech.com" lower-right, semi-transparent.
 
-Watermark "vksTech.com" lower-right, semi-transparent.</pre>
+CRITICAL: 
+- USE THE SAME VKS TECH LOGO from Image 1 — as-is, do NOT modify
+- Devanagari script must render correctly. Use Noto Sans Devanagari or similar. If the AI struggles with Hindi, generate Image 2 (English) first and then manually edit the Hindi text in afterwards using Figma / Canva / Photoshop — this is a known issue with image-generation AIs.
+
+Image dimensions exactly 1600 × 900 pixels.</pre>
+</div>
+
+<!-- IMAGE 4: ROADMAP DESK PHOTO -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges">
+<span class="card-num">IMAGE 4 OF 4</span>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+</div>
+<div class="card-title">90-Day Roadmap — Engineer's Desk Photo</div>
+<div class="card-concept">Top-down flat-lay of a real engineer's desk: 2026 calendar with 31 OCT circled, 5 colour-coded sticky notes (one per phase), tablet, helmet, coffee cup, 2 small printed cards for penalty + relief.</div>
+<div class="dim-callout">📐 1200 × 1500 px (4:5 portrait — A4)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses the logo from Image 1 in the same Gemini chat.</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-4', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-4">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is — do NOT redraw it.
+
+Generate a photo-realistic top-down flat-lay photograph at 1200 × 1500 pixels (4:5 portrait ratio) of an Indian plant engineer's desk during EPR compliance planning. Style: editorial workspace photography, like a "what's on my desk today" magazine shot.
+
+SCENE: Top-down (90-degree overhead) view of a clean, organised wooden or matte cream-coloured desk surface. The composition is intentional and editorial, NOT cluttered.
+
+OBJECTS ON THE DESK (arranged top to bottom):
+
+TOP OF FRAME — A small white safety helmet (industrial PPE style) at the top-left corner, partially in frame, suggesting "this is a plant engineer's desk." Next to it on the right, a coffee cup (plain white ceramic, no logo), partially in frame.
+
+UPPER MIDDLE — A 2026 wall calendar laid flat, showing the months April through December. Visible markings:
+  - "31 OCT" circled in bold red marker (the half-yearly return deadline)
+  - Small ticks or notes on a few earlier dates
+The calendar is the visual anchor of the roadmap — its dates ground the timeline.
+
+CENTER — 5 sticky notes laid out in a vertical column on the right side of the calendar, connected by a hand-drawn timeline arrow in pen. Each note is a different colour, written in clear handwriting (sans-serif feel, like Sharpie marker):
+
+  Sticky Note 1 (orange #E85D26, top):
+    "DAY 1-15
+     REGISTER ON CPCB
+     Portal: cpcb.nic.in"
+
+  Sticky Note 2 (orange #E85D26):
+    "DAY 15-30
+     CLASSIFY EVERY SKU
+     Cat I / II / III / IV"
+
+  Sticky Note 3 (teal #0D8C7E):
+    "DAY 15-45
+     QR CODE AUDIT
+     5-min batch test"
+
+  Sticky Note 4 (teal #0D8C7E):
+    "DAY 30-60
+     TONNAGE + SUPPLIERS
+     Verify CPCB reg"
+
+  Sticky Note 5 (orange #E85D26, bottom):
+    "DAY 60-90
+     FILE RETURN
+     31 OCT 2026"
+
+LEFT SIDE OF FRAME — A tablet computer (iPad-style, plain), screen visible at an angle, showing a clean Excel dashboard with the title "EPR COMPLIANCE TRACKER" in navy and orange. The dashboard shows colored bars and a status verdict — readable but not pixel-perfect (it's a backdrop element).
+
+BOTTOM OF FRAME — Two small printed cards laying flat:
+  Card 1 (red-orange #C5320E background, white text):
+    "⚠ PENALTIES
+     ₹10,000 to ₹15 LAKH per violation
+     + DAILY FINES (Section 15, EPA 1986)"
+
+  Card 2 (teal #0D8C7E background, white text):
+    "💡 RELIEF — Carry-forward
+     3 years if 1/3 of deficit cleared annually"
+
+A pen (plain black or navy, no logo) lies diagonally across the calendar, suggesting the engineer just put it down.
+
+LIGHTING: Soft, diffused, natural daylight from camera-left (suggesting a window). Soft shadows under the helmet, the cup, the tablet — gives depth without harshness. Like a photography softbox at 45 degrees.
+
+CAMERA: Direct top-down view (90 degrees), shot on a Canon R5 with 35mm lens, f/5.6 for moderate depth of field — desk surface mostly in focus, slight background softness near the edges.
+
+COLOUR PALETTE: Cream desk surface (#FAF9F6 vibe), white objects (helmet, cup, tablet), navy/orange/teal sticky notes matching brand colours, red marker on calendar. Natural wood-grain or matte cream texture beneath. No saturated random colours.
+
+TEXT OVERLAY:
+
+TOP HEADER (full width, 100px tall, navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1 in this chat) at the FAR LEFT of the band, sized to approximately 70×70 pixels. Use the actual logo as-is.
+  To the right of the logo: White text, bold: "EPR COMPLIANCE — 90-DAY ROADMAP"
+  Subtitle in cream (#FAF9F6) below, smaller: "For Indian Flexible Packaging Plants"
+
+BOTTOM FOOTER (full width, 60px, navy #1A2744 band):
+  White text, centered: "vksTech.com | Free Industrial Toolkit | © VKS TECH — Vivek Kumar"
+
+WATERMARK: "vksTech.com" small white text, lower-right (outside footer band), 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1 — as-is, do NOT modify
+- Photo-realistic — like a real product/workspace photograph, NOT illustration, NOT 3D render, NOT cartoon
+- All objects should look like real physical items (sticky notes have slight curl, calendar has paper texture, tablet screen has slight reflection)
+- No readable text on the helmet, cup, pen, or any item except the sticky notes, calendar markings, tablet screen, and the two cards
+- No real brand logos OTHER than the VKS Tech logo
+- Hand-written sticky notes should look hand-written (not perfectly typed) — slight irregularity gives realism
+- Shot on Canon R5 with 35mm lens, professional editorial workspace photography, magazine quality
+- Image dimensions exactly 1200 × 1500 pixels (portrait 4:5 ratio)</pre>
 </div>
 
 <div class="checklist">
 <h3>📋 Publishing Checklist</h3>
 <ul>
+<li>Verify dimensions match exactly (1600×900 for Images 1, 2, 3 / 1200×1500 for Image 4)</li>
 <li>Save each image as PNG (lossless, no JPEG compression artifacts)</li>
-<li>Verify all text is legible at thumbnail size — especially the cover</li>
+<li><strong>Logo check</strong> — VKS Tech logo visible top-left on all 4 images, looks like the original (not warped/recoloured)</li>
+<li>Realism test: at thumbnail size, do all 4 look like real photographs? If yes, ship. If any look cartoonish, regenerate.</li>
 <li>Confirm <code>vksTech.com</code> watermark is visible on each image</li>
+<li>Verify Hindi image (Image 3) renders Devanagari correctly — regenerate if garbled</li>
 <li>Place all 4 PNG files in the same folder as <code>index.html</code></li>
-<li>Check the blog page render — covers should auto-load in the admin/CMS</li>
-<li>Verify the Hindi image renders Devanagari correctly (regenerate if garbled)</li>
+<li>Test the blog page render — covers should auto-load in the admin/CMS</li>
 </ul>
 </div>
 
 <div class="warning">
-<strong>⚠ If Gemini garbles Hindi text:</strong> AI image generators frequently mishandle Devanagari script. If <code>epr-categories-hi.png</code> comes out wrong, generate the English version (Image 2) first, then open it in Figma / Canva / Photoshop and manually replace the text fields with the Hindi text given in the prompt. This manual fallback ensures Devanagari accuracy.
+<strong>📎 If Gemini warps the logo (most common issue):</strong> Even with "use as-is" instructions, AI generators sometimes redraw uploaded logos. If the logo looks distorted: (1) Regenerate 1-2 times — sometimes works on retry. (2) <strong>Manual fallback:</strong> Generate the image WITHOUT the logo (skip the logo paragraph), then paste real <code>logo.png</code> in Canva/Figma at the specified position. 30 seconds, perfect logo every time.
+</div>
+
+<div class="warning">
+<strong>📸 If any image looks too cartoonish or fake:</strong> Regenerate 2-3 times — output varies. If still off, append: <code>"Shot on Canon R5 with 50mm lens, professional editorial photography, magazine quality, photo-realistic, NOT illustration"</code>. For complex scenes (Image 4 desk), if Gemini struggles with multi-object layout, try fewer objects first then add the rest in Photoshop/Canva.
+</div>
+
+<div class="warning">
+<strong>📝 For text-heavy overlays:</strong> AI generators often garble overlay text. If the title overlay text comes out wrong, generate the photo WITHOUT title/footer overlays, then add them yourself in Canva/Figma — gives 100% text control.
+</div>
+
+<div class="warning">
+<strong>⚠ If Gemini garbles Hindi text in Image 3:</strong> Devanagari handling is unreliable. Generate Image 2 (English) first, then open in Figma/Canva/Photoshop and manually replace the label-card text with the Hindi text from the prompt.
 </div>
 
 <footer>
@@ -457,7 +705,6 @@ function copyPrompt(elementId, btn) {
       btn.classList.remove('copied');
     }, 2000);
   }).catch(err => {
-    // Fallback: select text
     const range = document.createRange();
     range.selectNode(document.getElementById(elementId));
     window.getSelection().removeAllRanges();
