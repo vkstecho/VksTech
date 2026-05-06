@@ -144,6 +144,36 @@ export default async function handler(req, res) {
       content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + ASSET_URL + '/');
     }
 
+    /* Dedupe: if the first <img> in the article body matches the DB cover_image,
+       strip it. Page-level <div class="cover-wrap"> already shows the cover at the top
+       of the page, so showing it again inside the article creates the duplicate visible
+       in the rendered output.
+
+       Matching strategy: compare the filename (last path segment) of both URLs.
+       This is robust against absolute vs relative URLs and trailing query strings. */
+    if (content && cover) {
+      const coverFile = (cover.split('?')[0].split('/').pop() || '').toLowerCase();
+      if (coverFile) {
+        /* Find the first <img> tag and its src */
+        const firstImgMatch = content.match(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/i);
+        if (firstImgMatch) {
+          const imgSrc = firstImgMatch[1];
+          const imgFile = (imgSrc.split('?')[0].split('/').pop() || '').toLowerCase();
+          if (imgFile && imgFile === coverFile) {
+            /* Strip just the matched <img> tag.
+               If it sits alone inside a <p> or <figure> wrapper, also clean up the empty wrapper. */
+            const imgTag = firstImgMatch[0];
+            content = content.replace(imgTag, '');
+            /* Remove now-empty wrappers that contained only this image */
+            content = content
+              .replace(/<p>\s*<\/p>/gi, '')
+              .replace(/<figure>\s*(<figcaption>[\s\S]*?<\/figcaption>)?\s*<\/figure>/gi, '')
+              .replace(/<div[^>]*>\s*<\/div>/gi, '');
+          }
+        }
+      }
+    }
+
     /* Compute reading time. Prefer stored value (fast, accurate, set at publish).
        Fall back to live computation if not yet set (legacy blogs).
        Always wins because we compute from the full GitHub content here. */
