@@ -3,451 +3,693 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini Image Prompts — Blog 40 (5S Audit Format)</title>
+<title>Blog 40 GEMINI Prompts — 5S on the Shop Floor | VKS Tech</title>
 <style>
-  * { box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
-  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
-  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
-  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
-  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
-  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
-  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
-  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
-  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
-  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
-  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
-  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
-  .copy-btn:hover { background: #c94a18; }
-  .copy-btn.copied { background: #0D8C7E; }
-  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
-  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
-  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
-  .meta-band strong { color: #E85D26; }
-  .upgrade-band { background: rgba(13,140,126,0.12); border: 1px solid #0D8C7E; color: #1A2744; padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
-  .upgrade-band strong { color: #0D8C7E; }
-  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
-  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+header { background: #1A2744; color: #FAF9F6; padding: 28px 32px; border-radius: 14px; margin-bottom: 28px; border-top: 5px solid #E85D26; }
+header h1 { font-size: 1.8em; margin-bottom: 8px; color: #FAF9F6; }
+header .subtitle { color: #E85D26; font-size: 0.95em; font-weight: 600; letter-spacing: 0.5px; }
+header .meta { color: rgba(250,249,246,0.7); font-size: 0.88em; margin-top: 12px; }
+header .style-banner { background: #E85D26; color: #fff; padding: 10px 16px; border-radius: 6px; margin-top: 16px; font-weight: 700; font-size: 0.92em; display: inline-block; }
+.workflow-box { background: #fff; border: 3px solid #0D8C7E; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; }
+.workflow-box h3 { color: #0D8C7E; margin-bottom: 12px; font-size: 1.1em; }
+.workflow-box ol { padding-left: 24px; margin-bottom: 8px; }
+.workflow-box li { margin-bottom: 8px; line-height: 1.55; }
+.workflow-box li strong { color: #1A2744; }
+.workflow-box code { background: #1A2744; color: #FAF9F6; padding: 2px 6px; border-radius: 3px; font-size: 0.88em; }
+.workflow-box .note { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; color: #5A5A5A; border-radius: 4px; }
+.brand-bar { background: #0D8C7E; color: #fff; padding: 12px 18px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 0.92em; }
+.brand-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
+.summary-table { background: #fff; border: 2px solid #1A2744; border-radius: 10px; padding: 18px 22px; margin-bottom: 28px; overflow-x: auto; }
+.summary-table h3 { color: #1A2744; margin-bottom: 12px; font-size: 1.05em; }
+.summary-table table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.summary-table th, .summary-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
+.summary-table th { background: #1A2744; color: #fff; font-weight: 600; }
+.summary-table td:first-child { font-weight: 700; color: #E85D26; width: 40px; text-align: center; }
+.summary-table .dim-cell { font-family: monospace; font-weight: 700; color: #0D8C7E; }
+.summary-table .logo-cell { font-weight: 600; color: #E85D26; font-size: 0.85em; }
+.card { background: #fff; border: 3px solid #E85D26; border-radius: 12px; padding: 24px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(26,39,68,0.08); }
+.card.first-card { border-color: #0D8C7E; border-width: 4px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 2px solid #FAF9F6; }
+.card-header-left { flex: 1; min-width: 250px; }
+.badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.card-num { display: inline-block; background: #E85D26; color: #fff; font-weight: 700; font-size: 0.78em; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+.card-num.style-photo { background: #1A2744; }
+.card-num.style-info { background: #6B7280; }
+.card-num.style-attach { background: #0D8C7E; }
+.card-title { font-size: 1.25em; color: #1A2744; }
+.logo-instr { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 8px 12px; margin-top: 8px; font-size: 0.86em; color: #1A2744; border-radius: 4px; }
+.logo-instr.attach { background: #D9EDE9; border-left-color: #0D8C7E; }
+.logo-instr strong { color: #E85D26; }
+.logo-instr.attach strong { color: #0D8C7E; }
+.dim-callout { display: inline-block; background: #E85D26; border-radius: 6px; padding: 6px 14px; margin-top: 8px; font-family: monospace; font-weight: 700; font-size: 0.9em; color: #fff; }
+.copy-btn { background: #E85D26; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9em; transition: all 0.2s; white-space: nowrap; }
+.copy-btn:hover { background: #cc4d1f; transform: translateY(-1px); }
+.copy-btn.copied { background: #0D8C7E; }
+pre { background: #1A2744; color: #FAF9F6; padding: 18px 22px; border-radius: 8px; font-family: 'Monaco', 'Menlo', 'Consolas', monospace; font-size: 0.86em; line-height: 1.65; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+pre::-webkit-scrollbar { height: 8px; }
+pre::-webkit-scrollbar-track { background: #2a3754; }
+pre::-webkit-scrollbar-thumb { background: #E85D26; border-radius: 4px; }
+.warning { background: #fff5f0; border-left: 5px solid #E85D26; padding: 18px 22px; border-radius: 8px; margin-bottom: 22px; }
+.warning strong { color: #E85D26; }
+footer { background: #1A2744; color: #FAF9F6; padding: 18px 24px; border-radius: 10px; text-align: center; margin-top: 32px; font-size: 0.88em; }
+footer a { color: #E85D26; text-decoration: none; font-weight: 600; }
+@media (max-width: 600px) { header h1 { font-size: 1.4em; } .card { padding: 18px; } pre { font-size: 0.8em; padding: 14px; } }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<h1>📸 Gemini Image Prompts — Blog 40</h1>
-<p class="meta"><em>What is 5S and How to Maintain It on the Shop Floor — A Practical Guide for Flexible Packaging Plants</em><br>4 images: 1 cover + 2 bilingual pillar diagrams + 1 standalone cheat sheet</p>
+<div class="container">
 
-<div class="upgrade-band">
-<strong>What's different in this blog:</strong> First "explainer-with-downloads" blog (paired with 5 free Excel formats below the fold). Visual convention: <strong>each S has its own colour anchor</strong> (1S orange, 2S navy, 3S teal, 4S orange, 5S teal) used consistently across cover, pillars diagram, and cheat sheet so readers track the flow visually. The cheat sheet doubles as a printable reference for plant noticeboards.
+<header>
+<h1>🎨 Blog 40 — GEMINI Image Prompts</h1>
+<div class="subtitle">5S ON THE SHOP FLOOR — A PLANT ENGINEER'S PRACTICAL GUIDE</div>
+<div class="meta">9 images · Click "Copy Prompt" on any card to copy to clipboard · Paste into Gemini</div>
+<div class="style-banner">📸 Photo-realistic shop floor + 📊 Concept diagrams (mixed)</div>
+</header>
+
+<div class="workflow-box">
+<h3>🎯 Workflow — How to Use These Prompts</h3>
+<ol>
+<li><strong>Open a fresh Gemini chat</strong> for this blog (one chat per blog — keeps the logo context loaded across all 9 images).</li>
+<li><strong>For Image 1 (cover):</strong> 📎 <strong>Upload <code>logo.png</code> as an attachment</strong> with the prompt. Gemini embeds the actual logo.</li>
+<li><strong>For Images 2-9:</strong> Stay in the SAME Gemini chat — the prompts reference the logo Gemini already saw in Image 1. <strong>No need to re-upload</strong> the logo.</li>
+<li><strong>Verify each output:</strong> logo present, dimensions correct, photo-realistic where specified, tools (Lutz blade, Stanley knife, Nataraj cutter) shown correctly in Image 5.</li>
+</ol>
+<div class="note"><strong>⚠ If Gemini still warps the logo:</strong> AI generators are inconsistent with embedded logos. If the output logo looks distorted, generate the image without the logo (skip that part of the prompt) and paste the real <code>logo.png</code> in Canva/Figma afterwards — 30 seconds, perfect logo every time.</div>
 </div>
 
-<div class="meta-band">
-<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 4 images alongside <code>index.html</code> before publishing.
+<div class="brand-bar">
+<span><strong>VKS TECH</strong> · Brand colours: Navy #1A2744 · Orange #E85D26 · Teal #0D8C7E · Cream #FAF9F6</span>
+<span>🌐 <a href="https://vksTech.com">vksTech.com</a></span>
 </div>
 
-<h2>Quick Reference</h2>
+<div class="summary-table">
+<h3>📐 Image Dimensions, Style & Logo Source</h3>
 <table>
-<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<thead><tr><th>#</th><th>Filename</th><th>Dimensions</th><th>Style</th><th>Logo source</th></tr></thead>
 <tbody>
-<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Cover — before/after floor visual + 5S pillars strip + Free Downloads badge</td></tr>
-<tr><td>2A</td><td><code>5s-pillars-en.png</code></td><td>16:9</td><td>5 pillars diagram — Sort/Set/Shine/Standardize/Sustain (English)</td></tr>
-<tr><td>2B</td><td><code>5s-pillars-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
-<tr><td>3</td><td><code>5s-cheat-sheet.png</code></td><td>4:5 portrait</td><td><strong>STANDALONE CHEAT SHEET</strong> — 13 checkpoints by pillar + 0/1/2 scoring + 4-tier verdicts</td></tr>
+<tr><td>1</td><td>cover.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">📎 Upload logo.png</td></tr>
+<tr><td>2</td><td>5s-pillars-en.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📊 Infographic</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>3</td><td>5s-pillars-hi.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📊 Infographic</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>4</td><td>1s-sort-shopfloor.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>5</td><td>2s-set-in-order-shopfloor.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>6</td><td>3s-shine-shopfloor.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>7</td><td>4s-standardise-shopfloor.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>8</td><td>5s-sustain-shopfloor.png</td><td class="dim-cell">1600 × 900 pixels</td><td>📸 Photo</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>9</td><td>5s-cheat-sheet.png</td><td class="dim-cell">1200 × 1500 pixels</td><td>📊 Infographic</td><td class="logo-cell">Same chat — reuse</td></tr>
 </tbody>
 </table>
-
-<h2>Brand Standards</h2>
-<table>
-<thead><tr><th>Color</th><th>Hex</th><th>Use</th></tr></thead>
-<tbody>
-<tr><td>Navy</td><td><code>#1A2744</code></td><td>Headings, dark panels, primary text, 2S Set in Order pillar</td></tr>
-<tr><td>Orange</td><td><code>#E85D26</code></td><td>Accents, hero numbers, 1S Sort & 4S Standardize pillars, "warning" / poor scores</td></tr>
-<tr><td>Teal</td><td><code>#0D8C7E</code></td><td>Secondary, 3S Shine & 5S Sustain pillars, "good" / passing scores</td></tr>
-<tr><td>Cream</td><td><code>#FAF9F6</code></td><td>Backgrounds</td></tr>
-<tr><td>Grey</td><td><code>#5A5A5A</code></td><td>Subtitles, captions, footer text</td></tr>
-</tbody>
-</table>
-
-<p><strong>Fonts:</strong> Inter, Söhne, Helvetica Neue (Latin); Hind, Mukta (Devanagari). Big numbers in Bebas Neue, Anton, or Oswald.</p>
-
-<p><strong>Critical labels (must spell correctly):</strong> Sort (छँटाई), Set in Order (सही जगह), Shine (सफाई), Standardize (मानकीकरण), Sustain (निरंतरता). Japanese names: Seiri, Seiton, Seiso, Seiketsu, Shitsuke. Scoring: 0 (Not) / 1 (Partial) / 2 (Fully). Max 26 points (13 checkpoints × 2). Healthy plant 78–94% sustained.</p>
-
-<p><strong>Rules:</strong> No identifiable faces, no clipart, no decorative flourishes. WSJ / Bloomberg / HBR editorial style only.</p>
-
-<h2>📷 Image 1 — Cover</h2>
-
-<div class="prompt-card">
-<div class="prompt-header">
-  <div>
-    <div class="prompt-title">Cover Image</div>
-    <div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 (16:9)</div>
-  </div>
-  <button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
-</div>
-<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
-
-IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. The output must be widescreen landscape. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized for fast loading (target file size 400-700 KB). No JPEG artifacts, no blur, no fuzzy edges on text.
-
-Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "What is 5S and How to Maintain It on the Shop Floor."
-
-Composition — left two-thirds is a before/after floor visual + 5S pillars strip, right one-third is a hero text panel with a "Free Downloads" callout.
-
-LEFT TWO-THIRDS — before/after floor + 5S pillars:
-
-A horizontal stage on a clean cream `#FAF9F6` background with subtle paper-grain texture.
-
-TOP HALF — Before/After flat-vector schematic:
-Two side-by-side panels, separated by a vertical orange `#E85D26` divider.
-
-- LEFT PANEL — "BEFORE" (chaotic): A simplified flat-vector floor plan view from above showing a metalliser machine in the centre. Around it, scattered objects (small navy outlines) representing scrap rolls, tools, drums, empty cores, papers — drawn as randomly-placed shapes suggesting clutter. Tag in red corner: "❌ NO 5S"
-
-- RIGHT PANEL — "AFTER" (clean): Same floor plan view of the same metalliser machine, but the scattered objects are replaced with neatly-arranged clusters: a labelled rectangle marked "TOOLS", another marked "ROLLS", another marked "WASTE BIN", with floor markings (yellow lines) showing zone boundaries. Tag in green corner: "✅ WITH 5S"
-
-BOTTOM HALF — Five 5S Pillars strip:
-A horizontal row of 5 pillar-shaped rectangles, evenly spaced. Each pillar is a tall narrow box with:
-- Top cap in a different colour (orange / navy / teal / orange / teal alternating per S)
-- Big number label in white centred: 1S, 2S, 3S, 4S, 5S
-- Below the cap, in the body of the pillar (cream background, navy outline):
-  - Pillar 1: "SORT" / Hindi "छँटाई" — Remove what is not needed
-  - Pillar 2: "SET IN ORDER" / Hindi "सही जगह" — A place for everything
-  - Pillar 3: "SHINE" / Hindi "सफाई" — Clean as you inspect
-  - Pillar 4: "STANDARDIZE" / Hindi "मानकीकरण" — Visual standards
-  - Pillar 5: "SUSTAIN" / Hindi "निरंतरता" — Daily discipline
-
-RIGHT ONE-THIRD — navy `#1A2744` editorial panel with subtle paper-grain texture:
-
-- Top eyebrow strip in orange `#E85D26`, all caps, small letterspacing: vksTech.com / FREE DOWNLOADS
-- Main title in white Inter Bold or Söhne Bold (3-4 lines, large): 5S on the Floor — Real Format, Real Discipline
-- Subtitle (smaller italic, cream opacity 0.8): The methodology every plant talks about. The format my plant actually uses.
-- HORIZONTAL DIVIDER (orange `#E85D26`, 2 px thin)
-- DOWNLOAD BADGE BLOCK — teal `#0D8C7E` accent rectangle prominent:
-  - Label: "5 FREE EXCEL FORMATS"
-  - Sub-list (white text, ~14pt):
-    - ☑ Metalliser Audit Sheet
-    - ☑ Slitter Audit Sheet
-    - ☑ Generic FP Floor Audit
-    - ☑ Responsibility Roster
-    - ☑ Monthly Score Tracker (auto-graphs)
-  - Below: "Bilingual EN + HI · Pre-built formulas · Free"
-- Bottom strip: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
-- In the bottom-right corner of this panel, place the attached VKS Tech logo at ~100×100 px on a thin white round backplate
-
-Mood: practical, useful, the cover of a plant-floor reference document. NOT decorative. NOT marketing. Reads like a Production Engineering feature. The before/after panel is the hook; the pillars strip is the framework; the download badge is the offer.
-
-Strict colors: navy `#1A2744`, orange `#E85D26`, teal `#0D8C7E`, cream `#FAF9F6`, white. No red except orange. No green outside teal. No yellow except subtle floor-marking accents.</div>
-<div class="planb"><strong>Plan B:</strong> If the before/after floor schematic looks weak, simplify to two coloured boxes (left orange-tinted = "Cluttered floor" with stylised scattered shapes; right teal-tinted = "5S floor" with neat clusters). The labels carry the meaning even without elaborate floor plans.</div>
 </div>
 
-<h2>📐 Image 2A — 5S Pillars Diagram (English)</h2>
 
-<div class="prompt-card">
-<div class="prompt-header">
-  <div>
-    <div class="prompt-title">5S Pillars Diagram (English)</div>
-    <div class="prompt-meta">Save as <code>5s-pillars-en.png</code> · 1600×900 (16:9)</div>
-  </div>
-  <button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+<div class="card first-card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 1 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span><span class="card-num style-attach">📎 ATTACH LOGO HERE</span></div>
+<div class="card-title">COVER — Supervisor with 5S Audit Clipboard</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr attach"><strong>📎 LOGO ACTION:</strong> Upload <code>logo.png</code> as an attachment WITH this prompt.</div>
 </div>
-<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+<button class="copy-btn" onclick="copyPrompt('prompt-1', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-1">ATTACHED IMAGE: A logo file (logo.png) is attached to this prompt. This is the VKS Tech brand logo. USE THIS LOGO AS-IS in the output image — do NOT redraw it, do NOT modify it, do NOT recreate it. Place the actual attached logo image into the output exactly as provided.
 
-IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No JPEG artifacts, no blur on text.
+Generate a photo-realistic editorial cover image at 1600 × 900 pixels (16:9 ratio) for a flexible packaging industry blog post about 5S workplace organisation.
 
-Create a clean flat-vector editorial concept-diagram. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. The Economist / Harvard Business Review methodology-diagram style.
+SCENE: Inside a modern Indian flexible packaging plant. Mid-shot of a male plant supervisor in his late 30s, wearing a navy blue half-sleeve uniform shirt with a small white name patch (no readable text on the patch), light industrial safety helmet pushed back on his head, clipboard with audit checklist held in his hands at chest height. He is standing in front of a clean, organised metalliser machine. His expression is focused, professional — the look of an engineer doing a 5S audit.
 
-Background: cream `#FAF9F6` with subtle paper-grain texture (5% opacity max).
+FOREGROUND (lower-right corner): A small visible portion of a labelled tool board on the wall — Lutz blade rack with numbered slots, Stanley knife holster, all clearly organised. The board is part of the "5S Set In Order" visual.
 
-Header zone (top 12%):
-- Eyebrow strip in orange `#E85D26`, small caps, letterspaced: THE FIVE Ss IN FLEXIBLE PACKAGING CONTEXT
-- Title (navy `#1A2744`, large bold sans-serif): 5S Pillars — From Sort to Sustain
-- Subtitle (grey `#5A5A5A`): Universal principles applied to metalliser, slitter, and converting floors.
+BACKGROUND: Soft-focus organised shop floor — visible (but blurred) winding machine on the right, marked floor zones (yellow/green tape) for input/output rolls, fluorescent overhead lighting. Use shallow depth-of-field (f/2.8) so the supervisor and clipboard are sharp, background is creamy bokeh.
 
-Main visual zone (middle 76%) — FIVE PILLAR BLOCKS in a horizontal row, evenly spaced:
+LIGHTING: Industrial fluorescent overhead with warm key light from camera left highlighting the supervisor's face, the clipboard, and the tool board. No harsh shadows.
 
-Each pillar block is a tall vertical rectangle (roughly 280 px wide × 580 px tall), with:
+COLOUR PALETTE: Industrial gray machinery, beige floor with yellow zone markings, off-white walls. Supervisor's uniform is navy blue (matches brand).
 
-1. Top header strip (60 px tall) in the pillar's accent colour, white text:
-   - Pillar 1: orange `#E85D26` → 1S — SORT
-   - Pillar 2: navy `#1A2744` → 2S — SET IN ORDER
-   - Pillar 3: teal `#0D8C7E` → 3S — SHINE
-   - Pillar 4: orange `#E85D26` → 4S — STANDARDIZE
-   - Pillar 5: teal `#0D8C7E` → 5S — SUSTAIN
+TEXT OVERLAY (top-left corner, semi-transparent navy #1A2744 panel with rounded corners, padding 24px):
+  Place the ATTACHED VKS Tech logo image as-is at the LEFT edge of this panel, sized approximately 80×80 pixels. Use the actual attached logo image — do NOT redraw it.
+  To the RIGHT of the logo, place text:
+    Line 1 (small, orange #E85D26, uppercase, letter-spaced): "VKS TECH | 2026"
+    Line 2 (large, white, bold, sans-serif): "5S ON THE SHOP FLOOR"
+    Line 3 (medium, white, regular weight): "A Plant Engineer's Practical Guide for FP Lines"
 
-2. Body (white background, navy thin outline). Inside each body, top-to-bottom:
-   - Japanese name (small italic, grey, ~14pt): "Seiri" / "Seiton" / "Seiso" / "Seiketsu" / "Shitsuke"
-   - One-line definition (navy, ~16pt semibold, ~3 lines wrapped):
-     - 1S: "Remove what is not needed for today's work."
-     - 2S: "A designated, marked location for everything that remains."
-     - 3S: "Clean as you inspect — find problems while cleaning."
-     - 4S: "Visual standards, photos, schedules — make it repeatable."
-     - 5S: "Daily discipline — survives without reminders."
-   - DIVIDER LINE (small horizontal in pillar's accent colour)
-   - EXAMPLE CHECKPOINT (smaller italic, grey, ~12pt, ~3-4 lines wrapped):
-     - 1S: Example: "Scrap rolls, empty cores, old parts removed from floor."
-     - 2S: Example: "Doctor blades, rubber rolls, cork tapes arranged in marked rack."
-     - 3S: Example: "Machine body, control panel, roller surfaces clean and oil-free."
-     - 4S: Example: "Cleaning schedule and responsibilities displayed and followed."
-     - 5S: Example: "Operators follow 5S norms daily without reminder."
+BOTTOM-RIGHT BADGE (small, teal #0D8C7E pill, white text):
+  "📥 5 FREE AUDIT FORMATS"
 
-3. Bottom strip (40 px tall) in pillar's accent colour, white text, small caps:
-   - Pillar 1: "REMOVAL"
-   - Pillar 2: "ARRANGEMENT"
-   - Pillar 3: "INSPECTION"
-   - Pillar 4: "REPEATABILITY"
-   - Pillar 5: "DISCIPLINE"
+WATERMARK: "vksTech.com" small white letters, lower-right corner, 60% opacity.
 
-Between pillars, small thin orange `#E85D26` arrows pointing right (suggesting sequential flow), with tiny text above arrows: "→"
-
-Bottom callout strip (8%):
-Navy `#1A2744` background, two-column split:
-- LEFT (orange `#E85D26` text, bold): ⚡ The hardest pillar:
-- RIGHT (white text): 5S Sustain. Every plant can do a one-time blitz before a customer audit. Few sustain it for 12 months without backsliding. The Monthly Score Tracker exists to make backsliding visible early.
-
-Bottom-right corner: VKS Tech logo at ~80×80 px on white circle backplate.
-Bottom-left corner: small grey footer text: vkstech.com — Free 5S Audit Formats. Real Plant Methodology.
-
-Typography: Inter or Söhne sans-serif throughout. Pillar headers in semibold caps. Examples in light italic.
-
-What to AVOID: clipart, cartoons, hand-drawn elements, photorealism, isometric/3D effects, decorative borders.</div>
-<div class="planb"><strong>Plan B:</strong> If the 5-pillar layout is too cramped at 1600×900, reduce to 4 pillar blocks visible (combine 4S and 5S into one merged block). The 5 Ss remain identifiable but the diagram breathes more.</div>
+CRITICAL CONSTRAINTS:
+- USE THE ATTACHED LOGO AS-IS — do not redraw, modify, or recreate it.
+- Do NOT show real company logos other than the attached VKS Tech logo
+- Do NOT show readable text on name patch, machinery, or any item except the clipboard checklist (which can be a blurred grid of rows)
+- Do NOT include other people in the frame
+- Photo-realistic — like a professional industrial photographer's editorial shot
+- Shot on Sony A7 IV with 50mm f/1.4 lens, professional industrial photography, magazine editorial quality
+- Image dimensions exactly 1600 × 900 pixels</pre>
 </div>
 
-<h2>📐 Image 2B — 5S Pillars Diagram (Hindi)</h2>
-
-<div class="prompt-card">
-<div class="prompt-header">
-  <div>
-    <div class="prompt-title">5S Pillars Diagram (Hindi)</div>
-    <div class="prompt-meta">Save as <code>5s-pillars-hi.png</code> · 1600×900 (16:9)</div>
-  </div>
-  <button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 2 OF 9</span><span class="card-num style-info">📊 INFOGRAPHIC</span></div>
+<div class="card-title">5S PILLARS DIAGRAM (English)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
 </div>
-<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
-
-IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
-
-Create a flat-vector editorial concept-diagram with EXACTLY the same layout, colour palette, and structure as the English 5S Pillars Diagram. Pillar headers (1S, 2S, 3S, 4S, 5S, with English names — SORT, SET IN ORDER, etc.) stay in English/symbolic. Japanese names (Seiri, Seiton, Seiso, Seiketsu, Shitsuke) stay as is. Only definition, example, and bottom callout translate to Hindi.
-
-Use Hind or Mukta Devanagari font for all Hindi text.
-
-Header:
-- Eyebrow (orange #E85D26, English): THE FIVE Ss IN FLEXIBLE PACKAGING CONTEXT
-- Title (Hindi, navy bold, large): 5S Pillars — Sort से Sustain तक
-- Subtitle (Hindi, grey): Universal principles metalliser, slitter, और converting floors पर apply।
-
-PILLAR BODIES — replace English definitions and examples with Hindi:
-
-1. 1S Sort:
-   - Definition: आज के काम के लिए जो ज़रूरी नहीं उसे हटाएँ।
-   - Example: Example: "Scrap rolls, खाली cores, पुराने parts floor से हटाए हैं।"
-   - Bottom strip (English): REMOVAL
-
-2. 2S Set in Order:
-   - Definition: जो रहता है उसके लिए designated, marked location।
-   - Example: Example: "Doctor blades, rubber rolls, tapes marked rack में arrange हैं।"
-   - Bottom strip (English): ARRANGEMENT
-
-3. 3S Shine:
-   - Definition: सफाई के साथ inspection — सफाई करते हुए problems ढूँढें।
-   - Example: Example: "Machine body, control panel, roller surfaces साफ और oil-free।"
-   - Bottom strip (English): INSPECTION
-
-4. 4S Standardize:
-   - Definition: Visual standards, photos, schedules — इसे repeatable बनाएँ।
-   - Example: Example: "Cleaning schedule और responsibilities displayed और follow होते हैं।"
-   - Bottom strip (English): REPEATABILITY
-
-5. 5S Sustain:
-   - Definition: रोज़ की discipline — reminders के बिना survive करती है।
-   - Example: Example: "Operators 5S norms रोज़ बिना reminder के follow करते हैं।"
-   - Bottom strip (English): DISCIPLINE
-
-Bottom callout (Hindi):
-- LEFT (orange bold): ⚡ सबसे hard pillar:
-- RIGHT (white text, Hindi): 5S Sustain। हर plant customer audit से पहले one-time blitz कर सकता है। बहुत कम 12 महीने बिना backsliding के sustain कर सकते हैं। Monthly Score Tracker इसी लिए है — backsliding को early visible बनाने के लिए।
-
-Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
-Bottom-left: small grey Hindi footer: vkstech.com — Free 5S Audit Formats। Real Plant Methodology।
-
-All other styling identical to Image 2A.</div>
-<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 2A first, then replace title, subtitle, definitions, examples, and bottom callout with proper Devanagari text using Hind or Mukta font in Photopea/Canva. Pillar headers (1S, 2S, etc.) and Japanese names stay in English.</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-2', this)">📋 Copy Prompt</button>
 </div>
+<pre id="prompt-2">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is — do NOT redraw it.
 
-<h2>📋 Image 3 — Standalone Cheat Sheet</h2>
+Generate a clean flat-vector editorial concept diagram at 1600 × 900 pixels (16:9) titled "The 5 Pillars of 5S — Adapted for Flexible Packaging Plants" for a blog post.
 
-<div class="prompt-card">
-<div class="prompt-header">
-  <div>
-    <div class="prompt-title">5S Cheat Sheet (Standalone Printable)</div>
-    <div class="prompt-meta">Save as <code>5s-cheat-sheet.png</code> · 1200×1500 (4:5 portrait)</div>
-  </div>
-  <button class="copy-btn" data-target="prompt-3">📋 Copy Prompt</button>
-</div>
-<div class="prompt-body" id="prompt-3">[ATTACH `logo.png` to THIS prompt]
+LAYOUT: 5 vertical pillars side-by-side, equally spaced. Each pillar is a tall coloured column with content arranged vertically.
 
-IMAGE SPEC: Generate at exactly 1200 pixels wide by 1500 pixels tall, 4:5 portrait aspect ratio. This is a vertical (portrait) format, NOT landscape. Do NOT generate square (1:1) or landscape formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 400-700 KB). Designed to be saved as a phone wallpaper or printed on A4 paper.
+THE 5 PILLARS (left to right):
 
-Create a clean, professional, bookmark-quality reference cheat sheet — the kind of one-page printable that plant supervisors in flexible packaging would laminate and clip to the area noticeboard. NOT a marketing brochure. A working tool.
+PILLAR 1 — SORT (1S)
+  Header bar (60px): orange (#E85D26) with white text
+    "1S — SORT"
+    Below in smaller white: "Seiri / सोर्ट"
+  Body (cream #FAF9F6 background):
+    Icon: red tag with arrow into bin
+    "Remove what is not needed"
+    Example: "Scrap rolls, broken Lutz blades, expired cork tape"
 
-Background: cream `#FAF9F6` with very subtle paper-grain texture.
+PILLAR 2 — SET IN ORDER (2S)
+  Header bar (60px): orange (#E85D26) with white text
+    "2S — SET IN ORDER"
+    Below: "Seiton / सेट इन ऑर्डर"
+  Body (cream background):
+    Icon: shadow board with tool silhouettes
+    "Place tools in marked locations"
+    Example: "Lutz blade rack, Stanley knife holster, Nataraj cutter bracket, spanner board"
 
-Header zone (top 10% of image):
-- VKS Tech logo (the attached logo.png) at top-left, ~100×100 px
-- To the right of the logo, two-line header:
-  - Eyebrow line in orange `#E85D26` small caps: VKSTECH.COM REFERENCE CHEAT SHEET
-  - Main title in navy `#1A2744` bold large: 5S Daily Audit — Quick Reference
-- Below the title, a thin orange `#E85D26` horizontal divider
+PILLAR 3 — SHINE (3S)
+  Header bar (60px): teal (#0D8C7E) with white text
+    "3S — SHINE"
+    Below: "Seiso / शाइन"
+  Body (cream background):
+    Icon: cleaning cloth + machine
+    "Clean machine and workspace"
+    Example: "Wipe metalliser chamber, sweep floor, clear vacuum lines"
 
-Body zone (middle 78% of image) — THREE sections stacked vertically:
+PILLAR 4 — STANDARDISE (4S)
+  Header bar (60px): teal (#0D8C7E) with white text
+    "4S — STANDARDISE"
+    Below: "Seiketsu / स्टैंडरडाइज़"
+  Body (cream background):
+    Icon: laminated SOP card
+    "Visible SOPs at every workstation"
+    Example: "Boat-change procedure, OD chart, daily startup checklist"
 
-TOP SECTION (35% of body) — 13 Checkpoint Categories:
+PILLAR 5 — SUSTAIN (5S)
+  Header bar (60px): navy (#1A2744) with white text
+    "5S — SUSTAIN"
+    Below: "Shitsuke / सस्टेन"
+  Body (cream background):
+    Icon: clipboard with checkmarks
+    "Audit weekly, score, improve"
+    Example: "5S Monthly Score Tracker, weekly walkthrough, scoring 80%+"
 
-Title above (navy bold, small): 13 CHECKPOINTS, GROUPED BY 5S PILLAR
+TOP HEADER (full width, 80px tall, navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1) at FAR LEFT of the band, sized approximately 60×60 pixels. Use the actual logo as-is.
+  To the right of the logo, white text bold centered: "THE 5 PILLARS OF 5S — ADAPTED FOR FLEXIBLE PACKAGING"
 
-A 5-row table, one row per S, with the row colour-coded by S number:
+BOTTOM FOOTER (full width, 50px, teal #0D8C7E band):
+  White text centered: "vksTech.com | Free Industrial Toolkit | Shop-floor 5S for FP plants"
 
-Row 1 (orange-tinted): 1S | SORT (छँटाई) | 3 checkpoints | "Only required materials present near machine"
-Row 2 (navy-tinted): 2S | SET IN ORDER (सही जगह) | 3 checkpoints | "Tools kept in marked locations"
-Row 3 (teal-tinted): 3S | SHINE (सफाई) | 3 checkpoints | "Machine body and floor clean and oil-free"
-Row 4 (orange-tinted): 4S | STANDARDIZE (मानकीकरण) | 2 checkpoints | "Cleaning schedule displayed and followed"
-Row 5 (teal-tinted): 5S | SUSTAIN (निरंतरता) | 2 checkpoints | "Operators follow 5S daily without reminder"
+WATERMARK: "vksTech.com" lower-right, semi-transparent.
 
-Total row at bottom: TOTAL = 13 CHECKPOINTS
+STYLE: Clean infographic with thin gray dividers between pillars. Modern sans-serif typography (Inter or similar). Icons are flat line-art (NOT 3D, NOT photo-realistic). No people. No real brand logos other than VKS Tech.
 
-MIDDLE SECTION (25% of body) — Scoring Methodology:
+USE ONLY THESE COLOURS: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white.
 
-Title above (navy bold, small): SCORING — DAILY, EACH CHECKPOINT
-
-A horizontal row of 3 large coloured tiles:
-
-Tile 1 (orange `#E85D26` filled rounded rectangle):
-- Big symbol: ❌
-- Big number (Bebas Neue, ~80pt): 0
-- Subtext: NOT FOLLOWED / पालन नहीं
-
-Tile 2 (yellow-orange filled rounded rectangle):
-- Big symbol: ⚠
-- Big number (Bebas Neue, ~80pt): 1
-- Subtext: PARTIAL / आंशिक
-
-Tile 3 (teal `#0D8C7E` filled rounded rectangle):
-- Big symbol: ✅
-- Big number (Bebas Neue, ~80pt): 2
-- Subtext: FULLY FOLLOWED / पूरा पालन
-
-Below the tiles, in centre: "MAX = 13 × 2 = 26 points / day"
-
-BOTTOM SECTION (40% of body) — Compliance Tier Verdicts:
-
-Title above (navy bold, small): MONTHLY COMPLIANCE % — WHAT THE NUMBER MEANS
-
-A 4-row vertical table, each row coloured by tier:
-
-Row 1 (teal background): ≥ 95% — Audit too lenient. Tighten checkpoints. / Audit बहुत lenient। Checkpoints tighten करें।
-Row 2 (teal-tinted background): 85% – 94% — Mature 5S. Sustain & improve. / Mature 5S। Sustain और improve करें।
-Row 3 (yellow background): 70% – 84% — Improving. Watch trend direction. / सुधार पर। Trend direction देखें।
-Row 4 (orange background): < 70% — Audit not taken seriously. Escalate. / Audit serious नहीं। Escalate करें।
-
-Footer zone (bottom 12% of image):
-
-Three columns:
-- LEFT: A small navy panel: 5 FREE FORMATS at vkstech.com
-- CENTER: A small teal panel: Print A3 landscape · Laminate · Clip near machine
-- RIGHT: A small orange panel: Score daily · Review monthly · Trend matters most
-
-Above the footer columns, a thin orange divider.
-
-Bottom-most strip with grey small caps: vkstech.com — More tools, more cheat sheets, real-plant methodology · Vivek Kumar | M.Tech NIT Uttarakhand
-
-Mood: clean, dense, useful, professional. The kind of reference doc a real supervisor would print, laminate, and use weekly. Information density is a feature.
-
-Typography: Inter or Söhne sans-serif throughout. Pillar names in bold navy. Numbers in semibold. Tier verdicts in semibold colour-coded text.
-
-Strict colors: navy `#1A2744`, orange `#E85D26`, teal `#0D8C7E`, cream `#FAF9F6`, white, plus subtle yellow for the warning row. No others.
-
-What to AVOID: decorative borders, clipart, drop shadows, gradients, 3D effects.</div>
-<div class="planb"><strong>Plan B:</strong> If the table format looks too cramped at 1200×1500, drop the bottom-section "What the number means" tier table to 3 rows (combine 85-94% and 70-84% into "Healthy zone — keep auditing"). The remaining content stays full.</div>
+Image dimensions exactly 1600 × 900 pixels.</pre>
 </div>
 
-<h2>✅ Quality Check Before Publishing</h2>
-<table>
-<thead><tr><th>Check</th><th>What to verify</th></tr></thead>
-<tbody>
-<tr><td>Brand colour discipline</td><td>Only Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>, white, grey, subtle yellow</td></tr>
-<tr><td>Each S has its anchor colour</td><td>1S orange, 2S navy, 3S teal, 4S orange, 5S teal — consistent across cover, pillars, cheat sheet</td></tr>
-<tr><td>Numbers correct</td><td>13 checkpoints (3+3+3+2+2), max 26 points, healthy plant 78–94%, &lt;70% not serious, ≥95% too lenient</td></tr>
-<tr><td>Japanese names spelled correctly</td><td>Seiri / Seiton / Seiso / Seiketsu / Shitsuke (visible on Pillars 2A &amp; 2B)</td></tr>
-<tr><td>Hindi text renders cleanly</td><td>Devanagari (Hind / Mukta font) — no boxed glyphs, no missing characters</td></tr>
-<tr><td>Logo placement</td><td>Bottom-right (Cover, Pillars), top-left (Cheat Sheet)</td></tr>
-<tr><td>Aspect ratios</td><td>Cover &amp; Pillars 16:9 widescreen · Cheat Sheet 4:5 portrait</td></tr>
-<tr><td>No AI tells</td><td>No identifiable faces, no garbled text, no decorative flourishes</td></tr>
-</tbody>
-</table>
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 3 OF 9</span><span class="card-num style-info">📊 INFOGRAPHIC</span></div>
+<div class="card-title">5S PILLARS DIAGRAM (Hindi)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-3', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-3">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
 
-<h2>🚨 Troubleshooting</h2>
-<ul>
-<li><strong>Image comes out as a square (1:1):</strong> Re-paste the prompt and re-emphasize the IMAGE SPEC line. For Image 3, double-check it's portrait (1200×1500).</li>
-<li><strong>Numbers come out wrong:</strong> Always overlay correct numbers in an editor afterward (Photopea, Canva). AI image models are unreliable with numerics.</li>
-<li><strong>Pillar layout looks crammed:</strong> Reduce visible pillars to 4 for a less cramped layout (merge 4S+5S).</li>
-<li><strong>Hindi renders as gibberish:</strong> Generate EN version first, replace text in Photopea/Canva using Hind or Mukta font.</li>
-<li><strong>Decorative clutter:</strong> Add: <em>"STRICTLY no decorative elements, no clipart, no flourishes."</em></li>
-</ul>
+Generate the same flat-vector concept diagram as Image 2 but with all body text in Hindi (Devanagari script). Use Noto Sans Devanagari or similar.
 
-<h2>📁 Folder Structure When Complete</h2>
-<pre style="background:#1A2744;color:#FAF9F6;padding:14px;border-radius:8px;font-size:0.86em;line-height:1.6;overflow-x:auto;">40-what-is-5s-floor/
-├── index.html
-├── logo.png                       (already provided)
-├── cover.png                      (Image 1)
-├── 5s-pillars-en.png              (Image 2A)
-├── 5s-pillars-hi.png              (Image 2B)
-├── 5s-cheat-sheet.png             (Image 3 — STANDALONE BOOKMARK)
-├── GEMINI-PROMPTS.md              (markdown reference)
-├── GEMINI-PROMPTS.html            (this interactive page)
-└── formats/                       (5 downloadable Excel files)
-    ├── 01-5S-Metalliser-Audit-Bilingual.xlsx
-    ├── 02-5S-Slitter-Audit-Bilingual.xlsx
-    ├── 03-5S-Generic-FP-Floor-Audit-Bilingual.xlsx
-    ├── 04-5S-Responsibility-Roster-Bilingual.xlsx
-    └── 05-5S-Monthly-Score-Tracker-Bilingual.xlsx</pre>
+DIMENSIONS: 1600 × 900 pixels (16:9 ratio).
 
-<div id="toast" class="toast">✓ Copied to clipboard</div>
+PILLAR HEADERS (keep English/Japanese names — they are universal):
+  PILLAR 1: "1S — SORT" / "Seiri / सोर्ट"
+  PILLAR 2: "2S — SET IN ORDER" / "Seiton / सेट इन ऑर्डर"
+  PILLAR 3: "3S — SHINE" / "Seiso / शाइन"
+  PILLAR 4: "4S — STANDARDISE" / "Seiketsu / स्टैंडरडाइज़"
+  PILLAR 5: "5S — SUSTAIN" / "Shitsuke / सस्टेन"
+
+BODY TEXT (in Hindi):
+  PILLAR 1 — "जो ज़रूरी नहीं है उसे हटाएँ"
+    Example: "Scrap rolls, टूटे Lutz blades, expired cork tape"
+  PILLAR 2 — "Tools को marked locations में रखें"
+    Example: "Lutz blade rack, Stanley knife holster, Nataraj cutter bracket, spanner board"
+  PILLAR 3 — "Machine और workplace साफ़ रखें"
+    Example: "Metalliser chamber wipe करें, floor sweep करें, vacuum lines clear करें"
+  PILLAR 4 — "हर workstation पर visible SOPs"
+    Example: "Boat-change procedure, OD chart, daily startup checklist"
+  PILLAR 5 — "हर हफ़्ते audit करें, score करें, सुधारें"
+    Example: "5S Monthly Score Tracker, weekly walkthrough, 80%+ scoring"
+
+TOP HEADER (navy band): "5S के 5 PILLARS — FLEXIBLE PACKAGING के लिए ADAPTED"
+BOTTOM FOOTER (teal band): "vksTech.com | Free Industrial Toolkit | FP plants के लिए shop-floor 5S"
+
+LAYOUT, COLOURS, ICONS, AND STYLING: Identical to Image 2 (5 vertical pillars, same colour palette, same style).
+
+CRITICAL: Devanagari script must render correctly. Use Noto Sans Devanagari or similar. If the AI struggles with Hindi, generate Image 2 (English) first and then manually edit the Hindi text in afterwards using Figma / Canva / Photoshop.
+
+Image dimensions exactly 1600 × 900 pixels.</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 4 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span></div>
+<div class="card-title">1S — SORT (Shop Floor Photo)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-4', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-4">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9) of a 1S "SORT" red-tag area in an Indian flexible packaging plant.
+
+SCENE: A corner of the shop floor designated as the "RED TAG AREA" — a clearly demarcated zone (red floor tape outline) where items pending sort/disposal are placed. The zone is organised but contains items being evaluated for removal:
+
+ITEMS IN THE RED TAG ZONE:
+- 2-3 partially used scrap rolls of metallised film (silver, dusty, with frayed edges) standing on the floor
+- A small disposal bin labelled "BROKEN BLADES" (handwritten or printed sticker) containing 4-5 used Lutz blades (small rectangular industrial blades, about 50mm × 20mm, slightly worn edges)
+- A few empty paper cores (cardboard tubes, ~75mm diameter) stacked
+- A roll of expired cork tape (the kind used as cushioning between metallised film layers — slightly yellowed, partially used)
+- A red tag (printed paper with "RED TAG" header, today's date, item description fields) attached to one of the scrap rolls
+
+BACKGROUND: Soft-focus rest of the shop floor — operational metalliser visible (blurred) in the distance, fluorescent overhead lighting, clean concrete floor with yellow/green tape marking other zones.
+
+FOREGROUND-LEFT: A small printed wall sign reading "1S — SORT (Seiri / सोर्ट) | RED TAG AREA" in navy and orange — clearly visible, attached to a yellow stand.
+
+LIGHTING: Industrial fluorescent overhead with a warm key light from camera left. Slight directional shadows give depth. The red floor tape and red tag stand out against the neutral concrete and metal tones.
+
+COLOUR PALETTE: Industrial gray and beige base, red (floor tape, red tags) for emphasis, silver scrap film, brown cardboard cores. Brand colours appear in the wall sign.
+
+TEXT OVERLAY:
+
+TOP HEADER (full width, 80px, semi-transparent navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1) at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "1S — SORT (Seiri) | Red Tag Area Example"
+
+BOTTOM FOOTER (50px, teal #0D8C7E band, semi-transparent):
+  White text centered: "vksTech.com | What '1S Sort' looks like on a real metalliser shop floor"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual industrial photography, NOT illustration, NOT 3D render
+- The "RED TAG AREA" should look genuinely demarcated with floor tape, not painted
+- The Lutz blades should look like REAL industrial replaceable blades, not generic knives
+- The scrap rolls, cores, cork tape should look like real metalliser-line waste
+- No real company logos other than VKS Tech
+- No people in the frame
+- No readable text on the items themselves except the "RED TAG" header on the tag and "BROKEN BLADES" on the bin label
+- Shot on Canon R5 with 35mm lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 5 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span></div>
+<div class="card-title">2S — SET IN ORDER (Shop Floor Photo)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-5', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-5">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9) of a 2S "SET IN ORDER" tool board in an Indian flexible packaging plant.
+
+SCENE: A wall-mounted shadow board (light wooden or white-painted MDF panel, approximately 1.5m × 1m) with tools arranged in clearly marked locations. Each tool has a black silhouette outline behind it so its absence is immediately visible. The board is the centrepiece of the photograph, mounted on the wall above a small workbench in a slitter/metalliser area.
+
+THE TOOL BOARD CONTAINS (laid out clearly):
+
+TOP ROW:
+- Numbered Lutz blade rack (4 small slots labelled 1-2-3-4, each holding a fresh Lutz blade — small rectangular industrial blades ~50mm × 20mm)
+- Stanley knife holster (a clear holder with the knife visibly slotted, retractable razor blade visible, body navy or black colour)
+- Nataraj paper cutter (heavy cast-iron paper guillotine, mounted on a small bracket on the right side of the board, ~30cm long arm)
+
+MIDDLE ROW:
+- 4 spanners of different sizes hanging on labelled hooks (each hook has a silhouette outline)
+- A torque wrench in a clip
+- 2 screwdrivers (Phillips and flathead) in hooks
+
+BOTTOM ROW:
+- A roll of cork tape on a labelled bracket
+- 2 lint-free cloth rolls in a labelled holder
+
+Each location on the board has a small printed label below it with the tool name (e.g., "LUTZ BLADE 1", "STANLEY KNIFE", "NATARAJ CUTTER", "10mm SPANNER", "CORK TAPE", etc.).
+
+FOREGROUND: A small workbench in front of the board with a clean, organised surface — one item out (a metallised film sample being inspected) but otherwise clear.
+
+BACKGROUND: Soft-focus shop floor — visible (but blurred) slitter machine on the right, fluorescent overhead lighting.
+
+WALL SIGN (visible in the upper-left of the board): "2S — SET IN ORDER (Seiton / सेट इन ऑर्डर)" in navy and orange.
+
+LIGHTING: Bright industrial fluorescent overhead, even illumination across the board. Soft directional shadow from camera left gives the board slight depth.
+
+COLOUR PALETTE: Light wood or white board base, black silhouette outlines, metal tools, navy uniform-coloured holsters, orange labels for emphasis. Industrial gray background.
+
+TEXT OVERLAY:
+
+TOP HEADER (80px, semi-transparent navy band):
+  SAME VKS Tech logo at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "2S — SET IN ORDER (Seiton) | Shadow Board Example"
+
+BOTTOM FOOTER (50px, teal band):
+  White centered: "vksTech.com | Lutz blades, Stanley knives, Nataraj cutter — every tool has a marked home"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual industrial photography
+- The Lutz blades, Stanley knife, and Nataraj cutter must look like REAL tools (not generic knives or props)
+  - Lutz blade = small rectangular replaceable industrial blade
+  - Stanley knife = utility knife with retractable razor blade
+  - Nataraj cutter = heavy paper guillotine with metal arm
+- Black silhouettes behind each tool slot must be clearly visible
+- Labels under each tool position must be readable: "LUTZ BLADE 1", "STANLEY KNIFE", "NATARAJ CUTTER", "SPANNER", "CORK TAPE"
+- No people in the frame
+- No real brand logos other than VKS Tech
+- Shot on Canon R5 with 35mm lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 6 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span></div>
+<div class="card-title">3S — SHINE (Shop Floor Photo)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-6', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-6">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9) of a 3S "SHINE" cleaning activity at an Indian metalliser machine.
+
+SCENE: A male operator (late 20s, navy uniform, white safety helmet) in profile view, focused on his work, wiping down the outside of a metalliser vacuum chamber door with a lint-free cloth. The chamber door is a large stainless-steel circular hatch on the metalliser body. The operator is using methodical, careful strokes — this is intentional cleaning, not casual wiping.
+
+ON THE FLOOR BESIDE HIM:
+- A cleaning trolley (small stainless-steel cart on wheels) with neatly arranged cleaning supplies:
+  - A spray bottle of IPA (isopropyl alcohol) labelled clearly
+  - A stack of folded lint-free white cloths
+  - A small bin for used cloths
+  - A microfiber duster
+- A vacuum cleaner (industrial, plain navy or grey, no brand) parked nearby
+- The floor immediately around the metalliser is visibly clean — no scrap, no dust, polished concrete
+
+WALL BEHIND OPERATOR: A small printed sign "3S — SHINE (Seiso / शाइन) | DAILY CLEANING ZONE" visible on the wall — navy and teal colours.
+
+BACKGROUND: Soft-focus rest of the shop floor — other organised zones visible (blurred). Fluorescent overhead lighting.
+
+LIGHTING: Industrial fluorescent overhead with warm key light from camera left highlighting the operator's profile and the metalliser surface he is cleaning. The stainless-steel chamber reflects light realistically.
+
+COLOUR PALETTE: Stainless-steel metalliser body, navy uniform, white helmet and cloths, neutral concrete floor.
+
+TEXT OVERLAY:
+
+TOP HEADER (80px, semi-transparent navy band):
+  SAME VKS Tech logo at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "3S — SHINE (Seiso) | Daily Cleaning at the Metalliser"
+
+BOTTOM FOOTER (50px, teal band):
+  White centered: "vksTech.com | Cleaning is inspection — operators see problems while wiping"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual industrial photography
+- The operator should look engaged in cleaning, not posing
+- The cleaning trolley should look like a real industrial cart with realistic supplies
+- The IPA spray bottle, lint-free cloths, and vacuum should look professional, not consumer-grade
+- The metalliser chamber door should look like a REAL metalliser (large circular stainless-steel hatch with locking handle)
+- No readable text on operator's name patch or machine
+- No real brand logos other than VKS Tech
+- Shot on Canon R5 with 50mm lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 7 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span></div>
+<div class="card-title">4S — STANDARDISE (Shop Floor Photo)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-7', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-7">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9) of a 4S "STANDARDISE" laminated SOP procedure card mounted on a slitter machine in an Indian flexible packaging plant.
+
+SCENE: Close-up shot of a slitter machine with a laminated A4 SOP procedure card mounted on a metal stand or magnetic clip directly next to the operator station. The card is the centrepiece. An operator (partial view from the side, navy uniform, helmet visible) is reading the card while in the middle of a procedure step.
+
+THE LAMINATED SOP CARD CONTAINS (clearly readable):
+- Title bar in navy: "BOAT-CHANGE PROCEDURE — METALLISER M2.2"
+- Steps numbered 1-6 with brief text:
+  1. Stop machine, isolate vacuum
+  2. Wait 15 min for cool-down
+  3. Open chamber door, secure boat carrier
+  4. Replace boat-set per spec (×4)
+  5. Close chamber, restart vacuum to 4×10⁻⁴ mbar
+  6. Run heating cycle 8 min, verify OD on test sample
+- Bottom of card: "VKS TECH | SOP-MET-001 | Rev 3 | Apr 2026" in small text
+
+OTHER STANDARDISATION ELEMENTS VISIBLE:
+- A small "OD INSPECTION CHART" laminated card next to the SOP, showing target OD ranges (visible but not the focal point)
+- A "DAILY STARTUP CHECKLIST" clipboard hanging on a hook, partially visible
+- Yellow floor tape marking the operator's standing zone
+- A small printed sign on the wall: "4S — STANDARDISE (Seiketsu / स्टैंडरडाइज़) | VISUAL SOPs" in navy and teal
+
+BACKGROUND: Soft-focus rest of the slitter machine — control panel with indicator lights, film roll on the unwind, fluorescent overhead lighting.
+
+FOREGROUND: The SOP card is in sharp focus, the operator's hand is partially visible reaching toward a control on the machine.
+
+LIGHTING: Industrial fluorescent overhead, even illumination on the SOP card so the text is readable. Slight directional shadow from camera left.
+
+COLOUR PALETTE: Navy SOP header, white card body, black text, stainless-steel slitter, navy uniform, neutral concrete background.
+
+TEXT OVERLAY:
+
+TOP HEADER (80px, semi-transparent navy band):
+  SAME VKS Tech logo at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "4S — STANDARDISE (Seiketsu) | Visual SOP at the Operator Station"
+
+BOTTOM FOOTER (50px, teal band):
+  White centered: "vksTech.com | Laminated SOPs at every machine — no procedure left to memory"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual industrial photography
+- The SOP card text must be REALISTIC and readable — the 6 boat-change steps as listed
+- The card should look genuinely laminated (slight reflection, slight thickness)
+- The operator is partially visible (hand, side of body) but not the focus — the SOP card is the focus
+- No readable text on operator's name patch
+- No real company logos other than VKS Tech in the SOP footer
+- Shot on Canon R5 with 50mm macro lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 8 OF 9</span><span class="card-num style-photo">📸 PHOTO-REALISTIC</span></div>
+<div class="card-title">5S — SUSTAIN (Shop Floor Photo)</div>
+<div class="dim-callout">📐 1600 × 900 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-8', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-8">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9) of a 5S "SUSTAIN" weekly audit being conducted at a slitter machine in an Indian flexible packaging plant.
+
+SCENE: Two people in mid-frame: a male shift supervisor (late 30s, navy uniform, helmet) holding an audit clipboard with a printed checklist, and a younger male operator (mid-20s, navy uniform, helmet) standing beside him discussing a checkpoint. Both are looking at the audit sheet — the supervisor is filling in a score with a pen. This is a collaborative weekly walkthrough, not a confrontation — both look engaged and constructive.
+
+THE AUDIT CLIPBOARD shows:
+- Header: "5S WEEKLY AUDIT — SLITTER LINE 2"
+- Date filled in (top corner)
+- 13 checkpoint rows visible (some checked, some pending)
+- Score column with numbers being filled in (e.g., 4/5, 5/5, 3/5)
+- Bottom of clipboard: "VKS TECH | 5S-AUDIT-001 | Weekly" in small text
+
+ON THE FLOOR / WORKSPACE NEARBY:
+- The slitter machine running smoothly in the background (motion-blurred slightly to suggest operation)
+- A small "5S SCORE TRACKER" wall chart visible in the background showing weekly bars
+- Yellow zone markings on the floor
+- A small printed sign on the wall: "5S — SUSTAIN (Shitsuke / सस्टेन) | WEEKLY AUDIT IN PROGRESS" in navy and orange
+
+LIGHTING: Industrial fluorescent overhead with warm key light from camera left. Both subjects are well-lit but the supervisor's clipboard and the operator's expression are the focus.
+
+COLOUR PALETTE: Navy uniforms, white helmets, beige clipboard with white sheet, neutral concrete floor with yellow zone markings.
+
+TEXT OVERLAY:
+
+TOP HEADER (80px, semi-transparent navy band):
+  SAME VKS Tech logo at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "5S — SUSTAIN (Shitsuke) | Weekly Audit In Progress"
+
+BOTTOM FOOTER (50px, teal band):
+  White centered: "vksTech.com | Score weekly, share results, repeat — that's how 5S sticks"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual industrial photography
+- Two people only — supervisor and operator. Both engaged in the audit, not posed for camera
+- The clipboard checklist must look like a real audit form — header readable, rows visible, score column visible
+- The 5S Score Tracker wall chart in background should show weekly progression bars
+- No readable text on name patches
+- No real company logos other than VKS Tech
+- Shot on Canon R5 with 50mm lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges"><span class="card-num">IMAGE 9 OF 9</span><span class="card-num style-info">📊 INFOGRAPHIC</span></div>
+<div class="card-title">5S CHEAT SHEET — Standalone Printable</div>
+<div class="dim-callout">📐 1200 × 1500 pixels</div>
+<div class="logo-instr "><strong>📎 LOGO:</strong> Reuse from Image 1</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-9', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-9">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place it as-is.
+
+Generate a vertical "cheat sheet" infographic at 1200 × 1500 pixels (4:5 portrait) titled "5S Daily Audit — Flexible Packaging Plants" suitable for printing on A4 portrait and pinning to a plant noticeboard.
+
+LAYOUT (top to bottom):
+
+TOP HEADER (full width, 120px, navy #1A2744 band):
+  Place SAME VKS Tech logo at FAR LEFT, ~70×70 pixels.
+  Title in white bold: "5S DAILY AUDIT — CHEAT SHEET"
+  Subtitle in cream below, smaller: "For Indian Flexible Packaging Plants"
+
+5 CHECKPOINT BLOCKS (stacked vertically, alternating orange/teal headers):
+
+BLOCK 1 — 1S SORT (orange #E85D26 header):
+  Three checkboxes:
+    ☐ Red-tag area present and used (scrap rolls, broken Lutz blades, expired cork tape)
+    ☐ No obsolete trial reels or unused boats lying around
+    ☐ Personal items, food, drinks NOT on shop floor
+
+BLOCK 2 — 2S SET IN ORDER (orange #E85D26 header):
+  Three checkboxes:
+    ☐ Lutz blade rack with numbered slots, all blades in place
+    ☐ Stanley knives, Nataraj cutter, spanners on labelled tool board with silhouettes
+    ☐ Input/output roll zones marked with floor tape
+
+BLOCK 3 — 3S SHINE (teal #0D8C7E header):
+  Three checkboxes:
+    ☐ Metalliser chamber door wiped clean (no aluminium dust)
+    ☐ Floor swept, vacuum lines clear, no oil/grease pools
+    ☐ Cleaning trolley stocked: IPA, lint-free cloths, microfiber dusters
+
+BLOCK 4 — 4S STANDARDISE (teal #0D8C7E header):
+  Three checkboxes:
+    ☐ Laminated SOP cards visible at every workstation (boat-change, OD chart, startup)
+    ☐ Daily startup checklist signed by operator
+    ☐ Visual control charts updated (OD trend, downtime, scrap)
+
+BLOCK 5 — 5S SUSTAIN (navy #1A2744 header):
+  Three checkboxes:
+    ☐ Weekly audit conducted on schedule, score recorded
+    ☐ Monthly score chart on noticeboard, last 4 weeks visible
+    ☐ Action items from last audit closed or in-progress
+
+SCORING BOX (bottom, before footer, full width, light cream background, navy border):
+  "🎯 SCORING — Tick each box. Count totals.
+   ✅ 13-15 checks = WORLD CLASS (80%+ target)
+   ⚠ 9-12 checks = ACCEPTABLE (60-80% range, improvement needed)
+   ❌ &lt;9 checks = ACTION REQUIRED (below 60%, daily focus)"
+
+BOTTOM FOOTER (60px, navy band):
+  White centered: "vksTech.com | Free Industrial Toolkit | © VKS TECH — Vivek Kumar"
+
+STYLE: Clean modern infographic, ample white space (cream #FAF9F6 background), sans-serif typography (Inter or similar). Icons next to each S name (clipboard, shadow board, cleaning cloth, SOP card, audit checkmark). NO 3D, NOT photo-realistic — pure flat-vector design.
+
+USE ONLY THESE COLOURS: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white.
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+Image dimensions exactly 1200 × 1500 pixels.</pre>
+</div>
+
+
+<div class="warning">
+<strong>📎 Logo issues:</strong> Standard fallback — regenerate 1-2 times, or generate without logo and paste real <code>logo.png</code> in Canva/Figma after.
+</div>
+
+<div class="warning">
+<strong>📸 Shop-floor photo realism (Images 4-8):</strong> If they look cartoonish, regenerate 2-3 times. Add: <code>"Shot on Canon R5 with 35mm lens at f/4, professional industrial editorial photography, magazine quality, photo-realistic, NOT illustration, NOT 3D render"</code>.
+</div>
+
+<div class="warning">
+<strong>🔧 Image 5 specifically — three distinct tools:</strong> Lutz blade (small rectangular replaceable industrial blade), Stanley knife (utility knife with retractable razor), Nataraj cutter (heavy paper guillotine with metal arm). If Gemini conflates these, regenerate emphasising the size and shape difference, OR generate the board with placeholder slots and paste real product images in Canva/Photoshop.
+</div>
+
+<div class="warning">
+<strong>📝 Hindi rendering for Image 3:</strong> Devanagari handling is unreliable. If garbled, generate Image 2 (English) first, then manually edit the Hindi text using Figma/Canva/Photoshop.
+</div>
+
+<footer>
+🌐 <a href="https://vksTech.com">vksTech.com</a> &nbsp;|&nbsp; Built by Vivek Kumar (Privacy Papa) — M.Tech NIT Uttarakhand &nbsp;|&nbsp; 9+ Yrs Flexible Packaging
+<br>
+© VKS TECH &nbsp;|&nbsp; Free Industrial Toolkit &nbsp;|&nbsp; Share freely, do not resell
+</footer>
 
 </div>
 
 <script>
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetId = btn.getAttribute('data-target');
-    const target = document.getElementById(targetId);
-    if (!target) return;
-    const text = target.innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const original = btn.innerHTML;
-      btn.innerHTML = '✓ Copied';
-      btn.classList.add('copied');
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => {
-        btn.innerHTML = original;
-        btn.classList.remove('copied');
-        toast.classList.remove('show');
-      }, 1800);
-    }).catch(() => {
-      const range = document.createRange();
-      range.selectNode(target);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      try {
-        document.execCommand('copy');
-        btn.innerHTML = '✓ Copied';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.innerHTML = '📋 Copy Prompt'; btn.classList.remove('copied'); }, 1800);
-      } catch (e) { alert('Copy failed. Please select manually.'); }
-      window.getSelection().removeAllRanges();
-    });
+function copyPrompt(elementId, btn) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = btn.innerText;
+    btn.innerText = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerText = originalText; btn.classList.remove('copied'); }, 2000);
+  }).catch(err => {
+    const range = document.createRange();
+    range.selectNode(document.getElementById(elementId));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    btn.innerText = '⚠ Select & Ctrl+C';
+    setTimeout(() => { btn.innerText = '📋 Copy Prompt'; }, 3000);
   });
-});
+}
 </script>
 
 </body>
