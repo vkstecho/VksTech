@@ -318,6 +318,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--navy);line-height:1.25;margin-bottom:10px;}
 .meta{font-size:.78rem;color:var(--light);margin-bottom:28px;font-family:'JetBrains Mono',monospace;}
 
+/* Cover image — full-width below header, before article body */
+.cover-wrap{max-width:900px;margin:0 auto 32px;padding:0 5%;}
+.cover-img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--border);box-shadow:0 6px 24px rgba(0,0,0,.06);}
+@media(max-width:600px){.cover-wrap{margin-bottom:24px;padding:0 4%;}.cover-img{border-radius:10px;}}
+
 .article{max-width:780px;margin:0 auto;padding:0 5% 40px;font-size:1rem;color:var(--text);line-height:2;}
 .article h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin:32px 0 14px;padding-top:18px;border-top:1px solid var(--border);}
 .article h3{font-weight:700;font-size:1.05rem;color:var(--orange);margin:24px 0 10px;}
@@ -344,6 +349,16 @@ body.lang-hi h1 .en-content{display:none !important;}
 body.lang-hi h1 .hi-content{display:inline !important;}
 body.lang-en h1 .hi-content{display:none !important;}
 body.lang-en h1 .en-content{display:inline !important;}
+
+/* Legacy: blogs that wrap Hindi content in <div class="hindi-section">
+   should hide it when on English. Mirror class hindi-content also supported. */
+body.lang-en .hindi-section,
+body.lang-en .hindi-content,
+body.lang-en .hi-section{display:none !important;}
+/* When user is on Hindi: keep .hindi-section visible (default).
+   English-side content authored without .en-content wrapper still shows —
+   that's fine, since most readers default to EN and only switch to HI
+   intentionally to see the translated half. */
 
 .share-btn{position:fixed;bottom:24px;right:24px;z-index:100;width:56px;height:56px;border-radius:50%;border:none;background:var(--orange);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(232,93,38,.4);transition:transform .2s,box-shadow .2s;}
 .share-btn:hover{transform:scale(1.08);box-shadow:0 8px 26px rgba(232,93,38,.55);}
@@ -483,6 +498,8 @@ body.lang-en h1 .en-content{display:inline !important;}
   </h1>
   <div class="meta">${esc(dateStr)} \xB7 By Vivek Kumar${readTime ? ' \xB7 \u{1F4D6} ' + esc(readTime) : ''}</div>
 </div>
+
+${cover ? `<div class="cover-wrap"><img src="${esc(cover)}" alt="${esc(enTitle)}" class="cover-img" loading="eager"/></div>` : ''}
 
 <article class="article">
 ${content}
