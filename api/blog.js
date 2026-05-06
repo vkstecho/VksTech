@@ -511,7 +511,7 @@ body.lang-en .hi-section{display:none !important;}
 <body class="lang-en">
 
 <div class="topbar">
-  <a href="/#blog" class="back-btn">\u2190 Back</a>
+  <button onclick="goBackSmart()" class="back-btn" type="button" aria-label="Go back">\u2190 Back</button>
   <div class="topbar-right">
     <div class="lang-pills">
       <button class="lpill active" id="btnEn" onclick="setLang('en')">EN</button>
@@ -578,6 +578,23 @@ function setLang(lang){
   localStorage.setItem('vkstech_lang',lang);
 }
 (function(){var s=localStorage.getItem('vkstech_lang');if(s==='hi')setLang('hi');})();
+
+/* ═══════════════════════════════════════════
+   Smart Back button — goes back to wherever the user actually came from.
+   Falls back to the blog archive page if there's no history (e.g., direct link).
+   ═══════════════════════════════════════════ */
+function goBackSmart(){
+  /* If the user has history within this site, just go back. */
+  var ref = document.referrer || '';
+  var sameOrigin = ref.indexOf(window.location.origin) === 0;
+  if (sameOrigin && window.history.length > 1){
+    window.history.back();
+    return;
+  }
+  /* No same-origin history (direct link / new tab / from external site) →
+     send to /blog archive, which is the right "home" for a blog reader. */
+  window.location.href = '/blog';
+}
 
 function shareThis(){
   var data={title:${JSON.stringify(enTitle)},text:${JSON.stringify(enSummary)},url:${JSON.stringify(pageUrl)}};
