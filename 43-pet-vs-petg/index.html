@@ -1,1 +1,693 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* ═══════════════════════════════════════════════
+   VKS Tech Blog — Responsive Stylesheet
+   Blog #43 · PET vs PETG · vkstech.com
+   Breakpoints: mobile ≤600px | tablet 601–860px | desktop 861px+
+═══════════════════════════════════════════════ */
 
+/* ── Base wrapper ── */
+.en-content, .hindi-section {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Noto Sans', 'Hind', sans-serif;
+  line-height: 1.75;
+  color: #1A2744;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ── Comparison table rows (desktop/tablet default) ── */
+.fp-th {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  background: #1A2744;
+  padding: 12px 16px;
+}
+.fp-tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+/* ── Download button base ── */
+.dl-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.92em;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+.dl-btn:hover { opacity: 0.88; }
+
+/* ── Images ── */
+.en-content img, .hindi-section img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Touch-friendly links ── */
+@media (hover: none) {
+  a { -webkit-tap-highlight-color: rgba(232,93,38,0.2); }
+}
+
+/* ═══════════════════════════════════════════════
+   TABLET  601px – 860px
+═══════════════════════════════════════════════ */
+@media (min-width: 601px) and (max-width: 860px) {
+  .en-content, .hindi-section { padding: 0 16px; }
+  .fp-tr > div:first-child  { font-size: 0.83em !important; }
+  .fp-tr > div:nth-child(2),
+  .fp-tr > div:nth-child(3) { font-size: 0.80em !important; padding: 9px 10px !important; }
+  .fp-th > div              { font-size: 0.80em !important; }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE  ≤ 600px
+═══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* wrapper */
+  .en-content, .hindi-section { padding: 0 10px; }
+
+  /* headings */
+  h2 { font-size: 1.25em !important; line-height: 1.35 !important; }
+  h3 { font-size: 1.05em !important; }
+
+  /* ── Comparison table header — 2-col (hide PROPERTY label) ── */
+  .fp-th {
+    grid-template-columns: 1fr 1fr !important;
+    padding: 10px 12px !important;
+  }
+  .fp-th > div:first-child { display: none !important; }
+  .fp-th > div { font-size: 0.82em !important; padding: 0 !important; }
+
+  /* ── Comparison table data rows — property full width, then PET|PETG 50/50 ── */
+  .fp-tr {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto !important;
+  }
+  /* property label spans full width */
+  .fp-tr > div:first-child {
+    grid-column: 1 / 3 !important;
+    font-size: 0.84em !important;
+    padding: 8px 12px 4px !important;
+    border-bottom: 1px dashed rgba(26,39,68,0.18) !important;
+  }
+  /* PET and PETG values side by side */
+  .fp-tr > div:nth-child(2),
+  .fp-tr > div:nth-child(3) {
+    font-size: 0.80em !important;
+    padding: 5px 10px 8px !important;
+    text-align: center !important;
+  }
+  /* PET / PETG mini-labels above values */
+  .fp-tr > div:nth-child(2)::before {
+    content: "PET";
+    display: block;
+    font-size: 0.70em;
+    font-weight: 700;
+    color: #E85D26;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .fp-tr > div:nth-child(3)::before {
+    content: "PETG";
+    display: block;
+    font-size: 0.70em;
+    font-weight: 700;
+    color: #0D8C7E;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  /* ── Quick reference card — small text bump ── */
+  .qr-label { font-size: 0.74em !important; }
+
+  /* ── Download cards — button goes full width ── */
+  .dl-btn {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 10px !important;
+    white-space: normal !important;
+    font-size: 0.88em !important;
+    padding: 12px 14px !important;
+  }
+
+  /* ── Callout boxes — reduce padding ── */
+  div[style*="border-left:4px"],
+  div[style*="border-left: 4px"] {
+    padding: 12px 14px !important;
+  }
+
+  /* ── Image captions ── */
+  .img-caption { font-size: 0.75em !important; }
+
+  /* ── Key takeaway and Q&A boxes ── */
+  div[style*="border-left:6px"] { border-left-width: 4px !important; }
+
+  /* ── Hindi text — slightly more line-height ── */
+  .hindi-section p,
+  .hindi-section li { line-height: 1.85 !important; }
+}
+</style>
+
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="raw-materials">
+
+<div class="en-content">
+
+<h2>🧪 PET vs PETG — What's the Difference and Which One Does Your Packaging Actually Need?</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 10-min read &nbsp;|&nbsp; The Two Most Confused Polyester Films in Flexible Packaging — Finally Explained Simply &nbsp;|&nbsp; Includes Free Downloadable Comparison Chart &nbsp;|&nbsp; Published May 2026</p>
+
+<p>Walk into any flexible packaging plant and ask five people the difference between PET and PETG. You will get five different answers — and at least two of them will be wrong. These two materials share almost the same name, look almost identical when you hold a roll up to the light, and yet behave completely differently on your machine, in your laminator, and on your customer's shelf. The confusion costs plants real money — wrong film specified on the BOM, shrink sleeve that won't shrink properly, barrier that fails mid-shelf-life. This blog explains the difference simply, clearly, and in the language of the shop floor. No chemistry lecture. Just what you need to know to specify the right film for the right job.</p>
+
+<!-- IMAGE 1: COVER HERO -->
+<div style="margin:24px 0 28px 0;text-align:center;">
+  <img src="cover.png" alt="PET vs PETG — Complete Comparison Guide for Flexible Packaging" style="max-width:100%;border-radius:10px;box-shadow:0 6px 24px rgba(26,39,68,0.18);" loading="eager">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">PET vs PETG — two polyester films, one letter of difference, completely different jobs in your plant.</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — PET vs PETG in 30 Seconds</strong>
+<a href="#downloads-en" onclick="event.preventDefault(); document.getElementById('downloads-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Downloads →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">THE ONE-LINE DIFFERENCE</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.7;">PET and PETG are both polyester films. PETG is PET with one extra ingredient — <strong>Glycol</strong>. That single addition makes PETG softer, more flexible, easier to thermoform, and capable of shrinking tightly around any shape. PET stays rigid and strong. Each wins in a different job.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHERE EACH ONE LIVES IN YOUR PLANT</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;"><strong>PET</strong> — Your BOPET lamination substrate, your metallised film base, your printed foil-look pouch. Rigid, dimensionally stable, high barrier.<br><strong>PETG</strong> — That shrink sleeve wrapping the shampoo bottle. That heat-shrink tamper seal on the pharma cap. Flexible, high-shrink, glass-like clarity.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHAT YOU GET BELOW</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">A complete head-to-head property comparison, where each material appears in real flexible packaging applications, how to choose between them, and a free downloadable comparison chart + material selection checklist.</div>
+</div>
+</div>
+
+<h3>🔬 The "G" That Changes Everything</h3>
+
+<p>PET stands for <strong>Polyethylene Terephthalate</strong>. It is one of the most used plastics in the world — found in water bottles, polyester fabric, BOPET film, and almost every food pouch you have ever sealed. PETG stands for <strong>Polyethylene Terephthalate Glycol</strong>. The only difference in the name is that "G" — and that G stands for Glycol, a chemical added during manufacturing that disrupts PET's natural molecular structure.</p>
+
+<p>Here is the simple version: PET molecules naturally arrange themselves into a tight, orderly, crystalline structure — like soldiers standing in formation. This gives PET its strength, stiffness, and excellent barrier properties. When you add Glycol to the recipe, the molecules can no longer line up neatly. The structure becomes disordered and amorphous — like a crowd after a match rather than a parade. This disordered structure is what gives PETG its flexibility, its impact resistance, and most importantly, its ability to stretch and shrink when heat is applied.</p>
+
+<p>One letter. One ingredient. Completely different behaviour on your machine.</p>
+
+<!-- IMAGE 5A: THE G EXPLAINED — MOLECULAR ANALOGY VISUAL (English) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="g-explained-en.png" alt="How adding Glycol changes PET's molecular structure — soldiers in formation vs crowd after a match" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">PET = molecules in tight crystalline formation (left). PETG = Glycol scrambles the structure into an amorphous crowd (right). Same base material. Completely different behaviour.</p>
+</div>
+
+<h3>💪 PET — The Strong, Reliable Workhorse</h3>
+
+<p>PET has been the backbone of flexible packaging for decades. When you laminate a BOPET film to a CPP or aluminium layer to make a pouch, the BOPET layer is PET. When you run a roll through your metalliser and deposit a thin aluminium layer on it, the base film is PET. When a client hands you a sample of a printed food pouch with a stiff, crinkle-resistant feel, that outer substrate is almost certainly biaxially oriented PET — BOPET.</p>
+
+<p>What makes PET so reliable? Its semi-crystalline structure gives it <strong>high tensile strength</strong> — it resists tearing, stretching, and puncturing under the stresses of lamination, printing, and high-speed form-fill-seal. Its <strong>excellent barrier properties</strong> against oxygen and moisture mean the food inside a PET-based pouch stays fresh longer. Its <strong>dimensional stability</strong> — it does not stretch, warp, or distort under normal processing temperatures — means registration stays tight on a 10-colour rotogravure press. Its <strong>high heat resistance</strong> means it can handle hot-fill applications and retort pouches without deforming.</p>
+
+<p>PET is also cheaper than PETG, widely available in India, and carries Resin Identification Code #1 — the most widely recycled plastic globally. If you need strength, barrier, dimensional stability, or a metallisable substrate, PET is almost always the answer.</p>
+
+<h3>🤸 PETG — The Flexible, Shrinkable Specialist</h3>
+
+<p>PETG is not PET's competitor. It is PET's cousin who went to gymnastics school. Where PET is rigid and structured, PETG is flexible and adaptable. The Glycol modification that scrambles PET's crystalline structure unlocks a property that PET simply cannot offer — <strong>the ability to shrink dramatically when heat is applied</strong>.</p>
+
+<p>PETG shrink film can shrink up to <strong>78% of its original size</strong> when heat is applied. That is why it wraps so perfectly around the curved, irregular shapes of shampoo bottles, beverage cans, and pharmaceutical containers — forming a seamless 360-degree label that looks printed directly onto the bottle. No wrinkles. No lifting corners. Clean, tight, professional.</p>
+
+<p>Beyond shrink, PETG offers <strong>superior optical clarity and gloss</strong> compared to PET. PET is transparent, yes — but PETG has a glass-like brilliance that makes colours on a printed shrink sleeve appear vivid and premium. PETG is also <strong>more impact-resistant</strong> — it bends before it breaks, making it far less likely to crack or shatter during handling, transport, or cold-storage. And because it is amorphous (no crystalline structure to lock in), PETG is significantly <strong>easier to thermoform</strong> — it flows into moulds at lower temperatures, with less risk of stress cracking or warping.</p>
+
+<p>The tradeoff is real though. PETG has <strong>lower heat resistance</strong> than PET — it starts to soften at a lower temperature, making it unsuitable for retort pouches or hot-fill containers that see above 70–80°C. Its barrier properties — while decent — are not as strong as PET, especially against oxygen. And it costs more per kg than standard PET. PETG is not a general-purpose film. It is a specialist that earns its price in the right application.</p>
+
+<h3>⚖️ Head-to-Head — Every Property That Matters</h3>
+
+<div style="display:grid;grid-template-columns:1fr;gap:0;margin:20px 0;border:2px solid #1A2744;border-radius:10px;overflow:hidden;">
+
+<div class="fp-th" style="background:#1A2744;padding:12px 16px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">PROPERTY</div>
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">PET</div>
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">PETG</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Molecular Structure</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Semi-crystalline</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Amorphous</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Rigidity / Flexibility</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Rigid ✓</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Flexible ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Tensile Strength</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Higher ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Lower</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Impact Resistance</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Good</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Excellent ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Transparency / Clarity</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">High</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Glass-like ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">O₂ &amp; Moisture Barrier</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Excellent ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Good</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Heat Resistance (use temp)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Up to ~120°C ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Up to ~70–80°C</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Shrink Capability</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Minimal</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Up to 78% ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Thermoformability</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Moderate</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Excellent ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Dimensional Stability</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Excellent ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Moderate</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Printability</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Excellent ✓</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Excellent ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Metallisable (on metalliser)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Yes ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Rarely</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Cost (approx.)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Lower ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">10–20% Higher</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Recyclability (India)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Resin #1 — Wide ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Resin #1 — Growing</div>
+</div>
+
+</div>
+
+<!-- IMAGE 2A: PET vs PETG COMPARISON DIAGRAM (English) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="pet-vs-petg-en.png" alt="PET vs PETG — 14 property comparison diagram with colour-coded winners" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">All 14 properties at a glance. Orange = PET wins. Teal = PETG wins. Download the full editable version in the formats section below.</p>
+</div>
+
+<h3>🏭 Where You Actually See Each One in Flexible Packaging</h3>
+
+<p><strong>PET — the film under your laminate.</strong> If you run a lamination line and your structure is PET / Adhesive / CPP or PET / Al Foil / PE, the outer web is PET. It provides the printable surface, the stiffness that keeps the pouch standing upright on a shelf, and the first line of barrier defence. PET is also the base film in a metalliser — the roll that enters the vacuum chamber and exits with a thin mirror-like aluminium coating that gives snack and namkeen pouches their shiny silver finish. BOPET (Biaxially Oriented PET) is the specific grade that runs through both processes — stretched in two directions during manufacture to boost strength and barrier to their maximum.</p>
+
+<p><strong>PET — retort and hot-fill containers.</strong> When a food product needs to be sterilised inside its final pouch at 121°C, only PET-based structures can handle that. PETG would soften and deform. PET retort pouches — seen in ready-to-eat meals, baby food, and pet food — rely on PET's high-temperature stability.</p>
+
+<p><strong>PETG — the sleeve that wraps the bottle.</strong> The full-body label on a soft drink bottle, shampoo bottle, or water bottle is almost always a PETG shrink sleeve. The label is printed flat as a tube, then slipped over the bottle and passed through a heat tunnel. PETG shrinks tightly around every curve — even the narrow neck and wide shoulder — giving a seamless 360-degree decoration that would be impossible with a paper or pressure-sensitive label. This is where PETG's 78% shrink capability earns its premium price.</p>
+
+<p><strong>PETG — tamper-evident seals and caps.</strong> That tight band around a medicine bottle cap, or the shrink wrap sealing a cosmetics box, is PETG. It provides tamper evidence (any attempt to open it tears the seal visibly) and a premium appearance that retailers value. Medical and pharmaceutical packaging uses PETG extensively for its chemical resistance, glass-like clarity, and proven food-safety record under FDA and EFSA standards.</p>
+
+<p><strong>PETG — blister packaging and thermoformed trays.</strong> When a blister pack for tablets is formed, the cavity that holds each tablet is thermoformed into a film. PETG thermoforms at lower temperatures, with fewer cracks and better shape retention than PET — making it preferred for complex blister cavity geometries.</p>
+
+<!-- IMAGE 6: PLANT FLOOR MAP — WHERE EACH FILM LIVES IN YOUR PLANT -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="plant-floor-map.png" alt="Flexible packaging plant floor map showing where PET and PETG are used — metalliser, laminator, shrink sleeve line, blister line" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">In a typical flexible packaging plant — PET runs on the metalliser, laminator, and rotogravure press. PETG runs on the shrink sleeve line, heat-tunnel, and blister thermoformer. Both materials, entirely different zones.</p>
+</div>
+
+<h3>🎯 How to Choose Between Them — The Simple Decision Tree</h3>
+
+<p>The choice between PET and PETG is not about which film is better. It is about which film is right for what you are making.</p>
+
+<p><strong>Choose PET when:</strong> You need a lamination substrate for a printed food pouch. You are running a metalliser and need a base film. Your product is hot-filled, retorted, or needs to survive above 80°C. You need the best possible oxygen and moisture barrier. You need dimensional stability for tight registration on a printing press. Cost is a key factor. You need a widely recycled material.</p>
+
+<p><strong>Choose PETG when:</strong> You are making a full-body shrink sleeve for a bottle. You need a tamper-evident heat-shrink band around a cap or carton. You are thermoforming complex shapes like blister cavities or display trays. You need glass-like optical clarity for a premium appearance. Your product will be stored in a freezer or cold chain and you need impact resistance without brittleness.</p>
+
+<p>The single fastest question to ask: <strong>does this film need to shrink?</strong> If yes — PETG. If no — PET is almost always the right starting point.</p>
+
+<h3>⚠️ Three Common Confusions That Cost Plants Money</h3>
+
+<p><strong>1. Ordering PETG when you need BOPET (or vice versa).</strong> The most expensive confusion. A purchase officer reads a BOM that says "polyester film" and orders PETG because it is in stock. The lamination line runs fine but the pouch goes soft in the hot-fill machine. Or the metalliser operator loads a PETG roll by mistake — the film behaves completely differently under vacuum and the metallisation is uneven. PET and PETG are not interchangeable. The BOM must specify the grade.</p>
+
+<p><strong>2. Assuming PETG has the same barrier as PET.</strong> For long shelf-life food products — dry snacks, spices, nuts — the oxygen barrier is the difference between a 12-month shelf life and a 4-month one. PETG's barrier is decent but measurably lower than PET's. Using PETG in a structure designed around PET barrier values will shorten shelf life without anyone on the production floor noticing until the field complaints come in.</p>
+
+<p><strong>3. Trying to metallise PETG on a standard PET metalliser programme.</strong> PETG's lower heat resistance means it behaves very differently in a vacuum metalliser's heat zone. Running PETG on parameters designed for BOPET can cause film stretching, surface defects, or uneven aluminium deposition. If your customer specifically asks for a metallised PETG shrink sleeve (yes, this exists — see PETG Metallised Shrink Film), treat it as a completely separate product with its own development cycle.</p>
+
+<!-- IMAGE 7: THREE COSTLY MISTAKES WARNING CARD -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="three-mistakes.png" alt="Three costly PET vs PETG mistakes that cost flexible packaging plants money — warning card" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Save this. Share with your purchase team. These three mistakes appear in plants every month — and all three are preventable with one sentence on the BOM.</p>
+</div>
+
+<!-- IMAGE 3: CHEAT SHEET PREVIEW -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="pet-vs-petg-cheat-sheet.png" alt="PET vs PETG cheat sheet — printable desk reference with decision tree, property comparison and plant applications" style="max-width:480px;width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">The full cheat sheet — print A4, laminate, keep at your desk. Decision tree + 14-property winner table + where each film lives in your plant. Download the Excel versions below.</p>
+</div>
+
+<h3 id="downloads-en">⬇ Free Downloadable Formats — PET vs PETG Reference Tools</h3>
+
+<p>Both files are fully editable Excel files (.xlsx) in English and Hindi. Use them as quick references on the shop floor, for BOM reviews, or for training new purchase and production staff.</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">PET vs PETG Property Comparison Chart (Bilingual)</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">14 properties compared side-by-side · colour-coded winners · English + Hindi · A4 printable</div>
+</div>
+class="dl-btn" <a href="/downloads/01-PET-vs-PETG-Comparison-Bilingual.xlsx" download style="background:#E85D26;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #0D8C7E;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#0D8C7E;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ DECISION TOOL</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#0D8C7E;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">FP Film Material Selection Checklist (Bilingual)</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">10-question checklist to choose the right film for any FP application · covers PET, PETG, BOPP, CPP, PE · dropdown scoring · auto-recommendation</div>
+</div>
+class="dl-btn" <a href="/downloads/02-FP-Film-Material-Selection-Checklist-Bilingual.xlsx" download style="background:#0D8C7E;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 How to use these together:</strong> Use the Comparison Chart (Format 1) for training your purchase and production team on material properties. Use the Selection Checklist (Format 2) every time a new product specification lands on your desk — answer 10 questions and the sheet recommends the right base film family. Prevents the costly BOM errors described in the common confusions section above.
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog covers PET vs PETG material selection. If you found this useful, explore the full flexible packaging blog series at <a href="https://www.vkstech.com/#blog" style="color:#E85D26;font-weight:bold;">vkstech.com/#blog</a> — topics include BOPET film, vacuum metallising, lamination structures, barrier calculations, and more. Coming up next: <strong>BOPP vs BOPET</strong> — when does the cost saving justify the barrier trade-off? The full set of free calculators and downloadable formats is at <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Working with a PETG shrink sleeve supplier and getting inconsistent shrink performance? Unsure whether a client's specification calls for PET or PETG? Running a metalliser and wondering whether PETG films can be processed? <strong>Drop your question in the Q&amp;A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> PET and PETG are both polyester films — the only difference is Glycol, one added ingredient that changes everything. PET is semi-crystalline, rigid, strong, high-barrier, heat-resistant, metallisable, and cheaper — the workhorse substrate for laminated food pouches, BOPET printing webs, and vacuum metallised films. PETG is amorphous, flexible, impact-resistant, shrinkable (up to 78%), glass-clear, and easier to thermoform — the specialist film for shrink sleeves, tamper-evident bands, and complex blister cavities. They are not interchangeable. The fastest decision rule: does the film need to shrink? If yes — PETG. If no — start with PET. The three most expensive mistakes: ordering the wrong grade because the BOM says "polyester film" without specifying type; assuming PETG barrier equals PET barrier for long shelf-life food products; and trying to metallise PETG on parameters set for BOPET.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> Now that PET and PETG are clear, the next logical question is: what about BOPP? How does biaxially oriented polypropylene compare to BOPET for the same food pouch application — and when does the cost saving justify the barrier trade-off? The next blog will break down BOPP vs BOPET with the same head-to-head format.</p>
+
+</div>
+
+<!-- ==================== HINDI SECTION ==================== -->
+
+<div class="hindi-section">
+
+<h2>🧪 PET vs PETG — क्या फ़र्क है और आपकी Packaging को Actually कौन सा चाहिए?</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 10-min read &nbsp;|&nbsp; Flexible Packaging के दो सबसे Confusing Polyester Films — Finally Simple में Explained &nbsp;|&nbsp; Free Downloadable Comparison Chart शामिल &nbsp;|&nbsp; May 2026 में Published</p>
+
+<p>किसी भी flexible packaging plant में जाएँ और पाँच लोगों से PET और PETG का फ़र्क पूछें। पाँच अलग-अलग जवाब मिलेंगे — और कम से कम दो गलत होंगे। इन दोनों materials के नाम लगभग same हैं, रोशनी में रोल उठाकर देखें तो लगभग identical दिखते हैं — फिर भी machine पर, laminator में, और customer की shelf पर बिल्कुल अलग behave करते हैं। ये confusion plants को real पैसा खर्च कराती है — BOM पर wrong film specify होती है, shrink sleeve ठीक से shrink नहीं होती, barrier shelf-life के बीच fail हो जाता है। ये blog फ़र्क को simply, clearly, और shop floor की language में explain करता है। कोई chemistry lecture नहीं। सिर्फ़ वो जो right film right job के लिए specify करने के लिए जानना ज़रूरी है।</p>
+
+<!-- IMAGE 1: COVER HERO (Hindi section — reuse same cover) -->
+<div style="margin:24px 0 28px 0;text-align:center;">
+  <img src="cover.png" alt="PET vs PETG — Flexible Packaging के लिए Complete Comparison Guide" style="max-width:100%;border-radius:10px;box-shadow:0 6px 24px rgba(26,39,68,0.18);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">PET vs PETG — दो polyester films, नाम में एक letter का फ़र्क, आपके plant में बिल्कुल अलग jobs।</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — PET vs PETG 30 Seconds में</strong>
+<a href="#downloads-hi" onclick="event.preventDefault(); document.getElementById('downloads-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Downloads पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">एक-लाइन का फ़र्क</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.7;">PET और PETG दोनों polyester films हैं। PETG, PET में एक extra ingredient — <strong>Glycol</strong> — add करके बनाया जाता है। वो single addition PETG को softer, more flexible, thermoform करने में आसान, और किसी भी shape पर tightly shrink होने में capable बनाती है। PET rigid और strong रहता है। दोनों अलग-अलग job में जीतते हैं।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">आपके Plant में कहाँ-कहाँ दिखते हैं</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;"><strong>PET</strong> — आपका BOPET lamination substrate, metallised film base, printed foil-look pouch। Rigid, dimensionally stable, high barrier।<br><strong>PETG</strong> — Shampoo bottle को wrap करती shrink sleeve। Pharma cap पर heat-shrink tamper seal। Flexible, high-shrink, glass-like clarity।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div class="qr-label" style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">नीचे क्या मिलेगा</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Complete head-to-head property comparison, real flexible packaging applications में हर material कहाँ use होता है, दोनों में कैसे choose करें, और एक free downloadable comparison chart + material selection checklist।</div>
+</div>
+</div>
+
+<h3>🔬 वो "G" जो सब कुछ बदल देता है</h3>
+
+<p>PET का full form है <strong>Polyethylene Terephthalate</strong>। ये दुनिया के सबसे ज़्यादा use होने वाले plastics में से एक है — water bottles, polyester fabric, BOPET film, और लगभग हर food pouch में मिलता है जो आपने कभी seal किया हो। PETG का full form है <strong>Polyethylene Terephthalate Glycol</strong>। नाम में सिर्फ़ एक "G" का फ़र्क है — और वो G stands for Glycol, एक chemical जो manufacturing के दौरान add किया जाता है और PET की natural molecular structure को disrupt करता है।</p>
+
+<p>Simple version ये है: PET molecules naturally अपने आप को tight, orderly, crystalline structure में arrange करते हैं — जैसे soldiers parade में खड़े हों। ये PET को उसकी strength, stiffness, और excellent barrier properties देता है। जब Glycol recipe में add होता है, molecules नeatly line up नहीं कर पाते। Structure disordered और amorphous हो जाता है — जैसे match के बाद की भीड़, parade नहीं। ये disordered structure ही PETG को flexibility, impact resistance, और सबसे ज़रूरी — heat apply होने पर stretch और shrink करने की ability देता है।</p>
+
+<p>एक letter। एक ingredient। Machine पर बिल्कुल अलग behaviour।</p>
+
+<!-- IMAGE 5B: THE G EXPLAINED — MOLECULAR ANALOGY VISUAL (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="g-explained-hi.png" alt="Glycol add करने से PET की molecular structure कैसे बदलती है — soldiers in formation बनाम crowd after match" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">PET = molecules tight crystalline formation में (बाएँ)। PETG = Glycol structure को amorphous crowd में scramble करता है (दाएँ)। Same base material। बिल्कुल अलग behaviour।</p>
+</div>
+
+<h3>💪 PET — मज़बूत, Reliable Workhorse</h3>
+
+<p>PET decades से flexible packaging की backbone रहा है। जब आप एक BOPET film को CPP या aluminium layer के साथ laminate करते हैं pouch बनाने के लिए, वो BOPET layer PET है। जब आप metalliser में एक roll run करते हैं और उस पर thin aluminium layer deposit होती है, वो base film PET है। जब कोई client आपको एक stiff, crinkle-resistant feel वाला printed food pouch sample देता है, वो outer substrate almost certainly biaxially oriented PET — BOPET है।</p>
+
+<p>PET को इतना reliable क्या बनाता है? इसकी semi-crystalline structure इसे <strong>high tensile strength</strong> देती है — lamination, printing, और high-speed form-fill-seal के stresses में tearing, stretching, और puncturing resist करती है। Oxygen और moisture के against इसकी <strong>excellent barrier properties</strong> का मतलब है PET-based pouch में food longer fresh रहता है। इसकी <strong>dimensional stability</strong> — normal processing temperatures पर stretch, warp, या distort नहीं होती — मतलब 10-colour rotogravure press पर registration tight रहती है। इसकी <strong>high heat resistance</strong> का मतलब ये hot-fill applications और retort pouches को बिना deform हुए handle कर सकता है।</p>
+
+<p>PET PETG से सस्ता भी है, India में widely available है, और Resin Identification Code #1 carry करता है — globally सबसे widely recycled plastic। Strength, barrier, dimensional stability, या metallisable substrate — PET लगभग हमेशा answer है।</p>
+
+<h3>🤸 PETG — Flexible, Shrinkable Specialist</h3>
+
+<p>PETG, PET का competitor नहीं है। ये PET का वो cousin है जो gymnastics school गया। जहाँ PET rigid और structured है, PETG flexible और adaptable है। Glycol modification जो PET की crystalline structure को scramble करता है, एक ऐसी property unlock करता है जो PET simply offer नहीं कर सकता — <strong>heat apply होने पर dramatically shrink करने की ability</strong>।</p>
+
+<p>PETG shrink film heat apply होने पर अपने original size का <strong>78% तक shrink</strong> कर सकता है। इसीलिए ये shampoo bottles, beverage cans, और pharmaceutical containers की curved, irregular shapes के around इतनी perfectly wrap करती है — एक seamless 360-degree label बनाती है जो ऐसी लगती है जैसे bottle पर directly printed हो। कोई wrinkles नहीं। कोई lifting corners नहीं। Clean, tight, professional।</p>
+
+<p>Shrink के अलावा, PETG PET की तुलना में <strong>superior optical clarity और gloss</strong> offer करता है। PET transparent है, हाँ — लेकिन PETG में glass-like brilliance है जो printed shrink sleeve पर colours को vivid और premium दिखाती है। PETG <strong>more impact-resistant</strong> भी है — टूटने से पहले bend करता है, handling, transport, या cold-storage के दौरान crack या shatter होने की chances बहुत कम। और क्योंकि ये amorphous है, PETG <strong>thermoform करने में काफ़ी आसान</strong> है — lower temperatures पर moulds में flow करता है, stress cracking या warping का risk कम।</p>
+
+<p>Trade-off real है। PETG की PET से <strong>lower heat resistance</strong> है — lower temperature पर soften होना शुरू होता है, retort pouches या hot-fill containers जो 70–80°C से ऊपर देखते हैं उनके लिए unsuitable। इसकी barrier properties — decent होते हुए भी — PET जितनी strong नहीं, especially oxygen के against। और PET से per kg costlier है। PETG general-purpose film नहीं है। ये एक specialist है जो right application में अपनी premium price earn करता है।</p>
+
+<h3>⚖️ Head-to-Head — हर Property जो Matter करती है</h3>
+
+<div style="display:grid;grid-template-columns:1fr;gap:0;margin:20px 0;border:2px solid #1A2744;border-radius:10px;overflow:hidden;">
+
+<div class="fp-th" style="background:#1A2744;padding:12px 16px;">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">PROPERTY</div>
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">PET</div>
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">PETG</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Molecular Structure</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Semi-crystalline</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Amorphous</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">कठोरता / लचीलापन</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Rigid ✓</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Flexible ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Tensile Strength</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">ज़्यादा ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">कम</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Impact Resistance</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">अच्छा</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Excellent ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Transparency / Clarity</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">High</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Glass-like ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">O₂ और Moisture Barrier</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Excellent ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">अच्छा</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Heat Resistance (use temp)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">~120°C तक ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">~70–80°C तक</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Shrink Capability</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Minimal</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">78% तक ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Thermoformability</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Moderate</div>
+<div style="font-size:0.85em;color:#E85D26;text-align:center;font-weight:bold;">Excellent ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Metallisable (Metalliser पर)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">हाँ ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Rarely</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Cost (approx.)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">कम ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">10–20% ज़्यादा</div>
+</div>
+
+<div class="fp-tr" style="padding:11px 16px;background:#fff;">
+<div style="font-size:0.88em;color:#1A2744;font-weight:600;">Recyclability (India)</div>
+<div style="font-size:0.85em;color:#0D8C7E;text-align:center;font-weight:bold;">Resin #1 — Wide ✓</div>
+<div style="font-size:0.85em;color:#1A2744;text-align:center;">Resin #1 — Growing</div>
+</div>
+
+</div>
+
+<!-- IMAGE 2B: PET vs PETG COMPARISON DIAGRAM (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="pet-vs-petg-hi.png" alt="PET vs PETG — 14 properties का Hindi comparison diagram, colour-coded winners के साथ" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">एक नज़र में सभी 14 properties। Orange = PET जीता। Teal = PETG जीता। नीचे formats section में full editable version download करें।</p>
+</div>
+
+<h3>🏭 Flexible Packaging में Actually कहाँ दिखते हैं</h3>
+
+<p><strong>PET — आपके laminate के नीचे की film।</strong> अगर आप lamination line run करते हैं और structure PET / Adhesive / CPP या PET / Al Foil / PE है, तो outer web PET है। ये printable surface provide करता है, वो stiffness जो pouch को shelf पर standing upright रखती है, और barrier defence की first line। PET metalliser में base film भी है — वो roll जो vacuum chamber में enter करता है और mirror-like aluminium coating के साथ exit होता है जो snack और namkeen pouches को shiny silver finish देती है।</p>
+
+<p><strong>PET — Retort और Hot-fill Containers।</strong> जब food product को 121°C पर उसके final pouch में sterilise करना होता है, सिर्फ़ PET-based structures ही handle कर सकती हैं। PETG soften और deform हो जाएगा। PET retort pouches — ready-to-eat meals, baby food, और pet food में देखे जाते हैं।</p>
+
+<p><strong>PETG — Bottle को wrap करती sleeve।</strong> Soft drink bottle, shampoo bottle, या water bottle पर full-body label almost always PETG shrink sleeve होती है। Label flat tube के रूप में printed होती है, bottle पर slip होती है, और heat tunnel से गुज़रती है। PETG हर curve के around tightly shrink होता है — narrow neck और wide shoulder भी — seamless 360-degree decoration देता है।</p>
+
+<p><strong>PETG — Tamper-evident Seals और Caps।</strong> Medicine bottle cap के around tight band, या cosmetics box को seal करती shrink wrap — ये PETG है। Tamper evidence देती है और premium appearance जो retailers value करते हैं।</p>
+
+<p><strong>PETG — Blister Packaging और Thermoformed Trays।</strong> Tablets के लिए blister pack जब form होता है, हर tablet hold करने वाली cavity PETG में thermoform होती है। PETG lower temperatures पर thermoform होता है, fewer cracks और better shape retention के साथ — complex blister cavity geometries के लिए preferred।</p>
+
+<!-- IMAGE 6: PLANT FLOOR MAP (Hindi section — bilingual image, reuse same) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="plant-floor-map.png" alt="Flexible packaging plant में PET और PETG कहाँ use होते हैं — metalliser, laminator, shrink sleeve line, blister line" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Typical flexible packaging plant में — PET metalliser, laminator, और rotogravure press पर run होता है। PETG shrink sleeve line, heat-tunnel, और blister thermoformer पर। दोनों materials, बिल्कुल अलग zones।</p>
+</div>
+
+<h3>🎯 कैसे Choose करें — Simple Decision Tree</h3>
+
+<p>PET और PETG के बीच choice ये नहीं है कि कौन सी film better है। ये है कि आप जो बना रहे हैं उसके लिए कौन सी right है।</p>
+
+<p><strong>PET choose करें जब:</strong> आपको printed food pouch के लिए lamination substrate चाहिए। आप metalliser run कर रहे हैं। Product hot-fill, retorted, या 80°C से ऊपर survive करना ज़रूरी है। Best possible oxygen और moisture barrier चाहिए। Printing press पर tight registration के लिए dimensional stability चाहिए। Cost key factor है।</p>
+
+<p><strong>PETG choose करें जब:</strong> Bottle के लिए full-body shrink sleeve बना रहे हैं। Cap या carton के around tamper-evident heat-shrink band चाहिए। Complex shapes thermoform कर रहे हैं। Glass-like optical clarity चाहिए। Product freezer में store होगा और cold chain में brittleness के बिना impact resistance ज़रूरी है।</p>
+
+<p>एक सबसे fast question: <strong>क्या इस film को shrink करना है?</strong> अगर हाँ — PETG। अगर नहीं — PET लगभग हमेशा सही starting point है।</p>
+
+<h3>⚠️ तीन Common Confusions जो Plants को पैसा खर्च कराती हैं</h3>
+
+<p><strong>1. PETG order करना जब BOPET चाहिए था (या उलटा)।</strong> सबसे महँगी confusion। Purchase officer BOM पर "polyester film" पढ़ता है और PETG order कर देता है क्योंकि stock में था। Lamination line ठीक से run करती है लेकिन pouch hot-fill machine में soft हो जाती है। या metalliser operator गलती से PETG roll load कर देता है — film vacuum में completely different behave करती है और metallisation uneven होती है। PET और PETG interchangeable नहीं हैं। BOM में grade specify होनी चाहिए।</p>
+
+<p><strong>2. Assume करना कि PETG का barrier PET के equal है।</strong> Long shelf-life food products — dry snacks, spices, nuts — के लिए oxygen barrier 12-month shelf life और 4-month shelf life के बीच का difference है। PETG का barrier decent है लेकिन PET के values से measurably lower है। PET barrier values के around designed structure में PETG use करने से shelf life shorter होगी — और production floor पर कोई notice नहीं करेगा जब तक field complaints न आएँ।</p>
+
+<p><strong>3. PETG को standard PET metalliser programme पर metallise करने की कोशिश।</strong> PETG की lower heat resistance का मतलब है ये vacuum metalliser के heat zone में बहुत differently behave करती है। BOPET के लिए set parameters पर PETG run करने से film stretching, surface defects, या uneven aluminium deposition हो सकती है। Metallised PETG shrink sleeve के लिए इसे completely separate product treat करें।</p>
+
+<!-- IMAGE 7: THREE COSTLY MISTAKES WARNING CARD (Hindi section — bilingual image, reuse same) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="three-mistakes.png" alt="तीन costly PET vs PETG mistakes जो flexible packaging plants को पैसा खर्च कराती हैं — warning card" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Save करें। Purchase team के साथ share करें। ये तीन mistakes हर महीने plants में होती हैं — और तीनों BOM पर एक sentence से preventable हैं।</p>
+</div>
+
+<!-- IMAGE 3: CHEAT SHEET PREVIEW (Hindi section) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="pet-vs-petg-cheat-sheet.png" alt="PET vs PETG cheat sheet — printable desk reference, decision tree, property comparison और plant applications के साथ" style="max-width:480px;width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Complete cheat sheet — A4 print करें, laminate करें, desk पर रखें। Decision tree + 14-property winner table + plant applications। Excel versions नीचे download करें।</p>
+</div>
+
+<h3 id="downloads-hi">⬇ Free Downloadable Formats — PET vs PETG Reference Tools</h3>
+
+<p>दोनों files fully editable Excel files (.xlsx) हैं English और Hindi में। Shop floor पर quick reference के लिए, BOM reviews के लिए, या new purchase और production staff को train करने के लिए use करें।</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">PET vs PETG Property Comparison Chart (Bilingual)</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">14 properties side-by-side compare · colour-coded winners · English + Hindi · A4 printable</div>
+</div>
+class="dl-btn" <a href="/downloads/01-PET-vs-PETG-Comparison-Bilingual.xlsx" download style="background:#E85D26;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #0D8C7E;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#0D8C7E;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ DECISION TOOL</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#0D8C7E;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">FP Film Material Selection Checklist (Bilingual)</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">10-question checklist किसी भी FP application के लिए right film choose करने के लिए · PET, PETG, BOPP, CPP, PE cover · dropdown scoring · auto-recommendation</div>
+</div>
+class="dl-btn" <a href="/downloads/02-FP-Film-Material-Selection-Checklist-Bilingual.xlsx" download style="background:#0D8C7E;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 ये कैसे एक साथ fit होते हैं:</strong> Comparison Chart (Format 1) से अपनी purchase और production team को material properties पर train करें। Selection Checklist (Format 2) हर बार use करें जब desk पर new product specification आए — 10 questions answer करें और sheet right base film family recommend करती है। ऊपर describe BOM errors को prevent करती है।
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर Related Reads:</strong> ये blog PET vs PETG material selection cover करता है। अगर ये useful लगा, तो पूरी flexible packaging blog series explore करें <a href="https://www.vkstech.com/#blog" style="color:#E85D26;font-weight:bold;">vkstech.com/#blog</a> पर — BOPET film, vacuum metallising, lamination structures, barrier calculations, और बहुत कुछ। अगला blog: <strong>BOPP vs BOPET</strong> — cost saving कब barrier trade-off को justify करती है? Free calculators और downloadable formats का full set <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a> पर।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">PETG shrink sleeve supplier के साथ काम कर रहे हैं और inconsistent shrink performance मिल रही है? Unsure हैं कि client specification PET माँग रही है या PETG? Metalliser run कर रहे हैं और wonder कर रहे हैं PETG films process हो सकती हैं क्या? <strong>अपना question इस page के bottom पर Q&amp;A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> PET और PETG दोनों polyester films हैं — फ़र्क सिर्फ़ Glycol, एक added ingredient का है जो सब कुछ बदल देता है। PET semi-crystalline, rigid, strong, high-barrier, heat-resistant, metallisable, और सस्ता है — laminated food pouches, BOPET printing webs, और vacuum metallised films का workhorse substrate। PETG amorphous, flexible, impact-resistant, shrinkable (78% तक), glass-clear, और thermoform करने में आसान है — shrink sleeves, tamper-evident bands, और complex blister cavities का specialist film। ये interchangeable नहीं हैं। Fastest decision rule: क्या film को shrink करना है? अगर हाँ — PETG। अगर नहीं — PET से शुरू करें। तीन सबसे महँगी mistakes: BOM में "polyester film" लिखने पर wrong grade order करना; long shelf-life food के लिए PETG barrier को PET के equal assume करना; BOPET parameters पर PETG metallise करने की कोशिश।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> अब PET और PETG clear हैं, logical next question है: BOPP के बारे में क्या? Biaxially oriented polypropylene same food pouch application के लिए BOPET से कैसे compare करता है — और cost saving कब barrier trade-off को justify करती है? अगला blog BOPP vs BOPET को same head-to-head format में break down करेगा।</p>
+
+</div>
