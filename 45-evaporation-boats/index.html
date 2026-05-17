@@ -1,0 +1,559 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser-maintenance">
+
+<style>
+/* ═══════════════════════════════════════════════
+   VKS Tech Blog — Responsive Stylesheet
+   Blog #45 · Evaporation Boats · vkstech.com
+═══════════════════════════════════════════════ */
+.en-content, .hindi-section {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Noto Sans', 'Hind', sans-serif;
+  line-height: 1.75;
+  color: #1A2744;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.fp-th {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  background: #1A2744;
+  padding: 12px 16px;
+}
+.fp-tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+}
+.dl-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.92em;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+.dl-btn:hover { opacity: 0.88; }
+.en-content img, .hindi-section img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 600px) {
+  .en-content, .hindi-section { padding: 0 10px; }
+  h2 { font-size: 1.25em !important; line-height: 1.35 !important; }
+  h3 { font-size: 1.05em !important; }
+  .fp-th {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    padding: 10px 10px !important;
+  }
+  .fp-th > div:first-child { display: none !important; }
+  .fp-th > div { font-size: 0.76em !important; }
+  .fp-tr {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-rows: auto auto !important;
+  }
+  .fp-tr > div:first-child {
+    grid-column: 1 / 4 !important;
+    font-size: 0.83em !important;
+    padding: 8px 12px 4px !important;
+    border-bottom: 1px dashed rgba(26,39,68,0.18) !important;
+  }
+  .fp-tr > div:not(:first-child) {
+    font-size: 0.76em !important;
+    padding: 5px 8px 8px !important;
+    text-align: center !important;
+  }
+  .dl-btn {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 10px !important;
+    white-space: normal !important;
+    padding: 12px 14px !important;
+  }
+  .img-caption { font-size: 0.75em !important; }
+  .hindi-section p, .hindi-section li { line-height: 1.85 !important; }
+}
+@media (min-width: 601px) and (max-width: 860px) {
+  .fp-tr > div { font-size: 0.82em !important; }
+  .fp-th > div { font-size: 0.80em !important; }
+}
+</style>
+
+<!-- ==================== ENGLISH SECTION ==================== -->
+<div class="en-content">
+
+<h2>⛵ Evaporation Boats — The Heart of Your Metalliser (What They Are, Why They Fail, and How to Get More Life From Every Boat)</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 12-min read &nbsp;|&nbsp; The Most Replaced Consumable in Any Metalliser Plant — Finally Explained From First Principles &nbsp;|&nbsp; Includes Free Boat Life Log &amp; Troubleshooting Checklist &nbsp;|&nbsp; Published May 2026</p>
+
+<p>If you run a metalliser, you buy evaporation boats more than almost any other consumable. They crack. They puncture. They stop wetting properly. They go dark and stop evaporating uniformly. A boat that should last 200 hours barely makes it to 80. A boat from a different supplier lasts 260 hours doing the same job. Your maintenance team has opinions. Your purchase team has prices. Nobody is quite sure what actually makes a good boat or why the same boat behaves differently on Monday versus Friday. This blog cuts through all of that. What a boat is, what it is made of, exactly how it works, why it fails, and how to squeeze every last hour of life out of every boat in your chamber — explained simply, from the shop floor up.</p>
+
+<!-- IMAGE 1: COVER HERO -->
+<div style="margin:24px 0 28px 0;text-align:center;">
+  <img src="cover.png" alt="Evaporation boats for vacuum metalliser — what they are, why they fail, how to extend boat life" style="max-width:100%;border-radius:10px;box-shadow:0 6px 24px rgba(26,39,68,0.18);" loading="eager">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Evaporation boats — the most replaced consumable in any metalliser plant. This blog explains everything your team needs to know.</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — What is an Evaporation Boat in 30 Seconds</strong>
+<a href="#downloads-en" onclick="event.preventDefault();document.getElementById('downloads-en').scrollIntoView({behavior:'smooth',block:'start'});return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Downloads →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHAT IS IT?</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.7;">An evaporation boat is a small rectangular ceramic component — roughly the size of a thick pencil eraser — that sits inside the vacuum chamber of a metalliser. It is connected to a high-current electrical supply. When current passes through it, the boat heats up to around 1400–1500°C. Aluminium wire is fed onto the hot boat, melts instantly, and evaporates — the vapour deposits on the film passing above as a thin metallic coating.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHAT IS IT MADE OF?</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;"><strong>TiB₂ + BN composite ceramic</strong> — Titanium Diboride (TiB₂) makes the boat electrically conductive so it can self-heat. Boron Nitride (BN) provides thermal shock resistance so it doesn't crack when heated and cooled hundreds of times. Together they create a material that can survive molten aluminium at 1400°C, cycle after cycle, for hundreds of hours — nothing else comes close.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHAT YOU GET BELOW</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">How a boat works electrically, the TiB₂+BN chemistry explained simply, why wettability is the most important property nobody talks about, the exact reasons boats fail, how to extend boat life with proper procedures, what to specify when buying, and free downloadable formats for boat life tracking and troubleshooting.</div>
+</div>
+</div>
+
+<h3>🔌 How a Boat Works — Electricity, Heat, and Evaporation</h3>
+
+<p>Understanding why boats behave the way they do starts with understanding the basic physics. An evaporation boat is essentially a high-temperature resistor. Copper electrode clamps grip both ends of the boat and pass a high current — typically 400 to 900 amperes at 5 to 15 volts — through it. The boat's ceramic material has a carefully controlled electrical resistance. This resistance converts electrical energy into heat, just like a wire in an electric heater — except at a far more extreme scale. The entire boat reaches 1400–1500°C within seconds of full power being applied.</p>
+
+<!-- IMAGE 5A: HOW A BOAT WORKS DIAGRAM (EN) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-working-en.png" alt="How evaporation boat works — current through TiB2 BN ceramic heats to 1400C, aluminium wire melts and evaporates onto film" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Current (400–900A) flows through the ceramic boat → heats to 1400–1500°C → aluminium wire melts on contact → evaporates → deposits on film as a mirror coating just a few hundred angstroms thick.</p>
+</div>
+
+<p>The aluminium wire — typically 1.5 to 2mm diameter — is fed from a spool at a controlled rate onto the centre cavity of the hot boat. The moment it touches the boat surface, it melts. The molten aluminium spreads across the boat's cavity surface — this spreading is called <strong>wetting</strong> — and the heat evaporates it into a cloud of aluminium vapour. That vapour travels upward in the vacuum and lands on the BOPET or BOPP film passing above the boat zone, forming the thin metallic coating you see on every shiny food pouch and snack packet.</p>
+
+<p>A typical metalliser has many boats arranged in a row — commonly 10 to 20 boats side by side across the full width of the machine — so the entire film width gets coated uniformly in one pass. Each boat is powered independently through its own clamp pair, allowing operators to adjust power to individual boats to correct for uneven coating across the web width.</p>
+
+<h3>🧱 The Material — Why TiB₂ + BN and Nothing Else</h3>
+
+<p>The choice of TiB₂ (Titanium Diboride) and BN (Boron Nitride) as the ceramic composite for evaporation boats is not arbitrary. It is the result of decades of development that eliminated every other candidate material. Here is why this specific combination wins:</p>
+
+<!-- IMAGE 5B: TiB2 BN MATERIAL DIAGRAM -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="material-diagram-en.png" alt="TiB2 BN ceramic composite evaporation boat material properties diagram — why titanium diboride and boron nitride" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">TiB₂ handles the electrical conductivity and high-temperature strength. BN handles the thermal shock resistance and chemical stability. Together they create a material that nothing else in industry can replicate for this application.</p>
+</div>
+
+<p><strong>TiB₂ — Titanium Diboride (the conductor).</strong> TiB₂ is a hard, dense ceramic with a melting point of 2980°C — almost twice the operating temperature of the boat. It is electrically conductive, which is what allows the boat to be self-heated by passing current through it. Without TiB₂, the ceramic would be an insulator and could not be resistively heated at all. TiB₂ also provides hardness and structural strength to the boat body.</p>
+
+<p><strong>BN — Boron Nitride (the shock absorber).</strong> BN is a layered ceramic — hexagonal in structure, similar to graphite — that is electrically non-conductive but has exceptional thermal shock resistance. Every time a boat is heated up to 1400°C and then cooled back to room temperature (each metallising run), it experiences an enormous thermal cycle. Without BN's shock-absorbing properties, the boat would crack after just a few cycles. BN also acts as a lubricant at the microscopic level, allowing the thermal expansion and contraction without stress fractures propagating through the body.</p>
+
+<p><strong>The ratio matters.</strong> The ratio of TiB₂ to BN determines the boat's character. Higher TiB₂ content = better electrical conductivity, better wettability, but more susceptibility to corrosion by molten aluminium. Higher BN content = better thermal shock resistance, longer life, but slightly less wettability. Boat manufacturers tune this ratio for different applications — film metallising, paper metallising, capacitor film — and this is one of the key things to understand when comparing boats from different suppliers.</p>
+
+<h3>💧 Wettability — The Most Important Property Nobody Talks About</h3>
+
+<p>Ask ten metalliser operators what makes a good boat and most will say "life" or "no cracking." Rarely will anyone mention wettability — but wettability is the single property that most directly determines coating quality, and indirectly determines boat life.</p>
+
+<p>Wettability describes how well molten aluminium spreads across the boat's cavity surface when it melts. <strong>Good wettability = molten aluminium spreads evenly across the full cavity area, forming a thin, uniform liquid film that evaporates consistently.</strong> Poor wettability = molten aluminium beads up, forms puddles, does not spread — the evaporation is uneven, the aluminium may spit or splash, and the coating on the film will be patchy or have optical density variations.</p>
+
+<p>The tradeoff that Supervac and other quality boat manufacturers are very clear about: <strong>higher wettability comes at the cost of corrosion resistance</strong>. A boat with excellent wettability allows the molten aluminium to spread and react more actively with the BN in the boat surface — which gradually corrodes and erodes the cavity. A boat optimised for maximum life (high BN, better corrosion resistance) will have slightly lower wettability. The best boats are engineered to balance both — and maintaining good wettability throughout the boat's service life, even as the cavity surface erodes slightly, is the mark of a quality product.</p>
+
+<p>On the shop floor, poor wettability shows up as: aluminium puddles in the boat cavity instead of spreading, spitting or spattering of aluminium droplets, uneven OD (optical density) across the film width, and streaky coating that looks like some boats are working harder than others.</p>
+
+<h3>💀 Why Boats Fail — The Six Real Causes</h3>
+
+<!-- IMAGE 6: BOAT FAILURE MODES DIAGRAM -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-failures-en.png" alt="Evaporation boat failure modes — cracking, puncture, poor wetting, corrosion, thermal shock, electrode damage" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Six ways a boat can fail — and the root cause behind each one. Most failures are preventable with the right procedures.</p>
+</div>
+
+<p><strong>Failure 1 — Thermal shock cracking on first use.</strong> New boats always contain some residual moisture absorbed during storage. If a new boat is powered up too quickly — full current applied immediately — the moisture inside converts to steam faster than it can escape through the boat's pores. The pressure buildup cracks the boat from the inside, often within the first few minutes. <em>Prevention: always heat new boats slowly on first use — start at 50–75% power and ramp up gradually over 15–20 minutes before first use.</em></p>
+
+<p><strong>Failure 2 — Cracking from the dry/wet zone temperature difference.</strong> When the aluminium wire melts and wets only part of the boat cavity (incomplete wetting), the wetted area is cooled by the evaporating aluminium while the dry area continues to heat unchecked. The temperature difference between the wetted zone and the dry zone creates enormous thermal stress. Cracks initiate at the boundary between wet and dry zones, propagate through the boat body, and the boat splits. <em>Prevention: ensure full wetting of the boat cavity from the start of each run. Place aluminium wire in U-shape in the cavity before closing the chamber.</em></p>
+
+<p><strong>Failure 3 — Puncture from overheating.</strong> If wire feed rate is too low for the power being applied, or if the wire feed stops momentarily while power remains on, the boat temperature spikes dramatically. Molten aluminium becomes superheated and reacts aggressively with the BN in the boat — corroding rapidly through the base of the cavity. This causes a puncture — a hole through the boat floor — which ends the boat's life immediately and, if molten aluminium falls onto the copper clamp, can cause a short circuit and machine damage. <em>Prevention: always maintain wire feed rate matched to power level. Never allow power without wire feed.</em></p>
+
+<p><strong>Failure 4 — Electrode/clamp contact failure.</strong> The boat sits in copper electrode clamps. If the clamp surfaces are rough, misaligned, oxidised, or have aluminium deposits on them, current distribution across the boat ends becomes uneven. The ends of the boat see more current than the centre, creating hot spots at the edges. These hot spots cause premature cracking or localised corrosion at the boat ends — the boat appears to have a much shorter life than it should. <em>Prevention: clean copper clamp contact surfaces before every boat change. Check alignment. Replace clamps when they show significant wear or aluminium build-up.</em></p>
+
+<p><strong>Failure 5 — Sludge build-up blocking the cavity.</strong> Over time, oxidised aluminium compounds, aluminium nitride, and other reaction products accumulate as a grey-black sludge in the boat cavity and around its edges. This sludge reduces the effective wetting area, increases local temperature at unwetted zones, and causes uneven evaporation. Left unmanaged, sludge accelerates all other failure modes. <em>Prevention: clean sludge from boat cavities regularly — at every roll change if running hard, at minimum every few hours of operation.</em></p>
+
+<p><strong>Failure 6 — Air exposure while hot.</strong> If the vacuum chamber is vented to atmosphere while boats are still at operating temperature — due to a power cut, emergency stop, or procedural error — the hot boat surface reacts with oxygen in the air. The TiB₂ surface oxidises, the cavity surface degrades, and wettability drops sharply. The boat may physically look fine but will perform poorly thereafter. <em>Prevention: after stopping wire feed and power, wait at least 2 minutes before venting the chamber — the boats must cool below red heat before air contact.</em></p>
+
+<h3>📐 What to Specify When Buying — Don't Just Order by Size</h3>
+
+<p>Most purchase orders for evaporation boats specify only dimensions — length × width × thickness, in millimetres. This is necessary but not sufficient. Two boats with identical dimensions from different suppliers can have completely different TiB₂:BN ratios, different hot-pressing processes, different surface finishes — and deliver dramatically different life and coating quality. Here is what to specify or ask for when ordering:</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:0;margin:20px 0;border:2px solid #1A2744;border-radius:10px;overflow:hidden;">
+
+<div class="fp-th">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">PARAMETER</div>
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">WHAT TO ASK</div>
+<div style="color:#FAF9F6;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">WHY IT MATTERS</div>
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">TYPICAL VALUE</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Dimensions</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">L × W × T (mm)</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Must match your machine's clamp spacing</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">e.g. 140×10×10 mm</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Composition</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">TiB₂ % + BN % ratio</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Controls wettability vs. corrosion life balance</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">40–60% TiB₂ typical</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Density</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">g/cm³ (ask for cert)</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Higher density = fewer pores = longer life</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;font-weight:bold;">&gt;3.0 g/cm³ minimum</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Electrical Resistance</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">mΩ per boat (as-supplied)</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Determines operating current — must match your machine</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Supplier to specify</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Manufacturing method</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Hot-pressed or cold-pressed?</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Hot-pressed = denser, more uniform, longer life</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;font-weight:bold;">Hot-pressed always ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Application</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">BOPET / BOPP film or paper?</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Different substrates need different boat grades</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Tell supplier your substrate</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Supplier reference</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Ask for Indian FP plant references</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Confirms boats proven in your machine type</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;">Supervac, Kennametal, Chinese OEMs</div>
+</div>
+
+</div>
+
+<h3>⏱️ How to Extend Boat Life — Seven Practical Rules</h3>
+
+<p>These are not theoretical guidelines — they are the practices that separate a plant getting 80 hours per boat from one getting 200+ hours from the same boat, same machine, same aluminium wire.</p>
+
+<p><strong>Rule 1 — Slow heat on every new boat.</strong> Start every new boat at 50–75% power. Ramp up to full power over 15–20 minutes during the first production run. This drives out residual moisture without cracking. Do not skip this even under production pressure.</p>
+
+<p><strong>Rule 2 — Pre-wet the cavity before closing the chamber.</strong> Before closing the vacuum chamber at the start of every run, place 1–3 pieces of aluminium wire (longer than two-thirds of the boat cavity length) in the cavity in a U-shape. This ensures the cavity wets uniformly from the very first seconds of production, preventing the dry/wet zone cracking described earlier.</p>
+
+<p><strong>Rule 3 — Keep wire feed rate matched to power.</strong> Every boat has an ideal relationship between wire feed rate and electrical power. Running too little wire at too much power means the boat gets superheated in the unwetted zones — accelerating corrosion and cracking. Your machine's settings sheet or the boat supplier will give you the recommended wire feed rates for different power levels. Follow them.</p>
+
+<p><strong>Rule 4 — Clean sludge regularly.</strong> Grey-black sludge in the boat cavity is aluminium nitride and oxidised aluminium compounds. It reduces wetting area and creates hot spots. Clean it out at every roll change. A simple wooden or ceramic scraper (never metal — metal scratches the boat surface) is all you need. Clean clamp faces at the same time.</p>
+
+<p><strong>Rule 5 — Never power off abruptly — stop wire first, then power.</strong> At the end of every run, stop the aluminium wire feed first. Then reduce power to zero. Then wait at least 2 minutes for the boat to cool below visible red heat before venting the chamber. Abrupt power-off while aluminium is still molten can leave a cold aluminium plug in the cavity that stresses the boat on the next heat-up.</p>
+
+<p><strong>Rule 6 — Check clamp contact quality at every boat change.</strong> Worn, pitted, or aluminium-contaminated clamp surfaces cause uneven current distribution — which means uneven heating — which means premature cracking. Cleaning clamp faces takes two minutes. Replacing a boat takes much longer. Do the maths.</p>
+
+<p><strong>Rule 7 — Log every boat's life hours.</strong> The single most useful data point for optimising boat purchasing and scheduling is the actual hours-per-boat you are achieving, broken down by boat supplier, boat grade, machine position, and operator. Without this log, you are guessing. With it, you can identify which positions on the machine kill boats fastest, which supplier is delivering the best real-world life, and when boat performance is degrading before it causes a quality problem.</p>
+
+<!-- IMAGE 7: BOAT LIFE TIPS VISUAL -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-life-tips.png" alt="7 rules to extend evaporation boat life — slow heat ramp, pre-wetting, wire feed rate, sludge cleaning, proper shutdown" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Seven rules that separate 80 hours per boat from 200+ hours. All operational. No extra cost. Just procedure.</p>
+</div>
+
+<!-- IMAGE 3: CHEAT SHEET PREVIEW -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-cheat-sheet.png" alt="Evaporation boat cheat sheet — TiB2 BN material, failure modes, 7 life rules, what to specify when buying" style="max-width:480px;width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">The complete desk reference — what boats are made of, all 6 failure modes, 7 life rules, buying checklist. Print A4, laminate, fix next to the metalliser. Excel formats below.</p>
+</div>
+
+<h3 id="downloads-en">⬇ Free Downloadable Formats — Evaporation Boat Reference Tools</h3>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:180px;">
+<div style="font-weight:bold;font-size:1.05em;color:#1A2744;">Evaporation Boat Life Log (Bilingual)</div>
+<div style="font-size:0.88em;color:#5A5A5A;margin-top:3px;">Track hours per boat by position, supplier, grade · auto-calculates average life · highlights underperforming positions · weekly and monthly summary · English + Hindi</div>
+</div>
+<a href="/downloads/01-Evaporation-Boat-Life-Log-Bilingual.xlsx" download class="dl-btn" style="background:#E85D26;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #0D8C7E;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#0D8C7E;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ TROUBLESHOOTING TOOL</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#0D8C7E;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:180px;">
+<div style="font-weight:bold;font-size:1.05em;color:#1A2744;">Boat Failure Troubleshooting Checklist (Bilingual)</div>
+<div style="font-size:0.88em;color:#5A5A5A;margin-top:3px;">Symptom → root cause → corrective action table · covers all 6 failure modes · buying specification checklist · 7 life rules quick reference · English + Hindi</div>
+</div>
+<a href="/downloads/02-Boat-Failure-Troubleshooting-Checklist-Bilingual.xlsx" download class="dl-btn" style="background:#0D8C7E;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 How to use these together:</strong> Use the Life Log (Format 1) every day — one row per boat, per position. After 3 months you will know exactly which position kills boats fastest, which supplier gives the best real-world life, and when to schedule boat changes before they cause quality issues. Use the Troubleshooting Checklist (Format 2) whenever a boat fails earlier than expected — it will identify the root cause in under 5 minutes.
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> This blog covers evaporation boats — the main consumable in your metalliser. The previous blog (Blog #44) covers diffusion pump silicone oil — CVC-4, SV-Sigma, and all the other names. The full flexible packaging blog series is at <a href="https://www.vkstech.com/#blog" style="color:#E85D26;font-weight:bold;">vkstech.com/#blog</a>. Free calculators and tools at <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Getting boats that crack within the first 30 minutes and don't know if it is the boat quality or the procedure? Seeing uneven OD across your film width and suspecting a wetting issue? Trying to switch from one boat supplier to another and want to know what specs to compare? <strong>Drop your question in the Q&amp;A section at the bottom of this page</strong> — I respond personally to every thoughtful question.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> An evaporation boat is a small TiB₂+BN composite ceramic — TiB₂ makes it electrically conductive so it self-heats to 1400–1500°C, BN gives it thermal shock resistance so it survives hundreds of heat cycles without cracking. The most important and least discussed property is wettability — how well molten aluminium spreads across the cavity. Good wettability = uniform coating; poor wettability = patchy OD, spitting, uneven film. The six failure modes are: thermal shock cracking on first use, dry/wet zone cracking, puncture from overheating, clamp contact failure, sludge build-up, and air exposure while hot — all six are preventable with correct procedures. When buying, specify density (&gt;3.0 g/cm³), composition (TiB₂:BN ratio), hot-pressed manufacturing, and application substrate — not just dimensions. The seven life rules — slow heat ramp, pre-wet cavity, match wire feed to power, clean sludge regularly, stop wire before power, check clamps, log every boat's hours — are the difference between 80 and 200+ hours per boat, from the same supplier, on the same machine.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> Now that boats are clear, the next metalliser consumable to understand is <strong>aluminium wire for metallising</strong> — the raw material that actually becomes the coating. What grade, what diameter, what temper, what purity level, and why cheap wire costs more in the long run through boat damage and coating failures. Coming in Blog #46.</p>
+
+</div>
+
+<!-- ==================== HINDI SECTION ==================== -->
+<div class="hindi-section">
+
+<h2>⛵ Evaporation Boats — आपके Metalliser का दिल (क्या हैं, क्यों Fail होते हैं, और हर Boat से ज़्यादा Life कैसे निकालें)</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 12-min read &nbsp;|&nbsp; किसी भी Metalliser Plant का सबसे ज़्यादा Replace होने वाला Consumable — Finally First Principles से Explained &nbsp;|&nbsp; Free Boat Life Log &amp; Troubleshooting Checklist शामिल &nbsp;|&nbsp; May 2026 में Published</p>
+
+<p>अगर आप metalliser run करते हैं, तो evaporation boats लगभग हर दूसरे consumable से ज़्यादा खरीदते हैं। Crack होते हैं। Puncture होते हैं। Wetting ठीक नहीं होती। Dark हो जाते हैं और evaporate करना बंद कर देते हैं। एक boat जो 200 घंटे चलनी चाहिए, मुश्किल से 80 घंटे पहुँचती है। किसी दूसरे supplier का boat same job में 260 घंटे देता है। Maintenance team की अपनी राय है। Purchase team के पास price है। कोई sure नहीं कि actually एक अच्छा boat क्या है और same boat Monday को अलग और Friday को अलग behave क्यों करता है। ये blog सब कुछ simple करता है — boat क्या है, किस चीज़ से बना है, exactly कैसे काम करता है, क्यों fail होता है, और हर chamber के हर boat से maximum life कैसे निकालें — shop floor से शुरू करके simply explained।</p>
+
+<!-- IMAGE 1: COVER HERO (Hindi) -->
+<div style="margin:24px 0 28px 0;text-align:center;">
+  <img src="cover.png" alt="Vacuum metalliser के लिए evaporation boats — क्या हैं, क्यों fail होते हैं, boat life कैसे extend करें" style="max-width:100%;border-radius:10px;box-shadow:0 6px 24px rgba(26,39,68,0.18);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Evaporation boats — किसी भी metalliser plant का सबसे ज़्यादा replace होने वाला consumable। ये blog वो सब explain करता है जो आपकी team को जानना ज़रूरी है।</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Evaporation Boat क्या है 30 Seconds में</strong>
+<a href="#downloads-hi" onclick="event.preventDefault();document.getElementById('downloads-hi').scrollIntoView({behavior:'smooth',block:'start'});return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Downloads पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">ये क्या है?</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.7;">Evaporation boat एक छोटा rectangular ceramic component है — मोटे pencil eraser के size का — जो metalliser के vacuum chamber के अंदर रहता है। High-current electrical supply से connected होता है। जब इसमें current pass होती है, ये ~1400–1500°C तक heat होता है। Aluminium wire इस hot boat पर feed होती है, instantly melt होती है, और evaporate हो जाती है — vapour ऊपर से pass हो रही film पर thin metallic coating के रूप में deposit होती है।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">किस चीज़ से बना है?</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;"><strong>TiB₂ + BN composite ceramic</strong> — Titanium Diboride (TiB₂) boat को electrically conductive बनाता है ताकि self-heat हो सके। Boron Nitride (BN) thermal shock resistance देता है ताकि सैकड़ों बार heat और cool होने पर crack न हो। साथ मिलकर ये ऐसा material बनाते हैं जो 1400°C पर molten aluminium को cycle after cycle survive करे — इसके करीब कोई नहीं आता।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">नीचे क्या मिलेगा</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Boat electrically कैसे काम करता है, TiB₂+BN chemistry simply explained, wettability क्यों सबसे important property है जिसकी कोई बात नहीं करता, exactly कैसे boats fail होते हैं, सही procedures से boat life कैसे extend करें, खरीदते वक्त क्या specify करें, और boat life tracking और troubleshooting के लिए free downloadable formats।</div>
+</div>
+</div>
+
+<h3>🔌 Boat कैसे काम करता है — Electricity, Heat, और Evaporation</h3>
+
+<p>Boats क्यों जैसे behave करते हैं वैसे — ये समझने के लिए basic physics समझनी होगी। Evaporation boat essentially एक high-temperature resistor है। Copper electrode clamps boat के दोनों ends को grip करते हैं और high current pass करते हैं — typically 400 से 900 amperes, 5 से 15 volts पर। Boat की ceramic material की carefully controlled electrical resistance है। ये resistance electrical energy को heat में convert करती है — electric heater के wire की तरह, लेकिन far more extreme scale पर। Full power apply होने के seconds में पूरा boat 1400–1500°C पहुँच जाता है।</p>
+
+<!-- IMAGE 5A: HOW A BOAT WORKS DIAGRAM (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-working-hi.png" alt="Evaporation boat कैसे काम करता है — TiB2 BN ceramic में current से 1400°C heat, aluminium wire melts और film पर evaporate होती है — Hindi diagram" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-stil:italic;">Current (400–900A) ceramic boat से flow करती है → 1400–1500°C तक heat होती है → aluminium wire touch होते ही melt होती है → evaporate होती है → film पर mirror coating deposit होती है — सिर्फ़ कुछ सौ angstroms thick।</p>
+</div>
+
+<p>Aluminium wire — typically 1.5 से 2mm diameter — एक spool से controlled rate पर hot boat के centre cavity पर feed होती है। Boat surface touch करते ही melt होती है। Molten aluminium boat की cavity surface पर spread होता है — इस spreading को <strong>wetting</strong> कहते हैं — और heat इसे evaporate कर देती है aluminium vapour के cloud में। वो vapour ऊपर vacuum में travel करता है और boat zone के ऊपर से pass हो रही BOPET या BOPP film पर land करता है — वो thin metallic coating बनाता है जो हर shiny food pouch पर दिखती है।</p>
+
+<p>Typical metalliser में machine की full width across एक row में कई boats होते हैं — commonly 10 से 20 boats side by side — ताकि पूरी film width uniformly coat हो। हर boat independently अपने clamp pair से powered होता है — operators individual boats की power adjust कर सकते हैं।</p>
+
+<h3>🧱 Material — TiB₂ + BN ही क्यों, और कुछ नहीं</h3>
+
+<p>Evaporation boats के लिए TiB₂ और BN का choice arbitrary नहीं है। ये decades के development का result है जिसने हर दूसरे candidate material को eliminate किया।</p>
+
+<!-- IMAGE 5B: TiB2 BN MATERIAL DIAGRAM (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="material-diagram-hi.png" alt="TiB2 BN ceramic composite evaporation boat material properties diagram Hindi — titanium diboride और boron nitride क्यों" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">TiB₂ electrical conductivity और high-temperature strength handle करता है। BN thermal shock resistance और chemical stability handle करता है। साथ मिलकर ऐसा material बनाते हैं जिसे industry में कोई replicate नहीं कर सकता।</p>
+</div>
+
+<p><strong>TiB₂ — Titanium Diboride (conductor)।</strong> TiB₂ एक hard, dense ceramic है जिसका melting point 2980°C है — boat के operating temperature का लगभग दोगुना। ये electrically conductive है — इसीलिए boat में current pass करके self-heat हो सकता है। TiB₂ के बिना ceramic insulator होती और resistively heat नहीं हो सकती।</p>
+
+<p><strong>BN — Boron Nitride (shock absorber)।</strong> BN एक layered ceramic है — hexagonal structure, graphite जैसा — electrically non-conductive लेकिन exceptional thermal shock resistance वाला। हर metallising run में boat 1400°C तक heat और room temperature तक cool होता है। BN के बिना boat कुछ cycles में ही crack हो जाता। BN microscopic level पर lubricant की तरह भी काम करता है — thermal expansion और contraction को stress fractures के बिना allow करता है।</p>
+
+<p><strong>Ratio matter करता है।</strong> TiB₂ और BN का ratio boat का character decide करता है। ज़्यादा TiB₂ = better conductivity, better wettability, लेकिन molten aluminium से ज़्यादा corrosion। ज़्यादा BN = better thermal shock resistance, longer life, लेकिन slightly कम wettability। Boat manufacturers अलग-अलग applications के लिए ये ratio tune करते हैं — film metallising, paper metallising, capacitor film — और यही एक key thing है जो different suppliers के boats compare करते वक्त समझनी होती है।</p>
+
+<h3>💧 Wettability — सबसे Important Property जिसकी कोई बात नहीं करता</h3>
+
+<p>दस metalliser operators से पूछें एक अच्छा boat क्या बनाता है — ज़्यादातर "life" या "no cracking" बोलेंगे। Wettability की बात शायद ही कोई करे — लेकिन wettability वो single property है जो coating quality को सबसे directly determine करती है, और indirectly boat life को भी।</p>
+
+<p>Wettability describe करती है कि molten aluminium boat की cavity surface पर melt होने पर कितनी अच्छी तरह spread होती है। <strong>अच्छी wettability = molten aluminium पूरी cavity area में evenly spread होता है, thin uniform liquid film बनाता है जो consistently evaporate होती है।</strong> खराब wettability = molten aluminium bead up होता है, puddles बनाता है, spread नहीं होता — evaporation uneven होती है, aluminium spit या splash हो सकता है, film पर coating patchy होगी।</p>
+
+<p>Supervac और quality boat manufacturers clearly बताते हैं: <strong>higher wettability corrosion resistance की कीमत पर आती है।</strong> Excellent wettability वाला boat molten aluminium को ज़्यादा actively spread और boat surface के BN से react करने देता है — जो gradually cavity को corrode करता है। Maximum life के लिए optimised boat (high BN, better corrosion resistance) slightly कम wettability होगी। Best boats दोनों को balance करने के लिए engineered होते हैं।</p>
+
+<p>Shop floor पर poor wettability इस रूप में दिखती है: boat cavity में aluminium puddles, spitting या spattering, film width पर uneven OD, streaky coating।</p>
+
+<h3>💀 Boats Fail क्यों होते हैं — छह Real Causes</h3>
+
+<!-- IMAGE 6: BOAT FAILURE MODES DIAGRAM (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-failures-hi.png" alt="Evaporation boat failure modes Hindi — cracking, puncture, poor wetting, corrosion, thermal shock, electrode damage" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">छह तरीके जिनसे boat fail हो सकता है — और हर एक के पीछे root cause। ज़्यादातर failures सही procedures से preventable हैं।</p>
+</div>
+
+<p><strong>Failure 1 — पहले use पर thermal shock cracking।</strong> New boats में हमेशा storage के दौरान absorbed residual moisture होती है। अगर new boat को too quickly power up किया — full current immediately — अंदर की moisture steam में convert होती है जो pores से escape करने से पहले pressure buildup करती है। Boat अंदर से crack हो जाता है, अक्सर पहले कुछ minutes में। <em>Prevention: हर new boat को slowly heat करें — 50–75% power से शुरू करें, 15–20 minutes में gradually ramp up करें।</em></p>
+
+<p><strong>Failure 2 — Dry/wet zone temperature difference से cracking।</strong> जब aluminium wire boat cavity के सिर्फ़ part में wets (incomplete wetting), wetted area evaporating aluminium से cool होता है जबकि dry area heat होता रहता है। Temperature difference से enormous thermal stress बनता है। Cracks wet और dry zones की boundary पर शुरू होकर boat body में propagate होते हैं। <em>Prevention: हर run की शुरुआत से full cavity wetting ensure करें। Chamber close करने से पहले U-shape में aluminium wire cavity में रखें।</em></p>
+
+<p><strong>Failure 3 — Overheating से puncture।</strong> अगर applied power के लिए wire feed rate बहुत कम है, या wire feed momentarily रुक जाती है जबकि power on रहती है, boat temperature dramatically spike करता है। Molten aluminium superheated हो जाता है और BN के साथ aggressively react करता है — cavity base को rapidly corrode करता है। Puncture होता है — boat floor में एक hole — जो immediately boat की life end करता है। <em>Prevention: हमेशा wire feed rate को power level से match रखें। Power on रहते wire feed कभी बंद न हो।</em></p>
+
+<p><strong>Failure 4 — Electrode/clamp contact failure।</strong> Boat copper electrode clamps में बैठता है। Clamp surfaces rough, misaligned, oxidised, या aluminium deposits वाले हों तो boat ends में current distribution uneven होती है। Boat ends ज़्यादा current देखते हैं, edges पर hot spots बनते हैं। ये premature cracking या localised corrosion cause करते हैं। <em>Prevention: हर boat change पर copper clamp contact surfaces clean करें। Alignment check करें।</em></p>
+
+<p><strong>Failure 5 — Sludge build-up cavity block करना।</strong> Time के साथ oxidised aluminium compounds, aluminium nitride, और दूसरे reaction products grey-black sludge के रूप में boat cavity में accumulate होते हैं। ये effective wetting area reduce करता है, unwetted zones पर local temperature increase करता है, और uneven evaporation cause करता है। <em>Prevention: boat cavities से sludge regularly clean करें — hard running में हर roll change पर।</em></p>
+
+<p><strong>Failure 6 — Hot रहते air exposure।</strong> अगर boats operating temperature पर हों और vacuum chamber vent हो जाए — power cut, emergency stop, या procedural error से — hot boat surface oxygen से react करती है। TiB₂ surface oxidise होती है, cavity surface degrade होती है, wettability sharply drop हो जाती है। <em>Prevention: wire feed और power stop करने के बाद कम से कम 2 minutes wait करें — chamber vent करने से पहले boats red heat से नीचे cool हों।</em></p>
+
+<h3>📐 खरीदते वक्त क्या Specify करें — सिर्फ़ Size से Order मत करें</h3>
+
+<p>ज़्यादातर purchase orders में सिर्फ़ dimensions होती हैं — length × width × thickness। ये ज़रूरी है लेकिन काफ़ी नहीं। अलग-अलग suppliers के same dimension के दो boats में completely different TiB₂:BN ratios, different hot-pressing processes, different surface finishes हो सकते हैं — और dramatically different life और coating quality deliver कर सकते हैं।</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:0;margin:20px 0;border:2px solid #1A2744;border-radius:10px;overflow:hidden;">
+
+<div class="fp-th">
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;">PARAMETER</div>
+<div style="color:#0D8C7E;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">क्या पूछें</div>
+<div style="color:#FAF9F6;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">क्यों Matter करता है</div>
+<div style="color:#E85D26;font-weight:bold;font-size:0.85em;letter-spacing:0.5px;text-align:center;">Typical Value</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Dimensions</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">L × W × T (mm)</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Machine के clamp spacing से match होनी चाहिए</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">e.g. 140×10×10 mm</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Composition</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">TiB₂ % + BN % ratio</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Wettability vs. corrosion life balance control करता है</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">40–60% TiB₂ typical</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Density</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">g/cm³ (cert माँगें)</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Higher density = fewer pores = longer life</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;font-weight:bold;">&gt;3.0 g/cm³ minimum</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Manufacturing method</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Hot-pressed या cold-pressed?</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Hot-pressed = denser, more uniform, longer life</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;font-weight:bold;">Hot-pressed हमेशा ✓</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#FAF9F6;border-bottom:1px solid #e0ddd6;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Application</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">BOPET / BOPP film या paper?</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">अलग substrates को अलग boat grades चाहिए</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Supplier को substrate बताएँ</div>
+</div>
+
+<div class="fp-tr" style="padding:10px 16px;background:#fff;">
+<div style="font-size:0.87em;color:#1A2744;font-weight:700;">Supplier reference</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Indian FP plant references माँगें</div>
+<div style="font-size:0.84em;color:#1A2744;text-align:center;">Confirms boats your machine type में proven हैं</div>
+<div style="font-size:0.84em;color:#0D8C7E;text-align:center;">Supervac, Kennametal, Chinese OEMs</div>
+</div>
+
+</div>
+
+<h3>⏱️ Boat Life कैसे Extend करें — सात Practical Rules</h3>
+
+<!-- IMAGE 7: BOAT LIFE TIPS (Hindi section) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-life-tips.png" alt="7 rules evaporation boat life extend करने के लिए — slow heat ramp, pre-wetting, wire feed rate, sludge cleaning, proper shutdown" style="max-width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">सात rules जो 80 hours per boat और 200+ hours per boat के बीच का फ़र्क हैं। सब operational। कोई extra cost नहीं। बस procedure।</p>
+</div>
+
+<p><strong>Rule 1 — हर new boat पर slow heat।</strong> हर new boat 50–75% power से शुरू करें। पहले production run में 15–20 minutes में gradually full power तक ramp up करें। Production pressure में भी skip मत करें।</p>
+
+<p><strong>Rule 2 — Chamber close करने से पहले cavity pre-wet करें।</strong> हर run की शुरुआत में chamber close करने से पहले 1–3 pieces aluminium wire (boat cavity length के दो-तिहाई से longer) U-shape में cavity में रखें। ये ensure करता है कि production के पहले seconds से ही cavity uniformly wet हो।</p>
+
+<p><strong>Rule 3 — Wire feed rate को power से match रखें।</strong> हर boat का ideal relationship है wire feed rate और electrical power के बीच। बहुत कम wire, बहुत ज़्यादा power = unwetted zones में boat superheat होता है। Machine की settings sheet या boat supplier recommended wire feed rates देगा।</p>
+
+<p><strong>Rule 4 — Sludge regularly clean करें।</strong> Boat cavity में grey-black sludge aluminium nitride और oxidised aluminium compounds है। हर roll change पर clean करें। Wooden या ceramic scraper use करें — metal कभी नहीं। साथ ही clamp faces भी clean करें।</p>
+
+<p><strong>Rule 5 — Abruptly power off मत करें — पहले wire, फिर power।</strong> हर run के end में पहले aluminium wire feed stop करें। फिर power zero करें। फिर chamber vent करने से पहले कम से कम 2 minutes wait करें — boats visible red heat से नीचे cool हों।</p>
+
+<p><strong>Rule 6 — हर boat change पर clamp contact quality check करें।</strong> Worn, pitted, या aluminium-contaminated clamp surfaces uneven current distribution cause करते हैं — uneven heating — premature cracking। Clamp faces clean करने में दो minutes लगते हैं। Boat replace करने में बहुत ज़्यादा।</p>
+
+<p><strong>Rule 7 — हर boat की life hours log करें।</strong> Boat purchasing और scheduling optimize करने के लिए सबसे useful data point है actual hours-per-boat — boat supplier, grade, machine position, और operator के हिसाब से broken down। इस log के बिना आप guess कर रहे हैं। इसके साथ आप identify कर सकते हैं कि machine पर कौन सी position boats को fastest kill करती है।</p>
+
+<!-- IMAGE 3: CHEAT SHEET PREVIEW (Hindi) -->
+<div style="margin:28px 0;text-align:center;">
+  <img src="boat-cheat-sheet.png" alt="Evaporation boat cheat sheet — TiB2 BN material, failure modes, 7 life rules, buying checklist" style="max-width:480px;width:100%;border-radius:10px;box-shadow:0 4px 20px rgba(26,39,68,0.14);" loading="lazy">
+  <p class="img-caption" style="font-size:0.8em;color:#5A5A5A;margin:8px 0 0 0;font-style:italic;">Complete desk reference — boats किससे बने हैं, सभी 6 failure modes, 7 life rules, buying checklist। A4 print करें, laminate करें, metalliser के पास fix करें। Excel formats नीचे।</p>
+</div>
+
+<h3 id="downloads-hi">⬇ Free Downloadable Formats — Evaporation Boat Reference Tools</h3>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:180px;">
+<div style="font-weight:bold;font-size:1.05em;color:#1A2744;">Evaporation Boat Life Log (Bilingual)</div>
+<div style="font-size:0.88em;color:#5A5A5A;margin-top:3px;">Position, supplier, grade के हिसाब से hours per boat track करें · average life auto-calculate · underperforming positions highlight · weekly और monthly summary · English + Hindi</div>
+</div>
+<a href="/downloads/01-Evaporation-Boat-Life-Log-Bilingual.xlsx" download class="dl-btn" style="background:#E85D26;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #0D8C7E;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#0D8C7E;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ TROUBLESHOOTING TOOL</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#0D8C7E;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:180px;">
+<div style="font-weight:bold;font-size:1.05em;color:#1A2744;">Boat Failure Troubleshooting Checklist (Bilingual)</div>
+<div style="font-size:0.88em;color:#5A5A5A;margin-top:3px;">Symptom → root cause → corrective action table · सभी 6 failure modes cover · buying specification checklist · 7 life rules quick reference · English + Hindi</div>
+</div>
+<a href="/downloads/02-Boat-Failure-Troubleshooting-Checklist-Bilingual.xlsx" download class="dl-btn" style="background:#0D8C7E;color:#fff;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 ये एक साथ कैसे use करें:</strong> Life Log (Format 1) हर दिन use करें — हर boat, हर position के लिए एक row। 3 महीने में आपको exactly पता होगा कि machine पर कौन सी position boats fastest kill करती है, कौन सा supplier best real-world life दे रहा है, और quality problem cause करने से पहले boat changes कब schedule करें। Troubleshooting Checklist (Format 2) तब use करें जब कोई boat expected से पहले fail हो — 5 minutes में root cause identify होगा।
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर Related Reads:</strong> ये blog evaporation boats cover करता है — metalliser का main consumable। Previous blog (Blog #44) diffusion pump silicone oil cover करता है — CVC-4, SV-Sigma, और सभी दूसरे names। Full flexible packaging blog series <a href="https://www.vkstech.com/#blog" style="color:#E85D26;font-weight:bold;">vkstech.com/#blog</a> पर। Free calculators और tools <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a> पर।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या Pushback?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Boats पहले 30 minutes में crack हो रहे हैं और नहीं पता boat quality की problem है या procedure की? Film width पर uneven OD आ रही है और wetting issue suspect है? एक boat supplier से दूसरे पर switch करना है और specs compare करना है? <strong>अपना question इस page के bottom पर Q&amp;A section में डालें</strong> — मैं हर thoughtful question का personally जवाब देता हूँ।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Evaporation boat एक छोटा TiB₂+BN composite ceramic है — TiB₂ electrically conductive बनाता है ताकि 1400–1500°C तक self-heat हो, BN thermal shock resistance देता है सैकड़ों heat cycles survive करने के लिए। सबसे important और least discussed property है wettability — molten aluminium cavity में कितनी अच्छी तरह spread होती है। अच्छी wettability = uniform coating; खराब wettability = patchy OD, spitting। छह failure modes हैं: first use पर thermal shock cracking, dry/wet zone cracking, overheating से puncture, clamp contact failure, sludge build-up, hot रहते air exposure — सभी correct procedures से preventable हैं। Buying में specify करें: density (&gt;3.0 g/cm³), composition (TiB₂:BN ratio), hot-pressed manufacturing, application substrate — सिर्फ़ dimensions नहीं। Seven life rules — slow heat ramp, pre-wet cavity, wire feed match करें, sludge clean करें, wire पहले power बाद, clamps check करें, हर boat log करें — same supplier, same machine पर 80 और 200+ hours के बीच का फ़र्क हैं।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> Boats clear हो गए, अब metalliser का अगला consumable — <strong>aluminium wire for metallising</strong>। कौन सा grade, कौन सा diameter, कौन सा temper, कौन सा purity level, और cheap wire long run में ज़्यादा expensive क्यों होती है boat damage और coating failures के through। Blog #46 में।</p>
+
+</div>
