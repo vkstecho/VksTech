@@ -27,9 +27,9 @@
 | Cream | `#FAF9F6` | Backgrounds |
 
 **Key numbers — verify in every image:**
-- Process vacuum = **10⁻⁴ to 10⁻⁵ Torr**
-- Rotary pump brings pressure to **~1 Torr**
-- Roots booster brings to **~10⁻² Torr**
+- Process vacuum = **10⁻⁴ to 10⁻⁵ mbar**
+- Rotary pump brings pressure to **~1–2 mbar**
+- Roots booster brings to **~10⁻² mbar**
 - Diffusion pump oil heated to **~200–220°C**
 - Oil change interval (normal) = **18–24 months**
 - CVC-4 = Bobst brand name only ★
@@ -61,7 +61,7 @@
 >   - Small label at bottom: **"Silicone oil heated here"** with orange underline
 > - Below illustration: three small cream property pills:
 >   - 🔵 **No moving parts**
->   - 🔵 **10⁻⁴ to 10⁻⁵ Torr**
+>   - 🔵 **10⁻⁴ to 10⁻⁵ mbar**
 >   - 🔵 **200–220°C operating temp**
 >
 > **CENTRE-RIGHT PANEL (35% width, teal `#0D8C7E` background):**
@@ -110,7 +110,7 @@
 >
 > **Header (top 12%):**
 > - Eyebrow (orange small caps): THE 3-PUMP RELAY — HOW YOUR METALLISER REACHES PROCESS VACUUM
-> - Title (navy bold): **From 760 Torr to 10⁻⁵ Torr — Three Pumps, Three Oils, One System**
+> - Title (navy bold): **From ~1013 mbar to 10⁻⁴ mbar — Three Pumps, Three Oils, One System**
 > - Subtitle (grey italic): *No single pump can do this alone. Each one hands off to the next — like runners in a relay race.*
 >
 > **Main diagram (centre 76%) — LEFT TO RIGHT flow:**
@@ -118,7 +118,7 @@
 > Layout: 4 boxes connected by large orange arrows (→), arranged horizontally across the full width.
 >
 > **BOX 1 — VACUUM CHAMBER (left):**
-> Navy `#1A2744` rounded rectangle. Inside: simple flat outline of a roll of film passing over a horizontal aluminium evaporation source. Label: **VACUUM CHAMBER**. Below box: **Starting pressure: ~760 Torr (atmospheric)**. Small grey note: *"Film + aluminium wire inside"*
+> Navy `#1A2744` rounded rectangle. Inside: simple flat outline of a roll of film passing over a horizontal aluminium evaporation source. Label: **VACUUM CHAMBER**. Below box: **Starting pressure: ~1013 mbar (atmospheric)**. Small grey note: *"Film + aluminium wire inside"*
 >
 > **Large orange arrow (→) with label above:** *"Rotary pump evacuates →"*
 >
@@ -127,7 +127,7 @@
 > - Icon: flat rectangle with 4 small vane lines inside (simplified rotor cross-section)
 > - Label bold white: **PUMP 1\nROTARY VANE PUMP**
 > - Sub (cream small): *Mechanical pump · mineral oil inside*
-> - Orange tag below box: **Achieves: ~1 Torr**
+> - Orange tag below box: **Achieves: ~1–2 mbar**
 > - Small orange label: *"Roughing pump"*
 > - Small note below in grey: *Uses: rotary pump mineral oil (NOT silicone)*
 >
@@ -138,7 +138,7 @@
 > - Icon: two figure-8 / lobe shapes side by side (simplified Roots blower cross-section)
 > - Label bold white: **PUMP 2\nROOTS BOOSTER PUMP**
 > - Sub (white small): *High-speed lobes · booster oil inside*
-> - Teal tag below box: **Achieves: ~10⁻² Torr**
+> - Teal tag below box: **Achieves: ~10⁻² mbar**
 > - Small note below in grey: *Uses: booster pump oil (NOT silicone)*
 >
 > **Large orange arrow (→) with label above:** *"Diffusion pump finishes →"*
@@ -148,7 +148,7 @@
 > - Icon: simple vertical cylinder cross-section showing 3 jet nozzles (umbrella shapes stacked), heat arrows at bottom, condensation lines on sides
 > - Label bold white: **PUMP 3\nDIFFUSION PUMP**
 > - Sub (white small): *No moving parts · silicone oil inside*
-> - Large white badge: **Achieves: 10⁻⁴ to 10⁻⁵ Torr** ✓ PROCESS VACUUM
+> - Large white badge: **Achieves: 10⁻⁴ to 10⁻⁵ mbar** ✓ PROCESS VACUUM
 > - Orange tag: **★ This is where CVC-4 / SV-Sigma goes**
 > - Small note below in grey: *Uses: silicone diffusion pump oil (CVC-4 / DC-704 / SV-Sigma)*
 >
@@ -158,7 +158,7 @@
 > - CENTRE (white): *Never put diffusion pump silicone oil in the rotary pump. Never mix them.*
 > - RIGHT: VKS Tech logo ~70×70px + *vkstech.com · Blog #44*
 >
-> **Typography:** Box labels in Bebas Neue or Anton ~20pt. Sub-labels in Inter Regular ~11pt. Pressure numbers MUST be exact: **760 Torr · ~1 Torr · ~10⁻² Torr · 10⁻⁴ to 10⁻⁵ Torr**.
+> **Typography:** Box labels in Bebas Neue or Anton ~20pt. Sub-labels in Inter Regular ~11pt. Pressure numbers MUST be exact: **~1013 mbar · ~1–2 mbar · ~10⁻² mbar · 10⁻⁴ to 10⁻⁵ mbar**.
 
 **Plan B:** If 4-box horizontal layout is too wide, use L-shape: 3 boxes top row (Chamber → Rotary → Roots), diffusion pump box full width at bottom with a large downward arrow. Pressure values at each stage mandatory.
 
@@ -173,14 +173,14 @@
 >
 > **Header (Hindi):**
 > - Eyebrow (English/orange): THE 3-PUMP RELAY
-> - Title (Hindi, navy bold): **760 Torr से 10⁻⁵ Torr तक — तीन Pumps, तीन Oils, एक System**
+> - Title (Hindi, navy bold): **~1013 mbar से 10⁻⁴ mbar तक — तीन Pumps, तीन Oils, एक System**
 > - Subtitle (Hindi, grey italic): *कोई एक pump अकेले ये नहीं कर सकता। हर एक अगले को handoff करता है — relay race की तरह।*
 >
 > **Box labels (Hindi):**
-> - Box 1: **VACUUM CHAMBER** · नीचे: *शुरुआती pressure: ~760 Torr (atmospheric)*
-> - Box 2: **PUMP 1 · ROTARY VANE PUMP** · sub: *Mechanical pump · mineral oil अंदर* · tag: **Achieves: ~1 Torr** · note: *Use: rotary pump mineral oil (silicone नहीं)*
-> - Box 3: **PUMP 2 · ROOTS BOOSTER PUMP** · sub: *High-speed lobes · booster oil अंदर* · tag: **Achieves: ~10⁻² Torr** · note: *Use: booster pump oil (silicone नहीं)*
-> - Box 4: **PUMP 3 · DIFFUSION PUMP** · sub: *कोई moving parts नहीं · silicone oil अंदर* · badge: **Achieves: 10⁻⁴ से 10⁻⁵ Torr ✓ PROCESS VACUUM** · tag: **★ यहाँ CVC-4 / SV-Sigma जाती है** · note: *Use: silicone diffusion pump oil (CVC-4 / SV-Sigma)*
+> - Box 1: **VACUUM CHAMBER** · नीचे: *शुरुआती pressure: ~1013 mbar (atmospheric)*
+> - Box 2: **PUMP 1 · ROTARY VANE PUMP** · sub: *Mechanical pump · mineral oil अंदर* · tag: **Achieves: ~1–2 mbar** · note: *Use: rotary pump mineral oil (silicone नहीं)*
+> - Box 3: **PUMP 2 · ROOTS BOOSTER PUMP** · sub: *High-speed lobes · booster oil अंदर* · tag: **Achieves: ~10⁻² mbar** · note: *Use: booster pump oil (silicone नहीं)*
+> - Box 4: **PUMP 3 · DIFFUSION PUMP** · sub: *कोई moving parts नहीं · silicone oil अंदर* · badge: **Achieves: 10⁻⁴ से 10⁻⁴ mbar ✓ PROCESS VACUUM** · tag: **★ यहाँ CVC-4 / SV-Sigma जाती है** · note: *Use: silicone diffusion pump oil (CVC-4 / SV-Sigma)*
 >
 > **Arrow labels (Hindi):** *Rotary pump evacuate करता है →* · *Roots booster लेता है →* · *Diffusion pump finish करता है →*
 >
@@ -248,7 +248,7 @@
 > 4. (Teal) **STEP 4 — RECYCLE** · *Liquid oil flows back to boiler. Cycle repeats continuously.*
 >
 > **Bottom strip (12%) — navy:**
-> - LEFT (orange bold): **RESULT:** *10⁻⁴ to 10⁻⁵ Torr — process vacuum maintained throughout the metallising run*
+> - LEFT (orange bold): **RESULT:** *10⁻⁴ to 10⁻⁵ mbar — process vacuum maintained throughout the metallising run*
 > - CENTRE (white): *No moving parts. Just silicone oil, heat, and water cooling.*
 > - RIGHT: VKS Tech logo ~70×70px + *vkstech.com · Blog #44*
 
@@ -451,11 +451,11 @@
 >
 > **SECTION 1 (22%) — THE 3-PUMP SYSTEM:**
 > Three navy boxes left to right, connected by orange arrows:
-> - Box 1: **ROTARY PUMP** · Mineral oil · ~1 Torr
+> - Box 1: **ROTARY PUMP** · Mineral oil · ~1–2 mbar
 > - Arrow: →
-> - Box 2: **ROOTS BOOSTER** · Booster oil · ~10⁻² Torr
+> - Box 2: **ROOTS BOOSTER** · Booster oil · ~10⁻² mbar
 > - Arrow: →
-> - Box 3 (teal, larger): **DIFFUSION PUMP** · Silicone oil (CVC-4 / SV-Sigma) · **10⁻⁴ to 10⁻⁵ Torr** ★
+> - Box 3 (teal, larger): **DIFFUSION PUMP** · Silicone oil (CVC-4 / SV-Sigma) · **10⁻⁴ to 10⁻⁵ mbar** ★
 > Small bilingual caption: *"3 pumps · 3 different oils · NEVER mix them"* / *"3 pumps · 3 अलग oils · कभी mix मत करें"*
 >
 > **SECTION 2 (25%) — ALL BRAND NAMES:**
@@ -530,7 +530,7 @@
 > - Body: *Diffusion pump heater switched on at atmospheric pressure. Hot silicone oil exposed to oxygen. Oxidises to dark brown/black in one run. Fastest way to destroy a fresh charge of oil.*
 > - Hindi sub: *Rough vacuum achieve करने से पहले diffusion pump heater start किया*
 > - Consequence badge (orange): **RESULT: Oil destroyed in one run — immediate oil change needed**
-> - Fix: *Never start diffusion pump heater until rotary pump shows < 0.5 Torr.*
+> - Fix: *Never start diffusion pump heater until rotary pump shows < 0.5 mbar.*
 >
 > **Bottom strip:**
 > - Three summary pills: *Label your drums* · *Drain before refill* · *Rough vacuum first*
@@ -541,9 +541,9 @@
 ## REVIEW CHECKLIST — All 10 Images
 
 ### Numbers to verify in every image
-- Process vacuum = **10⁻⁴ to 10⁻⁵ Torr** (not 10⁻³, not 10⁻⁶)
-- Rotary pump → **~1 Torr**
-- Roots booster → **~10⁻² Torr**
+- Process vacuum = **10⁻⁴ to 10⁻⁵ mbar** (not 10⁻³, not 10⁻⁶)
+- Rotary pump → **~1–2 mbar**
+- Roots booster → **~10⁻² mbar**
 - Diffusion pump oil heated to **~200–220°C**
 - Oil change interval = **18–24 months**
 - CVC-4 = **Bobst brand name only ★** (not a generic name)
