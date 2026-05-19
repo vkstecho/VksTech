@@ -364,7 +364,7 @@ function toast(msg, err){
 function switchTab(tab,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['github','upload','write','posts','qa','req'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  ['github','upload','write','posts','qa','req','subs','yt'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
   if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
   if(tab==='posts')loadPosts();
   if(tab==='qa')loadQuestions();
