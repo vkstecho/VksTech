@@ -64,6 +64,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <button class="tab" onclick="switchTab('qa',this)">❓ Q&amp;A <span id="qaBadge" style="display:none;background:var(--red);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
 <button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
 <button class="tab" onclick="switchTab('subs',this)">📧 Subscribers <span id="subsBadge" style="display:none;background:var(--teal);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
+<button class="tab" onclick="switchTab('yt',this)">📺 YouTube</button>
 </div>
 
 <div id="tab-github" class="panel">
@@ -194,7 +195,82 @@ Don't share or sell this list — it's a trust contract.
 <div id="subsList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
 </div>
 
+<!-- YOUTUBE TAB — manage channels + playlist short URLs -->
+<div id="tab-yt" class="panel" style="display:none">
+<h3>📺 YouTube Channels &amp; Playlists</h3>
+<p style="background:#fff0f0;border-left:3px solid #e85d26;padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Custom short URLs for your playlists.</strong> A playlist's YouTube URL is long and random.
+Here you create a short, clean one like <code>vkstech.com/ToonTales/KushhaliNagriKaSafar</code> that redirects to it.
+Manage your channels first, then add playlists under each.
+</p>
+
+<!-- ── CHANNELS ─────────────────────────────────────── -->
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+    <h4 style="margin:0;color:var(--navy)">📡 Channels</h4>
+    <button class="btn btn-primary" onclick="ytNewChannel()">+ Add Channel</button>
+  </div>
+  <div id="ytChannelList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
 </div>
+
+<!-- ── PLAYLISTS ────────────────────────────────────── -->
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+    <h4 style="margin:0;color:var(--navy)">🎬 Playlists</h4>
+    <button class="btn btn-primary" onclick="ytNewPlaylist()" id="ytAddPlaylistBtn">+ Add Playlist</button>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+    <select id="ytFilterChannel" onchange="renderYtPlaylists()" style="flex:1;min-width:200px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.86rem;font-family:inherit;">
+      <option value="">All channels</option>
+    </select>
+  </div>
+  <div id="ytPlaylistList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ── YOUTUBE CHANNEL MODAL ──────────────────────────── -->
+<div id="ytChannelModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:600px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 id="ytChannelModalTitle" style="font-family:'Playfair Display',serif;">📡 Add Channel</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytCloseChannelModal()">✕ Close</button>
+    </div>
+    <input type="hidden" id="ytcId">
+    <div class="field"><label>Channel name *</label><input type="text" id="ytcName" placeholder="Toon Tales By VKS"></div>
+    <div class="field"><label>URL slug *</label><input type="text" id="ytcSlug" placeholder="ToonTales" oninput="ytcSlugClean(this)"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/<b id="ytcSlugPreview">slug</b>/playlist-name</div></div>
+    <div class="field"><label>YouTube channel URL *</label><input type="text" id="ytcUrl" placeholder="https://www.youtube.com/@vksToonTales"></div>
+    <div class="field"><label>Handle (optional)</label><input type="text" id="ytcHandle" placeholder="@vksToonTales"></div>
+    <div class="field"><label>Description (optional)</label><input type="text" id="ytcDesc" placeholder="Animated stories and toon tales."></div>
+    <div class="field"><label>Sort order (lower shows first)</label><input type="number" id="ytcSort" placeholder="0"></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="ytSaveChannel()">💾 Save Channel</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytCloseChannelModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── YOUTUBE PLAYLIST MODAL ─────────────────────────── -->
+<div id="ytPlaylistModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:600px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 id="ytPlaylistModalTitle" style="font-family:'Playfair Display',serif;">🎬 Add Playlist</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytClosePlaylistModal()">✕ Close</button>
+    </div>
+    <input type="hidden" id="ytpId">
+    <div class="field"><label>Channel *</label><select id="ytpChannel" onchange="ytpUpdatePreview()"></select></div>
+    <div class="field"><label>Playlist title *</label><input type="text" id="ytpTitle" placeholder="Kushhali Nagri Ka Safar"></div>
+    <div class="field"><label>URL slug *</label><input type="text" id="ytpSlug" placeholder="KushhaliNagriKaSafar" oninput="ytpSlugClean(this)"><div id="ytpUrlPreview" style="font-size:.74rem;color:var(--teal);font-family:monospace;margin-top:4px;word-break:break-all"></div></div>
+    <div class="field"><label>Long YouTube playlist URL *</label><input type="text" id="ytpLongUrl" placeholder="https://www.youtube.com/playlist?list=PLxxxxxxxx"></div>
+    <div class="field"><label>Description (optional)</label><input type="text" id="ytpDesc" placeholder="Short description of this playlist"></div>
+    <div class="field"><label>Sort order (lower shows first)</label><input type="number" id="ytpSort" placeholder="0"></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="ytSavePlaylist()">💾 Save Playlist</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytClosePlaylistModal()">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast">✅ Success</div>
@@ -294,6 +370,7 @@ function switchTab(tab,btn){
   if(tab==='qa')loadQuestions();
   if(tab==='req')loadRequests();
   if(tab==='subs')loadSubscribers();
+  if(tab==='yt')loadYouTube();
 }
 
 let uploadedContent='';
@@ -1352,6 +1429,309 @@ function downloadSubsCsv(){
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
   toast('Downloaded ' + _subs.length + ' subscribers');
+}
+
+/* ════════════════════════════════════════════════════════════
+   YOUTUBE — channels + playlist short URLs
+   ════════════════════════════════════════════════════════════ */
+let _ytChannels = [];
+let _ytPlaylists = [];
+
+/* Reserved slugs that would collide with existing site routes.
+   A channel slug must never be one of these. */
+const YT_RESERVED_SLUGS = ['blog','people','youtube','api','yt','admin',
+  'assets','images','img','static','public','sw','manifest'];
+
+/* Clean a slug: keep letters, digits, hyphens. No spaces or symbols. */
+function ytSlugify(s){
+  return (s||'').trim().replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'');
+}
+function ytcSlugClean(el){
+  el.value = ytSlugify(el.value);
+  const p = document.getElementById('ytcSlugPreview');
+  if(p) p.textContent = el.value || 'slug';
+}
+function ytpSlugClean(el){
+  el.value = ytSlugify(el.value);
+  ytpUpdatePreview();
+}
+function ytpUpdatePreview(){
+  const chSel = document.getElementById('ytpChannel');
+  const chSlug = chSel && chSel.selectedOptions[0] ? chSel.selectedOptions[0].dataset.slug : '';
+  const plSlug = document.getElementById('ytpSlug').value || 'playlist-slug';
+  const prev = document.getElementById('ytpUrlPreview');
+  if(prev) prev.textContent = chSlug ? ('→ vkstech.com/' + chSlug + '/' + plSlug) : '(pick a channel)';
+}
+
+async function loadYouTube(){
+  const chList = document.getElementById('ytChannelList');
+  const plList = document.getElementById('ytPlaylistList');
+  chList.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  plList.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+
+  /* Load channels */
+  const chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
+  if(chRes.error){
+    const needsTable = String(chRes.error.message).toLowerCase().indexOf('youtube_channels') > -1
+                    || String(chRes.error.message).toLowerCase().indexOf('does not exist') > -1;
+    chList.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(chRes.error.message)+'</p></div>';
+    if(needsTable){
+      chList.innerHTML += '<div style="margin-top:12px;padding:12px;background:#fff8e6;border-left:3px solid var(--orange);border-radius:8px;font-size:.83rem;color:var(--navy);line-height:1.55"><strong>Database setup needed.</strong><br>Run <code>youtube-migration.sql</code> in your Supabase SQL Editor first.</div>';
+    }
+    return;
+  }
+  _ytChannels = chRes.data || [];
+
+  /* Load playlists */
+  const plRes = await sb.from('youtube_playlists').select('*').order('sort_order',{ascending:true});
+  if(plRes.error){
+    plList.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(plRes.error.message)+'</p></div>';
+  } else {
+    _ytPlaylists = plRes.data || [];
+  }
+
+  renderYtChannels();
+  renderYtChannelDropdowns();
+  renderYtPlaylists();
+}
+
+function renderYtChannels(){
+  const box = document.getElementById('ytChannelList');
+  if(_ytChannels.length === 0){
+    box.innerHTML = '<div class="empty"><div>📭</div><p>No channels yet — add your first one.</p></div>';
+    return;
+  }
+  box.innerHTML = _ytChannels.map(function(c){
+    const plCount = _ytPlaylists.filter(function(p){ return p.channel_id === c.id; }).length;
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:200px">'
+      +   '<h4 style="margin-bottom:4px">'+escH(c.name)+' <span style="font-size:.7rem;color:var(--muted);font-family:monospace">/'+escH(c.slug)+'</span></h4>'
+      +   '<div class="meta"><a href="'+escH(c.youtube_url)+'" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600">'+escH(c.handle||c.youtube_url)+'</a></div>'
+      +   '<div class="meta" style="margin-top:4px">'+escH(c.description||'')+' · '+plCount+' playlist'+(plCount===1?'':'s')+'</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-primary" onclick="ytEditChannel('+c.id+')">✏️ Edit</button>'
+      +   '<button class="btn btn-danger" onclick="ytDeleteChannel('+c.id+')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function renderYtChannelDropdowns(){
+  /* Filter dropdown above the playlist list */
+  const filter = document.getElementById('ytFilterChannel');
+  const curFilter = filter.value;
+  filter.innerHTML = '<option value="">All channels</option>' +
+    _ytChannels.map(function(c){
+      return '<option value="'+c.id+'">'+escH(c.name)+'</option>';
+    }).join('');
+  filter.value = curFilter;
+  /* Modal dropdown */
+  const modalSel = document.getElementById('ytpChannel');
+  modalSel.innerHTML = '<option value="">— Select channel —</option>' +
+    _ytChannels.map(function(c){
+      return '<option value="'+c.id+'" data-slug="'+escH(c.slug)+'">'+escH(c.name)+'</option>';
+    }).join('');
+}
+
+function renderYtPlaylists(){
+  const box = document.getElementById('ytPlaylistList');
+  const filterId = document.getElementById('ytFilterChannel').value;
+  let list = _ytPlaylists;
+  if(filterId) list = list.filter(function(p){ return String(p.channel_id) === String(filterId); });
+
+  if(list.length === 0){
+    box.innerHTML = '<div class="empty"><div>📭</div><p>'+(filterId?'No playlists for this channel.':'No playlists yet — add your first one.')+'</p></div>';
+    return;
+  }
+  box.innerHTML = list.map(function(p){
+    const ch = _ytChannels.find(function(c){ return c.id === p.channel_id; });
+    const chSlug = ch ? ch.slug : '?';
+    const chName = ch ? ch.name : '(unknown channel)';
+    const shortUrl = 'vkstech.com/' + chSlug + '/' + p.slug;
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:220px">'
+      +   '<h4 style="margin-bottom:4px">'+escH(p.title)+'</h4>'
+      +   '<div class="meta" style="color:var(--teal);font-weight:600">'+escH(shortUrl)+'</div>'
+      +   '<div class="meta" style="margin-top:4px">'+escH(chName)+(p.description?' · '+escH(p.description):'')+'</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="ytCopyShortUrl(\''+escH(shortUrl).replace(/\x27/g,'')+'\')">📋 Copy URL</button>'
+      +   '<button class="btn btn-primary" onclick="ytEditPlaylist('+p.id+')">✏️ Edit</button>'
+      +   '<button class="btn btn-danger" onclick="ytDeletePlaylist('+p.id+')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function ytCopyShortUrl(url){
+  const full = 'https://' + url;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(full);
+      toast('Copied: ' + full);
+      return;
+    }
+  } catch(_){}
+  const ta = document.createElement('textarea');
+  ta.value = full; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); toast('Copied: ' + full); }
+  catch(_){ toast('Could not copy', true); }
+  document.body.removeChild(ta);
+}
+
+/* ── CHANNEL modal ────────────────────────────────── */
+function ytNewChannel(){
+  document.getElementById('ytChannelModalTitle').textContent = '📡 Add Channel';
+  document.getElementById('ytcId').value = '';
+  document.getElementById('ytcName').value = '';
+  document.getElementById('ytcSlug').value = '';
+  document.getElementById('ytcUrl').value = '';
+  document.getElementById('ytcHandle').value = '';
+  document.getElementById('ytcDesc').value = '';
+  document.getElementById('ytcSort').value = _ytChannels.length;
+  document.getElementById('ytcSlugPreview').textContent = 'slug';
+  document.getElementById('ytChannelModal').style.display = 'block';
+}
+function ytEditChannel(id){
+  const c = _ytChannels.find(function(x){ return x.id === id; });
+  if(!c) return;
+  document.getElementById('ytChannelModalTitle').textContent = '📡 Edit Channel';
+  document.getElementById('ytcId').value = c.id;
+  document.getElementById('ytcName').value = c.name || '';
+  document.getElementById('ytcSlug').value = c.slug || '';
+  document.getElementById('ytcUrl').value = c.youtube_url || '';
+  document.getElementById('ytcHandle').value = c.handle || '';
+  document.getElementById('ytcDesc').value = c.description || '';
+  document.getElementById('ytcSort').value = c.sort_order || 0;
+  document.getElementById('ytcSlugPreview').textContent = c.slug || 'slug';
+  document.getElementById('ytChannelModal').style.display = 'block';
+}
+function ytCloseChannelModal(){
+  document.getElementById('ytChannelModal').style.display = 'none';
+}
+async function ytSaveChannel(){
+  const id = document.getElementById('ytcId').value;
+  const name = document.getElementById('ytcName').value.trim();
+  const slug = ytSlugify(document.getElementById('ytcSlug').value);
+  const url = document.getElementById('ytcUrl').value.trim();
+  const handle = document.getElementById('ytcHandle').value.trim();
+  const desc = document.getElementById('ytcDesc').value.trim();
+  const sort = parseInt(document.getElementById('ytcSort').value, 10) || 0;
+
+  if(!name){ toast('Channel name is required', true); return; }
+  if(!slug){ toast('URL slug is required', true); return; }
+  if(YT_RESERVED_SLUGS.indexOf(slug.toLowerCase()) > -1){
+    toast('"'+slug+'" is a reserved word — pick a different slug', true); return;
+  }
+  if(!url){ toast('YouTube channel URL is required', true); return; }
+  /* Slug uniqueness check (case-insensitive), excluding self when editing */
+  const clash = _ytChannels.find(function(c){
+    return c.slug.toLowerCase() === slug.toLowerCase() && String(c.id) !== String(id);
+  });
+  if(clash){ toast('Slug "'+slug+'" is already used by another channel', true); return; }
+
+  const row = { name:name, slug:slug, youtube_url:url, handle:handle||null, description:desc||null, sort_order:sort };
+  let res;
+  if(id){
+    res = await sb.from('youtube_channels').update(row).eq('id', id);
+  } else {
+    res = await sb.from('youtube_channels').insert([row]);
+  }
+  if(res.error){ toast('Save failed: '+res.error.message, true); return; }
+  toast(id ? 'Channel updated' : 'Channel added');
+  ytCloseChannelModal();
+  loadYouTube();
+}
+async function ytDeleteChannel(id){
+  const c = _ytChannels.find(function(x){ return x.id === id; });
+  const plCount = _ytPlaylists.filter(function(p){ return p.channel_id === id; }).length;
+  let msg = 'Delete channel "'+(c?c.name:'')+'"?';
+  if(plCount > 0) msg += '\n\nThis will ALSO delete its '+plCount+' playlist'+(plCount===1?'':'s')+'. This cannot be undone.';
+  if(!confirm(msg)) return;
+  const res = await sb.from('youtube_channels').delete().eq('id', id);
+  if(res.error){ toast('Delete failed: '+res.error.message, true); return; }
+  toast('Channel deleted');
+  loadYouTube();
+}
+
+/* ── PLAYLIST modal ───────────────────────────────── */
+function ytNewPlaylist(){
+  if(_ytChannels.length === 0){
+    toast('Add a channel first', true); return;
+  }
+  document.getElementById('ytPlaylistModalTitle').textContent = '🎬 Add Playlist';
+  document.getElementById('ytpId').value = '';
+  document.getElementById('ytpChannel').value = '';
+  document.getElementById('ytpTitle').value = '';
+  document.getElementById('ytpSlug').value = '';
+  document.getElementById('ytpLongUrl').value = '';
+  document.getElementById('ytpDesc').value = '';
+  document.getElementById('ytpSort').value = _ytPlaylists.length;
+  ytpUpdatePreview();
+  document.getElementById('ytPlaylistModal').style.display = 'block';
+}
+function ytEditPlaylist(id){
+  const p = _ytPlaylists.find(function(x){ return x.id === id; });
+  if(!p) return;
+  document.getElementById('ytPlaylistModalTitle').textContent = '🎬 Edit Playlist';
+  document.getElementById('ytpId').value = p.id;
+  document.getElementById('ytpChannel').value = p.channel_id;
+  document.getElementById('ytpTitle').value = p.title || '';
+  document.getElementById('ytpSlug').value = p.slug || '';
+  document.getElementById('ytpLongUrl').value = p.long_url || '';
+  document.getElementById('ytpDesc').value = p.description || '';
+  document.getElementById('ytpSort').value = p.sort_order || 0;
+  ytpUpdatePreview();
+  document.getElementById('ytPlaylistModal').style.display = 'block';
+}
+function ytClosePlaylistModal(){
+  document.getElementById('ytPlaylistModal').style.display = 'none';
+}
+async function ytSavePlaylist(){
+  const id = document.getElementById('ytpId').value;
+  const channelId = document.getElementById('ytpChannel').value;
+  const title = document.getElementById('ytpTitle').value.trim();
+  const slug = ytSlugify(document.getElementById('ytpSlug').value);
+  const longUrl = document.getElementById('ytpLongUrl').value.trim();
+  const desc = document.getElementById('ytpDesc').value.trim();
+  const sort = parseInt(document.getElementById('ytpSort').value, 10) || 0;
+
+  if(!channelId){ toast('Pick a channel', true); return; }
+  if(!title){ toast('Playlist title is required', true); return; }
+  if(!slug){ toast('URL slug is required', true); return; }
+  if(!longUrl){ toast('Long YouTube URL is required', true); return; }
+  if(longUrl.indexOf('youtube.com') === -1 && longUrl.indexOf('youtu.be') === -1){
+    if(!confirm('That URL does not look like a YouTube link. Save anyway?')) return;
+  }
+  /* Slug uniqueness within the same channel, excluding self when editing */
+  const clash = _ytPlaylists.find(function(p){
+    return String(p.channel_id) === String(channelId)
+        && p.slug.toLowerCase() === slug.toLowerCase()
+        && String(p.id) !== String(id);
+  });
+  if(clash){ toast('This channel already has a playlist with slug "'+slug+'"', true); return; }
+
+  const row = { channel_id:parseInt(channelId,10), title:title, slug:slug, long_url:longUrl, description:desc||null, sort_order:sort };
+  let res;
+  if(id){
+    res = await sb.from('youtube_playlists').update(row).eq('id', id);
+  } else {
+    res = await sb.from('youtube_playlists').insert([row]);
+  }
+  if(res.error){ toast('Save failed: '+res.error.message, true); return; }
+  toast(id ? 'Playlist updated' : 'Playlist added');
+  ytClosePlaylistModal();
+  loadYouTube();
+}
+async function ytDeletePlaylist(id){
+  const p = _ytPlaylists.find(function(x){ return x.id === id; });
+  if(!confirm('Delete playlist "'+(p?p.title:'')+'"? This cannot be undone.')) return;
+  const res = await sb.from('youtube_playlists').delete().eq('id', id);
+  if(res.error){ toast('Delete failed: '+res.error.message, true); return; }
+  toast('Playlist deleted');
+  loadYouTube();
 }
 
 /* ════════════════════════════════════════════════════════════
