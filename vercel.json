@@ -2,7 +2,9 @@
   "rewrites": [
     { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" },
     { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/people", "destination": "/people.html" }
+    { "source": "/people", "destination": "/people.html" },
+    { "source": "/youtube", "destination": "/youtube.html" },
+    { "source": "/:channel/:playlist", "destination": "/api/yt?channel=:channel&playlist=:playlist" }
   ],
   "headers": [
     {
