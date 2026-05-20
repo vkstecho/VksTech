@@ -166,7 +166,7 @@ section{position:relative;z-index:1;}
 .btn-s:hover{border-color:var(--orange);color:var(--orange);}
 .hero-stats{display:flex;gap:2rem;margin-top:2.8rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
 .stat-item .num{font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;color:var(--navy);line-height:1;}
-.stat-item .num em{color:var(--orange);font-style:normal;}
+.stat-item .num em,.stat-item .num .plus{color:var(--orange);font-style:normal;}
 .stat-item .lbl{font-size:.73rem;color:var(--light);margin-top:4px;font-weight:500;}
 .hero-visual{display:flex;justify-content:flex-end;align-items:center;}
 .card-stack{position:relative;width:300px;height:380px;}
@@ -457,6 +457,13 @@ section{position:relative;z-index:1;}
 .yt-home-cta{text-align:center;margin-top:30px;}
 .yt-home-link{display:inline-block;background:var(--navy);color:#fff;padding:13px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.88rem;transition:background .2s,transform .2s;}
 .yt-home-link:hover{background:var(--orange);transform:translateY(-1px);}
+/* Skeleton placeholder cards shown while channels load — keeps the section
+   from looking empty between heading and CTA on slow connections. */
+.ythc-skel{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;height:150px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.ythc-skel::before{content:"";width:64px;height:64px;border-radius:50%;background:linear-gradient(110deg,var(--bg2) 30%,#ede9e0 50%,var(--bg2) 70%);background-size:200% 100%;animation:skel 1.4s ease-in-out infinite;}
+.ythc-skel::after{content:"";width:70%;height:14px;border-radius:6px;background:linear-gradient(110deg,var(--bg2) 30%,#ede9e0 50%,var(--bg2) 70%);background-size:200% 100%;animation:skel 1.4s ease-in-out infinite;animation-delay:.1s;}
+@keyframes skel{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+@media(prefers-reduced-motion:reduce){.ythc-skel::before,.ythc-skel::after{animation:none;}}
 @media(max-width:600px){
   .yt-home-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
   .ythc{padding:14px 10px;}
@@ -655,6 +662,7 @@ body.sp-hidden::after{
     <li><a href="#calculators" data-i="nav_calc">Calculators</a></li>
     <li><a href="#personal-apps" data-i="nav_per">Personal Apps</a></li>
     <li><a href="#blog" data-i="nav_blog">Blog</a></li>
+    <li><a href="/youtube" data-i="nav_yt">YouTube</a></li>
     <li><a href="#request-app" data-i="nav_req">Request App</a></li>
     <li><a href="#about" data-i="nav_about">About</a></li>
     <li><a href="/people" data-i="nav_people">People</a></li>
@@ -673,6 +681,7 @@ body.sp-hidden::after{
   <a href="#calculators" onclick="toggleMenu()" data-i="nav_calc">Calculators</a>
   <a href="#personal-apps" onclick="toggleMenu()" data-i="nav_per">Personal Apps</a>
   <a href="#blog" onclick="toggleMenu()" data-i="nav_blog">Blog</a>
+  <a href="/youtube" data-i="nav_yt">YouTube</a>
   <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request App</a>
   <a href="#about" onclick="toggleMenu()" data-i="nav_about">About</a>
   <a href="/people" data-i="nav_people">People</a>
@@ -697,7 +706,7 @@ body.sp-hidden::after{
         <div class="hero-stats">
           <div class="stat-item"><div class="num">7</div><div class="lbl" data-i="stat1">Calculators</div></div>
           <div class="stat-item"><div class="num">18</div><div class="lbl" data-i="stat2">Articles Published</div></div>
-          <div class="stat-item"><div class="num">9<em>+</em></div><div class="lbl" data-i="stat3">Apps Live</div></div>
+          <div class="stat-item"><div class="num">9<span class="plus">+</span></div><div class="lbl" data-i="stat3">Apps Live</div></div>
           <div class="stat-item"><div class="num">100%</div><div class="lbl" data-i="stat4">Free</div></div>
         </div>
       </div>
@@ -916,7 +925,9 @@ body.sp-hidden::after{
       <h2 class="section-title" data-i="yt_h2">Five channels, <span>one creator.</span></h2>
       <p class="section-sub" data-i="yt_sub2">Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.</p>
     </div>
-    <div id="ytHomeGrid" class="yt-home-grid"></div>
+    <div id="ytHomeGrid" class="yt-home-grid">
+      <div class="ythc-skel"></div><div class="ythc-skel"></div><div class="ythc-skel"></div><div class="ythc-skel"></div><div class="ythc-skel"></div>
+    </div>
     <div class="yt-home-cta">
       <a href="/youtube" class="yt-home-link" data-i="yt_home_cta">See all playlists →</a>
     </div>
@@ -1237,7 +1248,7 @@ document.addEventListener('click',(e)=>{const m=document.getElementById('mobileM
    LANGUAGE ENGINE — EN / HI
    ═══════════════════════════════ */
 const HI = {
-  nav_ind:"उद्योग ऐप्स", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_cta:"ऐप का अनुरोध करें",
+  nav_ind:"उद्योग ऐप्स", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"ऐप का अनुरोध करें",
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
@@ -1279,7 +1290,7 @@ const HI = {
 };
 
 const EN = {
-  nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_cta:"Request an App",
+  nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Request an App",
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Five channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",
@@ -2271,16 +2282,16 @@ var YT_BADGE_COLORS = ['#e85d26','#0d8c7e','#1a2744','#c8860a','#7c3aed'];
 async function loadYouTubeHome(){
   var grid = document.getElementById('ytHomeGrid');
   if(!grid) return;
+  /* Helper: replace skeleton with a friendly fallback if anything goes wrong */
+  function showFallback(){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:.9rem;padding:20px 0;">Couldn\'t load channels right now — <a href="/youtube" style="color:var(--orange);font-weight:600;">view them on the YouTube page →</a></div>';
+  }
   try {
     var chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
-    if(chRes.error){
-      /* If table missing or other error, hide the section entirely */
-      var section = document.getElementById('youtube-section');
-      if(section) section.style.display = 'none';
-      return;
-    }
+    if(chRes.error){ showFallback(); return; }
     var channels = chRes.data || [];
     if(channels.length === 0){
+      /* No data at all — hide the entire section rather than showing an empty grid */
       var section = document.getElementById('youtube-section');
       if(section) section.style.display = 'none';
       return;
@@ -2308,9 +2319,7 @@ async function loadYouTubeHome(){
         + '</a>';
     }).join('');
   } catch(e){
-    /* Network or other failure — hide section so we don't show broken state */
-    var section = document.getElementById('youtube-section');
-    if(section) section.style.display = 'none';
+    showFallback();
   }
 }
 /* Tiny escape helper for attribute/text values */
