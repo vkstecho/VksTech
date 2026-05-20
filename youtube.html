@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>YouTube Channels | VKS Tech</title>
+<meta name="description" content="VKS Tech YouTube channels — MoneyFlow, FitSutra, Toon Tales, WorkOHolic and VikiChoni Life. Curated playlists on finance, fitness, stories, productivity and everyday life."/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#1a2744"/>
+<link rel="canonical" href="https://vkstech.com/youtube"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="YouTube Channels | VKS Tech"/>
+<meta property="og:description" content="Five YouTube channels, one creator. Finance, fitness, stories, productivity and everyday life — find every playlist in one place."/>
+<meta property="og:url" content="https://vkstech.com/youtube"/>
+<meta property="og:image" content="https://vkstech.com/og-image.png"/>
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png"/>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --bg:#faf9f6; --bg2:#f3f1ec; --card:#fff;
+  --border:#e2ddd4; --border2:#d0c9bc;
+  --navy:#1a2744; --orange:#e85d26; --orange2:#f07040;
+  --teal:#0d8c7e; --gold:#c8860a;
+  --text:#1a2744; --muted:#6b7a99; --light:#9aaac4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;overflow-x:hidden;}
+
+/* Background motion */
+.pg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.pg .b1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,38,.06) 0%,transparent 70%);top:-200px;right:-100px;animation:bm1 14s ease-in-out infinite;}
+.pg .b2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,126,.05) 0%,transparent 70%);bottom:-100px;left:-80px;animation:bm2 18s ease-in-out infinite;}
+@keyframes bm1{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,70px);}}
+@keyframes bm2{0%,100%{transform:translate(0,0);}50%{transform:translate(70px,-50px);}}
+@media(prefers-reduced-motion:reduce){.pg .b1,.pg .b2{animation:none;}}
+
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:10;background:rgba(250,249,246,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;}
+.back-btn{background:var(--navy);color:#fff;border:none;padding:10px 22px;border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:background .2s;}
+.back-btn:hover{background:var(--orange);}
+.tb-brand{font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);font-size:1.05rem;}
+.tb-brand span{color:var(--orange);}
+
+main{position:relative;z-index:1;}
+
+/* Hero */
+.hero{max-width:820px;margin:0 auto;padding:54px 5% 30px;text-align:center;}
+.hero .eyebrow{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.2);padding:6px 14px;border-radius:50px;margin-bottom:20px;}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:2.5rem;line-height:1.18;color:var(--navy);margin-bottom:16px;}
+.hero h1 .accent{color:var(--orange);}
+.hero p{font-size:1.02rem;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7;}
+
+/* Channels grid */
+.channels{max-width:1080px;margin:30px auto 60px;padding:0 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;}
+.ch-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(26,39,68,.1);border-color:var(--border2);}
+.ch-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.ch-badge{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;color:#fff;flex-shrink:0;}
+.ch-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.18rem;color:var(--navy);line-height:1.25;}
+.ch-handle{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--muted);margin-top:2px;}
+.ch-desc{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+.ch-sub-btn{display:inline-flex;align-items:center;gap:7px;background:#ff0000;color:#fff;text-decoration:none;font-weight:700;font-size:.82rem;padding:9px 16px;border-radius:50px;margin-bottom:16px;align-self:flex-start;transition:background .2s,transform .2s;}
+.ch-sub-btn:hover{background:#d90000;transform:translateY(-1px);}
+.ch-pl-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--light);margin-bottom:8px;border-top:1px dashed var(--border);padding-top:14px;}
+.ch-pl-list{display:flex;flex-direction:column;gap:7px;}
+.pl-link{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--navy);font-size:.9rem;font-weight:600;padding:8px 11px;border-radius:9px;background:var(--bg2);transition:background .15s,color .15s;}
+.pl-link:hover{background:rgba(232,93,38,.1);color:var(--orange);}
+.pl-link .pl-ico{flex-shrink:0;}
+.pl-link .pl-ttl{flex:1;min-width:0;}
+.pl-empty{font-size:.84rem;color:var(--light);font-style:italic;padding:4px 0;}
+
+.state{max-width:600px;margin:60px auto;text-align:center;color:var(--muted);padding:0 5%;}
+.state .ico{font-size:2.4rem;margin-bottom:12px;}
+
+/* Footer */
+footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:36px 5%;font-size:.84rem;}
+footer a{color:#fff;text-decoration:none;}
+footer a:hover{color:var(--orange2);}
+
+@media(max-width:600px){
+  .hero{padding:38px 5% 22px;}
+  .hero h1{font-size:1.9rem;}
+  .channels{grid-template-columns:1fr;gap:16px;}
+}
+</style>
+</head>
+<body>
+<div class="pg"><div class="b1"></div><div class="b2"></div></div>
+
+<div class="topbar">
+  <a href="/" class="tb-brand">VKS<span> Tech</span></a>
+  <button onclick="goBackSmart()" class="back-btn" type="button">\u2190 Back</button>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">\u{1F4FA} VKS Tech on YouTube</div>
+    <h1>Five channels. <span class="accent">One creator.</span></h1>
+    <p>Finance, fitness, animated stories, productivity, and everyday life \u2014 every playlist, gathered in one place. Pick a channel and start watching.</p>
+  </section>
+
+  <div id="channelsGrid" class="channels"></div>
+  <div id="stateMsg" class="state"><div class="ico">\u23F3</div><p>Loading channels\u2026</p></div>
+</main>
+
+<footer>
+  &copy; <span id="yr"></span> VKS Tech \u00B7 Vivek Kumar \u00B7 <a href="/">Back to home</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* Smart back button — history if available, else homepage */
+function goBackSmart(){
+  var ref = document.referrer || '';
+  if (ref.indexOf(window.location.origin) === 0 && window.history.length > 1){
+    window.history.back();
+  } else {
+    window.location.href = '/';
+  }
+}
+
+var sb = window.supabase.createClient(
+  'https://hozqkfvusazdneockkxf.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY'
+);
+
+/* Each channel gets a deterministic colour for its badge */
+var BADGE_COLORS = ['#e85d26','#0d8c7e','#1a2744','#c8860a','#7c3aed','#d6336c'];
+function badgeColor(i){ return BADGE_COLORS[i % BADGE_COLORS.length]; }
+function initial(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
+
+function esc(s){
+  var d = document.createElement('div');
+  d.textContent = (s == null ? '' : String(s));
+  return d.innerHTML;
+}
+
+async function loadChannels(){
+  var grid = document.getElementById('channelsGrid');
+  var state = document.getElementById('stateMsg');
+
+  var chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
+  if(chRes.error){
+    state.innerHTML = '<div class="ico">\u26A0\uFE0F</div><p>Could not load channels right now. Please try again later.</p>';
+    return;
+  }
+  var channels = chRes.data || [];
+  if(channels.length === 0){
+    state.innerHTML = '<div class="ico">\u{1F4FA}</div><p>Channels coming soon.</p>';
+    return;
+  }
+
+  var plRes = await sb.from('youtube_playlists').select('*').order('sort_order',{ascending:true});
+  var playlists = (plRes && !plRes.error && plRes.data) ? plRes.data : [];
+
+  state.style.display = 'none';
+
+  grid.innerHTML = channels.map(function(c, i){
+    var myPls = playlists.filter(function(p){ return p.channel_id === c.id; });
+    var plHtml;
+    if(myPls.length === 0){
+      plHtml = '<div class="pl-empty">Playlists coming soon.</div>';
+    } else {
+      plHtml = myPls.map(function(p){
+        var shortUrl = '/' + encodeURIComponent(c.slug) + '/' + encodeURIComponent(p.slug);
+        return '<a class="pl-link" href="' + shortUrl + '">'
+             + '<span class="pl-ico">\u25B6\uFE0F</span>'
+             + '<span class="pl-ttl">' + esc(p.title) + '</span>'
+             + '</a>';
+      }).join('');
+    }
+    return '<div class="ch-card">'
+      + '<div class="ch-head">'
+      +   '<div class="ch-badge" style="background:' + badgeColor(i) + '">' + esc(initial(c.name)) + '</div>'
+      +   '<div>'
+      +     '<div class="ch-name">' + esc(c.name) + '</div>'
+      +     (c.handle ? '<div class="ch-handle">' + esc(c.handle) + '</div>' : '')
+      +   '</div>'
+      + '</div>'
+      + (c.description ? '<div class="ch-desc">' + esc(c.description) + '</div>' : '')
+      + '<a class="ch-sub-btn" href="' + esc(c.youtube_url) + '" target="_blank" rel="noopener">\u25B6 Subscribe on YouTube</a>'
+      + '<div class="ch-pl-label">Playlists</div>'
+      + '<div class="ch-pl-list">' + plHtml + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+loadChannels();
+</script>
+</body>
+</html>
