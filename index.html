@@ -445,6 +445,24 @@ section{position:relative;z-index:1;}
   .pd-title{font-size:.95rem;}
   .pd-sub{font-size:.78rem;}
 }
+
+/* YouTube section on homepage — channel cards */
+.yt-home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;max-width:1080px;margin:0 auto;padding:0 5%;}
+.ythc{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;align-items:center;}
+.ythc:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,39,68,.1);border-color:var(--orange);}
+.ythc-icon{width:64px;height:64px;border-radius:50%;margin-bottom:12px;object-fit:cover;border:2px solid var(--bg2);}
+.ythc-init{width:64px;height:64px;border-radius:50%;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.7rem;color:#fff;}
+.ythc-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--navy);margin-bottom:3px;line-height:1.2;}
+.ythc-count{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.05em;}
+.yt-home-cta{text-align:center;margin-top:30px;}
+.yt-home-link{display:inline-block;background:var(--navy);color:#fff;padding:13px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.88rem;transition:background .2s,transform .2s;}
+.yt-home-link:hover{background:var(--orange);transform:translateY(-1px);}
+@media(max-width:600px){
+  .yt-home-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .ythc{padding:14px 10px;}
+  .ythc-icon,.ythc-init{width:54px;height:54px;}
+  .ythc-name{font-size:.88rem;}
+}
 .pcath{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--navy);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;justify-items:center;}
 .pcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;box-shadow:var(--ss);transition:all .3s;width:100%;max-width:240px;}
@@ -871,7 +889,6 @@ body.sp-hidden::after{
     <div class="apps-grid">
       <a href="https://fitsutra.vkstech.com" target="_blank" class="acard reveal d1" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_3.png" alt="FitSutra" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" decoding="async"/></div><div class="acard-title">FitSutra — Health & Fitness</div><div class="acard-desc">A personal health and fitness companion designed to help track workouts, nutrition, and wellness goals. Built with simplicity in mind for everyday use.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
       <a href="https://moneyflow.vkstech.com" target="_blank" class="acard reveal d2" style="text-decoration:none;color:inherit;"><div class="acard-bar"></div><div class="acard-icon" style="background:none;"><img src="icon512_4.png" alt="MoneyFlow" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" decoding="async"/></div><div class="acard-title">MoneyFlow — Personal Finance</div><div class="acard-desc">Track expenses, budgets, savings, and investments in one clean dashboard. Built for Indian users — rupee-native, with insights that help you understand where your money actually goes.</div><div class="acard-foot"><span class="tag to">🔥 LIVE</span><span class="clink">Open App →</span></div></a>
-      <div class="acard reveal d3" style="border-style:dashed;opacity:.55;"><div class="acard-bar"></div><div class="acard-icon in_">✨</div><div class="acard-title">More on the Way</div><div class="acard-desc">Vivek is always building. Upcoming personal apps covering wellness, finance, creativity, and more. Watch this space.</div><div class="acard-foot"><span class="tag tg">In Pipeline</span></div></div>
     </div>
   </div>
 </section>
@@ -890,16 +907,20 @@ body.sp-hidden::after{
   </a>
 </section>
 
-<section class="people-discovery reveal" aria-label="VKS Tech on YouTube">
-  <a href="/youtube" class="pd-card">
-    <div class="pd-icon">📺</div>
-    <div class="pd-text">
-      <div class="pd-eyebrow" data-i="yt_eyebrow">VKS Tech on YouTube</div>
-      <div class="pd-title" data-i="yt_title">Five channels, one creator</div>
-      <div class="pd-sub" data-i="yt_sub">Finance, fitness, animated stories, productivity and everyday life — explore every playlist.</div>
+<!-- YOUTUBE — full section showing all 5 channels with icons.
+     Loads channels and playlist counts live from Supabase. -->
+<section id="youtube-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" data-i="yt_label">📺 VKS Tech on YouTube</div>
+      <h2 class="section-title" data-i="yt_h2">Five channels, <span>one creator.</span></h2>
+      <p class="section-sub" data-i="yt_sub2">Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.</p>
     </div>
-    <div class="pd-arrow">→</div>
-  </a>
+    <div id="ytHomeGrid" class="yt-home-grid"></div>
+    <div class="yt-home-cta">
+      <a href="/youtube" class="yt-home-link" data-i="yt_home_cta">See all playlists →</a>
+    </div>
+  </div>
 </section>
 
 <!-- BLOG — homepage preview (latest 3, full library at /blog) -->
@@ -1220,6 +1241,10 @@ const HI = {
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
+  yt_label:"📺 VKS Tech यूट्यूब पर",
+  yt_h2:"पाँच चैनल, <span>एक क्रिएटर।</span>",
+  yt_sub2:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर चैनल और प्लेलिस्ट एक जगह।",
+  yt_home_cta:"सभी प्लेलिस्ट देखें →",
   hero_badge:"फ्लेक्सिबल पैकेजिंग के लिए बनाया गया · हरियाणा, भारत",
   hero_title:"ऐप्स। कैलकुलेटर।<br>लेख। <span class='accent'>सब मुफ़्त।</span>",
   hero_sub:"फ्लेक्सिबल पैकेजिंग में काम करने वाले हर पेशेवर के लिए — ऑपरेटर से लेकर प्लांट हेड तक। बनाया है <strong>विवेक कुमार</strong> ने (M.Tech, NIT उत्तराखंड), UFlex, JPFL और GLS Polyfilms में 9 साल के अनुभव से।",
@@ -1258,6 +1283,10 @@ const EN = {
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Five channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",
+  yt_label:"📺 VKS Tech on YouTube",
+  yt_h2:"Five channels, <span>one creator.</span>",
+  yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
+  yt_home_cta:"See all playlists →",
   hero_badge:"BUILT FOR FLEXIBLE PACKAGING · HARYANA, INDIA",
   hero_title:"Apps. Calculators.<br>Articles. <span class='accent'>Free.</span>",
   hero_sub:"A toolkit for everyone working in flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) over 9 years at UFlex, JPFL, and GLS Polyfilms.",
@@ -2232,6 +2261,64 @@ function applyBlogLang(lang) {
 }
 
 loadBlogs();
+
+/* ════════════════════════════════════════════════════════════
+   YOUTUBE — homepage section
+   Loads the 5 channels (with icons + playlist counts) from Supabase
+   and renders compact cards. Independent of blog/people sections.
+   ════════════════════════════════════════════════════════════ */
+var YT_BADGE_COLORS = ['#e85d26','#0d8c7e','#1a2744','#c8860a','#7c3aed'];
+async function loadYouTubeHome(){
+  var grid = document.getElementById('ytHomeGrid');
+  if(!grid) return;
+  try {
+    var chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
+    if(chRes.error){
+      /* If table missing or other error, hide the section entirely */
+      var section = document.getElementById('youtube-section');
+      if(section) section.style.display = 'none';
+      return;
+    }
+    var channels = chRes.data || [];
+    if(channels.length === 0){
+      var section = document.getElementById('youtube-section');
+      if(section) section.style.display = 'none';
+      return;
+    }
+    /* Count playlists per channel */
+    var plRes = await sb.from('youtube_playlists').select('channel_id');
+    var counts = {};
+    if(plRes && !plRes.error && plRes.data){
+      plRes.data.forEach(function(p){
+        counts[p.channel_id] = (counts[p.channel_id] || 0) + 1;
+      });
+    }
+    grid.innerHTML = channels.map(function(c, i){
+      var color = YT_BADGE_COLORS[i % YT_BADGE_COLORS.length];
+      var initial = (c.name || '?').trim().charAt(0).toUpperCase();
+      var iconHtml = c.icon_url
+        ? '<img class="ythc-icon" src="'+escapeAttr(c.icon_url)+'" alt="'+escapeAttr(c.name)+'" onerror="this.outerHTML=&quot;<div class=\\&quot;ythc-init\\&quot; style=\\&quot;background:'+color+'\\&quot;>'+escapeAttr(initial)+'</div>&quot;"/>'
+        : '<div class="ythc-init" style="background:'+color+'">'+escapeAttr(initial)+'</div>';
+      var n = counts[c.id] || 0;
+      var countTxt = n + ' playlist' + (n===1?'':'s');
+      return '<a class="ythc" href="/youtube">'
+        + iconHtml
+        + '<div class="ythc-name">'+escapeAttr(c.name)+'</div>'
+        + '<div class="ythc-count">'+countTxt+'</div>'
+        + '</a>';
+    }).join('');
+  } catch(e){
+    /* Network or other failure — hide section so we don't show broken state */
+    var section = document.getElementById('youtube-section');
+    if(section) section.style.display = 'none';
+  }
+}
+/* Tiny escape helper for attribute/text values */
+function escapeAttr(s){
+  if(s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+loadYouTubeHome();
 
 /* FORM SUBMISSION */
 function submitReq(){

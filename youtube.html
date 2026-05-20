@@ -68,6 +68,7 @@ main{position:relative;z-index:1;}
 .ch-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(26,39,68,.1);border-color:var(--border2);}
 .ch-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
 .ch-badge{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;color:#fff;flex-shrink:0;}
+.ch-badge-img{object-fit:cover;background:var(--bg2);border:1px solid var(--border);}
 .ch-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.18rem;color:var(--navy);line-height:1.25;}
 .ch-handle{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--muted);margin-top:2px;}
 .ch-desc{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:16px;}
@@ -101,22 +102,22 @@ footer a:hover{color:var(--orange2);}
 
 <div class="topbar">
   <a href="/" class="tb-brand">VKS<span> Tech</span></a>
-  <button onclick="goBackSmart()" class="back-btn" type="button">\u2190 Back</button>
+  <button onclick="goBackSmart()" class="back-btn" type="button">← Back</button>
 </div>
 
 <main>
   <section class="hero">
     <div class="eyebrow">\u{1F4FA} VKS Tech on YouTube</div>
     <h1>Five channels. <span class="accent">One creator.</span></h1>
-    <p>Finance, fitness, animated stories, productivity, and everyday life \u2014 every playlist, gathered in one place. Pick a channel and start watching.</p>
+    <p>Finance, fitness, animated stories, productivity, and everyday life — every playlist, gathered in one place. Pick a channel and start watching.</p>
   </section>
 
   <div id="channelsGrid" class="channels"></div>
-  <div id="stateMsg" class="state"><div class="ico">\u23F3</div><p>Loading channels\u2026</p></div>
+  <div id="stateMsg" class="state"><div class="ico">⏳</div><p>Loading channels…</p></div>
 </main>
 
 <footer>
-  &copy; <span id="yr"></span> VKS Tech \u00B7 Vivek Kumar \u00B7 <a href="/">Back to home</a>
+  &copy; <span id="yr"></span> VKS Tech · Vivek Kumar · <a href="/">Back to home</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -155,7 +156,7 @@ async function loadChannels(){
 
   var chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
   if(chRes.error){
-    state.innerHTML = '<div class="ico">\u26A0\uFE0F</div><p>Could not load channels right now. Please try again later.</p>';
+    state.innerHTML = '<div class="ico">⚠️</div><p>Could not load channels right now. Please try again later.</p>';
     return;
   }
   var channels = chRes.data || [];
@@ -178,21 +179,28 @@ async function loadChannels(){
       plHtml = myPls.map(function(p){
         var shortUrl = '/' + encodeURIComponent(c.slug) + '/' + encodeURIComponent(p.slug);
         return '<a class="pl-link" href="' + shortUrl + '">'
-             + '<span class="pl-ico">\u25B6\uFE0F</span>'
+             + '<span class="pl-ico">▶️</span>'
              + '<span class="pl-ttl">' + esc(p.title) + '</span>'
              + '</a>';
       }).join('');
     }
+    /* If icon_url is set, use the real image; fall back to initial badge if image fails or is missing.
+       The onerror handler swaps in a colored initial badge if the image URL is broken. */
+    var badgeHtml = c.icon_url
+      ? '<img class="ch-badge ch-badge-img" src="' + esc(c.icon_url) + '" alt="' + esc(c.name) + '" '
+        + 'onerror="this.outerHTML=&quot;<div class=\\&quot;ch-badge\\&quot; style=\\&quot;background:' + badgeColor(i) + '\\&quot;>' + esc(initial(c.name)) + '</div>&quot;"/>'
+      : '<div class="ch-badge" style="background:' + badgeColor(i) + '">' + esc(initial(c.name)) + '</div>';
+
     return '<div class="ch-card">'
       + '<div class="ch-head">'
-      +   '<div class="ch-badge" style="background:' + badgeColor(i) + '">' + esc(initial(c.name)) + '</div>'
+      +   badgeHtml
       +   '<div>'
       +     '<div class="ch-name">' + esc(c.name) + '</div>'
       +     (c.handle ? '<div class="ch-handle">' + esc(c.handle) + '</div>' : '')
       +   '</div>'
       + '</div>'
       + (c.description ? '<div class="ch-desc">' + esc(c.description) + '</div>' : '')
-      + '<a class="ch-sub-btn" href="' + esc(c.youtube_url) + '" target="_blank" rel="noopener">\u25B6 Subscribe on YouTube</a>'
+      + '<a class="ch-sub-btn" href="' + esc(c.youtube_url) + '" target="_blank" rel="noopener">▶ Subscribe on YouTube</a>'
       + '<div class="ch-pl-label">Playlists</div>'
       + '<div class="ch-pl-list">' + plHtml + '</div>'
       + '</div>';
