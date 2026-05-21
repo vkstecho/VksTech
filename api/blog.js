@@ -732,6 +732,8 @@ async function submitQuestion(){
   msgEl.textContent = '\u2705 Thanks ' + name.split(' ')[0] + '! Your question will appear below once Vivek replies.';
 }
 </script>
+<!-- Vercel Web Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>`;
 }
@@ -742,7 +744,7 @@ function notFoundHtml() {
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f6;color:#1a2744;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:20px;text-align:center;}h1{font-size:2rem;margin-bottom:12px;}a{color:#e85d26;text-decoration:none;font-weight:600;}</style>
-</head><body><div><h1>Article not found</h1><p>This blog post may have been moved or deleted.</p><p style="margin-top:20px;"><a href="/">Back to VKS Tech</a></p></div></body></html>`;
+</head><body><div><h1>Article not found</h1><p>This blog post may have been moved or deleted.</p><p style="margin-top:20px;"><a href="/">Back to VKS Tech</a></p></div><script defer src="/_vercel/insights/script.js"></script></body></html>`;
 }
 
 function errorHtml() {
@@ -751,5 +753,5 @@ function errorHtml() {
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f6;color:#1a2744;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:20px;text-align:center;}h1{font-size:2rem;margin-bottom:12px;}a{color:#e85d26;text-decoration:none;font-weight:600;}</style>
-</head><body><div><h1>Something went wrong</h1><p>Please try again shortly.</p><p style="margin-top:20px;"><a href="/">Back to VKS Tech</a></p></div></body></html>`;
+</head><body><div><h1>Something went wrong</h1><p>Please try again shortly.</p><p style="margin-top:20px;"><a href="/">Back to VKS Tech</a></p></div><script defer src="/_vercel/insights/script.js"></script></body></html>`;
 }
