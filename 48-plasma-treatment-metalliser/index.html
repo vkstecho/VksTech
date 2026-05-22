@@ -1,0 +1,390 @@
+<meta name="category" content="flexible-packaging">
+<meta name="subcategory" content="metalliser">
+
+<div style="margin:24px 0;">
+<img src="cover.png" alt="What is Plasma Treatment in a Metalliser? — Purpose, Use, and Where It Sits in the Vacuum Chamber" style="width:100%;height:auto;border-radius:12px;display:block;"/>
+</div>
+
+<div class="en-content">
+
+<h2>🔥 What is Plasma Treatment in a Metalliser? — Purpose, Use, and Where It Sits in the Vacuum Chamber</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 14-min read &nbsp;|&nbsp; The vacuum-chamber surface treatment that decides whether your aluminium actually sticks &nbsp;|&nbsp; Includes 3 free downloadable bilingual Excel tools &nbsp;|&nbsp; Published May 2026</p>
+
+<p>A metalliser that has been making aluminised film for years can still have one part of its process that operators were never properly taught — the plasma treatment unit. In a control panel reading, it shows up as a power level, a gas flow rate, and a chamber pressure. In a maintenance log, it shows up as "plasma electrode cleaning". In an OEM manual, there are three pages explaining it. But ask three operators on three shifts what plasma is actually doing inside the vacuum chamber, and you may get three different stories. <strong>Plasma treatment is the most under-explained, often-misunderstood process unit on a modern vacuum metalliser</strong> — and skipping it, mis-setting it, or running the wrong gas through it will quietly cost you adhesion failures, barrier inconsistency, and rolls that the customer rejects without an obvious technical reason.</p>
+
+<p>This blog answers four direct questions, in plain language. What is plasma treatment, technically — and how is it different from the corona treatment we already use outside the vacuum chamber? Why does a metalliser need it — what does it actually accomplish that ordinary vacuum metallisation alone does not? Where exactly does it sit in the machine — at what point in the web path is the film "hit by plasma"? And which substrates and applications really need it, versus which can be run without it? Fourteen minutes, written for metalliser operators, shift supervisors, and process engineers. Three free downloadable tools at the bottom — a substrate-by-application decision chart telling you when plasma is essential versus optional, a daily operating log to make plasma a tracked process instead of a black box, and a combined gas selection guide and troubleshooting reference.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Plasma in a Metalliser in 30 Seconds</strong>
+<a href="#downloads-en" onclick="event.preventDefault(); document.getElementById('downloads-en').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Skip to Downloads →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">WHAT IT IS</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">An ionised-gas surface treatment that happens inside the vacuum chamber, just before aluminium deposition. A specific gas (usually oxygen, sometimes argon or a mix) is fed in at low pressure, energised by a high-voltage electrode into a glowing plasma, and the film web passes through it. The web exits with a chemically activated, contamination-free surface that bonds far better to the aluminium vapour about to land on it.</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">PURPOSE — FIVE REAL JOBS</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">(1) Improve aluminium-to-substrate adhesion. (2) Improve barrier performance (lower OTR and WVTR) via more uniform aluminium nucleation. (3) Remove water and contaminants that have outgassed from the film into the vacuum. (4) Enable AlOx transparent barrier coatings — these literally cannot be deposited without plasma. (5) Enable difficult substrates like BOPP and mono-PE, which have no native polar groups for aluminium to bond to.</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">POSITION — BEFORE THE BOATS</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Inside the deposition chamber, the plasma electrode sits in the web path after the chill drum has accepted the film, but before the web reaches the evaporator zone where the tungsten boats heat the aluminium wire to its vapour. The web is "hit by plasma just prior to the coating process" — that is the exact wording metalliser OEM BOBST uses to describe it.</div>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:20px 22px;margin:24px 0;">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+<span style="background:#1A2744;color:#FAF9F6;padding:4px 10px;border-radius:4px;font-size:0.78em;font-weight:bold;letter-spacing:0.5px;">📚 GLOSSARY</span>
+<strong style="color:#1A2744;font-size:1.05em;">Quick Definitions — The Terms in This Blog</strong>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 18px;font-size:0.92em;line-height:1.5;">
+<div><strong style="color:#E85D26;">Plasma</strong> — The fourth state of matter, after solid, liquid, and gas. An ionised gas: some of the gas molecules have lost or gained electrons, creating a soup of ions, electrons, and energetic neutral atoms that glow visibly and react aggressively with surfaces they touch.</div>
+<div><strong style="color:#E85D26;">Polar groups</strong> — Oxygen- or nitrogen-containing chemical groups (carbonyl C=O, hydroxyl C-OH, carboxyl COOH, amine C-N) on a film surface. These groups have an electrical polarity that gives metals and adhesives something to chemically bond to.</div>
+<div><strong style="color:#E85D26;">Nucleation sites</strong> — Microscopic points on a substrate surface where vapour-deposited aluminium atoms preferentially settle and begin to form the metal layer. More nucleation sites means a denser, more defect-free metal coating.</div>
+<div><strong style="color:#E85D26;">Outgassing</strong> — The release of absorbed water, oils, and volatile compounds from a film into the vacuum chamber when chamber pressure drops. Plasma can help drive off and remove these contaminants from the film surface.</div>
+<div><strong style="color:#E85D26;">sccm</strong> — Standard Cubic Centimetres per Minute. The flow-rate unit used for gases entering a vacuum plasma chamber. Controlled by a mass flow controller and shown on the plasma unit's HMI.</div>
+<div><strong style="color:#E85D26;">AlOx</strong> — Aluminium oxide (Al₂O₃) transparent barrier coating. Deposited by reactive plasma deposition — aluminium vapour reacts with oxygen plasma during deposition to form a clear, glass-like barrier layer.</div>
+<div><strong style="color:#E85D26;">Plasma-reactive deposition</strong> — A deposition process where the plasma is not just for pretreatment but is part of the chemistry of the layer being formed. AlOx and SiOx coatings are produced this way; standard aluminium metallisation is not.</div>
+<div><strong style="color:#E85D26;">Tape test</strong> — A practical adhesion check: a strip of standard adhesive tape is pressed onto a metallised film and pulled off; if aluminium comes off with the tape, adhesion is inadequate. The first thing to investigate when tape tests fail is plasma settings.</div>
+<div><strong style="color:#E85D26;">Passivation</strong> — A surface treatment applied after aluminium deposition (in a few advanced metallisers) to protect the aluminium against corrosion in service. Less common than pre-treatment but uses similar plasma equipment.</div>
+</div>
+</div>
+
+<h3>⚛ What Plasma Treatment Actually Is — And How It Differs From Corona</h3>
+<div style="margin:20px 0;">
+<img src="plasma-vs-corona-comparison.png" alt="Plasma vs corona treatment — vacuum-chamber low-pressure plasma in a metalliser compared with atmospheric corona discharge" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p>The physics first, because nothing else makes sense without it. Plasma is sometimes called the fourth state of matter, after solid, liquid, and gas. When you give an ordinary gas enough energy — typically by passing it through a strong electric field — some of the gas molecules split into ions and free electrons. What you now have is no longer a neutral gas; it is a glowing soup of charged particles, energetic neutral atoms, and ultraviolet photons. That soup is plasma. It glows because energised electrons drop back to lower energy states and release light. It is reactive because the ions and energised neutrals have enough energy to break and form chemical bonds when they hit a surface.</p>
+
+<p>Inside a metalliser, plasma is created in a specific, controlled way. A chosen gas — typically oxygen, sometimes argon, sometimes a mix — is fed into the vacuum chamber through a mass flow controller at a measured rate in sccm. The chamber pressure during plasma treatment sits in the rough range of around 10⁻² mbar — much higher than the deep vacuum of the metallisation zone, but still far below atmospheric pressure. An electrode is energised at high voltage and high frequency. Between the electrode and the earthed counter-roller, the gas ionises and the film web passes through this discharge zone. In a fraction of a second, the surface molecules of the polymer are bombarded by ions and energised atoms, and chemical reactions graft new functional groups onto the surface.</p>
+
+<p>This is where plasma's relationship to corona becomes important — they are cousins, not the same thing. Corona treatment, the technique covered in detail in our previous blog on dyne levels, operates at atmospheric pressure, in ambient air, outside any vacuum chamber. It uses the surrounding air as its gas. Plasma in a metalliser operates at low pressure (vacuum), inside the deposition chamber, using a specifically chosen gas at a controlled flow rate. The chemistry it can perform is broader and more controlled than corona's, because you choose the gas and you control the pressure. <a href="https://digitaledition.packagingstrategies.com/flexible-packaging-march-2021/plasma-surface/" style="color:#E85D26;font-weight:bold;">Industry research from corona/plasma OEM Vetaphone</a> shows that plasma can achieve and sustain higher surface activation than corona can, and the activation lasts longer before decaying — though this is for atmospheric plasma; in-vacuum plasma in a metalliser is a more specialised case with a different end goal.</p>
+
+<p>The other difference is the goal. Corona's goal is to make a film printable or laminatable — the film leaves the corona station and may then sit in inventory for weeks before being used. Plasma in a metalliser is in-situ treatment: the activated film exits the plasma zone and within a second or two enters the evaporation zone, where aluminium vapour is condensing onto it. The activated surface and the metal vapour meet at the moment when plasma's effect is strongest, not after the activation has had any chance to decay. That immediacy is part of why plasma in a metalliser is so effective at improving aluminium adhesion.</p>
+
+<h3>🎯 Why a Metalliser Needs Plasma — The Five Real Jobs</h3>
+
+<p>Vacuum metallisation by itself, without any plasma step, can work — and historically did work, for decades — for substrates like properly pre-treated PET running into standard barrier applications. So why is plasma now standard equipment on virtually every modern web vacuum metalliser? Because it does five distinct, measurable jobs that no other unit on the metalliser does. Each one matters more for some applications than others, but together they explain why <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7807232" style="color:#E85D26;font-weight:bold;">the web metallising industry has, in the patent literature's own words, "adopted inline high-speed plasma treatment of the substrate to improve the quality of metal deposition"</a>.</p>
+
+<p><strong>Job 1: Improve aluminium-to-substrate adhesion.</strong> For PET, aluminium adhesion is driven by chemical bonds between the aluminium atoms and the inherent oxygen-containing groups (C=O, ether/carbonyl groups) already present on PET. The bond is <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/H2209" style="color:#E85D26;font-weight:bold;">specifically a C-O-Al metal-oxide linkage</a>. PET that has been corona-treated at extrusion will have more of these groups than untreated PET, but plasma in the metalliser adds even more, freshly, inside the chamber. For BOPP, the situation is more dramatic: BOPP has essentially no native polar groups, so adhesion of aluminium to untreated BOPP is poor. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0257897298007804" style="color:#E85D26;font-weight:bold;">Peer-reviewed research on plasma-modified BOPP-aluminium interfaces</a> shows that gentle oxygen plasma pretreatment dramatically improves Al adhesion by grafting oxygen onto the BOPP surface, where it forms the same kind of bond PET enjoys naturally.</p>
+
+<p><strong>Job 2: Improve barrier performance.</strong> A metallised film's barrier against oxygen (OTR) and water vapour (WVTR) is set by how uniform and defect-free the aluminium layer is. Aluminium vapour condensing onto a substrate "nucleates" — meaning it forms tiny clusters at preferred sites and then grows outward to connect them. Polar groups on the substrate surface act as preferred nucleation sites. More nucleation sites means smaller, more densely-packed initial clusters and therefore fewer micro-voids in the final continuous layer. Per the metalliser OEM BOBST, plasma treatment <a href="https://www.bobst.com/been/products/vacuum-metallizing/process/" style="color:#E85D26;font-weight:bold;">"acts to increase the number of nucleation sites by the introduction of polar groups, resulting in a coating with a homogeneous surface morphology and fewer defects."</a> The peer-reviewed research literature documents that thin barrier layers in the 40-100 nm range can reduce oxygen permeability by very large factors — but only when the substrate-barrier interface is well-engineered, which plasma enables.</p>
+
+<p><strong>Job 3: Surface cleaning.</strong> The moment a film enters the vacuum chamber and pressure drops, water vapour, low-molecular-weight oils, processing residues, and slip additives start to outgas from the polymer's near-surface region. Some of this outgassing happens on the chill drum before the web reaches the plasma electrode, but a thin layer of contamination commonly persists. Plasma — particularly when it includes oxygen or argon — physically and chemically scrubs this contamination off. Per BOBST's process description, plasma's role explicitly <a href="https://www.bobst.com/been/products/vacuum-metallizing/process/" style="color:#E85D26;font-weight:bold;">"removing moisture and other contaminants"</a> from the surface just before aluminium deposition. A clean surface, separately from the polar-groups effect, is itself critical for uniform aluminium coverage.</p>
+
+<p><strong>Job 4: Enable AlOx transparent barrier coatings.</strong> This is the strong case. Conventional aluminium metallisation deposits opaque metallic aluminium and could, in principle, be done without plasma. AlOx (aluminium oxide, Al₂O₃) transparent barrier coatings cannot. AlOx is produced by a process called plasma-reactive deposition: aluminium vapour from the boats reacts with oxygen plasma during deposition to form a clear, glass-like ceramic layer on the film. The metalliser OEM Bühler Leybold Optics offers the PAK T and PAK T+ series of vacuum coaters explicitly designated as "plasma-reactive" machines for AlOx production. Without plasma, the chamber atmosphere has no oxygen for the aluminium to react with, and you get standard opaque metallisation, not transparent oxide barrier. For any plant moving toward transparent high-barrier flexible packaging, plasma is not optional equipment — it is the deposition mechanism.</p>
+
+<p><strong>Job 5: Enable difficult substrates.</strong> Modern flexible packaging is moving toward mono-material structures (mono-PE for recyclability), higher-PCR-content films, and substrates like nylon and biopolymers that did not historically dominate metallised packaging. Many of these substrates either lack the native polar groups PET has, or have surface variability from recycled-content irregularity, or both. Plasma normalises the surface chemistry across the diversity of substrates a modern converter has to handle. It is the single piece of equipment that turns "we run PET well, we struggle with BOPP" into "we run all our substrates with confidence."</p>
+
+<h3>📍 Where Plasma Sits in the Machine — The Exact Position</h3>
+<div style="margin:20px 0;">
+<img src="plasma-position-cutaway.png" alt="Metalliser vacuum chamber cutaway showing the plasma electrode position between chill drum and evaporator boats in the web path" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p>Picture the vacuum metalliser in cross-section. The web travels through the machine on a defined path: it leaves the unwind roll, passes through tension-control rollers, reaches the entry slit to the vacuum chamber, enters the chamber, wraps around the large temperature-controlled chill drum, leaves the chill drum, passes the deposition zone where the row of tungsten boats vaporises the aluminium wire, passes additional cooling rollers, and finally exits the chamber to be wound onto the rewind roll. The whole web path inside the chamber typically takes two to four seconds end to end.</p>
+
+<p>The plasma electrode sits between the chill drum and the deposition zone. The web has been cooled, has reached vacuum pressure equilibrium, and any rapid initial outgassing has happened. Now, just before the film reaches the part of its journey where aluminium vapour will condense onto it, it passes the plasma station. The web glides over a counter-roller (the earthed electrode); the high-voltage electrode sits a small distance above the web surface; gas flows in through inlet ports near the electrode; and the plasma discharge fills the gap between electrode and web. The web is in the plasma zone for a fraction of a second — the exposure time set by the web speed and the electrode width. Within another fraction of a second, the freshly activated film is in the evaporation zone, and aluminium vapour begins condensing onto the just-activated surface.</p>
+
+<p>This timing is crucial. If the plasma activation had to wait minutes or hours before metallisation, it would partially decay — the same decay we discussed for corona treatment. By placing the plasma electrode <em>immediately</em> upstream of the evaporators, the metalliser captures plasma's effect at peak intensity. The activated surface and the depositing metal meet within seconds, not days. This is structurally why in-machine plasma achieves results that no amount of pre-treatment at the extruder or at the converting line can replicate for the metallisation step.</p>
+
+<p>A small number of advanced metallisers also include a plasma station <em>after</em> the deposition zone, on the way to the rewind. This second plasma is for passivation — gently treating the freshly deposited aluminium surface to improve corrosion resistance. This is documented in the patent literature on inline passivation of vacuum-deposited aluminium and is becoming more common in metallisers targeting long-shelf-life or harsh-environment applications. It is not standard equipment, but it is on the menu from several OEMs.</p>
+
+<p>The practical implication for an operator or supervisor is this: when you are looking at your metalliser's process flow diagram, the plasma unit should be on it, identified by name, with its gas inlet and electrical connection labelled. If you do not know exactly where the plasma electrode sits in your machine and what gas it uses, that is the first place to fix the knowledge gap — either with your OEM service engineer or via the OEM operations manual. You cannot run a process well if you do not know where in the machine it physically lives.</p>
+
+<h3>🧪 Which Substrates and Applications Need Plasma — A Practical Hierarchy</h3>
+
+<p>The honest answer is that "plasma essential or optional?" depends on the combination of substrate and application — not on the substrate alone. The Plasma Need Decision Chart (Format 1 below) lays out the full matrix; here is the verbal version.</p>
+
+<p>For standard aluminium metallisation on pre-treated polyester (PET), plasma is technically optional. PET has the native carbonyl groups aluminium can bond to, and many serviceable metallised PET films have been made on machines without plasma. But "optional" in the literal sense does not mean "skip it" — using plasma reduces run-to-run variation in optical density, improves the consistency of the barrier, and gives a more uniform aluminium layer. For any serious customer specification, plasma elevates a "good enough" result to a reliable one.</p>
+
+<p>For BOPP and CPP (polypropylene-family films), plasma is at minimum highly recommended and for high-barrier applications it is essential. The peer-reviewed BOPP-aluminium adhesion research is clear: oxygen plasma pretreatment improves aluminium peel strength significantly, while untreated BOPP can produce aluminium layers that fail tape tests. If you are running BOPP for a low-barrier decorative application, you may get acceptable results without plasma; if you are running it for a food or pharma barrier claim, you need plasma working and verified.</p>
+
+<p>For polyethylene films — including the mono-PE structures that are central to the global push for recyclable flexible packaging — plasma is essential. PE has the lowest native surface energy of common packaging films and the fewest polar groups for aluminium to bond to. Mono-PE high-barrier metallised structures are technically possible, but only with proper plasma pretreatment; without it, the metallised PE will not deliver the barrier or the adhesion the customer expects.</p>
+
+<p>For AlOx transparent barrier coatings on any substrate (PET, BOPP, paper, PE), plasma is not just essential — it is part of the deposition mechanism itself. Without plasma you do not get AlOx; you get standard opaque aluminium. Plants planning to add AlOx production capability are essentially planning to add a plasma-reactive metalliser or to upgrade an existing metalliser with the appropriate plasma source.</p>
+
+<p>For recycled-content films (r-PET, PCR-PET), plasma is recommended even at lower percentages and essential at higher ones. Recycled content brings surface variability — slightly different additive packages, micro-contamination from the recycling stream, variable native surface energy from batch to batch. Plasma normalises this variability, giving you consistent metallisation despite inconsistent input.</p>
+
+<p>For Nylon (BOPA), plasma is closer to optional. Nylon contains amide groups (C=O linked to nitrogen) that naturally serve as nucleation and bonding sites, similar in spirit to PET's ether groups. Standard aluminium metallisation often works on Nylon without plasma. For barrier-critical applications, plasma still improves consistency, but it is not the difference between success and failure as it is for BOPP or mono-PE.</p>
+
+<h3>⚠ Five Plasma Operating Mistakes That Cost Real Money</h3>
+<div style="margin:20px 0;">
+<img src="plasma-control-desk.png" alt="Plasma operating control desk with gas flow meters, plasma power readout, tape test sample, and daily log sheet" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p><strong>1. Assuming "plasma is on" when actually it is not.</strong> The plasma electrode can be energised and the gas flowing — but if the gas mass flow controller has drifted, or a cylinder is near empty and pressure is dropping, or the electrode has built up a non-conducting deposit, the actual plasma at the web surface may be far weaker than the HMI suggests. The single best check is the tape test on the metallised output: if adhesion drops without an obvious cause, the first thing to physically verify is plasma operation, not the boats.</p>
+
+<p><strong>2. Running too much plasma power.</strong> The fast first reactions in oxygen plasma add useful polar groups to the substrate. But plasma also contains ultraviolet photons that can break polymer chains at the surface — chain scission — degrading the same surface you are trying to improve. The literature on plasma pretreatment is explicit that <a href="https://www.sciencedirect.com/science/article/abs/pii/S0257897298007804" style="color:#E85D26;font-weight:bold;">"the electrons, ions and UV radiation also present in the oxygen plasma weaken the cohesive strength of the polymer by inner chain scissions"</a>. Past the optimum window, more power damages the surface. Use the OEM-specified watt density for your substrate; do not blast maximum power to "be safe".</p>
+
+<p><strong>3. Using the wrong gas for the substrate.</strong> Argon is excellent for physical surface cleaning but does not add polar groups. Oxygen is excellent for adding polar groups but is over-reactive for some specialty films. Nitrogen has its niche. If the OEM set up your plasma unit for oxygen on PET and a shift supervisor changed to argon "to clean the surface better" without understanding the chemistry, the surface is now cleaner but no more chemically activated than before — and adhesion will not improve. Always verify your plasma gas selection against the substrate and the goal, using your OEM specification and the Gas Selection Guide (Format 3 below).</p>
+
+<p><strong>4. Neglecting plasma electrode maintenance.</strong> The plasma electrode operates in a vacuum chamber surrounded by aluminium vapour. Some of that aluminium ends up depositing on the plasma electrode itself, gradually building up a layer that reduces electrode efficiency and can eventually cause arcing. The plasma may still "light up" with a buildup on the electrode, but the discharge becomes uneven across the web width and the result is patchy treatment. Scheduled electrode inspection and cleaning per the OEM maintenance plan is non-negotiable. If you cannot remember the last time the plasma electrode was inspected, that is the first thing to put on the maintenance calendar.</p>
+
+<p><strong>5. Running plasma settings for one substrate when the job has changed to another.</strong> The plasma recipe — gas, flow rate, power, exposure time via web speed — was tuned by the OEM (or your process engineer) for a specific substrate and a specific application. When the job changes from PET to BOPP, or from standard barrier to high-barrier, those settings need to change too. A plant where every job runs the same plasma recipe regardless of substrate is leaving real performance on the table for some jobs and possibly damaging others. The OEM manual or process engineer specifies the recipe per job category; the Plasma Operating Daily Log (Format 2 below) creates the discipline of recording it.</p>
+
+<h3 id="downloads-en">⬇ Free Downloadable Tools — All 3 Bilingual Excel Files</h3>
+
+<p>All three tools are fully editable Excel files (.xlsx) with English and Hindi side-by-side. Full VKS Tech branding on every page.</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#E85D26;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ MOST USED</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Treatment Need — Decision Chart</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">A substrate-by-application matrix for every common metalliser job (PET, BOPP, CPP, PE/mono-PE, Nylon, r-PET) across three application levels (standard Al, high-barrier Al, AlOx transparent). Each cell returns ESSENTIAL, RECOMMENDED, or OPTIONAL with the reason. A planning aid before any new job or substrate change.</div>
+</div>
+<a href="/downloads/01-Plasma-Need-Decision-Chart.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Operating Daily Log</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">A shift log with 18 rows: time, roll/job ID, substrate, gas used, flow rate (sccm), plasma power, web speed, chamber pressure, tape-test adhesion result, OD reading, operator. Supervisor and Met-QC sign-off. Turns plasma from an HMI screen into a tracked, audit-ready process.</div>
+</div>
+<a href="/downloads/02-Plasma-Operating-Daily-Log.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">3</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Gas Selection + Troubleshooting</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">Two tabs. Tab 1: which gas does what — O₂, Ar, N₂, and common mixes, with primary effect and best-use substrate notes. Tab 2: an 8-symptom troubleshooting chart covering tape-test failures, OD inconsistency, surface pinholes, gas pressure drops, electrode buildup, and AlOx-specific issues.</div>
+</div>
+<a href="/downloads/03-Plasma-Gas-Selection-Troubleshooting.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 How these fit together:</strong> Use Format 1 (Decision Chart) when planning a new job or evaluating whether to invest in plasma for a particular product mix. Use Format 2 (Daily Log) every shift to make plasma a tracked process rather than an HMI screen nobody reads. Use Format 3 (Gas Selection + Troubleshooting) when something goes wrong and you need a structured way to diagnose it before calling the OEM.
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 Related reads on this site:</strong> <a href="/blog/corona-treatment-dyne-levels" style="color:#E85D26;font-weight:bold;">Blog #47</a> covers corona treatment and dyne levels — the atmospheric-pressure cousin of plasma, used outside the metalliser for surface preparation before printing and lamination. <a href="/blog/alox-vs-metallised-pet-epr-2026" style="color:#E85D26;font-weight:bold;">Blog #31</a> covers the AlOx versus traditional metallised PET decision — plasma is the process unit that makes AlOx possible. <a href="/blog/why-do-we-metallise" style="color:#E85D26;font-weight:bold;">Blog #33</a> covers why vacuum metallisation exists at all — useful context for understanding where plasma fits in the metallisation process. The full free toolkit lives at <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a>.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚠ Important Note</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Plasma settings on a vacuum metalliser are normally pre-configured by the metalliser OEM (BOBST, Bühler Leybold Optics, ULVAC, KOBOTECH, and others) for each substrate-application combination. Changes to plasma gas, flow rate, or power should be made with reference to the OEM manual and, where possible, with involvement of the OEM service engineer or your in-house process engineer. The guidance in this blog is general industry knowledge intended to help operators and supervisors understand what plasma is doing and why — it is not a substitute for your machine's specific OEM documentation.</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question or Stuck Somewhere?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Investigating an adhesion failure that has the metalliser team divided? Considering an AlOx upgrade and wondering what the plasma system actually adds? Trying to decide whether your plant should run plasma on BOPP jobs? <strong>Drop your question in the comments at the bottom of this page</strong> — I respond to every thoughtful question, plant engineer to plant engineer.</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Plasma treatment in a vacuum metalliser is an in-chamber surface treatment that uses ionised gas — usually oxygen, sometimes argon or a mix — to chemically activate the film surface in the second before aluminium vapour lands on it. It is different from corona: corona is atmospheric-pressure and outside the metalliser, plasma is low-pressure and inside the vacuum chamber. Its five real jobs are improving aluminium adhesion (especially on BOPP and PE where native polar groups are scarce), increasing aluminium nucleation site density for more uniform barrier, removing outgassed contaminants from the web, enabling AlOx transparent barrier coatings via plasma-reactive deposition, and enabling difficult or recycled-content substrates. It sits in the web path immediately upstream of the evaporator boats — the web is "hit by plasma just prior to the coating process" per metalliser OEM BOBST. Which substrates need it depends on the application: optional for PET in standard barrier work, recommended-to-essential for BOPP, essential for PE and mono-PE, essential for AlOx, recommended for r-PET. Avoid the five operating mistakes: assuming plasma is on when it is not, over-powering and damaging the substrate via UV chain scission, wrong gas selection, neglecting electrode maintenance, and running one recipe across all substrates. Three free downloads above (Decision Chart, Daily Log, Gas Selection + Troubleshooting) make plasma a tracked, understood process instead of a vacuum-chamber mystery.
+</div>
+
+<p style="margin-top:20px;"><strong>📌 What's next.</strong> The blog after this looks at AlOx — the transparent barrier coating that plasma-reactive deposition actually produces — and the practical decision of when a converter should add AlOx capability to compete in higher-value, transparent, recyclable barrier packaging.</p>
+
+</div>
+
+<div class="hindi-section">
+
+<h2>🔥 Metalliser में Plasma Treatment क्या है? — Purpose, Use, और Vacuum Chamber में कहाँ बैठता है</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 14-min read &nbsp;|&nbsp; Vacuum-chamber का वो surface treatment जो तय करता है कि आपका aluminium actually चिपकेगा या नहीं &nbsp;|&nbsp; 3 Free Downloadable Bilingual Excel Tools शामिल &nbsp;|&nbsp; May 2026 में published</p>
+
+<p>एक metalliser जो सालों से aluminised film बना रहा है, उसकी process का एक हिस्सा अभी भी ऐसा हो सकता है जो operators को कभी ठीक से नहीं सिखाया गया — plasma treatment unit। Control panel में यह एक power level, एक gas flow rate, और एक chamber pressure के रूप में दिखता है। Maintenance log में यह "plasma electrode cleaning" के रूप में दिखता है। OEM manual में इसे explain करने के लिए तीन पन्ने हैं। पर तीन shifts के तीन operators से पूछें कि plasma vacuum chamber के अंदर actually क्या कर रहा है, तो आपको तीन अलग कहानियाँ मिल सकती हैं। <strong>Plasma treatment आधुनिक vacuum metalliser का सबसे कम-समझा-गया, अक्सर-ग़लत-समझा-गया process unit है</strong> — और इसे skip करना, ग़लत set करना, या इसमें ग़लत gas चलाना चुपचाप adhesion failures, barrier inconsistency, और customer द्वारा बिना स्पष्ट technical कारण के reject की गई rolls के रूप में आपको cost करेगा।</p>
+
+<p>यह blog चार सीधे सवालों का जवाब देता है, साफ़ भाषा में। Plasma treatment technically क्या है — और यह उस corona treatment से कैसे अलग है जिसे हम पहले से vacuum chamber के बाहर इस्तेमाल करते हैं? Metalliser को इसकी ज़रूरत क्यों है — यह वास्तव में क्या करता है जो साधारण vacuum metallisation अकेले नहीं करता? यह machine में exactly कहाँ बैठता है — web path के किस point पर film को "plasma से hit किया जाता है"? और कौन से substrates और applications को वास्तव में इसकी ज़रूरत है, बनाम कौन से इसके बिना चलाए जा सकते हैं? चौदह मिनट, metalliser operators, shift supervisors, और process engineers के लिए लिखा गया। नीचे तीन free downloadable tools — एक substrate-by-application decision chart बताता है कि plasma कब essential बनाम optional है, एक daily operating log जो plasma को black box के बजाय tracked process बनाता है, और एक combined gas selection guide और troubleshooting reference।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:20px 22px;margin:24px 0;border-radius:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+<strong style="color:#E85D26;font-size:1.1em;">📌 Quick Reference — Metalliser में Plasma 30 Seconds में</strong>
+<a href="#downloads-hi" onclick="event.preventDefault(); document.getElementById('downloads-hi').scrollIntoView({behavior:'smooth', block:'start'}); return false;" style="background:#E85D26;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;cursor:pointer;">Downloads पर जाएँ →</a>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">यह क्या है</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">एक ionised-gas surface treatment जो vacuum chamber के अंदर, aluminium deposition से ठीक पहले होता है। एक specific gas (आम तौर पर oxygen, कभी-कभी argon या mix) को low pressure पर feed किया जाता है, high-voltage electrode द्वारा glowing plasma में energise किया जाता है, और film web उससे होकर गुज़रता है। Web एक chemically activated, contamination-free surface के साथ निकलता है जो उस aluminium vapour से कहीं बेहतर bond करता है जो उस पर land होने वाला है।</div>
+</div>
+
+<div style="background:rgba(13,140,126,0.15);border-left:3px solid #0D8C7E;padding:12px 14px;margin:0 0 12px 0;border-radius:6px;">
+<div style="font-size:0.78em;color:#0D8C7E;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">PURPOSE — पाँच वास्तविक काम</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">(1) Aluminium-to-substrate adhesion सुधारना। (2) Barrier performance सुधारना (कम OTR और WVTR) ज़्यादा uniform aluminium nucleation के माध्यम से। (3) पानी और contaminants निकालना जो film से vacuum में outgas हुए हैं। (4) AlOx transparent barrier coatings enable करना — ये plasma के बिना literally deposit नहीं हो सकते। (5) BOPP और mono-PE जैसे difficult substrates enable करना, जिनमें aluminium के bond करने के लिए कोई native polar groups नहीं हैं।</div>
+</div>
+
+<div style="background:rgba(232,93,38,0.12);border-left:3px solid #E85D26;padding:12px 14px;margin:0;border-radius:6px;">
+<div style="font-size:0.78em;color:#E85D26;font-weight:bold;letter-spacing:0.5px;margin-bottom:8px;">POSITION — BOATS से पहले</div>
+<div style="font-size:0.92em;color:#FAF9F6;line-height:1.6;">Deposition chamber के अंदर, plasma electrode web path में chill drum द्वारा film accept करने के बाद, पर web के उस evaporator zone तक पहुँचने से पहले बैठता है जहाँ tungsten boats aluminium wire को उसके vapour में heat करते हैं। Web को "coating process से ठीक पहले plasma से hit किया जाता है" — यह वही exact शब्द हैं जो metalliser OEM BOBST इसे describe करने के लिए use करता है।</div>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:20px 22px;margin:24px 0;">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+<span style="background:#1A2744;color:#FAF9F6;padding:4px 10px;border-radius:4px;font-size:0.78em;font-weight:bold;letter-spacing:0.5px;">📚 शब्दावली</span>
+<strong style="color:#1A2744;font-size:1.05em;">त्वरित परिभाषाएँ — इस Blog के शब्द</strong>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 18px;font-size:0.92em;line-height:1.5;">
+<div><strong style="color:#E85D26;">Plasma</strong> — पदार्थ की चौथी अवस्था, solid, liquid, और gas के बाद। एक ionised gas: कुछ gas molecules ने electrons खोए या पाए हैं, ions, electrons, और energetic neutral atoms का एक soup बनाते हैं जो दिखाई देता है glow करता है और जिन surfaces को छूता है उनके साथ aggressively react करता है।</div>
+<div><strong style="color:#E85D26;">Polar groups</strong> — Oxygen- या nitrogen-containing chemical groups (carbonyl C=O, hydroxyl C-OH, carboxyl COOH, amine C-N) film surface पर। इन groups में electrical polarity है जो metals और adhesives को chemically bond करने के लिए कुछ देती है।</div>
+<div><strong style="color:#E85D26;">Nucleation sites</strong> — Substrate surface पर सूक्ष्म points जहाँ vapour-deposited aluminium atoms preferentially settle करते हैं और metal layer बनाना शुरू करते हैं। ज़्यादा nucleation sites का मतलब denser, ज़्यादा defect-free metal coating।</div>
+<div><strong style="color:#E85D26;">Outgassing</strong> — Chamber pressure गिरने पर vacuum chamber में film से absorbed पानी, oils, और volatile compounds का release। Plasma इन contaminants को film surface से drive off और remove करने में मदद कर सकता है।</div>
+<div><strong style="color:#E85D26;">sccm</strong> — Standard Cubic Centimetres per Minute। Vacuum plasma chamber में entering gases के लिए flow-rate unit। Mass flow controller से control होता है और plasma unit के HMI पर दिखता है।</div>
+<div><strong style="color:#E85D26;">AlOx</strong> — Aluminium oxide (Al₂O₃) transparent barrier coating। Reactive plasma deposition से deposit होता है — aluminium vapour deposition के दौरान oxygen plasma के साथ react करके clear, glass-like barrier layer बनाता है।</div>
+<div><strong style="color:#E85D26;">Plasma-reactive deposition</strong> — एक deposition process जहाँ plasma केवल pretreatment के लिए नहीं है बल्कि बन रही layer की chemistry का हिस्सा है। AlOx और SiOx coatings इसी तरह produce होते हैं; standard aluminium metallisation नहीं।</div>
+<div><strong style="color:#E85D26;">Tape test</strong> — Practical adhesion check: standard adhesive tape की एक strip metallised film पर दबाकर खींची जाती है; अगर aluminium tape के साथ निकलता है, तो adhesion inadequate है। जब tape tests fail हों तो पहली जाँचने वाली चीज़ plasma settings है।</div>
+<div><strong style="color:#E85D26;">Passivation</strong> — Aluminium deposition के बाद (कुछ advanced metallisers में) लगाया गया surface treatment, service में corrosion से aluminium को बचाने के लिए। Pre-treatment से कम common है पर इसी तरह के plasma equipment का इस्तेमाल करता है।</div>
+</div>
+</div>
+
+<h3>⚛ Plasma Treatment वास्तव में क्या है — और Corona से कैसे अलग है</h3>
+<div style="margin:20px 0;">
+<img src="plasma-vs-corona-comparison.png" alt="Plasma बनाम corona treatment — metalliser में vacuum-chamber low-pressure plasma की atmospheric corona discharge से तुलना" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p>पहले physics, क्योंकि उसके बिना कुछ भी समझ नहीं आता। Plasma को कभी-कभी पदार्थ की चौथी अवस्था कहा जाता है, solid, liquid, और gas के बाद। जब आप एक साधारण gas को पर्याप्त ऊर्जा देते हैं — आम तौर पर एक strong electric field से गुज़ारकर — तो कुछ gas molecules ions और मुक्त electrons में टूट जाते हैं। अब आपके पास जो है वो neutral gas नहीं है; यह charged particles, energetic neutral atoms, और ultraviolet photons का एक glowing soup है। वही soup plasma है। यह glow इसलिए करता है क्योंकि energised electrons निचली energy states पर वापस गिरते हैं और प्रकाश release करते हैं। यह इसलिए reactive है क्योंकि ions और energised neutrals में surface से टकराने पर chemical bonds तोड़ने और बनाने के लिए पर्याप्त ऊर्जा है।</p>
+
+<p>Metalliser के अंदर, plasma एक specific, controlled तरीक़े से बनाया जाता है। एक चुनी गई gas — आम तौर पर oxygen, कभी-कभी argon, कभी-कभी mix — एक mass flow controller के माध्यम से sccm में मापी गई rate पर vacuum chamber में feed होती है। Plasma treatment के दौरान chamber pressure लगभग 10⁻² mbar की range में बैठता है — metallisation zone के deep vacuum से बहुत ज़्यादा, पर atmospheric pressure से अभी भी बहुत कम। एक electrode को high voltage और high frequency पर energise किया जाता है। Electrode और earthed counter-roller के बीच, gas ionise होती है और film web इस discharge zone से गुज़रता है। एक second के अंश में, polymer के surface molecules ions और energised atoms से बम्बार्ड होते हैं, और chemical reactions surface पर नए functional groups graft करती हैं।</p>
+
+<p>यहाँ plasma का corona से रिश्ता महत्वपूर्ण हो जाता है — वे cousins हैं, एक चीज़ नहीं। Corona treatment, जो हमारे dyne levels पर पिछले blog में detail से cover हुआ है, atmospheric pressure पर operate होता है, ambient air में, किसी भी vacuum chamber के बाहर। यह आस-पास की हवा को अपनी gas के रूप में use करता है। Metalliser में Plasma low pressure (vacuum) पर operate होता है, deposition chamber के अंदर, controlled flow rate पर specifically चुनी गई gas use करते हुए। यह जो chemistry कर सकता है वो corona से broader और ज़्यादा controlled है, क्योंकि आप gas चुनते हैं और आप pressure control करते हैं। <a href="https://digitaledition.packagingstrategies.com/flexible-packaging-march-2021/plasma-surface/" style="color:#E85D26;font-weight:bold;">Corona/plasma OEM Vetaphone की industry research</a> दिखाती है कि plasma corona से ज़्यादा higher surface activation achieve और sustain कर सकता है, और activation decay होने से पहले ज़्यादा देर तक टिकती है — हालाँकि यह atmospheric plasma के लिए है; metalliser में in-vacuum plasma एक ज़्यादा specialised case है अलग end goal के साथ।</p>
+
+<p>दूसरा फ़र्क़ goal है। Corona का goal एक film को printable या laminatable बनाना है — film corona station छोड़ती है और फिर हफ़्तों inventory में बैठ सकती है इससे पहले कि use हो। Metalliser में Plasma in-situ treatment है: activated film plasma zone से निकलती है और एक-दो second के अंदर evaporation zone में प्रवेश करती है, जहाँ aluminium vapour उस पर condense हो रहा है। Activated surface और metal vapour उस पल मिलते हैं जब plasma का प्रभाव सबसे मज़बूत है, activation को decay का कोई मौक़ा मिलने के बाद नहीं। वही immediacy एक हिस्सा है क्यों metalliser में plasma aluminium adhesion सुधारने में इतना effective है।</p>
+
+<h3>🎯 Metalliser को Plasma की ज़रूरत क्यों है — पाँच वास्तविक काम</h3>
+
+<p>केवल vacuum metallisation, बिना किसी plasma step के, काम कर सकती है — और ऐतिहासिक रूप से दशकों तक काम करती रही — properly pre-treated PET जैसे substrates पर standard barrier applications के लिए। तो plasma अब practically हर modern web vacuum metalliser पर standard equipment क्यों है? क्योंकि यह पाँच distinct, measurable काम करता है जो metalliser पर कोई दूसरा unit नहीं करता। हर एक कुछ applications के लिए ज़्यादा matter करता है, पर साथ मिलकर वे बताते हैं क्यों <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/7807232" style="color:#E85D26;font-weight:bold;">"web metallising industry ने metal deposition की quality सुधारने के लिए substrate के inline high-speed plasma treatment को adopt किया है"</a> — patent literature के अपने शब्दों में।</p>
+
+<p><strong>Job 1: Aluminium-to-substrate adhesion सुधारना।</strong> PET के लिए, aluminium adhesion aluminium atoms और PET पर पहले से मौजूद inherent oxygen-containing groups (C=O, ether/carbonyl groups) के बीच chemical bonds से चलती है। Bond <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/H2209" style="color:#E85D26;font-weight:bold;">specifically एक C-O-Al metal-oxide linkage है</a>। जो PET extrusion पर corona-treated हुआ है उसमें untreated PET से इन groups की ज़्यादा संख्या होगी, पर metalliser में plasma chamber के अंदर freshly और भी ज़्यादा जोड़ देता है। BOPP के लिए, situation ज़्यादा dramatic है: BOPP में essentially कोई native polar groups नहीं हैं, इसलिए untreated BOPP पर aluminium की adhesion poor है। <a href="https://www.sciencedirect.com/science/article/abs/pii/S0257897298007804" style="color:#E85D26;font-weight:bold;">Plasma-modified BOPP-aluminium interfaces पर Peer-reviewed research</a> दिखाती है कि gentle oxygen plasma pretreatment BOPP surface पर oxygen graft करके Al adhesion को dramatically सुधारता है, जहाँ यह वही तरह का bond बनाता है जो PET naturally enjoy करता है।</p>
+
+<p><strong>Job 2: Barrier performance सुधारना।</strong> Metallised film की oxygen (OTR) और water vapour (WVTR) के against barrier इस पर set होती है कि aluminium layer कितनी uniform और defect-free है। Substrate पर condense होती aluminium vapour "nucleate" करती है — meaning यह preferred sites पर tiny clusters बनाती है और फिर उन्हें connect करने के लिए outward grow करती है। Substrate surface पर Polar groups preferred nucleation sites के रूप में काम करते हैं। ज़्यादा nucleation sites का मतलब छोटे, ज़्यादा densely-packed initial clusters और इसलिए final continuous layer में कम micro-voids। Metalliser OEM BOBST के अनुसार, plasma treatment <a href="https://www.bobst.com/been/products/vacuum-metallizing/process/" style="color:#E85D26;font-weight:bold;">"polar groups के introduction से nucleation sites की संख्या बढ़ाने का काम करता है, जिससे homogeneous surface morphology और fewer defects वाली coating मिलती है।"</a> Peer-reviewed research literature documents करता है कि 40-100 nm range में thin barrier layers oxygen permeability को बहुत बड़े factors से कम कर सकते हैं — पर तभी जब substrate-barrier interface well-engineered है, जिसे plasma enable करता है।</p>
+
+<p><strong>Job 3: Surface cleaning।</strong> जिस पल film vacuum chamber में प्रवेश करती है और pressure गिरता है, water vapour, low-molecular-weight oils, processing residues, और slip additives polymer के near-surface region से outgas होने लगते हैं। इस outgassing का कुछ हिस्सा chill drum पर web के plasma electrode तक पहुँचने से पहले होता है, पर contamination की एक पतली layer आम तौर पर बनी रहती है। Plasma — विशेष रूप से जब इसमें oxygen या argon शामिल हो — इस contamination को physically और chemically scrub करता है। BOBST के process description के अनुसार, plasma का role explicitly aluminium deposition से ठीक पहले surface से <a href="https://www.bobst.com/been/products/vacuum-metallizing/process/" style="color:#E85D26;font-weight:bold;">"moisture और other contaminants को remove करना"</a> है। एक साफ़ surface, polar-groups effect से अलग, खुद uniform aluminium coverage के लिए critical है।</p>
+
+<p><strong>Job 4: AlOx transparent barrier coatings enable करना।</strong> यह strong case है। Conventional aluminium metallisation opaque metallic aluminium deposit करती है और सिद्धांत में plasma के बिना की जा सकती है। AlOx (aluminium oxide, Al₂O₃) transparent barrier coatings नहीं की जा सकतीं। AlOx एक process से produce होता है जिसे plasma-reactive deposition कहते हैं: boats से aluminium vapour deposition के दौरान oxygen plasma के साथ react करके film पर clear, glass-like ceramic layer बनाती है। Metalliser OEM Bühler Leybold Optics PAK T और PAK T+ series के vacuum coaters offer करता है जो explicitly AlOx production के लिए "plasma-reactive" machines के रूप में designated हैं। Plasma के बिना, chamber atmosphere में aluminium के react करने के लिए कोई oxygen नहीं है, और आपको standard opaque metallisation मिलती है, transparent oxide barrier नहीं। Transparent high-barrier flexible packaging की ओर बढ़ने वाले किसी भी plant के लिए, plasma optional equipment नहीं है — यह deposition mechanism है।</p>
+
+<p><strong>Job 5: Difficult substrates enable करना।</strong> आधुनिक flexible packaging mono-material structures (recyclability के लिए mono-PE), higher-PCR-content films, और nylon और biopolymers जैसे substrates की ओर बढ़ रही है जो metallised packaging में historically dominate नहीं करते थे। इनमें से कई substrates या तो PET के पास मौजूद native polar groups नहीं रखते, या recycled-content irregularity से surface variability रखते हैं, या दोनों। Plasma उन substrates की विविधता के पार surface chemistry को normalise करता है जिन्हें modern converter को handle करना है। यह एकमात्र equipment है जो "हम PET अच्छा चलाते हैं, BOPP में struggle करते हैं" को "हम अपने सभी substrates confidence के साथ चलाते हैं" में बदल देता है।</p>
+
+<h3>📍 Plasma Machine में कहाँ बैठता है — Exact Position</h3>
+<div style="margin:20px 0;">
+<img src="plasma-position-cutaway.png" alt="Metalliser vacuum chamber cutaway — chill drum और evaporator boats के बीच web path में plasma electrode की position" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p>Vacuum metalliser को cross-section में देखें। Web machine के through एक defined path पर travel करता है: यह unwind roll छोड़ता है, tension-control rollers से गुज़रता है, vacuum chamber के entry slit तक पहुँचता है, chamber में प्रवेश करता है, बड़े temperature-controlled chill drum के चारों ओर wrap करता है, chill drum छोड़ता है, deposition zone से गुज़रता है जहाँ tungsten boats की row aluminium wire को vapourise करती है, additional cooling rollers से गुज़रता है, और अंत में chamber से निकलकर rewind roll पर wound होता है। Chamber के अंदर पूरा web path typically दो से चार seconds end to end लगता है।</p>
+
+<p>Plasma electrode chill drum और deposition zone के बीच बैठता है। Web cool हो चुका है, vacuum pressure equilibrium तक पहुँच गया है, और कोई भी rapid initial outgassing हो चुकी है। अब, film के अपनी यात्रा के उस हिस्से तक पहुँचने से ठीक पहले जहाँ aluminium vapour उस पर condense होगा, यह plasma station से गुज़रती है। Web counter-roller (earthed electrode) पर glide करता है; high-voltage electrode web surface से एक छोटी दूरी पर ऊपर बैठता है; electrode के पास inlet ports से gas बहती है; और plasma discharge electrode और web के बीच gap को भरता है। Web plasma zone में एक second के अंश के लिए होता है — exposure time web speed और electrode width से set होती है। एक और second के अंश में, freshly activated film evaporation zone में है, और aluminium vapour just-activated surface पर condense होना शुरू करता है।</p>
+
+<p>यह timing crucial है। अगर plasma activation को metallisation से पहले मिनटों या घंटों wait करना पड़ता, तो यह partially decay होती — वही decay जो हमने corona treatment के लिए discuss की। Plasma electrode को evaporators के <em>immediately</em> upstream रखकर, metalliser plasma के प्रभाव को peak intensity पर capture करता है। Activated surface और depositing metal seconds में मिलते हैं, days में नहीं। यह structurally है कि क्यों in-machine plasma ऐसे results achieve करता है जो extruder पर या converting line पर pre-treatment की कोई भी मात्रा metallisation step के लिए replicate नहीं कर सकती।</p>
+
+<p>कम संख्या में advanced metallisers deposition zone के <em>बाद</em>, rewind के रास्ते पर भी एक plasma station शामिल करते हैं। यह दूसरा plasma passivation के लिए है — corrosion resistance सुधारने के लिए freshly deposited aluminium surface को gently treat करना। यह vacuum-deposited aluminium के inline passivation पर patent literature में documented है और long-shelf-life या harsh-environment applications को target करने वाले metallisers में ज़्यादा common होता जा रहा है। यह standard equipment नहीं है, पर कई OEMs के menu पर है।</p>
+
+<p>Operator या supervisor के लिए practical implication यह है: जब आप अपने metalliser के process flow diagram को देख रहे हैं, plasma unit उस पर होनी चाहिए, name से identified, उसके gas inlet और electrical connection labelled के साथ। अगर आपको exactly नहीं पता कि आपकी machine में plasma electrode कहाँ बैठता है और किस gas का इस्तेमाल करता है, वही पहली जगह है जहाँ knowledge gap को ठीक करना है — या तो अपने OEM service engineer के साथ या OEM operations manual के माध्यम से। आप एक process अच्छी तरह नहीं चला सकते अगर आपको नहीं पता कि वो machine में physically कहाँ रहती है।</p>
+
+<h3>🧪 कौन से Substrates और Applications को Plasma की ज़रूरत है — Practical Hierarchy</h3>
+
+<p>ईमानदार जवाब यह है कि "plasma essential या optional?" substrate और application के combination पर निर्भर करता है — केवल substrate पर नहीं। Plasma Need Decision Chart (नीचे Format 1) पूरा matrix देता है; यहाँ verbal version है।</p>
+
+<p>Pre-treated polyester (PET) पर standard aluminium metallisation के लिए, plasma technically optional है। PET के पास native carbonyl groups हैं जिनसे aluminium bond कर सकता है, और कई serviceable metallised PET films बिना plasma वाली machines पर बनाई गई हैं। पर "optional" का literal अर्थ "skip करें" नहीं है — plasma का इस्तेमाल optical density में run-to-run variation को कम करता है, barrier की consistency सुधारता है, और ज़्यादा uniform aluminium layer देता है। किसी भी serious customer specification के लिए, plasma एक "good enough" result को reliable result में बदल देता है।</p>
+
+<p>BOPP और CPP (polypropylene-family films) के लिए, plasma कम से कम highly recommended है और high-barrier applications के लिए essential है। Peer-reviewed BOPP-aluminium adhesion research स्पष्ट है: oxygen plasma pretreatment aluminium peel strength को significantly सुधारता है, जबकि untreated BOPP ऐसी aluminium layers produce कर सकती है जो tape tests fail करती हैं। अगर आप BOPP को low-barrier decorative application के लिए चला रहे हैं, तो आप plasma के बिना acceptable results पा सकते हैं; अगर आप इसे food या pharma barrier claim के लिए चला रहे हैं, तो आपको plasma working और verified चाहिए।</p>
+
+<p>Polyethylene films के लिए — जिसमें वो mono-PE structures शामिल हैं जो recyclable flexible packaging के global push के केंद्र में हैं — plasma essential है। PE की common packaging films में सबसे कम native surface energy है और aluminium के bond करने के लिए सबसे कम polar groups। Mono-PE high-barrier metallised structures technically possible हैं, पर केवल proper plasma pretreatment के साथ; इसके बिना, metallised PE customer द्वारा अपेक्षित barrier या adhesion deliver नहीं करेगी।</p>
+
+<p>किसी भी substrate (PET, BOPP, paper, PE) पर AlOx transparent barrier coatings के लिए, plasma केवल essential नहीं है — यह स्वयं deposition mechanism का हिस्सा है। Plasma के बिना आपको AlOx नहीं मिलता; आपको standard opaque aluminium मिलता है। AlOx production capability जोड़ने की योजना बना रहे Plants essentially या तो plasma-reactive metalliser जोड़ने की योजना बना रहे हैं या मौजूदा metalliser को appropriate plasma source के साथ upgrade करने की।</p>
+
+<p>Recycled-content films (r-PET, PCR-PET) के लिए, plasma कम percentages पर भी recommended है और higher percentages पर essential है। Recycled content surface variability लाता है — थोड़े अलग additive packages, recycling stream से micro-contamination, batch-to-batch variable native surface energy। Plasma इस variability को normalise करता है, inconsistent input के बावजूद आपको consistent metallisation देता है।</p>
+
+<p>Nylon (BOPA) के लिए, plasma optional के क़रीब है। Nylon में amide groups (nitrogen से जुड़ा C=O) हैं जो naturally nucleation और bonding sites के रूप में काम करते हैं, PET के ether groups जैसे आत्मा में similar। Standard aluminium metallisation अक्सर Nylon पर plasma के बिना काम करती है। Barrier-critical applications के लिए, plasma अभी भी consistency सुधारता है, पर यह success और failure के बीच का अंतर नहीं है जैसा BOPP या mono-PE के लिए है।</p>
+
+<h3>⚠ पाँच Plasma Operating Mistakes जो Real Money Cost करती हैं</h3>
+<div style="margin:20px 0;">
+<img src="plasma-control-desk.png" alt="Plasma operating control desk — gas flow meters, plasma power readout, tape test sample, और daily log sheet" style="width:100%;height:auto;border-radius:10px;display:block;"/>
+</div>
+
+
+<p><strong>1. यह मानना कि "plasma चालू है" जब वास्तव में नहीं है।</strong> Plasma electrode energised हो सकता है और gas flowing — पर अगर gas mass flow controller drift हो गया है, या एक cylinder near empty है और pressure गिर रहा है, या electrode पर एक non-conducting deposit build हो गया है, तो web surface पर actual plasma HMI जो suggest करता है उससे बहुत कमज़ोर हो सकता है। एकमात्र सबसे अच्छा check metallised output पर tape test है: अगर adhesion बिना obvious कारण के गिरती है, पहली physically verify करने वाली चीज़ plasma operation है, boats नहीं।</p>
+
+<p><strong>2. बहुत ज़्यादा plasma power चलाना।</strong> Oxygen plasma में fast first reactions substrate में useful polar groups जोड़ती हैं। पर plasma में ultraviolet photons भी होते हैं जो surface पर polymer chains तोड़ सकते हैं — chain scission — उसी surface को degrade करते हुए जिसे आप सुधारने की कोशिश कर रहे हैं। Plasma pretreatment पर literature explicit है कि <a href="https://www.sciencedirect.com/science/article/abs/pii/S0257897298007804" style="color:#E85D26;font-weight:bold;">"oxygen plasma में मौजूद electrons, ions और UV radiation भी inner chain scissions से polymer की cohesive strength को कमज़ोर करते हैं"</a>। Optimum window के पार, ज़्यादा power surface को damage करती है। अपने substrate के लिए OEM-specified watt density use करें; "safe रहने के लिए" maximum power blast न करें।</p>
+
+<p><strong>3. Substrate के लिए ग़लत gas use करना।</strong> Argon physical surface cleaning के लिए excellent है पर polar groups नहीं जोड़ता। Oxygen polar groups जोड़ने के लिए excellent है पर कुछ specialty films के लिए over-reactive है। Nitrogen की अपनी niche है। अगर OEM ने आपके plasma unit को PET पर oxygen के लिए setup किया और एक shift supervisor ने chemistry को समझे बिना "surface को बेहतर clean करने के लिए" argon पर बदल दिया, तो surface अब cleaner है पर पहले से ज़्यादा chemically activated नहीं है — और adhesion नहीं सुधरेगी। हमेशा अपने plasma gas selection को substrate और goal के against verify करें, OEM specification और Gas Selection Guide (नीचे Format 3) का इस्तेमाल करते हुए।</p>
+
+<p><strong>4. Plasma electrode maintenance की उपेक्षा।</strong> Plasma electrode aluminium vapour से घिरे vacuum chamber में operate होता है। उस aluminium का कुछ हिस्सा plasma electrode पर खुद deposit हो जाता है, धीरे-धीरे एक layer बनाते हुए जो electrode efficiency कम करती है और eventually arcing कर सकती है। Plasma electrode पर buildup के साथ भी "light up" कर सकता है, पर discharge web width के पार uneven हो जाता है और result patchy treatment है। OEM maintenance plan के अनुसार scheduled electrode inspection और cleaning non-negotiable है। अगर आपको याद नहीं कि plasma electrode last कब inspect हुआ, वही पहली चीज़ है जो maintenance calendar पर डालनी है।</p>
+
+<p><strong>5. एक substrate के लिए plasma settings चलाना जब job दूसरे में बदल गया है।</strong> Plasma recipe — gas, flow rate, power, web speed के माध्यम से exposure time — OEM (या आपके process engineer) ने एक specific substrate और एक specific application के लिए tune की थी। जब job PET से BOPP में बदलता है, या standard barrier से high-barrier में, उन settings को भी बदलना होगा। एक plant जहाँ हर job substrate के regardless एक ही plasma recipe चलाती है, कुछ jobs के लिए real performance छोड़ रही है और संभवतः दूसरों को damage कर रही है। OEM manual या process engineer हर job category के लिए recipe specify करता है; Plasma Operating Daily Log (नीचे Format 2) उसे record करने की discipline बनाता है।</p>
+
+<h3 id="downloads-hi">⬇ Free Downloadable Tools — तीनों Bilingual Excel Files</h3>
+
+<p>तीनों tools fully editable Excel files (.xlsx) हैं English और Hindi side-by-side के साथ। हर page पर full VKS Tech branding।</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0;">
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;position:relative;">
+<div style="position:absolute;top:-10px;right:14px;background:#E85D26;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.72em;font-weight:bold;letter-spacing:0.5px;">⭐ MOST USED</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">1</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Treatment Need — Decision Chart</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">हर common metalliser job (PET, BOPP, CPP, PE/mono-PE, Nylon, r-PET) के लिए तीन application levels (standard Al, high-barrier Al, AlOx transparent) के पार एक substrate-by-application matrix। हर cell ESSENTIAL, RECOMMENDED, या OPTIONAL कारण के साथ return करता है। किसी भी नए job या substrate change से पहले planning aid।</div>
+</div>
+<a href="/downloads/01-Plasma-Need-Decision-Chart.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">2</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Operating Daily Log</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">18 rows के साथ एक shift log: time, roll/job ID, substrate, used gas, flow rate (sccm), plasma power, web speed, chamber pressure, tape-test adhesion result, OD reading, operator। Supervisor और Met-QC sign-off। Plasma को HMI screen से tracked, audit-ready process में बदल देता है।</div>
+</div>
+<a href="/downloads/02-Plasma-Operating-Daily-Log.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+<div style="background:#FAF9F6;border:2px solid #1A2744;border-radius:10px;padding:18px;">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="background:#1A2744;color:#fff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.3em;flex-shrink:0;">3</div>
+<div style="flex:1;min-width:200px;">
+<div style="font-weight:bold;font-size:1.1em;color:#1A2744;">Plasma Gas Selection + Troubleshooting</div>
+<div style="font-size:0.9em;color:#5A5A5A;margin-top:3px;">दो tabs। Tab 1: कौन सी gas क्या करती है — O₂, Ar, N₂, और common mixes, primary effect और best-use substrate notes के साथ। Tab 2: एक 8-symptom troubleshooting chart जो tape-test failures, OD inconsistency, surface pinholes, gas pressure drops, electrode buildup, और AlOx-specific issues cover करता है।</div>
+</div>
+<a href="/downloads/03-Plasma-Gas-Selection-Troubleshooting.xlsx" download style="background:#E85D26;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:0.92em;white-space:nowrap;">⬇ Download .xlsx</a>
+</div>
+</div>
+
+</div>
+
+<div style="background:rgba(13,140,126,0.12);border-left:4px solid #0D8C7E;padding:14px 18px;margin:20px 0;border-radius:6px;">
+<strong style="color:#0D8C7E;">💡 ये कैसे एक साथ fit होते हैं:</strong> Format 1 (Decision Chart) तब use करें जब नया job plan कर रहे हों या किसी विशेष product mix के लिए plasma में invest करना है या नहीं evaluate कर रहे हों। Format 2 (Daily Log) हर shift use करें ताकि plasma एक HMI screen के बजाय tracked process बने। Format 3 (Gas Selection + Troubleshooting) तब use करें जब कुछ ग़लत हो जाए और आपको OEM call करने से पहले उसे diagnose करने का structured तरीक़ा चाहिए।
+</div>
+
+<p style="margin:24px 0;color:#1A2744;line-height:1.8;background:#FAF9F6;border-left:4px solid #1A2744;padding:14px 18px;border-radius:6px;"><strong>📚 इस site पर related reads:</strong> <a href="/blog/corona-treatment-dyne-levels" style="color:#E85D26;font-weight:bold;">Blog #47</a> corona treatment और dyne levels cover करता है — plasma का atmospheric-pressure cousin, metalliser के बाहर printing और lamination से पहले surface preparation के लिए use होता है। <a href="/blog/alox-vs-metallised-pet-epr-2026" style="color:#E85D26;font-weight:bold;">Blog #31</a> AlOx बनाम traditional metallised PET decision cover करता है — plasma वो process unit है जो AlOx को possible बनाता है। <a href="/blog/why-do-we-metallise" style="color:#E85D26;font-weight:bold;">Blog #33</a> cover करता है कि vacuum metallisation क्यों exist करती है — metallisation process में plasma कहाँ fit होता है समझने के लिए useful context। Full free toolkit <a href="https://www.vkstech.com/#tools" style="color:#E85D26;font-weight:bold;">vkstech.com/#tools</a> पर है।</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">⚠ महत्वपूर्ण Note</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">Vacuum metalliser पर Plasma settings normally metalliser OEM (BOBST, Bühler Leybold Optics, ULVAC, KOBOTECH, और दूसरे) द्वारा हर substrate-application combination के लिए pre-configured होती हैं। Plasma gas, flow rate, या power में बदलाव OEM manual के reference में और जहाँ संभव हो, OEM service engineer या आपके in-house process engineer की involvement के साथ किए जाने चाहिए। इस blog में guidance general industry knowledge है जिसका intent operators और supervisors की मदद करना है कि plasma क्या कर रहा है और क्यों समझें — यह आपकी machine के specific OEM documentation का substitute नहीं है।</p>
+</div>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;border-left:6px solid #E85D26;">
+<strong style="color:#E85D26;font-size:1.1em;">💬 Question या कहीं Stuck?</strong>
+<p style="margin:10px 0 0 0;color:#FAF9F6;line-height:1.7;">एक adhesion failure की जाँच कर रहे हैं जिसने metalliser team को विभाजित कर दिया है? AlOx upgrade पर विचार कर रहे हैं और सोच रहे हैं कि plasma system actually क्या जोड़ता है? तय करने की कोशिश कर रहे हैं कि क्या आपके plant को BOPP jobs पर plasma चलाना चाहिए? <strong>अपना सवाल इस page के bottom पर comments में डालें</strong> — मैं हर thoughtful question का जवाब देता हूँ, plant engineer to plant engineer।</p>
+</div>
+
+<div style="background:#faf9f6;border-left:4px solid #e85d26;padding:16px 20px;margin:24px 0;border-radius:8px;">
+<strong>💡 Key Takeaway:</strong> Vacuum metalliser में Plasma treatment एक in-chamber surface treatment है जो ionised gas — आम तौर पर oxygen, कभी-कभी argon या mix — का इस्तेमाल करके film surface को chemically activate करता है उस second में पहले जब उस पर aluminium vapour land होता है। यह corona से अलग है: corona atmospheric-pressure और metalliser के बाहर है, plasma low-pressure और vacuum chamber के अंदर है। इसके पाँच real jobs aluminium adhesion सुधारना हैं (विशेष रूप से BOPP और PE पर जहाँ native polar groups scarce हैं), अधिक uniform barrier के लिए aluminium nucleation site density बढ़ाना, web से outgassed contaminants निकालना, plasma-reactive deposition के माध्यम से AlOx transparent barrier coatings enable करना, और difficult या recycled-content substrates enable करना। यह web path में evaporator boats के immediately upstream बैठता है — web को "coating process से ठीक पहले plasma से hit किया जाता है" metalliser OEM BOBST के अनुसार। कौन से substrates को इसकी ज़रूरत है यह application पर निर्भर करता है: standard barrier work में PET के लिए optional, BOPP के लिए recommended-to-essential, PE और mono-PE के लिए essential, AlOx के लिए essential, r-PET के लिए recommended। पाँच operating mistakes से बचें: यह मानना कि plasma चालू है जब नहीं है, over-powering और UV chain scission से substrate damage करना, ग़लत gas selection, electrode maintenance की उपेक्षा, और सभी substrates पर एक recipe चलाना। ऊपर तीन free downloads (Decision Chart, Daily Log, Gas Selection + Troubleshooting) plasma को vacuum-chamber mystery के बजाय एक tracked, समझा गया process बनाते हैं।
+</div>
+
+<p style="margin-top:20px;"><strong>📌 आगे क्या।</strong> इसके बाद का blog AlOx को देखता है — वो transparent barrier coating जो plasma-reactive deposition actually produce करती है — और practical decision कि एक converter को higher-value, transparent, recyclable barrier packaging में compete करने के लिए AlOx capability कब जोड़नी चाहिए।</p>
+
+</div>
