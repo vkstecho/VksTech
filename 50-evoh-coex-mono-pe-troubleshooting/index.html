@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="category" content="Process Mastery">
+    <meta name="subcategory" content="Extrusion & Co-Extrusion">
+    <title>Blog 50: EVOH Co-Extrusion vs. Mono-PE Troubleshooting Guide</title>
+    <style>
+        /* Base VKS Tech Brand Palette Integration */
+        :root {
+            --navy: #1A2744;
+            --orange: #E85D26;
+            --teal: #0D8C7E;
+            --cream: #FAF9F6;
+            --text-dark: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .brand-header {
+            border-bottom: 3px solid var(--navy);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .brand-title {
+            color: var(--navy);
+            margin: 0;
+            font-size: 28px;
+        }
+        .meta-info {
+            font-size: 14px;
+            color: var(--teal);
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        h2 {
+            color: var(--navy);
+            border-left: 5px solid var(--orange);
+            padding-left: 12px;
+            margin-top: 35px;
+        }
+        h3 {
+            color: var(--teal);
+            margin-top: 25px;
+        }
+        p, li {
+            font-size: 16px;
+            text-align: justify;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        .note-box {
+            background-color: rgba(13, 140, 126, 0.1);
+            border-left: 4px solid var(--teal);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .alert-box {
+            background-color: rgba(232, 93, 38, 0.1);
+            border-left: 4px solid var(--orange);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--navy);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .img-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .img-caption {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        /* Bilingual Sibling Architecture */
+        .en-content {
+            display: block;
+        }
+        .hi-content {
+            display: block;
+            margin-top: 50px;
+            border-top: 2px dashed #ccc;
+            padding-top: 40px;
+        }
+        .lang-badge {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        .hi-content .lang-badge {
+            background: var(--orange);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="brand-header">
+        <h1 class="brand-title">VKS Tech Technical Insights</h1>
+        <div class="meta-info">Category: Process Mastery | Subcategory: Extrusion & Co-Extrusion</div>
+    </div>
+
+    <div class="en-content">
+        <span class="lang-badge">English Version</span>
+        <h1>EVOH Co-Extrusion vs. Mono-PE: The Operational Troubleshooting Guide for 2026 Recyclability</h1>
+        
+        <p>Enforcement of strict Extended Producer Responsibility (EPR) Category I mandates has forced a mass migration away from legacy, multi-material laminates like PET/Alu-Foil/PE. To maintain high oxygen and moisture barriers without violating recyclability thresholds, plant teams must run either <strong>EVOH-contained multi-layer co-extrusion films</strong> (where EVOH remains below 5% of the total structure weight to clear recycling parameters) or <strong>Machine Direction Oriented Mono-PE (MDO-PE)</strong> structures.</p>
+        
+        <p>Both routes create severe operational bottlenecks on the shop floor. EVOH is highly prone to thermal degradation and gel formation under un-optimized shear, while Mono-PE structures exhibit an incredibly narrow sealing window during high-speed conversion. This troubleshooting guide addresses the precise engineering control adjustments needed to overcome these run failures.</p>
+
+        <div class="img-container">
+            <img src="evoh_coex_die_flow.png" alt="Multi-layer co-extrusion die block showing EVOH barrier core layer encapsulation">
+            <div class="img-caption">Figure 1: Cross-sectional melt flow profile of an EVOH barrier layer encapsulated inside polyolefin skin layers.</div>
+        </div>
+
+        <h2>1. EVOH Processing: Eliminating Gel Degradation & Die Drool</h2>
+        <p>Ethylene Vinyl Alcohol (EVOH) has a very sensitive operational thermal window. If the residence time inside the extruder is too long, or if localized shear temperatures spike beyond the polymer's limit, cross-linking reactions occur. This generates hard carbon gels, structural pinholes, and severe "die drool" (oxidized deposit buildup on the die lips) that splits the bubble or scratches the moving web.</p>
+        
+        <h3>The Action Plan for Extruder Setups:</h3>
+        <ul>
+            <li><strong>The Temperature Profile Flatline:</strong> Keep EVOH extruder melt temperatures strictly between $190^\circ\text{C}$ and $220^\circ\text{C}$. Exceeding $230^\circ\text{C}$ causes rapid chain scission. Ensure the adapter and feed-block zone temperatures exactly match the core melt temperature to avoid interfacial flow instability.</li>
+            <li><strong>Purge Management Protocols:</strong> Never allow an EVOH layer extruder to sit idle or stagnate at operating temperatures during line stoppages. If a breakdown exceeds 15 minutes, immediately displace the EVOH resin inside the barrel with a high-viscosity, thermally stable fractional-melt LDPE or a dedicated purging compound.</li>
+            <li><strong>Encapsulation Integrity:</strong> In feed-block design, ensure that the polyolefin tie layers completely encapsulate the EVOH core layer before entering the die manifold. Un-encapsulated EVOH contacting the dead zones of raw steel components will degrade within hours, forcing premature shutdowns for die-splitting and cleaning.</li>
+        </ul>
+
+        <h2>2. Mono-PE Run Parameters: Solving Heat-Seal Burn-Through</h2>
+        <p>Shifting to an MDO-PE/PE mono-material laminate eliminates the thermal resistance layer that PET previously provided. Because the outer oriented PE layer and the inner sealing PE layer share close melting points, conversion lines experience high rates of structural shrink, package distortion, or outright heat-seal burn-through on Form-Fill-Seal (FFS) lines.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Operational Failure Mode</th>
+                    <th>Root Cause Parameter</th>
+                    <th>Corrective Floor-Level Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>High Gel Count in Co-Ex Film</strong></td>
+                    <td>Stagnant flow or localized shear overheating of EVOH resin</td>
+                    <td>Reduce screw speed on the core extruder; check for dead spots in feed-block channels.</td>
+                </tr>
+                <tr>
+                    <td><strong>Die Drool / Lip Deposits</strong></td>
+                    <td>Low molecular weight additives migrating under high die-pressure</td>
+                    <td>Apply a continuous external air-purge system at the die exit; use fluoropolymer processing aids (PPA).</td>
+                </tr>
+                <tr>
+                    <td><strong>Pouch Seam Pucker / Shrinkage</strong></td>
+                    <td>FFS sealing jaws operating above the outer MDO-PE softening point</td>
+                    <td>Install Teflon-coated impulse sealing bars; transition to a broader, low-initiation temperature (SIT) metallocene sealing resin.</td>
+                </tr>
+                <tr>
+                    <td><strong>Interlayer Delamination</strong></td>
+                    <td>Incompatible tie-layer melt temperature or incorrect layer ratio</td>
+                    <td>Verify tie-layer extruder melt temperature is $\ge 210^\circ\text{C}$ to optimize functional maleic anhydride bonding.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>Shop-Floor Waste Tracking Reality:</strong> Mono-PE webs and EVOH co-ex films thin out rapidly under erratic gauge control. Track gauge-variation trim and bubble-burst startup scrap strictly in **kg**. Do not log in linear meters; high-density polyolefin waste metrics must accurately reflect raw material mass balance to manage your true operational cost-to-print.
+        </div>
+
+        <h2>3. Optimizing the FFS Conversion Sealing Window</h2>
+        <p>To successfully run mono-PE pouches at high commercial output speeds without burning through the laminate, operators must recalibrate FFS jaw physics. The window between the Seal Initiation Temperature (SIT) of the inner layer and the melting point of the outer layer shrinks to a narrow $\Delta T$ of just $15^\circ\text{C}$ to $20^\circ\text{C}$ (compared to a comfortable $80^\circ\text{C}$ margin with PET/PE).</p>
+        
+        <p>Precise adjustments require dropping jaw temperatures while simultaneously extending seal dwell time, or modifying the jaw profile to a targeted line contact instead of a flat face. This concentrates pressure exactly where needed, achieving hermetic integrity before heat can conduct through to the outer oriented web layer.</p>
+
+        <div class="alert-box">
+            <strong>Process Risk Warning:</strong> When running high-barrier EVOH co-ex films, moisture absorption is your silent enemy. Raw EVOH resin pellets absorb ambient moisture rapidly from open bags, causing bubble instability and internal moisture vapor pocketing (foaming) during extrusion. Always maintain raw resin hopper dryers at a strict dew point of $-40^\circ\text{C}$.
+        </div>
+    </div>
+
+    <div class="hi-content">
+        <span class="lang-badge">हिंदी संस्करण</span>
+        <h1>EVOH को-एक्सट्रूज़न बनाम मोनो-पीई: 2026 रीसाइक्लिंग नियमों के लिए ऑपरेशनल ट्रबलशूटिंग गाइड</h1>
+        
+        <p>सख्त एक्सटेंडेड प्रोड्यूसर रिस्पॉन्सिबिलिटी (EPR) कैटेगरी I नियमों के लागू होने के कारण, अब पारंपरिक मल्टी-मटेरियल लेमिनेट्स (जैसे PET/Alu-Foil/PE) को बंद करना अनिवार्य हो गया है। रीसाइक्लिंग मानकों को पूरा करते हुए उच्च ऑक्सीजन और मॉइस्चर बैरियर बनाए रखने के लिए, प्लांट टीमों के पास दो ही मुख्य रास्ते बचे हैं: <strong>EVOH-युक्त मल्टी-लेयर को-एक्सट्रूज़न फिल्म्स</strong> (जहां कुल फिल्म वजन में EVOH की मात्रा 5% से कम रखी जाती है) या <strong>मशीन डायरेक्शन ओरिएंटेड मोनो-पीई (MDO-PE)</strong> स्ट्रक्चर्स।</p>
+        
+        <p>लेकिन इन दोनों ही मटेरियल्स को चलाना शॉप फ्लोर पर ऑपरेटरों के लिए बड़ी चुनौतियाँ खड़ी करता है। अन-ऑप्टिमाइज़्ड शियर (shear) के कारण EVOH बहुत जल्दी जल जाता है और कार्बन जेल्स बनाता है, वहीं मोनो-पीई स्ट्रक्चर्स का सीलिंग विंडो (sealing window) बहुत संकरा होने के कारण पाउच मेकिंग मशीनों पर बर्न-थ्रू (burn-through) की समस्या आती है। यह गाइड इन्हीं समस्याओं के सटीक इंजीनियरिंग समाधान प्रदान करती है।</p>
+
+        <h2>1. EVOH प्रोसेसिंग: जेल डिग्रेडेशन और डाई ड्रूल का समाधान</h2>
+        <p>इथिलीन विनाइल अल्कोहल (EVOH) का थर्मल प्रोसेसिंग विंडो बेहद संवेदनशील होता है। यदि एक्सट्रूडर के अंदर मटेरियल का निवास समय (residence time) अधिक हो जाए, या शियर हीट के कारण तापमान बढ़ जाए, तो इसके मॉलिक्यूल्स आपस में क्रॉस-लिंकिंग करने लगते हैं। इससे फिल्म में कड़े कार्बन जेल्स और पिनहोल्स बनते हैं, और डाई के मुहाने पर चिपचिपा कचरा (die drool) जमा होने लगता है जो बबल को फाड़ देता है।</p>
+        
+        <h3>एक्सट्रूडर सेटअप के लिए जरूरी नियम:</h3>
+        <ul>
+            <li><strong>तापमान को स्थिर रखें (Flatline Profile):</strong> EVOH एक्सट्रूडर के मेल्ट तापमान को सख्ती से $190^\circ\text{C}$ से $220^\circ\text{C}$ के बीच ही रखें। तापमान $230^\circ\text{C}$ से ऊपर जाते ही मटेरियल तेजी से सड़ने लगता है। एडाप्टर और फीड-ब्लॉक ज़ोन का तापमान भी इसी के अनुरूप रखें।</li>
+            <li><strong>पर्जिंग प्रोटोकॉल (Purge Management):</strong> लाइन बंद होने पर EVOH को कभी भी एक्सट्रूडर के अंदर गर्म अवस्था में न छोड़ें। यदि ब्रेकडाउन 15 मिनट से अधिक लंबा हो, तो तुरंत बैरल के अंदर मौजूद EVOH को हाई-विस्कोसिटी LDPE या एक विशेष पर्जिंग कंपाउंड चलाकर बाहर निकाल दें।</li>
+            <li><strong>लेयर एनकैप्सुलेशन (Layer Encapsulation):</strong> फीड-ब्लॉक डिज़ाइन में यह सुनिश्चित करें कि पॉलिओलेफिन टाई-लेयर्स (tie layers) डाई मैनिफोल्ड में प्रवेश करने से पहले EVOH कोर लेयर को पूरी तरह से चारों तरफ से कवर (encapsulate) कर लें। यदि नग्न EVOH डाई के कोनों में कच्चे लोहे के संपर्क में आएगा, तो वह कुछ ही घंटों में जलकर पूरी लाइन को कड़ाही की तरह काला कर देगा।</li>
+        </ul>
+
+        <h2>2. मोनो-पीई रन पैरामीटर्स: हीट-सीलिंग बर्न-थ्रू को रोकना</h2>
+        <p>MDO-PE/PE मोनो-मटेरियल स्ट्रक्चर पर शिफ्ट होने का मतलब है कि हमने उस बाहरी PET लेयर को हटा दिया है जो पहले सीलिंग के समय बाहरी गर्मी को झेलती थी। चूंकि अब बाहरी ओरिएंटेड पीई और अंदरूनी सीलिंग पीई दोनों का मेल्टिंग पॉइंट लगभग आसपास होता है, इसलिए FFS (Form-Fill-Seal) मशीनों पर फिल्म सुकड़ जाती है या पूरी तरह जलकर कट जाती है।</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ऑपरेशनल फेलियर मोड</th>
+                    <th>मुख्य तकनीकी कारण</th>
+                    <th>शॉप-फ्लोर सुधारात्मक कदम</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>फिल्म में हाई जेल काउंट (Carbon Gels)</strong></td>
+                    <td>EVOH का जरूरत से ज्यादा गर्म होना या बहाव रुकना</td>
+                    <td>कोर एक्सट्रूडर की स्क्रू स्पीड कम करें; फीड-ब्लॉक के फ्लो चैनलों की जांच करें।</td>
+                </tr>
+                <tr>
+                    <td><strong>डाई ड्रूल (Die Drool)</strong></td>
+                    <td>हाई डाई-प्रेशर के कारण लो-मॉलिक्यूलर एडिटिव्स का बाहर आना</td>
+                    <td>डाई के निकास द्वार पर कंटीन्यूअस एयर-पर्ज सिस्टम लगाएं; PPA एडिटिव का उपयोग करें।</td>
+                </tr>
+                <tr>
+                    <td><strong>पाउच सीम का सुकड़ना (Puckering)</strong></td>
+                    <td>FFS जबड़ों (jaws) का तापमान बाहरी MDO-PE के सॉफ्टनिंग पॉइंट से ऊपर होना</td>
+                    <td>टेफ्लॉन-कोटेड इम्पल्स सीलिंग बार लगाएं; कम तापमान पर सील होने वाले (Low SIT) मेटलोसीन रेजिन का उपयोग करें।</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>शॉप-फ्लोर वेस्ट ट्रैकिंग:</strong> गेज कंट्रोल सही न होने पर मोनो-पीई और EVOH को-एक्स फिल्में बहुत तेजी से पतली या मोटी होने लगती हैं। बबल फटने से होने वाले स्टार्ट-अप स्क्रैप और साइड ट्रिमिंग के वेस्ट को हमेशा मीटर के बजाय केवल <strong>किलोग्राम (kg)</strong> में ही तौलें। मीटर में गणना करने से मटेरियल की वास्तविक खपत और वेस्टेज का सही पता नहीं चलता।
+        </div>
+
+        <h2>3. FFS कन्वर्शन सीलिंग विंडो को ऑप्टिमाइज़ करना</h2>
+        <p>बिना लैमिनेट को जलाए तेज स्पीड पर मोनो-पीई पाउच बनाने के लिए ऑपरेटरों को FFS मशीन के सीलिंग जॉ (jaw) प्रेशर और टाइमिंग को नए सिरे से सेट करना होगा। अंदरूनी लेयर के सील होने की शुरुआत के तापमान (SIT) और बाहरी लेयर के पिघलने के तापमान के बीच का अंतर ($\Delta T$) घटकर अब मात्र $15^\circ\text{C}$ से $20^\circ\text{C}$ ही रह जाता है।</p>
+        
+        <p>सटीक सेटिंग्स के लिए जबड़ों के तापमान को कम करें और दबाव के समय (dwell time) को थोड़ा बढ़ाएं। इसके अलावा, सपाट (flat face) जबड़ों के बजाय पतली लाइन कॉन्टैक्ट वाले प्रोफाइल का उपयोग करें। यह दबाव को एक ही बिंदु पर केंद्रित करता है, जिससे बाहरी लेयर तक गर्मी पहुंचने से पहले ही अंदरूनी सील मजबूत और एयर-टाइट हो जाती है।</p>
+
+        <div class="alert-box">
+            <strong>प्रोसेस रिस्क चेतावनी:</strong> हाई-बैरियर EVOH को-एक्सट्रूज़न के दौरान नमी (moisture) सबसे बड़ी दुश्मन है। खुली बोरियों में पड़ा कच्चा EVOH रेजिन हवा की नमी को सोख लेता है, जिससे एक्सट्रूज़न के दौरान बबल डगमगाने लगता है और फिल्म के अंदर बारीक झाग (foaming) बनने लगता है। हमेशा रेजिन हॉपर ड्रायर्स को $-40^\circ\text{C}$ के सख्त ड्यू-पॉइंट पर चलाएं।
+        </div>
+    </div>
+</div>
+
+</body>
+                      </html>
 
