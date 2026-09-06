@@ -674,7 +674,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
         <div class="hero-stats">
           <div class="stat-item"><div class="num">7</div><div class="lbl" data-i="stat1">Calculators</div></div>
-          <div class="stat-item"><div class="num">18</div><div class="lbl" data-i="stat2">Articles Published</div></div>
+          <div class="stat-item"><div class="num" id="statArticlesNum">–</div><div class="lbl" data-i="stat2">Articles Published</div></div>
           <div class="stat-item"><div class="num">9<span class="plus">+</span></div><div class="lbl" data-i="stat3">Apps Live</div></div>
           <div class="stat-item"><div class="num">100%</div><div class="lbl" data-i="stat4">Free</div></div>
         </div>
@@ -1667,6 +1667,9 @@ function loadBlogs() {
         published: b.published,
         date: {seconds: new Date(b.created_at).getTime()/1000}
       }));
+      /* Live "Articles Published" hero stat — replaces the old hardcoded number */
+      var statEl = document.getElementById('statArticlesNum');
+      if(statEl) statEl.textContent = allBlogs.length;
       if(allBlogs.length === 0) {
         grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles about flexible packaging, Excel formulas, career tips, and tech tools coming soon!</p></div>';
       } else {
