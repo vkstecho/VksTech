@@ -65,6 +65,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
 <button class="tab" onclick="switchTab('subs',this)">📧 Subscribers <span id="subsBadge" style="display:none;background:var(--teal);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
 <button class="tab" onclick="switchTab('yt',this)">📺 YouTube</button>
+<button class="tab" onclick="switchTab('visitors',this)">👁️ Visitors</button>
 </div>
 
 <div id="tab-github" class="panel">
@@ -228,6 +229,42 @@ Manage your channels first, then add playlists under each.
 </div>
 </div>
 
+<!-- VISITORS TAB — lightweight, privacy-friendly pageview stats -->
+<div id="tab-visitors" class="panel" style="display:none">
+<h3>👁️ Visitors</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Simple, self-hosted pageview stats.</strong> No cookies, no personal data — just anonymous counts of pages viewed, stored in your own Supabase project.
+</p>
+
+<div id="visitorsSetupBanner" style="display:none;background:#fff8e6;border-left:3px solid #e85d26;padding:14px 16px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:18px;line-height:1.7">
+<strong>One-time setup needed.</strong> Run this once in your Supabase project's SQL editor, then reload this tab:
+<pre style="background:#1a2744;color:#d4e0ff;padding:14px;border-radius:8px;margin-top:10px;font-size:.74rem;overflow-x:auto;line-height:1.6;white-space:pre">create table page_views (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  path text not null,
+  referrer text,
+  visitor_id text
+);
+alter table page_views enable row level security;
+create policy "Anyone can log a pageview"
+  on page_views for insert to anon with check (true);
+create policy "Only admins can read pageviews"
+  on page_views for select to authenticated using (true);</pre>
+</div>
+
+<div id="visitorsStatCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:22px;"></div>
+
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+  <h4 style="margin:0 0 12px;color:var(--navy)">📈 Last 14 days</h4>
+  <div id="visitorsDailyChart" style="display:flex;align-items:flex-end;gap:6px;height:140px;"></div>
+</div>
+
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;">
+  <h4 style="margin:0 0 12px;color:var(--navy)">🕓 Recent pageviews</h4>
+  <div id="visitorsRecentList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -365,13 +402,14 @@ function toast(msg, err){
 function switchTab(tab,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['github','upload','write','posts','qa','req','subs','yt'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  ['github','upload','write','posts','qa','req','subs','yt','visitors'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
   if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
   if(tab==='posts')loadPosts();
   if(tab==='qa')loadQuestions();
   if(tab==='req')loadRequests();
   if(tab==='subs')loadSubscribers();
   if(tab==='yt')loadYouTube();
+  if(tab==='visitors')loadVisitors();
 }
 
 let uploadedContent='';
@@ -1870,6 +1908,94 @@ async function delQ(id){
   loadQuestions();
 }
 function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* ════════════════════════════════════════════════════════════
+   VISITORS — reads the `page_views` table logged by index.html.
+   Shows: today / 7-day / 30-day / all-time counts, unique visitors
+   (by anonymous localStorage id) for the last 30 days, a simple
+   14-day bar chart, and a recent-activity list.
+   ════════════════════════════════════════════════════════════ */
+async function loadVisitors(){
+  const cards = document.getElementById('visitorsStatCards');
+  const chart = document.getElementById('visitorsDailyChart');
+  const recent = document.getElementById('visitorsRecentList');
+  const setupBanner = document.getElementById('visitorsSetupBanner');
+  cards.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  chart.innerHTML = '';
+  recent.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  setupBanner.style.display = 'none';
+
+  const now = new Date();
+  const startOfDay = (d)=>{ const x=new Date(d); x.setHours(0,0,0,0); return x; };
+  const today0 = startOfDay(now);
+  const d7 = new Date(today0); d7.setDate(d7.getDate()-6);   // last 7 days incl. today
+  const d30 = new Date(today0); d30.setDate(d30.getDate()-29); // last 30 days incl. today
+
+  /* Pull everything from the last 30 days (enough for all stat cards + chart),
+     plus counts for older data via a separate all-time count query. */
+  const [{data:recentRows, error:recentErr}, {count:allTimeCount, error:allErr}] = await Promise.all([
+    sb.from('page_views').select('created_at,path,referrer,visitor_id').gte('created_at', d30.toISOString()).order('created_at',{ascending:false}),
+    sb.from('page_views').select('id', {count:'exact', head:true})
+  ]);
+
+  if(recentErr || allErr){
+    const msg = (recentErr||allErr).message || '';
+    cards.innerHTML = '';
+    chart.innerHTML = '';
+    recent.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(msg)+'</p></div>';
+    if(msg.toLowerCase().indexOf('page_views') > -1 || msg.toLowerCase().indexOf('relation') > -1){
+      setupBanner.style.display = 'block';
+    }
+    return;
+  }
+
+  const rows = recentRows || [];
+  const todayRows = rows.filter(r => new Date(r.created_at) >= today0);
+  const d7Rows = rows.filter(r => new Date(r.created_at) >= d7);
+  const uniqueVisitors30 = new Set(rows.map(r => r.visitor_id).filter(Boolean)).size;
+
+  cards.innerHTML = [
+    {label:'Today', value: todayRows.length, color:'var(--orange)'},
+    {label:'Last 7 days', value: d7Rows.length, color:'var(--teal)'},
+    {label:'Last 30 days', value: rows.length, color:'var(--navy)'},
+    {label:'All-time', value: (allTimeCount==null?'—':allTimeCount), color:'var(--navy)'},
+    {label:'Unique (30d)', value: uniqueVisitors30, color:'var(--gold)'},
+  ].map(c => `<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.7rem;color:${c.color}">${c.value}</div>
+      <div style="font-size:.74rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px">${c.label}</div>
+    </div>`).join('');
+
+  /* 14-day bar chart, oldest → newest */
+  const days = [];
+  for(let i=13;i>=0;i--){
+    const d = new Date(today0); d.setDate(d.getDate()-i);
+    const next = new Date(d); next.setDate(next.getDate()+1);
+    const n = rows.filter(r => { const t=new Date(r.created_at); return t>=d && t<next; }).length;
+    days.push({date:d, n});
+  }
+  const max = Math.max(1, ...days.map(d=>d.n));
+  chart.innerHTML = days.map(d => {
+    const h = Math.round((d.n/max)*100);
+    const label = d.date.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;" title="${label}: ${d.n} views">
+      <div style="font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${d.n}</div>
+      <div style="width:100%;max-width:26px;height:${Math.max(h,3)}%;background:var(--orange);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.62rem;color:var(--muted);white-space:nowrap;">${label}</div>
+    </div>`;
+  }).join('');
+
+  /* Recent pageviews list — most recent 20 */
+  if(!rows.length){
+    recent.innerHTML = '<div class="empty"><div>📭</div><p>No pageviews logged yet</p></div>';
+  } else {
+    recent.innerHTML = rows.slice(0,20).map(r => `<div class="post-item" style="padding:12px 16px;">
+      <div style="flex:1;min-width:200px">
+        <div style="font-weight:700;font-size:.88rem">${escH(r.path||'/')}</div>
+        <div class="meta">${new Date(r.created_at).toLocaleString()}${r.referrer?' • from '+escH(r.referrer):''}</div>
+      </div>
+    </div>`).join('');
+  }
+}
 
 /* Compute integer read-time-minutes from an HTML body.
    Strips tags, counts words, divides by 220 wpm.
