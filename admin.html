@@ -71,7 +71,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div id="tab-github" class="panel">
 <h3>📦 Publish from GitHub Folder</h3>
 <p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
-<strong>Pick-and-publish.</strong> Upload your blog folder (HTML + images + PDFs + Excel) to <code style="background:#fff;padding:2px 6px;border-radius:4px">github.com/vkstecho/VksTech</code>. The dropdown below lists all blog folders on your GitHub repo — pick one, click Fetch & Preview, then Publish. Edit on GitHub anytime; the site updates automatically.
+<strong>Pick-and-publish.</strong> Upload your blog folder (HTML + images + PDFs + Excel) to <code style="background:#fff;padding:2px 6px;border-radius:4px">github.com/vkstecho/VksTech</code> — either at repo root or inside <code style="background:#fff;padding:2px 6px;border-radius:4px">Blogs/</code>. The dropdown below lists all blog folders on your GitHub repo — pick one, click Fetch & Preview, then Publish. Edit on GitHub anytime; the site updates automatically.
 </p>
 
 <div style="background:#fffbea;border:1px solid #f0d47c;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.82rem;line-height:1.7">
@@ -91,7 +91,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <input type="checkbox" id="gShowAll" onchange="loadGithubFolders()" style="width:auto;margin:0;cursor:pointer"> Show already-published
 </label>
 </div>
-<div style="font-size:.72rem;color:#999;margin-top:6px">Folders are scanned from <code>github.com/vkstecho/VksTech</code>. Only folders containing a <code>.html</code> file are shown. Already-published folders are hidden by default — tick the checkbox to see all.</div>
+<div style="font-size:.72rem;color:#999;margin-top:6px">Folders are scanned from <code>github.com/vkstecho/VksTech</code> at any depth (repo root <em>and</em> nested under <code>Blogs/</code>). Only folders containing a <code>.html</code> file are shown. Already-published folders are hidden by default — tick the checkbox to see all.</div>
 
 <details style="margin-top:10px;font-size:.78rem">
 <summary style="cursor:pointer;color:var(--muted)">Can't find your folder? Type it manually</summary>
@@ -585,20 +585,21 @@ async function loadGithubTree(forceRefresh){
   const data = await r.json();
   if (!data.tree) throw new Error('Unexpected GitHub API response');
 
-  /* Group entries by top-level folder. Each entry from Trees API has:
-       path: "folder-name/file.html" or "file-at-root.html"
+  /* Group entries by their parent folder (any depth).
+     Supports both root-level blogs (15-web-break-.../index.html)
+     and nested blogs under Blogs/ (Blogs/51-man-power-.../index.html).
+     Each Trees API entry has:
+       path: "folder/file.html" or "Blogs/folder/file.html"
        type: "blob" (file) or "tree" (folder)
        size: bytes (for blobs)
-     We index files-by-folder so listGithubFolder() becomes free. */
+     We index files-by-folder so listGithubFolder() is free (no extra API calls). */
   const byFolder = {};
   data.tree.forEach(entry => {
     if (entry.type !== 'blob') return;
-    const slash = entry.path.indexOf('/');
-    if (slash === -1) return;  /* root-level file, skip */
-    const folder = entry.path.substring(0, slash);
-    const file = entry.path.substring(slash + 1);
-    /* Only consider direct children, not nested sub-folders */
-    if (file.indexOf('/') > -1) return;
+    const lastSlash = entry.path.lastIndexOf('/');
+    if (lastSlash === -1) return;  /* root-level file, skip */
+    const folder = entry.path.substring(0, lastSlash);  /* full parent path */
+    const file = entry.path.substring(lastSlash + 1);
     if (!byFolder[folder]) byFolder[folder] = [];
     byFolder[folder].push({ name: file, size: entry.size || 0 });
   });
