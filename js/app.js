@@ -620,12 +620,24 @@ function searchBlogs(){
 
 function getLocalText(text) {
   if(!text) return '';
-  // Split on | with flexible spacing: "|", " |", "| ", " | "
+  /* Bilingual fields are stored as "English ... | Hindi ...".
+     Meta lines inside a single language also use "|" (e.g. "12-min read | topic").
+     So we classify each segment by Devanagari instead of always taking parts[0]/parts[1]. */
   if(text.indexOf('|') > -1) {
-    var parts = text.split(/\s*\|\s*/);
-    if(curLang === 'hi' && parts.length > 1 && parts[1]) return parts[1].trim();
-    return parts[0].trim();
+    var parts = text.split(/\s*\|\s*/).map(function(p){ return p.trim(); }).filter(Boolean);
+    var hiParts = parts.filter(function(p){ return /[\u0900-\u097F]/.test(p); });
+    var enParts = parts.filter(function(p){ return p && !/[\u0900-\u097F]/.test(p); });
+    if(curLang === 'hi') {
+      if(hiParts.length) return hiParts.join(' · ');
+      /* fallback: last segment if no Devanagari detected */
+      return parts[parts.length - 1];
+    }
+    if(enParts.length) return enParts.join(' · ');
+    return parts[0];
   }
+  /* Whole string is Hindi-only or English-only */
+  if(curLang === 'hi' && !/[\u0900-\u097F]/.test(text)) return text;
+  if(curLang === 'en' && /[\u0900-\u097F]/.test(text) && !/[A-Za-z]{3,}/.test(text)) return text;
   return text;
 }
 
@@ -637,7 +649,13 @@ function stripReadTimeText(s){
   return s
     .replace(/📖\s*~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
     .replace(/~?\d+[\s-]*min(ute)?s?\s+read/gi, '')
+    .replace(/📖\s*~?\d+\s*मिनट/gi, '')
+    .replace(/\d+\s*मिनट(\s*रीड|\s*read)?/gi, '')
+    .replace(/Bookmark for the next shutdown/gi, '')
+    .replace(/अगले शटडाउन के लिए बुकमार्क करें/gi, '')
+    .replace(/\s*[·•]\s*/g, ' · ')
     .replace(/\s{2,}/g, ' ')
+    .replace(/^(?:\s*·\s*)+|(?:\s*·\s*)+$/g, '')
     .trim();
 }
 /* Read time for blog cards.
