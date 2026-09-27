@@ -101,3 +101,11 @@ https://vkstech.com/?mc-width=3000&mc-micron=12&mc-speed=800#calc-met-capacity
 ```
 
 Field IDs match the `id` attributes in the HTML (e.g. `cw-len`, `mc-jumbo`).
+
+
+## Update 2026-09-27
+
+- Added **Man Power** card in Industry Apps section (first card), linking to https://manpower.vkstech.com
+- Asset: `manpower-icon.png` (copy of app icon-512)
+- Sitemap entry for blog slug `man-power-team-management-app`
+- Blog package lives in sibling zip / `Blogs/51-man-power-team-management-app/`
