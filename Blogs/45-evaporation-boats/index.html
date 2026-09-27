@@ -1,0 +1,143 @@
+<meta name="category" content="packaging">
+<meta name="subcategory" content="metalliser">
+<meta name="blog-id" content="45">
+<meta name="slug" content="evaporation-boats">
+
+<div class="article-body">
+
+<div style="margin:24px 0;">
+<img src="cover.png" alt="Evaporation Boats for Metalliser — Selection, Install, Failure Modes" style="width:100%;max-width:720px;height:auto;border-radius:12px;display:block;margin:0 auto;"/>
+</div>
+
+<div class="en-content">
+
+<h2>⛵ Evaporation Boats — Selection, Installation Discipline &amp; Failure Modes</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 13-min read &nbsp;|&nbsp; Metalliser source &nbsp;|&nbsp; Published September 2026</p>
+
+<p>Boat <em>life</em> (how many hours or kg before change) is only half the story. The other half is <strong>which boat you put in, how you install it, and why it fails early</strong>. This post is the companion to boat-life optimisation: selection, fit-up discipline, and the failure modes that waste aluminium and downtime.</p>
+
+<div style="background:#1A2744;color:#FAF9F6;padding:18px 22px;margin:24px 0;border-radius:10px;">
+<strong style="color:#E85D26;font-size:1.05em;">📌 What this blog covers (vs boat-life posts)</strong>
+<ul style="margin:10px 0 0 0;padding-left:22px;line-height:1.85;color:#FAF9F6;">
+<li>Boat types and when to use which</li>
+<li>Install sequence that avoids cracked ceramics and bad contact</li>
+<li>Failure modes: wet-out, spatter, crack, end-block arcing</li>
+<li>Incoming check before the boat ever sees vacuum</li>
+</ul>
+</div>
+
+<h3>1. What an evaporation boat is doing</h3>
+
+<p>In resistive metallisers, aluminium wire is fed onto a heated ceramic boat (typically BN / intermetallic composites). The boat must conduct current, hold a molten Al pool, and evaporate metal upward toward the film at stable rate. Geometry, resistivity, and surface chemistry all matter.</p>
+
+<h3>2. Selection — match boat to duty</h3>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li><strong>Wire diameter and feed rate</strong> — boat cavity and wet-out behaviour must match your standard wire (e.g. 1.2–2.0 mm class)</li>
+<li><strong>Power window</strong> — boat resistance should sit in the range your transformer / SCR can control smoothly</li>
+<li><strong>Coating vs decorative duty</strong> — high OD / high speed may need different thermal mass than light optical coatings</li>
+<li><strong>OEM or approved equivalent</strong> — “same shape” from an unknown source often differs in resistivity and life</li>
+</ul>
+
+<p>Keep a short approved list per machine. Changing brand without a trial log creates noise in OD and waste data.</p>
+
+<h3>3. Installation discipline (where most early failures start)</h3>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.85;">
+<li>Inspect boat for chips, cracks, contamination before clamp</li>
+<li>Clean contact faces on clamps / end blocks — oxide and Al dust kill contact</li>
+<li>Seat boat fully; torque or clamp pressure per OEM — uneven clamp = hot spot</li>
+<li>Check alignment so wire lands in the cavity, not on the rim</li>
+<li>Verify no strain from bus bars twisting the ceramic</li>
+<li>After pump-down, ramp power per recipe — aggressive cold start cracks boats</li>
+</ol>
+
+<div style="background:#F0F7FF;border-left:4px solid #2563EB;padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0;">
+<strong>💡 Floor rule:</strong> If the night shift changes a boat in under two minutes without a visual check, you will pay for it in the next scrap roll. Build a 60-second boat card into the changeover standard.
+</div>
+
+<h3>4. Failure modes — name them so operators can report them</h3>
+
+<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:0.95em;">
+<thead>
+<tr style="background:#1A2744;color:#fff;">
+<th style="padding:10px;text-align:left;">Mode</th>
+<th style="padding:10px;text-align:left;">What you see</th>
+<th style="padding:10px;text-align:left;">Typical drivers</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #e2ddd4;"><td style="padding:10px;">Poor wet-out</td><td style="padding:10px;">Balling Al, unstable rate</td><td style="padding:10px;">Wrong surface, contamination, low temp</td></tr>
+<tr style="border-bottom:1px solid #e2ddd4;"><td style="padding:10px;">Spatter</td><td style="padding:10px;">Pinholes / metal dots on film</td><td style="padding:10px;">Overfeed, wrong power, impure wire</td></tr>
+<tr style="border-bottom:1px solid #e2ddd4;"><td style="padding:10px;">Crack / break</td><td style="padding:10px;">Sudden open circuit</td><td style="padding:10px;">Thermal shock, clamp stress, defect</td></tr>
+<tr style="border-bottom:1px solid #e2ddd4;"><td style="padding:10px;">End-block arcing</td><td style="padding:10px;">Flash, pitting, trip</td><td style="padding:10px;">Bad contact, oxide, loose clamp</td></tr>
+<tr style="border-bottom:1px solid #e2ddd4;"><td style="padding:10px;">Short life</td><td style="padding:10px;">Frequent change</td><td style="padding:10px;">Over-power, wire quality, vacuum dirt</td></tr>
+</tbody>
+</table>
+
+<h3>5. Incoming check before stores issue</h3>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>Visual: no cracks, chips, oil stains</li>
+<li>Dimension: length / cavity match approved drawing</li>
+<li>Batch label retained until boat is consumed</li>
+<li>Reject rate tracked by supplier — not only by “boat felt bad”</li>
+</ul>
+
+<h3>6. Link to cost</h3>
+
+<p>Every early boat failure is aluminium waste, vacuum recovery time, and OD risk on the next jumbo. Selection + install discipline is cheaper than buying “longer life” boats and installing them poorly.</p>
+
+<p style="margin-top:28px;color:#6b7280;font-size:0.9em;">Pair with: boat-life optimisation (hours/kg), SMED boat change case studies, aluminium wire guide. Always follow OEM electrical safety during clamp work.</p>
+
+</div>
+
+<div class="hindi-section hi-content" lang="hi" style="display:none;">
+
+<h2>⛵ इवैपोरेशन बोट — चयन, इंस्टॉल डिसिप्लिन और फेल्योर मोड</h2>
+
+<p style="color:#6b7280;font-size:0.95em;margin:8px 0 20px 0;font-style:italic;">📖 13 मिनट &nbsp;|&nbsp; मेटलाइज़र सोर्स &nbsp;|&nbsp; सितंबर 2026</p>
+
+<p>बोट <em>लाइफ</em> (कितने घंटे/किलो) कहानी का आधा हिस्सा है। दूसरा आधा है: <strong>कौन सी बोट लगाई, कैसे लगाई, और जल्दी क्यों फेल हुई</strong>। यह लेख बोट-लाइफ ऑप्टिमाइज़ेशन का साथी है — चयन, फिट-अप, और वे फेल्योर मोड जो Al और डाउनटाइम दोनों बर्बाद करते हैं।</p>
+
+<h3>1. बोट क्या काम करती है</h3>
+
+<p>रेसिस्टिव मेटलाइज़र में Al तार गर्म सिरेमिक बोट पर फीड होती है। बोट करंट चलाए, मॉल्टन पूल रखे, और स्थिर दर से फिल्म की ओर मेटल इवैपोरेट करे। ज्यामिति, रेसिस्टिविटी और सतह रसायन सब मायने रखते हैं।</p>
+
+<h3>2. चयन</h3>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>तार व्यास और फीड रेट से कैविटी मैच</li>
+<li>पावर विंडो में स्मूथ कंट्रोल</li>
+<li>OEM या अप्रूव्ड इक्विवेलेंट — सिर्फ आकार समान होना काफी नहीं</li>
+</ul>
+
+<h3>3. इंस्टॉल डिसिप्लिन</h3>
+
+<ol style="margin:12px 0;padding-left:24px;line-height:1.85;">
+<li>क्रैक/चिप/गंदगी जाँच</li>
+<li>क्लैंप संपर्क सतह साफ</li>
+<li>सही सीटिंग और क्लैंप प्रेशर</li>
+<li>तार कैविटी में गिरे, किनारे पर नहीं</li>
+<li>ठंडी शुरुआत में आक्रामक रैंप न करें</li>
+</ol>
+
+<h3>4. फेल्योर मोड</h3>
+
+<ul style="margin:12px 0;padding-left:24px;line-height:1.8;">
+<li>खराब वेट-आउट → अस्थिर रेट</li>
+<li>स्पैटर → फिल्म पर पिनहोल/डॉट</li>
+<li>क्रैक → अचानक ओपन सर्किट</li>
+<li>एंड-ब्लॉक आर्किंग → खराब संपर्क</li>
+<li>कम लाइफ → ओवर-पावर / तार / गंदगी</li>
+</ul>
+
+<h3>5. इनकमिंग चेक</h3>
+
+<p>दृश्य जाँच, डाइमेंशन, बैच लेबल, सप्लायर-वार रिजेक्ट ट्रैक।</p>
+
+<p style="margin-top:28px;color:#6b7280;font-size:0.9em;">साथ पढ़ें: बोट लाइफ ऑप्टिमाइज़ेशन, SMED बोट चेंज, एल्युमिनियम वायर गाइड।</p>
+
+</div>
+</div>
