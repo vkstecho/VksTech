@@ -109,3 +109,7 @@ Field IDs match the `id` attributes in the HTML (e.g. `cw-len`, `mc-jumbo`).
 - Asset: `manpower-icon.png` (copy of app icon-512)
 - Sitemap entry for blog slug `man-power-team-management-app`
 - Blog package lives in sibling zip / `Blogs/51-man-power-team-management-app/`
+
+## Update — remove MET Power
+- Removed MET Power card, modules subsection, hero card, JSON-LD, footer link, keywords.
+- Industry apps now: Man Power, Plan Power, FP Job.
