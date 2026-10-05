@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converting Plant Capacity & Efficiency Calculator</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2b6cb0;
+            --accent: #3182ce;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #1a202c;
+            --muted: #718096;
+            --border: #e2e8f0;
+            --success: #276749;
+            --light-blue: #ebf8ff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+            padding: 16px;
+        }
+        .container { max-width: 1180px; margin: 0 auto; }
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2b6cb0 100%);
+            color: white;
+            padding: 22px 26px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(30,58,95,0.3);
+        }
+        header h1 { font-size: 1.5rem; margin-bottom: 4px; }
+        header p { opacity: 0.92; font-size: 0.9rem; }
+        .card {
+            background: var(--card);
+            border-radius: 11px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 14px;
+            padding-bottom: 7px;
+            border-bottom: 2px solid #bee3f8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .card h2 span { font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+        }
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px 11px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            font-size: 0.92rem;
+            background: #fff;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(49,130,206,0.15);
+        }
+        input[readonly] { background: #edf2f7; font-weight: 600; color: #22543d; }
+        .machine-block {
+            background: #f8fafc;
+            border-radius: 9px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--secondary);
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 18px 0 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #152a45; }
+        .btn-secondary { background: #e2e8f0; color: var(--text); }
+        .btn-secondary:hover { background: #cbd5e1; }
+        .btn-success { background: var(--success); color: white; }
+        .results { display: none; }
+        .results.show { display: block; }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .result-box {
+            background: linear-gradient(145deg, #ebf8ff, #e6fffa);
+            border: 1px solid #b2f5ea;
+            border-radius: 9px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+        .result-box .value { font-size: 1.35rem; font-weight: 700; color: var(--primary); }
+        .result-box .label { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+        .result-box.total {
+            background: linear-gradient(145deg, #c6f6d5, #9ae6b4);
+            border: 1px solid #68d391;
+        }
+        .result-box.total .value { color: #22543d; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 9px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+        tr.total-row { background: #f0fff4; font-weight: 700; }
+        tr.total-row td { border-top: 2px solid #68d391; color: #22543d; }
+        .note {
+            background: #fffaf0;
+            border: 1px solid #fbd38d;
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.84rem;
+            color: #744210;
+            margin-top: 14px;
+        }
+        .info-box {
+            background: var(--light-blue);
+            border: 1px solid #90cdf4;
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.84rem;
+            color: #2c5282;
+            margin-top: 12px;
+        }
+        .eff-breakdown {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 12px;
+            font-size: 0.86rem;
+        }
+        .eff-breakdown strong { color: var(--success); }
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .tip { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+        .calc-note {
+            background: #fefcbf;
+            border: 1px solid #f6e05e;
+            border-radius: 7px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #744210;
+            margin-top: 10px;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .btn-row { display: none; }
+            header { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Converting Plant Capacity & Efficiency Calculator</h1>
+        <p>Printing • Lamination • Slitting • Pouching | Capacity in MT | Changeovers derived from Roll Length + Speed</p>
+    </header>
+
+    <!-- 1. Plant Working Parameters -->
+    <div class="card">
+        <h2>1. Plant Working Parameters</h2>
+        <div class="grid">
+            <div>
+                <label>Working Days / Month</label>
+                <input type="number" id="daysPerMonth" value="26" min="1" max="31">
+            </div>
+            <div>
+                <label>Shifts per Day</label>
+                <input type="number" id="shifts" value="3" min="1" max="3">
+            </div>
+            <div>
+                <label>Hours per Shift</label>
+                <input type="number" id="hoursPerShift" value="8" min="1" max="12" step="0.5">
+            </div>
+            <div>
+                <label>Film Density (g/cm³)</label>
+                <input type="number" id="density" value="0.92" min="0.8" max="1.5" step="0.01">
+                <div class="tip">PE ≈ 0.92 | PET ≈ 1.39 | BOPP ≈ 0.91</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Efficiency + Roll Changeover Logic -->
+    <div class="card">
+        <h2>2. Efficiency & Roll Changeover Logic</h2>
+        <div class="info-box">
+            <strong>How changeovers are calculated now:</strong><br>
+            Number of Changeovers = Total meters the machine can run ÷ Average Roll Length<br>
+            Changeover Loss % = (No. of Changeovers × Changeover Time) ÷ Available minutes × 100<br>
+            This is calculated <strong>separately for each machine type</strong> using its own speed.
+        </div>
+
+        <div class="grid" style="margin-top:14px;">
+            <div>
+                <label>Average Roll Length (meters)</label>
+                <input type="number" id="rollLength" value="24000" min="5000" max="50000" step="1000">
+                <div class="tip">Standard jumbo / finished roll length (commonly 24,000 m)</div>
+            </div>
+            <div>
+                <label>Avg Changeover Time per Roll/Job (min)</label>
+                <input type="number" id="changeoverTime" value="25" min="5" max="90">
+                <div class="tip">Time from end of one roll/job to start of next good production</div>
+            </div>
+            <div>
+                <label>Machine Availability / Uptime (%)</label>
+                <input type="number" id="uptime" value="92" min="50" max="100">
+                <div class="tip">Breakdowns, maintenance, power cuts</div>
+            </div>
+            <div>
+                <label>Quality / Reject Loss (%)</label>
+                <input type="number" id="qualityLoss" value="5" min="0" max="25">
+                <div class="tip">Registration, colour, defects, start-up waste</div>
+            </div>
+            <div>
+                <label>Speed / Operator Efficiency (%)</label>
+                <input type="number" id="speedEff" value="88" min="50" max="100">
+                <div class="tip">Running below rated speed, operator skill</div>
+            </div>
+        </div>
+
+        <div class="eff-breakdown" id="effPreview" style="margin-top:14px;">
+            <strong>Overall Efficiency will be calculated after you press Calculate</strong><br>
+            <span style="font-size:0.82rem;color:#276749;">
+            Changeover loss is now machine-specific (based on its speed + roll length)
+            </span>
+        </div>
+    </div>
+
+    <!-- 3. Printing -->
+    <div class="card">
+        <h2>3. Printing Machines (Gravure / Flexo)</h2>
+        <div class="machine-block">
+            <div class="grid">
+                <div>
+                    <label>Number of Machines</label>
+                    <input type="number" id="printQty" value="2" min="0">
+                </div>
+                <div>
+                    <label>Type</label>
+                    <select id="printType">
+                        <option value="Gravure">Gravure</option>
+                        <option value="Flexo" selected>Flexo (CI / Stack)</option>
+                        <option value="Mixed">Mixed</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Rated Speed (m/min)</label>
+                    <input type="number" id="printSpeed" value="280" min="50" max="500">
+                </div>
+                <div>
+                    <label>Max Web Width (mm)</label>
+                    <input type="number" id="printWidth" value="1200" min="400" max="1600">
+                </div>
+                <div>
+                    <label>Average Micron (μm)</label>
+                    <input type="number" id="printMicron" value="20" min="8" max="100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Lamination -->
+    <div class="card">
+        <h2>4. Lamination Machines</h2>
+        <div class="machine-block">
+            <div class="grid">
+                <div>
+                    <label>Number of Laminators</label>
+                    <input type="number" id="lamQty" value="2" min="0">
+                </div>
+                <div>
+                    <label>Type</label>
+                    <select id="lamType">
+                        <option value="Solvent-less" selected>Solvent-less</option>
+                        <option value="Solvent-based">Solvent-based</option>
+                        <option value="Both">Both</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Rated Speed (m/min)</label>
+                    <input type="number" id="lamSpeed" value="220" min="50" max="400">
+                </div>
+                <div>
+                    <label>Max Web Width (mm)</label>
+                    <input type="number" id="lamWidth" value="1200" min="400" max="1600">
+                </div>
+                <div>
+                    <label>Average Micron (μm)</label>
+                    <input type="number" id="lamMicron" value="40" min="15" max="150">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Slitting -->
+    <div class="card">
+        <h2>5. Slitting Machines</h2>
+        <div class="machine-block">
+            <div class="grid">
+                <div>
+                    <label>Number of Slitters</label>
+                    <input type="number" id="slitQty" value="3" min="0">
+                </div>
+                <div>
+                    <label>Rated Speed (m/min)</label>
+                    <input type="number" id="slitSpeed" value="400" min="100" max="700">
+                </div>
+                <div>
+                    <label>Max Web Width (mm)</label>
+                    <input type="number" id="slitWidth" value="1300" min="400" max="1600">
+                </div>
+                <div>
+                    <label>Average Micron (μm)</label>
+                    <input type="number" id="slitMicron" value="40" min="10" max="150">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Pouching -->
+    <div class="card">
+        <h2>6. Pouching Machines</h2>
+        <div class="machine-block">
+            <div class="grid">
+                <div>
+                    <label>Number of Machines</label>
+                    <input type="number" id="pouchQty" value="8" min="0">
+                </div>
+                <div>
+                    <label>Avg Speed (pouches/min)</label>
+                    <input type="number" id="pouchSpeed" value="90" min="20" max="250">
+                </div>
+                <div>
+                    <label>Avg Pouch Weight (grams)</label>
+                    <input type="number" id="pouchWeight" value="15" min="2" max="120" step="0.5">
+                </div>
+                <div>
+                    <label>Pouch Type</label>
+                    <select id="pouchType">
+                        <option>Centre Seal</option>
+                        <option>Side Seal</option>
+                        <option>Stand-up / Gusset</option>
+                        <option>Zipper / Mixed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tip" style="margin-top:8px;">Note: Pouching changeovers are usually fewer and handled via the Quality + Speed efficiency factors.</div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-row">
+        <button class="btn-primary" onclick="calculate()">Calculate Capacity & Efficiency</button>
+        <button class="btn-secondary" onclick="resetForm()">Reset Defaults</button>
+        <button class="btn-success" onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <!-- Results -->
+    <div class="card results" id="resultsSection">
+        <h2>Results – Monthly Production Capacity (in MT)</h2>
+
+        <div class="eff-breakdown" id="finalEffBox" style="margin-bottom:16px;"></div>
+
+        <div class="result-grid" id="summaryBoxes"></div>
+
+        <h3 style="margin-top:22px;color:var(--primary);font-size:1rem;">Machine-wise Capacity + Changeover Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Process</th>
+                    <th>Qty</th>
+                    <th>Speed</th>
+                    <th>Est. Changeovers / Day</th>
+                    <th>Changeover Loss %</th>
+                    <th>Capacity (MT/month)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <div class="note">
+            <strong>Logic used:</strong><br>
+            1. Available minutes per day (after uptime) → theoretical meters = Speed × available minutes<br>
+            2. Number of Changeovers = Theoretical meters ÷ Roll Length (24,000 m default)<br>
+            3. Changeover Loss % = (Changeovers × Changeover Time) ÷ Available minutes × 100<br>
+            4. Final efficiency for that process = Uptime × (1 – Changeover Loss) × (1 – Quality) × Speed Eff<br>
+            5. Capacity (MT) is then calculated using the process-specific efficiency.
+        </div>
+
+        <div class="info-box">
+            <strong>Typical values:</strong> Roll length 20,000–30,000 m | Changeover 15–40 min | 
+            Overall efficiency after all losses usually 55–75% in converting plants.
+        </div>
+    </div>
+
+    <footer>
+        Converting Plant Capacity Calculator • Changeovers derived from Roll Length + Machine Speed • Capacity in MT
+    </footer>
+</div>
+
+<script>
+    function getVal(id) {
+        return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    function calculate() {
+        const days = getVal('daysPerMonth');
+        const shifts = getVal('shifts');
+        const hrs = getVal('hoursPerShift');
+        const density = getVal('density');
+        const rollLength = getVal('rollLength');          // meters
+        const changeoverTime = getVal('changeoverTime'); // minutes
+        const uptime = getVal('uptime') / 100;
+        const quality = getVal('qualityLoss') / 100;
+        const speedEff = getVal('speedEff') / 100;
+
+        // Available minutes per day before changeover & quality losses
+        const availableMinPerDayBase = shifts * hrs * 60 * uptime;
+
+        function metersToMT(meters, widthMm, micron) {
+            const widthM = widthMm / 1000;
+            const thicknessM = micron / 1000000;
+            const kg = meters * widthM * thicknessM * density * 1000;
+            return kg / 1000;
+        }
+
+        // Generic function for continuous web processes (Print / Lam / Slit)
+        function calcProcess(qty, speed, width, micron) {
+            if (qty === 0 || speed === 0) {
+                return { meters: 0, mt: 0, changeoversPerDay: 0, coLoss: 0, eff: 0 };
+            }
+
+            // Theoretical meters per day at full speed (after uptime only)
+            const theoMetersPerDay = qty * speed * availableMinPerDayBase;
+
+            // Number of changeovers per day
+            const changeoversPerDay = rollLength > 0 ? theoMetersPerDay / rollLength : 0;
+
+            // Changeover minutes lost per day
+            const coMinLost = changeoversPerDay * changeoverTime;
+
+            // Changeover loss as fraction of available time
+            const coLoss = availableMinPerDayBase > 0 ? coMinLost / availableMinPerDayBase : 0;
+
+            // Overall efficiency for this process
+            const processEff = uptime * (1 - Math.min(coLoss, 0.6)) * (1 - quality) * speedEff;
+
+            // Productive minutes per month
+            const productiveMinMonth = days * shifts * hrs * 60 * processEff;
+
+            // Final meters & MT
+            const meters = qty * speed * productiveMinMonth;
+            const mt = metersToMT(meters, width, micron);
+
+            return {
+                meters,
+                mt,
+                changeoversPerDay: changeoversPerDay,
+                coLoss: coLoss * 100,
+                eff: processEff * 100
+            };
+        }
+
+        // Printing
+        const print = calcProcess(
+            getVal('printQty'), getVal('printSpeed'),
+            getVal('printWidth'), getVal('printMicron')
+        );
+
+        // Lamination
+        const lam = calcProcess(
+            getVal('lamQty'), getVal('lamSpeed'),
+            getVal('lamWidth'), getVal('lamMicron')
+        );
+
+        // Slitting
+        const slit = calcProcess(
+            getVal('slitQty'), getVal('slitSpeed'),
+            getVal('slitWidth'), getVal('slitMicron')
+        );
+
+        // Pouching (simpler – no roll length logic)
+        const pouchQty = getVal('pouchQty');
+        const pouchSpeed = getVal('pouchSpeed');
+        const pouchWeightG = getVal('pouchWeight');
+        const pouchEff = uptime * (1 - quality) * speedEff; // no heavy changeover factor
+        const pouchMinMonth = days * shifts * hrs * 60 * pouchEff;
+        const pouchCount = pouchQty * pouchSpeed * pouchMinMonth;
+        const pouchMT = (pouchCount * pouchWeightG) / 1000000;
+
+        const totalMT = print.mt + lam.mt + slit.mt + pouchMT;
+        const bottleneck = Math.min(
+            print.mt > 0 ? print.mt : Infinity,
+            lam.mt > 0 ? lam.mt : Infinity,
+            slit.mt > 0 ? slit.mt : Infinity,
+            pouchMT > 0 ? pouchMT : Infinity
+        );
+
+        // Average efficiency for display
+        const avgEff = (print.eff + lam.eff + slit.eff + pouchEff * 100) / 4;
+
+        document.getElementById('finalEffBox').innerHTML = `
+            <strong>Roll Length used:</strong> ${rollLength.toLocaleString()} m &nbsp;|&nbsp;
+            <strong>Changeover Time:</strong> ${changeoverTime} min<br>
+            Changeovers are calculated individually for each machine type based on its speed.
+            Average process efficiency ≈ <strong>${avgEff.toFixed(1)}%</strong>
+        `;
+
+        document.getElementById('summaryBoxes').innerHTML = `
+            <div class="result-box">
+                <div class="value">${print.mt.toFixed(1)}</div>
+                <div class="label">Printing (MT/month)</div>
+            </div>
+            <div class="result-box">
+                <div class="value">${lam.mt.toFixed(1)}</div>
+                <div class="label">Lamination (MT/month)</div>
+            </div>
+            <div class="result-box">
+                <div class="value">${slit.mt.toFixed(1)}</div>
+                <div class="label">Slitting (MT/month)</div>
+            </div>
+            <div class="result-box">
+                <div class="value">${pouchMT.toFixed(1)}</div>
+                <div class="label">Pouching (MT/month)</div>
+            </div>
+            <div class="result-box">
+                <div class="value">${(pouchCount/1000).toFixed(0)}k</div>
+                <div class="label">Pouches / month</div>
+            </div>
+            <div class="result-box total">
+                <div class="value">${bottleneck === Infinity ? 0 : bottleneck.toFixed(1)}</div>
+                <div class="label">Bottleneck Capacity (MT)</div>
+            </div>
+            <div class="result-box total">
+                <div class="value">${totalMT.toFixed(1)}</div>
+                <div class="label">Sum of All Processes (MT)</div>
+            </div>
+        `;
+
+        document.getElementById('tableBody').innerHTML = `
+            <tr>
+                <td>Printing (${document.getElementById('printType').value})</td>
+                <td>${getVal('printQty')}</td>
+                <td>${getVal('printSpeed')} m/min</td>
+                <td>${print.changeoversPerDay.toFixed(1)}</td>
+                <td>${print.coLoss.toFixed(1)}%</td>
+                <td><strong>${print.mt.toFixed(2)} MT</strong></td>
+            </tr>
+            <tr>
+                <td>Lamination (${document.getElementById('lamType').value})</td>
+                <td>${getVal('lamQty')}</td>
+                <td>${getVal('lamSpeed')} m/min</td>
+                <td>${lam.changeoversPerDay.toFixed(1)}</td>
+                <td>${lam.coLoss.toFixed(1)}%</td>
+                <td><strong>${lam.mt.toFixed(2)} MT</strong></td>
+            </tr>
+            <tr>
+                <td>Slitting</td>
+                <td>${getVal('slitQty')}</td>
+                <td>${getVal('slitSpeed')} m/min</td>
+                <td>${slit.changeoversPerDay.toFixed(1)}</td>
+                <td>${slit.coLoss.toFixed(1)}%</td>
+                <td><strong>${slit.mt.toFixed(2)} MT</strong></td>
+            </tr>
+            <tr>
+                <td>Pouching (${document.getElementById('pouchType').value})</td>
+                <td>${pouchQty}</td>
+                <td>${pouchSpeed} pcs/min</td>
+                <td>—</td>
+                <td>—</td>
+                <td><strong>${pouchMT.toFixed(2)} MT</strong></td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="5"><strong>TOTAL PLANT CAPACITY (Sum of all processes)</strong></td>
+                <td><strong>${totalMT.toFixed(2)} MT</strong></td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="5"><strong>BOTTLENECK CAPACITY (Limiting process)</strong></td>
+                <td><strong>${bottleneck === Infinity ? '0.00' : bottleneck.toFixed(2)} MT</strong></td>
+            </tr>
+        `;
+
+        document.getElementById('resultsSection').classList.add('show');
+        document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetForm() {
+        const defaults = {
+            daysPerMonth: 26, shifts: 3, hoursPerShift: 8, density: 0.92,
+            rollLength: 24000, changeoverTime: 25,
+            uptime: 92, qualityLoss: 5, speedEff: 88,
+            printQty: 2, printSpeed: 280, printWidth: 1200, printMicron: 20,
+            lamQty: 2, lamSpeed: 220, lamWidth: 1200, lamMicron: 40,
+            slitQty: 3, slitSpeed: 400, slitWidth: 1300, slitMicron: 40,
+            pouchQty: 8, pouchSpeed: 90, pouchWeight: 15
+        };
+        for (const [id, val] of Object.entries(defaults)) {
+            if (document.getElementById(id)) document.getElementById(id).value = val;
+        }
+        document.getElementById('printType').value = 'Flexo';
+        document.getElementById('lamType').value = 'Solvent-less';
+        document.getElementById('resultsSection').classList.remove('show');
+    }
+</script>
+</body>
+</html>
