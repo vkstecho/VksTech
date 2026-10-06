@@ -13,7 +13,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
    Requires a `page_views` table in Supabase — see admin.html
    for the one-time SQL setup.
    ═══════════════════════════════════════════ */
-function trackPageView(){
+function _visitorId(){
   try{
     var VID_KEY = 'vks_vid';
     var vid = localStorage.getItem(VID_KEY);
@@ -22,8 +22,29 @@ function trackPageView(){
             : 'v-' + Date.now() + '-' + Math.random().toString(16).slice(2);
       localStorage.setItem(VID_KEY, vid);
     }
+    return vid;
+  }catch(e){ return null; }
+}
+
+/* Record a page path. Use for full navigations AND in-page views (blog overlay, calculators). */
+function trackPath(pathOverride){
+  try{
+    var vid = _visitorId();
+    if(!vid) return;
+    var path = pathOverride;
+    if(!path){
+      path = location.pathname || '/';
+      /* Capture calculator / in-page hash so Visitors shows more than just "/" */
+      if(location.hash && location.hash.length > 1){
+        var h = location.hash;
+        if(h.indexOf('#calc-') === 0 || h.indexOf('#blog') === 0){
+          path = path + h;
+        }
+      }
+    }
+    path = String(path).slice(0, 300);
     sb.from('page_views').insert([{
-      path: location.pathname || '/',
+      path: path,
       referrer: (document.referrer || '').slice(0, 300) || null,
       visitor_id: vid
     }]).then(function(res){
@@ -31,7 +52,17 @@ function trackPageView(){
     });
   }catch(e){ /* Tracking must never break the page */ }
 }
+
+function trackPageView(){ trackPath(null); }
 trackPageView();
+
+/* Re-track when calculator deep-link / hash changes (SPA-style) */
+window.addEventListener('hashchange', function(){
+  var h = location.hash || '';
+  if(h.indexOf('#calc-') === 0 || h.indexOf('#blog') === 0){
+    trackPath((location.pathname || '/') + h);
+  }
+});
 
 /* GitHub — blog content lives here; see admin.html for upload flow */
 const GH_OWNER='vkstecho', GH_REPO='VksTech', GH_BRANCH='main';
@@ -118,7 +149,7 @@ const HI = {
   ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
   ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
   pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद",
-  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
+  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", c9_t:"कन्वर्टिंग प्लांट क्षमता", c9_s:"स्पीड × चौड़ाई × माइक्रॉन → MT/दिन", calc_label:"🧮 पैकेजिंग कैलकुलेटर", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
 };
 
 const EN = {
@@ -160,7 +191,7 @@ const EN = {
   ppl_title:"The People Behind <span>This Journey</span>",
   ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
   pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks",
-  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
+  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", c9_t:"Converting Plant Capacity", c9_s:"Speed × Width × Micron → MT/day (with changeover)", calc_label:"🧮 Packaging Calculators", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
 };
 
 let curLang = (function(){
@@ -315,9 +346,18 @@ function toggleCalc(head, evt){
   var card = head.parentElement;
   var wasOpen = card.classList.contains('open');
   // Close all others
-  document.querySelectorAll('.calc-card.open').forEach(function(c){c.classList.remove('open');});
+  document.querySelectorAll('.calc-card.open').forEach(function(c){
+    c.classList.remove('open');
+    var h = c.querySelector('.calc-head');
+    if(h) h.setAttribute('aria-expanded', 'false');
+  });
   // Toggle clicked
-  if(!wasOpen) card.classList.add('open');
+  if(!wasOpen) {
+    card.classList.add('open');
+    head.setAttribute('aria-expanded', 'true');
+  } else {
+    head.setAttribute('aria-expanded', 'false');
+  }
   /* Update URL bar so the deep-link shareable URL reflects the current state.
      Uses replaceState to avoid cluttering browser history with every tap. */
   if(card.id && history && history.replaceState){
@@ -326,6 +366,26 @@ function toggleCalc(head, evt){
       history.replaceState(null, '', location.pathname + location.search + newHash);
     }
   }
+}
+/* Keyboard + ARIA for calculator accordion heads */
+function initCalcA11y(){
+  document.querySelectorAll('.calc-head').forEach(function(head){
+    if(!head.hasAttribute('role')) head.setAttribute('role', 'button');
+    if(!head.hasAttribute('tabindex')) head.setAttribute('tabindex', '0');
+    var card = head.parentElement;
+    head.setAttribute('aria-expanded', card && card.classList.contains('open') ? 'true' : 'false');
+    head.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggleCalc(head, e);
+      }
+    });
+  });
+}
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initCalcA11y);
+} else {
+  initCalcA11y();
 }
 /* Copy a shareable deep-link to the calculator to clipboard. */
 function copyCalcLink(btn, evt){
@@ -486,6 +546,51 @@ function calcMetCapacity(){
   document.getElementById('mc-res').textContent = capacity.toFixed(2);
   document.getElementById('mc-sub').textContent = rollsDay.toFixed(2)+' rolls/day × '+Math.round(rollKg).toLocaleString('en-IN')+' kg/roll · cycle '+cycleTime.toFixed(1)+' min';
 }
+
+function calcConvCapacity(){
+  if(!_calcCheck(['cc-speed','cc-width','cc-micron','cc-roll','cc-avail','cc-co','cc-uptime','cc-speedeff','cc-quality'],'cc-res','cc-sub')) return;
+  var speed=parseFloat(document.getElementById('cc-speed').value);
+  var width=parseFloat(document.getElementById('cc-width').value);
+  var micron=parseFloat(document.getElementById('cc-micron').value);
+  var dens=parseFloat(document.getElementById('cc-dens').value);
+  var rollLen=parseFloat(document.getElementById('cc-roll').value);
+  var avail=parseFloat(document.getElementById('cc-avail').value);
+  var coMin=parseFloat(document.getElementById('cc-co').value);
+  var uptime=parseFloat(document.getElementById('cc-uptime').value)/100;
+  var speedEff=parseFloat(document.getElementById('cc-speedeff').value)/100;
+  var quality=parseFloat(document.getElementById('cc-quality').value)/100;
+  var jobs=parseFloat(document.getElementById('cc-jobs').value)||1;
+  if(speed<=0||width<=0||micron<=0||rollLen<=0||avail<=0){
+    document.getElementById('cc-res').textContent='Invalid';
+    document.getElementById('cc-sub').textContent='Check inputs';
+    return;
+  }
+  /* Estimate productive window after job changeovers (min of job-based and roll-based) */
+  var grossRun = avail * uptime;
+  /* Tentative length without CO, then derive roll COs */
+  var tentLen = speed * grossRun * speedEff;
+  var rollCOs = Math.max(0, Math.floor(tentLen / rollLen));
+  var jobCOs = Math.max(0, jobs - 1);
+  var totalCO = (rollCOs + jobCOs) * coMin;
+  if(totalCO >= grossRun){
+    document.getElementById('cc-res').textContent='0';
+    document.getElementById('cc-sub').textContent='Changeover exceeds available time';
+    document.getElementById('cc-detail').textContent='';
+    return;
+  }
+  var netMin = grossRun - totalCO;
+  var lengthM = speed * netMin * speedEff;
+  var kg = lengthM * (width/1000) * micron * dens * 1e-6;
+  var mt = kg / 1000;
+  var goodMt = mt * quality;
+  document.getElementById('cc-res').textContent = goodMt.toFixed(2);
+  document.getElementById('cc-sub').textContent = 'Good output · ' + lengthM.toFixed(0) + ' m run';
+  document.getElementById('cc-detail').textContent =
+    'Gross run ' + grossRun.toFixed(0) + ' min · CO loss ' + totalCO.toFixed(0) +
+    ' min (rolls≈' + rollCOs + ', jobs≈' + jobCOs + ') · Gross ' + mt.toFixed(2) +
+    ' MT · Yield ' + (quality*100).toFixed(0) + '% → ' + goodMt.toFixed(2) + ' MT/day';
+}
+
 
 /* ═══════════════════════════════════════
    CALCULATOR COPY BUTTONS
@@ -689,8 +794,8 @@ function renderBlogCard(b) {
   const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
   const readTime = computeReadTime(b);
   const imgHtml = b.imageUrl
-    ? '<div class="blog-img" style="background:url(\''+b.imageUrl+'\') center/cover no-repeat;"></div>'
-    : '<div class="blog-img">'+cat.icon+'</div>';
+    ? '<div class="blog-img"><img src="'+escH(b.imageUrl)+'" alt="" loading="lazy" decoding="async" width="640" height="360"/></div>'
+    : '<div class="blog-img blog-img-fallback">'+cat.icon+'</div>';
   /* Link to the server-rendered /blog/<slug> page (api/blog.js).
      Fallback to #blog-<id> only if slug is missing (legacy data). */
   const href = b.slug ? ('/blog/' + b.slug) : ('#blog-' + b.id);
@@ -708,8 +813,27 @@ function renderBlogCard(b) {
 
 function escH(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
+function blogEmptyState(msg, showRetry) {
+  var retry = showRetry
+    ? '<button type="button" class="blog-retry-btn" onclick="loadBlogs()">Retry</button>'
+    : '';
+  return '<div class="blog-empty" style="grid-column:1/-1;text-align:center;padding:48px 20px;">'
+    + '<div style="font-size:2.6rem;margin-bottom:12px;">📝</div>'
+    + '<h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">'+(msg.title||'No articles yet')+'</h3>'
+    + '<p style="color:var(--muted);font-size:.9rem;max-width:420px;margin:0 auto 16px;">'+(msg.body||'')+'</p>'
+    + retry
+    + (msg.link ? '<p style="margin-top:10px;"><a href="/blog" class="blog-view-all" style="display:inline-flex;">Browse blog →</a></p>' : '')
+    + '</div>';
+}
+
 function loadBlogs() {
   const grid = document.getElementById('blogGrid');
+  if(!grid) return;
+  /* Show skeleton while fetching */
+  grid.innerHTML = ''
+    + '<div class="blog-skel" aria-hidden="true"><div class="blog-skel-img"></div><div class="blog-skel-body"><div class="blog-skel-line w40"></div><div class="blog-skel-line w90"></div><div class="blog-skel-line w70"></div></div></div>'
+    + '<div class="blog-skel" aria-hidden="true"><div class="blog-skel-img"></div><div class="blog-skel-body"><div class="blog-skel-line w40"></div><div class="blog-skel-line w90"></div><div class="blog-skel-line w70"></div></div></div>'
+    + '<div class="blog-skel" aria-hidden="true"><div class="blog-skel-img"></div><div class="blog-skel-body"><div class="blog-skel-line w40"></div><div class="blog-skel-line w90"></div><div class="blog-skel-line w70"></div></div></div>';
   sb.from('blogs').select('*').eq('published', true).order('created_at', {ascending: false})
     .then(({data, error}) => {
       if(error) throw error;
@@ -731,19 +855,26 @@ function loadBlogs() {
       var statEl = document.getElementById('statArticlesNum');
       if(statEl) statEl.textContent = allBlogs.length;
       if(allBlogs.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles about flexible packaging, Excel formulas, career tips, and tech tools coming soon!</p></div>';
+        grid.innerHTML = blogEmptyState({
+          title: 'Blog Coming Soon',
+          body: 'Articles about flexible packaging, Excel formulas, career tips, and tech tools coming soon!',
+          link: true
+        }, false);
       } else {
-        /* Homepage shows only latest 3 — full library lives at /blog */
-        var preview = allBlogs.slice(0, 3);
+        /* Homepage shows latest 6 — full library lives at /blog */
+        var preview = allBlogs.slice(0, 6);
         grid.innerHTML = preview.map(renderBlogCard).join('');
-        /* Update the "Browse all articles" hint with actual count */
         var hint = document.querySelector('.blog-cta-hint');
         if(hint) hint.textContent = allBlogs.length + ' articles · filter, search, paginate';
       }
     })
     .catch(err => {
-      console.warn('Blog load:', err.message);
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📝</div><h3 style="color:var(--navy);font-family:Playfair Display,serif;margin-bottom:8px;">Blog Coming Soon</h3><p style="color:var(--muted);font-size:.9rem;">Articles coming soon!</p></div>';
+      console.warn('Blog load:', err && err.message);
+      grid.innerHTML = blogEmptyState({
+        title: 'Could not load articles',
+        body: 'Check your connection and try again, or open the full blog page.',
+        link: true
+      }, true);
     });
 }
 
@@ -861,6 +992,11 @@ async function fetchGithubBlog(github_path){
 async function openBlog(id) {
   const b = allBlogs.find(x=>String(x.id)===String(id));
   if(!b) return;
+  /* Log blog view as /blog/<slug> so Visitors tab shows real pages */
+  try{
+    var blogPath = b.slug ? ('/blog/' + b.slug) : ('/blog?id=' + id);
+    if(typeof trackPath === 'function') trackPath(blogPath);
+  }catch(e){}
   const cat = CAT_STYLES[b.category] || {cls:'tp', label:b.category, icon:'📝'};
   const dateStr = b.date ? new Date(b.date.seconds ? b.date.seconds*1000 : b.date).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : '';
 

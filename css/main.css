@@ -208,7 +208,7 @@ section{position:relative;z-index:1;}
 .calc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 22px;}
 .calc-card.open .calc-body{max-height:500px;padding:18px 22px;}
 /* Tall calculator variant — for multi-section calcs like Met M/C Capacity */
-.calc-card.calc-tall.open .calc-body{max-height:1400px;}
+.calc-card.calc-tall.open .calc-body{max-height:2200px;}
 .calc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .calc-row.c1{grid-template-columns:1fr;}
 .calc-row.c3{grid-template-columns:1fr 1fr 1fr;}
@@ -567,4 +567,108 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   .calc-body { transition: none !important; }
   .acard, .mcard, .blog-card, .ythc, .pd-card { transition: none !important; }
+}
+
+/* Converting capacity detail line */
+#calc-converting-capacity #cc-detail{word-break:break-word;}
+#calc-converting-capacity .calc-body{max-height:none;}
+
+
+/* ════════════════════════════════════════════════
+   2026-10-06 UX improvements — blog + calcs
+   ════════════════════════════════════════════════ */
+
+/* Tall calculators (Met + Converting) span full grid width */
+.calc-grid .calc-card.calc-tall{
+  grid-column: 1 / -1;
+}
+
+/* Blog cover: real image, 16:9 */
+.blog-img{
+  width:100%;
+  aspect-ratio:16/9;
+  height:auto;
+  min-height:0;
+  background:var(--bg2);
+  display:block;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.blog-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.blog-img-fallback{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  font-size:3rem;
+  color:var(--muted);
+  aspect-ratio:16/9;
+}
+
+/* Skeleton loaders */
+.blog-skel{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--ss);
+}
+.blog-skel-img{
+  aspect-ratio:16/9;
+  background:linear-gradient(90deg, var(--bg2) 25%, #eef1f6 50%, var(--bg2) 75%);
+  background-size:200% 100%;
+  animation:skelShine 1.2s ease-in-out infinite;
+}
+.blog-skel-body{padding:20px 22px;}
+.blog-skel-line{
+  height:12px;
+  border-radius:6px;
+  margin-bottom:10px;
+  background:linear-gradient(90deg, var(--bg2) 25%, #eef1f6 50%, var(--bg2) 75%);
+  background-size:200% 100%;
+  animation:skelShine 1.2s ease-in-out infinite;
+}
+.blog-skel-line.w40{width:40%;}
+.blog-skel-line.w70{width:70%;}
+.blog-skel-line.w90{width:90%;}
+@keyframes skelShine{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
+
+.blog-retry-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--orange);color:#fff;border:none;
+  padding:10px 20px;border-radius:50px;
+  font-weight:700;font-size:.85rem;cursor:pointer;
+  font-family:inherit;
+}
+.blog-retry-btn:hover{filter:brightness(1.05);}
+.blog-retry-btn:focus-visible{outline:2px solid var(--navy);outline-offset:3px;}
+
+/* Calc head keyboard focus */
+.calc-head[role="button"]:focus-visible{
+  outline:2px solid var(--orange);
+  outline-offset:2px;
+  border-radius:12px 12px 0 0;
+}
+
+/* Mobile: stack calc fields for tall cards */
+@media(max-width:480px){
+  .calc-row.c3,
+  .calc-row{grid-template-columns:1fr !important;}
+  #calc-met-capacity .calc-body,
+  #calc-converting-capacity .calc-body{padding:14px 14px;}
+}
+@media(max-width:768px){
+  .calc-grid .calc-card.calc-tall{grid-column:1 / -1;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .blog-skel-img,.blog-skel-line{animation:none;}
 }
