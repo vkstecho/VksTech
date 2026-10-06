@@ -123,7 +123,7 @@ footer a:hover{color:var(--orange2);}
 
 <main>
   <section class="hero">
-    <div class="eyebrow">\u{1F4FA} VKS Tech on YouTube</div>
+    <div class="eyebrow">📺 VKS Tech on YouTube</div>
     <h1><span id="ytPageCount">Channels</span>. <span class="accent">One creator.</span></h1>
     <p>Finance, fitness, animated stories, productivity, and everyday life — every playlist, gathered in one place. Pick a channel and start watching.</p>
   </section>
@@ -177,7 +177,7 @@ async function loadChannels(){
   }
   var channels = chRes.data || [];
   if(channels.length === 0){
-    state.innerHTML = '<div class="ico">\u{1F4FA}</div><p>Channels coming soon.</p>';
+    state.innerHTML = '<div class="ico">📺</div><p>Channels coming soon.</p>';
     return;
   }
   (function(){

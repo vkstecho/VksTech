@@ -383,99 +383,78 @@
       <!-- 9. CONVERTING PLANT CAPACITY — multi-machine (Blog 62) -->
       <div class="calc-card reveal calc-tall" id="calc-converting-capacity">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c9_t">Converting Plant Capacity</h3><p data-i="c9_s">All machines → MT/day · plant bottleneck</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
-        <div class="calc-body">
-          <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
-            Fill <strong>each machine row</strong> (qty, speed, width, micron). Changeovers come from roll length ÷ produced length.<br>
-            <strong>Plant capacity</strong> = bottleneck (lowest MT/day among active lines). Set qty = 0 to ignore a machine.
+        <div class="calc-body cp-body">
+          <p class="cp-help">Enter qty, speed, width &amp; micron for each line. Changeovers are estimated from roll length. <strong>Plant capacity = lowest MT/day</strong> among active machines (set qty = 0 to skip a line).</p>
+
+          <div class="cp-section-label">Plant defaults</div>
+          <div class="cp-defaults">
+            <div class="cp-field"><label for="cp-avail">Available min/day</label><input type="number" id="cp-avail" value="1440" min="0" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-roll">Roll length (m)</label><input type="number" id="cp-roll" value="24000" min="0" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-co">Changeover (min)</label><input type="number" id="cp-co" value="45" min="0" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-dens">Density (g/cm³)</label><input type="number" id="cp-dens" value="0.92" step="0.01" min="0" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-uptime">Uptime %</label><input type="number" id="cp-uptime" value="85" min="0" max="100" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-speedeff">Speed eff. %</label><input type="number" id="cp-speedeff" value="90" min="0" max="100" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-quality">Quality yield %</label><input type="number" id="cp-quality" value="97" min="0" max="100" oninput="calcConvPlant()"></div>
+            <div class="cp-field"><label for="cp-pouchwt">Pouch weight (g)</label><input type="number" id="cp-pouchwt" value="12" step="0.1" min="0" oninput="calcConvPlant()"></div>
           </div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Plant defaults</div>
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Available (min/day)</label><input type="number" id="cp-avail" value="1440" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Roll length (m)</label><input type="number" id="cp-roll" value="24000" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Changeover (min each)</label><input type="number" id="cp-co" value="45" oninput="calcConvPlant()"></div>
-          </div>
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Density (g/cm³)</label><input type="number" id="cp-dens" value="0.92" step="0.01" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Uptime %</label><input type="number" id="cp-uptime" value="85" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Speed eff. %</label><input type="number" id="cp-speedeff" value="90" oninput="calcConvPlant()"></div>
-          </div>
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Quality yield %</label><input type="number" id="cp-quality" value="97" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Pouch wt (g)</label><input type="number" id="cp-pouchwt" value="12" step="0.1" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>&nbsp;</label><div style="font-size:.72rem;color:var(--muted);padding-top:8px;">Pouching uses wt × pcs/min</div></div>
+          <div class="cp-section-label">Machines</div>
+          <div class="cp-machines">
+            <div class="cp-machine" data-kind="print">
+              <div class="cp-machine-head"><span class="cp-dot" style="background:#e85d26"></span><strong>Printing</strong><span class="cp-tag">Gravure / Flexo</span></div>
+              <div class="cp-machine-grid">
+                <div class="cp-field"><label>Qty</label><input type="number" id="cp-print-qty" value="1" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Speed (m/min)</label><input type="number" id="cp-print-spd" value="200" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Width (mm)</label><input type="number" id="cp-print-w" value="1000" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Micron</label><input type="number" id="cp-print-um" value="40" min="0" oninput="calcConvPlant()"></div>
+              </div>
+              <div class="cp-machine-result"><span>CO/day <b id="cp-print-co">—</b></span><span>MT/day <b id="cp-print-mt">—</b></span></div>
+            </div>
+            <div class="cp-machine" data-kind="lam">
+              <div class="cp-machine-head"><span class="cp-dot" style="background:#0d8c7e"></span><strong>Lamination</strong><span class="cp-tag">Solvent / solvent-less</span></div>
+              <div class="cp-machine-grid">
+                <div class="cp-field"><label>Qty</label><input type="number" id="cp-lam-qty" value="1" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Speed (m/min)</label><input type="number" id="cp-lam-spd" value="180" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Width (mm)</label><input type="number" id="cp-lam-w" value="1000" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Micron</label><input type="number" id="cp-lam-um" value="50" min="0" oninput="calcConvPlant()"></div>
+              </div>
+              <div class="cp-machine-result"><span>CO/day <b id="cp-lam-co">—</b></span><span>MT/day <b id="cp-lam-mt">—</b></span></div>
+            </div>
+            <div class="cp-machine" data-kind="slit">
+              <div class="cp-machine-head"><span class="cp-dot" style="background:#1a2744"></span><strong>Slitting</strong><span class="cp-tag">Rewind / slit</span></div>
+              <div class="cp-machine-grid">
+                <div class="cp-field"><label>Qty</label><input type="number" id="cp-slit-qty" value="1" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Speed (m/min)</label><input type="number" id="cp-slit-spd" value="300" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Width (mm)</label><input type="number" id="cp-slit-w" value="1000" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Micron</label><input type="number" id="cp-slit-um" value="50" min="0" oninput="calcConvPlant()"></div>
+              </div>
+              <div class="cp-machine-result"><span>CO/day <b id="cp-slit-co">—</b></span><span>MT/day <b id="cp-slit-mt">—</b></span></div>
+            </div>
+            <div class="cp-machine" data-kind="pouch">
+              <div class="cp-machine-head"><span class="cp-dot" style="background:#c45c26"></span><strong>Pouching</strong><span class="cp-tag">pcs/min × pouch wt</span></div>
+              <div class="cp-machine-grid cp-machine-grid-2">
+                <div class="cp-field"><label>Qty</label><input type="number" id="cp-pouch-qty" value="2" min="0" oninput="calcConvPlant()"></div>
+                <div class="cp-field"><label>Speed (pcs/min)</label><input type="number" id="cp-pouch-spd" value="80" min="0" oninput="calcConvPlant()"></div>
+              </div>
+              <div class="cp-machine-result"><span>CO/day <b id="cp-pouch-co">—</b></span><span>MT/day <b id="cp-pouch-mt">—</b></span></div>
+            </div>
           </div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:16px 0 8px;text-transform:uppercase;">Machines</div>
-          <div class="cp-table-wrap">
-            <table class="cp-table" id="cp-machine-table">
-              <thead>
-                <tr>
-                  <th>Machine</th>
-                  <th>Qty</th>
-                  <th>Speed</th>
-                  <th>Width</th>
-                  <th>µm</th>
-                  <th>CO/day</th>
-                  <th>MT/day</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="cp-name">Printing<span class="cp-hint">Gravure / Flexo</span></td>
-                  <td><input type="number" id="cp-print-qty" value="1" min="0" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-print-spd" value="200" oninput="calcConvPlant()" aria-label="Print speed m/min"><span class="cp-unit">m/min</span></td>
-                  <td><input type="number" id="cp-print-w" value="1000" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-print-um" value="40" oninput="calcConvPlant()"></td>
-                  <td class="cp-out" id="cp-print-co">—</td>
-                  <td class="cp-out cp-mt" id="cp-print-mt">—</td>
-                </tr>
-                <tr>
-                  <td class="cp-name">Lamination<span class="cp-hint">Solvent / solvent-less</span></td>
-                  <td><input type="number" id="cp-lam-qty" value="1" min="0" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-lam-spd" value="180" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
-                  <td><input type="number" id="cp-lam-w" value="1000" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-lam-um" value="50" oninput="calcConvPlant()"></td>
-                  <td class="cp-out" id="cp-lam-co">—</td>
-                  <td class="cp-out cp-mt" id="cp-lam-mt">—</td>
-                </tr>
-                <tr>
-                  <td class="cp-name">Slitting<span class="cp-hint">Rewind / slit</span></td>
-                  <td><input type="number" id="cp-slit-qty" value="1" min="0" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-slit-spd" value="300" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
-                  <td><input type="number" id="cp-slit-w" value="1000" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-slit-um" value="50" oninput="calcConvPlant()"></td>
-                  <td class="cp-out" id="cp-slit-co">—</td>
-                  <td class="cp-out cp-mt" id="cp-slit-mt">—</td>
-                </tr>
-                <tr>
-                  <td class="cp-name">Pouching<span class="cp-hint">pcs/min</span></td>
-                  <td><input type="number" id="cp-pouch-qty" value="2" min="0" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-pouch-spd" value="80" oninput="calcConvPlant()"><span class="cp-unit">pcs/min</span></td>
-                  <td colspan="2" class="cp-muted">Uses pouch wt (g)</td>
-                  <td class="cp-out" id="cp-pouch-co">—</td>
-                  <td class="cp-out cp-mt" id="cp-pouch-mt">—</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr class="cp-total">
-                  <td colspan="5"><strong>Plant capacity (bottleneck)</strong></td>
-                  <td class="cp-out" id="cp-sum-note">min line</td>
-                  <td class="cp-out cp-mt" id="cp-plant-mt">—</td>
-                </tr>
-                <tr class="cp-sum">
-                  <td colspan="5">Sum of process MT/day (reference only)</td>
-                  <td></td>
-                  <td class="cp-out" id="cp-sum-mt">—</td>
-                </tr>
-              </tfoot>
-            </table>
+          <div class="cp-plant-summary">
+            <div class="cp-plant-main">
+              <div class="cp-plant-label">Plant capacity (bottleneck)</div>
+              <div class="cp-plant-value"><span id="cp-res">—</span> <small>MT/day</small></div>
+              <div class="cp-plant-sub" id="cp-sub">Enter machine data</div>
+            </div>
+            <div class="cp-plant-side">
+              <div><span class="cp-muted">Limiting line</span><strong id="cp-sum-note">—</strong></div>
+              <div><span class="cp-muted">Sum of processes</span><strong id="cp-sum-mt">—</strong> <span class="cp-muted">MT/day</span></div>
+            </div>
           </div>
-          <div class="calc-result" style="margin-top:14px"><div><div class="val" id="cp-res">—</div><div class="sub" id="cp-sub">Bottleneck MT/day</div></div><div class="unit">MT/day</div></div>
-          <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="cp-detail"></div>
+          <div class="cp-detail" id="cp-detail"></div>
+          <span id="cp-plant-mt" class="sr-only" aria-hidden="true">—</span>
         </div>
       </div>
-
     </div><!-- /.calc-grid -->
   </div><!-- /.container -->
 </section>
