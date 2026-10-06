@@ -131,6 +131,23 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
   .pg,.pg .b1,.pg .b2{animation:none!important;}
 }
+
+/* Unified home brand link (replaces navy "Back to vkstech.com" pill) */
+.tb-brand{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--navy);
+  text-decoration:none;
+  letter-spacing:-0.02em;
+  transition:opacity .2s;
+}
+.tb-brand span{color:var(--orange);}
+.tb-brand:hover{opacity:.85;}
+.tb-brand:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:4px;}
+/* Keep layout: brand on the left; optional right slot empty */
+.topbar{justify-content:flex-start;}
+
 </style>
 </head>
 <body>
@@ -139,8 +156,7 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
 
 <!-- Top bar -->
 <div class="topbar">
-  <a href="/" class="back-btn">← Back to vkstech.com</a>
-  <a href="/" class="brand">VKS <span class="accent">TECH</span></a>
+  <a href="/" class="tb-brand" aria-label="VKS Tech home">VKS<span> Tech</span></a>
 </div>
 
 <!-- Hero -->
@@ -216,7 +232,7 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
   <h3>One last thought</h3>
   <p>If you're reading this, you almost certainly have people like this in your own life — people who carried you when you couldn't carry yourself.</p>
   <p style="margin-bottom:1.5rem;"><strong>Tell them today.</strong> Not next week. Not when you "have time." Today.</p>
-  <a href="/" class="quiet-link">← Back to vkstech.com</a>
+  <a href="/" class="quiet-link">VKS Tech home →</a>
 </section>
 
 <footer>

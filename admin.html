@@ -283,7 +283,17 @@ create policy "Only admins can read pageviews"
     <div class="field"><label>Channel name *</label><input type="text" id="ytcName" placeholder="Toon Tales By VKS"></div>
     <div class="field"><label>URL slug *</label><input type="text" id="ytcSlug" placeholder="ToonTales" oninput="ytcSlugClean(this)"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/<b id="ytcSlugPreview">slug</b>/playlist-name</div></div>
     <div class="field"><label>YouTube channel URL *</label><input type="text" id="ytcUrl" placeholder="https://www.youtube.com/@vksToonTales"></div>
-    <div class="field"><label>Icon URL (optional) — channel profile picture</label><input type="text" id="ytcIcon" placeholder="https://raw.githubusercontent.com/vkstecho/VksTech/main/channel-icons/toontales.png"><div style="font-size:.72rem;color:#999;margin-top:3px">Upload icon images to <code>channel-icons/</code> on GitHub, then paste the raw URL here.</div></div>
+    <div class="field"><label>Icon URL — channel profile picture</label>
+      <div style="display:flex;gap:8px;align-items:stretch;flex-wrap:wrap">
+        <input type="text" id="ytcIcon" placeholder="Auto-fills from YouTube, or paste any image URL" style="flex:1;min-width:200px">
+        <button type="button" class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);white-space:nowrap" onclick="ytFetchChannelIcon()" title="Fetch profile picture from YouTube URL">🖼️ Fetch icon</button>
+      </div>
+      <div id="ytcIconPreview" style="display:none;margin-top:10px;align-items:center;gap:12px">
+        <img id="ytcIconImg" alt="Preview" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);background:#fff">
+        <span style="font-size:.78rem;color:var(--muted)">Preview — save channel to apply</span>
+      </div>
+      <div style="font-size:.72rem;color:#999;margin-top:6px;line-height:1.5">Click <strong>Fetch icon</strong> after entering the channel URL (or leave blank — auto-fetches on Save). Or upload to <code>channel-icons/</code> on GitHub and paste the raw URL.</div>
+    </div>
     <div class="field"><label>Handle (optional)</label><input type="text" id="ytcHandle" placeholder="@vksToonTales"></div>
     <div class="field"><label>Description (optional)</label><input type="text" id="ytcDesc" placeholder="Animated stories and toon tales."></div>
     <div class="field"><label>Sort order (lower shows first)</label><input type="number" id="ytcSort" placeholder="0"></div>
@@ -1643,6 +1653,7 @@ function ytNewChannel(){
   document.getElementById('ytcDesc').value = '';
   document.getElementById('ytcSort').value = _ytChannels.length;
   document.getElementById('ytcSlugPreview').textContent = 'slug';
+  if(typeof ytShowIconPreview==='function') ytShowIconPreview('');
   document.getElementById('ytChannelModal').style.display = 'block';
 }
 function ytEditChannel(id){
@@ -1654,6 +1665,7 @@ function ytEditChannel(id){
   document.getElementById('ytcSlug').value = c.slug || '';
   document.getElementById('ytcUrl').value = c.youtube_url || '';
   document.getElementById('ytcIcon').value = c.icon_url || '';
+  if(typeof ytShowIconPreview==='function') ytShowIconPreview(c.icon_url || '');
   document.getElementById('ytcHandle').value = c.handle || '';
   document.getElementById('ytcDesc').value = c.description || '';
   document.getElementById('ytcSort').value = c.sort_order || 0;
@@ -1663,12 +1675,85 @@ function ytEditChannel(id){
 function ytCloseChannelModal(){
   document.getElementById('ytChannelModal').style.display = 'none';
 }
+
+/* ── Channel icon auto-fetch (YouTube profile picture) ───────── */
+function ytParseChannelRef(url){
+  if(!url) return null;
+  url = String(url).trim();
+  var m = url.match(/youtube\.com\/@([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/youtube\.com\/channel\/([A-Za-z0-9_-]+)/i);
+  if(m) return { type:'id', value:m[1] };
+  m = url.match(/youtube\.com\/c\/([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/youtube\.com\/user\/([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/^@([A-Za-z0-9._-]+)$/);
+  if(m) return { type:'handle', value:m[1] };
+  return null;
+}
+function ytIconCandidates(ref){
+  var list = [];
+  if(!ref) return list;
+  if(ref.type === 'handle'){
+    list.push('https://unavatar.io/youtube/' + encodeURIComponent(ref.value));
+    list.push('https://unavatar.io/youtube/@' + encodeURIComponent(ref.value));
+  } else if(ref.type === 'id'){
+    list.push('https://unavatar.io/youtube/channel/' + encodeURIComponent(ref.value));
+  }
+  return list;
+}
+function ytShowIconPreview(url){
+  var box = document.getElementById('ytcIconPreview');
+  var img = document.getElementById('ytcIconImg');
+  if(!box || !img) return;
+  if(!url){ box.style.display = 'none'; img.removeAttribute('src'); return; }
+  img.onload = function(){ box.style.display = 'flex'; };
+  img.onerror = function(){ box.style.display = 'none'; };
+  img.referrerPolicy = 'no-referrer';
+  img.src = url;
+}
+function ytTryLoadImage(url, timeoutMs){
+  return new Promise(function(resolve){
+    var img = new Image();
+    var done = false;
+    var timer = setTimeout(function(){ if(!done){ done=true; resolve(false); } }, timeoutMs||9000);
+    img.onload = function(){ if(done) return; done=true; clearTimeout(timer); resolve(true); };
+    img.onerror = function(){ if(done) return; done=true; clearTimeout(timer); resolve(false); };
+    img.referrerPolicy = 'no-referrer';
+    img.src = url;
+  });
+}
+async function ytFetchChannelIcon(opts){
+  opts = opts || {};
+  var silent = !!opts.silent;
+  var urlEl = document.getElementById('ytcUrl');
+  var url = (urlEl && urlEl.value || '').trim();
+  if(!url){ if(!silent) toast('Paste the YouTube channel URL first', true); return null; }
+  var ref = ytParseChannelRef(url);
+  if(!ref){ if(!silent) toast('Could not read channel from that URL. Use https://youtube.com/@YourHandle', true); return null; }
+  if(!silent) toast('Fetching channel icon…');
+  var candidates = ytIconCandidates(ref);
+  for(var i=0;i<candidates.length;i++){
+    var ok = await ytTryLoadImage(candidates[i], 9000);
+    if(ok){
+      var iconEl = document.getElementById('ytcIcon');
+      if(iconEl) iconEl.value = candidates[i];
+      ytShowIconPreview(candidates[i]);
+      if(!silent) toast('Icon found');
+      return candidates[i];
+    }
+  }
+  if(!silent) toast('Could not auto-fetch icon. Upload to channel-icons/ on GitHub and paste the raw URL.', true);
+  return null;
+}
+
 async function ytSaveChannel(){
   const id = document.getElementById('ytcId').value;
   const name = document.getElementById('ytcName').value.trim();
   const slug = ytSlugify(document.getElementById('ytcSlug').value);
   const url = document.getElementById('ytcUrl').value.trim();
-  const icon = document.getElementById('ytcIcon').value.trim();
+  let icon = document.getElementById('ytcIcon').value.trim();
   const handle = document.getElementById('ytcHandle').value.trim();
   const desc = document.getElementById('ytcDesc').value.trim();
   const sort = parseInt(document.getElementById('ytcSort').value, 10) || 0;
@@ -1679,6 +1764,11 @@ async function ytSaveChannel(){
     toast('"'+slug+'" is a reserved word — pick a different slug', true); return;
   }
   if(!url){ toast('YouTube channel URL is required', true); return; }
+  /* Auto-fetch profile picture when icon was left blank */
+  if(!icon){
+    const fetched = await ytFetchChannelIcon({ silent:true });
+    if(fetched) icon = fetched;
+  }
   /* Slug uniqueness check (case-insensitive), excluding self when editing */
   const clash = _ytChannels.find(function(c){
     return c.slug.toLowerCase() === slug.toLowerCase() && String(c.id) !== String(id);
@@ -2101,6 +2191,24 @@ document.addEventListener('DOMContentLoaded', function(){
       el.addEventListener('input', function(){ this.dataset.manual = 'true'; });
     }
   });
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  var iconInput = document.getElementById('ytcIcon');
+  if(iconInput){
+    iconInput.addEventListener('input', function(){
+      if(typeof ytShowIconPreview==='function') ytShowIconPreview(this.value.trim());
+    });
+  }
+  var urlInput = document.getElementById('ytcUrl');
+  if(urlInput){
+    urlInput.addEventListener('blur', function(){
+      var iconEl = document.getElementById('ytcIcon');
+      if(iconEl && !iconEl.value.trim() && this.value.trim() && typeof ytFetchChannelIcon==='function'){
+        ytFetchChannelIcon({ silent:true });
+      }
+    });
+  }
 });
 </script>
 </body></html>

@@ -95,14 +95,30 @@ footer a:hover{color:var(--orange2);}
   .hero h1{font-size:1.9rem;}
   .channels{grid-template-columns:1fr;gap:16px;}
 }
+
+/* Unified home brand link (replaces navy "Back to vkstech.com" pill) */
+.tb-brand{
+  font-family:'Playfair Display',serif;
+  font-weight:800;
+  font-size:1.15rem;
+  color:var(--navy);
+  text-decoration:none;
+  letter-spacing:-0.02em;
+  transition:opacity .2s;
+}
+.tb-brand span{color:var(--orange);}
+.tb-brand:hover{opacity:.85;}
+.tb-brand:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:4px;}
+/* Keep layout: brand on the left; optional right slot empty */
+.topbar{justify-content:flex-start;}
+
 </style>
 </head>
 <body>
 <div class="pg"><div class="b1"></div><div class="b2"></div></div>
 
 <div class="topbar">
-  <a href="/" class="tb-brand">VKS<span> Tech</span></a>
-  <button onclick="goBackSmart()" class="back-btn" type="button">← Back</button>
+  <a href="/" class="tb-brand" aria-label="VKS Tech home">VKS<span> Tech</span></a>
 </div>
 
 <main>
