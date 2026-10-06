@@ -385,8 +385,8 @@
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c9_t">Converting Plant Capacity</h3><p data-i="c9_s">All machines → MT/day · plant bottleneck</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
-            Fill <strong>each machine row</strong> (qty, speed, width, micron). Changeovers are derived from roll length ÷ speed.<br>
-            <strong>Plant capacity</strong> = bottleneck (lowest MT/day among active processes).
+            Fill <strong>each machine row</strong> (qty, speed, width, micron). Changeovers come from roll length ÷ produced length.<br>
+            <strong>Plant capacity</strong> = bottleneck (lowest MT/day among active lines). Set qty = 0 to ignore a machine.
           </div>
 
           <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Plant defaults</div>
@@ -402,8 +402,8 @@
           </div>
           <div class="calc-row c3">
             <div class="calc-field"><label>Quality yield %</label><input type="number" id="cp-quality" value="97" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>Pouch wt (g) <span style="opacity:.7;font-weight:500">for pouching</span></label><input type="number" id="cp-pouchwt" value="12" step="0.1" oninput="calcConvPlant()"></div>
-            <div class="calc-field"><label>&nbsp;</label><div style="font-size:.72rem;color:var(--muted);padding-top:8px;">Set qty = 0 to ignore a line</div></div>
+            <div class="calc-field"><label>Pouch wt (g)</label><input type="number" id="cp-pouchwt" value="12" step="0.1" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>&nbsp;</label><div style="font-size:.72rem;color:var(--muted);padding-top:8px;">Pouching uses wt × pcs/min</div></div>
           </div>
 
           <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:16px 0 8px;text-transform:uppercase;">Machines</div>
@@ -414,24 +414,24 @@
                   <th>Machine</th>
                   <th>Qty</th>
                   <th>Speed</th>
-                  <th>Width mm</th>
-                  <th>Micron</th>
+                  <th>Width</th>
+                  <th>µm</th>
                   <th>CO/day</th>
                   <th>MT/day</th>
                 </tr>
               </thead>
               <tbody>
-                <tr data-kind="print">
-                  <td class="cp-name">Printing<br><span class="cp-hint">Gravure / Flexo</span></td>
+                <tr>
+                  <td class="cp-name">Printing<span class="cp-hint">Gravure / Flexo</span></td>
                   <td><input type="number" id="cp-print-qty" value="1" min="0" oninput="calcConvPlant()"></td>
-                  <td><input type="number" id="cp-print-spd" value="200" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
+                  <td><input type="number" id="cp-print-spd" value="200" oninput="calcConvPlant()" aria-label="Print speed m/min"><span class="cp-unit">m/min</span></td>
                   <td><input type="number" id="cp-print-w" value="1000" oninput="calcConvPlant()"></td>
                   <td><input type="number" id="cp-print-um" value="40" oninput="calcConvPlant()"></td>
                   <td class="cp-out" id="cp-print-co">—</td>
                   <td class="cp-out cp-mt" id="cp-print-mt">—</td>
                 </tr>
-                <tr data-kind="lam">
-                  <td class="cp-name">Lamination<br><span class="cp-hint">Solvent / solvent-less</span></td>
+                <tr>
+                  <td class="cp-name">Lamination<span class="cp-hint">Solvent / solvent-less</span></td>
                   <td><input type="number" id="cp-lam-qty" value="1" min="0" oninput="calcConvPlant()"></td>
                   <td><input type="number" id="cp-lam-spd" value="180" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
                   <td><input type="number" id="cp-lam-w" value="1000" oninput="calcConvPlant()"></td>
@@ -439,8 +439,8 @@
                   <td class="cp-out" id="cp-lam-co">—</td>
                   <td class="cp-out cp-mt" id="cp-lam-mt">—</td>
                 </tr>
-                <tr data-kind="slit">
-                  <td class="cp-name">Slitting<br><span class="cp-hint">Rewind / slit</span></td>
+                <tr>
+                  <td class="cp-name">Slitting<span class="cp-hint">Rewind / slit</span></td>
                   <td><input type="number" id="cp-slit-qty" value="1" min="0" oninput="calcConvPlant()"></td>
                   <td><input type="number" id="cp-slit-spd" value="300" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
                   <td><input type="number" id="cp-slit-w" value="1000" oninput="calcConvPlant()"></td>
@@ -448,11 +448,11 @@
                   <td class="cp-out" id="cp-slit-co">—</td>
                   <td class="cp-out cp-mt" id="cp-slit-mt">—</td>
                 </tr>
-                <tr data-kind="pouch">
-                  <td class="cp-name">Pouching<br><span class="cp-hint">pcs/min × pouch wt</span></td>
+                <tr>
+                  <td class="cp-name">Pouching<span class="cp-hint">pcs/min</span></td>
                   <td><input type="number" id="cp-pouch-qty" value="2" min="0" oninput="calcConvPlant()"></td>
                   <td><input type="number" id="cp-pouch-spd" value="80" oninput="calcConvPlant()"><span class="cp-unit">pcs/min</span></td>
-                  <td colspan="2" class="cp-muted">Uses pouch wt (g) above</td>
+                  <td colspan="2" class="cp-muted">Uses pouch wt (g)</td>
                   <td class="cp-out" id="cp-pouch-co">—</td>
                   <td class="cp-out cp-mt" id="cp-pouch-mt">—</td>
                 </tr>
@@ -464,7 +464,7 @@
                   <td class="cp-out cp-mt" id="cp-plant-mt">—</td>
                 </tr>
                 <tr class="cp-sum">
-                  <td colspan="5">Sum of all process MT/day (not plant limit)</td>
+                  <td colspan="5">Sum of process MT/day (reference only)</td>
                   <td></td>
                   <td class="cp-out" id="cp-sum-mt">—</td>
                 </tr>
@@ -476,31 +476,8 @@
         </div>
       </div>
 
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cc-micron" value="40" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Film / Structure Density</label><select id="cc-dens" onchange="calcConvCapacity()"><option value="0.92">PE / LDPE — 0.92</option><option value="0.91">BOPP — 0.91</option><option value="1.38">PET — 1.38</option><option value="0.90">CPP — 0.90</option><option value="1.05">Laminate avg — 1.05</option></select></div>
-            <div class="calc-field"><label>Roll Length (m)</label><input type="number" id="cc-roll" value="24000" oninput="calcConvCapacity()"></div>
-          </div>
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase;">Time & Efficiency</div>
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Available (min/day)</label><input type="number" id="cc-avail" value="1440" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Changeover (min each)</label><input type="number" id="cc-co" value="45" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Uptime %</label><input type="number" id="cc-uptime" value="85" oninput="calcConvCapacity()"></div>
-          </div>
-          <div class="calc-row c3">
-            <div class="calc-field"><label>Speed Efficiency %</label><input type="number" id="cc-speedeff" value="90" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Quality Yield %</label><input type="number" id="cc-quality" value="97" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Jobs / day (est.)</label><input type="number" id="cc-jobs" value="4" oninput="calcConvCapacity()" title="Used to estimate changeovers if roll length not driving"></div>
-          </div>
-          <div class="calc-result"><div><div class="val" id="cc-res">—</div><div class="sub" id="cc-sub"></div></div><div class="unit">MT/day</div></div>
-          <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="cc-detail"></div>
-        </div>
-      </div>
-
-      </div>
-
-    </div>
-  </div>
+    </div><!-- /.calc-grid -->
+  </div><!-- /.container -->
 </section>
 
 <!-- PERSONAL APPS -->
@@ -538,7 +515,7 @@
   <div class="container">
     <div class="reveal">
       <div class="section-label" data-i="yt_label">📺 VKS Tech on YouTube</div>
-      <h2 class="section-title" data-i="yt_h2">Five channels, <span>one creator.</span></h2>
+      <h2 class="section-title" id="ytHomeTitle" data-i="yt_h2"><span id="ytChannelCountLabel">Your channels</span>, <span>one creator.</span></h2>
       <p class="section-sub" data-i="yt_sub2">Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.</p>
     </div>
     <div id="ytHomeGrid" class="yt-home-grid">

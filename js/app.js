@@ -116,7 +116,7 @@ const HI = {
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
   yt_label:"📺 VKS Tech यूट्यूब पर",
-  yt_h2:"पाँच चैनल, <span>एक क्रिएटर।</span>",
+  yt_h2:"चैनल, <span>एक क्रिएटर।</span>",
   yt_sub2:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर चैनल और प्लेलिस्ट एक जगह।",
   yt_home_cta:"सभी प्लेलिस्ट देखें →",
   hero_badge:"फ्लेक्सिबल पैकेजिंग के लिए बनाया गया · हरियाणा, भारत",
@@ -155,10 +155,10 @@ const HI = {
 const EN = {
   nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Request an App",
   yt_eyebrow:"VKS Tech on YouTube",
-  yt_title:"Five channels, one creator",
+  yt_title:"Channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",
   yt_label:"📺 VKS Tech on YouTube",
-  yt_h2:"Five channels, <span>one creator.</span>",
+  yt_h2:"Channels, <span>one creator.</span>",
   yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
   yt_home_cta:"See all playlists →",
   hero_badge:"BUILT FOR FLEXIBLE PACKAGING · HARYANA, INDIA",
@@ -1441,6 +1441,23 @@ async function loadYouTubeHome(){
         counts[p.channel_id] = (counts[p.channel_id] || 0) + 1;
       });
     }
+    /* Dynamic headline from live channel count (admin adds more → title updates) */
+    (function(){
+      var n = channels.length;
+      var enPhrase = (n === 1) ? '1 channel' : (n + ' channels');
+      var hiPhrase = (n === 1) ? '1 चैनल' : (n + ' चैनल');
+      var enHtml = enPhrase + ', <span>one creator.</span>';
+      var hiHtml = hiPhrase + ', <span>एक क्रिएटर।</span>';
+      if(typeof EN !== 'undefined') EN.yt_h2 = enHtml;
+      if(typeof HI !== 'undefined') HI.yt_h2 = hiHtml;
+      var h2 = document.getElementById('ytHomeTitle');
+      if(h2){
+        var useHi = (typeof curLang !== 'undefined' && curLang === 'hi');
+        h2.innerHTML = useHi ? hiHtml : enHtml;
+      }
+      var label = document.getElementById('ytChannelCountLabel');
+      if(label) label.textContent = useHi ? hiPhrase : enPhrase;
+    })();
     grid.innerHTML = channels.map(function(c, i){
       var color = YT_BADGE_COLORS[i % YT_BADGE_COLORS.length];
       var initial = (c.name || '?').trim().charAt(0).toUpperCase();

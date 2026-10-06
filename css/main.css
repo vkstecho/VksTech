@@ -211,7 +211,7 @@ section{position:relative;z-index:1;}
 .calc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 22px;}
 .calc-card.open .calc-body{max-height:500px;padding:18px 22px;}
 /* Tall calculator variant — for multi-section calcs like Met M/C Capacity */
-.calc-card.calc-tall.open .calc-body{max-height:2200px;}
+.calc-card.calc-tall.open .calc-body{max-height:none;}
 .calc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .calc-row.c1{grid-template-columns:1fr;}
 .calc-row.c3{grid-template-columns:1fr 1fr 1fr;}
@@ -574,7 +574,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 /* Converting capacity detail line */
 #calc-converting-capacity #cc-detail{word-break:break-word;}
-#calc-converting-capacity .calc-body{max-height:none;}
+
 
 
 /* ════════════════════════════════════════════════
@@ -693,7 +693,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .cp-total td{background:rgba(13,140,126,.08)!important;border-top:2px solid rgba(13,140,126,.25);}
 .cp-sum td{background:var(--bg2)!important;color:var(--muted);font-size:.75rem;}
 #calc-converting-capacity.open .calc-body,
-#calc-converting-capacity .calc-body{max-height:none;}
+
 @media(max-width:600px){
   .cp-table input{width:58px;padding:5px 4px;font-size:.75rem;}
 }

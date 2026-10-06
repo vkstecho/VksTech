@@ -124,7 +124,7 @@ footer a:hover{color:var(--orange2);}
 <main>
   <section class="hero">
     <div class="eyebrow">\u{1F4FA} VKS Tech on YouTube</div>
-    <h1>Five channels. <span class="accent">One creator.</span></h1>
+    <h1><span id="ytPageCount">Channels</span>. <span class="accent">One creator.</span></h1>
     <p>Finance, fitness, animated stories, productivity, and everyday life — every playlist, gathered in one place. Pick a channel and start watching.</p>
   </section>
 
@@ -180,6 +180,16 @@ async function loadChannels(){
     state.innerHTML = '<div class="ico">\u{1F4FA}</div><p>Channels coming soon.</p>';
     return;
   }
+  (function(){
+    var n = channels.length;
+    var el = document.getElementById('ytPageCount');
+    if(el) el.textContent = (n === 1) ? '1 channel' : (n + ' channels');
+    var h1 = document.querySelector('.hero h1');
+    if(h1 && !document.getElementById('ytPageCount')){
+      h1.innerHTML = ((n===1)?'1 channel':(n+' channels')) + '. <span class="accent">One creator.</span>';
+    }
+  })();
+
 
   var plRes = await sb.from('youtube_playlists').select('*').order('sort_order',{ascending:true});
   var playlists = (plRes && !plRes.error && plRes.data) ? plRes.data : [];
