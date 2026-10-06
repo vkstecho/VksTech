@@ -324,7 +324,27 @@ function resetCalc(cardId) {
     });
     localStorage.setItem(CALC_STORAGE_KEY, JSON.stringify(state));
   } catch (e) {}
+
+  /* Re-run calculator after reset so results update */
+  try {
+    if (cardId === 'calc-converting-capacity' && typeof calcConvPlant === 'function') calcConvPlant();
+    else if (cardId === 'calc-met-capacity' && typeof calcMetCapacity === 'function') calcMetCapacity();
+    else {
+      var fnMap = {
+        'calc-roll-weight': 'calcRollWeight',
+        'calc-roll-length': 'calcRollLength',
+        'calc-roll-od': 'calcRollOd',
+        'calc-gsm-micron': 'calcGsmMicron',
+        'calc-yield': 'calcYield',
+        'calc-machine-utilisation': 'calcUtilisation',
+        'calc-cost-sqm': 'calcCostSqm'
+      };
+      var fnName = fnMap[cardId];
+      if (fnName && typeof window[fnName] === 'function') window[fnName]();
+    }
+  } catch (e2) {}
 }
+
 
 /* Wrap original calc functions to save state + announce */
 function _wrapCalc(fn, prefix, resId) {
@@ -355,6 +375,13 @@ function toggleCalc(head, evt){
   if(!wasOpen) {
     card.classList.add('open');
     head.setAttribute('aria-expanded', 'true');
+    /* Compute converting plant result when card opens */
+    if(card.id === 'calc-converting-capacity' && typeof calcConvPlant === 'function'){
+      setTimeout(function(){ calcConvPlant(); }, 0);
+    }
+    if(card.id === 'calc-met-capacity' && typeof calcMetCapacity === 'function'){
+      setTimeout(function(){ calcMetCapacity(); }, 0);
+    }
   } else {
     head.setAttribute('aria-expanded', 'false');
   }
@@ -548,92 +575,124 @@ function calcMetCapacity(){
 }
 
 
+
 function calcConvPlant(){
-  function n(id){ var el=document.getElementById(id); return el ? (parseFloat(el.value)||0) : 0; }
-  function setTxt(id, v){ var el=document.getElementById(id); if(el) el.textContent=v; }
-
-  var avail = n('cp-avail');
-  var rollLen = n('cp-roll');
-  var coMin = n('cp-co');
-  var dens = n('cp-dens');
-  var uptime = n('cp-uptime')/100;
-  var speedEff = n('cp-speedeff')/100;
-  var quality = n('cp-quality')/100;
-  var pouchWt = n('cp-pouchwt'); /* grams */
-
-  if(avail <= 0 || dens <= 0){
-    setTxt('cp-res','—'); setTxt('cp-sub','Check plant defaults');
-    return;
-  }
-
-  var grossMin = avail * uptime;
-
-  /* Web process: qty machines × speed m/min */
-  function calcWeb(prefix, qty, speed, width, micron){
-    if(qty <= 0 || speed <= 0 || width <= 0 || micron <= 0){
-      setTxt(prefix+'-co','—'); setTxt(prefix+'-mt','—');
-      return {mt:0, co:0, active:false};
+  try {
+    function n(id){
+      var el = document.getElementById(id);
+      if(!el) return 0;
+      var v = parseFloat(String(el.value).replace(/,/g,'').trim());
+      return isFinite(v) ? v : 0;
     }
-    /* Tentative meters at full gross time, then CO from rolls */
-    var tentM = qty * speed * grossMin * speedEff;
-    var rollCOs = (rollLen > 0) ? (tentM / rollLen) : 0;
-    var coLossMin = rollCOs * coMin;
-    /* Cap CO loss so net never negative */
-    var netMin = Math.max(0, grossMin - Math.min(coLossMin, grossMin * 0.85));
-    var lengthM = qty * speed * netMin * speedEff;
-    var kg = lengthM * (width/1000) * micron * dens * 1e-6;
-    var mt = (kg / 1000) * quality;
-    setTxt(prefix+'-co', rollCOs.toFixed(1));
-    setTxt(prefix+'-mt', mt.toFixed(2));
-    return {mt:mt, co:rollCOs, active:true, lengthM:lengthM};
-  }
-
-  function calcPouch(qty, pcsPerMin){
-    if(qty <= 0 || pcsPerMin <= 0 || pouchWt <= 0){
-      setTxt('cp-pouch-co','—'); setTxt('cp-pouch-mt','—');
-      return {mt:0, co:0, active:false};
+    function setTxt(id, v){
+      var el = document.getElementById(id);
+      if(el) el.textContent = v;
     }
-    /* Estimate job COs as 1 per ~4 hours productive — soft model using shared CO */
-    var tentPcs = qty * pcsPerMin * grossMin * speedEff;
-    var jobCOs = Math.max(0, (grossMin / 240) * qty); /* ~1 CO per 4h per machine */
-    var coLossMin = jobCOs * coMin;
-    var netMin = Math.max(0, grossMin - Math.min(coLossMin, grossMin * 0.85));
-    var pcs = qty * pcsPerMin * netMin * speedEff;
-    var kg = pcs * pouchWt / 1000;
-    var mt = (kg / 1000) * quality;
-    setTxt('cp-pouch-co', jobCOs.toFixed(1));
-    setTxt('cp-pouch-mt', mt.toFixed(2));
-    return {mt:mt, co:jobCOs, active:true, pcs:pcs};
-  }
 
-  var print = calcWeb('cp-print', n('cp-print-qty'), n('cp-print-spd'), n('cp-print-w'), n('cp-print-um'));
-  var lam   = calcWeb('cp-lam',   n('cp-lam-qty'),   n('cp-lam-spd'),   n('cp-lam-w'),   n('cp-lam-um'));
-  var slit  = calcWeb('cp-slit',  n('cp-slit-qty'),  n('cp-slit-spd'),  n('cp-slit-w'),  n('cp-slit-um'));
-  var pouch = calcPouch(n('cp-pouch-qty'), n('cp-pouch-spd'));
+    var avail    = n('cp-avail');
+    var rollLen  = n('cp-roll');
+    var coMin    = n('cp-co');
+    var dens     = n('cp-dens');
+    var uptime   = n('cp-uptime') / 100;
+    var speedEff = n('cp-speedeff') / 100;
+    var quality  = n('cp-quality') / 100;
+    var pouchWt  = n('cp-pouchwt'); /* grams per pouch */
 
-  var active = [print, lam, slit, pouch].filter(function(x){ return x.active && x.mt > 0; });
-  var sum = [print,lam,slit,pouch].reduce(function(s,x){ return s + (x.mt||0); }, 0);
-  var bottleneck = active.length ? Math.min.apply(null, active.map(function(x){ return x.mt; })) : 0;
-  var bottleneckName = '—';
-  if(active.length){
-    var map = [{n:'Printing',x:print},{n:'Lamination',x:lam},{n:'Slitting',x:slit},{n:'Pouching',x:pouch}];
-    var b = map.filter(function(m){ return m.x.active && m.x.mt > 0; }).sort(function(a,b){ return a.x.mt - b.x.mt; })[0];
-    if(b) bottleneckName = b.n;
-  }
+    if(avail <= 0 || dens <= 0){
+      setTxt('cp-res','—');
+      setTxt('cp-sub','Check plant defaults (available min & density)');
+      return;
+    }
+    if(uptime <= 0) uptime = 1;
+    if(speedEff <= 0) speedEff = 1;
+    if(quality <= 0) quality = 1;
 
-  setTxt('cp-plant-mt', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
-  setTxt('cp-sum-mt', sum > 0 ? sum.toFixed(2) : '—');
-  setTxt('cp-sum-note', bottleneckName !== '—' ? bottleneckName : 'min line');
-  setTxt('cp-res', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
-  setTxt('cp-sub', bottleneck > 0 ? ('Bottleneck: ' + bottleneckName) : 'Enter machine data');
-  var detail = document.getElementById('cp-detail');
-  if(detail){
-    detail.textContent = 'Gross run ' + grossMin.toFixed(0) + ' min/day (after uptime) · Yield ' +
-      (quality*100).toFixed(0) + '% applied · Plant limit = lowest active process (' + bottleneckName + ').';
+    var grossMin = avail * uptime;
+
+    /* Web process capacity (print / lam / slit)
+       Mass formula: kg = length_m × width_mm × micron × density_g_cm3 × 1e-6
+       (standard converting plant formula) */
+    function calcWeb(prefix, qty, speed, width, micron){
+      if(qty <= 0 || speed <= 0 || width <= 0 || micron <= 0){
+        setTxt(prefix + '-co', '—');
+        setTxt(prefix + '-mt', '—');
+        return { mt:0, co:0, active:false };
+      }
+      /* Start with gross productive minutes, then subtract changeover loss */
+      var runMin = grossMin * speedEff;
+      var tentM = qty * speed * runMin;
+      var cos = (rollLen > 0) ? (tentM / rollLen) : 0;
+      var coLoss = cos * coMin;
+      /* Cap CO loss at 85% of available so capacity never goes negative */
+      var netMin = Math.max(0, runMin - Math.min(coLoss, runMin * 0.85));
+      var lengthM = qty * speed * netMin;
+      var kg = lengthM * width * micron * dens * 1e-6;
+      var mt = (kg / 1000) * quality;
+      setTxt(prefix + '-co', cos.toFixed(1));
+      setTxt(prefix + '-mt', mt.toFixed(2));
+      return { mt: mt, co: cos, active: true };
+    }
+
+    function calcPouch(qty, pcsPerMin){
+      if(qty <= 0 || pcsPerMin <= 0 || pouchWt <= 0){
+        setTxt('cp-pouch-co', '—');
+        setTxt('cp-pouch-mt', '—');
+        return { mt:0, co:0, active:false };
+      }
+      var runMin = grossMin * speedEff;
+      var jobCOs = Math.max(0, (runMin / 240) * qty); /* ~1 CO per 4h per machine */
+      var coLoss = jobCOs * coMin;
+      var netMin = Math.max(0, runMin - Math.min(coLoss, runMin * 0.85));
+      var pcs = qty * pcsPerMin * netMin;
+      var kg = pcs * pouchWt / 1000;
+      var mt = (kg / 1000) * quality;
+      setTxt('cp-pouch-co', jobCOs.toFixed(1));
+      setTxt('cp-pouch-mt', mt.toFixed(2));
+      return { mt: mt, co: jobCOs, active: true };
+    }
+
+    var print = calcWeb('cp-print', n('cp-print-qty'), n('cp-print-spd'), n('cp-print-w'), n('cp-print-um'));
+    var lam   = calcWeb('cp-lam',   n('cp-lam-qty'),   n('cp-lam-spd'),   n('cp-lam-w'),   n('cp-lam-um'));
+    var slit  = calcWeb('cp-slit',  n('cp-slit-qty'),  n('cp-slit-spd'),  n('cp-slit-w'),  n('cp-slit-um'));
+    var pouch = calcPouch(n('cp-pouch-qty'), n('cp-pouch-spd'));
+
+    var rows = [
+      { n:'Printing',    x:print },
+      { n:'Lamination',  x:lam },
+      { n:'Slitting',    x:slit },
+      { n:'Pouching',    x:pouch }
+    ];
+    var active = rows.filter(function(r){ return r.x.active && r.x.mt > 0; });
+    var sum = rows.reduce(function(s,r){ return s + (r.x.mt || 0); }, 0);
+    var bottleneck = 0;
+    var bottleneckName = '—';
+    if(active.length){
+      active.sort(function(a,b){ return a.x.mt - b.x.mt; });
+      bottleneck = active[0].x.mt;
+      bottleneckName = active[0].n;
+    }
+
+    setTxt('cp-plant-mt', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
+    setTxt('cp-sum-mt', sum > 0 ? sum.toFixed(2) : '—');
+    setTxt('cp-sum-note', bottleneckName);
+    setTxt('cp-res', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
+    setTxt('cp-sub', bottleneck > 0 ? ('Bottleneck: ' + bottleneckName) : 'Enter machine data above');
+
+    var detail = document.getElementById('cp-detail');
+    if(detail){
+      detail.textContent = 'Gross run ' + grossMin.toFixed(0) + ' min/day after uptime · Yield ' +
+        (quality * 100).toFixed(0) + '% · Plant limit = lowest active process (' + bottleneckName + ').';
+    }
+  } catch (err) {
+    console.error('calcConvPlant error:', err);
+    var sub = document.getElementById('cp-sub');
+    if(sub) sub.textContent = 'Calculation error — check console';
   }
 }
-/* Keep old name as alias so any leftover oninput still works */
 function calcConvCapacity(){ calcConvPlant(); }
+window.calcConvPlant = calcConvPlant;
+window.calcConvCapacity = calcConvCapacity;
+
 
 
 
@@ -1661,3 +1720,27 @@ function submitNewsletter(ev, source){
     });
   return false;
 }
+/* Ensure converting plant calc runs when deep-linked or after load */
+(function initConvPlantCalc(){
+  function run(){
+    try {
+      if (typeof calcConvPlant === 'function') calcConvPlant();
+    } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(run, 100);
+    });
+  } else {
+    setTimeout(run, 100);
+  }
+  /* Backup: bind input listeners in case oninput attributes fail */
+  document.addEventListener('DOMContentLoaded', function(){
+    var card = document.getElementById('calc-converting-capacity');
+    if (!card) return;
+    card.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('input', function(){ calcConvPlant(); });
+      inp.addEventListener('change', function(){ calcConvPlant(); });
+    });
+  });
+})();
