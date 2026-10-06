@@ -149,7 +149,7 @@ const HI = {
   ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
   ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
   pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद",
-  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", c9_t:"कन्वर्टिंग प्लांट क्षमता", c9_s:"स्पीड × चौड़ाई × माइक्रॉन → MT/दिन", calc_label:"🧮 पैकेजिंग कैलकुलेटर", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
+  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", c9_t:"कन्वर्टिंग प्लांट क्षमता", c9_s:"सभी मशीनें → MT/दिन · प्लांट बॉटलनेक", calc_label:"🧮 पैकेजिंग कैलकुलेटर", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
 };
 
 const EN = {
@@ -163,7 +163,7 @@ const EN = {
   yt_home_cta:"See all playlists →",
   hero_badge:"BUILT FOR FLEXIBLE PACKAGING · HARYANA, INDIA",
   hero_title:"Apps. Calculators.<br>Articles. <span class='accent'>Free.</span>",
-  hero_sub:"A toolkit for everyone working in flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) over 9 years at UFlex, JPFL, and GLS Polyfilms.",
+  hero_sub:"A free toolkit for flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) after 9 years at UFlex, JPFL, and GLS Polyfilms.",
   hero_btn1:"Try a Calculator →", hero_btn2:"See All Apps",
   stat1:"Calculators", stat2:"Articles Published", stat3:"Apps Live", stat4:"Free",
   cos_label:"9 Years in India's Flexible Packaging Industry",
@@ -191,7 +191,7 @@ const EN = {
   ppl_title:"The People Behind <span>This Journey</span>",
   ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
   pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks",
-  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", c9_t:"Converting Plant Capacity", c9_s:"Speed × Width × Micron → MT/day (with changeover)", calc_label:"🧮 Packaging Calculators", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
+  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", c9_t:"Converting Plant Capacity", c9_s:"All machines → MT/day · plant bottleneck", calc_label:"🧮 Packaging Calculators", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
 };
 
 let curLang = (function(){
@@ -547,49 +547,94 @@ function calcMetCapacity(){
   document.getElementById('mc-sub').textContent = rollsDay.toFixed(2)+' rolls/day × '+Math.round(rollKg).toLocaleString('en-IN')+' kg/roll · cycle '+cycleTime.toFixed(1)+' min';
 }
 
-function calcConvCapacity(){
-  if(!_calcCheck(['cc-speed','cc-width','cc-micron','cc-roll','cc-avail','cc-co','cc-uptime','cc-speedeff','cc-quality'],'cc-res','cc-sub')) return;
-  var speed=parseFloat(document.getElementById('cc-speed').value);
-  var width=parseFloat(document.getElementById('cc-width').value);
-  var micron=parseFloat(document.getElementById('cc-micron').value);
-  var dens=parseFloat(document.getElementById('cc-dens').value);
-  var rollLen=parseFloat(document.getElementById('cc-roll').value);
-  var avail=parseFloat(document.getElementById('cc-avail').value);
-  var coMin=parseFloat(document.getElementById('cc-co').value);
-  var uptime=parseFloat(document.getElementById('cc-uptime').value)/100;
-  var speedEff=parseFloat(document.getElementById('cc-speedeff').value)/100;
-  var quality=parseFloat(document.getElementById('cc-quality').value)/100;
-  var jobs=parseFloat(document.getElementById('cc-jobs').value)||1;
-  if(speed<=0||width<=0||micron<=0||rollLen<=0||avail<=0){
-    document.getElementById('cc-res').textContent='Invalid';
-    document.getElementById('cc-sub').textContent='Check inputs';
+
+function calcConvPlant(){
+  function n(id){ var el=document.getElementById(id); return el ? (parseFloat(el.value)||0) : 0; }
+  function setTxt(id, v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+
+  var avail = n('cp-avail');
+  var rollLen = n('cp-roll');
+  var coMin = n('cp-co');
+  var dens = n('cp-dens');
+  var uptime = n('cp-uptime')/100;
+  var speedEff = n('cp-speedeff')/100;
+  var quality = n('cp-quality')/100;
+  var pouchWt = n('cp-pouchwt'); /* grams */
+
+  if(avail <= 0 || dens <= 0){
+    setTxt('cp-res','—'); setTxt('cp-sub','Check plant defaults');
     return;
   }
-  /* Estimate productive window after job changeovers (min of job-based and roll-based) */
-  var grossRun = avail * uptime;
-  /* Tentative length without CO, then derive roll COs */
-  var tentLen = speed * grossRun * speedEff;
-  var rollCOs = Math.max(0, Math.floor(tentLen / rollLen));
-  var jobCOs = Math.max(0, jobs - 1);
-  var totalCO = (rollCOs + jobCOs) * coMin;
-  if(totalCO >= grossRun){
-    document.getElementById('cc-res').textContent='0';
-    document.getElementById('cc-sub').textContent='Changeover exceeds available time';
-    document.getElementById('cc-detail').textContent='';
-    return;
+
+  var grossMin = avail * uptime;
+
+  /* Web process: qty machines × speed m/min */
+  function calcWeb(prefix, qty, speed, width, micron){
+    if(qty <= 0 || speed <= 0 || width <= 0 || micron <= 0){
+      setTxt(prefix+'-co','—'); setTxt(prefix+'-mt','—');
+      return {mt:0, co:0, active:false};
+    }
+    /* Tentative meters at full gross time, then CO from rolls */
+    var tentM = qty * speed * grossMin * speedEff;
+    var rollCOs = (rollLen > 0) ? (tentM / rollLen) : 0;
+    var coLossMin = rollCOs * coMin;
+    /* Cap CO loss so net never negative */
+    var netMin = Math.max(0, grossMin - Math.min(coLossMin, grossMin * 0.85));
+    var lengthM = qty * speed * netMin * speedEff;
+    var kg = lengthM * (width/1000) * micron * dens * 1e-6;
+    var mt = (kg / 1000) * quality;
+    setTxt(prefix+'-co', rollCOs.toFixed(1));
+    setTxt(prefix+'-mt', mt.toFixed(2));
+    return {mt:mt, co:rollCOs, active:true, lengthM:lengthM};
   }
-  var netMin = grossRun - totalCO;
-  var lengthM = speed * netMin * speedEff;
-  var kg = lengthM * (width/1000) * micron * dens * 1e-6;
-  var mt = kg / 1000;
-  var goodMt = mt * quality;
-  document.getElementById('cc-res').textContent = goodMt.toFixed(2);
-  document.getElementById('cc-sub').textContent = 'Good output · ' + lengthM.toFixed(0) + ' m run';
-  document.getElementById('cc-detail').textContent =
-    'Gross run ' + grossRun.toFixed(0) + ' min · CO loss ' + totalCO.toFixed(0) +
-    ' min (rolls≈' + rollCOs + ', jobs≈' + jobCOs + ') · Gross ' + mt.toFixed(2) +
-    ' MT · Yield ' + (quality*100).toFixed(0) + '% → ' + goodMt.toFixed(2) + ' MT/day';
+
+  function calcPouch(qty, pcsPerMin){
+    if(qty <= 0 || pcsPerMin <= 0 || pouchWt <= 0){
+      setTxt('cp-pouch-co','—'); setTxt('cp-pouch-mt','—');
+      return {mt:0, co:0, active:false};
+    }
+    /* Estimate job COs as 1 per ~4 hours productive — soft model using shared CO */
+    var tentPcs = qty * pcsPerMin * grossMin * speedEff;
+    var jobCOs = Math.max(0, (grossMin / 240) * qty); /* ~1 CO per 4h per machine */
+    var coLossMin = jobCOs * coMin;
+    var netMin = Math.max(0, grossMin - Math.min(coLossMin, grossMin * 0.85));
+    var pcs = qty * pcsPerMin * netMin * speedEff;
+    var kg = pcs * pouchWt / 1000;
+    var mt = (kg / 1000) * quality;
+    setTxt('cp-pouch-co', jobCOs.toFixed(1));
+    setTxt('cp-pouch-mt', mt.toFixed(2));
+    return {mt:mt, co:jobCOs, active:true, pcs:pcs};
+  }
+
+  var print = calcWeb('cp-print', n('cp-print-qty'), n('cp-print-spd'), n('cp-print-w'), n('cp-print-um'));
+  var lam   = calcWeb('cp-lam',   n('cp-lam-qty'),   n('cp-lam-spd'),   n('cp-lam-w'),   n('cp-lam-um'));
+  var slit  = calcWeb('cp-slit',  n('cp-slit-qty'),  n('cp-slit-spd'),  n('cp-slit-w'),  n('cp-slit-um'));
+  var pouch = calcPouch(n('cp-pouch-qty'), n('cp-pouch-spd'));
+
+  var active = [print, lam, slit, pouch].filter(function(x){ return x.active && x.mt > 0; });
+  var sum = [print,lam,slit,pouch].reduce(function(s,x){ return s + (x.mt||0); }, 0);
+  var bottleneck = active.length ? Math.min.apply(null, active.map(function(x){ return x.mt; })) : 0;
+  var bottleneckName = '—';
+  if(active.length){
+    var map = [{n:'Printing',x:print},{n:'Lamination',x:lam},{n:'Slitting',x:slit},{n:'Pouching',x:pouch}];
+    var b = map.filter(function(m){ return m.x.active && m.x.mt > 0; }).sort(function(a,b){ return a.x.mt - b.x.mt; })[0];
+    if(b) bottleneckName = b.n;
+  }
+
+  setTxt('cp-plant-mt', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
+  setTxt('cp-sum-mt', sum > 0 ? sum.toFixed(2) : '—');
+  setTxt('cp-sum-note', bottleneckName !== '—' ? bottleneckName : 'min line');
+  setTxt('cp-res', bottleneck > 0 ? bottleneck.toFixed(2) : '—');
+  setTxt('cp-sub', bottleneck > 0 ? ('Bottleneck: ' + bottleneckName) : 'Enter machine data');
+  var detail = document.getElementById('cp-detail');
+  if(detail){
+    detail.textContent = 'Gross run ' + grossMin.toFixed(0) + ' min/day (after uptime) · Yield ' +
+      (quality*100).toFixed(0) + '% applied · Plant limit = lowest active process (' + bottleneckName + ').';
+  }
 }
+/* Keep old name as alias so any leftover oninput still works */
+function calcConvCapacity(){ calcConvPlant(); }
+
 
 
 /* ═══════════════════════════════════════

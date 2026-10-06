@@ -205,23 +205,38 @@
       <div>
         <div class="hero-eyebrow" data-i="hero_badge">BUILT FOR FLEXIBLE PACKAGING · HARYANA, INDIA</div>
         <h1 class="hero-title" data-i="hero_title">Apps. Calculators.<br>Articles. <span class="accent">Free.</span></h1>
-        <p class="hero-sub" data-i="hero_sub">A toolkit for everyone working in flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) over 9 years at UFlex, JPFL, and GLS Polyfilms.</p>
+        <p class="hero-sub" data-i="hero_sub">A free toolkit for flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) after 9 years at UFlex, JPFL, and GLS Polyfilms.</p>
         <div class="hero-btns">
           <a href="#calculators" class="btn-p" data-i="hero_btn1">Try a Calculator →</a>
           <a href="#industry-apps" class="btn-s" data-i="hero_btn2">See All Apps</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><div class="num">8</div><div class="lbl" data-i="stat1">Calculators</div></div>
+          <div class="stat-item"><div class="num">9</div><div class="lbl" data-i="stat1">Calculators</div></div>
           <div class="stat-item"><div class="num" id="statArticlesNum">–</div><div class="lbl" data-i="stat2">Articles Published</div></div>
-          <div class="stat-item"><div class="num">9<span class="plus">+</span></div><div class="lbl" data-i="stat3">Apps Live</div></div>
+          <div class="stat-item"><div class="num">5</div><div class="lbl" data-i="stat3">Apps Live</div></div>
           <div class="stat-item"><div class="num">100%</div><div class="lbl" data-i="stat4">Free</div></div>
         </div>
       </div>
       <div class="hero-visual">
         <div class="card-stack">
-          <div class="hcard hcard1"><span class="hchip co">Industry Tool</span><span class="hcard-icon">👥</span><div class="hcard-title">Man Power</div><div class="hcard-sub">Team Management &amp; Training</div></div>
-          <div class="hcard hcard2"><span class="hchip ct">Production</span><span class="hcard-icon">📐</span><div class="hcard-title">Plan Power</div><div class="hcard-sub">Production Planning Engine</div></div>
-          <div class="hcard hcard3"><span class="hchip cn">Network</span><span class="hcard-icon">💼</span><div class="hcard-title">FP Job</div><div class="hcard-sub">Packaging Industry Jobs</div></div>
+          <a href="https://manpower.vkstech.com" target="_blank" rel="noopener" class="hcard hcard1" aria-label="Open Man Power app">
+            <span class="hchip co">Industry Tool</span>
+            <span class="hcard-icon"><img src="manpower-icon.png" alt="" width="48" height="48" loading="lazy" decoding="async"/></span>
+            <div class="hcard-title">Man Power</div>
+            <div class="hcard-sub">Team Management &amp; Training</div>
+          </a>
+          <a href="https://pp.vkstech.com" target="_blank" rel="noopener" class="hcard hcard2" aria-label="Open Plan Power app">
+            <span class="hchip ct">Production</span>
+            <span class="hcard-icon"><img src="icon512_2.png" alt="" width="48" height="48" loading="lazy" decoding="async"/></span>
+            <div class="hcard-title">Plan Power</div>
+            <div class="hcard-sub">Production Planning Engine</div>
+          </a>
+          <a href="https://fpjob.vkstech.com" target="_blank" rel="noopener" class="hcard hcard3" aria-label="Open FP Job app">
+            <span class="hchip cn">Network</span>
+            <span class="hcard-icon"><img src="icon512_1.png" alt="" width="48" height="48" loading="lazy" decoding="async"/></span>
+            <div class="hcard-title">FP Job</div>
+            <div class="hcard-sub">Packaging Industry Jobs</div>
+          </a>
         </div>
       </div>
     </div>
@@ -365,22 +380,102 @@
           <div class="calc-result"><div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub"></div></div><div class="unit">MT/day</div></div>
         </div>
 
-      <!-- 9. CONVERTING PLANT CAPACITY (see Blog 62) -->
+      <!-- 9. CONVERTING PLANT CAPACITY — multi-machine (Blog 62) -->
       <div class="calc-card reveal calc-tall" id="calc-converting-capacity">
-        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c9_t">Converting Plant Capacity</h3><p data-i="c9_s">Speed × Width × Micron → MT/day (with changeover)</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c9_t">Converting Plant Capacity</h3><p data-i="c9_s">All machines → MT/day · plant bottleneck</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
-            <strong>Net run time</strong> = Available − (Changeovers × CO min)<br>
-            <strong>Length (m)</strong> = Speed × Net run × Uptime × Speed%<br>
-            <strong>MT/day</strong> = Length × Width/1000 × μm × ρ × 1e−6 ÷ 1000<br>
-            <span style="opacity:.85;">Default roll length 24,000 m · Full multi-machine tool in Blog 62</span>
+            Fill <strong>each machine row</strong> (qty, speed, width, micron). Changeovers are derived from roll length ÷ speed.<br>
+            <strong>Plant capacity</strong> = bottleneck (lowest MT/day among active processes).
           </div>
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Machine & Film</div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Plant defaults</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Machine Type</label><select id="cc-type" onchange="calcConvCapacity()"><option value="print">Print (Gravure/Flexo)</option><option value="lam">Lamination</option><option value="slit">Slitter</option><option value="pouch">Pouching</option></select></div>
-            <div class="calc-field"><label>Line Speed (m/min)</label><input type="number" id="cc-speed" value="200" oninput="calcConvCapacity()"></div>
-            <div class="calc-field"><label>Width (mm)</label><input type="number" id="cc-width" value="1000" oninput="calcConvCapacity()"></div>
+            <div class="calc-field"><label>Available (min/day)</label><input type="number" id="cp-avail" value="1440" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>Roll length (m)</label><input type="number" id="cp-roll" value="24000" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>Changeover (min each)</label><input type="number" id="cp-co" value="45" oninput="calcConvPlant()"></div>
           </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Density (g/cm³)</label><input type="number" id="cp-dens" value="0.92" step="0.01" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>Uptime %</label><input type="number" id="cp-uptime" value="85" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>Speed eff. %</label><input type="number" id="cp-speedeff" value="90" oninput="calcConvPlant()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Quality yield %</label><input type="number" id="cp-quality" value="97" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>Pouch wt (g) <span style="opacity:.7;font-weight:500">for pouching</span></label><input type="number" id="cp-pouchwt" value="12" step="0.1" oninput="calcConvPlant()"></div>
+            <div class="calc-field"><label>&nbsp;</label><div style="font-size:.72rem;color:var(--muted);padding-top:8px;">Set qty = 0 to ignore a line</div></div>
+          </div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:16px 0 8px;text-transform:uppercase;">Machines</div>
+          <div class="cp-table-wrap">
+            <table class="cp-table" id="cp-machine-table">
+              <thead>
+                <tr>
+                  <th>Machine</th>
+                  <th>Qty</th>
+                  <th>Speed</th>
+                  <th>Width mm</th>
+                  <th>Micron</th>
+                  <th>CO/day</th>
+                  <th>MT/day</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-kind="print">
+                  <td class="cp-name">Printing<br><span class="cp-hint">Gravure / Flexo</span></td>
+                  <td><input type="number" id="cp-print-qty" value="1" min="0" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-print-spd" value="200" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
+                  <td><input type="number" id="cp-print-w" value="1000" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-print-um" value="40" oninput="calcConvPlant()"></td>
+                  <td class="cp-out" id="cp-print-co">—</td>
+                  <td class="cp-out cp-mt" id="cp-print-mt">—</td>
+                </tr>
+                <tr data-kind="lam">
+                  <td class="cp-name">Lamination<br><span class="cp-hint">Solvent / solvent-less</span></td>
+                  <td><input type="number" id="cp-lam-qty" value="1" min="0" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-lam-spd" value="180" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
+                  <td><input type="number" id="cp-lam-w" value="1000" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-lam-um" value="50" oninput="calcConvPlant()"></td>
+                  <td class="cp-out" id="cp-lam-co">—</td>
+                  <td class="cp-out cp-mt" id="cp-lam-mt">—</td>
+                </tr>
+                <tr data-kind="slit">
+                  <td class="cp-name">Slitting<br><span class="cp-hint">Rewind / slit</span></td>
+                  <td><input type="number" id="cp-slit-qty" value="1" min="0" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-slit-spd" value="300" oninput="calcConvPlant()"><span class="cp-unit">m/min</span></td>
+                  <td><input type="number" id="cp-slit-w" value="1000" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-slit-um" value="50" oninput="calcConvPlant()"></td>
+                  <td class="cp-out" id="cp-slit-co">—</td>
+                  <td class="cp-out cp-mt" id="cp-slit-mt">—</td>
+                </tr>
+                <tr data-kind="pouch">
+                  <td class="cp-name">Pouching<br><span class="cp-hint">pcs/min × pouch wt</span></td>
+                  <td><input type="number" id="cp-pouch-qty" value="2" min="0" oninput="calcConvPlant()"></td>
+                  <td><input type="number" id="cp-pouch-spd" value="80" oninput="calcConvPlant()"><span class="cp-unit">pcs/min</span></td>
+                  <td colspan="2" class="cp-muted">Uses pouch wt (g) above</td>
+                  <td class="cp-out" id="cp-pouch-co">—</td>
+                  <td class="cp-out cp-mt" id="cp-pouch-mt">—</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="cp-total">
+                  <td colspan="5"><strong>Plant capacity (bottleneck)</strong></td>
+                  <td class="cp-out" id="cp-sum-note">min line</td>
+                  <td class="cp-out cp-mt" id="cp-plant-mt">—</td>
+                </tr>
+                <tr class="cp-sum">
+                  <td colspan="5">Sum of all process MT/day (not plant limit)</td>
+                  <td></td>
+                  <td class="cp-out" id="cp-sum-mt">—</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="calc-result" style="margin-top:14px"><div><div class="val" id="cp-res">—</div><div class="sub" id="cp-sub">Bottleneck MT/day</div></div><div class="unit">MT/day</div></div>
+          <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="cp-detail"></div>
+        </div>
+      </div>
+
           <div class="calc-row c3">
             <div class="calc-field"><label>Thickness (Micron)</label><input type="number" id="cc-micron" value="40" oninput="calcConvCapacity()"></div>
             <div class="calc-field"><label>Film / Structure Density</label><select id="cc-dens" onchange="calcConvCapacity()"><option value="0.92">PE / LDPE — 0.92</option><option value="0.91">BOPP — 0.91</option><option value="1.38">PET — 1.38</option><option value="0.90">CPP — 0.90</option><option value="1.05">Laminate avg — 1.05</option></select></div>
@@ -545,7 +640,7 @@
           <div class="av-bd">
             <div class="tl">
               <div class="tli"><div class="tly">2013–17</div><div class="tlc"><h4>B.Tech – NIT Uttarakhand</h4><p>Mechanical Engineering</p></div></div>
-              <div class="tli"><div class="tly">GATE</div><div class="tlc"><h4>M.Tech – DCRUST University</h4><p>Highest Academic Qualification</p></div></div>
+              <div class="tli"><div class="tly">GATE</div><div class="tlc"><h4>M.Tech – DCRUST University</h4><p>Mechanical Engineering</p></div></div>
               <div class="tli"><div class="tly">UFlex</div><div class="tlc"><h4>UFlex Limited, Noida</h4><p>Flexible Packaging Industry</p></div></div>
               <div class="tli"><div class="tly">JPFL</div><div class="tlc"><h4>JPFL Films Pvt. Ltd., Nashik</h4><p>Films Production & Technology</p></div></div>
               <div class="tli"><div class="tly">GLS</div><div class="tlc"><h4>GLS Polyfilms, Gurawara</h4><p>Polymer Films Manufacturing</p></div></div>
