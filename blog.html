@@ -149,7 +149,7 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
   letter-spacing:-0.02em;
   transition:opacity .2s;
 }
-.tb-brand span{color:var(--orange);}
+.tb-brand{display:flex;align-items:center;text-decoration:none;}.tb-brand .vks-name{font-weight:800;color:#0a0a0a;font-size:1.15rem;letter-spacing:0.3px;}.tb-brand .vks-tech{font-weight:500;color:#e11d2a;font-size:1.15rem;}
 .tb-brand:hover{opacity:.85;}
 .tb-brand:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:4px;}
 /* Keep layout: brand on the left; optional right slot empty */
@@ -163,7 +163,10 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
 
 <!-- Top bar -->
 <div class="topbar">
-  <a href="/" class="tb-brand" aria-label="VKS Tech home">VKS<span style="color:#e11d2a;font-weight:500">Tech</span></a>
+  <a href="/" class="tb-brand" aria-label="VKS Tech home">
+    <img src="logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:8px"/>
+    <span class="vks-name">VKS</span><span class="vks-tech">Tech</span>
+  </a>
 </div>
 
 <!-- Hero -->
