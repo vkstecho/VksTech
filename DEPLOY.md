@@ -113,3 +113,19 @@ Field IDs match the `id` attributes in the HTML (e.g. `cw-len`, `mc-jumbo`).
 ## Update — remove MET Power
 - Removed MET Power card, modules subsection, hero card, JSON-LD, footer link, keywords.
 - Industry apps now: Man Power, Plan Power, FP Job.
+
+---
+
+## v2 quality pass (aligned with ManPower 3.2.6)
+
+### Resume Builder
+- JSON **Export** / **Import** / **Clear all** controls in the toolbar
+- Ctrl/Cmd+S saves progress; improved persistence safety
+
+### Mentor
+- Identical to ManPower `/Mentor/` (same guidance.js + CSS)
+
+### Keep in sync
+When updating Mentor or resume-builder, copy the folder to **both**:
+- manpower host (`/Mentor/`, `/resume-builder/`)
+- vkstech.com root (`/Mentor/`, `/resume-builder/`)
