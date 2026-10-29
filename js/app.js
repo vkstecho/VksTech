@@ -111,7 +111,7 @@ document.addEventListener('click',(e)=>{const m=document.getElementById('mobileM
    LANGUAGE ENGINE — EN / HI
    ═══════════════════════════════ */
 const HI = {
-  nav_ind:"उद्योग ऐप्स", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"ऐप का अनुरोध करें",
+  nav_ind:"उद्योग ऐप्स", nav_mentor:"मेंटर", nav_resume:"रिज़्यूमे", nav_calc:"कैलकुलेटर", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"ऐप का अनुरोध करें",
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
@@ -153,7 +153,7 @@ const HI = {
 };
 
 const EN = {
-  nav_ind:"Industry Apps", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Request an App",
+  nav_ind:"Industry Apps", nav_mentor:"Mentor", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Request an App",
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",

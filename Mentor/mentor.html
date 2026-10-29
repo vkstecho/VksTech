@@ -157,6 +157,16 @@
       window.MentorFB = null;
     }
   </script>
+
+<style id="mp-mentor-mobile">
+@media (max-width: 640px) {
+  #app header .truncate { max-width: 42vw; }
+  #mobileBadge span#mobileDisplay { max-width: 5.5rem; overflow: hidden; text-overflow: ellipsis; }
+  #messagesArea, #chatScroll, .chat-scroll { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+  #chatInputBar, .chat-input-bar { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+}
+</style>
+
 </head>
 <body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans">
 
