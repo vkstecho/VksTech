@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Builder | VKS Tech</title>
+  <meta name="description" content="Build a professional ATS-friendly resume in minutes. Modern templates, live preview, photo support, perfect A4 PDF export. Free by VKS Tech." />
+  <link rel="icon" href="icon512_1.png" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: system-ui, -apple-system, sans-serif; background: #0f172a; }
+    .bar {
+      height: 52px; display: flex; align-items: center; gap: 12px;
+      padding: 0 14px; background: #0f172a; color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .bar a {
+      color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 600;
+      padding: 8px 12px; border-radius: 10px; transition: .15s;
+    }
+    .bar a:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .bar .brand { font-weight: 800; font-size: 15px; color: #fff; margin-right: auto; }
+    .bar .brand span { color: #fbbf24; }
+    iframe { width: 100%; height: calc(100% - 52px); border: 0; display: block; background: #fff; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a href="index.html">← VKS Tech</a>
+    <div class="brand">AI Resume Builder <span>· VKS Tech</span></div>
+    <a href="mentor.html">Mentor</a>
+  </div>
+  <!-- 
+    Deploy the resume-builder folder next to this file.
+    Example: resume-builder/index.html
+  -->
+  <iframe src="resume-builder/index.html" title="AI Resume Builder" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+</body>
+</html>
