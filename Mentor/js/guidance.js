@@ -13,23 +13,25 @@
   const RATE_PER_HOUR = 699;
   const OTP_STORAGE_KEY = 'vks_mentor_otp';
   const OTP_EXPIRY_MS = 5 * 60 * 1000;       // 5 minutes
+  /** Device remembers mentor-mode unlock after one successful OTP (no Firebase rules change). */
+  const MENTOR_MODE_DEVICE_KEY = 'vks_mentor_mode_device_';
+  const MENTOR_MODE_DEVICE_TTL_MS = 180 * 24 * 60 * 60 * 1000; // 180 days
 
   // ========== Topics Catalog (15 Tracks) ==========
   // icons: array of {icon: 'fa class or text', bg: 'brand color', title: 'tooltip'}
   const TOPICS = [
     {
       id: 'ai_models',
-      title: 'Learn Gemini, Cloud, Grok, DeepSeek & ChatGPT',
-      hook: 'Master the World\'s Most Powerful AI Models One-to-One — From Prompt Engineering to Cloud Deployment.',
-      tags: ['Gemini', 'Google Cloud', 'Grok', 'DeepSeek', 'ChatGPT', 'Prompt Eng'],
+      title: 'Learn Gemini, Claude, Grok, DeepSeek & ChatGPT',
+      hook: 'Master the World\'s Most Powerful AI Models One-to-One — From Prompt Engineering to Claude (Anthropic).',
+      tags: ['Gemini', 'Claude', 'Grok', 'DeepSeek', 'ChatGPT', 'Prompt Eng'],
       gradient: 'linear-gradient(135deg, #4285F4 0%, #34A853 40%, #FBBC05 70%, #EA4335 100%)',
       icons: [
         { img: 'icons/gemini.svg', title: 'Gemini' },
-        { img: 'icons/google.svg', title: 'Google Cloud' },
+        { img: 'icons/claude.svg', title: 'Claude' },
         { img: 'icons/grok.svg', title: 'Grok' },
         { img: 'icons/deepseek.svg', title: 'DeepSeek' },
-        { img: 'icons/chatgpt.svg', title: 'ChatGPT' },
-        { img: 'icons/claude.svg', title: 'Claude' }
+        { img: 'icons/chatgpt.svg', title: 'ChatGPT' }
       ]
     },
     {
@@ -984,12 +986,19 @@
       return;
     }
     try {
-      if (!window.MentorFB || typeof window.MentorFB.sendOtp !== 'function') {
-        showToast('Firebase not ready — try again in a moment');
+      // Wait briefly for Firebase module (iframe / slow network)
+      for (let w = 0; w < 25 && !(window.MentorFB && (window.MentorFB.sendOtp || window.MentorFB.sendPhoneOtp)); w++) {
+        await new Promise(r => setTimeout(r, 100));
+      }
+      if (!window.MentorFB || !(window.MentorFB.sendOtp || window.MentorFB.sendPhoneOtp)) {
+        showToast('Firebase not ready — open Mentor again or check network');
         return;
       }
       showToast('Sending OTP SMS to +91 ' + MENTOR_MOBILE + '…');
-      await window.MentorFB.sendOtp('+91' + MENTOR_MOBILE);
+      {
+        const send = window.MentorFB.sendOtp || window.MentorFB.sendPhoneOtp;
+        await send.call(window.MentorFB, '+91' + MENTOR_MOBILE);
+      }
       window._mentorUnlockOtpPending = true;
       $('#pinModal').classList.remove('hidden');
       $('#pinModal').classList.add('flex');
@@ -1010,11 +1019,12 @@
       return;
     }
     try {
-      if (!window.MentorFB || typeof window.MentorFB.confirmOtp !== 'function') {
+      if (!window.MentorFB || !(window.MentorFB.confirmOtp || window.MentorFB.verifyPhoneOtp)) {
         showToast('Firebase not ready');
         return;
       }
-      await window.MentorFB.confirmOtp(entered);
+      const conf = window.MentorFB.confirmOtp || window.MentorFB.verifyPhoneOtp;
+      await conf.call(window.MentorFB, entered);
       window._mentorUnlockOtpPending = false;
       try { localStorage.removeItem(OTP_STORAGE_KEY); } catch (e) {}
       $('#pinModal').classList.add('hidden');
@@ -1026,13 +1036,77 @@
     }
   }
 
-  function enableMentorMode() {
+
+  function mentorModeDeviceKey(mob) {
+    return MENTOR_MODE_DEVICE_KEY + String(mob || MENTOR_MOBILE);
+  }
+
+  function rememberMentorModeOnDevice(mob) {
+    try {
+      var payload = {
+        mobile: String(mob || MENTOR_MOBILE),
+        at: Date.now(),
+        expires: Date.now() + MENTOR_MODE_DEVICE_TTL_MS
+      };
+      localStorage.setItem(mentorModeDeviceKey(mob), JSON.stringify(payload));
+      // Also mirror on parent Man Power origin when embedded (same device)
+      try {
+        if (window.parent && window.parent !== window && window.parent.localStorage) {
+          window.parent.localStorage.setItem(mentorModeDeviceKey(mob), JSON.stringify(payload));
+        }
+      } catch (e2) {}
+    } catch (e) {}
+  }
+
+  function isMentorModeRememberedOnDevice(mob) {
+    mob = String(mob || '');
+    if (mob !== MENTOR_MOBILE) return false;
+    function read(store) {
+      try {
+        var raw = store.getItem(mentorModeDeviceKey(mob));
+        if (!raw) return false;
+        var o = JSON.parse(raw);
+        if (!o || String(o.mobile) !== mob) return false;
+        if (o.expires && Date.now() > o.expires) {
+          try { store.removeItem(mentorModeDeviceKey(mob)); } catch (e) {}
+          return false;
+        }
+        return true;
+      } catch (e) { return false; }
+    }
+    if (read(localStorage)) return true;
+    try {
+      if (window.parent && window.parent !== window && window.parent.localStorage) {
+        if (read(window.parent.localStorage)) {
+          // copy into iframe storage for next time
+          rememberMentorModeOnDevice(mob);
+          return true;
+        }
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function clearMentorModeOnDevice(mob) {
+    try { localStorage.removeItem(mentorModeDeviceKey(mob || MENTOR_MOBILE)); } catch (e) {}
+    try {
+      if (window.parent && window.parent !== window && window.parent.localStorage) {
+        window.parent.localStorage.removeItem(mentorModeDeviceKey(mob || MENTOR_MOBILE));
+      }
+    } catch (e) {}
+  }
+
+  function enableMentorMode(opts) {
+    opts = opts || {};
     isMentor = true;
-    $('#mentorBadge').classList.remove('hidden');
-    $('#mentorStudentBar').classList.remove('hidden');
-    refreshStudentList();
-    renderCatalog(); // so Approve buttons appear
-    showToast('Mentor mode enabled');
+    rememberMentorModeOnDevice(mobile || MENTOR_MOBILE);
+    try {
+      $('#mentorBadge').classList.remove('hidden');
+      $('#mentorStudentBar').classList.remove('hidden');
+    } catch (e) {}
+    try { refreshStudentList(); } catch (e) {}
+    try { renderCatalog(); } catch (e) {}
+    if (!opts.silent) showToast('Mentor mode enabled · remembered on this device');
   }
 
   async function refreshStudentList() {
@@ -1167,7 +1241,7 @@
 
   async function startApp(mob) {
     mobile = mob;
-    isMentor = false; // Never auto-enable. Always require OTP even for mentor number.
+    isMentor = false;
     data = loadUserData(mobile); // instant from cache
     $('#mobileDisplay').textContent = '+91 ' + mobile;
     $('#mentorBadge')?.classList.add('hidden');
@@ -1183,6 +1257,12 @@
           pinBtn.style.display = 'none';
           pinBtn.setAttribute('hidden', 'true');
         }
+      }
+    } catch (e) {}
+    // Remembered mentor mode on this device → no OTP again
+    try {
+      if (String(mob) === MENTOR_MOBILE && isMentorModeRememberedOnDevice(mob)) {
+        enableMentorMode({ silent: true });
       }
     } catch (e) {}
     $('#mobilePrompt').classList.add('hidden');
