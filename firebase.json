@@ -1,0 +1,18 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      { "source": "/mentor", "destination": "https://mentor.vkstech.com/", "type": 301 },
+      { "source": "/mentor/", "destination": "https://mentor.vkstech.com/", "type": 301 },
+      { "source": "/mentor.html", "destination": "https://mentor.vkstech.com/", "type": 301 },
+      { "source": "/mentorship", "destination": "https://mentor.vkstech.com/", "type": 301 },
+      { "source": "/mentorship/**", "destination": "https://mentor.vkstech.com/", "type": 301 },
+      { "source": "/resume", "destination": "https://manpower.vkstech.com/resume-builder/", "type": 301 },
+      { "source": "/resume/", "destination": "https://manpower.vkstech.com/resume-builder/", "type": 301 },
+      { "source": "/resume.html", "destination": "https://manpower.vkstech.com/resume-builder/", "type": 301 },
+      { "source": "/resume-builder", "destination": "https://manpower.vkstech.com/resume-builder/", "type": 301 },
+      { "source": "/resume-builder/**", "destination": "https://manpower.vkstech.com/resume-builder/", "type": 301 }
+    ]
+  }
+}
