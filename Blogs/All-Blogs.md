@@ -438,16 +438,17 @@
 | **Key points** | Structure reality; delam table; don’t use dry OTR alone; seal checks; honest mono PE vs EVOH framing |
 | **Related** | #34 OTR/WVTR, #32 PE, #31/#49 AlOx |
 
-### 51 — Man Power app *(written 2026-09-27)*
+### 51 — Man Power App — Team Management, Shifts & Leave
 | | |
 |--|--|
-| **Slug / folder** | `Blogs/51-man-power-team-management-app` |
+| **Slug / folder** | `51-man-power-team-management-app` (also live at `/blog/man-power-team-management-app`) |
 | **Category** | tech |
-| **Status** | written · on GitHub under `Blogs/` |
-| **Topic** | Man Power app usage, fees, support |
-| **Angle** | App product blog (not metalliser process) |
-| **Key points** | Modules (team/shift/leave/reports); time savings; fees & help on **8929397920**; URL manpower.vkstech.com |
-| **Related** | Website apps section / MET Power |
+| **Status** | live · https://www.vkstech.com/blog/man-power-team-management-app |
+| **Topic** | Man Power app — how to use, time savings, fees, support |
+| **Angle** | Product + plant adoption guide (not process metalliser content) |
+| **Key points** | Modules: Team, Shift Schedule, My Shift, Leave, Reports, To-Do, Training; OTP login; Excel team upload; leaves out of WhatsApp; several hours/week saved for supervisors; fees & support **8929397920**; live at manpower.vkstech.com |
+| **Related** | Website apps section / MET Power / Plan Power |
+| **Notes** | Full content fetched from live site 2026-10-05. Phone-first PWA for packaging plant workforce coordination. |
 
 ---
 
@@ -619,15 +620,398 @@ GitHub folders for these often have **only images/PDFs**. Article body is stored
 `api` · `css` · `js` · `channel-icons`
 
 
+
+---
+
+
+---
+
+# Converting & Plant Excellence Series (52–90)
+
+**Status:** All **complete** — bilingual HTML · covers · infographics  
+**Covers:** Photographic topic-matched covers (branded overlay + VKS logo)  
+**Zip:** `Blogs-52-to-90-Photo-Matched.zip`
+
+---
+
+## Master index 52–90
+
+| # | Folder / slug | Title | Series |
+|---|---------------|-------|--------|
+| 52 | `52-converting-plant-introduction` | Introduction to Flexible Packaging Converting Plant | Converting Mastery |
+| 53 | `53-gravure-printing-explained` | Gravure Printing Explained Simply | Converting Mastery |
+| 54 | `54-flexo-printing-complete-guide` | Flexo Printing – Complete Guide | Converting Mastery |
+| 55 | `55-registration-colour-consistency` | Registration & Colour Consistency in Printing | Converting Mastery |
+| 56 | `56-solvent-vs-solventless-lamination` | Solvent-based vs Solvent-less Lamination | Converting Mastery |
+| 57 | `57-slitting-process-converting` | Slitting Process in Converting Plants | Converting Mastery |
+| 58 | `58-pouching-machines-types` | Pouching Machines & Different Pouch Types | Converting Mastery |
+| 59 | `59-wastage-calculation-converting` | How to Calculate Wastage % in a Converting Plant | Converting Mastery |
+| 60 | `60-efficiency-breakdown-converting` | Understanding Efficiency in Converting Plants | Converting Mastery |
+| 61 | `61-roll-length-changeover-capacity` | How Roll Length & Changeover Time Affect Capacity | Converting Mastery |
+| 62 | `62-production-capacity-calculator` | How to Calculate Production Capacity (with live calculator) | Converting Mastery |
+| 63 | `63-ppc-role-converting-plant` | Role of PPC in a Converting Plant – Complete Guide | Converting Mastery |
+| 64 | `64-web-tension-converting` | Web Tension in Converting | Operations & PPC Deep Dive |
+| 65 | `65-ink-viscosity-colour-strength` | Ink Viscosity & Colour Strength | Operations & PPC Deep Dive |
+| 66 | `66-bond-strength-delamination` | Bond Strength & Delamination | Operations & PPC Deep Dive |
+| 67 | `67-smed-changeover-converting` | SMED Changeover for Converting | Operations & PPC Deep Dive |
+| 68 | `68-conversion-cost-per-kg` | Conversion Cost per kg | Operations & PPC Deep Dive |
+| 69 | `69-converting-defects-playbook` | Converting Defects Playbook | Operations & PPC Deep Dive |
+| 70 | `70-shift-handover-daily-meeting` | Shift Handover & Daily Meeting | Operations & PPC Deep Dive |
+| 71 | `71-wip-inventory-ppc` | WIP & Inventory for PPC | Operations & PPC Deep Dive |
+| 72 | `72-customer-complaint-flexible-packaging` | Customer Complaint Handling | Operations & PPC Deep Dive |
+| 73 | `73-mono-material-structures-plant` | Mono-Material Structures — Plant View | Operations & PPC Deep Dive |
+| 74 | `74-presenting-numbers-management` | Presenting Numbers to Management | Operations & PPC Deep Dive |
+| 75 | `75-first-90-days-ppc-converting` | First 90 Days as PPC in Converting | Operations & PPC Deep Dive |
+| 76 | `76-static-control-converting` | Static Control on Converting Lines | Advanced Plant Excellence |
+| 77 | `77-core-winding-quality` | Core Quality & Winding Defects | Advanced Plant Excellence |
+| 78 | `78-energy-utilities-cost-ppc` | Energy & Utilities Cost for PPC | Advanced Plant Excellence |
+| 79 | `79-operator-skill-matrix` | Operator Skill Matrix | Advanced Plant Excellence |
+| 80 | `80-structure-trial-method` | How to Run a Structure Trial | Advanced Plant Excellence |
+| 81 | `81-proof-colour-first-piece` | Proof, Colour & First-Piece Approval | Advanced Plant Excellence |
+| 82 | `82-coat-weight-adhesive-gsm` | Coat Weight / Adhesive GSM | Advanced Plant Excellence |
+| 83 | `83-slitter-knife-life-economics` | Slitter Knife Life Economics | Advanced Plant Excellence |
+| 84 | `84-five-why-packaging-defects` | 5-Why for Packaging Defects | Advanced Plant Excellence |
+| 85 | `85-daily-production-dashboard` | Daily Production Dashboard | Advanced Plant Excellence |
+| 86 | `86-working-with-suppliers-specs` | Working with Supplier Specs | Advanced Plant Excellence |
+| 87 | `87-safety-rewinder-slitter` | Safety at Rewinder & Slitter | Advanced Plant Excellence |
+| 88 | `88-humidity-storage-film-rolls` | Humidity & Storage of Film Rolls | Advanced Plant Excellence |
+| 89 | `89-otif-without-overpromise` | OTIF Without Overpromising | Advanced Plant Excellence |
+| 90 | `90-yearly-capacity-maintenance-plan` | Yearly Capacity & Maintenance Plan | Advanced Plant Excellence |
+
+---
+
+## Series A — Converting Plant Mastery (52–63)
+
+### 52 — Introduction to Flexible Packaging Converting Plant
+| | |
+|--|--|
+| **Slug / folder** | `52-converting-plant-introduction` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | What a converting plant is, process flow, main machines, why PPC matters |
+| **Angle** | Full converting overview (distinct from metalliser process flow #E06 / #30) |
+| **Key points** | Input → Print → Lam → Slit → Pouch; speeds; multi-job vs continuous metalliser; changeovers drive capacity |
+| **Related** | #30, #62 |
+| **Assets** | index.html · cover.png/en/hi · infographic-process-flow.png · logo |
+
+### 53 — Gravure Printing Explained Simply
+| | |
+|--|--|
+| **Slug / folder** | `53-gravure-printing-explained` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | How gravure works, control points, when to use it |
+| **Angle** | Floor + PPC view (not cylinder-engraving textbook) |
+| **Key points** | Cylinder → doctor blade → transfer → dry; 200–450 m/min; long runs; 5 control points |
+| **Related** | #54, #55 |
+| **Assets** | index.html · covers · infographic-gravure-steps.png · logo |
+
+### 54 — Flexo Printing – Complete Guide
+| | |
+|--|--|
+| **Slug / folder** | `54-flexo-printing-complete-guide` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Flexo process, anilox vs plate, changeovers |
+| **Angle** | Anilox does not change with every plate |
+| **Key points** | Raised plate + anilox volume; mounting; viscosity; changeover as capacity killer |
+| **Related** | #53, #55, #61 |
+| **Assets** | index.html · covers · infographic-anilox-plate.png · logo |
+
+### 55 — Registration & Colour Consistency
+| | |
+|--|--|
+| **Slug / folder** | `55-registration-colour-consistency` |
+| **Category** | packaging / quality |
+| **Status** | **complete** |
+| **Topic** | Registration tolerance, D50/D65, Delta E |
+| **Angle** | Cost of small drift on long runs |
+| **Key points** | ±0.15–0.3 mm; D50 vs D65; first-piece under standard light |
+| **Related** | #53, #54 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 56 — Solvent-based vs Solvent-less Lamination
+| | |
+|--|--|
+| **Slug / folder** | `56-solvent-vs-solventless-lamination` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Process difference, risks, practical choice |
+| **Angle** | Solvent-less ≠ no chemistry; cure & mix-ratio risks |
+| **Key points** | Dryer vs chemical cure; no powdered solvents; late delamination |
+| **Related** | #52, #66 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 57 — Slitting Process in Converting Plants
+| | |
+|--|--|
+| **Slug / folder** | `57-slitting-process-converting` |
+| **Category** | packaging / slitter |
+| **Status** | **complete** |
+| **Topic** | Tension, blades, telescoping, OD, width |
+| **Angle** | Last process that can still ruin a good print/lam job |
+| **Key points** | 300–600 m/min; tension by structure; blade discipline |
+| **Related** | #52, #59, #83 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 58 — Pouching Machines & Different Pouch Types
+| | |
+|--|--|
+| **Slug / folder** | `58-pouching-machines-types` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Centre/side/stand-up/zipper; tooling; speed |
+| **Angle** | Capacity needs weight + changeover, not only pcs/min |
+| **Key points** | Pouch families; tooling time; seal recipe; MT via weight |
+| **Related** | #52, #62 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 59 — How to Calculate Wastage % in a Converting Plant
+| | |
+|--|--|
+| **Slug / folder** | `59-wastage-calculation-converting` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Machine-wise wastage formula and buckets |
+| **Angle** | Plant-level % hides the machine that burns money (vs #24/#38 metalliser) |
+| **Key points** | (Input−Good)/Input×100; machine-wise; setup/reg/trim/reject |
+| **Related** | #24, #38, #60 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 60 — Understanding Efficiency in Converting Plants
+| | |
+|--|--|
+| **Slug / folder** | `60-efficiency-breakdown-converting` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Four-factor efficiency model |
+| **Angle** | Single % is useless without uptime/CO/quality/speed split |
+| **Key points** | Overall ≈ Uptime×(1−CO%)×(1−Qual%)×Speed%; fix worst lever |
+| **Related** | #39, #61, #62 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 61 — How Roll Length & Changeover Time Affect Capacity
+| | |
+|--|--|
+| **Slug / folder** | `61-roll-length-changeover-capacity` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Derive changeover loss from roll length + speed |
+| **Angle** | Calculate CO loss instead of guessing % |
+| **Key points** | ~24,000 m default; CO/day = metres÷length; loss % formula |
+| **Related** | #60, #62 |
+| **Assets** | index.html · covers · infographic · logo |
+
+### 62 — How to Calculate Production Capacity of a Converting Plant
+| | |
+|--|--|
+| **Slug / folder** | `62-production-capacity-calculator` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | Full MT capacity method + live calculator |
+| **Angle** | Converting capacity (vs #30 metalliser); bottleneck MT |
+| **Key points** | Efficiency × speed × width × micron → MT; `calculator.html` in folder |
+| **Related** | #30, #60, #61 |
+| **Assets** | index.html · calculator.html · covers · infographic · logo |
+
+### 63 — Role of PPC in a Converting Plant – Complete Guide
+| | |
+|--|--|
+| **Slug / folder** | `63-ppc-role-converting-plant` |
+| **Category** | packaging / general |
+| **Status** | **complete** |
+| **Topic** | What PPC owns daily/weekly; capacity, material, OTIF |
+| **Angle** | Career + ops close of converting foundation series |
+| **Key points** | Bottleneck truth; sequence; material readiness; honest OTIF |
+| **Related** | series 52–62, #75 |
+| **Assets** | index.html · covers · infographic · logo |
+
+---
+
+## Series B — Operations & PPC Deep Dive (64–75)
+
+### 64 — Web Tension in Converting
+| **Slug** | `64-web-tension-converting` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Tension profile across print–lam–slit; not only break risk |
+| **Key points** | Profile not one number; structure change → re-check; defect map |
+| **Related** | #55, #57 |
+
+### 65 — Ink Viscosity & Colour Strength
+| **Slug** | `65-ink-viscosity-colour-strength` | **Category** | packaging / quality | **Status** | complete |
+| **Angle** | Measure → adjust → re-measure (not eye corrections) |
+| **Related** | #54, #55 |
+
+### 66 — Bond Strength & Delamination
+| **Slug** | `66-bond-strength-delamination` | **Category** | packaging / quality | **Status** | complete |
+| **Angle** | Late delamination after laminator; cure vs residual solvent |
+| **Related** | #56, #50 |
+
+### 67 — SMED Changeover for Converting
+| **Slug** | `67-smed-changeover-converting` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Internal vs external work for print/lam/pouch (vs #22 boat SMED) |
+| **Related** | #61, #22 |
+
+### 68 — Conversion Cost per kg
+| **Slug** | `68-conversion-cost-per-kg` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Converting conversion cost (vs #28 metalliser conversion cost) |
+| **Related** | #28, #59 |
+
+### 69 — Converting Defects Playbook
+| **Slug** | `69-converting-defects-playbook` | **Category** | packaging / quality | **Status** | complete |
+| **Angle** | Curl/blocking/set-off/ghost — converting-specific (not metalliser OD) |
+| **Related** | #16–17, #55 |
+
+### 70 — Shift Handover & Daily Meeting
+| **Slug** | `70-shift-handover-daily-meeting` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Structured handover minimum for multi-job converting plants |
+| **Related** | #63 |
+
+### 71 — WIP & Inventory for PPC
+| **Slug** | `71-wip-inventory-ppc` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Stage-wise WIP between print/lam/slit/pouch |
+| **Related** | #63, #62 |
+
+### 72 — Customer Complaint Handling
+| **Slug** | `72-customer-complaint-flexible-packaging` | **Category** | packaging / quality | **Status** | complete |
+| **Angle** | Containment-first sequence for flexible packaging complaints |
+| **Related** | #69 |
+
+### 73 — Mono-Material Structures — Plant View
+| **Slug** | `73-mono-material-structures-plant` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Seal/barrier honesty on floor (vs pure marketing mono claims) |
+| **Related** | #50, #32 |
+
+### 74 — Presenting Numbers to Management
+| **Slug** | `74-presenting-numbers-management` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | One-page bottleneck + risk + decision ask |
+| **Related** | #63, #62 |
+
+### 75 — First 90 Days as PPC in Converting
+| **Slug** | `75-first-90-days-ppc-converting` | **Category** | packaging / general | **Status** | complete |
+| **Angle** | Map → measure → one fix career arc for new converting PPC |
+| **Related** | #63, series 52–74 |
+
+---
+
+## Series C — Advanced Plant Excellence (76–90)
+
+### 76 — Static Control on Converting Lines
+| **Slug** | `76-static-control-converting` | **Status** | complete |
+| **Topic** | Ionisers, humidity, earthing; static vs ink defects |
+| **Related** | #55, #65 |
+
+### 77 — Core Quality & Winding Defects
+| **Slug** | `77-core-winding-quality` | **Status** | complete |
+| **Topic** | Core crush, ID match, telescoping, soft centres |
+| **Related** | #57, #61 |
+
+### 78 — Energy & Utilities Cost for PPC
+| **Slug** | `78-energy-utilities-cost-ppc` | **Status** | complete |
+| **Topic** | kWh, dryers, chillers, idle heat in conversion cost |
+| **Related** | #68 |
+
+### 79 — Operator Skill Matrix
+| **Slug** | `79-operator-skill-matrix` | **Status** | complete |
+| **Topic** | L1–L4 levels; evidence-based multi-skilling |
+| **Related** | #63, #75 |
+
+### 80 — How to Run a Structure Trial
+| **Slug** | `80-structure-trial-method` | **Status** | complete |
+| **Topic** | Written plan, success criteria, samples before web starts |
+| **Related** | #73 |
+
+### 81 — Proof, Colour & First-Piece Approval
+| **Slug** | `81-proof-colour-first-piece` | **Status** | complete |
+| **Topic** | Standard light, master/proof, signed first piece |
+| **Related** | #55, #65 |
+
+### 82 — Coat Weight / Adhesive GSM
+| **Slug** | `82-coat-weight-adhesive-gsm` | **Status** | complete |
+| **Topic** | Measured GSM as quality + cost control |
+| **Related** | #56, #66 |
+
+### 83 — Slitter Knife Life Economics
+| **Slug** | `83-slitter-knife-life-economics` | **Status** | complete |
+| **Topic** | Cost per clean million metres, not price per blade |
+| **Related** | #57 |
+
+### 84 — 5-Why for Packaging Defects
+| **Slug** | `84-five-why-packaging-defects` | **Status** | complete |
+| **Topic** | Process/system root cause — not “operator mistake” |
+| **Related** | #69, #72 |
+
+### 85 — Daily Production Dashboard
+| **Slug** | `85-daily-production-dashboard` | **Status** | complete |
+| **Topic** | Exceptions-only dashboard (bottleneck, risk, waste, material) |
+| **Related** | #74, #63 |
+
+### 86 — Working with Supplier Specs
+| **Slug** | `86-working-with-suppliers-specs` | **Status** | complete |
+| **Topic** | PO limits, COA, out-of-spec rules for film/ink/adhesive |
+| **Related** | #72 |
+
+### 87 — Safety at Rewinder & Slitter
+| **Slug** | `87-safety-rewinder-slitter` | **Status** | complete |
+| **Topic** | Guards, LOTO, nips, heavy-roll handling |
+| **Related** | #57 |
+
+### 88 — Humidity & Storage of Film Rolls
+| **Slug** | `88-humidity-storage-film-rolls` | **Status** | complete |
+| **Topic** | Wrap integrity, FIFO, heat sources, barrier-sensitive stock |
+| **Related** | #71 |
+
+### 89 — OTIF Without Overpromising
+| **Slug** | `89-otif-without-overpromise` | **Status** | complete |
+| **Topic** | Promise from bottleneck capacity, not pressure |
+| **Related** | #63, #74 |
+
+### 90 — Yearly Capacity & Maintenance Plan
+| **Slug** | `90-yearly-capacity-maintenance-plan` | **Status** | complete |
+| **Topic** | Annual skeleton: shutdowns, PM, peaks, efficiency assumptions |
+| **Related** | #62, #78 |
+
+---
+
+## Collision map (quick)
+
+| Topic | Metalliser side | Converting side |
+|-------|-----------------|-----------------|
+| Capacity | #30 | **#62** (+ calculator) |
+| Wastage | #24, #26, #38 | **#59** |
+| Conversion cost | #28 | **#68** |
+| SMED | #22 (boats) | **#67** (print/lam/pouch) |
+| Defects | #16–17, OD, pinholes | **#69** (curl/block/set-off) |
+| PPC role | — | **#63**, **#75** |
+
+---
+
+## Folder / asset checklist (52–90)
+
+Every folder under `Blogs/<nn>-<slug>/` should contain:
+
+- `index.html` (EN + HI)
+- `cover.png` · `cover-en.png` · `cover-hi.png` (photographic, topic-matched)
+- Infographic PNG (name varies by post)
+- `vkstech-logo.png`
+- **#62 only:** `calculator.html`
+
+**Deliverable zip:** `Blogs-52-to-90-Photo-Matched.zip`
+
+---
+
 ## Changelog
 
 | Date | Action |
 |------|--------|
 | 2026-09-27 | Tracker created (15–51). Blog 51 written. Admin nested `Blogs/`. |
 | 2026-09-27 | Blogs 44–50 rewritten from scratch. |
-| 2026-09-27 | **Expanded detail** — per-blog angle, key points, related links (this version). |
-| 2026-09-27 | Early folders listed from GitHub assets.
-| 2026-09-27 | **Fetched full early-blog detail from live site/Supabase** (E01–E12 titles, summaries, sections). |
+| 2026-09-27 | Expanded detail — per-blog angle, key points, related links. |
+| 2026-09-27 | Early folders listed from GitHub; E01–E12 detail from live site/Supabase. |
+| 2026-10-05 | Converting series **52–63** complete (HTML + covers + infographics). Blog 62 includes calculator. |
+| 2026-10-05 | Operations & PPC Deep Dive **64–75** complete. |
+| 2026-10-05 | Advanced Plant Excellence **76–90** complete. |
+| 2026-10-06 | Photographic topic-matched covers applied to **52–90**. Zip: `Blogs-52-to-90-Photo-Matched.zip`. |
+| 2026-10-06 | **All-Blogs.md** refreshed — master index 52–90, full series detail, collision map, asset checklist. |
 
 ---
 
@@ -635,8 +1019,9 @@ GitHub folders for these often have **only images/PDFs**. Article body is stored
 
 1. Attach or open **All-Blogs.md**  
 2. Say e.g.  
-   - *“Continue from All-Blogs.md — write blog 52 on …”*  
-   - *“Expand detail for blogs 15–20 from GitHub index.html”*  
-3. I will update this file after each new blog  
+   - *“Continue from All-Blogs.md — write blog 91 on …”*  
+   - *“Update cover for blog 53 only”*  
+3. Update this file after each new blog  
 
-**Format choice:** Keep **Markdown (.md)** as the working file (best for chat + Git). Use Word only if you need a printable management report — not required for writing continuity.
+**Format:** Keep **Markdown (.md)** as the working tracker (best for chat + Git).
+
