@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VKS Tech Blog Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--navy:#1a2744;--teal:#0d8c7e;--orange:#e85d26;--bg:#faf9f6;--card:#fff;--border:#e2ddd4;--muted:#6b7a99;--red:#dc3545;--green:#28a745}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.topbar{background:var(--navy);color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-size:1.2rem;font-weight:800}
+.btn{padding:9px 18px;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-danger{background:var(--red);color:#fff}
+.btn-success{background:var(--green);color:#fff}
+.container{max-width:1100px;margin:30px auto;padding:0 24px}
+.login-box{max-width:400px;margin:100px auto;background:var(--card);border-radius:16px;padding:40px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.login-box h2{margin-bottom:24px;font-family:'Playfair Display',serif}
+.login-box input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:1rem;margin-bottom:16px;font-family:inherit}
+.tabs{display:flex;gap:8px;border-bottom:2px solid var(--border);margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:12px 20px;background:none;border:none;font-family:inherit;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+.panel{background:var(--card);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.panel h3{margin-bottom:18px;font-family:'Playfair Display',serif}
+.field{margin-bottom:18px}
+.field label{display:block;font-weight:700;margin-bottom:6px;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--orange)}
+.field textarea{resize:vertical;min-height:200px;font-family:monospace;font-size:.8rem}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.post-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.post-item h4{font-size:1rem;margin-bottom:4px}
+.post-item .meta{font-size:.78rem;color:var(--muted)}
+.status{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.7rem;font-weight:700;margin-left:8px}
+.status.pub{background:#d4edda;color:#155724}.status.draft{background:#fff3cd;color:#856404}
+.post-actions{display:flex;gap:6px;flex-wrap:wrap}
+.post-actions button,.post-actions a{padding:6px 12px;font-size:.75rem}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}.empty div{font-size:3rem;margin-bottom:12px}
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer}
+.drop-zone:hover{border-color:var(--orange)}
+.drop-zone input{display:none}
+.toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}.toast.err{background:var(--red)}
+</style></head>
+<body>
+
+<div id="loginView"><div class="login-box"><h2>🔐 Admin Login</h2>
+<input type="email" id="emailInput" placeholder="Email" autocomplete="email" style="margin-bottom:12px">
+<input type="password" id="pwdInput" placeholder="Password" autocomplete="current-password" onkeypress="if(event.key==='Enter')login()">
+<button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">Login</button>
+<div id="loginMsg" style="color:var(--red);font-size:.82rem;margin-top:12px;min-height:1.2em"></div>
+</div></div>
+
+<div id="adminView" style="display:none">
+<div class="topbar"><h1>📝 VKS Tech Blog Admin</h1>
+<div><a href="index.html" class="btn btn-ghost" target="_blank">🌐 View Site</a>
+<button class="btn btn-ghost" onclick="logout()">🚪 Logout</button></div></div>
+
+<div class="container">
+<div class="tabs">
+<button class="tab active" onclick="switchTab('github',this)">📦 From GitHub</button>
+<button class="tab" onclick="switchTab('upload',this)">📤 Upload File</button>
+<button class="tab" onclick="switchTab('write',this)">✍️ Write Manually</button>
+<button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
+<button class="tab" onclick="switchTab('qa',this)">❓ Q&amp;A <span id="qaBadge" style="display:none;background:var(--red);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
+<button class="tab" onclick="switchTab('req',this)">📩 App Requests</button>
+<button class="tab" onclick="switchTab('subs',this)">📧 Subscribers <span id="subsBadge" style="display:none;background:var(--teal);color:#fff;padding:1px 7px;border-radius:50px;font-size:.68rem;margin-left:4px;vertical-align:middle"></span></button>
+<button class="tab" onclick="switchTab('yt',this)">📺 YouTube</button>
+<button class="tab" onclick="switchTab('visitors',this)">👁️ Visitors</button>
+</div>
+
+<div id="tab-github" class="panel">
+<h3>📦 Publish from GitHub Folder</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Pick-and-publish.</strong> Upload your blog folder (HTML + images + PDFs + Excel) to <code style="background:#fff;padding:2px 6px;border-radius:4px">github.com/vkstecho/VksTech</code> — either at repo root or inside <code style="background:#fff;padding:2px 6px;border-radius:4px">Blogs/</code>. The dropdown below lists all blog folders on your GitHub repo — pick one, click Fetch & Preview, then Publish. Edit on GitHub anytime; the site updates automatically.
+</p>
+
+<div style="background:#fffbea;border:1px solid #f0d47c;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.82rem;line-height:1.7">
+<strong style="color:var(--navy)">Your HTML file needs these lines in the <code>&lt;head&gt;</code>:</strong>
+<pre style="background:#1a2744;color:#f0e7d5;padding:12px 14px;border-radius:8px;margin-top:8px;overflow-x:auto;font-size:.78rem;line-height:1.55;font-family:'Courier New',monospace;">&lt;meta name="category" content="packaging"&gt;
+&lt;meta name="subcategory" content="metalliser"&gt;  &lt;!-- optional, only for category=packaging --&gt;</pre>
+<span style="color:var(--muted);font-size:.78rem">Category values: <code>packaging</code> · <code>excel</code> · <code>career</code> · <code>tech</code> · <code>manufacturing</code>. Sub-category values (only when <code>category=packaging</code>): <code>metalliser</code> · <code>slitter</code> · <code>quality</code> · <code>general</code>. Title comes from the first <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>, summary from the first <code>&lt;p&gt;</code>, cover from the first <code>&lt;img&gt;</code>. Bilingual: English from <code>.en-content</code> + Hindi from <code>.hindi-section</code>, joined with <code>|</code>.</span>
+</div>
+
+<div class="field"><label>Select Blog Folder *</label>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">
+<select id="gFolderSelect" style="flex:1;min-width:260px;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none;background:#fff">
+<option value="">⏳ Loading folders from GitHub...</option>
+</select>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="loadGithubFolders()" title="Refresh folder list">🔄 Refresh</button>
+<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;padding:11px 0;cursor:pointer;white-space:nowrap">
+<input type="checkbox" id="gShowAll" onchange="loadGithubFolders()" style="width:auto;margin:0;cursor:pointer"> Show already-published
+</label>
+</div>
+<div style="font-size:.72rem;color:#999;margin-top:6px">Folders are scanned from <code>github.com/vkstecho/VksTech</code> at any depth (repo root <em>and</em> nested under <code>Blogs/</code>). Only folders containing a <code>.html</code> file are shown. Already-published folders are hidden by default — tick the checkbox to see all.</div>
+
+<details style="margin-top:10px;font-size:.78rem">
+<summary style="cursor:pointer;color:var(--muted)">Can't find your folder? Type it manually</summary>
+<input type="text" id="gFolderManual" placeholder="folder name or full GitHub URL" oninput="this.value=this.value.replace(/[^a-zA-Z0-9\-_\/:.]/g,'')" style="margin-top:8px;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit">
+<div style="font-size:.7rem;color:#999;margin-top:4px">Useful if GitHub's API rate limit was hit. Accepts: <code>folder-name</code>, <code>blogs/my-folder</code>, or full URL like <code>https://github.com/vkstecho/VksTech/tree/main/folder-name</code>.</div>
+</details>
+</div>
+
+<div class="buttons">
+<button class="btn btn-primary" onclick="fetchAndPreview()">🔍 Fetch & Preview</button>
+</div>
+
+<div id="gPreview" style="display:none;margin-top:24px;padding:20px;background:#f8f6f1;border:1px solid var(--border);border-radius:12px">
+<h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy)">📋 Auto-detected Metadata</h4>
+<div id="gPreviewContent" style="font-size:.88rem;line-height:1.8"></div>
+<div class="buttons" style="margin-top:20px">
+<button class="btn btn-success" onclick="publishGithubBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="publishGithubBlog(false)">💾 Save as Draft</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="resetGithubForm()">🔄 Reset</button>
+</div>
+</div></div>
+
+<div id="tab-upload" class="panel" style="display:none">
+<h3>📤 Upload Blog HTML File</h3>
+<p style="background:#fff8e6;border-left:3px solid var(--orange);padding:10px 14px;border-radius:8px;font-size:.8rem;color:var(--navy);margin-bottom:18px">
+⚠️ <strong>Legacy method.</strong> Stores HTML directly in database. For new blogs, prefer the <strong>📦 From GitHub</strong> tab — it handles images and downloads much better.
+</p>
+<div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+<div style="font-size:2rem">📄</div><p style="margin:12px 0 4px;font-weight:700">Click to upload HTML file</p>
+<input type="file" id="fileInput" accept=".html" onchange="handleFile(this)"></div>
+<div id="uploadForm" style="display:none;margin-top:20px">
+<div class="field"><label>Blog Title (use " | " for bilingual)</label><input type="text" id="upTitle" placeholder="English Title | हिंदी शीर्षक"></div>
+<div class="field"><label>URL Slug (auto-generated, editable)</label><input type="text" id="upSlug" placeholder="e.g. oee-calculation-metalliser" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Edit if needed. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="upCat" onchange="toggleUploadSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field" id="upSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="upSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
+<div class="field"><label>Summary (use " | " for bilingual)</label><textarea id="upSummary" style="min-height:80px" placeholder="English summary | हिंदी सारांश"></textarea></div>
+<div class="field"><label>Cover Image URL (optional)</label><input type="text" id="upCover" placeholder="folder/image.png"></div>
+<div class="field"><label>Content Preview</label><textarea id="upContent" readonly></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="publishBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="publishBlog(false)">💾 Save as Draft</button></div></div></div>
+
+<div id="tab-write" class="panel" style="display:none">
+<h3>✍️ Write Blog Manually</h3>
+<div class="field"><label>Title</label><input type="text" id="wTitle" placeholder="English | हिंदी"></div>
+<div class="field"><label>URL Slug</label><input type="text" id="wSlug" placeholder="e.g. my-blog-post" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">Auto-fills from title. Used in: vkstech.com/blog/<b>your-slug</b></div></div>
+<div class="field"><label>Category</label><select id="wCat" onchange="toggleWriteSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+<div class="field" id="wSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="wSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
+<div class="field"><label>Summary</label><textarea id="wSummary" style="min-height:80px"></textarea></div>
+<div class="field"><label>Cover Image URL</label><input type="text" id="wCover"></div>
+<div class="field"><label>HTML Content</label><textarea id="wContent"></textarea></div>
+<div class="buttons"><button class="btn btn-primary" onclick="writeBlog(true)">🚀 Publish Now</button>
+<button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="writeBlog(false)">💾 Save as Draft</button></div></div>
+
+<div id="tab-posts" class="panel" style="display:none">
+<h3>📋 All Blog Posts</h3>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(232,93,38,.04),rgba(13,140,126,.03));border:1px solid var(--border);border-radius:10px;">
+  <span style="flex:1;font-size:.82rem;color:var(--navy);min-width:200px;">📖 <strong>Read time tools:</strong> Recalculate all blogs from their actual content (one-click bulk fix).</span>
+  <button class="btn btn-primary" onclick="recalcAllReadTimes()" id="recalcAllBtn">🔁 Recalc ALL Read Times</button>
+</div>
+<div id="postsList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+
+<div id="tab-qa" class="panel" style="display:none">
+<h3>❓ Reader Questions</h3>
+<p style="background:#fff8e6;border-left:3px solid var(--orange);padding:10px 14px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:18px">
+  Answer pending questions — they appear publicly under the blog post once you reply. Delete spam questions instead of answering them.
+</p>
+
+<div style="margin-bottom:28px">
+  <h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy);font-size:1rem">⏳ Pending (<span id="qaPendingCount">0</span>)</h4>
+  <div id="qaPendingList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div>
+</div>
+
+<div>
+  <h4 style="font-family:'Playfair Display',serif;margin-bottom:14px;color:var(--navy);font-size:1rem">✅ Answered (<span id="qaAnsweredCount">0</span>)</h4>
+  <div id="qaAnsweredList"></div>
+</div>
+</div>
+
+<div id="tab-req" class="panel" style="display:none">
+<h3>📩 App Requests</h3>
+<div id="reqList"><div class="empty"><div>⏳</div><p>Loading...</p></div></div></div>
+
+<!-- SUBSCRIBERS TAB — newsletter signup list -->
+<div id="tab-subs" class="panel" style="display:none">
+<h3>📧 Newsletter Subscribers</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Your audience.</strong> People who signed up to be notified about new blogs.
+When you publish, copy the email list (BCC field) into Gmail/Outlook and send your update.
+Don't share or sell this list — it's a trust contract.
+</p>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;">
+  <div style="flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--border);border-radius:50px;padding:6px 18px;">
+    <span style="color:var(--muted);">🔍</span>
+    <input type="search" id="subsSearch" placeholder="Search by name or email…" style="flex:1;border:none;outline:none;background:transparent;font-size:.88rem;font-family:inherit;color:var(--navy);padding:8px 0;" oninput="renderSubs()"/>
+  </div>
+  <button class="btn btn-primary" onclick="copySubsEmails()" id="subsCopyBtn">📋 Copy emails (BCC)</button>
+  <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="downloadSubsCsv()">⬇ Export CSV</button>
+</div>
+
+<div id="subsStats" style="font-size:.82rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px;"></div>
+<div id="subsList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+
+<!-- YOUTUBE TAB — manage channels + playlist short URLs -->
+<div id="tab-yt" class="panel" style="display:none">
+<h3>📺 YouTube Channels &amp; Playlists</h3>
+<p style="background:#fff0f0;border-left:3px solid #e85d26;padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Custom short URLs for your playlists.</strong> A playlist's YouTube URL is long and random.
+Here you create a short, clean one like <code>vkstech.com/ToonTales/KushhaliNagriKaSafar</code> that redirects to it.
+Manage your channels first, then add playlists under each.
+</p>
+
+<!-- ── CHANNELS ─────────────────────────────────────── -->
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+    <h4 style="margin:0;color:var(--navy)">📡 Channels</h4>
+    <button class="btn btn-primary" onclick="ytNewChannel()">+ Add Channel</button>
+  </div>
+  <div id="ytChannelList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+
+<!-- ── PLAYLISTS ────────────────────────────────────── -->
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+    <h4 style="margin:0;color:var(--navy)">🎬 Playlists</h4>
+    <button class="btn btn-primary" onclick="ytNewPlaylist()" id="ytAddPlaylistBtn">+ Add Playlist</button>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+    <select id="ytFilterChannel" onchange="renderYtPlaylists()" style="flex:1;min-width:200px;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.86rem;font-family:inherit;">
+      <option value="">All channels</option>
+    </select>
+  </div>
+  <div id="ytPlaylistList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+</div>
+
+<!-- VISITORS TAB — lightweight, privacy-friendly pageview stats -->
+<div id="tab-visitors" class="panel" style="display:none">
+<h3>👁️ Visitors</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Simple, self-hosted pageview stats.</strong> No cookies, no personal data — just anonymous counts of pages viewed, stored in your own Supabase project.
+</p>
+
+<div id="visitorsSetupBanner" style="display:none;background:#fff8e6;border-left:3px solid #e85d26;padding:14px 16px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:18px;line-height:1.7">
+<strong>One-time setup needed.</strong> Run this once in your Supabase project's SQL editor, then reload this tab:
+<pre style="background:#1a2744;color:#d4e0ff;padding:14px;border-radius:8px;margin-top:10px;font-size:.74rem;overflow-x:auto;line-height:1.6;white-space:pre">create table page_views (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  path text not null,
+  referrer text,
+  visitor_id text
+);
+alter table page_views enable row level security;
+create policy "Anyone can log a pageview"
+  on page_views for insert to anon with check (true);
+create policy "Only admins can read pageviews"
+  on page_views for select to authenticated using (true);</pre>
+</div>
+
+<div id="visitorsStatCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:22px;"></div>
+
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;">
+  <h4 style="margin:0 0 12px;color:var(--navy)">📈 Last 14 days</h4>
+  <div id="visitorsDailyChart" style="display:flex;align-items:flex-end;gap:6px;height:140px;"></div>
+</div>
+
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;">
+  <h4 style="margin:0 0 12px;color:var(--navy)">📄 Top pages (last 30 days)</h4>
+  <p style="font-size:.78rem;color:var(--muted);margin:-6px 0 12px;line-height:1.5">Grouped by path so you can see <strong>/blog/…</strong>, calculators, and home separately — not only <code>/</code>.</p>
+  <div id="visitorsTopPages"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+
+  <h4 style="margin:28px 0 12px;color:var(--navy)">🕓 Recent pageviews</h4>
+  <div id="visitorsRecentList"><div class="empty"><div>⏳</div><p>Loading…</p></div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ── YOUTUBE CHANNEL MODAL ──────────────────────────── -->
+<div id="ytChannelModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:600px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 id="ytChannelModalTitle" style="font-family:'Playfair Display',serif;">📡 Add Channel</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytCloseChannelModal()">✕ Close</button>
+    </div>
+    <input type="hidden" id="ytcId">
+    <div class="field"><label>Channel name *</label><input type="text" id="ytcName" placeholder="Toon Tales By VKS"></div>
+    <div class="field"><label>URL slug *</label><input type="text" id="ytcSlug" placeholder="ToonTales" oninput="ytcSlugClean(this)"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/<b id="ytcSlugPreview">slug</b>/playlist-name</div></div>
+    <div class="field"><label>YouTube channel URL *</label><input type="text" id="ytcUrl" placeholder="https://www.youtube.com/@vksToonTales"></div>
+    <div class="field"><label>Icon URL — channel profile picture</label>
+      <div style="display:flex;gap:8px;align-items:stretch;flex-wrap:wrap">
+        <input type="text" id="ytcIcon" placeholder="Auto-fills from YouTube, or paste any image URL" style="flex:1;min-width:200px">
+        <button type="button" class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);white-space:nowrap" onclick="ytFetchChannelIcon()" title="Fetch profile picture from YouTube URL">🖼️ Fetch icon</button>
+      </div>
+      <div id="ytcIconPreview" style="display:none;margin-top:10px;align-items:center;gap:12px">
+        <img id="ytcIconImg" alt="Preview" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);background:#fff">
+        <span style="font-size:.78rem;color:var(--muted)">Preview — save channel to apply</span>
+      </div>
+      <div style="font-size:.72rem;color:#999;margin-top:6px;line-height:1.5">Click <strong>Fetch icon</strong> after entering the channel URL (or leave blank — auto-fetches on Save). Or upload to <code>channel-icons/</code> on GitHub and paste the raw URL.</div>
+    </div>
+    <div class="field"><label>Handle (optional)</label><input type="text" id="ytcHandle" placeholder="@vksToonTales"></div>
+    <div class="field"><label>Description (optional)</label><input type="text" id="ytcDesc" placeholder="Animated stories and toon tales."></div>
+    <div class="field"><label>Sort order (lower shows first)</label><input type="number" id="ytcSort" placeholder="0"></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="ytSaveChannel()">💾 Save Channel</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytCloseChannelModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── YOUTUBE PLAYLIST MODAL ─────────────────────────── -->
+<div id="ytPlaylistModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:600px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 id="ytPlaylistModalTitle" style="font-family:'Playfair Display',serif;">🎬 Add Playlist</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytClosePlaylistModal()">✕ Close</button>
+    </div>
+    <input type="hidden" id="ytpId">
+    <div class="field"><label>Channel *</label><select id="ytpChannel" onchange="ytpUpdatePreview()"></select></div>
+    <div class="field"><label>Playlist title *</label><input type="text" id="ytpTitle" placeholder="Kushhali Nagri Ka Safar"></div>
+    <div class="field"><label>URL slug *</label><input type="text" id="ytpSlug" placeholder="KushhaliNagriKaSafar" oninput="ytpSlugClean(this)"><div id="ytpUrlPreview" style="font-size:.74rem;color:var(--teal);font-family:monospace;margin-top:4px;word-break:break-all"></div></div>
+    <div class="field"><label>Long YouTube playlist URL *</label><input type="text" id="ytpLongUrl" placeholder="https://www.youtube.com/playlist?list=PLxxxxxxxx"></div>
+    <div class="field"><label>Description (optional)</label><input type="text" id="ytpDesc" placeholder="Short description of this playlist"></div>
+    <div class="field"><label>Sort order (lower shows first)</label><input type="number" id="ytpSort" placeholder="0"></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="ytSavePlaylist()">💾 Save Playlist</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="ytClosePlaylistModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Success</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:30px 20px;">
+  <div style="max-width:800px;margin:0 auto;background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-family:'Playfair Display',serif;">✏️ Edit Blog Post</h3>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">✕ Close</button>
+    </div>
+    <input type="hidden" id="editId">
+    <div id="editSourceBanner" style="display:none;background:#fff8e6;border-left:3px solid #e85d26;padding:10px 14px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:14px;line-height:1.55;"></div>
+    <div class="field"><label>Title (bilingual with " | ")</label><input type="text" id="editTitle"></div>
+    <div class="field"><label>URL Slug</label><input type="text" id="editSlug" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'')"><div style="font-size:.72rem;color:#999;margin-top:3px">vkstech.com/blog/<b>your-slug</b></div></div>
+    <div class="field"><label>Category</label><select id="editCat" onchange="toggleEditSubcat()"><option value="packaging">Flexible Packaging</option><option value="excel">Excel & Formulas</option><option value="career">Career & Growth</option><option value="tech">Tech & Tools</option><option value="manufacturing">Manufacturing Excellence</option></select></div>
+    <div class="field" id="editSubcatField"><label>Sub-category <span style="opacity:.6;font-weight:400;text-transform:none;">(only for Flexible Packaging)</span></label><select id="editSubcat"><option value="">— None / unspecified —</option><option value="metalliser">⚙️ Metalliser</option><option value="slitter">✂️ Slitter</option><option value="quality">🔍 Quality Control</option><option value="general">📦 General / Common</option></select></div>
+    <div class="field"><label>Summary (bilingual with " | ")</label><textarea id="editSummary" style="min-height:80px;"></textarea></div>
+    <div class="field"><label>Cover Image URL</label><input type="text" id="editCover"></div>
+    <div class="field" id="editContentField"><label>HTML Content</label><textarea id="editContent" style="min-height:300px;"></textarea></div>
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="saveEdit()">💾 Save Changes</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border);" onclick="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
+});
+
+/* GitHub config — all blog folders live in this repo on the `main` branch */
+const GH_OWNER = 'vkstecho';
+const GH_REPO  = 'VksTech';
+const GH_BRANCH = 'main';
+function ghRawUrl(folder, file){ return `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`; }
+function ghEditUrl(folder, file){ return `https://github.com/${GH_OWNER}/${GH_REPO}/edit/${GH_BRANCH}/${folder}/${file}`; }
+function ghFolderUrl(folder){ return `https://github.com/${GH_OWNER}/${GH_REPO}/tree/${GH_BRANCH}/${folder}`; }
+
+/* ════════════════════════════════════════════════════════════
+   SUPABASE AUTH — checks session on load, shows admin if logged in
+   ════════════════════════════════════════════════════════════ */
+async function checkSession(){
+  const { data:{ session } } = await sb.auth.getSession();
+  if(session && session.user){
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
+    setTimeout(function(){ if(typeof loadGithubFolders === 'function') loadGithubFolders(); }, 100);
+    /* Fetch pending-question count for the tab badge */
+    updateQaBadge();
+  } else {
+    document.getElementById('loginView').style.display = 'block';
+    document.getElementById('adminView').style.display = 'none';
+  }
+}
+checkSession();
+
+async function login(){
+  const email = document.getElementById('emailInput').value.trim();
+  const pwd   = document.getElementById('pwdInput').value;
+  const msg   = document.getElementById('loginMsg');
+  msg.textContent = '';
+  if(!email || !pwd){ msg.textContent = 'Enter email and password.'; return; }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+  if(error){ msg.textContent = error.message; return; }
+  document.getElementById('pwdInput').value = '';
+  checkSession();
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  location.reload();
+}
+
+/* Auto-logout if session is revoked server-side */
+sb.auth.onAuthStateChange((_event, session) => {
+  if(!session && document.getElementById('adminView').style.display === 'block'){
+    location.reload();
+  }
+});
+function toast(msg, err){
+  const t=document.getElementById('toast');
+  t.textContent=(err?'❌ ':'✅ ')+msg;
+  t.className='toast show'+(err?' err':'');
+  setTimeout(()=>t.className='toast'+(err?' err':''), 3000);
+}
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['github','upload','write','posts','qa','req','subs','yt','visitors'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
+  if(tab==='posts')loadPosts();
+  if(tab==='qa')loadQuestions();
+  if(tab==='req')loadRequests();
+  if(tab==='subs')loadSubscribers();
+  if(tab==='yt')loadYouTube();
+  if(tab==='visitors')loadVisitors();
+}
+
+let uploadedContent='';
+function handleFile(input){
+  const file=input.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const temp=document.createElement('div');
+    temp.innerHTML=e.target.result;
+    temp.querySelectorAll('nav,header,footer,style,script,link,meta,title,.back-btn,.blog-footer,.share-bar,.article-hero').forEach(el=>el.remove());
+    const body=temp.querySelector('.article-body');
+    uploadedContent=body?body.outerHTML:temp.innerHTML;
+    document.getElementById('upContent').value=uploadedContent;
+    document.getElementById('uploadForm').style.display='block';
+    toast('File loaded!');
+  };
+  reader.readAsText(file);
+}
+
+async function publishBlog(published){
+  const title=document.getElementById('upTitle').value.trim();
+  const cat=document.getElementById('upCat').value;
+  const subcat=document.getElementById('upSubcat').value;
+  const summary=document.getElementById('upSummary').value.trim();
+  const cover=document.getElementById('upCover').value.trim();
+  if(!title||!summary||!uploadedContent){toast('Fill all fields and upload file',true);return;}
+  const slug=document.getElementById('upSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const row = {
+    title, slug, category:cat,
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover, content:uploadedContent,
+    read_time_minutes: computeReadTimeMinutes(uploadedContent),
+    published
+  };
+  const {error}=await sb.from('blogs').insert([row]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['upTitle','upSlug','upSummary','upCover','upContent'].forEach(id=>document.getElementById(id).value='');
+  uploadedContent='';
+  document.getElementById('uploadForm').style.display='none';
+  document.getElementById('fileInput').value='';
+}
+
+/* ---------- GITHUB-BASED PUBLISHING (auto-parse metadata from HTML) ---------- */
+let ghParsed = null;  // stores parsed metadata between fetch and publish
+let ghFoldersLoaded = false;  // tracks whether folder dropdown has been populated
+
+/* Text utilities */
+function textOf(el){ return el ? (el.textContent || '').trim().replace(/\s+/g,' ') : ''; }
+function firstMatch(root, selectors){
+  for (const sel of selectors){
+    const el = root.querySelector(sel);
+    if (el) return el;
+  }
+  return null;
+}
+
+/* Load all folders in the repo that look like blogs (contain at least one .html file)
+   and populate the dropdown. Excludes already-published ones unless "Show all" is ticked. */
+async function loadGithubFolders(){
+  const select = document.getElementById('gFolderSelect');
+  const showAll = document.getElementById('gShowAll').checked;
+  /* Force cache refresh when user clicks the Refresh button.
+     Distinguished from initial load by checking if cache is empty. */
+  const isManualRefresh = !!_ghTreeCache;
+  const forceRefresh = isManualRefresh;
+
+  select.innerHTML = '<option value="">⏳ Scanning GitHub repo...</option>';
+  ghFoldersLoaded = true;
+
+  try{
+    /* ONE API call gets the entire repo tree.
+       Cached for 10 minutes — subsequent renders use the cache. */
+    const tree = await loadGithubTree(forceRefresh);
+    const folderNames = Object.keys(tree.byFolder);
+
+    if (folderNames.length === 0){
+      select.innerHTML = '<option value="">📭 No folders found in repo</option>';
+      return;
+    }
+
+    /* Filter: only folders containing at least one .html file = blog folders */
+    const blogFolders = [];
+    folderNames.forEach(folder => {
+      const files = tree.byFolder[folder];
+      const html = pickBestHtml(files);
+      if (html){
+        blogFolders.push({ folder, htmlFile: html.name, totalFiles: files.length });
+      }
+    });
+
+    if (blogFolders.length === 0){
+      select.innerHTML = '<option value="">📭 No blog folders found (no folder with .html file)</option>';
+      return;
+    }
+
+    /* Fetch already-published github_paths so we can tag folders */
+    const { data: publishedRows } = await sb.from('blogs').select('github_path').not('github_path','is',null);
+    const publishedFolders = new Set();
+    (publishedRows || []).forEach(row => {
+      if (row.github_path){
+        publishedFolders.add(row.github_path.split('::')[0]);
+      }
+    });
+
+    /* Build dropdown */
+    blogFolders.sort((a,b) => a.folder.localeCompare(b.folder));
+    const opts = ['<option value="">— Select a folder —</option>'];
+    let newCount = 0, pubCount = 0;
+    blogFolders.forEach(({folder, htmlFile, totalFiles}) => {
+      const isPub = publishedFolders.has(folder);
+      if (isPub){ pubCount++; }
+      else { newCount++; }
+      if (!showAll && isPub) return;
+      const tag = isPub ? ' [already published]' : ' (NEW)';
+      opts.push('<option value="'+escH(folder)+'">📁 '+escH(folder)+' — '+escH(htmlFile)+' + '+(totalFiles-1)+' other files'+tag+'</option>');
+    });
+    select.innerHTML = opts.join('');
+
+    /* Summary message — note "1 API call" so user knows rate limit isn't a worry now */
+    const cacheAge = Math.floor((Date.now() - tree.fetchedAt) / 1000);
+    const cacheNote = cacheAge < 5 ? ' • fresh from GitHub' : ' • from cache (' + cacheAge + 's old)';
+    const truncatedNote = tree.truncated ? ' ⚠️ Tree truncated (huge repo)' : '';
+    const msg = showAll
+      ? '✅ Loaded '+blogFolders.length+' folders ('+newCount+' new, '+pubCount+' published)' + cacheNote + truncatedNote
+      : '✅ Loaded '+newCount+' new folders ('+pubCount+' already published, hidden)' + cacheNote + truncatedNote;
+    toast(msg);
+  }catch(err){
+    console.error('GitHub folder load error:', err);
+    if (err.rateLimit){
+      select.innerHTML = '<option value="">⚠️ GitHub rate limit — try again in a few minutes</option>';
+      toast('GitHub rate limit hit. Wait a few minutes and click Refresh.', true);
+    } else {
+      select.innerHTML = '<option value="">⚠️ Could not load — '+escH(err.message||'unknown error')+'</option>';
+      toast('Could not load GitHub folders: ' + (err.message || 'unknown'), true);
+    }
+  }
+}
+
+/* List all files in a GitHub folder using the public API.
+   Returns array of {name, size, download_url} or throws. */
+/* ════════════════════════════════════════════════════════════
+   GITHUB TREES API — single-call repo scan
+   ════════════════════════════════════════════════════════════
+   The contents API needs 1 call per folder. With 30 folders
+   that's 30+ calls per page load — and GitHub's anonymous
+   rate limit is 60/hour total. So we hit the limit fast.
+
+   The Trees API returns the ENTIRE repo tree in ONE call.
+   We cache the result for 10 minutes per session, so even
+   reloading the admin page costs zero API calls within the
+   cache window. Manual "Refresh" forces a re-fetch. */
+let _ghTreeCache = null;
+let _ghTreeCacheAt = 0;
+const TREE_CACHE_MS = 10 * 60 * 1000;  // 10 minutes
+
+async function loadGithubTree(forceRefresh){
+  const fresh = !forceRefresh && _ghTreeCache && (Date.now() - _ghTreeCacheAt) < TREE_CACHE_MS;
+  if (fresh) return _ghTreeCache;
+
+  const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/git/trees/${GH_BRANCH}?recursive=1`;
+  const r = await fetch(apiUrl);
+  if (!r.ok){
+    if (r.status === 403){
+      const err = new Error('GitHub rate limit reached — wait a minute and try again');
+      err.rateLimit = true;
+      throw err;
+    }
+    if (r.status === 404) throw new Error('Repo not found: ' + GH_OWNER + '/' + GH_REPO);
+    throw new Error('GitHub API error: HTTP ' + r.status);
+  }
+  const data = await r.json();
+  if (!data.tree) throw new Error('Unexpected GitHub API response');
+
+  /* Group entries by their parent folder (any depth).
+     Supports both root-level blogs (15-web-break-.../index.html)
+     and nested blogs under Blogs/ (Blogs/51-man-power-.../index.html).
+     Each Trees API entry has:
+       path: "folder/file.html" or "Blogs/folder/file.html"
+       type: "blob" (file) or "tree" (folder)
+       size: bytes (for blobs)
+     We index files-by-folder so listGithubFolder() is free (no extra API calls). */
+  const byFolder = {};
+  data.tree.forEach(entry => {
+    if (entry.type !== 'blob') return;
+    const lastSlash = entry.path.lastIndexOf('/');
+    if (lastSlash === -1) return;  /* root-level file, skip */
+    const folder = entry.path.substring(0, lastSlash);  /* full parent path */
+    const file = entry.path.substring(lastSlash + 1);
+    if (!byFolder[folder]) byFolder[folder] = [];
+    byFolder[folder].push({ name: file, size: entry.size || 0 });
+  });
+
+  _ghTreeCache = { byFolder, fetchedAt: Date.now(), truncated: !!data.truncated };
+  _ghTreeCacheAt = Date.now();
+  return _ghTreeCache;
+}
+
+/* Drop-in replacement: returns files for one folder.
+   Used by fetchAndPreview() and others. Now uses cached tree (zero API). */
+async function listGithubFolder(folder){
+  const tree = await loadGithubTree(false);
+  const files = tree.byFolder[folder];
+  if (!files || files.length === 0){
+    /* Maybe cache is stale and folder was just added — try one fresh fetch */
+    const freshTree = await loadGithubTree(true);
+    const fresh = freshTree.byFolder[folder];
+    if (!fresh || fresh.length === 0){
+      throw new Error('Folder not found on GitHub: ' + folder);
+    }
+    return fresh;
+  }
+  return files;
+}
+
+/* Pick the best HTML file from a file list.
+   Priority: index.html > any .html (biggest first). */
+function pickBestHtml(files){
+  const htmls = files.filter(f => /\.html?$/i.test(f.name));
+  if (htmls.length === 0) return null;
+  const idx = htmls.find(f => f.name.toLowerCase() === 'index.html');
+  if (idx) return idx;
+  htmls.sort((a,b) => (b.size||0) - (a.size||0));
+  return htmls[0];
+}
+
+async function fetchAndPreview(){
+  /* Read folder from dropdown first, fall back to manual input */
+  const fromDropdown = document.getElementById('gFolderSelect').value;
+  let fromManual = (document.getElementById('gFolderManual').value || '').trim().replace(/^\/|\/$/g,'');
+
+  /* If user pasted a full GitHub URL (e.g. https://github.com/owner/repo/tree/main/folder-name),
+     extract just the folder portion. Handle both URL and plain folder-name cases. */
+  if (fromManual.indexOf('github.com') > -1 || fromManual.indexOf('://') > -1){
+    /* Look for /tree/<branch>/<folder> pattern */
+    const m = fromManual.match(/\/tree\/[^/]+\/(.+?)(?:\/|$)/);
+    if (m && m[1]){
+      fromManual = m[1].replace(/\/$/, '');
+    } else {
+      /* Fallback: take the last non-empty path segment */
+      const parts = fromManual.split('/').filter(Boolean);
+      fromManual = parts[parts.length - 1] || '';
+    }
+  }
+
+  const folder = fromDropdown || fromManual;
+
+  const previewBox = document.getElementById('gPreview');
+  const previewContent = document.getElementById('gPreviewContent');
+  if (!folder){ toast('Pick a folder from the dropdown or type one manually', true); return; }
+
+  previewContent.innerHTML = '⏳ Listing GitHub folder...';
+  previewBox.style.display = 'block';
+
+  /* Step 1: list folder contents to find the HTML file automatically */
+  let files, htmlFile;
+  try{
+    files = await listGithubFolder(folder);
+  }catch(e){
+    previewContent.innerHTML = '<div style="color:var(--red);padding:10px"><strong>❌ '+escH(e.message)+'</strong><br><small>Check: folder uploaded to <a href="'+ghFolderUrl(folder)+'" target="_blank" style="color:var(--red)">'+ghFolderUrl(folder)+'</a>?</small></div>';
+    ghParsed = null;
+    return;
+  }
+  if (files.length === 0){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ Folder exists but is empty.</div>';
+    ghParsed = null;
+    return;
+  }
+  htmlFile = pickBestHtml(files);
+  if (!htmlFile){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ No .html file found in this folder. Files present: '+files.map(f=>escH(f.name)).join(', ')+'</div>';
+    ghParsed = null;
+    return;
+  }
+  const file = htmlFile.name;
+
+  /* Step 2: fetch the HTML content */
+  previewContent.innerHTML = '⏳ Fetching <code>'+escH(file)+'</code>...';
+  try{
+    const url = ghRawUrl(folder, file) + '?cb=' + Date.now();
+    const r = await fetch(url);
+    if (!r.ok){
+      previewContent.innerHTML = '<div style="color:var(--red)">❌ Not fetchable (HTTP '+r.status+')</div>';
+      ghParsed = null;
+      return;
+    }
+    const html = await r.text();
+    const meta = parseBlogHtml(html);
+
+    /* Build cover URL — resolve relative to folder.
+       Priority:
+       1. <img src="..."> in the HTML body (handled by parseBlogHtml → meta.cover)
+       2. Common cover filenames in the folder (cover.png/jpg/jpeg/webp, then OG variants)
+       3. Nothing — admin shows "no cover" warning */
+    let coverUrl = '';
+    let coverSource = '';
+    if (meta.cover){
+      if (/^https?:\/\//i.test(meta.cover)){
+        coverUrl = meta.cover;
+      } else {
+        const clean = meta.cover.replace(/^\.?\/+/, '');
+        coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
+      }
+      coverSource = 'from HTML <img>';
+    } else {
+      /* Fallback: scan folder files for a conventional cover image */
+      const coverNames = ['cover.png','cover.jpg','cover.jpeg','cover.webp',
+                          'og-image.png','og-image.jpg','og.png','og.jpg',
+                          'thumbnail.png','thumbnail.jpg','hero.png','hero.jpg'];
+      const lowerFiles = files.map(f => ({ orig: f.name, lower: f.name.toLowerCase() }));
+      for (const candidate of coverNames){
+        const match = lowerFiles.find(f => f.lower === candidate);
+        if (match){
+          coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${match.orig}`;
+          coverSource = 'auto-detected from folder file: ' + match.orig;
+          break;
+        }
+      }
+    }
+
+    /* Save for publish step */
+    ghParsed = {
+      folder, file,
+      slug: folderToSlug(folder),
+      title: meta.title,
+      summary: meta.summary,
+      category: meta.category,
+      subcategory: meta.subcategory || '',
+      cover: coverUrl,
+      sizeKB: (html.length/1024).toFixed(1),
+      readTimeMinutes: computeReadTimeMinutes(html)
+    };
+
+    /* Show list of other files found in the folder */
+    const otherFiles = files.filter(f => f.name !== file);
+    const filesRow = otherFiles.length
+      ? '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Files in folder:</td><td style="font-size:.78rem;color:var(--muted)">'+otherFiles.map(f=>'<code style="background:#fff;padding:2px 6px;border-radius:4px;margin:2px;display:inline-block">'+escH(f.name)+'</code>').join(' ')+'</td></tr>'
+      : '';
+
+    const warn = meta.warnings.length
+      ? '<div style="background:#fff4e6;border-left:3px solid var(--orange);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:.82rem"><strong>⚠️ Notes:</strong><ul style="margin:6px 0 0 18px">'+meta.warnings.map(w=>'<li>'+escH(w)+'</li>').join('')+'</ul></div>'
+      : '<div style="background:#e6f7ed;border-left:3px solid var(--green);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:.82rem">✅ All metadata found cleanly.</div>';
+
+    const coverHtml = coverUrl
+      ? '<div style="display:flex;gap:14px;align-items:flex-start;margin-top:6px"><img src="'+escH(coverUrl)+'" alt="Cover" style="width:140px;height:auto;border-radius:8px;border:1px solid var(--border)"><div style="flex:1;font-size:.78rem;color:var(--muted);word-break:break-all">'+escH(coverUrl)+(coverSource ? '<br><small style="color:var(--teal);font-style:italic">✓ '+escH(coverSource)+'</small>' : '')+'</div></div>'
+      : '<div style="color:var(--muted);font-style:italic">No cover image detected. Tip: name a file <code>cover.png</code> in the folder, OR add <code>&lt;img src="cover.png"&gt;</code> at the top of your blog HTML.</div>';
+
+    previewContent.innerHTML =
+      '<table style="width:100%;border-collapse:collapse">'+
+      '<tr><td style="padding:6px 0;font-weight:700;width:130px;vertical-align:top">HTML file:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--teal)">'+escH(file)+'</code> <small style="color:var(--muted)">(auto-detected, '+ghParsed.sizeKB+' KB)</small></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Slug:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--orange)">'+escH(ghParsed.slug)+'</code> <small style="color:var(--muted)">→ vkstech.com/blog/'+escH(ghParsed.slug)+'</small></td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Category:</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px">'+escH(ghParsed.category)+'</code>'+(ghParsed.subcategory?' <small style="color:var(--muted)">·</small> <code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--orange)">'+escH(ghParsed.subcategory)+'</code>':'')+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Title:</td><td>'+escH(ghParsed.title || '(missing)')+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Summary:</td><td style="color:var(--muted)">'+escH(ghParsed.summary || '(missing)')+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Cover:</td><td>'+coverHtml+'</td></tr>'+
+      '<tr><td style="padding:6px 0;font-weight:700;vertical-align:top">Read time:</td><td>'+(ghParsed.readTimeMinutes ? '<code style="background:#fff;padding:2px 8px;border-radius:4px;color:var(--teal)">📖 '+ghParsed.readTimeMinutes+' min</code> <small style="color:var(--muted)">(computed from full content)</small>' : '<small style="color:var(--muted)">(could not compute — content may be too short)</small>')+'</td></tr>'+
+      filesRow+
+      '</table>'+
+      warn;
+  }catch(e){
+    previewContent.innerHTML = '<div style="color:var(--red)">❌ Error: '+escH(e.message)+'</div>';
+    ghParsed = null;
+  }
+}
+
+/* Parse a blog HTML string and extract title, summary, cover, category.
+   Handles bilingual .en-content / .hindi-section structure. */
+function parseBlogHtml(html){
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const out = { title:'', summary:'', cover:'', category:'', subcategory:'', warnings:[] };
+
+  /* CATEGORY — from <meta name="category"> */
+  const metaCat = doc.querySelector('meta[name="category"]');
+  if (metaCat && metaCat.getAttribute('content')){
+    out.category = metaCat.getAttribute('content').trim().toLowerCase();
+    /* Normalize known wrong/legacy category values to canonical ones */
+    const catAliases = {
+      'flexible-packaging': 'packaging',
+      'flexible_packaging': 'packaging',
+      'flexible packaging': 'packaging',
+      'flex-pack': 'packaging',
+      'fp': 'packaging',
+      'manufacturing-excellence': 'manufacturing',
+      'manufacturing_excellence': 'manufacturing',
+      'excel-formulas': 'excel',
+      'excel-and-formulas': 'excel',
+      'career-growth': 'career',
+      'career-and-growth': 'career',
+      'tech-tools': 'tech',
+      'tech-and-tools': 'tech'
+    };
+    if (catAliases[out.category]){
+      out.warnings.push('Category "' + out.category + '" was auto-normalized to "' + catAliases[out.category] + '". Update <meta name="category"> in your HTML to avoid this.');
+      out.category = catAliases[out.category];
+    }
+    /* Validate against known list */
+    const validCategories = ['packaging','excel','career','tech','manufacturing'];
+    if (!validCategories.includes(out.category)){
+      out.warnings.push('Unknown category "' + out.category + '". Valid: ' + validCategories.join(', ') + '. Defaulting to "manufacturing".');
+      out.category = 'manufacturing';
+    }
+  } else {
+    out.warnings.push('No <meta name="category"> found — will default to "manufacturing". Add it to the HTML for correct tagging.');
+    out.category = 'manufacturing';
+  }
+
+  /* SUBCATEGORY — from <meta name="subcategory">. Optional — only meaningful when category=packaging. */
+  const metaSub = doc.querySelector('meta[name="subcategory"]');
+  if (metaSub && metaSub.getAttribute('content')){
+    out.subcategory = metaSub.getAttribute('content').trim().toLowerCase();
+    /* Validate it's one of our known values; warn if unknown */
+    const valid = ['metalliser','slitter','quality','general'];
+    if (out.category === 'packaging' && !valid.includes(out.subcategory)){
+      out.warnings.push('Unknown subcategory "' + out.subcategory + '". Valid: metalliser, slitter, quality, general.');
+    }
+    if (out.category !== 'packaging'){
+      out.warnings.push('Subcategory only applies when category="packaging" — it will be ignored for "' + out.category + '".');
+    }
+  }
+
+  /* Pick content scopes for EN and HI.
+     Strategy: if the body has .en-content / .hindi-section blocks, use those.
+     Otherwise, the whole body is treated as English only. */
+  const enScope = doc.querySelector('.en-content')  || doc.querySelector('.article-body') || doc.body;
+  const hiScope = doc.querySelector('.hindi-section, .hi-content');
+
+  /* TITLE — first h1/h2 inside each scope */
+  const enTitleEl = firstMatch(enScope, ['h1','h2']);
+  const hiTitleEl = hiScope ? firstMatch(hiScope, ['h1','h2']) : null;
+  const enTitle = textOf(enTitleEl);
+  const hiTitle = textOf(hiTitleEl);
+  if (!enTitle){
+    out.warnings.push('No <h1>/<h2> title found in the HTML body.');
+  }
+  out.title = hiTitle ? (enTitle + ' | ' + hiTitle) : enTitle;
+
+  /* SUMMARY — first <p> inside each scope (skip empty / whitespace only) */
+  function firstParagraph(scope){
+    if (!scope) return '';
+    const paras = scope.querySelectorAll('p');
+    for (const p of paras){
+      const t = textOf(p);
+      if (t && t.length > 20) return t;
+    }
+    return '';
+  }
+  const enSummary = firstParagraph(enScope);
+  const hiSummary = firstParagraph(hiScope);
+  if (!enSummary){
+    out.warnings.push('No substantive <p> paragraph found in the body — summary will be empty.');
+  }
+  /* Trim summaries to ~240 chars so card display stays clean */
+  const trim = (s) => s.length > 240 ? (s.slice(0,237) + '...') : s;
+  out.summary = hiSummary ? (trim(enSummary) + ' | ' + trim(hiSummary)) : trim(enSummary);
+
+  /* COVER — first <img src="..."> in body */
+  const firstImg = doc.body ? doc.body.querySelector('img[src]') : null;
+  if (firstImg){
+    out.cover = firstImg.getAttribute('src').trim();
+  } else {
+    out.warnings.push('No <img> found in body — cover will be blank.');
+  }
+
+  return out;
+}
+
+
+async function publishGithubBlog(published){
+  if (!ghParsed){ toast('Click "Fetch & Preview" first', true); return; }
+  if (!ghParsed.title){ toast('Title missing from HTML — add <h1> or <h2>', true); return; }
+  if (!ghParsed.slug){ toast('Cannot derive slug from folder name', true); return; }
+
+  /* Insert row — content left empty because HTML will be fetched live from GitHub */
+  const github_path = ghParsed.folder + '::' + ghParsed.file;
+  const row = {
+    title: ghParsed.title,
+    slug: ghParsed.slug,
+    category: ghParsed.category || 'manufacturing',
+    /* Only persist subcategory when main category is packaging — otherwise NULL */
+    subcategory: (ghParsed.category === 'packaging' && ghParsed.subcategory) ? ghParsed.subcategory : null,
+    summary: ghParsed.summary,
+    cover_image: ghParsed.cover,
+    content: '',
+    github_path,
+    read_time_minutes: ghParsed.readTimeMinutes || null,
+    published
+  };
+  const { error } = await sb.from('blogs').insert([row]);
+  if (error){
+    if (String(error.message).toLowerCase().indexOf('github_path') > -1){
+      toast('Database update needed. Run SQL: ALTER TABLE blogs ADD COLUMN github_path text;', true);
+    } else if (String(error.message).toLowerCase().indexOf('subcategory') > -1){
+      toast('Run subcategory-migration.sql in Supabase first.', true);
+    } else if (String(error.message).toLowerCase().indexOf('read_time_minutes') > -1){
+      toast('Run read-time-migration.sql in Supabase first.', true);
+    } else if (String(error.message).toLowerCase().indexOf('duplicate') > -1 || String(error.message).toLowerCase().indexOf('unique') > -1){
+      toast('Slug already exists. Rename folder or edit existing post.', true);
+    } else {
+      toast('Error: ' + error.message, true);
+    }
+    return;
+  }
+  toast(published ? 'Published from GitHub!' : 'Saved as draft');
+  resetGithubForm();
+}
+
+function resetGithubForm(){
+  document.getElementById('gFolder').value = '';
+  document.getElementById('gPreview').style.display = 'none';
+  ghParsed = null;
+}
+
+async function writeBlog(published){
+  const title=document.getElementById('wTitle').value.trim();
+  const cat=document.getElementById('wCat').value;
+  const subcat=document.getElementById('wSubcat').value;
+  const summary=document.getElementById('wSummary').value.trim();
+  const cover=document.getElementById('wCover').value.trim();
+  const content=document.getElementById('wContent').value.trim();
+  if(!title||!summary||!content){toast('Fill all fields',true);return;}
+  const slug=document.getElementById('wSlug').value.trim();
+  if(!slug){toast('Slug is required for URL',true);return;}
+  const row = {
+    title, slug, category:cat,
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover, content,
+    read_time_minutes: computeReadTimeMinutes(content),
+    published
+  };
+  const {error}=await sb.from('blogs').insert([row]);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast(published?'Published!':'Saved as draft');
+  ['wTitle','wSlug','wSummary','wCover','wContent'].forEach(id=>document.getElementById(id).value='');
+}
+
+/* Show / hide sub-category dropdown based on main category selection.
+   Sub-categories only apply to "Flexible Packaging" — for other categories
+   the field is hidden and any existing value is cleared. */
+function toggleEditSubcat(){
+  var cat = document.getElementById('editCat').value;
+  var fld = document.getElementById('editSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('editSubcat').value = '';
+  }
+}
+function toggleWriteSubcat(){
+  var cat = document.getElementById('wCat').value;
+  var fld = document.getElementById('wSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('wSubcat').value = '';
+  }
+}
+function toggleUploadSubcat(){
+  var cat = document.getElementById('upCat').value;
+  var fld = document.getElementById('upSubcatField');
+  if(!fld) return;
+  if(cat === 'packaging'){
+    fld.style.display = 'block';
+  } else {
+    fld.style.display = 'none';
+    document.getElementById('upSubcat').value = '';
+  }
+}
+/* Initialise both tabs on first load — packaging is the default so dropdowns show */
+document.addEventListener('DOMContentLoaded', function(){
+  toggleWriteSubcat();
+  toggleUploadSubcat();
+});
+
+async function loadPosts(){
+  const list=document.getElementById('postsList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('blogs').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📝</div><p>No posts yet</p></div>';return;}
+  list.innerHTML=data.map(b=>{
+    const gh = b.github_path ? b.github_path.split('::') : null;
+    const sourceTag = gh
+      ? `<span class="status" style="background:#dbeafe;color:#1e40af;margin-left:6px">📦 GitHub</span>`
+      : `<span class="status" style="background:#fde68a;color:#854d0e;margin-left:6px">📄 Inline</span>`;
+    const pathLine = gh
+      ? `<div class="meta" style="margin-top:4px;font-family:monospace;font-size:.72rem;color:#1e40af">📁 ${escH(gh[0])}/<strong>${escH(gh[1])}</strong></div>`
+      : '';
+    const editGhBtn = gh
+      ? `<a href="${ghEditUrl(gh[0], gh[1])}" target="_blank" class="btn" style="background:#1e40af;color:#fff">✏️ Edit on GitHub</a>
+         <a href="${ghFolderUrl(gh[0])}" target="_blank" class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)">📁 Folder</a>
+         <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="refreshGhMeta(${b.id})">🔄 Re-fetch Meta</button>`
+      : '';
+    return `<div class="post-item">
+      <div style="flex:1;min-width:250px">
+        <h4>${escH(b.title)}<span class="status ${b.published?'pub':'draft'}">${b.published?'Published':'Draft'}</span>${sourceTag}</h4>
+        <div class="meta">${escH(b.category||'')} • ${new Date(b.created_at).toLocaleDateString()}${b.read_time_minutes ? ' • 📖 '+b.read_time_minutes+' min' : ' • <span style="color:#c66">⚠️ no read time</span>'}</div>
+        ${pathLine}
+      </div>
+      <div class="post-actions">
+        ${editGhBtn}
+        <button class="btn btn-primary" onclick="editPost(${b.id})">✏️ Metadata</button>
+        <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="recalcReadTime(${b.id})" title="Recalculate read time from current content">🔁 Recalc Time</button>
+        <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="downloadPost(${b.id})">⬇️ Download</button>
+        <button class="btn ${b.published?'btn-ghost':'btn-success'}" style="${b.published?'border:1.5px solid var(--border);color:var(--navy)':''}" onclick="togglePub(${b.id},${!b.published})">${b.published?'📥 Unpublish':'🚀 Publish'}</button>
+        <button class="btn btn-danger" onclick="delPost(${b.id})">🗑️ Delete</button>
+      </div></div>`;
+  }).join('');
+}
+
+/* Re-fetch metadata from GitHub (useful after you edit the HTML there) */
+async function refreshGhMeta(id){
+  const {data,error} = await sb.from('blogs').select('*').eq('id',id).single();
+  if (error || !data || !data.github_path){ toast('Not a GitHub-backed post',true); return; }
+  const [folder, file] = data.github_path.split('::');
+  toast('Re-fetching from GitHub...');
+  try{
+    const r = await fetch(ghRawUrl(folder, file) + '?cb=' + Date.now());
+    if (!r.ok){ toast('GitHub file not reachable ('+r.status+')',true); return; }
+    const html = await r.text();
+    const meta = parseBlogHtml(html);
+    let coverUrl = '';
+    if (meta.cover){
+      if (/^https?:\/\//i.test(meta.cover)) coverUrl = meta.cover;
+      else {
+        const clean = meta.cover.replace(/^\.?\/+/, '');
+        coverUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${clean}`;
+      }
+    }
+    const { error:uerr } = await sb.from('blogs').update({
+      title: meta.title || data.title,
+      summary: meta.summary || data.summary,
+      cover_image: coverUrl || data.cover_image,
+      category: meta.category || data.category
+    }).eq('id', id);
+    if (uerr){ toast('Update failed: '+uerr.message, true); return; }
+    toast('Metadata refreshed from GitHub!');
+    loadPosts();
+  }catch(e){
+    toast('Error: '+e.message,true);
+  }
+}
+
+async function togglePub(id,pub){
+  const {error}=await sb.from('blogs').update({published:pub}).eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast(pub?'Published':'Unpublished');loadPosts();
+}
+async function delPost(id){
+  if(!confirm('Delete permanently?'))return;
+  const {error}=await sb.from('blogs').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadPosts();
+}
+
+/* Recalculate read_time_minutes for a single blog from its current content.
+   For GitHub-backed blogs: fetches the live HTML from GitHub.
+   For inline blogs: uses the content stored in the database.
+   Updates the row, then refreshes the list. */
+async function recalcReadTime(id){
+  /* Load the row to find content source */
+  const {data: row, error} = await sb.from('blogs').select('id,github_path,content').eq('id', id).single();
+  if(error){ toast('Could not load: '+error.message, true); return; }
+  let html = '';
+  if(row.github_path){
+    /* Fetch from GitHub raw */
+    const [folder, file] = row.github_path.split('::');
+    const url = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`;
+    try {
+      const r = await fetch(url, { cache:'no-store' });
+      if(!r.ok){ toast('GitHub fetch failed: '+r.status, true); return; }
+      html = await r.text();
+    } catch(e){ toast('Network error fetching GitHub: '+e.message, true); return; }
+  } else {
+    html = row.content || '';
+  }
+  const minutes = computeReadTimeMinutes(html);
+  if(!minutes){ toast('Content too short to compute read time', true); return; }
+  const {error: uerr} = await sb.from('blogs').update({ read_time_minutes: minutes }).eq('id', id);
+  if(uerr){
+    if(String(uerr.message).toLowerCase().indexOf('read_time_minutes') > -1){
+      toast('Run read-time-migration.sql in Supabase first.', true);
+    } else {
+      toast('Update failed: '+uerr.message, true);
+    }
+    return;
+  }
+  toast('✓ Updated: '+minutes+' min read');
+  loadPosts();
+}
+
+/* Bulk recalculate read_time_minutes for ALL blogs.
+   Fetches GitHub content for github_path blogs (sequential to avoid
+   hammering raw.githubusercontent.com), uses inline content for others.
+   Shows live progress on the button so the user knows it's working. */
+async function recalcAllReadTimes(){
+  if(!confirm('Recalculate read time for ALL blogs?\n\nThis will fetch each GitHub blog\'s HTML and update the database. Takes about 30 seconds for 18 blogs.')) return;
+  const btn = document.getElementById('recalcAllBtn');
+  const orig = btn ? btn.textContent : '';
+  if(btn){ btn.disabled = true; btn.textContent = '⏳ Loading blogs…'; }
+
+  /* 1. Fetch every blog */
+  const {data: blogs, error} = await sb.from('blogs')
+    .select('id,title,github_path,content,read_time_minutes')
+    .order('id', {ascending: true});
+  if(error){
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    toast('Could not load blogs: '+error.message, true);
+    return;
+  }
+  if(!blogs || blogs.length === 0){
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    toast('No blogs to update', true);
+    return;
+  }
+
+  let updated = 0, skipped = 0, failed = 0;
+  const failures = [];
+
+  for(let i = 0; i < blogs.length; i++){
+    const b = blogs[i];
+    if(btn) btn.textContent = '⏳ '+(i+1)+'/'+blogs.length+' · '+(b.title||'').slice(0,30)+'…';
+
+    let html = '';
+    try {
+      if(b.github_path){
+        const [folder, file] = b.github_path.split('::');
+        const url = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}`;
+        const r = await fetch(url, { cache:'no-store' });
+        if(!r.ok){ failed++; failures.push(b.title+' (HTTP '+r.status+')'); continue; }
+        html = await r.text();
+      } else {
+        html = b.content || '';
+      }
+    } catch(e){
+      failed++; failures.push(b.title+' (network)'); continue;
+    }
+
+    const minutes = computeReadTimeMinutes(html);
+    if(!minutes){ skipped++; continue; }
+
+    /* Skip the DB write if value is unchanged — saves writes */
+    if(minutes === b.read_time_minutes){ skipped++; continue; }
+
+    const {error: uerr} = await sb.from('blogs').update({ read_time_minutes: minutes }).eq('id', b.id);
+    if(uerr){
+      failed++; failures.push(b.title+' (db: '+uerr.message+')');
+      if(String(uerr.message).toLowerCase().indexOf('read_time_minutes') > -1){
+        if(btn){ btn.disabled=false; btn.textContent=orig; }
+        toast('Run read-time-migration.sql in Supabase first.', true);
+        return;
+      }
+      continue;
+    }
+    updated++;
+  }
+
+  if(btn){ btn.disabled=false; btn.textContent=orig; }
+  let msg = '✓ Done — '+updated+' updated';
+  if(skipped) msg += ', '+skipped+' unchanged';
+  if(failed)  msg += ', '+failed+' failed';
+  toast(msg, failed > 0);
+  if(failures.length) console.error('Failed blogs:', failures);
+  loadPosts();
+}
+
+async function editPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error loading: '+error.message,true);return;}
+  document.getElementById('editId').value=data.id;
+  document.getElementById('editTitle').value=data.title||'';
+  document.getElementById('editSlug').value=data.slug||'';
+  document.getElementById('editCat').value=data.category||'packaging';
+  document.getElementById('editSubcat').value=data.subcategory||'';
+  document.getElementById('editSummary').value=data.summary||'';
+  document.getElementById('editCover').value=data.cover_image||'';
+  document.getElementById('editContent').value=data.content||'';
+  /* Show/hide subcategory dropdown based on main category */
+  toggleEditSubcat();
+
+  /* Show a source banner so you know where this blog's content actually lives */
+  const banner = document.getElementById('editSourceBanner');
+  if(data.github_path){
+    const [folder, file] = data.github_path.split('::');
+    banner.innerHTML = '📦 <strong>GitHub-backed blog.</strong> Content lives in <code>' + escH(folder) + '/' + escH(file) + '</code>. ' +
+      'You can safely change title, slug, category, summary, cover here — to edit the article body, edit the file in GitHub.';
+    banner.style.background = '#e8f4fc';
+    banner.style.borderLeftColor = '#0080c8';
+    banner.style.display = 'block';
+    document.getElementById('editContentField').style.display = 'none';
+  } else {
+    banner.innerHTML = '📝 <strong>Inline blog.</strong> Content is stored in Supabase. Edit it below.';
+    banner.style.background = '#fff8e6';
+    banner.style.borderLeftColor = '#e85d26';
+    banner.style.display = 'block';
+    document.getElementById('editContentField').style.display = 'block';
+  }
+
+  document.getElementById('editModal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeEdit(){
+  document.getElementById('editModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+async function saveEdit(){
+  const id=document.getElementById('editId').value;
+  const title=document.getElementById('editTitle').value.trim();
+  const cat=document.getElementById('editCat').value;
+  const summary=document.getElementById('editSummary').value.trim();
+  const cover=document.getElementById('editCover').value.trim();
+  const content=document.getElementById('editContent').value.trim();
+  const slug=document.getElementById('editSlug').value.trim();
+
+  /* Validate basics — title, slug, summary are always required.
+     Content is only required for INLINE blogs (no github_path).
+     GitHub-backed blogs store their content in GitHub, so editContent
+     is expected to be empty here and we must NOT overwrite github_path. */
+  if(!title){toast('Title is required',true);return;}
+  if(!slug){toast('Slug is required',true);return;}
+  if(!summary){toast('Summary is required',true);return;}
+
+  /* Check if this blog is GitHub-backed before deciding what to save */
+  const {data:existing, error:fetchErr} = await sb.from('blogs').select('github_path').eq('id',id).single();
+  if(fetchErr){toast('Could not load blog: '+fetchErr.message,true);return;}
+  const isGithubBacked = !!(existing && existing.github_path);
+
+  /* For inline blogs, content must be present */
+  if(!isGithubBacked && !content){
+    toast('HTML content is required for inline blogs',true);
+    return;
+  }
+
+  /* Build the update payload — only include content if it's an inline blog
+     OR if the admin explicitly typed something (to let them convert
+     GitHub blog → inline if they really want to). Otherwise leave content
+     alone so we don't clobber good GitHub-sourced data. */
+  const subcat = document.getElementById('editSubcat').value;
+  const payload = {
+    title, slug, category:cat,
+    /* Only save subcategory when category is packaging; otherwise force NULL */
+    subcategory: (cat === 'packaging' && subcat) ? subcat : null,
+    summary, cover_image:cover
+  };
+  if(!isGithubBacked || content){
+    payload.content = content;
+    /* If content was set or modified, recompute read_time_minutes too.
+       For GitHub-backed blogs whose content stays empty in DB, the read time
+       is set during the GitHub publish step (and updated via Republish). */
+    var computed = computeReadTimeMinutes(content);
+    if(computed != null) payload.read_time_minutes = computed;
+  }
+
+  const {error} = await sb.from('blogs').update(payload).eq('id',id);
+  if(error){toast('Error: '+error.message,true);return;}
+  toast('Updated successfully!');
+  closeEdit();
+  loadPosts();
+}
+
+async function downloadPost(id){
+  const {data,error}=await sb.from('blogs').select('*').eq('id',id).single();
+  if(error){toast('Error: '+error.message,true);return;}
+  const html=`<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>${escH(data.title)}</title></head>
+<body>
+<h1>${escH(data.title)}</h1>
+<p><strong>Category:</strong> ${escH(data.category)}</p>
+<p><strong>Summary:</strong> ${escH(data.summary)}</p>
+${data.cover_image?'<img src="'+escH(data.cover_image)+'" style="max-width:100%;"/>':''}
+${data.content}
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='blog-'+id+'.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Downloaded!');
+}
+
+async function loadRequests(){
+  const list=document.getElementById('reqList');
+  list.innerHTML='<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  const {data,error}=await sb.from('app_requests').select('*').order('created_at',{ascending:false});
+  if(error){list.innerHTML='<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';return;}
+  if(!data||!data.length){list.innerHTML='<div class="empty"><div>📭</div><p>No requests yet</p></div>';return;}
+  list.innerHTML=data.map(r=>{
+    const wa=r.phone?`https://wa.me/${r.phone.replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+r.name+', thanks for your idea "'+r.title+'"')}`:'';
+    return `<div class="post-item">
+      <div style="flex:1;min-width:250px"><h4>${escH(r.title)}</h4>
+      <div class="meta">From: <strong>${escH(r.name)}</strong> • ${escH(r.email)} • ${escH(r.phone||'No phone')}</div>
+      <div class="meta">${escH(r.category)} • ${new Date(r.created_at).toLocaleDateString()}</div>
+      <p style="margin-top:8px;font-size:.85rem">${escH(r.description)}</p></div>
+      <div class="post-actions">
+      ${wa?`<a href="${wa}" target="_blank" class="btn btn-success">📲 WhatsApp</a>`:''}
+      <a href="mailto:${r.email}" class="btn btn-primary">📧 Email</a>
+      <button class="btn btn-danger" onclick="delReq(${r.id})">🗑️</button></div></div>`;
+  }).join('');
+}
+async function delReq(id){
+  if(!confirm('Delete?'))return;
+  const {error}=await sb.from('app_requests').delete().eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Deleted');loadRequests();
+}
+
+/* ════════════════════════════════════════════════════════════
+   NEWSLETTER SUBSCRIBERS
+   Loaded on demand when the Subscribers tab is opened.
+   Stored in module-level `_subs` so search filtering avoids re-fetch.
+   ════════════════════════════════════════════════════════════ */
+let _subs = [];
+
+async function loadSubscribers(){
+  const list = document.getElementById('subsList');
+  list.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  const { data, error } = await sb.from('subscribers').select('*').order('subscribed_at', {ascending:false});
+  if(error){
+    list.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(error.message)+'</p></div>';
+    /* If the table doesn't exist, give a clear migration hint */
+    if(String(error.message).toLowerCase().indexOf('subscribers') > -1
+       || String(error.message).toLowerCase().indexOf('does not exist') > -1){
+      list.innerHTML += '<div style="margin-top:14px;padding:14px;background:#fff8e6;border-left:3px solid var(--orange);border-radius:8px;font-size:.84rem;line-height:1.6;color:var(--navy);">'
+        + '<strong>Database setup needed.</strong><br>Run <code>subscribers-migration.sql</code> in your Supabase SQL Editor first.'
+        + '</div>';
+    }
+    return;
+  }
+  _subs = data || [];
+  renderSubs();
+  /* Update the badge with the total count */
+  const badge = document.getElementById('subsBadge');
+  if(_subs.length > 0){
+    badge.textContent = _subs.length;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function renderSubs(){
+  const list = document.getElementById('subsList');
+  const stats = document.getElementById('subsStats');
+  const q = (document.getElementById('subsSearch').value || '').toLowerCase().trim();
+  const filtered = q ? _subs.filter(s =>
+    (s.name||'').toLowerCase().indexOf(q) > -1
+    || (s.email||'').toLowerCase().indexOf(q) > -1
+  ) : _subs;
+
+  /* Stats line */
+  if(_subs.length === 0){
+    stats.textContent = '0 subscribers yet';
+  } else if(q){
+    stats.textContent = filtered.length + ' of ' + _subs.length + ' subscribers match "' + q + '"';
+  } else {
+    stats.textContent = _subs.length + ' subscriber' + (_subs.length===1?'':'s')
+      + ' • Latest signup: ' + new Date(_subs[0].subscribed_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  }
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div class="empty"><div>📭</div><p>'+(q?'No matches':'No subscribers yet — share your blog!')+'</p></div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(function(s){
+    const dateStr = new Date(s.subscribed_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+    const sourceTag = s.source ? '<span style="font-size:.7rem;background:rgba(13,140,126,.08);color:var(--teal);border:1px solid rgba(13,140,126,.18);padding:2px 8px;border-radius:50px;font-family:monospace;">'+escH(s.source)+'</span>' : '';
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:240px">'
+      +   '<h4 style="margin-bottom:4px">'+escH(s.name||'(no name)')+'</h4>'
+      +   '<div class="meta"><a href="mailto:'+encodeURIComponent(s.email)+'" style="color:var(--navy);font-weight:600;">'+escH(s.email)+'</a></div>'
+      +   '<div class="meta" style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">'
+      +     'Subscribed ' + dateStr + ' ' + sourceTag
+      +   '</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-danger" onclick="delSub('+s.id+', \''+escH(s.email).replace(/\x27/g,'')+'\')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+async function delSub(id, email){
+  if(!confirm('Remove subscriber "'+email+'"? This cannot be undone.')) return;
+  const { error } = await sb.from('subscribers').delete().eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Removed');
+  loadSubscribers();
+}
+
+function copySubsEmails(){
+  if(_subs.length === 0){ toast('No subscribers to copy', true); return; }
+  /* Filter by current search if active */
+  const q = (document.getElementById('subsSearch').value || '').toLowerCase().trim();
+  const list = q ? _subs.filter(s =>
+    (s.name||'').toLowerCase().indexOf(q) > -1
+    || (s.email||'').toLowerCase().indexOf(q) > -1
+  ) : _subs;
+  if(list.length === 0){ toast('No subscribers match', true); return; }
+  /* Comma-separated list — paste into Gmail BCC */
+  const text = list.map(s => s.email).join(', ');
+  let ok = false;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text); ok = true;
+    }
+  } catch(_){}
+  if(!ok){
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta); ok = true;
+    } catch(_){}
+  }
+  if(ok){
+    toast('Copied ' + list.length + ' email' + (list.length===1?'':'s') + ' to clipboard');
+    /* Briefly show success on the button */
+    const btn = document.getElementById('subsCopyBtn');
+    if(btn){
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied ' + list.length + ' emails';
+      setTimeout(function(){ btn.textContent = orig; }, 2200);
+    }
+  } else {
+    toast('Could not copy. Use Export CSV instead.', true);
+  }
+}
+
+function downloadSubsCsv(){
+  if(_subs.length === 0){ toast('No subscribers to export', true); return; }
+  /* Build CSV with proper escaping */
+  function csvCell(v){
+    v = (v == null) ? '' : String(v);
+    if(/[",\n]/.test(v)) v = '"' + v.replace(/"/g, '""') + '"';
+    return v;
+  }
+  const rows = [['Name','Email','Source','Subscribed At']];
+  _subs.forEach(function(s){
+    rows.push([s.name||'', s.email||'', s.source||'', s.subscribed_at||'']);
+  });
+  const csv = rows.map(r => r.map(csvCell).join(',')).join('\n');
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = 'vkstech-subscribers-' + dateStr + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  toast('Downloaded ' + _subs.length + ' subscribers');
+}
+
+/* ════════════════════════════════════════════════════════════
+   YOUTUBE — channels + playlist short URLs
+   ════════════════════════════════════════════════════════════ */
+let _ytChannels = [];
+let _ytPlaylists = [];
+
+/* Reserved slugs that would collide with existing site routes.
+   A channel slug must never be one of these. */
+const YT_RESERVED_SLUGS = ['blog','people','youtube','api','yt','admin',
+  'assets','images','img','static','public','sw','manifest'];
+
+/* Clean a slug: keep letters, digits, hyphens. No spaces or symbols. */
+function ytSlugify(s){
+  return (s||'').trim().replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'');
+}
+function ytcSlugClean(el){
+  el.value = ytSlugify(el.value);
+  const p = document.getElementById('ytcSlugPreview');
+  if(p) p.textContent = el.value || 'slug';
+}
+function ytpSlugClean(el){
+  el.value = ytSlugify(el.value);
+  ytpUpdatePreview();
+}
+function ytpUpdatePreview(){
+  const chSel = document.getElementById('ytpChannel');
+  const chSlug = chSel && chSel.selectedOptions[0] ? chSel.selectedOptions[0].dataset.slug : '';
+  const plSlug = document.getElementById('ytpSlug').value || 'playlist-slug';
+  const prev = document.getElementById('ytpUrlPreview');
+  if(prev) prev.textContent = chSlug ? ('→ vkstech.com/' + chSlug + '/' + plSlug) : '(pick a channel)';
+}
+
+async function loadYouTube(){
+  const chList = document.getElementById('ytChannelList');
+  const plList = document.getElementById('ytPlaylistList');
+  chList.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  plList.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+
+  /* Load channels */
+  const chRes = await sb.from('youtube_channels').select('*').order('sort_order',{ascending:true});
+  if(chRes.error){
+    const needsTable = String(chRes.error.message).toLowerCase().indexOf('youtube_channels') > -1
+                    || String(chRes.error.message).toLowerCase().indexOf('does not exist') > -1;
+    chList.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(chRes.error.message)+'</p></div>';
+    if(needsTable){
+      chList.innerHTML += '<div style="margin-top:12px;padding:12px;background:#fff8e6;border-left:3px solid var(--orange);border-radius:8px;font-size:.83rem;color:var(--navy);line-height:1.55"><strong>Database setup needed.</strong><br>Run <code>youtube-migration.sql</code> in your Supabase SQL Editor first.</div>';
+    }
+    return;
+  }
+  _ytChannels = chRes.data || [];
+
+  /* Load playlists */
+  const plRes = await sb.from('youtube_playlists').select('*').order('sort_order',{ascending:true});
+  if(plRes.error){
+    plList.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(plRes.error.message)+'</p></div>';
+  } else {
+    _ytPlaylists = plRes.data || [];
+  }
+
+  renderYtChannels();
+  renderYtChannelDropdowns();
+  renderYtPlaylists();
+}
+
+function renderYtChannels(){
+  const box = document.getElementById('ytChannelList');
+  if(_ytChannels.length === 0){
+    box.innerHTML = '<div class="empty"><div>📭</div><p>No channels yet — add your first one.</p></div>';
+    return;
+  }
+  box.innerHTML = _ytChannels.map(function(c){
+    const plCount = _ytPlaylists.filter(function(p){ return p.channel_id === c.id; }).length;
+    const iconHtml = c.icon_url
+      ? '<img src="'+escH(c.icon_url)+'" alt="" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);" onerror="this.style.display=\'none\'"/>'
+      : '<div style="width:44px;height:44px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);flex-shrink:0;">'+escH((c.name||'?').charAt(0).toUpperCase())+'</div>';
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:200px;display:flex;gap:12px;align-items:flex-start">'
+      +   iconHtml
+      +   '<div style="flex:1;min-width:0">'
+      +     '<h4 style="margin-bottom:4px">'+escH(c.name)+' <span style="font-size:.7rem;color:var(--muted);font-family:monospace">/'+escH(c.slug)+'</span></h4>'
+      +     '<div class="meta"><a href="'+escH(c.youtube_url)+'" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600">'+escH(c.handle||c.youtube_url)+'</a></div>'
+      +     '<div class="meta" style="margin-top:4px">'+escH(c.description||'')+' · '+plCount+' playlist'+(plCount===1?'':'s')+'</div>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-primary" onclick="ytEditChannel('+c.id+')">✏️ Edit</button>'
+      +   '<button class="btn btn-danger" onclick="ytDeleteChannel('+c.id+')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function renderYtChannelDropdowns(){
+  /* Filter dropdown above the playlist list */
+  const filter = document.getElementById('ytFilterChannel');
+  const curFilter = filter.value;
+  filter.innerHTML = '<option value="">All channels</option>' +
+    _ytChannels.map(function(c){
+      return '<option value="'+c.id+'">'+escH(c.name)+'</option>';
+    }).join('');
+  filter.value = curFilter;
+  /* Modal dropdown */
+  const modalSel = document.getElementById('ytpChannel');
+  modalSel.innerHTML = '<option value="">— Select channel —</option>' +
+    _ytChannels.map(function(c){
+      return '<option value="'+c.id+'" data-slug="'+escH(c.slug)+'">'+escH(c.name)+'</option>';
+    }).join('');
+}
+
+function renderYtPlaylists(){
+  const box = document.getElementById('ytPlaylistList');
+  const filterId = document.getElementById('ytFilterChannel').value;
+  let list = _ytPlaylists;
+  if(filterId) list = list.filter(function(p){ return String(p.channel_id) === String(filterId); });
+
+  if(list.length === 0){
+    box.innerHTML = '<div class="empty"><div>📭</div><p>'+(filterId?'No playlists for this channel.':'No playlists yet — add your first one.')+'</p></div>';
+    return;
+  }
+  box.innerHTML = list.map(function(p){
+    const ch = _ytChannels.find(function(c){ return c.id === p.channel_id; });
+    const chSlug = ch ? ch.slug : '?';
+    const chName = ch ? ch.name : '(unknown channel)';
+    const shortUrl = 'vkstech.com/' + chSlug + '/' + p.slug;
+    return '<div class="post-item">'
+      + '<div style="flex:1;min-width:220px">'
+      +   '<h4 style="margin-bottom:4px">'+escH(p.title)+'</h4>'
+      +   '<div class="meta" style="color:var(--teal);font-weight:600">'+escH(shortUrl)+'</div>'
+      +   '<div class="meta" style="margin-top:4px">'+escH(chName)+(p.description?' · '+escH(p.description):'')+'</div>'
+      + '</div>'
+      + '<div class="post-actions">'
+      +   '<button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="ytCopyShortUrl(\''+escH(shortUrl).replace(/\x27/g,'')+'\')">📋 Copy URL</button>'
+      +   '<button class="btn btn-primary" onclick="ytEditPlaylist('+p.id+')">✏️ Edit</button>'
+      +   '<button class="btn btn-danger" onclick="ytDeletePlaylist('+p.id+')">🗑️</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function ytCopyShortUrl(url){
+  const full = 'https://' + url;
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(full);
+      toast('Copied: ' + full);
+      return;
+    }
+  } catch(_){}
+  const ta = document.createElement('textarea');
+  ta.value = full; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); toast('Copied: ' + full); }
+  catch(_){ toast('Could not copy', true); }
+  document.body.removeChild(ta);
+}
+
+/* ── CHANNEL modal ────────────────────────────────── */
+function ytNewChannel(){
+  document.getElementById('ytChannelModalTitle').textContent = '📡 Add Channel';
+  document.getElementById('ytcId').value = '';
+  document.getElementById('ytcName').value = '';
+  document.getElementById('ytcSlug').value = '';
+  document.getElementById('ytcUrl').value = '';
+  document.getElementById('ytcIcon').value = '';
+  document.getElementById('ytcHandle').value = '';
+  document.getElementById('ytcDesc').value = '';
+  document.getElementById('ytcSort').value = _ytChannels.length;
+  document.getElementById('ytcSlugPreview').textContent = 'slug';
+  if(typeof ytShowIconPreview==='function') ytShowIconPreview('');
+  document.getElementById('ytChannelModal').style.display = 'block';
+}
+function ytEditChannel(id){
+  const c = _ytChannels.find(function(x){ return x.id === id; });
+  if(!c) return;
+  document.getElementById('ytChannelModalTitle').textContent = '📡 Edit Channel';
+  document.getElementById('ytcId').value = c.id;
+  document.getElementById('ytcName').value = c.name || '';
+  document.getElementById('ytcSlug').value = c.slug || '';
+  document.getElementById('ytcUrl').value = c.youtube_url || '';
+  document.getElementById('ytcIcon').value = c.icon_url || '';
+  if(typeof ytShowIconPreview==='function') ytShowIconPreview(c.icon_url || '');
+  document.getElementById('ytcHandle').value = c.handle || '';
+  document.getElementById('ytcDesc').value = c.description || '';
+  document.getElementById('ytcSort').value = c.sort_order || 0;
+  document.getElementById('ytcSlugPreview').textContent = c.slug || 'slug';
+  document.getElementById('ytChannelModal').style.display = 'block';
+}
+function ytCloseChannelModal(){
+  document.getElementById('ytChannelModal').style.display = 'none';
+}
+
+/* ── Channel icon auto-fetch (YouTube profile picture) ───────── */
+function ytParseChannelRef(url){
+  if(!url) return null;
+  url = String(url).trim();
+  var m = url.match(/youtube\.com\/@([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/youtube\.com\/channel\/([A-Za-z0-9_-]+)/i);
+  if(m) return { type:'id', value:m[1] };
+  m = url.match(/youtube\.com\/c\/([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/youtube\.com\/user\/([A-Za-z0-9._-]+)/i);
+  if(m) return { type:'handle', value:m[1] };
+  m = url.match(/^@([A-Za-z0-9._-]+)$/);
+  if(m) return { type:'handle', value:m[1] };
+  return null;
+}
+function ytIconCandidates(ref){
+  var list = [];
+  if(!ref) return list;
+  if(ref.type === 'handle'){
+    list.push('https://unavatar.io/youtube/' + encodeURIComponent(ref.value));
+    list.push('https://unavatar.io/youtube/@' + encodeURIComponent(ref.value));
+  } else if(ref.type === 'id'){
+    list.push('https://unavatar.io/youtube/channel/' + encodeURIComponent(ref.value));
+  }
+  return list;
+}
+function ytShowIconPreview(url){
+  var box = document.getElementById('ytcIconPreview');
+  var img = document.getElementById('ytcIconImg');
+  if(!box || !img) return;
+  if(!url){ box.style.display = 'none'; img.removeAttribute('src'); return; }
+  img.onload = function(){ box.style.display = 'flex'; };
+  img.onerror = function(){ box.style.display = 'none'; };
+  img.referrerPolicy = 'no-referrer';
+  img.src = url;
+}
+function ytTryLoadImage(url, timeoutMs){
+  return new Promise(function(resolve){
+    var img = new Image();
+    var done = false;
+    var timer = setTimeout(function(){ if(!done){ done=true; resolve(false); } }, timeoutMs||9000);
+    img.onload = function(){ if(done) return; done=true; clearTimeout(timer); resolve(true); };
+    img.onerror = function(){ if(done) return; done=true; clearTimeout(timer); resolve(false); };
+    img.referrerPolicy = 'no-referrer';
+    img.src = url;
+  });
+}
+async function ytFetchChannelIcon(opts){
+  opts = opts || {};
+  var silent = !!opts.silent;
+  var urlEl = document.getElementById('ytcUrl');
+  var url = (urlEl && urlEl.value || '').trim();
+  if(!url){ if(!silent) toast('Paste the YouTube channel URL first', true); return null; }
+  var ref = ytParseChannelRef(url);
+  if(!ref){ if(!silent) toast('Could not read channel from that URL. Use https://youtube.com/@YourHandle', true); return null; }
+  if(!silent) toast('Fetching channel icon…');
+  var candidates = ytIconCandidates(ref);
+  for(var i=0;i<candidates.length;i++){
+    var ok = await ytTryLoadImage(candidates[i], 9000);
+    if(ok){
+      var iconEl = document.getElementById('ytcIcon');
+      if(iconEl) iconEl.value = candidates[i];
+      ytShowIconPreview(candidates[i]);
+      if(!silent) toast('Icon found');
+      return candidates[i];
+    }
+  }
+  if(!silent) toast('Could not auto-fetch icon. Upload to channel-icons/ on GitHub and paste the raw URL.', true);
+  return null;
+}
+
+async function ytSaveChannel(){
+  const id = document.getElementById('ytcId').value;
+  const name = document.getElementById('ytcName').value.trim();
+  const slug = ytSlugify(document.getElementById('ytcSlug').value);
+  const url = document.getElementById('ytcUrl').value.trim();
+  let icon = document.getElementById('ytcIcon').value.trim();
+  const handle = document.getElementById('ytcHandle').value.trim();
+  const desc = document.getElementById('ytcDesc').value.trim();
+  const sort = parseInt(document.getElementById('ytcSort').value, 10) || 0;
+
+  if(!name){ toast('Channel name is required', true); return; }
+  if(!slug){ toast('URL slug is required', true); return; }
+  if(YT_RESERVED_SLUGS.indexOf(slug.toLowerCase()) > -1){
+    toast('"'+slug+'" is a reserved word — pick a different slug', true); return;
+  }
+  if(!url){ toast('YouTube channel URL is required', true); return; }
+  /* Auto-fetch profile picture when icon was left blank */
+  if(!icon){
+    const fetched = await ytFetchChannelIcon({ silent:true });
+    if(fetched) icon = fetched;
+  }
+  /* Slug uniqueness check (case-insensitive), excluding self when editing */
+  const clash = _ytChannels.find(function(c){
+    return c.slug.toLowerCase() === slug.toLowerCase() && String(c.id) !== String(id);
+  });
+  if(clash){ toast('Slug "'+slug+'" is already used by another channel', true); return; }
+
+  const row = { name:name, slug:slug, youtube_url:url, icon_url:icon||null, handle:handle||null, description:desc||null, sort_order:sort };
+  let res;
+  if(id){
+    res = await sb.from('youtube_channels').update(row).eq('id', id);
+  } else {
+    res = await sb.from('youtube_channels').insert([row]);
+  }
+  if(res.error){
+    if(String(res.error.message).toLowerCase().indexOf('icon_url') > -1){
+      toast('Run youtube-icons-migration.sql in Supabase first.', true);
+    } else {
+      toast('Save failed: '+res.error.message, true);
+    }
+    return;
+  }
+  toast(id ? 'Channel updated' : 'Channel added');
+  ytCloseChannelModal();
+  loadYouTube();
+}
+async function ytDeleteChannel(id){
+  const c = _ytChannels.find(function(x){ return x.id === id; });
+  const plCount = _ytPlaylists.filter(function(p){ return p.channel_id === id; }).length;
+  let msg = 'Delete channel "'+(c?c.name:'')+'"?';
+  if(plCount > 0) msg += '\n\nThis will ALSO delete its '+plCount+' playlist'+(plCount===1?'':'s')+'. This cannot be undone.';
+  if(!confirm(msg)) return;
+  const res = await sb.from('youtube_channels').delete().eq('id', id);
+  if(res.error){ toast('Delete failed: '+res.error.message, true); return; }
+  toast('Channel deleted');
+  loadYouTube();
+}
+
+/* ── PLAYLIST modal ───────────────────────────────── */
+function ytNewPlaylist(){
+  if(_ytChannels.length === 0){
+    toast('Add a channel first', true); return;
+  }
+  document.getElementById('ytPlaylistModalTitle').textContent = '🎬 Add Playlist';
+  document.getElementById('ytpId').value = '';
+  document.getElementById('ytpChannel').value = '';
+  document.getElementById('ytpTitle').value = '';
+  document.getElementById('ytpSlug').value = '';
+  document.getElementById('ytpLongUrl').value = '';
+  document.getElementById('ytpDesc').value = '';
+  document.getElementById('ytpSort').value = _ytPlaylists.length;
+  ytpUpdatePreview();
+  document.getElementById('ytPlaylistModal').style.display = 'block';
+}
+function ytEditPlaylist(id){
+  const p = _ytPlaylists.find(function(x){ return x.id === id; });
+  if(!p) return;
+  document.getElementById('ytPlaylistModalTitle').textContent = '🎬 Edit Playlist';
+  document.getElementById('ytpId').value = p.id;
+  document.getElementById('ytpChannel').value = p.channel_id;
+  document.getElementById('ytpTitle').value = p.title || '';
+  document.getElementById('ytpSlug').value = p.slug || '';
+  document.getElementById('ytpLongUrl').value = p.long_url || '';
+  document.getElementById('ytpDesc').value = p.description || '';
+  document.getElementById('ytpSort').value = p.sort_order || 0;
+  ytpUpdatePreview();
+  document.getElementById('ytPlaylistModal').style.display = 'block';
+}
+function ytClosePlaylistModal(){
+  document.getElementById('ytPlaylistModal').style.display = 'none';
+}
+async function ytSavePlaylist(){
+  const id = document.getElementById('ytpId').value;
+  const channelId = document.getElementById('ytpChannel').value;
+  const title = document.getElementById('ytpTitle').value.trim();
+  const slug = ytSlugify(document.getElementById('ytpSlug').value);
+  const longUrl = document.getElementById('ytpLongUrl').value.trim();
+  const desc = document.getElementById('ytpDesc').value.trim();
+  const sort = parseInt(document.getElementById('ytpSort').value, 10) || 0;
+
+  if(!channelId){ toast('Pick a channel', true); return; }
+  if(!title){ toast('Playlist title is required', true); return; }
+  if(!slug){ toast('URL slug is required', true); return; }
+  if(!longUrl){ toast('Long YouTube URL is required', true); return; }
+  if(longUrl.indexOf('youtube.com') === -1 && longUrl.indexOf('youtu.be') === -1){
+    if(!confirm('That URL does not look like a YouTube link. Save anyway?')) return;
+  }
+  /* Slug uniqueness within the same channel, excluding self when editing */
+  const clash = _ytPlaylists.find(function(p){
+    return String(p.channel_id) === String(channelId)
+        && p.slug.toLowerCase() === slug.toLowerCase()
+        && String(p.id) !== String(id);
+  });
+  if(clash){ toast('This channel already has a playlist with slug "'+slug+'"', true); return; }
+
+  const row = { channel_id:parseInt(channelId,10), title:title, slug:slug, long_url:longUrl, description:desc||null, sort_order:sort };
+  let res;
+  if(id){
+    res = await sb.from('youtube_playlists').update(row).eq('id', id);
+  } else {
+    res = await sb.from('youtube_playlists').insert([row]);
+  }
+  if(res.error){ toast('Save failed: '+res.error.message, true); return; }
+  toast(id ? 'Playlist updated' : 'Playlist added');
+  ytClosePlaylistModal();
+  loadYouTube();
+}
+async function ytDeletePlaylist(id){
+  const p = _ytPlaylists.find(function(x){ return x.id === id; });
+  if(!confirm('Delete playlist "'+(p?p.title:'')+'"? This cannot be undone.')) return;
+  const res = await sb.from('youtube_playlists').delete().eq('id', id);
+  if(res.error){ toast('Delete failed: '+res.error.message, true); return; }
+  toast('Playlist deleted');
+  loadYouTube();
+}
+
+/* ════════════════════════════════════════════════════════════
+   Q&A MANAGEMENT
+   ════════════════════════════════════════════════════════════ */
+async function updateQaBadge(){
+  /* Lightweight count query for pending questions, shown as a red pill on the tab */
+  const { count } = await sb.from('blog_questions')
+    .select('id', { count:'exact', head:true })
+    .is('answered_at', null);
+  const badge = document.getElementById('qaBadge');
+  if(count && count > 0){
+    badge.textContent = count;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+async function loadQuestions(){
+  const pendEl = document.getElementById('qaPendingList');
+  const ansEl  = document.getElementById('qaAnsweredList');
+  pendEl.innerHTML = '<div class="empty"><div>⏳</div><p>Loading...</p></div>';
+  ansEl.innerHTML  = '';
+
+  /* Pull all questions + the blog title they belong to via a join */
+  const { data, error } = await sb.from('blog_questions')
+    .select('*, blogs(id,title,slug)')
+    .order('created_at', { ascending:false });
+  if(error){
+    pendEl.innerHTML = '<div class="empty"><div>⚠️</div><p>'+error.message+'</p></div>';
+    return;
+  }
+
+  const pending  = (data||[]).filter(q => !q.answered_at);
+  const answered = (data||[]).filter(q => q.answered_at);
+
+  document.getElementById('qaPendingCount').textContent = pending.length;
+  document.getElementById('qaAnsweredCount').textContent = answered.length;
+
+  pendEl.innerHTML = pending.length
+    ? pending.map(renderPendingQ).join('')
+    : '<div class="empty"><div>📭</div><p>No pending questions</p></div>';
+
+  ansEl.innerHTML = answered.length
+    ? answered.map(renderAnsweredQ).join('')
+    : '<div class="empty" style="padding:30px"><div>✨</div><p>No answered questions yet</p></div>';
+
+  updateQaBadge();
+}
+
+function renderPendingQ(q){
+  const blogTitle = (q.blogs && q.blogs.title) ? q.blogs.title.split('|')[0].trim() : '(deleted blog)';
+  const askedOn   = new Date(q.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  const email     = q.asker_email ? `<a href="mailto:${escH(q.asker_email)}?subject=Re: your question on VKS Tech" style="color:var(--orange);text-decoration:none">${escH(q.asker_email)}</a>` : '<span style="color:#999">no email</span>';
+  return `<div class="post-item" style="flex-direction:column;align-items:stretch">
+    <div style="width:100%">
+      <div class="meta" style="font-size:.75rem;margin-bottom:4px">📄 <strong>${escH(blogTitle)}</strong> • ${askedOn}</div>
+      <h4 style="font-size:.95rem;margin-bottom:6px">❓ ${escH(q.question)}</h4>
+      <div class="meta">Asked by: <strong>${escH(q.asker_name)}</strong> • ${email}</div>
+    </div>
+    <div style="width:100%;margin-top:12px">
+      <textarea id="ans-${q.id}" placeholder="Write your answer here..." style="width:100%;min-height:90px;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;resize:vertical;outline:none" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      <div class="buttons" style="margin-top:10px">
+        <button class="btn btn-success" onclick="answerQ(${q.id})">✅ Submit Answer</button>
+        <button class="btn btn-danger" onclick="delQ(${q.id})">🗑️ Delete (Spam)</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAnsweredQ(q){
+  const blogTitle  = (q.blogs && q.blogs.title) ? q.blogs.title.split('|')[0].trim() : '(deleted blog)';
+  const answeredOn = new Date(q.answered_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  return `<div class="post-item" style="flex-direction:column;align-items:stretch;background:#f8f6f1">
+    <div style="width:100%">
+      <div class="meta" style="font-size:.75rem;margin-bottom:4px">📄 <strong>${escH(blogTitle)}</strong> • answered ${answeredOn}</div>
+      <h4 style="font-size:.92rem;margin-bottom:6px">❓ ${escH(q.question)}</h4>
+      <div class="meta" style="margin-bottom:8px">— <strong>${escH(q.asker_name)}</strong></div>
+      <div style="background:#fff;padding:11px 14px;border-left:3px solid var(--green);border-radius:6px;font-size:.88rem;line-height:1.7;white-space:pre-wrap">${escH(q.answer)}</div>
+    </div>
+    <div style="width:100%;margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-ghost" style="border:1.5px solid var(--border);color:var(--navy)" onclick="editAnswer(${q.id})">✏️ Edit Answer</button>
+      <button class="btn btn-danger" onclick="delQ(${q.id})">🗑️ Delete</button>
+    </div>
+  </div>`;
+}
+
+async function answerQ(id){
+  const txt = document.getElementById('ans-'+id).value.trim();
+  if(!txt){ toast('Answer cannot be empty', true); return; }
+  const { error } = await sb.from('blog_questions')
+    .update({ answer: txt, answered_at: new Date().toISOString() })
+    .eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Answer published!');
+  loadQuestions();
+}
+
+async function editAnswer(id){
+  const { data, error } = await sb.from('blog_questions').select('answer').eq('id',id).single();
+  if(error){ toast(error.message, true); return; }
+  const newAns = prompt('Edit your answer:', data.answer || '');
+  if(newAns === null) return;
+  if(!newAns.trim()){ toast('Answer cannot be empty', true); return; }
+  const { error:uerr } = await sb.from('blog_questions')
+    .update({ answer: newAns.trim() })
+    .eq('id', id);
+  if(uerr){ toast(uerr.message, true); return; }
+  toast('Answer updated');
+  loadQuestions();
+}
+
+async function delQ(id){
+  if(!confirm('Delete this question? This cannot be undone.')) return;
+  const { error } = await sb.from('blog_questions').delete().eq('id', id);
+  if(error){ toast(error.message, true); return; }
+  toast('Deleted');
+  loadQuestions();
+}
+function escH(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* ════════════════════════════════════════════════════════════
+   VISITORS — reads the `page_views` table logged by index.html.
+   Shows: today / 7-day / 30-day / all-time counts, unique visitors
+   (by anonymous localStorage id) for the last 30 days, a simple
+   14-day bar chart, and a recent-activity list.
+   ════════════════════════════════════════════════════════════ */
+async function loadVisitors(){
+  const cards = document.getElementById('visitorsStatCards');
+  const chart = document.getElementById('visitorsDailyChart');
+  const recent = document.getElementById('visitorsRecentList');
+  const setupBanner = document.getElementById('visitorsSetupBanner');
+  cards.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  chart.innerHTML = '';
+  recent.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  var topEl0 = document.getElementById('visitorsTopPages');
+  if(topEl0) topEl0.innerHTML = '<div class="empty"><div>⏳</div><p>Loading…</p></div>';
+  setupBanner.style.display = 'none';
+
+  const now = new Date();
+  const startOfDay = (d)=>{ const x=new Date(d); x.setHours(0,0,0,0); return x; };
+  const today0 = startOfDay(now);
+  const d7 = new Date(today0); d7.setDate(d7.getDate()-6);   // last 7 days incl. today
+  const d30 = new Date(today0); d30.setDate(d30.getDate()-29); // last 30 days incl. today
+
+  /* Pull everything from the last 30 days (enough for all stat cards + chart),
+     plus counts for older data via a separate all-time count query. */
+  const [{data:recentRows, error:recentErr}, {count:allTimeCount, error:allErr}] = await Promise.all([
+    sb.from('page_views').select('created_at,path,referrer,visitor_id').gte('created_at', d30.toISOString()).order('created_at',{ascending:false}),
+    sb.from('page_views').select('id', {count:'exact', head:true})
+  ]);
+
+  if(recentErr || allErr){
+    const msg = (recentErr||allErr).message || '';
+    cards.innerHTML = '';
+    chart.innerHTML = '';
+    recent.innerHTML = '<div class="empty"><div>⚠️</div><p>'+escH(msg)+'</p></div>';
+    if(msg.toLowerCase().indexOf('page_views') > -1 || msg.toLowerCase().indexOf('relation') > -1){
+      setupBanner.style.display = 'block';
+    }
+    return;
+  }
+
+  const rows = recentRows || [];
+  const todayRows = rows.filter(r => new Date(r.created_at) >= today0);
+  const d7Rows = rows.filter(r => new Date(r.created_at) >= d7);
+  const uniqueVisitors30 = new Set(rows.map(r => r.visitor_id).filter(Boolean)).size;
+
+  cards.innerHTML = [
+    {label:'Today', value: todayRows.length, color:'var(--orange)'},
+    {label:'Last 7 days', value: d7Rows.length, color:'var(--teal)'},
+    {label:'Last 30 days', value: rows.length, color:'var(--navy)'},
+    {label:'All-time', value: (allTimeCount==null?'—':allTimeCount), color:'var(--navy)'},
+    {label:'Unique (30d)', value: uniqueVisitors30, color:'var(--gold)'},
+  ].map(c => `<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.7rem;color:${c.color}">${c.value}</div>
+      <div style="font-size:.74rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px">${c.label}</div>
+    </div>`).join('');
+
+  /* 14-day bar chart, oldest → newest */
+  const days = [];
+  for(let i=13;i>=0;i--){
+    const d = new Date(today0); d.setDate(d.getDate()-i);
+    const next = new Date(d); next.setDate(next.getDate()+1);
+    const n = rows.filter(r => { const t=new Date(r.created_at); return t>=d && t<next; }).length;
+    days.push({date:d, n});
+  }
+  const max = Math.max(1, ...days.map(d=>d.n));
+  chart.innerHTML = days.map(d => {
+    const h = Math.round((d.n/max)*100);
+    const label = d.date.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;" title="${label}: ${d.n} views">
+      <div style="font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${d.n}</div>
+      <div style="width:100%;max-width:26px;height:${Math.max(h,3)}%;background:var(--orange);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.62rem;color:var(--muted);white-space:nowrap;">${label}</div>
+    </div>`;
+  }).join('');
+
+  /* Top pages — group by path (last 30 days in `rows`) */
+  const topEl = document.getElementById('visitorsTopPages');
+  if(topEl){
+    if(!rows.length){
+      topEl.innerHTML = '<div class="empty"><div>📭</div><p>No pageviews yet</p></div>';
+    } else {
+      const counts = {};
+      rows.forEach(r => {
+        const p = (r.path && String(r.path).trim()) ? String(r.path).trim() : '/';
+        counts[p] = (counts[p] || 0) + 1;
+      });
+      const ranked = Object.keys(counts).map(p => ({path:p, n:counts[p]}))
+        .sort((a,b) => b.n - a.n)
+        .slice(0, 25);
+      const maxN = ranked[0] ? ranked[0].n : 1;
+      topEl.innerHTML = ranked.map(item => {
+        const pct = Math.round((item.n / maxN) * 100);
+        const isHome = item.path === '/' || item.path === '';
+        const label = isHome ? '/  <span style="color:var(--muted);font-weight:500">(home)</span>' : escH(item.path);
+        return `<div class="post-item" style="padding:12px 16px;display:block;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;">
+            <div style="font-weight:700;font-size:.88rem;font-family:ui-monospace,monospace;word-break:break-all;">${label}</div>
+            <div style="font-family:ui-monospace,monospace;font-weight:800;color:var(--orange);font-size:.95rem;white-space:nowrap;">${item.n} <span style="font-size:.7rem;color:var(--muted);font-weight:600;">views</span></div>
+          </div>
+          <div style="margin-top:8px;height:6px;background:var(--border);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:var(--orange);border-radius:4px;"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  /* Recent pageviews list — most recent 30, path emphasized */
+  if(!rows.length){
+    recent.innerHTML = '<div class="empty"><div>📭</div><p>No pageviews logged yet</p></div>';
+  } else {
+    recent.innerHTML = rows.slice(0,30).map(r => {
+      const p = (r.path && String(r.path).trim()) ? String(r.path).trim() : '/';
+      const isHome = p === '/';
+      const pathLabel = isHome ? '/ <span style="color:var(--muted);font-weight:500;font-size:.78rem">(home)</span>' : escH(p);
+      return `<div class="post-item" style="padding:12px 16px;">
+      <div style="flex:1;min-width:200px">
+        <div style="font-weight:700;font-size:.9rem;font-family:ui-monospace,monospace;word-break:break-all;">${pathLabel}</div>
+        <div class="meta">${new Date(r.created_at).toLocaleString()}${r.referrer?' • from '+escH(r.referrer):''}${r.visitor_id?' • visitor '+escH(String(r.visitor_id).slice(0,8))+'…':''}</div>
+      </div>
+    </div>`;
+    }).join('');
+  }
+}
+
+/* Compute integer read-time-minutes from an HTML body.
+   Strips tags, counts words, divides by 220 wpm.
+   Returns null if content is too short to be meaningful. */
+function computeReadTimeMinutes(html){
+  if(!html || typeof html !== 'string') return null;
+  var text = html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+  if(!text) return null;
+  var words = text.split(' ').filter(function(w){ return w.length > 0; }).length;
+  if(words < 50) return null;
+  return Math.max(1, Math.round(words / 220));
+}
+
+/* Auto-generate slug from English part of title */
+function generateSlug(title){
+  const en = title.split('|')[0].trim();
+  return en.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .substring(0, 60);
+}
+/* Convert a GitHub folder name into a clean URL slug.
+   Transformations:
+     1. Take last path segment (if nested like "blogs/foo")
+     2. Lowercase + normalise special chars to hyphens
+     3. Strip leading numeric prefix — "16-web-break" → "web-break"
+        (lets you number folders for your own org without polluting URLs)
+     4. Strip redundant trailing suffixes — "-blog", "-post", "-article"
+        (the word is already implied by the /blog/ URL path)
+   Example: "16-web-break-reason-and-solution_blog" → "web-break-reason-and-solution" */
+function folderToSlug(folder){
+  return folder.split('/').pop()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '-')              // non-alphanumeric → hyphen
+    .replace(/-+/g, '-')                      // collapse multiple hyphens
+    .replace(/^-|-$/g, '')                    // trim leading/trailing
+    .replace(/^[0-9]+-/, '')                  // strip leading "16-", "07-", etc.
+    .replace(/-(?:blog|post|article)s?$/, '') // strip -blog / -post / -article suffix
+    .replace(/^-|-$/g, '');                   // re-trim in case above left stragglers
+}
+/* Hook: auto-fill slug when title changes */
+document.addEventListener('DOMContentLoaded', function(){
+  ['upTitle','wTitle'].forEach(function(tid){
+    var el = document.getElementById(tid);
+    if(!el) return;
+    var slugId = tid.replace('Title','Slug');
+    el.addEventListener('input', function(){
+      var slugEl = document.getElementById(slugId);
+      if(slugEl && !slugEl.dataset.manual){
+        slugEl.value = generateSlug(this.value);
+      }
+    });
+  });
+  ['upSlug','wSlug','editSlug'].forEach(function(sid){
+    var el = document.getElementById(sid);
+    if(el){
+      el.addEventListener('input', function(){ this.dataset.manual = 'true'; });
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  var iconInput = document.getElementById('ytcIcon');
+  if(iconInput){
+    iconInput.addEventListener('input', function(){
+      if(typeof ytShowIconPreview==='function') ytShowIconPreview(this.value.trim());
+    });
+  }
+  var urlInput = document.getElementById('ytcUrl');
+  if(urlInput){
+    urlInput.addEventListener('blur', function(){
+      var iconEl = document.getElementById('ytcIcon');
+      if(iconEl && !iconEl.value.trim() && this.value.trim() && typeof ytFetchChannelIcon==='function'){
+        ytFetchChannelIcon({ silent:true });
+      }
+    });
+  }
+});
+</script>
+</body></html>
