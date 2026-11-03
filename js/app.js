@@ -149,7 +149,7 @@ const HI = {
   ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
   ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
   pcat_par:"🙏 मेरे माता-पिता", pcat_spec:"⭐ विशेष धन्यवाद",
-  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", c9_t:"कन्वर्टिंग प्लांट क्षमता", c9_s:"सभी मशीनें → MT/दिन · प्लांट बॉटलनेक", calc_label:"🧮 पैकेजिंग कैलकुलेटर", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
+  nav_calc:"कैलकुलेटर", c1_t:"फिल्म रोल वज़न", c2_t:"वज़न से रोल लंबाई", c3_t:"रोल OD (बाहरी व्यास)", c4_t:"GSM ↔ माइक्रॉन रूपांतरण", c5_t:"उत्पादन यील्ड %", c6_t:"मशीन उपयोग %", c7_t:"प्रति वर्ग मीटर लागत", c8_t:"मेट मशीन क्षमता", c8_s:"3-स्टेप: साइकल → रोल/दिन → MT/दिन", c9_t:"कन्वर्टिंग प्लांट क्षमता", c9_s:"सभी मशीनें → MT/दिन · प्लांट बॉटलनेक", c10_t:"न्यूनतम मैनपावर", c10_s:"शिफ्ट × मशीन × रिलीफ × बफर → हेडकाउंट", calc_label:"🧮 पैकेजिंग कैलकुलेटर", search_ph:"ब्लॉग खोजें...", filt_all:"सभी", filt_pack:"फ्लेक्सिबल पैकेजिंग", filt_excel:"एक्सेल और फॉर्मूले", filt_career:"करियर और विकास", filt_tech:"तकनीक और उपकरण", filt_mfg:"मैन्युफैक्चरिंग एक्सीलेंस"
 };
 
 const EN = {
@@ -191,7 +191,7 @@ const EN = {
   ppl_title:"The People Behind <span>This Journey</span>",
   ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
   pcat_par:"🙏 My Parents", pcat_spec:"⭐ Special Thanks",
-  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", c9_t:"Converting Plant Capacity", c9_s:"All machines → MT/day · plant bottleneck", calc_label:"🧮 Packaging Calculators", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
+  nav_calc:"Calculators", c1_t:"Film Roll Weight", c2_t:"Roll Length from Weight", c3_t:"Roll OD (Outer Diameter)", c4_t:"GSM ↔ Micron Conversion", c5_t:"Production Yield %", c6_t:"Machine Utilisation %", c7_t:"Cost per Square Meter", c8_t:"Met M/C Capacity", c8_s:"3-Step: Cycle → Rolls/day → MT/day", c9_t:"Converting Plant Capacity", c9_s:"All machines → MT/day · plant bottleneck", c10_t:"Min Manpower", c10_s:"Shifts × Machines × Relief × Buffer → Headcount", calc_label:"🧮 Packaging Calculators", search_ph:"Search blogs...", filt_all:"All", filt_pack:"Flexible Packaging", filt_excel:"Excel & Formulas", filt_career:"Career & Growth", filt_tech:"Tech & Tools", filt_mfg:"Manufacturing Excellence"
 };
 
 let curLang = (function(){
@@ -328,6 +328,7 @@ function resetCalc(cardId) {
   /* Re-run calculator after reset so results update */
   try {
     if (cardId === 'calc-converting-capacity' && typeof calcConvPlant === 'function') calcConvPlant();
+    if (cardId === 'calc-min-manpower' && typeof calcMinManpower === 'function') { calcMinManpowerRebuildMachines(); calcMinManpower(); }
     else if (cardId === 'calc-met-capacity' && typeof calcMetCapacity === 'function') calcMetCapacity();
     else {
       var fnMap = {
@@ -378,6 +379,9 @@ function toggleCalc(head, evt){
     /* Compute converting plant result when card opens */
     if(card.id === 'calc-converting-capacity' && typeof calcConvPlant === 'function'){
       setTimeout(function(){ calcConvPlant(); }, 0);
+    }
+    if(card.id === 'calc-min-manpower' && typeof calcMinManpower === 'function'){
+      setTimeout(function(){ calcMinManpowerRebuildMachines(); calcMinManpower(); }, 0);
     }
     if(card.id === 'calc-met-capacity' && typeof calcMetCapacity === 'function'){
       setTimeout(function(){ calcMetCapacity(); }, 0);
@@ -1743,4 +1747,102 @@ function submitNewsletter(ev, source){
       inp.addEventListener('change', function(){ calcConvPlant(); });
     });
   });
+})();
+
+
+/* ---- Min Manpower calculator (ported from ManPower app, simplified) ---- */
+var _mmMachineDefaults = [
+  { name: 'Printing', count: 2, perShift: 3 },
+  { name: 'Lamination', count: 1, perShift: 2 },
+  { name: 'Slitting', count: 2, perShift: 2 },
+  { name: 'Pouching', count: 2, perShift: 2 }
+];
+
+function calcMinManpowerRebuildMachines(){
+  var wrap = document.getElementById('mm-machines');
+  if(!wrap) return;
+  var n = Math.max(1, Math.min(8, parseInt((document.getElementById('mm-mtypes')||{}).value, 10) || 2));
+  var existing = [];
+  wrap.querySelectorAll('.mm-mc-row').forEach(function(row, i){
+    existing[i] = {
+      name: (row.querySelector('.mm-mc-name')||{}).value || '',
+      count: (row.querySelector('.mm-mc-count')||{}).value || '1',
+      perShift: (row.querySelector('.mm-mc-ps')||{}).value || '2'
+    };
+  });
+  var html = '';
+  for(var i=0; i<n; i++){
+    var def = existing[i] || _mmMachineDefaults[i] || { name: 'Line-'+(i+1), count: 1, perShift: 2 };
+    html += '<div class="calc-row c3 mm-mc-row" style="margin-bottom:6px">' +
+      '<div class="calc-field"><label>Machine name</label><input type="text" class="mm-mc-name" value="'+String(def.name).replace(/"/g,'&quot;')+'" oninput="calcMinManpower()"></div>' +
+      '<div class="calc-field"><label>Qty of machines</label><input type="number" class="mm-mc-count" value="'+def.count+'" min="0" oninput="calcMinManpower()"></div>' +
+      '<div class="calc-field"><label>People / machine / shift</label><input type="number" class="mm-mc-ps" value="'+def.perShift+'" min="0" step="0.5" oninput="calcMinManpower()"></div>' +
+      '</div>';
+  }
+  wrap.innerHTML = html;
+  calcMinManpower();
+}
+
+function calcMinManpower(){
+  try{
+    var n = function(id){ var el=document.getElementById(id); return el ? parseFloat(el.value) : NaN; };
+    var shifts = Math.max(1, n('mm-shifts')||1);
+    var offs = Math.max(0, Math.min(3, n('mm-offs')||0));
+    var run = Math.max(1, Math.min(7, n('mm-run')||7));
+    var bufPct = Math.max(0, n('mm-buf')||0);
+    var work = Math.max(1, run - offs);
+    var relief = run / work;
+    var buf = 1 + bufPct/100;
+
+    var onDutyMachines = 0, machineUnits = 0;
+    document.querySelectorAll('#mm-machines .mm-mc-row').forEach(function(row){
+      var count = Math.max(0, parseFloat((row.querySelector('.mm-mc-count')||{}).value)||0);
+      var ps = Math.max(0, parseFloat((row.querySelector('.mm-mc-ps')||{}).value)||0);
+      onDutyMachines += count * ps;
+      machineUnits += count;
+    });
+    var processMachines = Math.ceil(onDutyMachines * shifts * relief * buf);
+
+    var eng = Math.max(0, n('mm-eng')||0);
+    var sup = Math.max(0, n('mm-sup')||0);
+    var other = Math.max(0, n('mm-other')||0);
+    var processDesig = Math.ceil((eng + sup + other) * relief * buf);
+
+    var engBase = Math.max(0, n('mm-engbase')||0);
+    var engPer = Math.max(0, n('mm-engper')||0);
+    var engOnDuty = engBase + machineUnits * engPer;
+    var engineeringTotal = Math.ceil(engOnDuty * relief * buf);
+
+    var processTotal = processMachines + processDesig;
+    var grand = processTotal + engineeringTotal;
+
+    var set = function(id, v){ var el=document.getElementById(id); if(el) el.textContent = v; };
+    set('mm-relief', relief.toFixed(3));
+    set('mm-res', isFinite(grand) ? String(grand) : '—');
+    set('mm-proc', isFinite(processMachines) ? String(processMachines) : '—');
+    set('mm-shared', isFinite(processDesig) ? String(processDesig) : '—');
+    set('mm-engtot', isFinite(engineeringTotal) ? String(engineeringTotal) : '—');
+    set('mm-detail',
+      'Relief '+relief.toFixed(3)+' · Buffer '+(bufPct)+'% · On-duty machine crew/shift '+onDutyMachines.toFixed(1)+
+      ' · Machine units '+machineUnits
+    );
+    set('mm-sub', 'Minimum headcount (rounded up)');
+  }catch(err){
+    console.error('calcMinManpower error:', err);
+  }
+}
+window.calcMinManpower = calcMinManpower;
+window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
+
+(function initMinManpowerCalc(){
+  function run(){
+    try {
+      if (typeof calcMinManpowerRebuildMachines === 'function') calcMinManpowerRebuildMachines();
+    } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(run, 120); });
+  } else {
+    setTimeout(run, 120);
+  }
 })();

@@ -204,7 +204,7 @@
           <a href="#industry-apps" class="btn-s" data-i="hero_btn2">See All Apps</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><div class="num">9</div><div class="lbl" data-i="stat1">Calculators</div></div>
+          <div class="stat-item"><div class="num">10</div><div class="lbl" data-i="stat1">Calculators</div></div>
           <div class="stat-item"><div class="num" id="statArticlesNum">–</div><div class="lbl" data-i="stat2">Articles Published</div></div>
           <div class="stat-item"><div class="num">6</div><div class="lbl" data-i="stat3">Apps Live</div></div>
           <div class="stat-item"><div class="num">100%</div><div class="lbl" data-i="stat4">Free</div></div>
@@ -293,7 +293,7 @@
     <div class="reveal">
       <div class="section-label" data-i="calc_label">🧮 Packaging Calculators</div>
       <h2 class="section-title" data-i="calc_title">Packaging <span>Calculators</span></h2>
-      <p class="section-sub" data-i="calc_sub">Free online calculators for flexible packaging professionals. Calculate film roll weight, length, OD, GSM, yield, Met capacity, converting capacity and more.</p>
+      <p class="section-sub" data-i="calc_sub">Free online calculators for flexible packaging professionals. Calculate film roll weight, length, OD, GSM, yield, Met capacity, converting capacity, min manpower and more.</p>
     </div>
     <div class="calc-grid">
 
@@ -393,6 +393,7 @@
           <div class="calc-row"><div class="calc-field"><label>Boat-Set Life (m)</label><input type="number" id="mc-boatset" placeholder="600000" oninput="calcMetCapacity()"></div><div class="calc-field"><label>Source Cleaning/day (min)</label><input type="number" id="mc-cleaning" value="20" oninput="calcMetCapacity()"></div></div>
           <div class="calc-result"><div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub"></div></div><div class="unit">MT/day</div></div>
         </div>
+      </div>
 
       <!-- 9. CONVERTING PLANT CAPACITY — multi-machine (same field UI as Met M/C) -->
       <div class="calc-card reveal calc-tall" id="calc-converting-capacity">
@@ -481,6 +482,65 @@
           </div>
           <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="cp-detail"></div>
           <span id="cp-plant-mt" class="sr-only" aria-hidden="true">—</span>
+        </div>
+      </div>
+
+
+      <!-- 10. MIN MANPOWER — plant staffing headcount -->
+      <div class="calc-card reveal calc-tall" id="calc-min-manpower">
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">👥</span><div class="calc-info"><h3 data-i="c10_t">Min Manpower</h3><p data-i="c10_s">Shifts × Machines × Relief × Buffer → Headcount</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
+            Relief factor = Running days ÷ (Running − Weekly offs). Total headcount includes process team, shared designations and engineering support.
+          </div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Plant shifts &amp; days</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Shifts / day</label><input type="number" id="mm-shifts" value="3" min="1" max="4" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Weekly offs / person</label><input type="number" id="mm-offs" value="1" min="0" max="3" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Running days / week</label><input type="number" id="mm-run" value="7" min="1" max="7" oninput="calcMinManpower()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Leave / absence buffer %</label><input type="number" id="mm-buf" value="10" min="0" max="40" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Relief factor</label><div class="cp-readonly" id="mm-relief">—</div></div>
+            <div class="calc-field"></div>
+          </div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Machines — process team</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Machine types (rows)</label><input type="number" id="mm-mtypes" value="2" min="1" max="8" oninput="calcMinManpowerRebuildMachines()"></div>
+            <div class="calc-field"></div>
+            <div class="calc-field"></div>
+          </div>
+          <div id="mm-machines"></div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Shared designations (not per machine)</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Engineers (on duty)</label><input type="number" id="mm-eng" value="2" min="0" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Supervisors (on duty)</label><input type="number" id="mm-sup" value="3" min="0" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Other shared (on duty)</label><input type="number" id="mm-other" value="0" min="0" oninput="calcMinManpower()"></div>
+          </div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Engineering support</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Base eng. team</label><input type="number" id="mm-engbase" value="4" min="0" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Extra eng. / machine unit</label><input type="number" id="mm-engper" value="0.25" min="0" step="0.05" oninput="calcMinManpower()"></div>
+            <div class="calc-field"></div>
+          </div>
+
+          <div class="calc-result" style="margin-top:16px">
+            <div>
+              <div class="val" id="mm-res">—</div>
+              <div class="sub" id="mm-sub">Minimum headcount</div>
+            </div>
+            <div class="unit">People</div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px 22px;margin-top:12px;font-size:.78rem;color:var(--muted);">
+            <div>Process: <strong id="mm-proc" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
+            <div>Shared: <strong id="mm-shared" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
+            <div>Engineering: <strong id="mm-engtot" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
+          </div>
+          <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="mm-detail"></div>
         </div>
       </div>
 
