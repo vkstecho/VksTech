@@ -29,7 +29,7 @@ Keep your existing assets as-is: `logo.jpeg`, `icon512*.png`, `vivek.png`, `favi
 
 ### SEO
 - `hreflang` tags (`en-IN`, `hi-IN`, `x-default`)
-- Expanded JSON-LD: Person, Organization, WebSite + **SoftwareApplication** (MET Power, Plan Power, FP Job) + **FAQPage** (common calculator questions)
+- Expanded JSON-LD: Person, Organization, WebSite + **SoftwareApplication** (MET Power, Plan Power, PackLink) + **FAQPage** (common calculator questions)
 - SearchAction on WebSite schema
 - `robots.txt` + starter `sitemap.xml`
 
@@ -112,7 +112,7 @@ Field IDs match the `id` attributes in the HTML (e.g. `cw-len`, `mc-jumbo`).
 
 ## Update — remove MET Power
 - Removed MET Power card, modules subsection, hero card, JSON-LD, footer link, keywords.
-- Industry apps now: Man Power, Plan Power, FP Job.
+- Industry apps now: Man Power, Plan Power, PackLink.
 
 ---
 
