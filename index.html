@@ -491,56 +491,65 @@
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">👥</span><div class="calc-info"><h3 data-i="c10_t">Min Manpower</h3><p data-i="c10_s">Shifts × Machines × Relief × Buffer → Headcount</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
         <div class="calc-body">
           <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.5;">
-            Relief factor = Running days ÷ (Running − Weekly offs). Total headcount includes process team, shared designations and engineering support.
+            Same formula as the <b>Man Power</b> app.<br>
+            Relief = Running days ÷ (Running − Weekly offs).<br>
+            Machines: ceil(on-duty × shifts × relief × buffer) · Shared &amp; Engineering: ceil(on-duty × relief × buffer) — <b>not</b> × shifts again.
           </div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Plant shifts &amp; days</div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">1 · Plant shifts &amp; days</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Shifts / day</label><input type="number" id="mm-shifts" value="3" min="1" max="4" oninput="calcMinManpower()"></div>
-            <div class="calc-field"><label>Weekly offs / person</label><input type="number" id="mm-offs" value="1" min="0" max="3" oninput="calcMinManpower()"></div>
-            <div class="calc-field"><label>Running days / week</label><input type="number" id="mm-run" value="7" min="1" max="7" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Shifts / day</label><input type="number" id="mm-shifts" value="3" min="1" max="4" step="1" inputmode="numeric"></div>
+            <div class="calc-field"><label>Weekly offs / person</label><input type="number" id="mm-offs" value="1" min="0" max="3" step="1" inputmode="numeric"></div>
+            <div class="calc-field"><label>Running days / week</label><input type="number" id="mm-run" value="7" min="1" max="7" step="1" inputmode="numeric"></div>
           </div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Leave / absence buffer %</label><input type="number" id="mm-buf" value="10" min="0" max="40" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Leave / absence buffer %</label><input type="number" id="mm-buf" value="10" min="0" max="40" step="1" inputmode="numeric"></div>
             <div class="calc-field"><label>Relief factor</label><div class="cp-readonly" id="mm-relief">—</div></div>
-            <div class="calc-field"></div>
+            <div class="calc-field"><label>Buffer multiplier</label><div class="cp-readonly" id="mm-bufmult">—</div></div>
           </div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Machines — process team</div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">2 · Machines — process team</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Machine types (rows)</label><input type="number" id="mm-mtypes" value="2" min="1" max="8" oninput="calcMinManpowerRebuildMachines()"></div>
+            <div class="calc-field"><label>Machine types (rows)</label><input type="number" id="mm-mtypes" value="2" min="1" max="8" step="1" inputmode="numeric"></div>
             <div class="calc-field"></div>
             <div class="calc-field"></div>
           </div>
-          <div id="mm-machines"></div>
+          <div id="mm-machines" style="display:flex;flex-direction:column;gap:8px;margin-bottom:4px;"></div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Shared designations (not per machine)</div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">3 · Shared designations (not per machine)</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Engineers (on duty)</label><input type="number" id="mm-eng" value="2" min="0" oninput="calcMinManpower()"></div>
-            <div class="calc-field"><label>Supervisors (on duty)</label><input type="number" id="mm-sup" value="3" min="0" oninput="calcMinManpower()"></div>
-            <div class="calc-field"><label>Other shared (on duty)</label><input type="number" id="mm-other" value="0" min="0" oninput="calcMinManpower()"></div>
+            <div class="calc-field"><label>Engineers (on duty)</label><input type="number" id="mm-eng" value="2" min="0" step="1" inputmode="numeric"></div>
+            <div class="calc-field"><label>Supervisors (on duty)</label><input type="number" id="mm-sup" value="3" min="0" step="1" inputmode="numeric"></div>
+            <div class="calc-field"><label>Other shared (on duty)</label><input type="number" id="mm-other" value="0" min="0" step="1" inputmode="numeric"></div>
           </div>
 
-          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">Engineering support</div>
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:18px 0 8px;text-transform:uppercase;">4 · Engineering support</div>
           <div class="calc-row c3">
-            <div class="calc-field"><label>Base eng. team</label><input type="number" id="mm-engbase" value="4" min="0" oninput="calcMinManpower()"></div>
-            <div class="calc-field"><label>Extra eng. / machine unit</label><input type="number" id="mm-engper" value="0.25" min="0" step="0.05" oninput="calcMinManpower()"></div>
-            <div class="calc-field"></div>
+            <div class="calc-field"><label>Base eng. on-duty (plant)</label><input type="number" id="mm-engbase" value="4" min="0" step="1" inputmode="numeric"></div>
+            <div class="calc-field"><label>Extra eng. / machine unit</label><input type="number" id="mm-engper" value="0.25" min="0" step="0.05" inputmode="decimal"></div>
+            <div class="calc-field"><label>Eng. on-duty (computed)</label><div class="cp-readonly" id="mm-engonduty">—</div></div>
           </div>
 
-          <div class="calc-result" style="margin-top:16px">
+          <div class="calc-result" style="margin-top:16px" aria-live="polite" aria-atomic="true">
             <div>
               <div class="val" id="mm-res">—</div>
               <div class="sub" id="mm-sub">Minimum headcount</div>
             </div>
             <div class="unit">People</div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:14px 22px;margin-top:12px;font-size:.78rem;color:var(--muted);">
-            <div>Process: <strong id="mm-proc" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
-            <div>Shared: <strong id="mm-shared" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
-            <div>Engineering: <strong id="mm-engtot" style="color:var(--navy);font-family:JetBrains Mono,monospace;">—</strong></div>
+
+          <div id="mm-breakdown" style="display:grid;gap:8px;margin-top:12px;">
+            <div style="padding:10px 12px;border-radius:10px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);font-size:.78rem;">
+              <b style="color:#16a34a;">Process team</b>: <strong id="mm-proc" style="font-family:JetBrains Mono,monospace;color:var(--navy);">—</strong>
+              <div style="color:var(--muted);margin-top:4px;font-size:.7rem;font-family:JetBrains Mono,monospace;" id="mm-proc-detail">Machine operators + shared designations</div>
+            </div>
+            <div style="padding:10px 12px;border-radius:10px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);font-size:.78rem;">
+              <b style="color:#0284c7;">Engineering team</b>: <strong id="mm-engtot" style="font-family:JetBrains Mono,monospace;color:var(--navy);">—</strong>
+              <div style="color:var(--muted);margin-top:4px;font-size:.7rem;font-family:JetBrains Mono,monospace;" id="mm-eng-detail">Base + per machine unit</div>
+            </div>
           </div>
           <div style="margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.55;font-family:JetBrains Mono,monospace;" id="mm-detail"></div>
+          <div style="display:none"><strong id="mm-shared">—</strong></div>
         </div>
       </div>
 
@@ -751,7 +760,7 @@
 <div class="toast" id="toast"><span class="toast-icon">✅</span><div><strong>Request Submitted!</strong><br><span style="font-size:.8rem;opacity:.7;">Vivek will review your idea soon.</span></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script defer src="js/app.js?v=20261006c"></script>
+<script defer src="js/app.js?v=20261104mm"></script>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
 
@@ -863,6 +872,147 @@
   });
 })();
 </script>
+
+<script id="mm-inline-calc">
+/* Min Manpower — inline so it works even if app.js is cached (same pattern as converting plant) */
+(function(){
+  var DEFAULTS = [
+    { name: 'Printing', count: 2, perShift: 3 },
+    { name: 'Lamination', count: 1, perShift: 2 },
+    { name: 'Slitting', count: 2, perShift: 2 },
+    { name: 'Pouching', count: 2, perShift: 2 }
+  ];
+
+  function n(id){
+    var el = document.getElementById(id);
+    if(!el) return 0;
+    var v = parseFloat(String(el.value).replace(/,/g,'').trim());
+    return isFinite(v) ? v : 0;
+  }
+  function setTxt(id, v){
+    var el = document.getElementById(id);
+    if(el) el.textContent = v;
+  }
+
+  function rebuildMachines(){
+    var wrap = document.getElementById('mm-machines');
+    if(!wrap) return;
+    var countEl = document.getElementById('mm-mtypes');
+    var num = Math.max(1, Math.min(8, parseInt(countEl && countEl.value, 10) || 2));
+    var existing = [];
+    wrap.querySelectorAll('.mm-mc-row').forEach(function(row, i){
+      existing[i] = {
+        name: (row.querySelector('.mm-mc-name')||{}).value || '',
+        count: (row.querySelector('.mm-mc-count')||{}).value || '1',
+        perShift: (row.querySelector('.mm-mc-ps')||{}).value || '2'
+      };
+    });
+    var html = '';
+    for(var i=0; i<num; i++){
+      var def = existing[i] || DEFAULTS[i] || { name: 'Line-'+(i+1), count: 1, perShift: 2 };
+      html += '<div class="mm-mc-row" style="padding:10px 12px;border-radius:10px;border:1px solid var(--border, #e2e8f0);background:rgba(15,23,42,.02);">' +
+        '<div class="calc-row c3" style="margin:0">' +
+        '<div class="calc-field"><label>Machine name</label><input type="text" class="mm-mc-name" value="'+String(def.name).replace(/"/g,'&quot;')+'"></div>' +
+        '<div class="calc-field"><label>Qty of machines</label><input type="number" class="mm-mc-count" value="'+def.count+'" min="0" step="1" inputmode="numeric"></div>' +
+        '<div class="calc-field"><label>People / machine / shift</label><input type="number" class="mm-mc-ps" value="'+def.perShift+'" min="0" step="0.5" inputmode="decimal"></div>' +
+        '</div></div>';
+    }
+    wrap.innerHTML = html;
+    wrap.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('input', calc);
+      inp.addEventListener('change', calc);
+    });
+    calc();
+  }
+
+  function calc(){
+    try{
+      var shifts = Math.max(1, n('mm-shifts')||1);
+      var offs = Math.max(0, Math.min(6, n('mm-offs')||0));
+      var run = Math.max(1, Math.min(7, n('mm-run')||7));
+      if(offs >= run) offs = Math.max(0, run - 1);
+      var bufPct = Math.max(0, n('mm-buf')||0);
+      var work = Math.max(1, run - offs);
+      var relief = run / work;
+      var buf = 1 + bufPct/100;
+
+      var onDutyMachines = 0, machineUnits = 0;
+      document.querySelectorAll('#mm-machines .mm-mc-row').forEach(function(row){
+        var count = Math.max(0, parseFloat((row.querySelector('.mm-mc-count')||{}).value)||0);
+        var ps = Math.max(0, parseFloat((row.querySelector('.mm-mc-ps')||{}).value)||0);
+        onDutyMachines += count * ps;
+        machineUnits += count;
+      });
+      var processMachines = Math.ceil(onDutyMachines * shifts * relief * buf);
+
+      var eng = Math.max(0, n('mm-eng')||0);
+      var sup = Math.max(0, n('mm-sup')||0);
+      var other = Math.max(0, n('mm-other')||0);
+      var processDesig = Math.ceil((eng + sup + other) * relief * buf);
+
+      var engBase = Math.max(0, n('mm-engbase')||0);
+      var engPer = Math.max(0, n('mm-engper')||0);
+      var engOnDuty = engBase + machineUnits * engPer;
+      var engineeringTotal = Math.ceil(engOnDuty * relief * buf);
+
+      var processTotal = processMachines + processDesig;
+      var grand = processTotal + engineeringTotal;
+
+      setTxt('mm-relief', relief.toFixed(3));
+      setTxt('mm-bufmult', buf.toFixed(2)+'×');
+      setTxt('mm-engonduty', engOnDuty.toFixed(2));
+      setTxt('mm-res', isFinite(grand) ? String(grand) : '—');
+      setTxt('mm-proc', isFinite(processTotal) ? String(processTotal) : '—');
+      setTxt('mm-shared', isFinite(processDesig) ? String(processDesig) : '—');
+      setTxt('mm-engtot', isFinite(engineeringTotal) ? String(engineeringTotal) : '—');
+      setTxt('mm-proc-detail',
+        'Operators '+processMachines+' · Shared designations '+processDesig+
+        ' · On-duty machine crew/shift '+onDutyMachines.toFixed(1)
+      );
+      setTxt('mm-eng-detail',
+        'On-duty '+engOnDuty.toFixed(2)+' · Base '+engBase+' + '+machineUnits+' units × '+engPer
+      );
+      setTxt('mm-detail',
+        'Shifts '+shifts+' · Relief '+relief.toFixed(3)+' · Buffer '+bufPct+'% · Machine units '+machineUnits+
+        ' · Formula: machines = ceil(onDuty×shifts×relief×buf); shared/eng = ceil(onDuty×relief×buf)'
+      );
+      setTxt('mm-sub', 'Minimum headcount (rounded up)');
+    }catch(err){
+      console.error('calcMinManpower error:', err);
+      setTxt('mm-sub', 'Calculation error — check inputs');
+    }
+  }
+
+  function bind(){
+    ['mm-shifts','mm-offs','mm-run','mm-buf','mm-eng','mm-sup','mm-other','mm-engbase','mm-engper'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('input', calc);
+      el.addEventListener('change', calc);
+    });
+    var mt = document.getElementById('mm-mtypes');
+    if(mt){
+      mt.addEventListener('input', rebuildMachines);
+      mt.addEventListener('change', rebuildMachines);
+    }
+    rebuildMachines();
+  }
+
+  // Public API (compatible with app.js toggleCalc / resetCalc)
+  window.calcMinManpower = calc;
+  window.calcMinManpowerRebuildMachines = rebuildMachines;
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+
+  window.addEventListener('hashchange', function(){
+    if(location.hash.indexOf('calc-min-manpower') >= 0 || location.hash.indexOf('calculators') >= 0){
+      setTimeout(function(){ rebuildMachines(); }, 50);
+    }
+  });
+})();
+</script>
+
 
 </body>
 </html>
