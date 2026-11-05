@@ -1002,3 +1002,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   }
   .highlight-card .hl-num { font-size: 1.55rem; }
 }
+
+
+/* Company logos on dark strip */
+.cob .co-logo-img{
+  height:28px;
+  width:auto;
+  max-width:96px;
+  object-fit:contain;
+  margin-bottom:8px;
+  display:block;
+  border-radius:4px;
+  background:rgba(255,255,255,.95);
+  padding:3px 6px;
+}
+.cob .co-logo-vks{
+  height:36px;
+  width:36px;
+  max-width:36px;
+  border-radius:50%;
+  padding:2px;
+  object-fit:cover;
+}
