@@ -4,198 +4,114 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>The People Behind This Journey | VKS Tech</title>
-<meta name="description" content="A page of gratitude. Every app, every late night, every moment of doubt overcome — these are the people who made it possible. Vivek Kumar's tribute to his parents and his guiding light."/>
+<meta name="description" content="Gratitude to parents, mentors, and colleagues at UFlex, Jindal, and GLS who shaped Vivek Kumar's journey."/>
 <meta name="robots" content="index, follow"/>
 <meta name="theme-color" content="#1a2744"/>
 <link rel="canonical" href="https://vkstech.com/people"/>
-
-<!-- Open Graph -->
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="The People Behind This Journey | VKS Tech"/>
-<meta property="og:description" content="A page of gratitude. Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible."/>
+<meta property="og:description" content="A page of gratitude — parents, seniors, and colleagues who made the journey possible."/>
 <meta property="og:url" content="https://vkstech.com/people"/>
 <meta property="og:image" content="https://vkstech.com/og-image.png"/>
-
-<!-- Favicons -->
 <link rel="icon" href="assets/favicon.ico" sizes="any"/>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-vks180.png"/>
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600;700&family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#faf9f6; --bg2:#f3f1ec; --card:#fff;
   --border:#e2ddd4; --border2:#d0c9bc;
   --navy:#1a2744; --orange:#e85d26; --orange2:#f07040;
-  --teal:#0d8c7e; --gold:#c8860a;
-  --text:#1a2744; --muted:#6b7a99; --light:#9aaac4;
+  --teal:#0d8c7e; --text:#1a2744; --muted:#6b7a99; --light:#9aaac4;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;overflow-x:hidden;}
-
-/* Subtle background motion (matches homepage) */
-.pg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
-.pg .b1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,38,.06) 0%,transparent 70%);top:-200px;right:-100px;animation:bm1 14s ease-in-out infinite;}
-.pg .b2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,126,.05) 0%,transparent 70%);bottom:-100px;left:-80px;animation:bm2 18s ease-in-out infinite;}
-@keyframes bm1{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,70px);}}
-@keyframes bm2{0%,100%{transform:translate(0,0);}50%{transform:translate(70px,-50px);}}
-
-/* Top bar (sticky) */
-.topbar{position:sticky;top:0;z-index:10;background:rgba(250,249,246,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;}
-.back-btn{background:var(--navy);color:#fff;border:none;padding:10px 22px;border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:background .2s;}
-.back-btn:hover{background:var(--orange);}
-.brand{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--navy);letter-spacing:.5px;text-decoration:none;}
-.brand .accent{color:var(--orange);}
-
-/* Hero — quietly emotional */
+.pg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.pg .b1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,38,.06) 0%,transparent 70%);top:-200px;right:-100px;}
+.pg .b2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(13,140,126,.05) 0%,transparent 70%);bottom:-100px;left:-80px;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(250,249,246,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:14px 5%;display:flex;align-items:center;}
+.tb-brand{display:flex;align-items:center;text-decoration:none;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--navy);}
+.tb-brand .vks-tech{color:#e11d2a;font-weight:500;}
 .hero{position:relative;z-index:1;padding:80px 5% 30px;text-align:center;max-width:780px;margin:0 auto;}
 .hero-eyebrow{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;font-weight:600;}
-.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.9rem,4vw,2.6rem);color:var(--navy);line-height:1.18;letter-spacing:-.5px;margin-bottom:1.4rem;}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.9rem,4vw,2.6rem);color:var(--navy);line-height:1.18;margin-bottom:1.4rem;}
 .hero h1 span{color:var(--orange);}
 .hero-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.05rem,2.2vw,1.25rem);color:var(--muted);line-height:1.7;max-width:620px;margin:0 auto;}
-
-/* Opening paragraph block */
 .opening{position:relative;z-index:1;max-width:720px;margin:50px auto;padding:0 5%;}
 .opening p{font-size:1.02rem;color:var(--text);line-height:1.95;margin-bottom:1.1rem;}
-.opening p:first-of-type::first-letter{
-  font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;color:var(--orange);
-  float:left;line-height:.9;padding-right:10px;padding-top:5px;
-}
-.opening strong{color:var(--navy);}
-
-/* Section dividers */
-.divider{display:flex;align-items:center;justify-content:center;max-width:780px;margin:60px auto 40px;padding:0 5%;gap:14px;}
-.divider .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+.opening p:first-of-type::first-letter{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;color:var(--orange);float:left;line-height:.9;padding-right:10px;padding-top:5px;}
+.divider{display:flex;align-items:center;justify-content:center;max-width:780px;margin:50px auto 30px;padding:0 5%;gap:14px;}
+.divider .line{flex:1;height:1px;background:var(--border);}
 .divider .heart{font-size:1.1rem;}
-
-/* People sections */
-.people-section{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 5%;}
-.people-section h2{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.2rem,2.6vw,1.5rem);color:var(--navy);margin-bottom:.5rem;text-align:center;}
-.people-section .sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:2.4rem;line-height:1.7;}
-
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;justify-items:center;max-width:720px;margin:0 auto;}
-.pcard{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 22px;text-align:center;box-shadow:0 2px 12px rgba(26,39,68,.07);transition:all .3s;width:100%;max-width:320px;}
-.pcard:hover{box-shadow:0 8px 28px rgba(26,39,68,.1);border-color:var(--orange2);transform:translateY(-3px);}
-.pav{width:100px;height:100px;border-radius:50%;margin:0 auto 14px;overflow:hidden;border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:var(--bg2);}
+.people-section{position:relative;z-index:1;max-width:960px;margin:0 auto 40px;padding:0 5%;}
+.people-section h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.55rem;color:var(--navy);margin-bottom:.4rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.people-section h2 img.co-logo{height:32px;width:auto;max-width:120px;object-fit:contain;border-radius:6px;background:#fff;padding:3px 6px;border:1px solid var(--border);}
+.people-section .sub{color:var(--muted);font-size:.95rem;margin-bottom:1.4rem;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;box-shadow:0 2px 12px rgba(26,39,68,.04);}
+.pav{width:72px;height:72px;border-radius:50%;margin:0 auto 10px;overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
 .pav img{width:100%;height:100%;object-fit:cover;}
-.pname{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--navy);margin-bottom:4px;}
-.prel{font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
-.pnote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.7;padding:0 4px;}
-
-/* Special-thanks card gets a warmer treatment */
-.special-card{
-  max-width:480px;background:linear-gradient(135deg,rgba(232,93,38,.04),rgba(13,140,126,.03));
-  border:1px solid var(--border);border-left:4px solid var(--orange);
-}
-.special-card .pav{border-color:rgba(232,93,38,.3);box-shadow:0 4px 20px rgba(232,93,38,.18);}
-
-/* Closing reflection */
-.closing{position:relative;z-index:1;max-width:720px;margin:80px auto 40px;padding:40px 5%;text-align:center;}
-.closing .quote-mark{font-family:'Playfair Display',serif;font-size:5rem;color:var(--orange);line-height:.4;opacity:.4;}
-.closing p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2.4vw,1.35rem);color:var(--navy);line-height:1.7;margin:1rem 0;}
-.closing .signature{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--orange);margin-top:1.5rem;letter-spacing:1px;}
-
-/* Quiet CTA */
-.cta-quiet{position:relative;z-index:1;max-width:680px;margin:30px auto 80px;padding:30px 5%;text-align:center;border-top:1px solid var(--border);}
-.cta-quiet h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:.6rem;}
-.cta-quiet p{color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:1.2rem;}
-.cta-quiet .quiet-link{color:var(--orange);text-decoration:none;font-weight:700;font-size:.92rem;border-bottom:2px solid transparent;transition:border-color .2s;}
-.cta-quiet .quiet-link:hover{border-bottom-color:var(--orange);}
-
-/* Footer */
-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:40px 5%;text-align:center;font-size:.82rem;position:relative;z-index:1;}
-footer a{color:var(--orange);text-decoration:none;font-weight:700;}
-
-@media(max-width:600px){
-  .topbar{padding:12px 4%;}
-  .back-btn{padding:8px 18px;font-size:.78rem;}
-  .brand{font-size:.92rem;}
-  .hero{padding:50px 5% 20px;}
-  .opening{margin:40px auto;}
-  .opening p{font-size:.96rem;}
-  .closing{margin:60px auto 30px;padding:30px 5%;}
-  .pcard{padding:22px 16px;}
-  .pav{width:84px;height:84px;}
-}
-
-/* Reveal animation */
-.reveal{opacity:0;transform:translateY(20px);transition:all .7s ease-out;}
+.pname{font-weight:700;font-size:.95rem;color:var(--navy);}
+.prel{font-size:.75rem;color:var(--muted);margin-top:2px;}
+.pnote{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5;}
+.special-card{border-color:rgba(232,93,38,.35);box-shadow:0 4px 20px rgba(232,93,38,.08);}
+.name-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+.name-pill{background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:.84rem;font-weight:600;color:var(--navy);line-height:1.3;}
+.name-pill.ms{border-color:rgba(13,140,126,.3);background:rgba(13,140,126,.04);}
+.co-head{display:flex;align-items:center;gap:12px;margin-bottom:.35rem;flex-wrap:wrap;}
+.co-head h2{margin:0;}
+.note-others{margin-top:14px;font-size:.88rem;color:var(--muted);font-style:italic;}
+.closing{position:relative;z-index:1;max-width:720px;margin:50px auto 80px;padding:0 5%;text-align:center;}
+.closing p{color:var(--muted);font-size:.98rem;line-height:1.85;}
+.reveal{opacity:0;transform:translateY(18px);transition:all .65s ease-out;}
 .reveal.visible{opacity:1;transform:none;}
-
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
-  .pg,.pg .b1,.pg .b2{animation:none!important;}
+@media(max-width:600px){
+  .hero{padding:56px 4% 20px;}
+  .pgrid{grid-template-columns:1fr 1fr;gap:10px;}
+  .name-pill{font-size:.78rem;padding:6px 11px;}
+  .people-section h2{font-size:1.3rem;}
 }
-
-/* Unified home brand link (replaces navy "Back to vkstech.com" pill) */
-.tb-brand{
-  font-family:'Playfair Display',serif;
-  font-weight:800;
-  font-size:1.15rem;
-  color:var(--navy);
-  text-decoration:none;
-  letter-spacing:-0.02em;
-  transition:opacity .2s;
-}
-.tb-brand{display:flex;align-items:center;text-decoration:none;}.tb-brand .vks-name{font-weight:800;color:#0a0a0a;font-size:1.15rem;letter-spacing:0.3px;}.tb-brand .vks-tech{font-weight:500;color:#e11d2a;font-size:1.15rem;}
-.tb-brand:hover{opacity:.85;}
-.tb-brand:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:4px;}
-/* Keep layout: brand on the left; optional right slot empty */
-.topbar{justify-content:flex-start;}
-
 </style>
 </head>
 <body>
-
 <div class="pg"><div class="b1"></div><div class="b2"></div></div>
 
-<!-- Top bar -->
 <div class="topbar">
   <a href="/" class="tb-brand" aria-label="VKS Tech home">
-    <img src="assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:8px"/>
+    <img src="assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/>
     <span class="vks-name">VKS</span><span class="vks-tech">Tech</span>
   </a>
 </div>
 
-<!-- Hero -->
 <header class="hero reveal">
   <div class="hero-eyebrow">❤️ With Gratitude</div>
   <h1>The People Behind <span>This Journey</span></h1>
   <p class="hero-quote">"No one builds anything alone. Behind every line of code, every late-night idea, every doubt overcome — there are people who made it possible."</p>
 </header>
 
-<!-- Opening reflection -->
 <section class="opening reveal">
   <p>When you build something — an app, a tool, a website, a career — the world only sees the finished output. They see the apps on this site, the calculators, the blogs. They don't see the people who made them possible.</p>
-
-  <p>This page is for those people.</p>
-
-  <p>I'm <strong>Vivek Kumar</strong>. I went to NIT Uttarakhand on a scholarship that meant nothing to me at 18, but everything to my parents. I qualified GATE while my mother prayed every morning at the temple near our house. I built my first apps in stolen hours after long shifts at UFlex, JPFL, and GLS — energy I would not have had without my cousin Ankit, who told me to keep building when nobody else thought it mattered.</p>
-
-  <p>So when you see something good on this site, it isn't really mine. It belongs to the three people on this page. They are the reason any of it exists.</p>
+  <p>This page is for those people — my parents, my family, and the colleagues and seniors at <strong>UFlex</strong>, <strong>Jindal</strong>, and <strong>GLS Polyfilms</strong> who taught me the plant floor, process discipline, and what real leadership looks like.</p>
+  <p>I'm <strong>Vivek Kumar</strong>. Everything on VKS Tech stands on what I learned from them.</p>
 </section>
 
-<!-- Divider -->
 <div class="divider reveal"><div class="line"></div><span class="heart">🙏</span><div class="line"></div></div>
 
-<!-- Parents section -->
 <section class="people-section reveal">
   <h2>My Parents</h2>
   <p class="sub">The foundation. Everything else is built on what they gave me.</p>
   <div class="pgrid">
     <div class="pcard">
-      <div class="pav"><img src="assets/papa.jpeg" alt="Mr. Guru Dutt — Father" onerror="this.style.display='none';this.parentElement.innerHTML='👨';" loading="lazy" decoding="async"/></div>
+      <div class="pav"><img src="assets/papa.jpeg" alt="Mr. Guru Dutt" onerror="this.parentElement.textContent='👨'" loading="lazy"/></div>
       <div class="pname">Mr. Guru Dutt</div>
       <div class="prel">Father</div>
       <div class="pnote">"Your sacrifices built the foundation of everything I am today."</div>
     </div>
     <div class="pcard">
-      <div class="pav"><img src="assets/mom.jpeg" alt="Mrs. Prem — Mother" onerror="this.style.display='none';this.parentElement.innerHTML='👩';" loading="lazy" decoding="async"/></div>
+      <div class="pav"><img src="assets/mom.jpeg" alt="Mrs. Prem" onerror="this.parentElement.textContent='👩'" loading="lazy"/></div>
       <div class="pname">Mrs. Prem</div>
       <div class="prel">Mother</div>
       <div class="pnote">"Your unconditional love and prayers have carried me through every storm."</div>
@@ -203,61 +119,127 @@ footer a{color:var(--orange);text-decoration:none;font-weight:700;}
   </div>
 </section>
 
-<!-- Divider -->
 <div class="divider reveal"><div class="line"></div><span class="heart">⭐</span><div class="line"></div></div>
 
-<!-- Special Thanks section -->
 <section class="people-section reveal">
   <h2>Special Thanks</h2>
   <p class="sub">When everyone else said "stop building," he said "build more."</p>
   <div class="pgrid">
     <div class="pcard special-card">
-      <div class="pav"><img src="assets/Ankit.jpeg" alt="Ankit Bhardwaj — cousin and guiding light" onerror="this.style.display='none';this.parentElement.innerHTML='⭐';" loading="lazy" decoding="async"/></div>
+      <div class="pav"><img src="assets/Ankit.jpeg" alt="Ankit Bhardwaj" onerror="this.parentElement.textContent='⭐'" loading="lazy"/></div>
       <div class="pname">Ankit Bhardwaj</div>
-      <div class="prel">Cousin & Guiding Light · IT Entrepreneur</div>
-      <div class="pnote">"Ankit bhai, your guidance, wisdom and constant encouragement have been the backbone of this entire journey. I owe more than words can express."</div>
+      <div class="prel">Cousin &amp; Guiding Light · IT Entrepreneur</div>
+      <div class="pnote">"Your guidance and constant encouragement have been the backbone of this journey."</div>
     </div>
   </div>
 </section>
 
-<!-- Closing reflection -->
+<div class="divider reveal"><div class="line"></div><span class="heart">🏭</span><div class="line"></div></div>
+
+<!-- UFlex -->
+<section class="people-section reveal">
+  <div class="co-head">
+    <h2><img class="co-logo" src="assets/logo-uflex.png" alt="UFlex" onerror="this.style.display='none'"/> UFlex Limited</h2>
+  </div>
+  <p class="sub">Colleagues and seniors who shaped the early years on the shop floor and in production leadership.</p>
+  <div class="name-cloud">
+    <span class="name-pill">Mr. Amit Khanna</span>
+    <span class="name-pill">Mr. Deep Chand Pant</span>
+    <span class="name-pill">Mr. Mahesh Verma</span>
+    <span class="name-pill">Mr. Satinder</span>
+    <span class="name-pill">Mr. Dilip Doshi</span>
+    <span class="name-pill">Mr. Sanjeev Gupta</span>
+    <span class="name-pill">Mr. Ajay Gupta</span>
+    <span class="name-pill">Mr. Ashish Tiwari</span>
+    <span class="name-pill">Mr. Naresh</span>
+    <span class="name-pill">Mr. Alauddeen</span>
+    <span class="name-pill">Mr. Parvesh</span>
+    <span class="name-pill">Mr. Lalit</span>
+    <span class="name-pill">Mr. Harender</span>
+    <span class="name-pill">Mr. Nitin</span>
+    <span class="name-pill">Mr. Aditya Tyagi</span>
+    <span class="name-pill">Mr. Pradeep Sharma</span>
+    <span class="name-pill">Mr. Bablu</span>
+    <span class="name-pill">Mr. B K Belwal</span>
+    <span class="name-pill">Mr. Deepak</span>
+    <span class="name-pill">Mr. Vijay</span>
+    <span class="name-pill">Mr. Brijesh</span>
+    <span class="name-pill">Mr. Gangaram</span>
+    <span class="name-pill">Mr. Ajab</span>
+    <span class="name-pill">Mr. Govind Dhiman</span>
+    <span class="name-pill">Mr. Prem Kumar</span>
+  </div>
+  <p class="note-others">…and others whose names are held close, or could not be listed here for space.</p>
+</section>
+
+<!-- Jindal -->
+<section class="people-section reveal">
+  <div class="co-head">
+    <h2><img class="co-logo" src="assets/logo-jindal.png" alt="Jindal" onerror="this.style.display='none'"/> Jindal Plant</h2>
+  </div>
+  <p class="sub">Leaders and teammates who strengthened process discipline and plant excellence.</p>
+  <div class="name-cloud">
+    <span class="name-pill">Mr. Punit Singh</span>
+    <span class="name-pill">Mr. Ankit Kulshreshtha</span>
+    <span class="name-pill">Mr. Sarjan Rana</span>
+    <span class="name-pill">Mr. Bharat Tailor</span>
+    <span class="name-pill">Mr. Brij Lal</span>
+    <span class="name-pill">Mr. Manoj Jain</span>
+    <span class="name-pill">Mr. Vijay Choughuley</span>
+    <span class="name-pill">Mr. Balbir</span>
+    <span class="name-pill">Mr. Nirav</span>
+    <span class="name-pill">Mr. Dharmendra Sinh</span>
+    <span class="name-pill">Mr. Akash</span>
+    <span class="name-pill">Mr. Umesh Pathare</span>
+    <span class="name-pill">Mr. NK Jena</span>
+    <span class="name-pill">Mr. Pradeep</span>
+    <span class="name-pill">Mr. Sonu Vishwakarma</span>
+    <span class="name-pill">Mr. Dishant</span>
+    <span class="name-pill">Mr. Sourav</span>
+    <span class="name-pill">Mr. Rajkumar</span>
+    <span class="name-pill">Mr. Shivam</span>
+    <span class="name-pill">Mr. Deepak</span>
+    <span class="name-pill ms">Ms. Amrita</span>
+    <span class="name-pill ms">Ms. Anjali</span>
+  </div>
+  <p class="note-others">…and others whose names are hidden or could not be written due to space.</p>
+</section>
+
+<!-- GLS -->
+<section class="people-section reveal">
+  <div class="co-head">
+    <h2><img class="co-logo" src="assets/logo-gls.png" alt="GLS Polyfilms" onerror="this.style.display='none'"/> GLS Polyfilms</h2>
+  </div>
+  <p class="sub">The team that trusted full operational ownership — production, quality, cost, and people.</p>
+  <div class="name-cloud">
+    <span class="name-pill">Mr. Pradeep Tyle</span>
+    <span class="name-pill">Mr. SS Akhtar</span>
+    <span class="name-pill">Mr. Satish Chaubey</span>
+    <span class="name-pill">Mr. S R Parida</span>
+    <span class="name-pill">Mr. Santosh</span>
+    <span class="name-pill">Mr. Suresh</span>
+    <span class="name-pill">Mr. Sanny</span>
+    <span class="name-pill">Mr. Anuj</span>
+    <span class="name-pill">Mr. Ghanshyam</span>
+  </div>
+  <p class="note-others">With respect to every colleague who shared a shift, a problem, or a solution.</p>
+</section>
+
 <section class="closing reveal">
-  <div class="quote-mark">"</div>
-  <p>To my parents — for every meal you skipped so I could study, every prayer you whispered for my exams, every sacrifice you never told me about.</p>
-  <p>To Ankit bhai — for being there when I needed direction, when I needed honesty, when I needed someone to believe in what I was building before I believed in it myself.</p>
-  <p>This site, these apps, this journey — they exist because of you.</p>
-  <p style="font-style:normal;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;color:var(--text);margin-top:2rem;">Thank you. 🙏</p>
-  <div class="signature">— Vivek</div>
+  <p>If your name belongs here and is missing, it is not for lack of gratitude — only space. You are remembered.</p>
+  <p style="margin-top:1.2rem;"><a href="/" style="color:var(--orange);font-weight:700;text-decoration:none;">← Back to VKS Tech</a></p>
 </section>
-
-<!-- Quiet reflection CTA (option b) -->
-<section class="cta-quiet reveal">
-  <h3>One last thought</h3>
-  <p>If you're reading this, you almost certainly have people like this in your own life — people who carried you when you couldn't carry yourself.</p>
-  <p style="margin-bottom:1.5rem;"><strong>Tell them today.</strong> Not next week. Not when you "have time." Today.</p>
-  <a href="/" class="quiet-link">VKS Tech home →</a>
-</section>
-
-<footer>
-  <p>© <span id="copyYear">2026</span> VKS Tech · Made with ❤️ from Haryana, India</p>
-</footer>
 
 <script>
-/* Scroll-reveal */
-const ro = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if(e.isIntersecting){
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
-      ro.unobserve(e.target);
-    }
-  });
-}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(r => ro.observe(r));
-
-/* Dynamic copyright year */
-(function(){ var el=document.getElementById('copyYear'); if(el) el.textContent=new Date().getFullYear(); })();
+document.querySelectorAll('.reveal').forEach(function(el,i){
+  setTimeout(function(){ el.classList.add('visible'); }, 80 + i*60);
+});
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+}
 </script>
-<!-- Vercel Web Analytics -->
-<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
