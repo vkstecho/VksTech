@@ -119,12 +119,12 @@ const HI = {
   yt_h2:"चैनल, <span>एक क्रिएटर।</span>",
   yt_sub2:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर चैनल और प्लेलिस्ट एक जगह।",
   yt_home_cta:"सभी प्लेलिस्ट देखें →",
-  hero_badge:"फ्लेक्सिबल पैकेजिंग के लिए बनाया गया · हरियाणा, भारत",
-  hero_title:"ऐप्स। कैलकुलेटर।<br>लेख। <span class='accent'>सब मुफ़्त।</span>",
-  hero_sub:"फ्लेक्सिबल पैकेजिंग में काम करने वाले हर पेशेवर के लिए — ऑपरेटर से लेकर प्लांट हेड तक। बनाया है <strong>विवेक कुमार</strong> ने (M.Tech, NIT उत्तराखंड), UFlex, JPFL और GLS Polyfilms में 9 साल के अनुभव से।",
-  hero_btn1:"कैलकुलेटर आज़माएँ →", hero_btn2:"सभी ऐप्स देखें",
-  stat1:"कैलकुलेटर", stat2:"प्रकाशित लेख", stat3:"लाइव ऐप्स", stat4:"मुफ़्त",
-  cos_label:"भारत के फ्लेक्सिबल पैकेजिंग उद्योग में 9 साल",
+  hero_badge:"पैकेजिंग में 9 साल · 60 सदस्यीय टीम लीड · अब फ्रीलांस",
+  hero_title:"ऐप्स। मेंटरशिप।<br>कैलकुलेटर। <span class='accent'>मुफ़्त।</span>",
+  hero_sub:"वास्तविक प्लांट लीडरशिप से बने व्यावहारिक उपकरण और वन-टू-वन मार्गदर्शन। UFlex, JPFL और GLS में 9 साल — 60 सदस्यीय टीमों का नेतृत्व सहित — के बाद <strong>विवेक कुमार</strong> (M.Tech, NIT उत्तराखंड) अब फ्रीलांस करते हैं, ऐप्स बनाते हैं और मेंटर करते हैं।",
+  hero_btn1:"मेंटरशिप बुक करें →", hero_btn2:"मुफ़्त कैलकुलेटर आज़माएँ",
+  stat1:"टीम सदस्य लीड", stat2:"वर्ष अनुभव", stat3:"लाइव ऐप्स", stat4:"मुफ़्त टूल्स",
+  cos_label:"भारत के फ्लेक्सिबल पैकेजिंग उद्योग में 9 साल · अब स्वतंत्र",
   ind_label:"🏭 फ्लेक्सिबल पैकेजिंग उद्योग", ind_title:"<span>पैकेजिंग पेशेवरों</span> के लिए ऐप्स",
   ind_sub:"उत्पादन, गुणवत्ता नियंत्रण और तकनीकी भूमिकाओं में 9 साल के व्यावहारिक अनुभव से निर्मित।",
   per_label:"🎯 व्यक्तिगत और जीवनशैली", per_title:"मनोरंजन, उत्पादकता और <span>व्यक्तिगत उपकरण</span>",
@@ -142,9 +142,9 @@ const HI = {
   fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
   submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
   about_label:"👤 मेरे बारे में",
-  about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>करियर से फ्लेक्सिबल पैकेजिंग पेशेवर</strong> और <strong>जुनून से ऐप निर्माता</strong> हूँ। UFlex, JPFL Films और GLS Polyfilms में 9 साल काम करके मैंने उद्योग की दैनिक अक्षमताओं को स्वयं महसूस किया।",
-  about_p2:"वह निराशा ईंधन बन गई। मैंने दोहराई जाने वाली गणनाओं को स्वचालित करने और गुणवत्ता प्रक्रियाओं को सुव्यवस्थित करने के लिए उपकरण बनाने शुरू किए।",
-  about_p3:"उद्योग से परे, मुझे ऐसे ऐप्स बनाना पसंद है जो रोज़मर्रा की ज़िंदगी को अधिक व्यवस्थित और कम तनावपूर्ण बनाएं। <strong>VKSTech (vkstech.com)</strong> इन सबका घर है।",
+  about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>अनुभव से प्रोडक्शन लीडर</strong> और <strong>पसंद से ऐप बिल्डर व मेंटर</strong> हूँ। UFlex, JPFL और GLS में 9 साल में मैंने <strong>60 सदस्यीय टीमों</strong> का नेतृत्व किया, प्रोडक्शन प्लानिंग, प्रोसेस कंट्रोल, क्वालिटी और कॉस्ट की पूरी जिम्मेदारी संभाली।",
+  about_p2:"मैं वर्तमान में <strong>पूर्णकालिक फ्रीलांस</strong> कर रहा हूँ: व्यावहारिक ऐप्स बनाता हूँ और mentor.vkstech.com पर वन-टू-वन मेंटरशिप देता हूँ (AI टूल्स, एक्सेल, करियर स्किल्स, फ्रीलांसिंग, पर्सनल फाइनेंस आदि)।",
+  about_p3:"हर कैलकुलेटर, हर ऐप और हर मेंटरिंग सेशन वास्तविक प्लांट-फ्लोर समस्याओं से निकला है जिन्हें मैंने स्वयं हल किया। <strong>VKS Tech</strong> इन सबका घर है।",
   ppl_label:"❤️ आभार के साथ",
   ppl_title:"इस यात्रा के पीछे <span>के लोग</span>",
   ppl_sub:"हर सफलता, हर देर रात, हर संदेह के पल को पार करना — ये वो लोग हैं जिन्होंने इसे संभव बनाया।",
@@ -161,12 +161,12 @@ const EN = {
   yt_h2:"Channels, <span>one creator.</span>",
   yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
   yt_home_cta:"See all playlists →",
-  hero_badge:"BUILT FOR FLEXIBLE PACKAGING · HARYANA, INDIA",
-  hero_title:"Apps. Calculators.<br>Articles. <span class='accent'>Free.</span>",
-  hero_sub:"A free toolkit for flexible packaging — from operators to plant heads. Built by <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) after 9 years at UFlex, JPFL, and GLS Polyfilms.",
-  hero_btn1:"Try a Calculator →", hero_btn2:"See All Apps",
-  stat1:"Calculators", stat2:"Articles Published", stat3:"Apps Live", stat4:"Free",
-  cos_label:"9 Years in India's Flexible Packaging Industry",
+  hero_badge:"9 YEARS IN PACKAGING · LED 60-MEMBER TEAMS · NOW FREELANCING",
+  hero_title:"Apps. Mentorship.<br>Calculators. <span class='accent'>Free.</span>",
+  hero_sub:"Practical tools and one-to-one guidance built from real plant leadership. After 9 years at UFlex, JPFL & GLS — including leading 60-member teams — <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) now freelances, builds apps, and mentors professionals.",
+  hero_btn1:"Book Mentorship →", hero_btn2:"Try Free Calculators",
+  stat1:"Team Members Led", stat2:"Years Experience", stat3:"Apps Live", stat4:"Free Tools",
+  cos_label:"9 Years in India's Flexible Packaging Industry · Now Independent",
   ind_label:"🏭 Flexible Packaging Industry", ind_title:"Apps for <span>Packaging Professionals</span>",
   ind_sub:"Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.",
   per_label:"🎯 Personal & Lifestyle", per_title:"Fun, Productivity & <span>Personal Tools</span>",
@@ -184,9 +184,9 @@ const EN = {
   fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
   submit_btn:"Send My App Request 🚀",
   about_label:"👤 About Me",
-  about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>Flexible Packaging professional by career</strong>, and an <strong>app builder by passion</strong>. After 9 years working at UFlex Limited, JPFL Films, and GLS Polyfilms, I've experienced first-hand the daily inefficiencies that slow down professionals in this industry.",
-  about_p2:"That frustration became fuel. I began building tools to automate repetitive calculations, streamline quality processes, and reduce manual errors. What started as personal tools slowly grew into something worth sharing.",
-  about_p3:"Beyond the industry, I love building apps that make everyday life more organised, more fun, and less stressful. <strong>VKSTech (vkstech.com)</strong> is the home for all of it.",
+  about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>production leader by experience</strong>, and an <strong>app builder & mentor by choice</strong>. Over 9 years at UFlex, JPFL and GLS I led teams of up to <strong>60 members</strong>, owned production planning, process control, quality and cost.",
+  about_p2:"I am currently <strong>freelancing full-time</strong>: building practical apps and offering one-to-one mentorship at mentor.vkstech.com (AI tools, Excel, career skills, freelancing, personal finance and more).",
+  about_p3:"Every calculator, every app, and every mentoring session is rooted in real plant-floor problems I solved myself. <strong>VKS Tech</strong> is the home for all of it.",
   ppl_label:"❤️ With Gratitude",
   ppl_title:"The People Behind <span>This Journey</span>",
   ppl_sub:"Every breakthrough, every late night, every moment of doubt overcome — these are the people who made it possible.",
@@ -1844,5 +1844,57 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
     document.addEventListener('DOMContentLoaded', function(){ setTimeout(run, 120); });
   } else {
     setTimeout(run, 120);
+  }
+})();
+
+/* ════════════════════════════════════════════════
+   STICKY MENTORSHIP CTA (mobile)
+   Shows after user scrolls past hero; hide when dismissed
+   or when near the dedicated #mentorship section.
+   ════════════════════════════════════════════════ */
+(function(){
+  var bar = document.getElementById('stickyMentor');
+  var closeBtn = document.getElementById('stickyMentorClose');
+  if(!bar) return;
+
+  var dismissed = false;
+  try { dismissed = sessionStorage.getItem('vks_sticky_mentor_dismissed') === '1'; } catch(e){}
+
+  function nearMentorship(){
+    var sec = document.getElementById('mentorship');
+    if(!sec) return false;
+    var r = sec.getBoundingClientRect();
+    // Hide when the section is in or near the viewport
+    return r.top < window.innerHeight * 0.85 && r.bottom > 80;
+  }
+
+  function update(){
+    if(dismissed || nearMentorship()){
+      bar.classList.remove('show');
+      return;
+    }
+    // Show after scrolling ~380px (past hero on most phones)
+    if(window.scrollY > 380){
+      bar.classList.add('show');
+    } else {
+      bar.classList.remove('show');
+    }
+  }
+
+  if(closeBtn){
+    closeBtn.addEventListener('click', function(){
+      dismissed = true;
+      bar.classList.remove('show');
+      try { sessionStorage.setItem('vks_sticky_mentor_dismissed', '1'); } catch(e){}
+    });
+  }
+
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update, {passive:true});
+  // Initial check
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', update);
+  } else {
+    update();
   }
 })();
