@@ -277,6 +277,26 @@ let curSort = 'newest';
 let curPage = 1;
 let curQuery = '';
 
+/* Persist list page in the URL so browser Back returns to the same page */
+function readPageFromUrl(){
+  try{
+    var p = parseInt(new URLSearchParams(location.search).get('page') || '1', 10);
+    return (p >= 1 && isFinite(p)) ? p : 1;
+  }catch(e){ return 1; }
+}
+function writePageToUrl(page, replace){
+  try{
+    if(getPathSlug && getPathSlug()) return; /* never rewrite while on /blog/<slug> */
+    var url = new URL(location.href);
+    if(page <= 1) url.searchParams.delete('page');
+    else url.searchParams.set('page', String(page));
+    var next = url.pathname + url.search + url.hash;
+    if(replace) history.replaceState({blogPage:page}, '', next);
+    else history.pushState({blogPage:page}, '', next);
+  }catch(e){}
+}
+curPage = readPageFromUrl();
+
 const CAT_INFO = {
   packaging:    {cls:'tag-to', label:'Flexible Packaging', icon:'🏭'},
   excel:        {cls:'tag-tt', label:'Excel & Formulas', icon:'📊'},
@@ -331,7 +351,8 @@ function renderCard(b){
   var subBadge = b.subcategory && SUBCAT_LABEL[b.subcategory]
     ? '<span class="blog-tag tag-sub">'+escH(SUBCAT_LABEL[b.subcategory])+'</span>'
     : '';
-  return '<a href="'+href+'" class="blog-card">'
+  /* Remember list URL (incl. ?page=) so article Back can return here */
+  return '<a href="'+href+'" class="blog-card" onclick="try{sessionStorage.setItem(\'vks_blog_list\',location.pathname+location.search);}catch(e){}">'
     + img
     + '<div class="blog-body">'
     + '<span class="blog-tag '+cat.cls+'">'+escH(cat.label)+'</span>' + subBadge
@@ -419,6 +440,7 @@ function render(){
       var p = parseInt(btn.getAttribute('data-page'));
       if(p && p !== curPage){
         curPage = p;
+        writePageToUrl(curPage, false);
         render();
         /* Scroll to top of grid */
         document.getElementById('blogGrid').scrollIntoView({behavior:'smooth', block:'start'});
@@ -435,6 +457,7 @@ document.querySelectorAll('.cat-pill').forEach(function(pill){
     curCat = pill.getAttribute('data-cat');
     curSub = 'all';
     curPage = 1;
+    writePageToUrl(1, true);
     /* Show / hide sub-row */
     var subRow = document.getElementById('subcatRow');
     if(curCat === 'packaging'){
@@ -453,6 +476,7 @@ document.querySelectorAll('.subcat-pill').forEach(function(pill){
     pill.classList.add('active');
     curSub = pill.getAttribute('data-subcat');
     curPage = 1;
+    writePageToUrl(1, true);
     render();
   });
 });
@@ -460,6 +484,7 @@ document.querySelectorAll('.subcat-pill').forEach(function(pill){
 document.getElementById('sortSelect').addEventListener('change', function(e){
   curSort = e.target.value;
   curPage = 1;
+  writePageToUrl(1, true);
   render();
 });
 
@@ -470,6 +495,7 @@ document.getElementById('searchInput').addEventListener('input', function(e){
   searchTimer = setTimeout(function(){
     curQuery = e.target.value;
     curPage = 1;
+    writePageToUrl(1, true);
     render();
   }, 200);
 });
@@ -626,6 +652,7 @@ sb.from('blogs').select('*').eq('published', true)
       showArticleBySlug(slug);
     } else {
       showListView();
+      curPage = readPageFromUrl();
       render();
     }
   })
@@ -636,6 +663,14 @@ sb.from('blogs').select('*').eq('published', true)
 
 /* Dynamic copyright year */
 (function(){var el=document.getElementById('copyYear');if(el)el.textContent=new Date().getFullYear();})();
+
+/* Back/Forward on list pages restores ?page=N */
+window.addEventListener('popstate', function(){
+  if(typeof getPathSlug === 'function' && getPathSlug()) return;
+  curPage = readPageFromUrl();
+  if(typeof showListView === 'function') showListView();
+  render();
+});
 </script>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>

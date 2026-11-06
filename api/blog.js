@@ -584,6 +584,14 @@ function setLang(lang){
    Falls back to the blog archive page if there's no history (e.g., direct link).
    ═══════════════════════════════════════════ */
 function goBackSmart(){
+  /* Prefer remembered list URL (includes ?page=N from the archive). */
+  try{
+    var saved = sessionStorage.getItem('vks_blog_list');
+    if(saved && saved.indexOf('/blog') === 0){
+      window.location.href = saved;
+      return;
+    }
+  }catch(e){}
   /* If the user has history within this site, just go back. */
   var ref = document.referrer || '';
   var sameOrigin = ref.indexOf(window.location.origin) === 0;
@@ -591,8 +599,7 @@ function goBackSmart(){
     window.history.back();
     return;
   }
-  /* No same-origin history (direct link / new tab / from external site) →
-     send to /blog archive, which is the right "home" for a blog reader. */
+  /* Direct link / new tab / external referrer → blog archive */
   window.location.href = '/blog';
 }
 
