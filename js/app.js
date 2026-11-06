@@ -1898,3 +1898,18 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
     update();
   }
 })();
+
+/* Floating WhatsApp button — show after modest scroll */
+(function(){
+  var btn = document.getElementById('floatWa');
+  if(!btn) return;
+  function update(){
+    if(window.scrollY > 280){
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();

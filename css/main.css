@@ -1040,3 +1040,101 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   filter:contrast(1.04) saturate(1.05);
 }
 .av-hd{text-align:center;}
+
+/* ========== Mobile engagement polish (v3.1) ========== */
+
+/* Larger, more comfortable touch targets */
+@media (max-width: 768px) {
+  .nav-links a,
+  .mob a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .dl-card,
+  .app-card,
+  .pcard,
+  .highlight-card {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .dl-card:active,
+  .app-card:active,
+  .pcard:active {
+    transform: scale(0.98);
+  }
+  /* Full-width primary buttons feel more tappable */
+  .hero-btns .btn-p {
+    width: 100%;
+    max-width: 340px;
+    padding: 16px 24px;
+    font-size: 1.05rem;
+  }
+  /* Slightly taller cards for easier tapping */
+  .apps-grid .app-card {
+    padding: 22px 18px;
+  }
+}
+
+/* Floating WhatsApp-style helper (appears after scroll) */
+.float-wa {
+  position: fixed;
+  bottom: 24px;
+  right: 18px;
+  z-index: 990;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.float-wa.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.float-wa svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+.float-wa:active {
+  transform: scale(0.92);
+}
+@media (min-width: 901px) {
+  .float-wa { bottom: 32px; right: 28px; }
+}
+/* Keep clear of sticky mentor bar on mobile */
+@media (max-width: 768px) {
+  .float-wa { bottom: 90px; }
+  body:has(.sticky-mentor:not(.show)) .float-wa { bottom: 24px; }
+}
+
+/* Smoother section reveals on mobile */
+@media (max-width: 768px) {
+  .reveal {
+    transition-duration: 0.5s;
+  }
+}
+
+/* Downloads page mobile polish */
+@media (max-width: 600px) {
+  .dl-card {
+    padding: 18px 16px;
+  }
+  .dl-title {
+    font-size: 1rem;
+  }
+  .tag {
+    font-size: 0.68rem;
+  }
+}

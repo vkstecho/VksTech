@@ -1,30 +1,4 @@
 {
-  "rewrites": [
-    { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" },
-    { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/people", "destination": "/people.html" },
-    { "source": "/youtube", "destination": "/youtube.html" },
-    { "source": "/:channel/:playlist", "destination": "/api/yt?channel=:channel&playlist=:playlist" }
-  ],
-  "headers": [
-    {
-      "source": "/sw.js",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
-        { "key": "Service-Worker-Allowed", "value": "/" }
-      ]
-    },
-    {
-      "source": "/manifest.json",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(png|jpg|jpeg|webp|svg|ico)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
-      ]
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
