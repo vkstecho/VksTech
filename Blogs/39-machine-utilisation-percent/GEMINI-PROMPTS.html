@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 39 (Machine Utilisation %)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
+  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
+  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
+  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
+  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn.copied { background: #0D8C7E; }
+  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
+  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
+  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .meta-band strong { color: #E85D26; }
+  .upgrade-band { background: rgba(13,140,126,0.12); border: 1px solid #0D8C7E; color: #1A2744; padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .upgrade-band strong { color: #0D8C7E; }
+  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 39</h1>
+<p class="meta"><em>Machine Utilisation % Calculator — The Metric Most Misreported in Flexible Packaging</em><br>4 images: 1 cover + 2 bilingual concept diagrams + 1 standalone cheat sheet</p>
+
+<div class="upgrade-band">
+<strong>What's different in this blog:</strong> Lighter 4-image set (calculator-explainer template). All prompts include <code>IMAGE SPEC:</code> line inside the prompt body. Convention: <strong>teal = running time / good</strong>, <strong>orange = downtime / setup / loss</strong> — used consistently across cover, flow diagram, and cheat sheet.
+</div>
+
+<div class="meta-band">
+<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 4 images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Cover — shift timeline + utilisation formula + Utilisation vs OEE distinction</td></tr>
+<tr><td>2A</td><td><code>utilisation-flow-en.png</code></td><td>16:9</td><td>Utilisation vs OEE diagram — what each metric measures (English)</td></tr>
+<tr><td>2B</td><td><code>utilisation-flow-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3</td><td><code>utilisation-cheat-sheet.png</code></td><td>4:5 portrait</td><td><strong>STANDALONE CHEAT SHEET</strong> — 6 shift scenarios + 4-tier verdict + formula reference</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards</h2>
+<p><strong>Colors:</strong> Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>. No others.<br>
+<strong>Convention:</strong> Teal = running / productive time. Orange = downtime / setup / loss.<br>
+<strong>Fonts:</strong> Inter / Söhne (Latin); Hind / Mukta (Devanagari); Bebas Neue / Anton for big numbers; Menlo/Consolas for formulas.<br>
+<strong>Critical numbers:</strong> Standard 8hr shift example <strong>89.6%</strong> excellent / <strong>78.1%</strong> average / <strong>50%</strong> poor · 12hr <strong>83.3%</strong> standard · 24hr <strong>85.4%</strong> reference.</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+**IMAGE SPEC:** Generate at exactly **1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio**. Do NOT generate square (1:1) or vertical formats. The output must be widescreen landscape. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized for fast loading (target file size 400-700 KB).
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "Machine Utilisation % — The Metric Most Plant Managers Confuse with OEE."
+
+**Composition** — left two-thirds is a horizontal shift-timeline visual, right one-third is the hero text panel.
+
+**LEFT TWO-THIRDS — shift timeline visual:**
+
+A horizontal stage on a clean cream `#FAF9F6` background with subtle paper-grain texture. The visual is a single long horizontal time-bar representing an 8-hour metalliser shift, divided into 3 colour-coded zones:
+
+- **The bar:** A long horizontal rectangle spanning ~80% of the panel width. The bar is divided horizontally into three segments:
+- **Setup zone (LEFT):** orange `#E85D26` filled, ~10% of bar width. Inside the segment, white text: "SETUP / 45 min / 9.4%"
+- **Running zone (MIDDLE):** teal `#0D8C7E` filled, ~78% of bar width. Inside, white bold large text: "RUNNING / 375 min / 78.1%"
+- **Downtime zone (RIGHT):** orange `#E85D26` filled, ~12% of bar width. Inside, white text: "DOWNTIME / 60 min / 12.5%"
+- Above the bar, a tick-mark scale showing time progression in hours: 0h ─ 1h ─ 2h ─ 3h ─ 4h ─ 5h ─ 6h ─ 7h ─ 8h
+- Below the bar, a single line connecting the entire bar with the label "TOTAL SHIFT = 480 min (8 hours)"
+- Below this label, a centred bracket pointing to just the teal middle zone with the text: "RUNNING ÷ TOTAL = 375 ÷ 480 = **78.1% UTILISATION**"
+
+Above the timeline, a single line of text in tiny navy caps centred: **THE METRIC THAT SETS THE CEILING ON CAPACITY.**
+
+Below the visual, the formula displayed prominently in a centred horizontal box:
+Box style: navy `#1A2744` background, white monospace text: **Utilisation % = (Running ÷ Shift) × 100**
+
+**RIGHT ONE-THIRD — navy `#1A2744` editorial panel with subtle paper-grain texture:**
+
+- Top eyebrow strip in orange `#E85D26`, all caps, small letterspacing: **vksTech.com / FREE CALCULATORS**
+- Main title in white Inter Bold or Söhne Bold (3-4 lines, large): **Machine Utilisation %**
+- Subtitle (smaller italic, grey `#FAF9F6` opacity 0.8): *The metric most plant managers confuse with OEE.*
+- HORIZONTAL DIVIDER (orange `#E85D26`, 2 px thin)
+- HERO STAT BLOCK — three rows showing benchmark tiers:
+- **≥85%** (white, ~50pt Bebas Neue): EXCELLENT (in teal)
+- **78-83%** (white, ~50pt): ON BENCHMARK
+- **≤75%** (white, ~50pt): INVESTIGATE (in orange)
+- Small text below: *Setup + Downtime + Running = Total Shift Time. Pick a definition; stick to it.*
+- Bottom strip: small text — **Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging**
+- In the bottom-right corner of this panel, place the attached VKS Tech logo at ~100×100 px on a thin white round backplate
+
+**Mood:** plant-floor reference. The cover of an engineering-magazine feature for industrial supervisors. NOT decorative.
+
+Strict colors: navy `#1A2744`, orange `#E85D26`, teal `#0D8C7E`, cream `#FAF9F6`, white. No red except orange. No green outside teal.</div>
+<div class="planb"><strong>Plan B:</strong> If the timeline bar visualisation is unclear, simplify to two stacked bars: top = "TOTAL SHIFT 480 min" (navy), bottom = "RUNNING 375 min" (teal), with the difference labelled "SETUP+DOWNTIME 105 min" (orange).</div>
+</div>
+
+<!-- IMAGE 2 -->
+<h2>Image 2A — Utilisation vs OEE Diagram (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Utilisation Flow Diagram</div>
+<div class="prompt-meta">Save as <code>utilisation-flow-en.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+**IMAGE SPEC:** Generate at exactly **1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio**. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB).
+
+Create a clean flat-vector editorial concept-diagram. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. *The Economist* / *Harvard Business Review* methodology-diagram style.
+
+**Background:** cream `#FAF9F6` with subtle paper-grain texture (5% opacity max).
+
+**Header zone (top 12%):**
+- Eyebrow strip in orange `#E85D26`, small caps, letterspaced: **UTILISATION ≠ OEE**
+- Title (navy `#1A2744`, large bold sans-serif): **Three Legs of OEE — Why Utilisation is Only One**
+- Subtitle (grey `#5A5A5A`): *Same machine, same utilisation, dramatically different real output.*
+
+**Main visual zone (middle 76%) — a 3-PANEL formula visual + bottom comparison strip:**
+
+**TOP — Formula visual (3 columns multiplied together to give OEE):**
+
+Three equal-width panels in a row, with × symbols between them and = OEE on the right:
+
+- **Panel 1 — UTILISATION (orange theme):**
+- Top tag (orange filled): UTILISATION
+- Big number: **85%** (Bebas Neue, ~70pt)
+- Sub-formula: "Running ÷ Shift"
+- Sub-caption italic: *Was the machine running?*
+
+- **× symbol** (large navy)
+
+- **Panel 2 — PERFORMANCE (teal theme):**
+- Top tag (teal filled): PERFORMANCE
+- Big number: **70%** (Bebas Neue, ~70pt)
+- Sub-formula: "Actual ÷ Rated speed"
+- Sub-caption italic: *Was it running fast?*
+
+- **× symbol** (large navy)
+
+- **Panel 3 — QUALITY (orange theme):**
+- Top tag (orange filled): QUALITY
+- Big number: **95%** (Bebas Neue, ~70pt)
+- Sub-formula: "Good ÷ Total output"
+- Sub-caption italic: *Was the output good?*
+
+- **= symbol** (large navy)
+
+- **OEE Result (navy theme):**
+- Top tag (navy filled): OEE
+- Big number: **57%** (Bebas Neue, ~80pt, in teal)
+- Sub-caption italic: *0.85 × 0.70 × 0.95*
+
+**BOTTOM — Comparison strip — TWO MACHINES, SAME UTILISATION (full width navy background):**
+Title (orange caps): TWO METALLISERS — IDENTICAL UTILISATION, DIFFERENT REALITY
+Two-column split:
+- LEFT: "Machine A: 85% utilisation × 100% speed × 99% quality = **84% OEE**" (in teal)
+- RIGHT: "Machine B: 85% utilisation × 70% speed × 92% quality = **55% OEE**" (in orange)
+Small caption below, centred: *Same headline number. 29-point gap in real output. Tracking only utilisation hides this.*
+
+**Bottom callout strip (8%):**
+Navy `#1A2744` background, two-column split:
+- LEFT (orange `#E85D26` text, bold): **⚡ The fix:**
+- RIGHT (white text): *Track utilisation, performance, and quality separately. Report all three. OEE without the breakdown is a comfort number, not a management tool.*
+
+**Bottom-right corner:** VKS Tech logo at ~80×80 px on white circle backplate.
+**Bottom-left corner:** small grey footer: *vkstech.com — Free Calculators. Real Plant Methodology.*
+
+**Typography:** Inter or Söhne sans-serif throughout. Big numbers in Bebas Neue. Tag chips in semibold caps. Equations in monospace.
+
+**What to AVOID:** clipart, cartoons, hand-drawn elements, photorealism, 3D effects.</div>
+<div class="planb"><strong>Plan B:</strong> If the 4-panel formula visual is too cramped horizontally, stack the three input panels vertically with an arrow flowing into a single OEE result panel on the right.</div>
+</div>
+
+<!-- IMAGE 3 -->
+<h2>Image 2B — Utilisation vs OEE Diagram (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Utilisation Flow Diagram</div>
+<div class="prompt-meta">Save as <code>utilisation-flow-hi.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+**IMAGE SPEC:** Generate at exactly **1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio**. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
+
+Create a flat-vector editorial concept-diagram with EXACTLY the same layout, colour palette, and structure as the English Utilisation vs OEE Diagram. Numbers (85%, 70%, 95%, 57%, etc.), formulas, and metric names (OEE, UTILISATION, PERFORMANCE, QUALITY) stay in English. Only title, subtitle, panel sub-captions, comparison strip caption, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+**Header:**
+- Eyebrow (orange #E85D26, English): UTILISATION ≠ OEE
+- Title (Hindi, navy bold, large): **OEE के तीन Legs — Utilisation सिर्फ़ एक है**
+- Subtitle (Hindi, grey): *Same machine, same utilisation, dramatically different real output।*
+
+**TOP formula visual:**
+- Panel 1 UTILISATION sub-caption (Hindi italic): *Machine running थी?*
+- Panel 2 PERFORMANCE sub-caption (Hindi italic): *Fast running थी?*
+- Panel 3 QUALITY sub-caption (Hindi italic): *Output good था?*
+- All formulas, numbers, panel tags stay in English
+
+**BOTTOM comparison strip:**
+- Title (English): TWO METALLISERS — IDENTICAL UTILISATION, DIFFERENT REALITY
+- Both two-column lines stay in English (numerical comparison)
+- Caption below (Hindi italic): *Same headline number। Real output में 29-point gap। सिर्फ़ utilisation track करना ये छिपाता है।*
+
+**Bottom callout (Hindi):**
+- LEFT (orange bold): **⚡ Fix:**
+- RIGHT (white text, Hindi): *Utilisation, performance, और quality separately track करें। तीनों report करें। Breakdown के बिना OEE comfort number है, management tool नहीं।*
+
+**Bottom-right:** VKS Tech logo at ~80×80 px on white backplate.
+**Bottom-left:** small grey Hindi footer: *vkstech.com — Free Calculators। Real Plant Methodology।*
+
+All other styling identical to Image 2A.</div>
+<div class="planb"><strong>Plan B:</strong> Generate Image 2A first, then replace title, subtitle, sub-captions, comparison caption, and bottom callout with Devanagari text using Hind or Mukta font in Photopea/Canva. Numbers, formulas, and metric names stay in English.</div>
+</div>
+
+<!-- IMAGE 4 -->
+<h2>Image 3 — Utilisation Cheat Sheet (Standalone Bookmark)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">📋 Utilisation Cheat Sheet (PORTRAIT)</div>
+<div class="prompt-meta">Save as <code>utilisation-cheat-sheet.png</code> · 1200×1500 portrait · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3">[ATTACH `logo.png` to THIS prompt]
+
+**IMAGE SPEC:** Generate at exactly **1200 pixels wide by 1500 pixels tall, 4:5 portrait aspect ratio**. This is a vertical (portrait) format, NOT landscape. Do NOT generate square (1:1) or landscape formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 400-700 KB).
+
+Create a clean, professional, bookmark-quality reference cheat sheet — the kind of one-page printable that a metalliser shift supervisor would tape to the wall next to the shift handover desk. NOT a marketing brochure. A working tool.
+
+**Background:** cream `#FAF9F6` with very subtle paper-grain texture.
+
+**Header zone (top 12% of image):**
+- VKS Tech logo (the attached logo.png) at top-left, ~100×100 px
+- To the right of the logo, two-line header:
+- Eyebrow line in orange `#E85D26` small caps: VKSTECH.COM REFERENCE CHEAT SHEET
+- Main title in navy `#1A2744` bold large: **Metalliser Shift Utilisation**
+- Below the title, a thin orange `#E85D26` horizontal divider
+
+**Body zone (middle 76% of image) — TWO sections:**
+
+**TOP SECTION — Shift Scenarios table (6 rows):**
+
+Title above the table (navy bold, small): SHIFT SCENARIOS REFERENCE
+
+Each row:
+- Scenario (left, navy bold)
+- Shift / Setup / Down (semibold, smaller)
+- Running (semibold, in teal `#0D8C7E`)
+- **Utilisation %** (right-aligned, large, colour-coded by tier: teal if ≥85, navy if 78-84, orange if &lt;78)
+- Verdict (small grey italic on the right)
+
+Header row at top: | SCENARIO | SHIFT/SETUP/DOWN | RUNNING | UTIL % | VERDICT |
+
+Rows (6 entries):
+1. Excellent 8-hr — 480/30/20 — 430 min — **89.6%** (teal) — Top quartile
+2. Average 8-hr — 480/45/60 — 375 min — **78.1%** (navy) — Median
+3. Poor 8-hr (breakdown) — 480/60/180 — 240 min — **50.0%** (orange) — Investigate
+4. Standard 12-hr — 720/60/60 — 600 min — **83.3%** (navy) — On benchmark
+5. 12-hr mid-cycle issue — 720/90/180 — 450 min — **62.5%** (orange) — Below average
+6. 24-hr day — 1440/90/120 — 1230 min — **85.4%** (teal) — Healthy day
+
+**MIDDLE DIVIDER STRIP — small orange horizontal line.**
+
+**BOTTOM SECTION — 3 Definitions table:**
+
+Title above (navy bold, small): SAME SHIFT, THREE DEFINITIONS
+
+Each row:
+- Definition (left, navy bold)
+- Setup includes (small semibold)
+- Downtime includes (small semibold)
+- **Sample utilisation** (right-aligned, in colour-coded text)
+
+Header row: | DEFINITION | SETUP INCLUDES | DOWNTIME INCLUDES | UTIL % |
+
+3 rows:
+1. Strict (operator-friendly) — Only first-roll setup — Only unplanned breakdown — **91%** (teal)
+2. Standard (most plants) — All changeover + start-up — All unplanned + boat changes — **78%** (navy)
+3. Strict (capacity-planning) — All non-running including PM — All non-running including breaks — **65%** (orange)
+
+Below the table, small footer line: *Same actual events, three categorisation choices. Pick one. Document. Stick with it.*
+
+**Footer zone (bottom 12% of image):**
+
+Three columns:
+- LEFT: A small teal-themed key showing "**TEAL = RUNNING TIME**"
+- CENTER: A small orange-themed key showing "**ORANGE = SETUP + DOWNTIME**"
+- RIGHT: A small navy panel: *Formula: Util % = (Run ÷ Shift) × 100. Where Run = Shift − Setup − Down. OEE = Util × Performance × Quality.*
+
+Above the footer columns, a thin orange divider.
+
+Bottom-most strip with grey small caps: *vkstech.com — More calculators, more cheat sheets, real-plant methodology · Vivek Kumar | M.Tech NIT Uttarakhand*
+
+**Mood:** clean, dense, useful, professional. The kind of reference doc a real metalliser supervisor would print, laminate, and use weekly.
+
+**Typography:** Inter or Söhne sans-serif throughout. Utilisation values colour-coded (teal good, navy average, orange poor). Big numbers in semibold or Bebas Neue.
+
+Strict colors: navy `#1A2744`, orange `#E85D26`, teal `#0D8C7E`, cream `#FAF9F6`, white. No others.
+
+**What to AVOID:** decorative borders, clipart, drop shadows, gradients, 3D effects.</div>
+<div class="planb"><strong>Plan B:</strong> If both tables together look cramped, drop one of the 6 shift scenario rows (the 24-hr reference) to save space, or render the bottom 3-definitions table at smaller font size with simpler labels.</div>
+</div>
+
+<h2>Review Checklist (8-Point)</h2>
+<ol>
+<li><strong>Brand colours</strong> — Navy / Orange / Teal / Cream / white / grey only. Teal = running/productive; orange = downtime/setup.</li>
+<li><strong>Typography</strong> — Inter/Söhne sans-serif; big numbers in Bebas/Anton; formulas in monospace.</li>
+<li><strong>Number accuracy (HARD)</strong> — Cover: 89.6% / 78.1% / 50% / Utilisation ≠ OEE callout. Flow 2A/2B: Utilisation = Running ÷ Shift × 100, with OEE = Utilisation × Performance × Quality breakdown. Cheat sheet: 6 shift scenarios + 4-tier verdict.</li>
+<li><strong>Image format</strong> — Images 1, 2A, 2B at 1600×900 widescreen PNG (300-700 KB). Image 3 at 1200×1500 portrait PNG (400-700 KB).</li>
+<li><strong>Logo placement</strong> — bottom-right (Images 1-2) or top-left (Image 3 cheat sheet), ~80–110 px.</li>
+<li><strong>Information density</strong> — cover 5 sec, flow diagram 10 sec, cheat sheet dense by design.</li>
+<li><strong>No AI-tells</strong> — no faces, no distorted hands, no garbled small text.</li>
+</ol>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">39-machine-utilisation-percent/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── utilisation-flow-en.png        (Image 2A)
+├── utilisation-flow-hi.png        (Image 2B)
+├── utilisation-cheat-sheet.png    (Image 3 — STANDALONE BOOKMARK)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) { markCopied(btn); showToast('✓ Prompt copied to clipboard'); }
+      else { showToast('✗ Copy failed — please select manually'); }
+    } catch (e) { showToast('✗ Copy failed — please select manually'); }
+    document.body.removeChild(ta);
+  }
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) copyText(target.textContent.trim(), btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
