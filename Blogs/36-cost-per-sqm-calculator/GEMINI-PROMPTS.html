@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 36 (Cost per Square Metre Calculator)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
+  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
+  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
+  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
+  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn.copied { background: #0D8C7E; }
+  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
+  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
+  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .meta-band strong { color: #E85D26; }
+  .upgrade-band { background: rgba(13,140,126,0.12); border: 1px solid #0D8C7E; color: #1A2744; padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .upgrade-band strong { color: #0D8C7E; }
+  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 36</h1>
+<p class="meta"><em>Cost Per Square Metre Calculator — Why ₹/kg is the Wrong Way to Compare Films</em><br>4 images: 1 cover + 2 bilingual concept diagrams + 1 standalone cheat sheet</p>
+
+<div class="upgrade-band">
+<strong>What's different in this blog:</strong> Lighter 4-image set (calculator-explainer template established in Blog 35). All prompts include <code>IMAGE SPEC:</code> line inside the prompt body. Convention: <strong>orange = ₹/kg / supplier side</strong>, <strong>teal = ₹/sqm / customer side</strong> — used consistently across cover, flow diagram, and cheat sheet.
+</div>
+
+<div class="meta-band">
+<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 4 images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>Aspect</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>16:9</td><td>Cover — supplier ratecard vs customer pouch + formula + counter-intuitive PET-vs-BOPP comparison</td></tr>
+<tr><td>2A</td><td><code>cost-flow-en.png</code></td><td>16:9</td><td>Two-step conversion diagram: ₹/kg → GSM → ₹/sqm (English)</td></tr>
+<tr><td>2B</td><td><code>cost-flow-hi.png</code></td><td>16:9</td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3</td><td><code>cost-cheat-sheet.png</code></td><td>4:5 portrait</td><td><strong>STANDALONE CHEAT SHEET</strong> — 9 film-rate-cost combinations + 7 polymer densities</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards</h2>
+<p><strong>Colors:</strong> Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>. No others.<br>
+<strong>Convention:</strong> Orange = ₹/kg / supplier side. Teal = ₹/sqm / customer side.<br>
+<strong>Fonts:</strong> Inter / Söhne (Latin); Hind / Mukta (Devanagari); Bebas Neue / Anton for big numbers; Menlo/Consolas for formulas.<br>
+<strong>Critical numbers:</strong> PET 12μm @ ₹120/kg = <strong>₹1.99/sqm</strong> · BOPP 18μm @ ₹150/kg = <strong>₹2.46/sqm</strong> · LDPE 50μm @ ₹110/kg = <strong>₹5.06/sqm</strong> · Densities: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92, HDPE 0.95, Paper 0.80, Nylon 1.14.</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. The output must be widescreen landscape. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized for fast loading (target file size 400-700 KB). No JPEG artifacts, no blur, no fuzzy edges on text.
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "Cost Per Square Metre Calculator — Why ₹/kg is the Wrong Way to Compare Films."
+
+Composition — left two-thirds is a side-by-side comparison visual showing the unit mismatch, right one-third is a hero text panel.
+
+LEFT TWO-THIRDS — unit mismatch visual:
+
+A horizontal stage on a clean cream #FAF9F6 background with subtle paper-grain texture. The visual shows the disconnect between supplier and customer:
+
+- LEFT HALF (orange-themed) — SUPPLIER VIEW:
+  - Top tag (small navy caps): SUPPLIER QUOTES
+  - Visual: A simplified flat-vector ratecard / invoice document, navy outline on cream. The visible content shows three line items in monospace:
+    - "PET 12μm — ₹120/kg"
+    - "BOPP 18μm — ₹150/kg"
+    - "LDPE 50μm — ₹110/kg"
+  - Below the document, small orange #E85D26 rounded badge: "₹/kg"
+  - Mini-caption italic small grey: "How suppliers bill"
+
+- CENTER — CONVERSION ARROW:
+  - A large vertical orange #E85D26 divider with a centred filled circle
+  - Inside the circle, white text: "= GSM ="
+  - Above the divider: small navy text "× Density"
+
+- RIGHT HALF (teal-themed) — CUSTOMER VIEW:
+  - Top tag (small navy caps): CUSTOMER PAYS
+  - Visual: A simplified flat-vector pouch silhouette (snack pouch shape), with three callout values pointing into the pouch outline:
+    - "PET 12μm → ₹1.99/sqm"
+    - "BOPP 18μm → ₹2.46/sqm"
+    - "LDPE 50μm → ₹5.06/sqm"
+  - Below the pouch, small teal #0D8C7E rounded badge: "₹/sqm"
+  - Mini-caption italic small grey: "How customers think"
+
+Above the entire visual, a single line of text in tiny navy caps centred: EVERY POUCH HAS A REAL COST. ₹/kg HIDES IT. ₹/sqm REVEALS IT.
+
+Below the visual, the formula displayed prominently in a centred horizontal box:
+Box style: navy #1A2744 background, white monospace text: ₹/sqm = ₹/kg × GSM ÷ 1000
+
+RIGHT ONE-THIRD — navy #1A2744 editorial panel with subtle paper-grain texture:
+- Top eyebrow strip in orange #E85D26, all caps, small letterspacing: vksTech.com / FREE CALCULATORS
+- Main title in white Inter Bold or Söhne Bold (3-4 lines, large): Cost Per Square Metre Calculator
+- Subtitle (smaller italic, grey): Why ₹/kg is the wrong way to compare films.
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO STAT BLOCK — three rows showing the counter-intuitive comparison:
+  - PET 12μm (white, ~40pt): ₹120/kg → ₹1.99/sqm (in teal — winner)
+  - BOPP 18μm (white, ~40pt): ₹150/kg → ₹2.46/sqm (in orange — costlier)
+  - The lesson (white, ~40pt): same GSM, different ₹/sqm because of ₹/kg gap
+- Small text below: Densities: PET 1.38, BOPP 0.91, CPP 0.90, LDPE 0.92
+- Bottom strip: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- In the bottom-right corner of this panel, place the attached VKS Tech logo at ~100×100 px on a thin white round backplate
+
+Mood: procurement-team practical, the cover of a reference document a sourcing manager would screenshot and share with their team. NOT decorative. NOT marketing.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No red except orange. No green outside teal. No yellow.</div>
+<div class="planb"><strong>Plan B:</strong> If the ratecard/pouch visualisations look weak, simplify to two coloured boxes (left orange box: "₹/kg" stack of 3 numbers; right teal box: "₹/sqm" stack of 3 numbers). The numbers carry the meaning.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Cost Flow Diagram (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Cost Flow Diagram</div>
+<div class="prompt-meta">Save as <code>cost-flow-en.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No JPEG artifacts, no blur on text.
+
+Create a clean flat-vector editorial concept-diagram. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. The Economist / Harvard Business Review methodology-diagram style.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header (top 10%):
+- Eyebrow (orange #E85D26, small caps): THE TWO-STEP CONVERSION
+- Title (navy #1A2744, large bold sans-serif): From Supplier ₹/kg to Customer ₹/sqm
+- Subtitle (grey #5A5A5A): GSM is the bridge. Two simple multiplications turn one unit into the other.
+
+Main visual zone (middle 80%) — THREE PANELS in a horizontal row, connected by orange arrows:
+
+PANEL 1 — INPUT (orange-themed, left):
+- Top tag (orange #E85D26 filled rounded rectangle, white caps): SUPPLIER RATE
+- Big number block: ₹120 (Bebas Neue, ~100 pt, in orange) above tiny label "per kg"
+- Below the big number, smaller text: "× 12 μm thickness"
+- Below that: "× 1.38 density (PET)"
+
+ARROW between Panel 1 and Panel 2: large orange #E85D26 rightward arrow with text above: "Step 1: GSM = μm × density →"
+
+PANEL 2 — BRIDGE (navy-themed, centre):
+- Top tag (navy #1A2744 filled rounded rectangle, white caps): GSM (THE BRIDGE)
+- Big number block: 16.6 (Bebas Neue, ~100 pt, in white on navy panel) above tiny label "g/m²"
+- Below the big number, smaller text: "12 × 1.38 = 16.56"
+- Caption italic: "grams of material per square metre"
+
+ARROW between Panel 2 and Panel 3: large orange #E85D26 rightward arrow with text above: "Step 2: ₹/sqm = ₹/kg × GSM ÷ 1000 →"
+
+PANEL 3 — OUTPUT (teal-themed, right):
+- Top tag (teal #0D8C7E filled rounded rectangle, white caps): CUSTOMER COST
+- Big number block: ₹1.99 (Bebas Neue, ~100 pt, in teal) above tiny label "per sqm"
+- Below the big number, smaller text: "120 × 16.6 ÷ 1000"
+- Caption italic: "the number your customer actually pays"
+
+Below all three panels — DENSITY REFERENCE STRIP (full width, navy background):
+Navy #1A2744 background. Single horizontal row of small density tiles:
+Title in orange caps: COMMON DENSITIES (g/cm³)
+Then: PET = 1.38 · BOPP = 0.91 · CPP = 0.90 · LDPE = 0.92 · HDPE = 0.95 · Paper = 0.80 · Nylon = 1.14
+
+Bottom callout (8%):
+Navy #1A2744 background, two-column split:
+- LEFT (orange #E85D26 bold): ⚡ The trap to avoid:
+- RIGHT (white text): Same ₹/kg does NOT mean same ₹/sqm. PET is 50% denser than BOPP — same micron at same ₹/kg gives different yields. The conversion is not optional.
+
+Bottom-right: VKS Tech logo at ~80×80 px on white circle backplate.
+Bottom-left: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif throughout. Tag chips in semibold caps. Big numbers in heavy condensed font (Bebas Neue, Anton, Oswald). Formula text in monospace (Menlo, Consolas).
+
+AVOID: clipart, cartoons, 3D, decorative borders.</div>
+<div class="planb"><strong>Plan B:</strong> If the three-panel flow looks too cramped, drop the density reference strip (move it to the cheat sheet) and give the three panels more vertical space.</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Cost Flow Diagram (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Cost Flow Diagram</div>
+<div class="prompt-meta">Save as <code>cost-flow-hi.png</code> · 1600×900 widescreen · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1600 pixels wide by 900 pixels tall, 16:9 widescreen aspect ratio. Do NOT generate square (1:1) or vertical formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 300-600 KB). No blur on Devanagari text.
+
+Create a flat-vector editorial concept-diagram with EXACTLY the same layout, colour palette, and structure as the English Cost Flow Diagram. Numbers (₹120, 12μm, 1.38, 16.6, ₹1.99, all densities), units (₹/kg, g/m², ₹/sqm, μm), formulas, and material names (PET, BOPP, CPP, LDPE, HDPE, Paper, Nylon) stay in English. Only title, subtitle, panel tags (where translatable), captions, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange #E85D26, English): THE TWO-STEP CONVERSION
+- Title (Hindi, navy bold, large): Supplier ₹/kg से Customer ₹/sqm तक
+- Subtitle (Hindi, grey): GSM bridge है। दो simple multiplications एक unit को दूसरी में बदलती हैं।
+
+PANEL 1 — INPUT (orange):
+- Tag (English): SUPPLIER RATE
+- Big number ₹120 with English label "per kg"
+- Below: "× 12 μm thickness"
+- Below: "× 1.38 density (PET)"
+
+ARROW between Panel 1 and 2 (Hindi text): "Step 1: GSM = μm × density →"
+
+PANEL 2 — BRIDGE (navy):
+- Tag (English): GSM (THE BRIDGE)
+- Big number 16.6 with label "g/m²"
+- Below: "12 × 1.38 = 16.56"
+- Caption (Hindi italic): "per square metre material के grams"
+
+ARROW between Panel 2 and 3 (Hindi text): "Step 2: ₹/sqm = ₹/kg × GSM ÷ 1000 →"
+
+PANEL 3 — OUTPUT (teal):
+- Tag (English): CUSTOMER COST
+- Big number ₹1.99 with label "per sqm"
+- Below: "120 × 16.6 ÷ 1000"
+- Caption (Hindi italic): "वो number जो customer actually pay करता है"
+
+DENSITY REFERENCE STRIP (English): COMMON DENSITIES (g/cm³): PET = 1.38 · BOPP = 0.91 · CPP = 0.90 · LDPE = 0.92 · HDPE = 0.95 · Paper = 0.80 · Nylon = 1.14
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Avoid करने वाला trap:
+- RIGHT (white text, Hindi): Same ₹/kg का मतलब same ₹/sqm नहीं है। PET BOPP से 50% denser है — same ₹/kg पर same micron पर different yields देता है। Conversion optional नहीं है।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 2A first, then replace title, subtitle, captions, arrow text, and bottom callout with proper Devanagari text using Hind or Mukta font in Photopea/Canva. Numbers, units, and material names stay in English.</div>
+</div>
+
+<!-- IMAGE 3 — CHEAT SHEET -->
+<h2>Image 3 — Cost Cheat Sheet (Standalone Bookmark)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">📋 Cost Cheat Sheet (PORTRAIT)</div>
+<div class="prompt-meta">Save as <code>cost-cheat-sheet.png</code> · 1200×1500 portrait · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3">[ATTACH `logo.png` to THIS prompt]
+
+IMAGE SPEC: Generate at exactly 1200 pixels wide by 1500 pixels tall, 4:5 portrait aspect ratio. This is a vertical (portrait) format, NOT landscape. Do NOT generate square (1:1) or landscape formats. High resolution, sharp text, crisp vector edges, anti-aliased typography. Output as PNG, web-optimized (target file size 400-700 KB). Designed to be saved as a phone wallpaper or printed on A4 paper.
+
+Create a clean, professional, bookmark-quality reference cheat sheet — the kind of one-page printable that procurement managers in flexible packaging would tape to the wall next to their supplier ratecard binder. NOT a marketing brochure. A working tool.
+
+Background: cream #FAF9F6 with very subtle paper-grain texture.
+
+Header zone (top 12% of image):
+- VKS Tech logo (the attached logo.png) at top-left, ~100×100 px
+- To the right of the logo, two-line header:
+  - Eyebrow line in orange #E85D26 small caps: VKSTECH.COM REFERENCE CHEAT SHEET
+  - Main title in navy #1A2744 bold large: Film Rate to ₹/sqm Quick Reference
+- Below the title, a thin orange #E85D26 horizontal divider
+
+Body zone (middle 76% of image) — TWO sections:
+
+TOP SECTION — Common Film-Rate-Cost combinations table:
+Title above the table (navy bold, small): COMMON ₹/kg → ₹/sqm CONVERSIONS
+
+Each row:
+- Film type (left, navy bold)
+- Thickness (semibold)
+- GSM (semibold, smaller)
+- Rate ₹/kg (in orange #E85D26 semibold)
+- Cost ₹/sqm (right-aligned, large, in teal #0D8C7E bold)
+- Yield sqm/kg (small, grey)
+
+Header row at top: | FILM | μm | GSM | ₹/kg | ₹/sqm | YIELD |
+
+Rows (9 entries):
+1. PET — 12 — 16.6 — ₹120 — ₹1.99 — 60.4
+2. PET — 12 — 16.6 — ₹140 — ₹2.32 — 60.4
+3. BOPP — 18 — 16.4 — ₹150 — ₹2.46 — 61.1
+4. BOPP — 25 — 22.8 — ₹145 — ₹3.30 — 43.9
+5. CPP — 30 — 27.0 — ₹140 — ₹3.78 — 37.0
+6. LDPE — 50 — 46.0 — ₹110 — ₹5.06 — 21.7
+7. LDPE — 80 — 73.6 — ₹108 — ₹7.95 — 13.6
+8. Paper — 80 — 64.0 — ₹75 — ₹4.80 — 15.6
+9. Nylon (BOPA) — 15 — 17.1 — ₹280 — ₹4.79 — 58.5
+
+MIDDLE DIVIDER STRIP — small orange horizontal line.
+
+BOTTOM SECTION — Density Reference (single horizontal row of 7 small tiles):
+Title above (navy bold, small): POLYMER DENSITIES (g/cm³)
+
+7 small tiles in a row, each navy #1A2744 rounded rectangle with orange-tinted top stripe:
+- PET — 1.38
+- BOPP — 0.91
+- CPP — 0.90
+- LDPE — 0.92
+- HDPE — 0.95
+- Paper — 0.80
+- Nylon — 1.14
+
+Big number in white Bebas Neue, ~50 pt. Material name in tiny orange caps above.
+
+Footer zone (bottom 12% of image):
+Three columns:
+- LEFT: A small orange-themed key showing "ORANGE = SUPPLIER (₹/kg)"
+- CENTER: A small teal-themed key showing "TEAL = CUSTOMER (₹/sqm)"
+- RIGHT: A small navy panel: Formula: ₹/sqm = ₹/kg × GSM ÷ 1000 · GSM = micron × density · Inverse: max ₹/kg = ₹/sqm × 1000 ÷ GSM
+
+Above the footer columns, a thin orange divider.
+
+Bottom-most strip with grey small caps: vkstech.com — More calculators, more cheat sheets, real-plant methodology · Vivek Kumar | M.Tech NIT Uttarakhand
+
+Mood: clean, dense, useful, professional. Information density is a feature.
+
+Typography: Inter or Söhne sans-serif throughout. ₹/kg values in orange semibold. ₹/sqm values in teal bold. Density values in white Bebas Neue.
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No others.
+
+AVOID: decorative borders, clipart, drop shadows, gradients, 3D effects.</div>
+<div class="planb"><strong>Plan B:</strong> If the table format looks too cramped at 1200×1500, simplify to 7 rows by combining LDPE entries (drop the 80μm row) and the 145 BOPP entry. The 7 most-used rows still cover 90% of real-world procurement conversations.</div>
+</div>
+
+<h2>Review Checklist (8-Point)</h2>
+<ol>
+<li><strong>Brand colours</strong> — Navy / Orange / Teal / Cream / white / grey only. Orange = ₹/kg side; teal = ₹/sqm side.</li>
+<li><strong>Typography</strong> — Inter/Söhne sans-serif; big numbers in Bebas/Anton; formulas in monospace.</li>
+<li><strong>Number accuracy (HARD)</strong> — Cover: PET ₹1.99/BOPP ₹2.46/LDPE ₹5.06. Flow 2A/2B: ₹120 → 16.6 GSM → ₹1.99 plus all 7 densities. Cheat sheet: 9 row values + 7 densities.</li>
+<li><strong>Image format</strong> — Images 1, 2A, 2B at 1600×900 widescreen PNG (300-700 KB). Image 3 at 1200×1500 portrait PNG (400-700 KB).</li>
+<li><strong>Logo placement</strong> — bottom-right (Images 1-2) or top-left (Image 3 cheat sheet), ~80–110 px.</li>
+<li><strong>Information density</strong> — cover 5 sec, flow diagram 10 sec, cheat sheet dense by design.</li>
+<li><strong>No AI-tells</strong> — no faces, no distorted hands, no garbled small text.</li>
+</ol>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">36-cost-per-sqm-calculator/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── cost-flow-en.png               (Image 2A)
+├── cost-flow-hi.png               (Image 2B)
+├── cost-cheat-sheet.png           (Image 3 — STANDALONE BOOKMARK)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) { markCopied(btn); showToast('✓ Prompt copied to clipboard'); }
+      else { showToast('✗ Copy failed — please select manually'); }
+    } catch (e) { showToast('✗ Copy failed — please select manually'); }
+    document.body.removeChild(ta);
+  }
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) copyText(target.textContent.trim(), btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
