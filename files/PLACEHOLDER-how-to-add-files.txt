@@ -1,0 +1,10 @@
+This is just a placeholder so the files/ folder is not empty.
+
+Replace this with real PDFs / Excel files.
+
+Example:
+  files/metalliser-pm-checklist.pdf
+  files/metalliser-production-log.xlsx
+
+Then edit downloads.html and change the card from a plain <div> 
+to an <a class="dl-card" href="files/...."> with the download attribute.

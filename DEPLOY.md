@@ -129,3 +129,26 @@ Field IDs match the `id` attributes in the HTML (e.g. `cw-len`, `mc-jumbo`).
 When updating Mentor or resume-builder, copy the folder to **both**:
 - manpower host (`/Mentor/`, `/resume-builder/`)
 - vkstech.com root (`/Mentor/`, `/resume-builder/`)
+
+---
+
+## Update 2026-11-06 — Downloads fix + mobile polish (v3.1)
+
+### Downloads 404 fix
+- Renamed folder `Downloads/` → `files/` (capital-D folder was colliding with `/downloads` route)
+- Added `vercel.json` with `"cleanUrls": true`
+- Added clean-URL rewrites in `firebase.json` and `_redirects`
+- Added `/downloads` to `sitemap.xml`
+- Cleaned `downloads.html` (removed internal admin notes from public page)
+
+### Mobile engagement
+- Grouped mobile nav into: Apps & Tools / Learn & Grow / Company
+- Hero "Read more" toggle on mobile (short intro by default)
+- Floating WhatsApp button (appears after scroll)
+- Larger touch targets + press feedback on cards
+- Full-width primary CTA on small screens
+
+### How to add real download files
+1. Put PDF/Excel into the `files/` folder
+2. Edit the corresponding card in `downloads.html` to use:
+   `href="files/your-file.pdf" download`

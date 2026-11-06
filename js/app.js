@@ -1913,3 +1913,15 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
   window.addEventListener('scroll', update, {passive:true});
   update();
 })();
+
+/* Hero "Read more" toggle on mobile */
+(function(){
+  var btn = document.getElementById('heroToggle');
+  var sub = document.querySelector('.hero-sub');
+  if(!btn || !sub) return;
+  btn.addEventListener('click', function(){
+    sub.classList.add('expanded');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.style.display = 'none';
+  });
+})();

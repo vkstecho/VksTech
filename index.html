@@ -187,16 +187,25 @@
   </div>
 </nav>
 <div class="mob" id="mobileMenu">
-  <a href="#industry-apps" onclick="toggleMenu()" data-i="nav_ind">Apps</a>
-  <a href="https://mentor.vkstech.com/" onclick="toggleMenu()" data-i="nav_mentor">Mentor</a>
-  <a href="https://manpower.vkstech.com/resume-builder/" onclick="toggleMenu()" data-i="nav_resume">Resume</a>
-  <a href="#calculators" onclick="toggleMenu()" data-i="nav_calc">Calculators</a>
+  <div class="mob-group">
+    <span class="mob-label">Apps &amp; Tools</span>
+    <a href="#industry-apps" onclick="toggleMenu()" data-i="nav_ind">Apps</a>
+    <a href="#calculators" onclick="toggleMenu()" data-i="nav_calc">Calculators</a>
+    <a href="/downloads" onclick="toggleMenu()" data-i="nav_downloads">Downloads</a>
+  </div>
+  <div class="mob-group">
+    <span class="mob-label">Learn &amp; Grow</span>
+    <a href="https://mentor.vkstech.com/" onclick="toggleMenu()" data-i="nav_mentor">Mentor</a>
+    <a href="https://manpower.vkstech.com/resume-builder/" onclick="toggleMenu()" data-i="nav_resume">Resume Builder</a>
     <a href="#blog" onclick="toggleMenu()" data-i="nav_blog">Blog</a>
-  <a href="/youtube" onclick="toggleMenu()" data-i="nav_yt">YouTube</a>
-  <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request App</a>
-  <a href="#about" onclick="toggleMenu()" data-i="nav_about">About</a>
-  <a href="/people" onclick="toggleMenu()" data-i="nav_people">People</a>
-  <a href="/downloads" onclick="toggleMenu()" data-i="nav_downloads">Downloads</a>
+    <a href="/youtube" onclick="toggleMenu()" data-i="nav_yt">YouTube</a>
+  </div>
+  <div class="mob-group">
+    <span class="mob-label">Company</span>
+    <a href="#about" onclick="toggleMenu()" data-i="nav_about">About</a>
+    <a href="/people" onclick="toggleMenu()" data-i="nav_people">People</a>
+    <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request an App</a>
+  </div>
   <div class="mob-lang">
     <button class="mob-lang-btn active" onclick="setLang('en')">EN</button>
     <button class="mob-lang-btn" onclick="setLang('hi')">हिंदी</button>
@@ -210,7 +219,11 @@
       <div>
         <div class="hero-eyebrow" data-i="hero_badge">9 YEARS IN PACKAGING · LED 60-MEMBER TEAMS · NOW FREELANCING</div>
         <h1 class="hero-title" data-i="hero_title">Apps. Mentorship.<br>Calculators. <span class="accent">Free.</span></h1>
-        <p class="hero-sub" data-i="hero_sub">Practical tools and one-to-one guidance built from real plant leadership. After 9 years at UFlex, JPFL &amp; GLS — including leading 60-member teams — <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) now freelances, builds apps, and mentors professionals via <a href="https://mentor.vkstech.com/" class="mentor-app-chip" style="display:inline-flex;align-items:center;gap:6px;color:var(--orange2);text-decoration:none;font-weight:700;background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.22);padding:3px 10px 3px 4px;border-radius:999px;vertical-align:middle;"><img src="assets/icon-mentor512.jpg" alt="" width="20" height="20" style="width:20px;height:20px;border-radius:6px;object-fit:cover"/>Mentor App by VKS</a>.</p>
+        <p class="hero-sub" data-i="hero_sub">
+          <span class="hero-short">Practical tools and one-to-one guidance built from real plant leadership.</span>
+          <span class="hero-more"> After 9 years at UFlex, JPFL &amp; GLS — including leading 60-member teams — <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) now freelances, builds apps, and mentors professionals via <a href="https://mentor.vkstech.com/" class="mentor-app-chip" style="display:inline-flex;align-items:center;gap:6px;color:var(--orange2);text-decoration:none;font-weight:700;background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.22);padding:3px 10px 3px 4px;border-radius:999px;vertical-align:middle;"><img src="assets/icon-mentor512.jpg" alt="" width="20" height="20" style="width:20px;height:20px;border-radius:6px;object-fit:cover"/>Mentor App by VKS</a>.</span>
+          <button type="button" class="hero-toggle" id="heroToggle" aria-expanded="false">Read more</button>
+        </p>
         <div class="hero-btns">
           <a href="https://mentor.vkstech.com/" class="btn-p" data-i="hero_btn1">Book Mentorship →</a>
           <a href="#calculators" class="btn-s" data-i="hero_btn2">Try Free Calculators</a>

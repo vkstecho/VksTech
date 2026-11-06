@@ -1138,3 +1138,54 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     font-size: 0.68rem;
   }
 }
+
+/* ========== Hero read-more (mobile) ========== */
+.hero-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-top: 6px;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+.hero-toggle:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .hero-sub .hero-more {
+    display: none;
+  }
+  .hero-sub.expanded .hero-more {
+    display: inline;
+  }
+  .hero-toggle {
+    display: inline-block;
+  }
+  .hero-sub.expanded .hero-toggle {
+    display: none; /* hide after expand, or keep as "Read less" if preferred */
+  }
+}
+
+/* ========== Grouped mobile nav ========== */
+.mob-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.9rem;
+}
+.mob-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 2px;
+  opacity: 0.85;
+}
+.mob-group a {
+  padding: 8px 0;
+}
