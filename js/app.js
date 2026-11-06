@@ -121,7 +121,7 @@ const HI = {
   yt_home_cta:"सभी प्लेलिस्ट देखें →",
   hero_badge:"पैकेजिंग में 9 साल · 450+ प्रोफेशनल्स गाइडेड · अब फ्रीलांस",
   hero_title:"<a href='#industry-apps' class='hero-link'>ऐप्स</a>। <a href='#mentorship' class='hero-link'>मेंटरशिप</a>।<br><a href='#calculators' class='hero-link'>कैलकुलेटर</a>। <span class='accent'>मुफ़्त।</span>",
-  hero_sub:"वास्तविक प्लांट लीडरशिप से बने व्यावहारिक उपकरण और वन-टू-वन मार्गदर्शन। UFlex, JPFL और GLS में 9 साल — 450+ प्रोफेशनल्स को गाइड करने सहित — के बाद <a href="#about" class="hero-link"><strong>विवेक कुमार</strong></a> (M.Tech, NIT उत्तराखंड) अब फ्रीलांस करते हैं, ऐप्स बनाते हैं और मेंटर करते हैं।",
+  hero_sub:"वास्तविक प्लांट लीडरशिप से बने व्यावहारिक उपकरण और वन-टू-वन मार्गदर्शन। UFlex, JPFL और GLS में 9 साल — 450+ प्रोफेशनल्स को गाइड करने सहित — के बाद <a href='#about' class='hero-link'><strong>विवेक कुमार</strong></a> (M.Tech, NIT उत्तराखंड) अब फ्रीलांस करते हैं, ऐप्स बनाते हैं और मेंटर करते हैं।",
   hero_btn1:"मेंटरशिप बुक करें →", hero_btn2:"मुफ़्त कैलकुलेटर आज़माएँ",
   nav_career:"करियर",
   stat1:"प्रोफेशनल्स गाइडेड", stat2:"वर्ष अनुभव", stat3:"लाइव ऐप्स", stat4:"मुफ़्त टूल्स",
