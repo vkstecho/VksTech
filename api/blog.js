@@ -19,20 +19,20 @@ function extractBodyContent(html) {
 }
 
 // Fetch blog content from GitHub for GitHub-backed blogs
-// Robust rewrite: always resolve relative src/href to the correct raw.githubusercontent.com
+// Robust rewrite: always resolve relative src/href to the correct cdn.jsdelivr.net (GitHub CDN)
 // folder of this blog (using only the filename). This tolerates wrong folder prefixes
 // that were baked into many index.html files (e.g. "16-wrinkle-.../" inside the 15- folder).
 async function fetchGithubContent(githubPath) {
   if (!githubPath) return '';
   const [folder, file] = githubPath.split('::');
   if (!folder || !file) return '';
-  const rawUrl = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/${file}?cb=${Date.now()}`;
+  const rawUrl = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${folder}/${file}?cb=${Date.now()}`;
   try {
     const r = await fetch(rawUrl, { cache: 'no-store' });
     if (!r.ok) return '';
     const html = await r.text();
     let body = extractBodyContent(html);
-    const rawBase = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/`;
+    const rawBase = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${folder}/`;
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
       // Take only the filename — all assets for a blog live in the same folder as index.html
       const filename = path.split('/').pop();
@@ -158,7 +158,7 @@ export default async function handler(req, res) {
         'high-od-action-plan': '11-high-od-action-plan',
         'pinholes-action-plan': '12-pinholes-action-plan',
       };
-      const RAW_BLOGS = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/Blogs/`;
+      const RAW_BLOGS = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/Blogs/`;
       content = (b.content || '').replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
         let p = path.replace(/^Blogs\//, '');
         const first = p.split('/')[0];
