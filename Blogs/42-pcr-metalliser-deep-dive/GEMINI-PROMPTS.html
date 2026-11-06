@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog 42 GEMINI Prompts — PCR Metalliser Deep Dive | VKS Tech</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+header { background: #1A2744; color: #FAF9F6; padding: 28px 32px; border-radius: 14px; margin-bottom: 28px; border-top: 5px solid #E85D26; }
+header h1 { font-size: 1.8em; margin-bottom: 8px; color: #FAF9F6; }
+header .subtitle { color: #E85D26; font-size: 0.95em; font-weight: 600; letter-spacing: 0.5px; }
+header .meta { color: rgba(250,249,246,0.7); font-size: 0.88em; margin-top: 12px; }
+header .style-banner { background: #E85D26; color: #fff; padding: 10px 16px; border-radius: 6px; margin-top: 16px; font-weight: 700; font-size: 0.92em; display: inline-block; }
+.workflow-box { background: #fff; border: 3px solid #0D8C7E; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; }
+.workflow-box h3 { color: #0D8C7E; margin-bottom: 12px; font-size: 1.1em; }
+.workflow-box ol { padding-left: 24px; margin-bottom: 8px; }
+.workflow-box li { margin-bottom: 8px; line-height: 1.55; }
+.workflow-box li strong { color: #1A2744; }
+.workflow-box code { background: #1A2744; color: #FAF9F6; padding: 2px 6px; border-radius: 3px; font-size: 0.88em; }
+.workflow-box .note { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; color: #5A5A5A; border-radius: 4px; }
+.brand-bar { background: #0D8C7E; color: #fff; padding: 12px 18px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 0.92em; }
+.brand-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
+.summary-table { background: #fff; border: 2px solid #1A2744; border-radius: 10px; padding: 18px 22px; margin-bottom: 28px; overflow-x: auto; }
+.summary-table h3 { color: #1A2744; margin-bottom: 12px; font-size: 1.05em; }
+.summary-table table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.summary-table th, .summary-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
+.summary-table th { background: #1A2744; color: #fff; font-weight: 600; }
+.summary-table td:first-child { font-weight: 700; color: #E85D26; width: 40px; text-align: center; }
+.summary-table .dim-cell { font-family: monospace; font-weight: 700; color: #0D8C7E; }
+.summary-table .logo-cell { font-weight: 600; color: #E85D26; font-size: 0.85em; }
+.card { background: #fff; border: 3px solid #E85D26; border-radius: 12px; padding: 24px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(26,39,68,0.08); }
+.card.first-card { border-color: #0D8C7E; border-width: 4px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 2px solid #FAF9F6; }
+.card-header-left { flex: 1; min-width: 250px; }
+.badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.card-num { display: inline-block; background: #E85D26; color: #fff; font-weight: 700; font-size: 0.78em; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+.card-num.style-photo { background: #1A2744; }
+.card-num.style-attach { background: #0D8C7E; }
+.card-title { font-size: 1.25em; color: #1A2744; }
+.card-concept { font-size: 0.88em; color: #5A5A5A; margin-top: 4px; font-style: italic; }
+.logo-instr { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 8px 12px; margin-top: 8px; font-size: 0.86em; color: #1A2744; border-radius: 4px; }
+.logo-instr.attach { background: #D9EDE9; border-left-color: #0D8C7E; }
+.logo-instr strong { color: #E85D26; }
+.logo-instr.attach strong { color: #0D8C7E; }
+.dim-callout { display: inline-block; background: #E85D26; border-radius: 6px; padding: 6px 14px; margin-top: 8px; font-family: monospace; font-weight: 700; font-size: 0.9em; color: #fff; }
+.copy-btn { background: #E85D26; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9em; transition: all 0.2s; white-space: nowrap; }
+.copy-btn:hover { background: #cc4d1f; transform: translateY(-1px); }
+.copy-btn.copied { background: #0D8C7E; }
+pre { background: #1A2744; color: #FAF9F6; padding: 18px 22px; border-radius: 8px; font-family: 'Monaco', 'Menlo', 'Consolas', monospace; font-size: 0.86em; line-height: 1.65; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+pre::-webkit-scrollbar { height: 8px; }
+pre::-webkit-scrollbar-track { background: #2a3754; }
+pre::-webkit-scrollbar-thumb { background: #E85D26; border-radius: 4px; }
+.checklist { background: #fff; border-left: 5px solid #0D8C7E; padding: 20px 24px; border-radius: 8px; margin-bottom: 22px; }
+.checklist h3 { color: #0D8C7E; margin-bottom: 12px; }
+.checklist ul { list-style: none; padding-left: 0; }
+.checklist li { padding: 8px 0; padding-left: 28px; position: relative; border-bottom: 1px solid #f0f0f0; }
+.checklist li:before { content: '☐'; position: absolute; left: 0; color: #E85D26; font-weight: bold; font-size: 1.2em; }
+.warning { background: #fff5f0; border-left: 5px solid #E85D26; padding: 18px 22px; border-radius: 8px; margin-bottom: 22px; }
+.warning strong { color: #E85D26; }
+footer { background: #1A2744; color: #FAF9F6; padding: 18px 24px; border-radius: 10px; text-align: center; margin-top: 32px; font-size: 0.88em; }
+footer a { color: #E85D26; text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+@media (max-width: 600px) { header h1 { font-size: 1.4em; } .card { padding: 18px; } pre { font-size: 0.8em; padding: 14px; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+<h1>🎨 Blog 42 — GEMINI Image Prompts</h1>
+<div class="subtitle">HOW MUCH PCR CAN A METALLISER REALLY HANDLE? — MECHANICAL vs CHEMICAL r-PET</div>
+<div class="meta">4 images · Click "Copy Prompt" on any card to copy to clipboard · Paste into Gemini</div>
+<div class="style-banner">📸 ALL 4 IMAGES = PHOTO-REALISTIC (no infographics, no cartoons, no 3D renders)</div>
+</header>
+
+<div class="workflow-box">
+<h3>🎯 Workflow — How to Use These Prompts</h3>
+<ol>
+<li><strong>Open a fresh Gemini chat</strong> for this blog (one chat per blog — keeps the logo context loaded).</li>
+<li><strong>For Image 1 (cover):</strong> 📎 <strong>Upload <code>logo.png</code> as an attachment</strong> with the prompt. Gemini embeds the actual logo.</li>
+<li><strong>For Images 2, 3, 4:</strong> Stay in the SAME Gemini chat — prompts reference the logo from Image 1. <strong>No re-upload needed.</strong></li>
+<li><strong>Verify each output:</strong> logo present, dimensions correct, photo-realistic.</li>
+</ol>
+<div class="note"><strong>⚠ Logo fallback:</strong> If Gemini warps the logo, generate the image without it and paste the real <code>logo.png</code> in Canva/Figma after — 30 seconds, perfect logo every time.</div>
+</div>
+
+<div class="brand-bar">
+<span><strong>VKS TECH</strong> · Brand colours: Navy #1A2744 · Orange #E85D26 · Teal #0D8C7E · Cream #FAF9F6</span>
+<span>🌐 <a href="https://vksTech.com">vksTech.com</a></span>
+</div>
+
+<div class="summary-table">
+<h3>📐 Image Dimensions, Photo Concept & Logo Source</h3>
+<table>
+<thead>
+<tr><th>#</th><th>Filename</th><th>Dimensions</th><th>Photo concept</th><th>Logo source</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>cover.png</td><td class="dim-cell">1600 × 900 px</td><td>Operator examining r-PET vs virgin pellets at extruder feed</td><td class="logo-cell">📎 Upload logo.png</td></tr>
+<tr><td>2</td><td>rpet-pellet-comparison.png</td><td class="dim-cell">1600 × 900 px</td><td>Top-down flat-lay: 3 pellet piles (virgin / mech / chem)</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>3</td><td>metalliser-trial-scene.png</td><td class="dim-cell">1600 × 900 px</td><td>QC engineer at metalliser sample station with backlit film</td><td class="logo-cell">Same chat — reuse</td></tr>
+<tr><td>4</td><td>pcr-cost-decision-desk.png</td><td class="dim-cell">1200 × 1500 px</td><td>Top-down desk: pellet jars, sticky-note strategies, CoAs</td><td class="logo-cell">Same chat — reuse</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- IMAGE 1: COVER -->
+<div class="card first-card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges">
+<span class="card-num">IMAGE 1 OF 4</span>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+<span class="card-num style-attach">📎 ATTACH LOGO HERE</span>
+</div>
+<div class="card-title">Cover — Operator with r-PET Pellets</div>
+<div class="card-concept">A real plant engineer in navy uniform comparing two clear sample jars side-by-side: virgin clear PET pellets on the left, faintly yellowish r-PET on the right. Tablet showing Compatibility Calculator in foreground.</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr attach"><strong>📎 LOGO ACTION:</strong> Upload <code>logo.png</code> as an attachment WITH this prompt.</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-1', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-1">ATTACHED IMAGE: A logo file (logo.png) is attached to this prompt. This is the VKS Tech brand logo. USE THIS LOGO AS-IS in the output image — do NOT redraw it, do NOT modify it, do NOT recreate it. Place the actual attached logo image into the output exactly as provided.
+
+Generate a photo-realistic editorial cover image at 1600 × 900 pixels (16:9 ratio) for a flexible packaging industry blog post.
+
+SCENE: Inside a modern Indian flexible packaging plant near the extruder feeding zone. Mid-shot of a male plant engineer in his late 30s, wearing a navy blue half-sleeve uniform shirt with a small white name patch (no readable text on the patch), light industrial safety helmet pushed back on his head, no eyewear. He is standing at a small workstation table examining two clear plastic sample jars side-by-side at chest height. The left jar contains clear water-clear PET pellets (virgin). The right jar contains slightly off-white, faintly yellowish PET pellets (r-PET). His expression is focused, analytical — comparing the two materials thoughtfully.
+
+FOREGROUND (lower-right): A second tablet computer on the workstation, screen visible at angle, showing a clean Excel-style "r-PET COMPATIBILITY CALCULATOR" with navy and orange data bars and a verdict cell.
+
+BACKGROUND: Soft-focus extruder feed zone — visible (but blurred) screw barrel, hopper above, dryer outlet, fluorescent overhead lighting. Use shallow depth-of-field (f/2.8) so the engineer and pellet jars are sharp, background creamy bokeh.
+
+LIGHTING: Cool industrial fluorescent overhead with a warm key light from camera left highlighting the engineer's face and the two pellet jars. The pellets should clearly show the colour difference — virgin water-clear vs r-PET faintly yellowish/whitish.
+
+COLOUR PALETTE: Industrial gray machinery, beige floor, off-white walls. Engineer's uniform navy blue. Virgin pellets clear, r-PET pellets slightly off-white with a hint of yellow tinge — this difference is the point of the cover.
+
+TEXT OVERLAY (top-left corner, semi-transparent navy #1A2744 panel with rounded corners, padding 24px):
+  Place the ATTACHED VKS Tech logo image as-is at the LEFT edge of this panel, sized approximately 80×80 pixels. Use the actual attached logo image — do NOT redraw it.
+  To the RIGHT of the logo, place text:
+    Line 1 (small, orange #E85D26, uppercase, letter-spaced): "VKS TECH | MAY 2026"
+    Line 2 (large, white, bold, sans-serif Inter or Helvetica): "HOW MUCH PCR?"
+    Line 3 (medium, white, regular weight): "The Mechanical vs Chemical r-PET Deep Dive"
+
+BOTTOM-RIGHT BADGE (small, teal #0D8C7E pill, white text):
+  "📥 3 FREE TOOLS INSIDE"
+
+WATERMARK: "vksTech.com" small white letters, lower-right corner, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE ATTACHED LOGO AS-IS — do not redraw, modify, or recreate it.
+- Do NOT show real company logos other than the attached VKS Tech logo
+- Do NOT show readable text on name patch, machinery, or background
+- Do NOT include other people in the frame
+- Pellet jars should be plain transparent — no labels visible
+- Photo-realistic — like a professional industrial photographer's editorial shot
+- Shot on Sony A7 IV with 50mm f/1.4 lens, professional industrial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<!-- IMAGE 2: PELLET COMPARISON -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges">
+<span class="card-num">IMAGE 2 OF 4</span>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+</div>
+<div class="card-title">Pellet Comparison — 3-Pile Flat-lay</div>
+<div class="card-concept">Top-down product photo of 3 PET pellet piles on cream background: virgin (clear) / mechanical r-PET (yellowish) / chemical r-PET (clear) — each with a small printed reference card showing IV, b*, gels, cost.</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses logo from Image 1 in same Gemini chat.</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-2', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-2">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place that exact logo as-is — do NOT redraw it.
+
+Generate a photo-realistic top-down flat-lay product photography image at 1600 × 900 pixels (16:9 ratio) for a flexible packaging blog. Style: clean, editorial, like a magazine product spread.
+
+SETUP: Top-down (90-degree overhead) view of THREE small piles of PET pellets laid out in a horizontal row on a clean cream-coloured (#FAF9F6) seamless paper background. Each pile is roughly 6cm × 6cm with about 80 pellets visible. Between each pile, about 30-40px of clean cream space.
+
+THE 3 PELLET PILES (left to right):
+
+PILE 1 (left third) — VIRGIN PET
+  Water-clear, glass-like transparent PET pellets, cylindrical shape ~3mm × 4mm. Light catches them, showing tiny rainbow refractions. Looks pristine and uniform.
+  Place a small printed card next to the pile (white card, 80×120px, navy #1A2744 border) with text:
+    "VIRGIN PET"
+    "IV: 0.80 dL/g"
+    "b*: 1.5"
+    "Gels: 2/m²"
+    "Cost: ₹110/kg"
+  Card has a navy header bar.
+
+PILE 2 (middle third) — MECHANICAL r-PET
+  Slightly off-white, faintly yellowish PET pellets, cylindrical ~3mm × 4mm. Less transparent than virgin — you can see they have a subtle whitish/yellowish cast. A few pellets show very tiny dark specks (impurities). Realistic looking.
+  Place an identical-style card with text:
+    "MECHANICAL r-PET"
+    "IV: 0.85 dL/g"
+    "b*: 4.5"
+    "Gels: 12/m²"
+    "Cost: ₹95/kg"
+    "⭐ ≤30% LOADING"
+  Card has an orange #E85D26 corner accent.
+
+PILE 3 (right third) — CHEMICAL r-PET
+  Water-clear, identical in appearance to Pile 1 (virgin). Maybe a hair different in size. The point: chemical r-PET is visually indistinguishable from virgin.
+  Place an identical card with text:
+    "CHEMICAL r-PET"
+    "IV: 0.80 dL/g"
+    "b*: 1.5"
+    "Gels: 2/m²"
+    "Cost: ₹165/kg"
+    "✅ UP TO 90%"
+  Card has a teal #0D8C7E corner accent.
+
+LIGHTING: Soft, diffused, natural daylight from above (photography softbox). Pellets show realistic specular highlights — virgin and chemical r-PET sparkling clear, mechanical r-PET slightly dulled. NO harsh shadows.
+
+CAMERA: Direct top-down (90 degrees), shot on Canon R5 with 50mm macro lens, f/8 aperture for sharpness across the plane.
+
+TEXT OVERLAY:
+
+TOP HEADER (full width, 80px tall, semi-transparent navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1) at FAR LEFT of the band, ~60×60 pixels. Use the actual logo as-is.
+  To the RIGHT of the logo, white text, bold, centered: "VIRGIN vs MECHANICAL vs CHEMICAL r-PET — VISUAL COMPARISON"
+
+BOTTOM FOOTER (full width, 50px, semi-transparent teal #0D8C7E band):
+  White text, centered: "Source: Industry CoA data, Celplast Metallized Products, peer-reviewed PET re-extrusion research | vksTech.com"
+
+WATERMARK: "vksTech.com" small white text, lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic — actual product photography style, NOT illustration, NOT 3D render
+- Real pellets, photographed — they should look like physical samples
+- The colour difference between virgin/chemical r-PET (water-clear) and mechanical r-PET (off-white/yellowish) is the WHOLE POINT — make sure it is visible
+- No real brand logos other than VKS Tech
+- Cream background (#FAF9F6) — clean, no clutter
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<!-- IMAGE 3: METALLISER TRIAL SCENE -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges">
+<span class="card-num">IMAGE 3 OF 4</span>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+</div>
+<div class="card-title">Metalliser Trial Scene — QC at Sample Station</div>
+<div class="card-concept">A QC engineer (female, late 20s, navy uniform) examining metallised silver film over a backlit light box, densitometer reading "2.18 OD" beside her, metalliser machinery softly out of focus behind. The unforgiving step.</div>
+<div class="dim-callout">📐 1600 × 900 px (16:9)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses logo from Image 1.</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-3', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-3">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place that exact logo as-is.
+
+Generate a photo-realistic editorial scene at 1600 × 900 pixels (16:9 ratio) of a metalliser QC station in an Indian flexible packaging plant.
+
+SCENE: A QC engineer (female, late 20s, wearing a navy blue uniform jacket and safety helmet) at a brightly-lit inspection table examining a metallised film sample. She is holding the metallised silver film up to a backlit light box, examining for gel defects (fish-eyes) under transmitted light. A handheld densitometer rests on the table beside her. Behind her, slightly out of focus, the metalliser machine itself — a large industrial unit with vacuum chamber visible, control panel showing readouts.
+
+ON THE INSPECTION TABLE:
+- A 1m piece of metallised PET film (silver, slightly reflective) draped over the back-light box
+- A handheld optical density meter (densitometer) — small, navy blue with a digital display showing "2.18 OD" in green
+- A clipboard with a partially visible trial protocol sheet (rows visible but text not readable except headers like "STEP" and "OD")
+- A clear sample jar of r-PET pellets (faintly yellowish) at the corner of the table
+
+LIGHTING: Bright clinical QC lighting, but with a focused light box illuminating the film from below — creating a soft glow that highlights any gel defects in the film. Slight directional shadow from camera left.
+
+BACKGROUND: Soft-focus metalliser machinery (5-8m behind the engineer) — visible vacuum chamber doors, control panel with green/orange indicator lights, polished metal surfaces. Background is creamy bokeh.
+
+COLOUR PALETTE: Cool clinical white/gray of the QC area, navy uniform, silver film, warm glow from the back-light box. Brand colours sneak in via the navy uniform and any orange/teal indicator lights.
+
+TEXT OVERLAY:
+
+TOP HEADER (full width, 80px, semi-transparent navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1) at FAR LEFT, ~60×60 pixels.
+  To the right, white text bold: "r-PET TRIAL QC — THE UNFORGIVING METALLISATION STEP"
+
+BOTTOM FOOTER (50px, semi-transparent teal):
+  Centered white: "vksTech.com | Free Industrial Toolkit | Metalliser & r-PET Tools"
+
+WATERMARK: "vksTech.com" lower-right, 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic editorial photography, NOT illustration, NOT 3D render
+- The QC engineer should look engaged and focused — this is precision work
+- The film, densitometer, and pellet jar should look like real industrial QC items
+- No readable text on machinery, name patches, or background
+- No real brand logos other than VKS Tech
+- The "2.18 OD" reading on the densitometer should be visible — it is the verdict moment
+- Shot on Canon R5 with 50mm lens, professional industrial editorial photography
+- Image dimensions exactly 1600 × 900 pixels</pre>
+</div>
+
+<!-- IMAGE 4: COST DECISION DESK -->
+<div class="card">
+<div class="card-header">
+<div class="card-header-left">
+<div class="badges">
+<span class="card-num">IMAGE 4 OF 4</span>
+<span class="card-num style-photo">📸 PHOTO-REALISTIC</span>
+</div>
+<div class="card-title">PCR Cost Decision — Engineer's Desk Photo</div>
+<div class="card-concept">Top-down flat-lay of a real engineer's desk during PCR strategy decision: 3 pellet sample jars (virgin/mech/chem), tablet showing Cost Optimiser, 4 sticky notes with strategy comparisons (Strategy B circled "Mech+Certs ₹95L/yr"), supplier CoA + EPR Certificate documents.</div>
+<div class="dim-callout">📐 1200 × 1500 px (4:5 portrait — A4)</div>
+<div class="logo-instr"><strong>📎 LOGO:</strong> Reuses logo from Image 1.</div>
+</div>
+<button class="copy-btn" onclick="copyPrompt('prompt-4', this)">📋 Copy Prompt</button>
+</div>
+<pre id="prompt-4">USE THE SAME VKS TECH LOGO from Image 1 in this chat. Place that exact logo as-is.
+
+Generate a photo-realistic top-down flat-lay photograph at 1200 × 1500 pixels (4:5 portrait) of an Indian plant engineer's desk during PCR strategy planning. Style: editorial workspace photography, magazine "what's on my desk today" shot.
+
+SCENE: Top-down (90-degree overhead) view of a clean wooden or matte cream desk surface during PCR sourcing decision day. The composition is intentional and editorial.
+
+OBJECTS ON THE DESK (arranged top to bottom):
+
+TOP OF FRAME:
+- A small white safety helmet at the top-left corner, partially in frame
+- A coffee cup (plain white ceramic, no logo) at top-right, partially in frame, half-empty
+- Three small clear plastic sample jars arranged in a row, each containing different pellets:
+  • Jar 1: clear water-clear pellets (labelled "VIRGIN")
+  • Jar 2: faintly yellowish/white pellets (labelled "MECH r-PET")
+  • Jar 3: clear pellets indistinguishable from Jar 1 (labelled "CHEM r-PET")
+  Labels are simple white tape with handwritten Sharpie text.
+
+UPPER MIDDLE:
+- A tablet computer (iPad-style, plain), screen at slight angle, showing the "PCR COST-HYBRID OPTIMISER" Excel dashboard with 4 strategy rows: Strategy A (all certs), B (mech + certs), C (chemical), D (50/50). One row is highlighted in orange showing "💡 LOWEST COST"
+
+CENTER:
+- 4 sticky notes laid out connected by hand-drawn arrows in pen, showing strategy comparison:
+
+  Sticky 1 (orange #E85D26): "STRATEGY A — All Certs ₹120L/yr"
+  Sticky 2 (orange #E85D26): "STRATEGY B — Mech + Certs ₹95L/yr ⭐"
+  Sticky 3 (teal #0D8C7E): "STRATEGY C — All Chemical ₹550L/yr"
+  Sticky 4 (teal #0D8C7E): "STRATEGY D — 50/50 ₹105L/yr"
+
+  Sticky note 2 has a bold pen circle around it indicating "this one!"
+
+BOTTOM OF FRAME:
+- A printed supplier CoA (Certificate of Analysis) document, partly visible — header "CERTIFICATE OF ANALYSIS" readable, body text deliberately blurred
+- A printed "EPR Certificate" document beside it — title "EPR RECYCLING CERTIFICATE" readable
+- A pen (plain navy, no logo) lying diagonally across the desk
+
+LIGHTING: Soft, diffused, natural daylight from camera-left (window light). Soft shadows under helmet, cup, tablet, jars. Like a photography softbox at 45 degrees.
+
+CAMERA: Direct top-down (90 degrees), shot on Canon R5 with 35mm lens, f/5.6 — desk surface in focus, slight softness near edges.
+
+COLOUR PALETTE: Cream desk surface, white objects (helmet, cup, tablet, jars), navy/orange/teal sticky notes, navy pen, white CoA documents. Natural wood-grain or matte cream beneath. No saturated random colours.
+
+TEXT OVERLAY:
+
+TOP HEADER (full width, 100px tall, navy #1A2744 band):
+  Place the SAME VKS Tech logo (from Image 1) at FAR LEFT, ~70×70 pixels.
+  Title in white bold: "PCR STRATEGY DECISION — 4 PATHWAYS COMPARED"
+  Subtitle in cream below, smaller: "For Indian Cat II Flexible Packaging Plants"
+
+BOTTOM FOOTER (full width, 60px, navy band):
+  White centered: "vksTech.com | Free Industrial Toolkit | © VKS TECH — Vivek Kumar"
+
+WATERMARK: "vksTech.com" small white text, lower-right (outside footer), 60% opacity.
+
+CRITICAL CONSTRAINTS:
+- USE THE SAME VKS TECH LOGO from Image 1
+- Photo-realistic workspace photography, NOT illustration, NOT 3D render, NOT cartoon
+- All objects should look like real physical items
+- Sticky notes should look hand-written (slight irregularity gives realism)
+- Pellet jar labels should look like real Sharpie-on-tape, not perfectly typed
+- No real brand logos other than VKS Tech
+- No readable text other than the labels, sticky notes, dashboard title, and CoA/Certificate headers specified
+- Shot on Canon R5 with 35mm lens, professional editorial workspace photography, magazine quality
+- Image dimensions exactly 1200 × 1500 pixels (portrait 4:5 ratio)</pre>
+</div>
+
+<div class="checklist">
+<h3>📋 Publishing Checklist</h3>
+<ul>
+<li>Verify dimensions match exactly (1600×900 for Images 1, 2, 3 / 1200×1500 for Image 4)</li>
+<li>Save each as PNG (lossless, no JPEG compression artifacts)</li>
+<li><strong>Logo check</strong> — VKS Tech logo visible top-left on all 4, looks like the original</li>
+<li><strong>Realism test</strong> — at thumbnail size, do all 4 look like real photographs?</li>
+<li><strong>Image 2 specific test</strong> — colour difference between virgin/chemical (clear) and mechanical r-PET (yellowish) is the point — confirm it shows</li>
+<li>Confirm <code>vksTech.com</code> watermark visible on each</li>
+<li>Place all 4 PNGs in the same folder as <code>index.html</code></li>
+</ul>
+</div>
+
+<div class="warning">
+<strong>📎 If Gemini warps the logo:</strong> Regenerate 1-2 times. If still off, generate the image WITHOUT the logo and paste real <code>logo.png</code> in Canva/Figma after — 30 seconds, perfect logo every time.
+</div>
+
+<div class="warning">
+<strong>📸 If any image looks too cartoonish:</strong> Regenerate 2-3 times — variability is normal. Add: <code>"Shot on Canon R5 with 50mm lens, professional editorial photography, magazine quality, photo-realistic, NOT illustration"</code>. For complex scenes (Image 4), generate fewer objects first, add the rest in Photoshop/Canva later.
+</div>
+
+<div class="warning">
+<strong>⚠ If Gemini mixes up pellet colours in Image 2:</strong> The colour contrast between mechanical r-PET (yellowish) and virgin/chemical (clear) is the entire point. If Gemini makes them all look the same, regenerate emphasising the difference, OR generate with all-clear pellets then add a slight yellow tint to the middle pile in Canva/Photoshop.
+</div>
+
+<footer>
+🌐 <a href="https://vksTech.com">vksTech.com</a> &nbsp;|&nbsp; Built by Vivek Kumar (Privacy Papa) — M.Tech NIT Uttarakhand &nbsp;|&nbsp; 9+ Yrs Flexible Packaging
+<br>
+© VKS TECH &nbsp;|&nbsp; Free Industrial Toolkit &nbsp;|&nbsp; Share freely, do not resell
+</footer>
+
+</div>
+
+<script>
+function copyPrompt(elementId, btn) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = btn.innerText;
+    btn.innerText = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerText = originalText; btn.classList.remove('copied'); }, 2000);
+  }).catch(err => {
+    const range = document.createRange();
+    range.selectNode(document.getElementById(elementId));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    btn.innerText = '⚠ Select & Ctrl+C';
+    setTimeout(() => { btn.innerText = '📋 Copy Prompt'; }, 3000);
+  });
+}
+</script>
+
+</body>
+</html>
