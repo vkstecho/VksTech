@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>High OD Defect — 5-Step Action Plan</title>
+</head>
+<body>
+<div class="article-body">
+
+
+
+
+<!-- ════════════════════ ENGLISH ════════════════════ -->
+<div class="en-content">
+
+<h2>🔴 High OD Defect — The Silent Money Burner</h2>
+
+<p>Your Inline OD Sensor screen shows OD <strong>2.6</strong> against a target of <strong>2.3</strong>. The coating looks fine, there's no customer complaint yet — so why panic? Here's why: <strong>every 0.1 of excess OD burns aluminium wire, shortens boat life, and silently eats ₹30,000–₹50,000 from your monthly P&amp;L.</strong></p>
+
+<p>Unlike Low OD (which screams for attention because of visible barrier failure), High OD is the defect that <strong>nobody notices but everyone pays for</strong>. This blog gives you the exact 5-step action plan to catch it, fix it, and prevent it — the same field-tested method used on Met-1 and Met-2 lines.</p>
+
+<h3>💸 Why High OD Hurts More Than You Think</h3>
+
+<ul>
+  <li><strong>Direct wire cost:</strong> Running OD 2.5 when target is 2.3 = ~9% extra aluminium wire consumed per jumbo</li>
+  <li><strong>Boat life reduction:</strong> Higher wire feed = harder boat wear = premature boat replacement</li>
+  <li><strong>Brittle metal layer:</strong> Over-coated films are more prone to flaking during lamination</li>
+  <li><strong>Customer spec violation:</strong> Some customers reject over-spec too — not just under-spec</li>
+  <li><strong>Hidden P&amp;L drain:</strong> ₹30,000–₹50,000/month plant-level loss that never shows in defect reports</li>
+</ul>
+
+<h3>🎯 The 5-Step High OD Action Plan</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Action</th><th>Time</th><th>Tools Needed</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Confirm</strong></td><td>Check magnitude &amp; trend on sensor</td><td>30 sec</td><td>HMI screen</td></tr>
+<tr><td><strong>2. Wire Feed Check</strong></td><td>HMI rate, AUTO mode, target value</td><td>1 min</td><td>HMI only</td></tr>
+<tr><td><strong>3. Speed Check</strong></td><td>Actual line speed vs recipe</td><td>30 sec</td><td>HMI + recipe card</td></tr>
+<tr><td><strong>4. Calibration</strong></td><td>Inline vs offline match</td><td>2 min</td><td>Offline densitometer</td></tr>
+<tr><td><strong>5. Verify</strong></td><td>Reduce wire feed or raise speed</td><td>2 min</td><td>Offline sample</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;"><img src="step5-flowchart.png" alt="High OD 5-Step Action Plan Flowchart" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<h3>🔍 Step 1 — CONFIRM (30 seconds)</h3>
+
+<p>Before adjusting anything, look at the sensor screen carefully:</p>
+
+<ul>
+  <li><strong>How much over target?</strong> → 0.1 is normal drift; 0.3+ is serious</li>
+  <li><strong>Gradually climbing or sudden jump?</strong> → Gradual = process drift; Sudden = mode switch or recipe load</li>
+  <li><strong>All probes high or only 1-2?</strong> → All = system issue; 1-2 = local problem</li>
+  <li><strong>Did operator just load a new recipe?</strong> → First place to look</li>
+</ul>
+
+<p>This 30-second diagnosis saves you from random adjustments. Don't skip it.</p>
+
+<h3>🔧 Step 2 — WIRE FEED CHECK (1 minute)</h3>
+
+<p>For High OD, the wire feed is delivering <strong>too much</strong> material. Check in this order:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Check</th><th>Symptom</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td>Wire feed rate</td><td>HMI shows value higher than recipe baseline</td><td>Let AUTO mode correct (if ON)</td></tr>
+<tr><td>Sensor mode</td><td>Stuck in Manual mode with high feed</td><td>Switch back to AUTO</td></tr>
+<tr><td>Target OD value</td><td>Target accidentally set to higher number</td><td>Verify recipe target matches customer spec</td></tr>
+<tr><td>Recipe ID</td><td>Wrong recipe loaded (OD 2.8 recipe for OD 2.3 job)</td><td>Load correct recipe immediately</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>⚡ Step 3 — SPEED CHECK (The Silent Culprit)</h3>
+
+<p>This is where High OD differs from Low OD. The relationship is simple but often missed:</p>
+
+<div style="margin:24px 0;"><img src="speed-od-relation.png" alt="Speed vs OD Relationship — Lower Speed = Higher OD" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<ul>
+  <li><strong>Lower line speed + same wire feed = more coating deposited per metre = Higher OD</strong></li>
+  <li>Check actual line speed on HMI vs recipe target</li>
+  <li>If running at 350 m/min instead of recipe 400 m/min → that 12% speed drop causes ~12% OD rise</li>
+  <li>Common causes of unplanned speed drop: tension issue, unwind near end, operator deliberately slowed for some reason</li>
+</ul>
+
+<p><strong>Fix:</strong> Bring speed back to recipe. In 90% of High OD cases where AUTO mode is ON, this single action fixes the problem in under 2 minutes.</p>
+
+<h3>📡 Step 4 — INLINE SENSOR CALIBRATION CHECK</h3>
+
+<p>Sometimes the coating is fine — the sensor is lying. Quick check:</p>
+
+<ol>
+  <li>Take an offline sample after 50 metres</li>
+  <li>Measure on offline densitometer (X-Rite or similar)</li>
+  <li>Compare with inline reading at same position</li>
+  <li>Mismatch &gt;0.1? → Sensor calibration drifted → Recalibrate against offline reference</li>
+  <li>Match within ±0.05? → Sensor is fine, issue is real process problem</li>
+</ol>
+
+<h3>✅ Step 5 — VERIFY</h3>
+
+<p>Once you've identified the cause, apply the fix and verify in this order:</p>
+
+<ol>
+  <li>Apply corrective action (reduce wire feed / increase speed / load correct recipe)</li>
+  <li>Wait 50 metres for system to stabilize</li>
+  <li>Take offline sample → measure L/C/R</li>
+  <li>All three within ±0.1 of target? → Ramp to full production speed</li>
+  <li>Still high? → Re-check Step 3 (speed) — this is the most-missed step</li>
+</ol>
+
+<div style="margin:24px 0;"><img src="decision-tree.png" alt="High OD Quick Decision Tree" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<h3>🏭 Real Shop Floor Story — The Night Shift That Cost ₹12,000</h3>
+
+<div style="background:#f8f6f1;border-left:4px solid #e85d26;padding:18px 20px;border-radius:8px;margin:20px 0;font-style:italic;line-height:1.7;">
+<p style="margin:0 0 12px 0;"><strong>Met-2, night shift, 2:00 AM.</strong> OD was holding steady at 2.30 against a 2.3 target. Perfect run. By 3:30 AM, the sensor showed 2.55. The operator reduced wire feed manually. By 4:00 AM — still 2.55. He reduced again. Still 2.55.</p>
+
+<p style="margin:0 0 12px 0;">By 5:00 AM, OD had crept to 2.75. The operator had already reduced wire feed by 15%. Panic set in. He called the supervisor.</p>
+
+<p style="margin:0 0 12px 0;">The supervisor walked in, looked at three things for 30 seconds: <strong>OD reading, wire feed %, actual line speed.</strong> Then he said: <em>"Kya speed check ki?"</em></p>
+
+<p style="margin:0 0 12px 0;">Recipe called for 400 m/min. Actual speed: <strong>335 m/min</strong>. The unwind roll was near its end, tension had softened, line had been gradually slowing for 3 hours. Nobody had checked.</p>
+
+<p style="margin:0;">Fix: Change unwind roll, restore speed to 400. OD settled to 2.32 in under 3 minutes. Total damage: <strong>~₹12,000 of extra aluminium wire burned</strong> over 3 hours. Root cause filed in the defect format. Now every Met-2 operator has a single rule written above the HMI: <strong>"High OD? Check speed FIRST."</strong></p>
+</div>
+
+<p><strong>Lesson:</strong> The wire feed system was doing its job perfectly — in AUTO mode it was trying to compensate for slower line speed by feeding more wire to maintain OD. When the operator manually overrode AUTO and reduced wire feed, he fought against the system instead of fixing the real problem. Three hours of diagnosis, fixed in 30 seconds once someone asked the right question.</p>
+
+<h3>📊 Top 5 Causes of High OD — Ranked by Frequency</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Rank</th><th>Cause</th><th>Frequency</th><th>First Action</th></tr>
+</thead>
+<tbody>
+<tr><td>#1</td><td>Line speed below recipe target</td><td>~40%</td><td>Restore recipe speed</td></tr>
+<tr><td>#2</td><td>Wrong recipe loaded</td><td>~25%</td><td>Verify recipe ID against PO</td></tr>
+<tr><td>#3</td><td>Sensor stuck in Manual mode</td><td>~15%</td><td>Switch to AUTO</td></tr>
+<tr><td>#4</td><td>Sensor calibration drifted</td><td>~12%</td><td>Recalibrate vs offline</td></tr>
+<tr><td>#5</td><td>Target OD wrongly entered</td><td>~8%</td><td>Re-enter correct target</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>💰 The Real Cost of Ignoring High OD</h3>
+
+<p>Let's do the math for a typical metallization plant:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>Average OD deviation (over target)</td><td>+0.15 OD</td></tr>
+<tr><td>Extra wire consumption</td><td>~6.5%</td></tr>
+<tr><td>Monthly aluminium wire consumed</td><td>2,500 kg</td></tr>
+<tr><td>Aluminium wire rate</td><td>₹341/kg</td></tr>
+<tr><td>Monthly extra wire cost</td><td><strong>₹55,400</strong></td></tr>
+<tr><td>Annual extra wire cost</td><td><strong>₹6.6 Lakh</strong></td></tr>
+<tr><td>Additional boat wear (~5% faster)</td><td>+₹20,000/month</td></tr>
+<tr><td><strong>Total annual invisible loss</strong></td><td><strong>₹8.8 Lakh</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Controlling High OD by just 0.1 on average can save a mid-sized plant <strong>₹5-6 lakh per year</strong> — without adding a single new machine or operator. That's pure P&amp;L improvement.</p>
+
+<h3>🛡️ Prevention — Stop High OD Before It Starts</h3>
+
+<ul>
+  <li><strong>Shift handover:</strong> Outgoing operator confirms current OD to incoming — catches drift early</li>
+  <li><strong>Recipe verification:</strong> Supervisor signs off on recipe ID before every new jumbo starts</li>
+  <li><strong>Speed monitoring:</strong> Alert when actual speed drops &gt;5% below recipe for more than 2 minutes</li>
+  <li><strong>Monthly calibration:</strong> Schedule Inline OD Sensor calibration against offline standard</li>
+  <li><strong>AUTO mode lock:</strong> Prevent operator from switching to Manual without supervisor password</li>
+</ul>
+
+<div style="background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:white;padding:24px;border-radius:14px;margin:32px 0;box-shadow:0 4px 16px rgba(26,39,68,0.2);">
+  <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 Free Downloads — Take This to the Shop Floor</h3>
+  <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">Two professionally designed PDFs for immediate plant use. Print, laminate, and use during real defects:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="high-od-action-plan/VKS-Tech-High-OD-Action-Card.pdf" download="" style="background:#e85d26;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">🎴 Shop Floor Action Card</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">Print + laminate + stick on machine. 5-step quick reference with cost calculator.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">Download PDF →</span>
+    </a>
+    <a href="high-od-action-plan/VKS-Tech-High-OD-Investigation-Format.pdf" download="" style="background:#0d8c7e;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;border:2px solid rgba(255,255,255,0.3);">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📋 Defect Investigation Format</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">Fillable A4 record. Operator + Supervisor + Quality sign-off. Audit-ready.</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">Download PDF →</span>
+    </a>
+  </div>
+</div>
+
+<div class="callout"><strong>💡 Key Takeaway:</strong> High OD is the invisible profit killer. Unlike Low OD, it doesn't trigger customer complaints — but it silently burns ₹5–9 lakh per year in extra aluminium wire and boat wear. The #1 cause (40% of cases) is simply running at lower line speed than recipe demands. Train operators to treat High OD with the same urgency as Low OD. Your CFO will notice.</div>
+
+</div>
+
+<!-- ════════════════════ HINDI ════════════════════ -->
+<div class="hindi-section hi-content">
+
+<h2>🔴 High OD Defect — ख़ामोश पैसे जलाने वाला</h2>
+
+<p>आपकी Inline OD Sensor screen पर OD <strong>2.6</strong> दिख रहा है, target है <strong>2.3</strong>। Coating दिखने में ठीक है, customer complaint भी नहीं — तो घबराएं क्यों? इसलिए: <strong>हर 0.1 extra OD मतलब aluminium wire जल रहा है, boat life कम हो रही है, और महीने की P&amp;L से ₹30,000–₹50,000 चुपचाप निकल रहे हैं।</strong></p>
+
+<p>Low OD (जो barrier failure की वजह से तुरंत दिखता है) के उलट, High OD वह defect है जो <strong>किसी को दिखता नहीं, पर सबको भुगतना पड़ता है</strong>। यह blog आपको वही field-tested 5-step action plan देता है जो Met-1 और Met-2 lines पर इस्तेमाल होता है।</p>
+
+<h3>💸 High OD से ज़्यादा नुकसान क्यों</h3>
+
+<ul>
+  <li><strong>सीधा wire cost:</strong> Target 2.3 पर 2.5 चलाने से हर jumbo में ~9% extra aluminium wire</li>
+  <li><strong>Boat life कम:</strong> ज़्यादा wire feed = boat की wear तेज़ = जल्दी replacement</li>
+  <li><strong>Brittle metal layer:</strong> Over-coated films lamination में flaking करती हैं</li>
+  <li><strong>Customer spec violation:</strong> कुछ customers over-spec भी reject करते हैं — सिर्फ़ under-spec नहीं</li>
+  <li><strong>Hidden P&amp;L drain:</strong> ₹30,000–₹50,000/month का plant-level नुकसान जो defect reports में नहीं दिखता</li>
+</ul>
+
+<h3>🎯 5-Step High OD Action Plan</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Step</th><th>Action</th><th>Time</th><th>ज़रूरी Tools</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Confirm</strong></td><td>Sensor पर magnitude &amp; trend check</td><td>30 sec</td><td>HMI screen</td></tr>
+<tr><td><strong>2. Wire Feed Check</strong></td><td>HMI rate, AUTO mode, target value</td><td>1 min</td><td>HMI only</td></tr>
+<tr><td><strong>3. Speed Check</strong></td><td>Actual line speed vs recipe</td><td>30 sec</td><td>HMI + recipe card</td></tr>
+<tr><td><strong>4. Calibration</strong></td><td>Inline vs offline match</td><td>2 min</td><td>Offline densitometer</td></tr>
+<tr><td><strong>5. Verify</strong></td><td>Wire feed कम या speed बढ़ाओ</td><td>2 min</td><td>Offline sample</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="margin:24px 0;"><img src="step5-flowchart-hi.png" alt="High OD 5-Step Action Plan Flowchart" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<h3>🔍 Step 1 — CONFIRM (30 सेकंड)</h3>
+
+<p>कुछ भी adjust करने से पहले sensor screen ध्यान से देखो:</p>
+
+<ul>
+  <li><strong>Target से कितना ज़्यादा?</strong> → 0.1 normal drift है; 0.3+ serious है</li>
+  <li><strong>धीरे-धीरे बढ़ा या अचानक?</strong> → Gradual = process drift; Sudden = mode switch या recipe load</li>
+  <li><strong>सभी probes high या सिर्फ़ 1-2?</strong> → सभी = system issue; 1-2 = local problem</li>
+  <li><strong>अभी operator ने new recipe load किया?</strong> → पहले यहीं देखो</li>
+</ul>
+
+<p>यह 30-second diagnosis आपको random adjustments से बचाती है। Skip मत करो।</p>
+
+<h3>🔧 Step 2 — WIRE FEED CHECK (1 minute)</h3>
+
+<p>High OD में wire feed <strong>ज़्यादा material</strong> दे रहा है। इस order में check करो:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Check</th><th>Symptom</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td>Wire feed rate</td><td>HMI पर value recipe baseline से ज़्यादा</td><td>AUTO mode correct करने दो (अगर ON है)</td></tr>
+<tr><td>Sensor mode</td><td>Manual mode में फँसा, high feed के साथ</td><td>AUTO पर switch करो</td></tr>
+<tr><td>Target OD value</td><td>Target ग़लती से ज़्यादा number पर set</td><td>Customer spec से मिलाओ</td></tr>
+<tr><td>Recipe ID</td><td>ग़लत recipe load (OD 2.3 job में OD 2.8 recipe)</td><td>सही recipe तुरंत load करो</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>⚡ Step 3 — SPEED CHECK (ख़ामोश क़ातिल)</h3>
+
+<p>यहीं High OD, Low OD से अलग है। Relationship सीधा है पर अक्सर miss होता है:</p>
+
+<div style="margin:24px 0;"><img src="speed-od-relation-hi.png" alt="Speed vs OD Relationship — Lower Speed = Higher OD" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<ul>
+  <li><strong>कम line speed + same wire feed = हर metre पर ज़्यादा coating = Higher OD</strong></li>
+  <li>HMI पर actual line speed vs recipe target check करो</li>
+  <li>Recipe 400 m/min है, चल रहा 350 m/min — यह 12% speed drop ~12% OD rise कर देता है</li>
+  <li>Unplanned speed drop के कारण: tension issue, unwind ख़त्म होने वाला, operator ने जान-बूझकर slow किया</li>
+</ul>
+
+<p><strong>Fix:</strong> Speed वापस recipe पर लाओ। 90% High OD cases में जहाँ AUTO mode ON है, यह एक action 2 minute में problem fix कर देती है।</p>
+
+<h3>📡 Step 4 — INLINE SENSOR CALIBRATION CHECK</h3>
+
+<p>कभी coating ठीक होती है — sensor झूठ बोल रहा होता है। Quick check:</p>
+
+<ol>
+  <li>50 metres के बाद offline sample लो</li>
+  <li>Offline densitometer (X-Rite या similar) पर measure</li>
+  <li>उसी position की inline reading से compare</li>
+  <li>Mismatch &gt;0.1? → Sensor calibration drift हो गया → Offline reference से recalibrate</li>
+  <li>±0.05 के अंदर? → Sensor ठीक है, असली process problem है</li>
+</ol>
+
+<h3>✅ Step 5 — VERIFY</h3>
+
+<p>कारण identify होने के बाद fix apply करो और इस order में verify करो:</p>
+
+<ol>
+  <li>Corrective action apply करो (wire feed कम / speed बढ़ाओ / सही recipe load करो)</li>
+  <li>System stabilize होने के लिए 50 metres wait करो</li>
+  <li>Offline sample लो → L/C/R measure</li>
+  <li>तीनों target के ±0.1 में? → Full production speed पर जाओ</li>
+  <li>अभी भी high? → Step 3 (speed) वापस check — यह सबसे ज़्यादा miss होता है</li>
+</ol>
+
+<div style="margin:24px 0;"><img src="decision-tree-hi.png" alt="High OD Quick Decision Tree" style="width:100%;height:auto;border-radius:12px;display:block;"></div>
+
+<h3>🏭 असली Shop Floor कहानी — वह रात की शिफ्ट जिसने ₹12,000 जलाए</h3>
+
+<div style="background:#f8f6f1;border-left:4px solid #e85d26;padding:18px 20px;border-radius:8px;margin:20px 0;font-style:italic;line-height:1.7;">
+<p style="margin:0 0 12px 0;"><strong>Met-2, रात की शिफ्ट, रात 2:00 बजे।</strong> OD बिल्कुल steady था 2.30 पर, target 2.3। Perfect run चल रहा था। रात 3:30 तक sensor 2.55 दिखाने लगा। Operator ने manually wire feed कम किया। 4:00 बजे तक — अभी भी 2.55। फिर कम किया। फिर भी 2.55।</p>
+
+<p style="margin:0 0 12px 0;">सुबह 5:00 तक OD बढ़कर 2.75 तक पहुँच गया। Operator wire feed 15% तक कम कर चुका था। घबराहट शुरू हो गई। Supervisor को बुलाया।</p>
+
+<p style="margin:0 0 12px 0;">Supervisor आया, 30 सेकंड में तीन चीज़ें देखीं: <strong>OD reading, wire feed %, actual line speed.</strong> फिर बोला: <em>"क्या speed check की?"</em></p>
+
+<p style="margin:0 0 12px 0;">Recipe में speed थी 400 m/min. Actual speed: <strong>335 m/min</strong>. Unwind roll ख़त्म होने वाला था, tension soft हो गई थी, line 3 घंटे से धीरे-धीरे slow हो रही थी। किसी ने check ही नहीं किया।</p>
+
+<p style="margin:0;">Fix: Unwind roll बदला, speed 400 पर restored। OD 3 मिनट में 2.32 पर settle हो गया। कुल नुकसान: <strong>~₹12,000 extra aluminium wire</strong> 3 घंटे में जला। Root cause defect format में file कर दी गई। अब हर Met-2 operator के HMI के ऊपर एक rule लिखा है: <strong>"High OD? पहले speed check करो।"</strong></p>
+</div>
+
+<p><strong>सीख:</strong> Wire feed system अपना काम perfectly कर रहा था — AUTO mode में वह कम speed को compensate करने के लिए ज़्यादा wire feed कर रहा था ताकि OD maintain रहे। जब operator ने manually AUTO override करके wire feed कम किया, तो वह system के against लड़ रहा था, असली problem fix नहीं कर रहा था। 3 घंटे की diagnosis — सही सवाल पूछते ही 30 सेकंड में हल।</p>
+
+<h3>📊 High OD के Top 5 कारण — Frequency Ranked</h3>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Rank</th><th>कारण</th><th>Frequency</th><th>पहली Action</th></tr>
+</thead>
+<tbody>
+<tr><td>#1</td><td>Line speed recipe से कम</td><td>~40%</td><td>Recipe speed restore</td></tr>
+<tr><td>#2</td><td>ग़लत recipe loaded</td><td>~25%</td><td>Recipe ID को PO से मिलाओ</td></tr>
+<tr><td>#3</td><td>Sensor Manual mode में फँसा</td><td>~15%</td><td>AUTO पर switch</td></tr>
+<tr><td>#4</td><td>Sensor calibration drift</td><td>~12%</td><td>Offline से recalibrate</td></tr>
+<tr><td>#5</td><td>Target OD ग़लत enter</td><td>~8%</td><td>सही target enter करो</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>💰 High OD नज़रअंदाज़ करने का असली नुकसान</h3>
+
+<p>एक typical metallization plant का calculation देखो:</p>
+
+<div style="overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid #e2ddd4;">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>Average OD deviation (target से ऊपर)</td><td>+0.15 OD</td></tr>
+<tr><td>Extra wire consumption</td><td>~6.5%</td></tr>
+<tr><td>Monthly aluminium wire consumed</td><td>2,500 kg</td></tr>
+<tr><td>Aluminium wire rate</td><td>₹341/kg</td></tr>
+<tr><td>Monthly extra wire cost</td><td><strong>₹55,400</strong></td></tr>
+<tr><td>Annual extra wire cost</td><td><strong>₹6.6 Lakh</strong></td></tr>
+<tr><td>Additional boat wear (~5% तेज़)</td><td>+₹20,000/month</td></tr>
+<tr><td><strong>Total annual invisible loss</strong></td><td><strong>₹8.8 Lakh</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>High OD को सिर्फ़ 0.1 average से control करना मतलब mid-sized plant को <strong>सालाना ₹5-6 लाख की बचत</strong> — बिना नई मशीन, बिना नए operator के। यह pure P&amp;L improvement है।</p>
+
+<h3>🛡️ Prevention — High OD आने से पहले रोको</h3>
+
+<ul>
+  <li><strong>Shift handover:</strong> जाने वाला operator आने वाले को current OD confirm करे — drift जल्दी पकड़ में आती है</li>
+  <li><strong>Recipe verification:</strong> हर नए jumbo से पहले supervisor recipe ID sign-off करे</li>
+  <li><strong>Speed monitoring:</strong> Actual speed recipe से 5% कम 2 minute तक रहे तो alert</li>
+  <li><strong>Monthly calibration:</strong> Inline OD Sensor को offline standard से calibrate करो</li>
+  <li><strong>AUTO mode lock:</strong> Supervisor password के बिना operator Manual पर switch न कर सके</li>
+</ul>
+
+<div style="background:linear-gradient(135deg,#1a2744 0%,#0d8c7e 100%);color:white;padding:24px;border-radius:14px;margin:32px 0;box-shadow:0 4px 16px rgba(26,39,68,0.2);">
+  <h3 style="color:white;margin:0 0 8px 0;font-size:20px;border:none;padding:0;">📥 मुफ़्त Downloads — Shop Floor पर ले जाओ</h3>
+  <p style="font-size:14px;margin:0 0 16px 0;color:#ffd9c5;">दो professionally designed PDFs जो plant में तुरंत इस्तेमाल हो सकते हैं। Print करो, laminate करो, real defects में use करो:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="high-od-action-plan/VKS-Tech-High-OD-Action-Card.pdf" download="" style="background:#e85d26;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">🎴 Shop Floor Action Card</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">Print + laminate + machine पर लगाओ। 5-step reference + cost calculator।</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">PDF Download →</span>
+    </a>
+    <a href="high-od-action-plan/VKS-Tech-High-OD-Investigation-Format.pdf" download="" style="background:#0d8c7e;color:white;padding:16px;border-radius:10px;text-decoration:none;display:block;border:2px solid rgba(255,255,255,0.3);">
+      <strong style="font-size:15px;display:block;margin-bottom:6px;">📋 Defect Investigation Format</strong>
+      <span style="font-size:13px;opacity:0.95;display:block;">Fillable A4 record। Operator + Supervisor + Quality sign-off। Audit-ready।</span>
+      <span style="display:inline-block;margin-top:10px;background:rgba(255,255,255,0.25);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;">PDF Download →</span>
+    </a>
+  </div>
+</div>
+
+<div class="callout"><strong>💡 मुख्य बात:</strong> High OD अदृश्य profit killer है। Low OD की तरह customer complaint नहीं करता — पर ख़ामोशी से सालाना ₹5–9 लाख aluminium wire और boat wear में जला देता है। #1 कारण (40% cases) सिर्फ़ recipe से कम line speed पर चलाना है। Operators को High OD को भी Low OD जितनी urgency से treat करना सिखाओ। CFO नोटिस करेंगे।</div>
+
+</div>
+
+
+</div>
+</body>
+</html>

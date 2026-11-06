@@ -19,6 +19,9 @@ function extractBodyContent(html) {
 }
 
 // Fetch blog content from GitHub for GitHub-backed blogs
+// Robust rewrite: always resolve relative src/href to the correct raw.githubusercontent.com
+// folder of this blog (using only the filename). This tolerates wrong folder prefixes
+// that were baked into many index.html files (e.g. "16-wrinkle-.../" inside the 15- folder).
 async function fetchGithubContent(githubPath) {
   if (!githubPath) return '';
   const [folder, file] = githubPath.split('::');
@@ -29,13 +32,11 @@ async function fetchGithubContent(githubPath) {
     if (!r.ok) return '';
     const html = await r.text();
     let body = extractBodyContent(html);
-    const folderPrefix = ASSET_URL + '/' + folder + '/';
+    const rawBase = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${folder}/`;
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
-      let cleanPath = path;
-      if (cleanPath.startsWith(folder + '/')) {
-        cleanPath = cleanPath.substring(folder.length + 1);
-      }
-      return `${attr}="${folderPrefix}${cleanPath}"`;
+      // Take only the filename — all assets for a blog live in the same folder as index.html
+      const filename = path.split('/').pop();
+      return `${attr}="${rawBase}${filename}"`;
     });
     return body;
   } catch (e) {
@@ -141,7 +142,31 @@ export default async function handler(req, res) {
       content = await fetchGithubContent(b.github_path);
     }
     if (!content) {
-      content = (b.content || '').replace(/src="(?!http)(?!\/)/g, 'src="' + ASSET_URL + '/');
+      // Content lives in Supabase for older blogs. Relative paths use short folder names
+      // (e.g. "Lutz_vs_cutter/...", "high-od-action-plan/..."). Map them to real GitHub folders.
+      const SHORT_FOLDER_MAP = {
+        'Lutz_vs_cutter': '1-Lutz_vs_cutter',
+        'cpp_vs_pet': '2-cpp_vs_pet',
+        'high_barrier_films': '3-high_barrier_films',
+        'sumifs_countifs': '4-sumifs_countifs',
+        'top10_excel': '5-top10_excel',
+        'metalliser_flow': '6-metalliser_flow',
+        'wire_boat_cost': '7-wire_boat_cost',
+        'machine_utilization': '8-machine_utilization',
+        'oee_simple': '9-oee_simple',
+        'low-od-action-plan': '10-low-od-action-plan',
+        'high-od-action-plan': '11-high-od-action-plan',
+        'pinholes-action-plan': '12-pinholes-action-plan',
+      };
+      const RAW_BLOGS = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/Blogs/`;
+      content = (b.content || '').replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
+        let p = path.replace(/^Blogs\//, '');
+        const first = p.split('/')[0];
+        if (SHORT_FOLDER_MAP[first]) {
+          p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
+        }
+        return `${attr}="${RAW_BLOGS}${p}"`;
+      });
     }
 
     /* Dedupe: if the first <img> in the article body matches the DB cover_image,
