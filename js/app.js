@@ -906,7 +906,7 @@ function renderBlogCard(b) {
   const imgHtml = b.imageUrl
     ? '<div class="blog-img"><img src="'+escH(b.imageUrl)+'" alt="" loading="lazy" decoding="async" width="640" height="360"/></div>'
     : '<div class="blog-img blog-img-fallback">'+cat.icon+'</div>';
-  /* Link to the server-rendered /blog/<slug> page (api/blog.js).
+  /* Link to /blog/<slug> — rewritten to blog.html which loads content from GitHub.
      Fallback to #blog-<id> only if slug is missing (legacy data). */
   const href = b.slug ? ('/blog/' + b.slug) : ('#blog-' + b.id);
   /* Combine date + read time on the same row, separated by a dot */
@@ -1267,9 +1267,9 @@ function _showShareToast(msg){
   document.body.appendChild(t);
   setTimeout(function(){ t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 320); }, 2400);
 }
-/* Auto-open blog overlay ONLY for legacy #blog-<id> hash URLs.
-   /blog/<slug> URLs are now served by api/blog.js (server-rendered),
-   so this client-side code never sees them — they hit the server instead. */
+/* Auto-open blog overlay for legacy #blog-<id> hash URLs on the homepage.
+   /blog/<slug> is rewritten to blog.html (list + article view); that page
+   loads the post from Supabase metadata + GitHub HTML itself. */
 function _tryOpenBlogFromHash(_retries){
   _retries = (typeof _retries === 'number') ? _retries : 0;
   var MAX_RETRIES = 20;

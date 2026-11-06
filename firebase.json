@@ -72,6 +72,10 @@
         "destination": "/blog.html"
       },
       {
+        "source": "/blog/**",
+        "destination": "/blog.html"
+      },
+      {
         "source": "/youtube",
         "destination": "/youtube.html"
       }

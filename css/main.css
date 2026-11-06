@@ -1189,3 +1189,243 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .mob-group a {
   padding: 8px 0;
 }
+
+/* ========== Hero clickable words ========== */
+.hero-title .hero-link,
+.hero-sub .hero-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s, color .2s;
+}
+.hero-title .hero-link:hover,
+.hero-sub .hero-link:hover {
+  color: var(--orange);
+  border-bottom-color: rgba(232,93,38,.45);
+}
+.hero-title .hero-link {
+  font-weight: inherit;
+}
+
+/* ========== Fix grouped mobile nav (was rendering inline) ========== */
+.mob {
+  display: none;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.mob.open {
+  display: flex;
+}
+.mob-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.mob-group:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0.4rem;
+}
+.mob-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+.mob-group a {
+  display: block;
+  padding: 9px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+.mob-group a:active {
+  color: var(--orange);
+}
+
+/* ========== Mobile button polish ========== */
+@media (max-width: 768px) {
+  .hero-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .hero-btns .btn-p,
+  .hero-btns .btn-s {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 15px 22px;
+    font-size: 1.02rem;
+    border-radius: 14px;
+    min-height: 52px;
+  }
+  .hero-btns .btn-p {
+    order: -1;
+    box-shadow: 0 8px 24px rgba(232, 93, 38, 0.28);
+  }
+  .hero-btns .btn-s {
+    background: #fff;
+    border: 1.5px solid var(--border);
+  }
+}
+
+/* ========== Career Journey ========== */
+.career-section {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+}
+.cj-companies {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 2.5rem;
+}
+.cj-block {
+  background: var(--white, #fff);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 22px 20px;
+  box-shadow: 0 4px 20px rgba(26, 39, 68, 0.05);
+}
+.cj-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.cj-logo {
+  height: 40px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.cj-meta h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--navy);
+  margin: 0 0 4px;
+}
+.cj-loc {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.cj-role {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+.cj-role strong {
+  color: var(--navy);
+}
+.cj-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  min-height: 40px;
+}
+.cj-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--bg2);
+}
+.cj-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(26, 39, 68, 0.12);
+}
+.cj-empty {
+  grid-column: 1 / -1;
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: 16px;
+  background: var(--bg2);
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  text-align: center;
+}
+.cj-empty code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--orange);
+}
+
+/* Lightbox */
+.cj-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: rgba(10, 16, 30, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: zoom-out;
+}
+.cj-lightbox.open {
+  display: flex;
+}
+.cj-lightbox img {
+  max-width: min(960px, 100%);
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  cursor: default;
+}
+.cj-lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  background: rgba(255,255,255,.15);
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+}
+.cj-lightbox-close:hover {
+  background: rgba(255,255,255,.28);
+}
+
+@media (max-width: 768px) {
+  .career-section { padding: 60px 0; }
+  .cj-block { padding: 18px 14px 16px; }
+  .cj-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  .cj-meta h3 { font-size: 1.1rem; }
+  .cj-logo { height: 34px; max-width: 100px; }
+}
+@media (max-width: 480px) {
+  .cj-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
