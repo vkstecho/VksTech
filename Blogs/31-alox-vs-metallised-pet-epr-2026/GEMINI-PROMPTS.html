@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Image Prompts — Blog 31 (AlOx vs Metallised PET)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAF9F6; color: #1A2744; line-height: 1.6; margin: 0; padding: 0; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 60px; }
+  h1 { color: #1A2744; font-size: 1.6em; margin: 0 0 6px 0; }
+  h2 { color: #1A2744; font-size: 1.25em; margin: 28px 0 10px 0; border-bottom: 2px solid #E85D26; padding-bottom: 6px; }
+  .meta { color: #5A5A5A; font-size: 0.92em; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ddd4; }
+  th { background: #1A2744; color: #FAF9F6; font-weight: bold; }
+  .prompt-card { background: #fff; border: 2px solid #1A2744; border-radius: 12px; padding: 18px; margin: 22px 0; box-shadow: 0 2px 6px rgba(26,39,68,0.06); }
+  .prompt-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2ddd4; }
+  .prompt-title { font-size: 1.1em; font-weight: bold; color: #1A2744; }
+  .prompt-meta { font-size: 0.85em; color: #5A5A5A; margin-top: 4px; }
+  .copy-btn { background: #E85D26; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; font-weight: bold; font-size: 0.9em; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .copy-btn:hover { background: #c94a18; }
+  .copy-btn.copied { background: #0D8C7E; }
+  .prompt-body { background: #FAF9F6; border-left: 3px solid #E85D26; padding: 12px 14px; border-radius: 4px; font-size: 0.92em; white-space: pre-wrap; word-wrap: break-word; color: #1A2744; font-family: 'SF Mono', Menlo, Consolas, monospace; line-height: 1.55; max-height: 380px; overflow-y: auto; }
+  .planb { background: #fff7e0; border-left: 3px solid #E85D26; padding: 10px 14px; margin-top: 12px; font-size: 0.88em; border-radius: 4px; }
+  .meta-band { background: #1A2744; color: #FAF9F6; padding: 14px 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92em; }
+  .meta-band strong { color: #E85D26; }
+  code { background: #f4ede2; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #0D8C7E; color: #fff; padding: 12px 22px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); font-weight: bold; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; pointer-events: none; z-index: 1000; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  @media (max-width: 600px) { .prompt-header { flex-direction: column; align-items: stretch; } .copy-btn { width: 100%; padding: 11px 16px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>📸 Gemini Image Prompts — Blog 31</h1>
+<p class="meta"><em>AlOx vs Metallised PET — When to Use Which (And Why EPR April 2026 Forces You to Decide)</em><br>5 images: 1 cover + 2 bilingual process diagrams + 2 bilingual decision matrices</p>
+
+<div class="meta-band">
+<strong>How to use:</strong> Tap <strong>📋 Copy Prompt</strong>. Open Google Gemini, attach <code>logo.png</code>, paste prompt, generate, save with the exact filename shown. Place all 5 images alongside <code>index.html</code> before publishing.
+</div>
+
+<h2>Quick Reference</h2>
+<table>
+<thead><tr><th>#</th><th>Filename</th><th>What it shows</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>cover.png</code></td><td>Hero — both films + EPR April 2026 + 3 killer numbers</td></tr>
+<tr><td>2A</td><td><code>process-difference-en.png</code></td><td>Same machine, two chemistries (English)</td></tr>
+<tr><td>2B</td><td><code>process-difference-hi.png</code></td><td>Same as 2A in Hindi</td></tr>
+<tr><td>3A</td><td><code>decision-matrix-en.png</code></td><td>4-lens comparison Met PET vs AlOx (English)</td></tr>
+<tr><td>3B</td><td><code>decision-matrix-hi.png</code></td><td>Same as 3A in Hindi</td></tr>
+</tbody>
+</table>
+
+<h2>Brand Standards</h2>
+<p><strong>Colors:</strong> Navy <code>#1A2744</code>, Orange <code>#E85D26</code>, Teal <code>#0D8C7E</code>, Cream <code>#FAF9F6</code>. No others.<br>
+<strong>Fonts:</strong> Inter / Söhne (Latin); Hind / Mukta (Devanagari); Bebas Neue / Anton for big numbers.<br>
+<strong>Critical numbers:</strong> Met PET <strong>32.17 MT/day</strong> · AlOx <strong>12.11 MT/day</strong> · <strong>−62%</strong> capacity drop · Conversion <strong>₹15.59 → ₹46.77/kg (3×)</strong> · EPR <strong>₹17.50 → ₹4/kg (Cat III → Cat II)</strong>.<br>
+<strong>Rules:</strong> No identifiable faces, no clipart, no decorative flourishes. WSJ / Bloomberg / HBR editorial style only. Material name is <strong>AlOx</strong>, never "Alubond".</p>
+
+<!-- IMAGE 1 -->
+<h2>Image 1 — Cover</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Cover Image</div>
+<div class="prompt-meta">Save as <code>cover.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-1">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-1">[ATTACH `logo.png` to THIS prompt]
+
+Create an editorial magazine-cover image for a flexible-packaging industry blog post titled "AlOx vs Metallised PET — When to Use Which (And Why EPR April 2026 Forces You to Decide)." Convey strategic choice, regulatory pressure, technical sophistication.
+
+Composition — split scene, three-zone layout:
+- LEFT THIRD: vertical photograph of a tightly-wound metallised PET roll — opaque silver mirror finish, industrial documentary style, shallow depth of field, warm industrial lighting. Roll fills the left third floor-to-ceiling.
+- MIDDLE THIRD: vertical photograph of a tightly-wound AlOx PET roll — glass-clear transparent finish, you can see the core through the film, identical lighting and framing as the left roll.
+- RIGHT THIRD: clean dark navy #1A2744 editorial panel with subtle paper-grain texture.
+
+Between the two rolls, a thin orange #E85D26 vertical separator with "vs" in a small circle at mid-height.
+
+Text overlay on the navy panel:
+- Top eyebrow (orange #E85D26, all caps): vksTech.com / EPR DECISION 2026
+- Main title (white Inter Bold or Söhne Bold, 3-4 lines, large): AlOx vs Metallised PET
+- Subtitle line: When to use which
+- Smaller italic line (grey #FAF9F6, lower opacity): And why EPR April 2026 forces you to decide
+- HORIZONTAL DIVIDER (orange #E85D26, 2 px thin)
+- HERO STAT BLOCK — three numbers stacked vertically:
+  - −62% in bright orange #E85D26 (Bebas Neue, ~120 pt), label below: SAME-MACHINE CAPACITY DROP
+  - 4.4× in white (~80 pt), label: EPR LIABILITY DELTA (CAT III vs II)
+  - 3× in teal #0D8C7E (~80 pt), label: CONVERSION COST PREMIUM
+- Bottom strip: small text — Vivek Kumar | M.Tech NIT Uttarakhand | 9+ Years Flexible Packaging
+- Bottom-right corner: VKS Tech logo at ~110×110 px on a thin white round backplate
+
+Mood: industrial executive-grade, NOT cinematic, NOT sci-fi. Wall Street Journal manufacturing feature meets a packaging-industry quarterly. The reader should feel: "this is the decision document I show my board."
+
+Strict colors: navy #1A2744, orange #E85D26, teal #0D8C7E, cream #FAF9F6, white. No red except orange. No green outside teal. No yellow.</div>
+<div class="planb"><strong>Plan B:</strong> If logo not embedded or AlOx transparent roll difficult to render, generate without and composite manually in Canva/Photopea. Use a ceramic-coated film mockup if needed.</div>
+</div>
+
+<!-- IMAGE 2A -->
+<h2>Image 2A — Process Difference (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Process Difference</div>
+<div class="prompt-meta">Save as <code>process-difference-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial infographic. NOT photorealistic. NOT 3D. Pure flat vector with crisp typography. The Economist / Harvard Business Review methodology-diagram style.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header (top 12%):
+- Eyebrow (orange #E85D26, small caps): THE SAME METALLISER, TWO CHEMISTRIES
+- Title (navy #1A2744, large bold sans-serif): One Vacuum Chamber. Two Films. One Big Difference.
+- Subtitle (grey #5A5A5A): Aluminium vapor → silver metal layer. Aluminium + oxygen vapor → transparent ceramic. Same machine, different barrier strategy.
+
+Main visual zone (middle 70%) — split 50/50 vertically:
+
+LEFT HALF — Metallised PET (orange-themed):
+Top: small navy tag chip — PROCESS A. Below: large label (navy bold): Metallised PET.
+Visual diagram top-to-bottom:
+1. Vacuum chamber outline (rectangular, navy stroke), PET film entering left, exiting right
+2. Tungsten boat at chamber center, glowing orange (1500°C)
+3. Aluminium wire feed entering boat from above
+4. Vapor cloud above boat, small upward orange #E85D26 arrows labeled "Al vapor"
+5. Metal layer condensing on film — thin opaque silver band underneath the moving PET
+6. Below chamber: cross-section bubble showing PET base (clear) + Al metal layer (silver, ~30 nm) with thickness label
+
+Bottom of left half: hero panel with orange #E85D26 background, white text:
+- Tag: BARRIER MECHANISM
+- Big text (Bebas Neue, ~60 pt): Metallic Reflection
+- Subtext: blocks oxygen, moisture, AND light
+
+CENTRE separator: thin orange #E85D26 vertical line with vs in a small circle at mid-height.
+
+RIGHT HALF — AlOx PET (teal-themed):
+Top: small navy tag chip — PROCESS B. Below: AlOx PET (Aluminium Oxide).
+Visual diagram — IDENTICAL chamber outline as left, with these differences:
+1. Same vacuum chamber, same boat (orange glow at 1500°C)
+2. Aluminium wire feed entering from above (same as left)
+3. Oxygen gas inlet from the side, small teal #0D8C7E arrows feeding into chamber
+4. Vapor cloud above boat — chemical reaction zone with both Al and O₂ molecules combining, labeled "Al + O₂ → Al₂O₃"
+5. Ceramic layer condensing on film — thin TRANSPARENT band underneath the moving PET (glassy translucent fill)
+6. Below: cross-section bubble — PET base (clear) + Al₂O₃ ceramic layer (transparent with subtle teal tint, ~30 nm)
+
+Bottom of right half: hero panel with navy #1A2744 background, teal #0D8C7E text accents:
+- Tag: BARRIER MECHANISM
+- Big text (white, same size as left): Ceramic Tortuous Path
+- Subtext (teal): blocks oxygen and moisture, lets light through
+
+Bottom callout strip (8%):
+Navy #1A2744 background, two-column split:
+- LEFT (orange #E85D26 bold): ⚡ The Recyclability Difference:
+- RIGHT (white): Metallised PET in a PE laminate = Multi-Layer Plastic (Cat III). AlOx PET in a mono-PET laminate = recyclable single-polymer (Cat II).
+
+Bottom-right: VKS Tech logo at ~80×80 px on white circle backplate.
+Bottom-left: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif. Process labels semibold. Hero text (Metallic Reflection / Ceramic Tortuous Path) in heavy condensed font (Bebas Neue, Anton, Oswald) at IDENTICAL point sizes.
+
+AVOID: clipart, cartoons, photorealistic chamber renders, isometric/3D, decorative borders.</div>
+<div class="planb"><strong>Plan B:</strong> If chamber illustration too cramped, simplify the boat/wire/gas inlet area and emphasise the cross-section bubbles (where the actual teaching lives). Composite logo manually if model ignores it.</div>
+</div>
+
+<!-- IMAGE 2B -->
+<h2>Image 2B — Process Difference (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Process Difference</div>
+<div class="prompt-meta">Save as <code>process-difference-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-2b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-2b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial infographic with EXACTLY the same layout, colour palette, and structure as the English Process Difference infographic. Process names (Metallised PET, AlOx PET, Aluminium Oxide), formulas (Al + O₂ → Al₂O₃), and chamber annotations stay in English (shop-floor convention). Numbers stay in English numerals.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange #E85D26, English): THE SAME METALLISER, TWO CHEMISTRIES
+- Title (Hindi, navy bold, large): एक Vacuum Chamber. दो Films. एक बड़ा Difference.
+- Subtitle (Hindi, grey): Aluminium vapor → silver metal layer। Aluminium + oxygen vapor → transparent ceramic। Same machine, different barrier strategy।
+
+Left half (Metallised PET): identical layout to Image 2A — Process A tag, all chamber illustration in English, cross-section bubble in English. Hero stat panel:
+- BARRIER MECHANISM (English)
+- Hero text (English): Metallic Reflection
+- Subtext (Hindi): oxygen, moisture, और light block करता है
+
+Right half (AlOx PET): identical layout — all chamber illustration in English. Hero stat panel:
+- BARRIER MECHANISM (English)
+- Hero text (English): Ceramic Tortuous Path
+- Subtext (Hindi, teal): oxygen और moisture block करता है, light pass होने देता है
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Recyclability का Difference:
+- RIGHT (white text, Hindi): PE laminate में Metallised PET = Multi-Layer Plastic (Cat III)। Mono-PET laminate में AlOx PET = recyclable single-polymer (Cat II)।
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey Hindi footer: vkstech.com — Free Calculators। Real Plant Methodology।
+
+All other styling identical to Image 2A.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate Image 2A first, replace title, subtitle, subtexts, and bottom callout with proper Devanagari text using Hind or Mukta in Photopea/Canva. Process labels and chamber annotations stay in English.</div>
+</div>
+
+<!-- IMAGE 3A -->
+<h2>Image 3A — Decision Matrix (English)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">English Decision Matrix</div>
+<div class="prompt-meta">Save as <code>decision-matrix-en.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3a">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3a">[ATTACH `logo.png` to THIS prompt]
+
+Create a clean flat-vector editorial comparison infographic. NOT photorealistic. NOT 3D. Bloomberg Markets / Financial Times comparison-graphic aesthetic.
+
+Background: cream #FAF9F6 with subtle paper-grain texture (5% opacity max).
+
+Header (top 10%):
+- Eyebrow (orange #E85D26, small caps): THE 4-LENS DECISION
+- Title (navy #1A2744, large bold sans-serif): AlOx vs Metallised PET — Decision Matrix
+- Subtitle (grey #5A5A5A): Same plant. Same crew. Two different answers depending on what your brand needs.
+
+Main visual zone (middle 78%) — TWO LARGE COLUMNS side by side:
+
+LEFT COLUMN — Metallised PET (orange-themed):
+Top: navy tag chip — PRODUCT A. Below: large label (navy bold): Metallised PET. Subtitle (grey small): opaque silver, MLP structure.
+
+Mid-column: 4 horizontal lens rows. Each row: lens name on left, icon, stat on right:
+- 🔬 BARRIER → OTR <1 · WVTR <1 · 0% light
+- ♻️ RECYCLABILITY → Category III MLP
+- ⚙️ PLANT CAPACITY → 32.17 MT/day
+- 💰 TOTAL COST/kg → ₹15.59 conv + ₹17.50 EPR
+
+Bottom of column: hero panel with orange #E85D26 background, white text:
+- Tag: BEST FOR
+- Big text (Bebas Neue, ~50 pt): Light-Sensitive Products
+- Subtext: vitamins, oils, premium silver-aesthetic packs
+
+CENTRE separator: thin orange #E85D26 vertical line with vs in a circle at mid-height.
+
+RIGHT COLUMN — AlOx PET (teal-themed):
+Top: navy tag chip — PRODUCT B. Below: AlOx PET. Subtitle: transparent ceramic, mono-PET structure.
+
+Mid-column: same 4 lens rows:
+- 🔬 BARRIER → OTR ~1 · WVTR ~1 · 90% light
+- ♻️ RECYCLABILITY → Category II Flexible
+- ⚙️ PLANT CAPACITY → 12.11 MT/day
+- 💰 TOTAL COST/kg → ₹46.77 conv + ₹4 EPR
+
+Bottom of column: hero panel with navy #1A2744 background, teal #0D8C7E accent:
+- Tag: BEST FOR
+- Big text (white, same size as left): Recyclable Premium Packs
+- Subtext (teal): snacks, dry foods, microwaveable, EU/US export
+
+Below both columns — DELTA STRIP (full width):
+Orange #E85D26 rounded rectangle, white text centred. Three callouts in a row:
+- LEFT: tag CAPACITY · big number −62% · sub: same machine
+- MIDDLE: tag EPR LIABILITY · big number −4.4× · sub: Cat III → Cat II
+- RIGHT: tag CONVERSION · big number +3× · sub: per kg
+
+Bottom callout (8%):
+Navy #1A2744, two-column split:
+- LEFT (orange bold): ⚡ The Honest Trade-off:
+- RIGHT (white): AlOx is a strategic move, not a cost-saving move. Higher line cost, lower regulatory risk, brand premium upside. Match the lens that matters most to your business.
+
+Bottom-right: VKS Tech logo at ~80×80 px on white backplate.
+Bottom-left: small grey footer: vkstech.com — Free Calculators. Real Plant Methodology.
+
+Typography: Inter or Söhne sans-serif. Big numbers (32.17, 12.11, −62%, −4.4×, +3×) in Bebas Neue or Anton. Both column hero panels at IDENTICAL big-number sizes.
+
+AVOID: clipart, cartoons, photorealism, isometric/3D, decorative borders.</div>
+<div class="planb"><strong>Plan B:</strong> If lens-row table too dense, drop icons and keep lens name + stat as a clean two-line block per row.</div>
+</div>
+
+<!-- IMAGE 3B -->
+<h2>Image 3B — Decision Matrix (Hindi)</h2>
+<div class="prompt-card">
+<div class="prompt-header">
+<div>
+<div class="prompt-title">Hindi Decision Matrix</div>
+<div class="prompt-meta">Save as <code>decision-matrix-hi.png</code> · 1600×900 · attach logo.png</div>
+</div>
+<button class="copy-btn" data-target="prompt-3b">📋 Copy Prompt</button>
+</div>
+<div class="prompt-body" id="prompt-3b">[ATTACH `logo.png` to THIS prompt]
+
+Create a flat-vector editorial comparison infographic with EXACTLY the same layout as the English Decision Matrix. Numbers, EPR category names, and stats stay in English. Only title, subtitle, BEST FOR subtexts, delta strip subtexts, and bottom callout translate to Hindi.
+
+Use Hind or Mukta Devanagari font for all Hindi text.
+
+Header:
+- Eyebrow (orange, English): THE 4-LENS DECISION
+- Title (Hindi, navy bold): AlOx vs Metallised PET — Decision Matrix
+- Subtitle (Hindi, grey): Same plant। Same crew। Brand को क्या चाहिए, उस हिसाब से दो अलग answers।
+
+LEFT COLUMN — Metallised PET:
+- Tag PRODUCT A
+- Label: Metallised PET (English)
+- Subtitle (Hindi): opaque silver, MLP structure
+- 4 lens rows — lens names in English, stats in English (OTR <1 · WVTR <1 · 0% light, Category III MLP, 32.17 MT/day, ₹15.59 conv + ₹17.50 EPR)
+- Hero panel:
+  - BEST FOR (English tag)
+  - Big text (English): Light-Sensitive Products
+  - Subtext (Hindi): vitamins, oils, premium silver-aesthetic packs
+
+Centre separator: thin orange line with vs in circle.
+
+RIGHT COLUMN — AlOx PET:
+- Tag PRODUCT B
+- Label: AlOx PET (English)
+- Subtitle (Hindi): transparent ceramic, mono-PET structure
+- 4 lens rows — same English stats (OTR ~1 · WVTR ~1 · 90% light, Category II Flexible, 12.11 MT/day, ₹46.77 conv + ₹4 EPR)
+- Hero panel:
+  - BEST FOR (English tag)
+  - Big text (English): Recyclable Premium Packs
+  - Subtext (Hindi, teal): snacks, dry foods, microwaveable, EU/US export
+
+Delta strip: same English big numbers (−62%, −4.4×, +3×). Tags in English (CAPACITY, EPR LIABILITY, CONVERSION). Sub-text translation:
+- −62% sub (Hindi): same machine
+- −4.4× sub (Hindi): Cat III → Cat II
+- +3× sub (Hindi): per kg
+
+Bottom callout (Hindi):
+- LEFT (orange bold): ⚡ Honest Trade-off:
+- RIGHT (white): AlOx strategic move है, cost-saving नहीं। Higher line cost, lower regulatory risk, brand premium upside। जो lens आपके business के लिए सबसे ज़्यादा matter करता है उसके साथ match करें।
+
+Logo bottom-right, Hindi grey footer bottom-left.</div>
+<div class="planb"><strong>Plan B for Hindi:</strong> Generate 3A first; replace Hindi text in Photopea/Canva using Hind or Mukta. Numbers, lens names, and EPR categories stay in English in both versions.</div>
+</div>
+
+<h2>Review Checklist (8-Point)</h2>
+<ol>
+<li><strong>Brand colours only</strong> — Navy / Orange / Teal / Cream / white / grey. No others.</li>
+<li><strong>Typography</strong> — Inter/Söhne sans-serif; big numbers in Bebas/Anton/Oswald.</li>
+<li><strong>Number accuracy (HARD)</strong> — Cover: −62%, 4.4×, 3×. Process 2A/2B: Al + O₂ → Al₂O₃ formula on AlOx side; ~30 nm cross-section labels. Decision Matrix 3A/3B: 32.17 vs 12.11 MT/day, ₹15.59 vs ₹46.77 conv, ₹17.50 vs ₹4 EPR, deltas −62% / −4.4× / +3×.</li>
+<li><strong>Material name</strong> — must say <strong>AlOx</strong>; never "Alubond" or "AluOx".</li>
+<li><strong>Hero panel parity</strong> — for 3A/3B both BEST FOR text at SAME point size.</li>
+<li><strong>Logo placement</strong> — bottom-right, ~80–110 px, white backplate.</li>
+<li><strong>Information density</strong> — cover reads as "AlOx vs Met PET, three penalties" in 5 sec; matrix reads as "two products, four lenses, clear winners" in 5 sec.</li>
+<li><strong>No AI-tells</strong> — no faces, no distorted hands, no garbled text, no plastic surfaces.</li>
+</ol>
+
+<h2>Folder Structure When Complete</h2>
+<pre style="background:#f4ede2;padding:12px 14px;border-radius:6px;font-size:0.88em;line-height:1.5;">31-alox-vs-metallised-pet-epr-2026/
+├── index.html
+├── logo.png                       (already provided)
+├── cover.png                      (Image 1)
+├── process-difference-en.png      (Image 2A)
+├── process-difference-hi.png      (Image 2B)
+├── decision-matrix-en.png         (Image 3A)
+├── decision-matrix-hi.png         (Image 3B)
+├── GEMINI-PROMPTS.md              (markdown reference)
+└── GEMINI-PROMPTS.html            (this page with copy buttons)
+</pre>
+
+</div>
+
+<div class="toast" id="toast">✓ Prompt copied to clipboard</div>
+
+<script>
+(function() {
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        markCopied(btn);
+        showToast('✓ Prompt copied to clipboard');
+      }, function() { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      var ok = document.execCommand('copy');
+      if (ok) { markCopied(btn); showToast('✓ Prompt copied to clipboard'); }
+      else { showToast('✗ Copy failed — please select manually'); }
+    } catch (e) { showToast('✗ Copy failed — please select manually'); }
+    document.body.removeChild(ta);
+  }
+  function markCopied(btn) {
+    var orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var target = document.getElementById(targetId);
+      if (target) copyText(target.textContent.trim(), btn);
+    });
+  });
+})();
+</script>
+</body>
+</html>
