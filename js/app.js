@@ -119,11 +119,12 @@ const HI = {
   yt_h2:"चैनल, <span>एक क्रिएटर।</span>",
   yt_sub2:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर चैनल और प्लेलिस्ट एक जगह।",
   yt_home_cta:"सभी प्लेलिस्ट देखें →",
-  hero_badge:"पैकेजिंग में 9 साल · 60 सदस्यीय टीम लीड · अब फ्रीलांस",
-  hero_title:"ऐप्स। मेंटरशिप।<br>कैलकुलेटर। <span class='accent'>मुफ़्त।</span>",
-  hero_sub:"वास्तविक प्लांट लीडरशिप से बने व्यावहारिक उपकरण और वन-टू-वन मार्गदर्शन। UFlex, JPFL और GLS में 9 साल — 60 सदस्यीय टीमों का नेतृत्व सहित — के बाद <strong>विवेक कुमार</strong> (M.Tech, NIT उत्तराखंड) अब फ्रीलांस करते हैं, ऐप्स बनाते हैं और मेंटर करते हैं।",
+  hero_badge:"पैकेजिंग में 9 साल · 450+ प्रोफेशनल्स गाइडेड · अब फ्रीलांस",
+  hero_title:"<a href='#industry-apps' class='hero-link'>ऐप्स</a>। <a href='#mentorship' class='hero-link'>मेंटरशिप</a>।<br><a href='#calculators' class='hero-link'>कैलकुलेटर</a>। <span class='accent'>मुफ़्त।</span>",
+  hero_sub:"वास्तविक प्लांट लीडरशिप से बने व्यावहारिक उपकरण और वन-टू-वन मार्गदर्शन। UFlex, JPFL और GLS में 9 साल — 450+ प्रोफेशनल्स को गाइड करने सहित — के बाद <a href="#about" class="hero-link"><strong>विवेक कुमार</strong></a> (M.Tech, NIT उत्तराखंड) अब फ्रीलांस करते हैं, ऐप्स बनाते हैं और मेंटर करते हैं।",
   hero_btn1:"मेंटरशिप बुक करें →", hero_btn2:"मुफ़्त कैलकुलेटर आज़माएँ",
-  stat1:"टीम सदस्य लीड", stat2:"वर्ष अनुभव", stat3:"लाइव ऐप्स", stat4:"मुफ़्त टूल्स",
+  nav_career:"करियर",
+  stat1:"प्रोफेशनल्स गाइडेड", stat2:"वर्ष अनुभव", stat3:"लाइव ऐप्स", stat4:"मुफ़्त टूल्स",
   cos_label:"भारत के फ्लेक्सिबल पैकेजिंग उद्योग में 9 साल · अब स्वतंत्र",
   ind_label:"🏭 फ्लेक्सिबल पैकेजिंग उद्योग", ind_title:"<span>पैकेजिंग पेशेवरों</span> के लिए ऐप्स",
   ind_sub:"उत्पादन, गुणवत्ता नियंत्रण और तकनीकी भूमिकाओं में 9 साल के व्यावहारिक अनुभव से निर्मित।",
@@ -142,7 +143,7 @@ const HI = {
   fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
   submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
   about_label:"👤 मेरे बारे में",
-  about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>अनुभव से प्रोडक्शन लीडर</strong> और <strong>पसंद से ऐप बिल्डर व मेंटर</strong> हूँ। UFlex, JPFL और GLS में 9 साल में मैंने <strong>60 सदस्यीय टीमों</strong> का नेतृत्व किया, प्रोडक्शन प्लानिंग, प्रोसेस कंट्रोल, क्वालिटी और कॉस्ट की पूरी जिम्मेदारी संभाली।",
+  about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>अनुभव से प्रोडक्शन लीडर</strong> और <strong>पसंद से ऐप बिल्डर व मेंटर</strong> हूँ। UFlex, JPFL और GLS में 9 साल में मैंने टीमें लीड कीं और <strong>450+ प्रोफेशनल्स</strong> को गाइड किया, प्रोडक्शन प्लानिंग, प्रोसेस कंट्रोल, क्वालिटी और कॉस्ट की पूरी जिम्मेदारी संभाली।",
   about_p2:"मैं वर्तमान में <strong>पूर्णकालिक फ्रीलांस</strong> कर रहा हूँ: व्यावहारिक ऐप्स बनाता हूँ और mentor.vkstech.com पर वन-टू-वन मेंटरशिप देता हूँ (AI टूल्स, एक्सेल, करियर स्किल्स, फ्रीलांसिंग, पर्सनल फाइनेंस आदि)।",
   about_p3:"हर कैलकुलेटर, हर ऐप और हर मेंटरिंग सेशन वास्तविक प्लांट-फ्लोर समस्याओं से निकला है जिन्हें मैंने स्वयं हल किया। <strong>VKS Tech</strong> इन सबका घर है।",
   ppl_label:"❤️ आभार के साथ",
@@ -161,11 +162,12 @@ const EN = {
   yt_h2:"Channels, <span>one creator.</span>",
   yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
   yt_home_cta:"See all playlists →",
-  hero_badge:"9 YEARS IN PACKAGING · LED 60-MEMBER TEAMS · NOW FREELANCING",
-  hero_title:"Apps. Mentorship.<br>Calculators. <span class='accent'>Free.</span>",
-  hero_sub:"Practical tools and one-to-one guidance built from real plant leadership. After 9 years at UFlex, JPFL & GLS — including leading 60-member teams — <strong>Vivek Kumar</strong> (M.Tech, NIT Uttarakhand) now freelances, builds apps, and mentors professionals.",
+  hero_badge:"9 YEARS IN PACKAGING · GUIDED 450+ PROFESSIONALS · NOW FREELANCING",
+  hero_title:"<a href='#industry-apps' class='hero-link'>Apps</a>. <a href='#mentorship' class='hero-link'>Mentorship</a>.<br><a href='#calculators' class='hero-link'>Calculators</a>. <span class='accent'>Free.</span>",
+  hero_sub:"Practical tools and one-to-one guidance built from real plant leadership. After 9 years at UFlex, JPFL & GLS — including guiding 450+ professionals — <a href='#about' class='hero-link'><strong>Vivek Kumar</strong></a> (M.Tech, NIT Uttarakhand) now freelances, builds apps, and mentors professionals.",
   hero_btn1:"Book Mentorship →", hero_btn2:"Try Free Calculators",
-  stat1:"Team Members Led", stat2:"Years Experience", stat3:"Apps Live", stat4:"Free Tools",
+  nav_career:"Career",
+  stat1:"Professionals Guided", stat2:"Years Experience", stat3:"Apps Live", stat4:"Free Tools",
   cos_label:"9 Years in India's Flexible Packaging Industry · Now Independent",
   ind_label:"🏭 Flexible Packaging Industry", ind_title:"Apps for <span>Packaging Professionals</span>",
   ind_sub:"Built from 9 years of hands-on experience across production, quality control, and technical roles in the flexible packaging world.",
@@ -184,7 +186,7 @@ const EN = {
   fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
   submit_btn:"Send My App Request 🚀",
   about_label:"👤 About Me",
-  about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>production leader by experience</strong>, and an <strong>app builder & mentor by choice</strong>. Over 9 years at UFlex, JPFL and GLS I led teams of up to <strong>60 members</strong>, owned production planning, process control, quality and cost.",
+  about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>production leader by experience</strong>, and an <strong>app builder & mentor by choice</strong>. Over 9 years at UFlex, JPFL and GLS I led teams and guided <strong>450+ professionals</strong>, owned production planning, process control, quality and cost.",
   about_p2:"I am currently <strong>freelancing full-time</strong>: building practical apps and offering one-to-one mentorship at mentor.vkstech.com (AI tools, Excel, career skills, freelancing, personal finance and more).",
   about_p3:"Every calculator, every app, and every mentoring session is rooted in real plant-floor problems I solved myself. <strong>VKS Tech</strong> is the home for all of it.",
   ppl_label:"❤️ With Gratitude",
@@ -1924,4 +1926,134 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
     btn.setAttribute('aria-expanded', 'true');
     btn.style.display = 'none';
   });
+})();
+
+/* ========== Career Journey – auto-load images from folders ========== */
+(function(){
+  var COMPANIES = [
+    { id: 'uflex',  folder: 'career-journey/uflex' },
+    { id: 'jindal', folder: 'career-journey/jindal' },
+    { id: 'gls',    folder: 'career-journey/gls' }
+  ];
+  var EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+  var MAX_NUM = 40; // probe 1..40
+
+  function parseDateFromName(name) {
+    // Try YYYY-MM-DD or YYYYMMDD or IMG_YYYYMMDD
+    var m = name.match(/(20\d{2})[-_]?(\d{2})[-_]?(\d{2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]).getTime();
+    m = name.match(/(20\d{2})(\d{2})(\d{2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]).getTime();
+    return 0;
+  }
+
+  function numFromName(name) {
+    var base = name.replace(/\.[^.]+$/, '');
+    var n = parseInt(base, 10);
+    return isNaN(n) ? null : n;
+  }
+
+  function probeImage(url) {
+    return new Promise(function(resolve) {
+      var img = new Image();
+      img.onload = function() { resolve(url); };
+      img.onerror = function() { resolve(null); };
+      img.src = url;
+    });
+  }
+
+  async function loadCompany(company) {
+    var gallery = document.getElementById('gallery-' + company.id);
+    if (!gallery) return;
+
+    var found = [];
+
+    // 1) Try optional manifest.json first
+    try {
+      var res = await fetch(company.folder + '/manifest.json', { cache: 'no-cache' });
+      if (res.ok) {
+        var list = await res.json();
+        if (Array.isArray(list) && list.length) {
+          found = list.map(function(f) {
+            return company.folder + '/' + (typeof f === 'string' ? f : f.file || f.name);
+          });
+        }
+      }
+    } catch (e) { /* no manifest */ }
+
+    // 2) Sequential numbered files: 1.jpg, 2.png, ...
+    if (!found.length) {
+      var probes = [];
+      for (var i = 1; i <= MAX_NUM; i++) {
+        for (var e = 0; e < EXTS.length; e++) {
+          probes.push(probeImage(company.folder + '/' + i + '.' + EXTS[e]));
+        }
+      }
+      var results = await Promise.all(probes);
+      found = results.filter(Boolean);
+      // Keep only first hit per number (prefer order of EXTS)
+      var byNum = {};
+      found.forEach(function(url) {
+        var name = url.split('/').pop();
+        var n = numFromName(name);
+        if (n != null && !byNum[n]) byNum[n] = url;
+      });
+      found = Object.keys(byNum).sort(function(a, b) { return +a - +b; }).map(function(k) { return byNum[k]; });
+    }
+
+    // Sort: if any have dates in name → newest first; else keep sequential
+    var hasDates = found.some(function(u) { return parseDateFromName(u.split('/').pop()) > 0; });
+    if (hasDates) {
+      found.sort(function(a, b) {
+        return parseDateFromName(b.split('/').pop()) - parseDateFromName(a.split('/').pop());
+      });
+    }
+
+    if (!found.length) {
+      // keep empty placeholder
+      return;
+    }
+
+    gallery.innerHTML = '';
+    found.forEach(function(url, idx) {
+      var img = document.createElement('img');
+      img.src = url;
+      img.alt = company.id + ' photo ' + (idx + 1);
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('click', function() { openLightbox(url); });
+      gallery.appendChild(img);
+    });
+  }
+
+  function openLightbox(src) {
+    var box = document.getElementById('cjLightbox');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'cjLightbox';
+      box.className = 'cj-lightbox';
+      box.innerHTML = '<button type="button" class="cj-lightbox-close" aria-label="Close">&times;</button><img alt=""/>';
+      document.body.appendChild(box);
+      box.addEventListener('click', function(e) {
+        if (e.target === box || e.target.classList.contains('cj-lightbox-close')) {
+          box.classList.remove('open');
+        }
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') box.classList.remove('open');
+      });
+    }
+    box.querySelector('img').src = src;
+    box.classList.add('open');
+  }
+
+  function init() {
+    COMPANIES.forEach(loadCompany);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

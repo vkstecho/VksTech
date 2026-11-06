@@ -152,3 +152,30 @@ When updating Mentor or resume-builder, copy the folder to **both**:
 1. Put PDF/Excel into the `files/` folder
 2. Edit the corresponding card in `downloads.html` to use:
    `href="files/your-file.pdf" download`
+
+---
+
+## Update 2026-11-06 — Career Journey section
+
+### New section: Career Journey
+- Section `#career-journey` with three company blocks:
+  - **UFlex Limited (Noida)** — Started as GET · Left as Being Engineer
+  - **Jindal / JPFL Films**
+  - **GLS Polyfilms (Gurawara)** — Manager – Metalliser (HOD)
+- Logos from `assets/logo-uflex.png`, `logo-jindal.png`, `logo-gls.png`
+
+### Image folders (upload your photos here)
+```
+career-journey/
+  uflex/     ← name files 1.jpg, 2.jpg, 3.png …
+  jindal/
+  gls/
+```
+
+**Naming:**
+- Numbered (`1.jpg`, `2.png`…) → sequential order
+- Date in name (`2024-05-12-team.jpg`, `IMG_20250301.jpg`) → **newest first**
+
+The page auto-detects images (probes 1–40 for common extensions). Optional: add `manifest.json` array of filenames for explicit control.
+
+Lightbox opens on image click.
