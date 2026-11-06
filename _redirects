@@ -9,9 +9,9 @@
 /resume-builder      https://manpower.vkstech.com/resume-builder/  301
 /resume-builder/*    https://manpower.vkstech.com/resume-builder/  301
 
-# Clean URLs (Netlify-style)
+# Clean URLs (Netlify-style) — Vercel uses vercel.json; kept for Netlify parity
 /downloads   /downloads.html   200
 /people      /people.html      200
 /blog        /blog.html        200
-/blog/*      /blog.html        200
+/blog/*      /api/blog         200
 /youtube     /youtube.html     200
