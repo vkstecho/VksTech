@@ -35,7 +35,11 @@ async function fetchGithubContent(githubPath) {
     const rawBase = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${folder}/`;
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
       // Take only the filename — all assets for a blog live in the same folder as index.html
-      const filename = path.split('/').pop();
+      let filename = path.split('/').pop();
+      // Prefer compressed .webp versions when original was png/jpg
+      if (/\.(png|jpe?g)$/i.test(filename)) {
+        filename = filename.replace(/\.(png|jpe?g)$/i, '.webp');
+      }
       return `${attr}="${rawBase}${filename}"`;
     });
     return body;
@@ -164,6 +168,10 @@ export default async function handler(req, res) {
         const first = p.split('/')[0];
         if (SHORT_FOLDER_MAP[first]) {
           p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
+        }
+        // Prefer .webp for raster images
+        if (/\.(png|jpe?g)$/i.test(p)) {
+          p = p.replace(/\.(png|jpe?g)$/i, '.webp');
         }
         return `${attr}="${RAW_BLOGS}${p}"`;
       });
