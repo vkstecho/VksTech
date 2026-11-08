@@ -529,6 +529,75 @@
         </div>
       </div>
 
+      <!-- 9. METALLISER CONVERSION COST — Actual vs Equivalent (from blog #28) -->
+      <div class="calc-card reveal calc-tall" id="calc-conversion-cost">
+        <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">💹</span><div class="calc-info"><h3>Met Conversion Cost</h3><p>Actual vs Equivalent ₹/kg · product-mix aware</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>
+        <div class="calc-body">
+          <div style="background:rgba(232,93,38,.06);border-left:3px solid var(--orange);padding:9px 12px;margin-bottom:14px;border-radius:6px;font-size:.72rem;color:var(--navy);font-family:JetBrains Mono,monospace;line-height:1.55;">
+            <strong>Actual ₹/kg</strong> = total cost ÷ actual MT&nbsp;&nbsp;·&nbsp;&nbsp;<strong>Equivalent ₹/kg</strong> adjusts for product-mix difficulty<br>
+            Add one row per material (Qty MT × Equivalence Factor). Indirect stays fixed; other heads scale by mix multiplier.<br>
+            Full guide: <a href="/blog/conversion-cost-metalliser" style="color:var(--orange);font-weight:700;">Conversion Cost blog →</a>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px;gap:8px;flex-wrap:wrap;">
+            <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;text-transform:uppercase;">Production mix</div>
+            <button type="button" id="cc-add-row" onclick="ccAddRow()" style="background:var(--orange);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-weight:700;font-size:.78rem;cursor:pointer;font-family:inherit;">+ Add row</button>
+          </div>
+          <div style="overflow-x:auto;margin-bottom:14px;border:1px solid var(--border);border-radius:10px;">
+            <table style="width:100%;border-collapse:collapse;font-size:.82rem;min-width:420px;">
+              <thead>
+                <tr style="background:var(--navy);color:#fff;">
+                  <th style="text-align:left;padding:8px 10px;font-weight:600;">Material / code</th>
+                  <th style="text-align:right;padding:8px 8px;font-weight:600;width:88px;">Qty (MT)</th>
+                  <th style="text-align:right;padding:8px 8px;font-weight:600;width:88px;">Eqv factor</th>
+                  <th style="text-align:right;padding:8px 8px;font-weight:600;width:88px;">Eqv MT</th>
+                  <th style="width:36px;"></th>
+                </tr>
+              </thead>
+              <tbody id="cc-material-rows"></tbody>
+              <tfoot>
+                <tr style="background:var(--bg2);font-weight:700;border-top:2px solid var(--orange);">
+                  <td style="padding:8px 10px;">TOTAL</td>
+                  <td style="text-align:right;padding:8px 8px;color:var(--orange);" id="cc-total-actual-mt">—</td>
+                  <td style="text-align:right;padding:8px 8px;color:var(--muted);" id="cc-avg-factor">—</td>
+                  <td style="text-align:right;padding:8px 8px;color:var(--teal);" id="cc-total-eqv-mt">—</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div style="font-size:.7rem;color:var(--orange);font-weight:700;font-family:JetBrains Mono,monospace;letter-spacing:.5px;margin:4px 0 8px;text-transform:uppercase;">Cost inputs</div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Wire consumed (kg)</label><input type="number" id="cc-wire-kg" value="7380" min="0" step="1" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Wire rate (₹/kg)</label><input type="number" id="cc-wire-rate" value="333.40" min="0" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Boats consumed (pcs)</label><input type="number" id="cc-boat-pcs" value="1850" min="0" step="1" oninput="calcConversionCost()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Boat rate (₹/pc)</label><input type="number" id="cc-boat-rate" value="1180" min="0" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Power consumed (units)</label><input type="number" id="cc-power-units" value="414119" min="0" step="1" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Power rate (₹/unit)</label><input type="number" id="cc-power-rate" value="8.25" min="0" step="0.01" oninput="calcConversionCost()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Slitter wastage (%)</label><input type="number" id="cc-wastage" value="1.81" min="0" max="20" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Base film rate (₹/kg)</label><input type="number" id="cc-film-rate" value="100" min="0" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Manpower (₹/kg)</label><input type="number" id="cc-manpower" value="1.00" min="0" step="0.01" oninput="calcConversionCost()"></div>
+          </div>
+          <div class="calc-row c3">
+            <div class="calc-field"><label>Consumables &amp; spares (₹/kg)</label><input type="number" id="cc-consumables" value="0.38" min="0" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>Indirect expense (₹/kg, fixed)</label><input type="number" id="cc-indirect" value="0.26" min="0" step="0.01" oninput="calcConversionCost()"></div>
+            <div class="calc-field"><label>B-Grade loss (₹/kg, fixed)</label><input type="number" id="cc-bgrade" value="0.024" min="0" step="0.001" oninput="calcConversionCost()"></div>
+          </div>
+
+          <div class="calc-result" style="flex-wrap:wrap;gap:12px;">
+            <div style="flex:1;min-width:120px;"><div class="val" id="cc-res-actual" style="color:var(--orange);">—</div><div class="sub">Actual ₹/kg</div></div>
+            <div style="flex:1;min-width:120px;"><div class="val" id="cc-res-eqv" style="color:var(--teal);">—</div><div class="sub">Equivalent ₹/kg</div></div>
+            <div style="flex:1;min-width:120px;"><div class="val" id="cc-res-gap">—</div><div class="sub">Mix gap ₹/kg</div></div>
+          </div>
+          <div id="cc-breakdown" style="margin-top:12px;font-family:JetBrains Mono,monospace;font-size:.75rem;line-height:1.75;color:var(--muted);white-space:pre-wrap;background:var(--bg2);padding:12px 14px;border-radius:10px;border:1px solid var(--border);"></div>
+        </div>
+      </div>
+
       <!-- 9. CONVERTING PLANT CAPACITY — multi-machine (same field UI as Met M/C) -->
       <div class="calc-card reveal calc-tall" id="calc-converting-capacity">
         <div class="calc-head" onclick="toggleCalc(this, event)"><span class="calc-emoji">🏭</span><div class="calc-info"><h3 data-i="c9_t">Converting Plant Capacity</h3><p data-i="c9_s">All machines → MT/day · plant bottleneck</p></div><button class="calc-share" onclick="copyCalcLink(this, event)" title="Copy link to this calculator" aria-label="Copy link">🔗</button><span class="calc-arrow">▼</span></div>

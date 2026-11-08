@@ -337,6 +337,7 @@ function resetCalc(cardId) {
     if (cardId === 'calc-converting-capacity' && typeof calcConvPlant === 'function') calcConvPlant();
     if (cardId === 'calc-min-manpower' && typeof calcMinManpower === 'function') { calcMinManpowerRebuildMachines(); calcMinManpower(); }
     else if (cardId === 'calc-met-capacity' && typeof calcMetCapacity === 'function') calcMetCapacity();
+    else if (cardId === 'calc-conversion-cost' && typeof calcConversionCost === 'function') calcConversionCost();
     else {
       var fnMap = {
         'calc-roll-weight': 'calcRollWeight',
@@ -392,6 +393,9 @@ function toggleCalc(head, evt){
     }
     if(card.id === 'calc-met-capacity' && typeof calcMetCapacity === 'function'){
       setTimeout(function(){ calcMetCapacity(); }, 0);
+    }
+    if(card.id === 'calc-conversion-cost' && typeof calcConversionCost === 'function'){
+      setTimeout(function(){ calcConversionCost(); }, 0);
     }
   } else {
     head.setAttribute('aria-expanded', 'false');
@@ -586,6 +590,158 @@ function calcMetCapacity(){
 }
 
 
+
+/* ═══════════════════════════════════════
+   METALLISER CONVERSION COST
+   Actual vs Equivalent ₹/kg (blog #28)
+   ═══════════════════════════════════════ */
+var CC_DEFAULT_ROWS = [
+  { name: 'PET_12_M2.2 (Std 12μ, baseline)', qty: 245, factor: 1.00 },
+  { name: 'PET_12_M2.5 (Std 12μ, 2.5 OD)',   qty: 100, factor: 1.24 },
+  { name: 'PET_12_M2.8 (Std 12μ, 2.8 OD)',   qty: 70,  factor: 1.44 },
+  { name: 'PET_10_M2.2 (Std 10μ)',            qty: 75,  factor: 1.20 },
+  { name: 'PET_8_M2.2 (Std 8μ)',             qty: 55,  factor: 1.875 },
+  { name: 'PET_12_M0.3_AlOx (AlOx)',          qty: 70,  factor: 3.00 },
+  { name: 'PET_12_M2.2_RC (Reverse/Release Coat)', qty: 50, factor: 2.17 }
+];
+
+function ccEscape(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function ccRenderRow(row){
+  var tr = document.createElement('tr');
+  tr.style.borderBottom = '1px solid var(--border)';
+  tr.innerHTML =
+    '<td style="padding:6px 8px;"><input type="text" class="cc-name" value="'+ccEscape(row.name)+'" style="width:100%;padding:7px 8px;border:1.5px solid var(--border);border-radius:6px;font-size:.82rem;font-family:inherit;background:var(--bg);" oninput="calcConversionCost()"></td>' +
+    '<td style="padding:6px 6px;"><input type="number" class="cc-qty" value="'+row.qty+'" min="0" step="1" style="width:100%;padding:7px 6px;border:1.5px solid var(--border);border-radius:6px;font-size:.82rem;font-family:inherit;background:var(--bg);text-align:right;font-weight:700;" oninput="calcConversionCost()"></td>' +
+    '<td style="padding:6px 6px;"><input type="number" class="cc-factor" value="'+row.factor+'" min="0.1" max="10" step="0.01" style="width:100%;padding:7px 6px;border:1.5px solid var(--border);border-radius:6px;font-size:.82rem;font-family:inherit;background:var(--bg);text-align:right;font-weight:700;" oninput="calcConversionCost()"></td>' +
+    '<td class="cc-eqv" style="padding:6px 8px;text-align:right;color:var(--teal);font-weight:700;font-size:.82rem;">—</td>' +
+    '<td style="padding:6px 4px;text-align:center;"><button type="button" onclick="ccDeleteRow(this)" style="background:transparent;border:none;color:var(--orange);font-size:1.15rem;cursor:pointer;font-weight:700;line-height:1;" title="Remove row" aria-label="Remove row">×</button></td>';
+  return tr;
+}
+
+function ccAddRow(){
+  var tbody = document.getElementById('cc-material-rows');
+  if(!tbody) return;
+  tbody.appendChild(ccRenderRow({ name: '', qty: 0, factor: 1.00 }));
+  calcConversionCost();
+}
+
+function ccDeleteRow(btn){
+  var row = btn.closest('tr');
+  if(row && row.parentNode) row.parentNode.removeChild(row);
+  calcConversionCost();
+}
+
+function ccInitRows(){
+  var tbody = document.getElementById('cc-material-rows');
+  if(!tbody || tbody.children.length) return;
+  CC_DEFAULT_ROWS.forEach(function(r){ tbody.appendChild(ccRenderRow(r)); });
+  calcConversionCost();
+}
+
+function calcConversionCost(){
+  var tbody = document.getElementById('cc-material-rows');
+  if(!tbody) return;
+
+  var qtys = tbody.querySelectorAll('.cc-qty');
+  var factors = tbody.querySelectorAll('.cc-factor');
+  var eqvCells = tbody.querySelectorAll('.cc-eqv');
+  var totalActualMT = 0, totalEqvMT = 0;
+
+  for(var i=0; i<qtys.length; i++){
+    var q = parseFloat(qtys[i].value) || 0;
+    var f = parseFloat(factors[i].value) || 0;
+    var eqv = q * f;
+    if(eqvCells[i]) eqvCells[i].textContent = eqv > 0 ? eqv.toFixed(1) : '—';
+    totalActualMT += q;
+    totalEqvMT += eqv;
+  }
+
+  var mult = totalActualMT > 0 ? (totalEqvMT / totalActualMT) : 0;
+  var elAct = document.getElementById('cc-total-actual-mt');
+  var elAvg = document.getElementById('cc-avg-factor');
+  var elEqv = document.getElementById('cc-total-eqv-mt');
+  if(elAct) elAct.textContent = totalActualMT > 0 ? totalActualMT.toFixed(1) + ' MT' : '—';
+  if(elAvg) elAvg.textContent = mult > 0 ? mult.toFixed(2) + '×' : '—';
+  if(elEqv) elEqv.textContent = totalEqvMT > 0 ? totalEqvMT.toFixed(1) + ' MT' : '—';
+
+  var wireKg = parseFloat((document.getElementById('cc-wire-kg')||{}).value) || 0;
+  var wireRate = parseFloat((document.getElementById('cc-wire-rate')||{}).value) || 0;
+  var boatPcs = parseFloat((document.getElementById('cc-boat-pcs')||{}).value) || 0;
+  var boatRate = parseFloat((document.getElementById('cc-boat-rate')||{}).value) || 0;
+  var powerUnits = parseFloat((document.getElementById('cc-power-units')||{}).value) || 0;
+  var powerRate = parseFloat((document.getElementById('cc-power-rate')||{}).value) || 0;
+  var wastagePct = parseFloat((document.getElementById('cc-wastage')||{}).value) || 0;
+  var filmRate = parseFloat((document.getElementById('cc-film-rate')||{}).value) || 0;
+  var manpower = parseFloat((document.getElementById('cc-manpower')||{}).value) || 0;
+  var consumables = parseFloat((document.getElementById('cc-consumables')||{}).value) || 0;
+  var indirect = parseFloat((document.getElementById('cc-indirect')||{}).value) || 0;
+  var bgrade = parseFloat((document.getElementById('cc-bgrade')||{}).value);
+  if(isNaN(bgrade)) bgrade = 0.024;
+
+  var outputKg = totalActualMT * 1000;
+  var resA = document.getElementById('cc-res-actual');
+  var resE = document.getElementById('cc-res-eqv');
+  var resG = document.getElementById('cc-res-gap');
+  var br = document.getElementById('cc-breakdown');
+
+  if(outputKg <= 0 || mult <= 0){
+    if(resA) resA.textContent = '—';
+    if(resE) resE.textContent = '—';
+    if(resG) resG.textContent = '—';
+    if(br) br.textContent = 'Add at least one material row with Qty > 0 to see results.';
+    return;
+  }
+
+  var wireA   = wireKg * wireRate / outputKg;
+  var boatA   = boatPcs * boatRate / outputKg;
+  var powerA  = powerUnits * powerRate / outputKg;
+  var wasteA  = wastagePct * filmRate / 100;
+  var manA    = manpower;
+  var consA   = consumables;
+  var indA    = indirect;
+  var totalA  = wireA + boatA + powerA + wasteA + bgrade + manA + consA + indA;
+
+  // Equivalent: scale variable heads by mix multiplier; Indirect stays fixed
+  var wireE = wireA / mult, boatE = boatA / mult, powerE = powerA / mult;
+  var wasteE = wasteA / mult, bgradeE = bgrade / mult;
+  var manE = manA / mult, consE = consA / mult, indE = indA;
+  var totalE = wireE + boatE + powerE + wasteE + bgradeE + manE + consE + indE;
+  var gap = totalA - totalE;
+
+  if(resA) resA.textContent = '₹' + totalA.toFixed(2);
+  if(resE) resE.textContent = '₹' + totalE.toFixed(2);
+  if(resG) resG.textContent = '₹' + gap.toFixed(2);
+
+  if(br){
+    function line(label, a, e){
+      return label.padEnd(16,' ') + ' ₹' + a.toFixed(2).padStart(6,' ') + '  /  ₹' + e.toFixed(2).padStart(6,' ');
+    }
+    br.innerHTML =
+      '<div style="color:var(--navy);font-weight:700;margin-bottom:4px;">Head               Actual   /  Equivalent</div>' +
+      line('Wire', wireA, wireE) + '<br>' +
+      line('Boat', boatA, boatE) + '<br>' +
+      line('Power', powerA, powerE) + '<br>' +
+      line('Wastage', wasteA, wasteE) + '<br>' +
+      line('B-Grade', bgrade, bgradeE) + '<br>' +
+      line('Manpower', manA, manE) + '<br>' +
+      line('Cons & Spares', consA, consE) + '<br>' +
+      line('Indirect', indA, indE) + '<br>' +
+      '<span style="color:var(--orange);font-weight:700;">' + line('TOTAL', totalA, totalE) + '</span>' +
+      '<div style="margin-top:8px;color:var(--muted);font-size:.72rem;">Mix multiplier = ' + mult.toFixed(3) + '× · Actual MT ' + totalActualMT.toFixed(1) + ' → Eqv MT ' + totalEqvMT.toFixed(1) + '</div>';
+  }
+}
+
+// Init conversion-cost rows when DOM ready
+(function(){
+  function boot(){ ccInitRows(); }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
 
 function calcConvPlant(){
   try {
