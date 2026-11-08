@@ -237,8 +237,13 @@ if(curLang === 'hi') setLang('hi');
 (function(){ var el=document.getElementById('copyYear'); if(el) el.textContent = new Date().getFullYear(); })();
 
 /* REVEAL */
-const ro=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*65);ro.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
+const ro=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*40);ro.unobserve(e.target);}});},{threshold:0.01,rootMargin:'0px 0px 80px 0px'});
 document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
+// Safety: never leave sections invisible forever (mobile chrome / fast scroll / IO quirks)
+setTimeout(function(){
+  document.querySelectorAll('.reveal:not(.visible)').forEach(function(el){ el.classList.add('visible'); });
+}, 2800);
+
 
 
 /* ═══════════════════════════════════════
@@ -1928,18 +1933,26 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
   });
 })();
 
-/* ========== Career Journey – auto-load images from folders ========== */
+/* ========== Career Journey – auto-load images from folders ==========
+   Mobile-safe loader:
+   - Prefer manifest.json (recommended)
+   - Fallback probes only a small range, sequential, with early stop
+   - Never floods the network with hundreds of parallel 404 Image requests
+   - This was causing blank screens / layout collapse on mobile
+*/
 (function(){
   var COMPANIES = [
     { id: 'uflex',  folder: 'career-journey/uflex' },
     { id: 'jindal', folder: 'career-journey/jindal' },
     { id: 'gls',    folder: 'career-journey/gls' }
   ];
-  var EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-  var MAX_NUM = 40; // probe 1..40
+  // Prefer modern formats first; limit extensions to reduce probes
+  var EXTS = ['webp', 'jpg', 'jpeg', 'png'];
+  var MAX_NUM = 20;          // hard cap — do not probe beyond this
+  var MAX_CONSEC_MISS = 4;   // stop after this many consecutive missing numbers
+  var MAX_IMAGES = 24;       // safety cap on images rendered per company
 
   function parseDateFromName(name) {
-    // Try YYYY-MM-DD or YYYYMMDD or IMG_YYYYMMDD
     var m = name.match(/(20\d{2})[-_]?(\d{2})[-_]?(\d{2})/);
     if (m) return new Date(+m[1], +m[2] - 1, +m[3]).getTime();
     m = name.match(/(20\d{2})(\d{2})(\d{2})/);
@@ -1947,19 +1960,31 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
     return 0;
   }
 
-  function numFromName(name) {
-    var base = name.replace(/\.[^.]+$/, '');
-    var n = parseInt(base, 10);
-    return isNaN(n) ? null : n;
-  }
-
   function probeImage(url) {
     return new Promise(function(resolve) {
       var img = new Image();
-      img.onload = function() { resolve(url); };
-      img.onerror = function() { resolve(null); };
+      var done = false;
+      var finish = function(val) {
+        if (done) return;
+        done = true;
+        resolve(val);
+      };
+      img.onload = function() { finish(url); };
+      img.onerror = function() { finish(null); };
+      // Timeout so a hanging request cannot block the chain
+      setTimeout(function() { finish(null); }, 3500);
       img.src = url;
     });
+  }
+
+  // Try extensions for one number sequentially (stops at first hit)
+  async function probeNumber(folder, n) {
+    for (var e = 0; e < EXTS.length; e++) {
+      var url = folder + '/' + n + '.' + EXTS[e];
+      var hit = await probeImage(url);
+      if (hit) return hit;
+    }
+    return null;
   }
 
   async function loadCompany(company) {
@@ -1968,40 +1993,35 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
 
     var found = [];
 
-    // 1) Try optional manifest.json first
+    // 1) Prefer manifest.json — zero probing, fastest & safest
     try {
       var res = await fetch(company.folder + '/manifest.json', { cache: 'no-cache' });
       if (res.ok) {
         var list = await res.json();
         if (Array.isArray(list) && list.length) {
           found = list.map(function(f) {
-            return company.folder + '/' + (typeof f === 'string' ? f : f.file || f.name);
-          });
+            return company.folder + '/' + (typeof f === 'string' ? f : (f.file || f.name || ''));
+          }).filter(Boolean);
         }
       }
     } catch (e) { /* no manifest */ }
 
-    // 2) Sequential numbered files: 1.jpg, 2.png, ...
+    // 2) Gentle sequential fallback (never Promise.all of hundreds of requests)
     if (!found.length) {
-      var probes = [];
+      var consecutiveMiss = 0;
       for (var i = 1; i <= MAX_NUM; i++) {
-        for (var e = 0; e < EXTS.length; e++) {
-          probes.push(probeImage(company.folder + '/' + i + '.' + EXTS[e]));
+        var hit = await probeNumber(company.folder, i);
+        if (hit) {
+          found.push(hit);
+          consecutiveMiss = 0;
+        } else {
+          consecutiveMiss++;
+          if (consecutiveMiss >= MAX_CONSEC_MISS) break;
         }
       }
-      var results = await Promise.all(probes);
-      found = results.filter(Boolean);
-      // Keep only first hit per number (prefer order of EXTS)
-      var byNum = {};
-      found.forEach(function(url) {
-        var name = url.split('/').pop();
-        var n = numFromName(name);
-        if (n != null && !byNum[n]) byNum[n] = url;
-      });
-      found = Object.keys(byNum).sort(function(a, b) { return +a - +b; }).map(function(k) { return byNum[k]; });
     }
 
-    // Sort: if any have dates in name → newest first; else keep sequential
+    // Optional date sort (newest first) when filenames contain dates
     var hasDates = found.some(function(u) { return parseDateFromName(u.split('/').pop()) > 0; });
     if (hasDates) {
       found.sort(function(a, b) {
@@ -2009,11 +2029,17 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
       });
     }
 
+    if (found.length > MAX_IMAGES) found = found.slice(0, MAX_IMAGES);
+
     if (!found.length) {
-      // keep empty placeholder
+      // keep existing empty placeholder
       return;
     }
 
+    // Show a lightweight loading state so layout does not jump from empty → full
+    gallery.innerHTML = '<div class="cj-loading" aria-hidden="true"></div>';
+
+    // Render images one by one so the main thread stays responsive on mobile
     gallery.innerHTML = '';
     found.forEach(function(url, idx) {
       var img = document.createElement('img');
@@ -2021,7 +2047,10 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
       img.alt = company.id + ' photo ' + (idx + 1);
       img.loading = 'lazy';
       img.decoding = 'async';
+      img.width = 200;
+      img.height = 200;
       img.addEventListener('click', function() { openLightbox(url); });
+      img.onerror = function() { this.style.display = 'none'; };
       gallery.appendChild(img);
     });
   }
@@ -2048,7 +2077,10 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
   }
 
   function init() {
-    COMPANIES.forEach(loadCompany);
+    // Stagger company loads slightly so mobile network is not saturated
+    COMPANIES.forEach(function(company, idx) {
+      setTimeout(function() { loadCompany(company); }, idx * 180);
+    });
   }
 
   if (document.readyState === 'loading') {

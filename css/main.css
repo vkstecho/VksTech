@@ -472,7 +472,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:60px 0 30px;}
 .fb{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:.75rem;flex-wrap:wrap;gap:10px;}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(30px);transition:all .65s ease-out;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease-out,transform .55s ease-out;}
 .reveal.visible{opacity:1;transform:none;}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
@@ -1341,7 +1341,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 10px;
-  min-height: 40px;
+  min-height: 48px;
+  /* Reserve space so layout does not collapse while images load */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
 }
 .cj-gallery img {
   width: 100%;
@@ -1352,6 +1355,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   background: var(--bg2);
+  display: block;
+}
+.cj-loading {
+  grid-column: 1 / -1;
+  height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--bg2) 25%, #f0eeea 50%, var(--bg2) 75%);
+  background-size: 200% 100%;
+  animation: cjShimmer 1.2s ease-in-out infinite;
+}
+@keyframes cjShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .cj-gallery img:hover {
   transform: scale(1.03);
@@ -1429,3 +1445,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+
+/* Mobile stability: avoid 100vh jumps + keep career gallery stable */
+@media (max-width: 768px) {
+  #hero {
+    min-height: auto;
+    min-height: 100svh; /* small viewport height when supported */
+    padding-bottom: 40px;
+  }
+  .cj-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    min-height: 100px;
+  }
+  .reveal {
+    /* slightly shorter travel so less empty space while waiting for IO */
+    transform: translateY(18px);
+  }
+}
+
