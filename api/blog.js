@@ -36,10 +36,9 @@ async function fetchGithubContent(githubPath) {
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
       // Take only the filename — all assets for a blog live in the same folder as index.html
       let filename = path.split('/').pop();
-      // Prefer compressed .webp versions when original was png/jpg
-      if (/\.(png|jpe?g)$/i.test(filename)) {
-        filename = filename.replace(/\.(png|jpe?g)$/i, '.webp');
-      }
+      // Keep original extension (.png / .jpg / .webp).
+      // Do NOT force .webp — many newer blogs only ship png/jpg, and forced webp 404s.
+      // If the HTML already points to .webp and that file exists, it is used as-is.
       return `${attr}="${rawBase}${filename}"`;
     });
     return body;
@@ -169,10 +168,7 @@ export default async function handler(req, res) {
         if (SHORT_FOLDER_MAP[first]) {
           p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
         }
-        // Prefer .webp for raster images
-        if (/\.(png|jpe?g)$/i.test(p)) {
-          p = p.replace(/\.(png|jpe?g)$/i, '.webp');
-        }
+        // Keep original extension (.png / .jpg / .webp). Do not force .webp.
         return `${attr}="${RAW_BLOGS}${p}"`;
       });
     }
