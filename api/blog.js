@@ -22,6 +22,33 @@ function extractBodyContent(html) {
 // Robust rewrite: always resolve relative src/href to the correct cdn.jsdelivr.net (GitHub CDN)
 // folder of this blog (using only the filename). This tolerates wrong folder prefixes
 // that were baked into many index.html files (e.g. "16-wrinkle-.../" inside the 15- folder).
+// Resolve which image extension actually exists on the CDN (webp → jpg → png).
+// Cached per stem for the life of the serverless invocation.
+const _extResolveCache = new Map();
+async function resolveExistingImageUrl(rawBase, filename) {
+  const stem = filename.replace(/\.(png|jpe?g|webp)$/i, '');
+  const primaryExt = ((filename.match(/\.(png|jpe?g|webp)$/i) || ['.png'])[0] || '.png').toLowerCase();
+  // Prefer webp when present, then original ext, then jpg, then png
+  const order = ['.webp', primaryExt, '.jpg', '.png'].filter((v, i, a) => a.indexOf(v) === i);
+  const cacheKey = rawBase + stem;
+  if (_extResolveCache.has(cacheKey)) {
+    return rawBase + stem + _extResolveCache.get(cacheKey);
+  }
+  for (const ext of order) {
+    const url = rawBase + stem + ext;
+    try {
+      const r = await fetch(url, { method: 'HEAD' });
+      if (r.ok) {
+        _extResolveCache.set(cacheKey, ext);
+        return url;
+      }
+    } catch (e) { /* try next */ }
+  }
+  // Fallback to original filename even if HEAD failed
+  _extResolveCache.set(cacheKey, primaryExt);
+  return rawBase + filename;
+}
+
 async function fetchGithubContent(githubPath) {
   if (!githubPath) return '';
   const [folder, file] = githubPath.split('::');
@@ -33,22 +60,25 @@ async function fetchGithubContent(githubPath) {
     const html = await r.text();
     let body = extractBodyContent(html);
     const rawBase = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${folder}/`;
+
+    // Collect unique raster image filenames to resolve
+    const imgFiles = new Set();
+    body.replace(/(src)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
+      const filename = path.split('/').pop();
+      if (/\.(png|jpe?g|webp)$/i.test(filename)) imgFiles.add(filename);
+      return m;
+    });
+    const resolved = new Map();
+    await Promise.all([...imgFiles].map(async (fn) => {
+      resolved.set(fn, await resolveExistingImageUrl(rawBase, fn));
+    }));
+
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
-      // Take only the filename — all assets for a blog live in the same folder as index.html
-      let filename = path.split('/').pop();
-      const url = rawBase + filename;
-      // For raster images: keep HTML extension as primary, add onerror fallback
-      // chain (.webp → .jpg → .png) so older blogs (HTML says .png, files are
-      // .jpg/.webp) and newer blogs (only .png/.jpg) both work.
-      if (attr === 'src' && /\.(png|jpe?g|webp)$/i.test(filename)) {
-        const stem = filename.replace(/\.(png|jpe?g|webp)$/i, '');
-        const primaryExt = (filename.match(/\.(png|jpe?g|webp)$/i) || ['.png'])[0].toLowerCase();
-        const order = [primaryExt, '.webp', '.jpg', '.png'].filter((v, i, a) => a.indexOf(v) === i);
-        const urls = order.map(e => rawBase + stem + e);
-        const fallbacks = urls.slice(1).join('|');
-        return `src="${urls[0]}" data-fallbacks="${fallbacks}" onerror="var f=(this.dataset.fallbacks||'').split('|').filter(Boolean);var i=+this.dataset.fb||0;if(i<f.length){this.dataset.fb=i+1;this.src=f[i];}else{this.onerror=null;}"`;
+      const filename = path.split('/').pop();
+      if (attr === 'src' && resolved.has(filename)) {
+        return `src="${resolved.get(filename)}"`;
       }
-      return `${attr}="${url}"`;
+      return `${attr}="${rawBase}${filename}"`;
     });
     return body;
   } catch (e) {
@@ -171,24 +201,36 @@ export default async function handler(req, res) {
         'pinholes-action-plan': '12-pinholes-action-plan',
       };
       const RAW_BLOGS = `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/Blogs/`;
-      content = (b.content || '').replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
+      // Resolve relative image paths against CDN; prefer existing webp/jpg/png
+      const RAW_BASE_RESOLVE = RAW_BLOGS;
+      const relImgs = new Set();
+      const draft = (b.content || '');
+      draft.replace(/(src)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
         let p = path.replace(/^Blogs\//, '');
         const first = p.split('/')[0];
         if (SHORT_FOLDER_MAP[first]) {
           p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
         }
-        const url = RAW_BLOGS + p;
-        if (attr === 'src' && /\.(png|jpe?g|webp)$/i.test(p)) {
-          const name = p.split('/').pop();
-          const folder = p.slice(0, p.length - name.length);
-          const stem = name.replace(/\.(png|jpe?g|webp)$/i, '');
-          const primaryExt = (name.match(/\.(png|jpe?g|webp)$/i) || ['.png'])[0].toLowerCase();
-          const order = [primaryExt, '.webp', '.jpg', '.png'].filter((v, i, a) => a.indexOf(v) === i);
-          const urls = order.map(e => RAW_BLOGS + folder + stem + e);
-          const fallbacks = urls.slice(1).join('|');
-          return `src="${urls[0]}" data-fallbacks="${fallbacks}" onerror="var f=(this.dataset.fallbacks||'').split('|').filter(Boolean);var i=+this.dataset.fb||0;if(i<f.length){this.dataset.fb=i+1;this.src=f[i];}else{this.onerror=null;}"`;
+        if (/\.(png|jpe?g|webp)$/i.test(p)) relImgs.add(p);
+        return m;
+      });
+      const resolvedRel = new Map();
+      await Promise.all([...relImgs].map(async (p) => {
+        const name = p.split('/').pop();
+        const folder = p.slice(0, p.length - name.length);
+        const url = await resolveExistingImageUrl(RAW_BASE_RESOLVE + folder, name);
+        resolvedRel.set(p, url);
+      }));
+      content = draft.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
+        let p = path.replace(/^Blogs\//, '');
+        const first = p.split('/')[0];
+        if (SHORT_FOLDER_MAP[first]) {
+          p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
         }
-        return `${attr}="${url}"`;
+        if (attr === 'src' && resolvedRel.has(p)) {
+          return `src="${resolvedRel.get(p)}"`;
+        }
+        return `${attr}="${RAW_BLOGS}${p}"`;
       });
     }
 
