@@ -36,10 +36,19 @@ async function fetchGithubContent(githubPath) {
     body = body.replace(/(src|href)="(?!https?:\/\/)(?!\/)(?!data:)(?!#)([^"]+)"/g, (m, attr, path) => {
       // Take only the filename — all assets for a blog live in the same folder as index.html
       let filename = path.split('/').pop();
-      // Keep original extension (.png / .jpg / .webp).
-      // Do NOT force .webp — many newer blogs only ship png/jpg, and forced webp 404s.
-      // If the HTML already points to .webp and that file exists, it is used as-is.
-      return `${attr}="${rawBase}${filename}"`;
+      const url = rawBase + filename;
+      // For raster images: keep HTML extension as primary, add onerror fallback
+      // chain (.webp → .jpg → .png) so older blogs (HTML says .png, files are
+      // .jpg/.webp) and newer blogs (only .png/.jpg) both work.
+      if (attr === 'src' && /\.(png|jpe?g|webp)$/i.test(filename)) {
+        const stem = filename.replace(/\.(png|jpe?g|webp)$/i, '');
+        const primaryExt = (filename.match(/\.(png|jpe?g|webp)$/i) || ['.png'])[0].toLowerCase();
+        const order = [primaryExt, '.webp', '.jpg', '.png'].filter((v, i, a) => a.indexOf(v) === i);
+        const urls = order.map(e => rawBase + stem + e);
+        const fallbacks = urls.slice(1).join('|');
+        return `src="${urls[0]}" data-fallbacks="${fallbacks}" onerror="var f=(this.dataset.fallbacks||'').split('|').filter(Boolean);var i=+this.dataset.fb||0;if(i<f.length){this.dataset.fb=i+1;this.src=f[i];}else{this.onerror=null;}"`;
+      }
+      return `${attr}="${url}"`;
     });
     return body;
   } catch (e) {
@@ -168,8 +177,18 @@ export default async function handler(req, res) {
         if (SHORT_FOLDER_MAP[first]) {
           p = SHORT_FOLDER_MAP[first] + '/' + p.split('/').slice(1).join('/');
         }
-        // Keep original extension (.png / .jpg / .webp). Do not force .webp.
-        return `${attr}="${RAW_BLOGS}${p}"`;
+        const url = RAW_BLOGS + p;
+        if (attr === 'src' && /\.(png|jpe?g|webp)$/i.test(p)) {
+          const name = p.split('/').pop();
+          const folder = p.slice(0, p.length - name.length);
+          const stem = name.replace(/\.(png|jpe?g|webp)$/i, '');
+          const primaryExt = (name.match(/\.(png|jpe?g|webp)$/i) || ['.png'])[0].toLowerCase();
+          const order = [primaryExt, '.webp', '.jpg', '.png'].filter((v, i, a) => a.indexOf(v) === i);
+          const urls = order.map(e => RAW_BLOGS + folder + stem + e);
+          const fallbacks = urls.slice(1).join('|');
+          return `src="${urls[0]}" data-fallbacks="${fallbacks}" onerror="var f=(this.dataset.fallbacks||'').split('|').filter(Boolean);var i=+this.dataset.fb||0;if(i<f.length){this.dataset.fb=i+1;this.src=f[i];}else{this.onerror=null;}"`;
+        }
+        return `${attr}="${url}"`;
       });
     }
 
