@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Minimum Manpower Calculator | Packaging Line Headcount — Free | VKS Tech</title>
+<meta name="description" content="Free minimum manpower calculator for packaging plants. Estimate headcount from shifts, machines, relief factor and buffer. Same logic as the Man Power app."/>
+<meta name="keywords" content="minimum manpower calculator, packaging manpower calculation, production headcount, relief factor, shift manpower India"/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#1a2744"/>
+<link rel="canonical" href="https://vkstech.com/calculators/min-manpower"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Min Manpower Calculator — Free | VKS Tech"/>
+<meta property="og:description" content="Calculate minimum headcount for packaging lines using shifts, machines, relief and buffer. Free tool."/>
+<meta property="og:url" content="https://vkstech.com/calculators/min-manpower"/>
+<meta property="og:image" content="https://vkstech.com/assets/og-image.png"/>
+<link rel="icon" href="../assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Minimum Manpower Calculator",
+      "url": "https://vkstech.com/calculators/min-manpower",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "description": "Estimate minimum headcount for packaging production lines from shifts, machines, relief factor and buffer."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate minimum manpower for a packaging line?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Headcount ≈ Shifts × (people per machine × machine count) × Relief factor × (1 + Buffer %). Relief = Working days in roster ÷ Actual working days (e.g. 7÷6 = 1.167 for one weekly off)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a relief factor in manpower planning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Relief factor accounts for weekly offs and leave so that every shift is covered. For a 7-day roster with 1 weekly off, relief = 7/6 ≈ 1.167."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vkstech.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://vkstech.com/calculators" },
+        { "@type": "ListItem", "position": 3, "name": "Min Manpower", "item": "https://vkstech.com/calculators/min-manpower" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{--navy:#1a2744;--orange:#e85d26;--bg:#faf9f6;--bg2:#f3f1ec;--card:#fff;--border:#e8e4dc;--muted:#5c6b7a;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 5%;background:rgba(250,249,246,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.tb-brand{display:flex;align-items:center;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.15rem}
+.vks-tech{color:var(--orange);margin-left:2px}
+.tb-nav a{color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:600;padding:8px 12px;border-radius:8px;margin-left:4px}
+.tb-nav a:hover{background:rgba(232,93,38,.08);color:var(--orange)}
+.wrap{max-width:720px;margin:0 auto;padding:36px 5% 60px}
+.crumb{font-size:.8rem;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--orange);text-decoration:none;font-weight:600}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.55rem,3.5vw,2.15rem);font-weight:800;margin-bottom:10px}
+h1 span{color:var(--orange)}
+.lead{color:var(--muted);margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(26,39,68,.06)}
+.sec{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin:12px 0 8px;font-family:'JetBrains Mono',monospace}
+.row{display:grid;gap:10px;margin-bottom:10px}
+.row.c3{grid-template-columns:repeat(3,1fr)}
+.row.c2{grid-template-columns:1fr 1fr}
+label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:3px}
+input{width:100%;padding:10px 11px;border:1.5px solid var(--border);border-radius:9px;font-size:.92rem;font-family:inherit}
+input:focus{outline:none;border-color:var(--orange)}
+.result{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:12px;padding:16px 18px;margin-top:14px}
+.result .val{font-size:1.7rem;font-weight:800;font-family:'Playfair Display',serif}
+.result .sub{font-size:.72rem;opacity:.8;margin-top:2px}
+.result .unit{font-size:.95rem;font-weight:700}
+.breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.bitem{background:var(--bg2);border-radius:10px;padding:12px;text-align:center}
+.bitem .n{font-size:1.25rem;font-weight:800;color:var(--navy)}
+.bitem .l{font-size:.72rem;color:var(--muted);margin-top:2px}
+.explain{margin-top:28px}
+.explain h2{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:10px}
+.explain p,.explain li{color:var(--muted);font-size:.93rem;line-height:1.7;margin-bottom:8px}
+.explain ul{padding-left:1.2rem}
+.related{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.related a{display:inline-block;margin:0 8px 8px 0;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--navy);font-size:.84rem;font-weight:600}
+.related a:hover{border-color:var(--orange);color:var(--orange)}
+.note{font-size:.82rem;color:var(--muted);margin-top:12px;padding:10px 12px;background:rgba(13,140,126,.06);border-radius:8px;border-left:3px solid #0d8c7e}
+.footer{border-top:1px solid var(--border);padding:22px 5%;text-align:center;color:var(--muted);font-size:.85rem}
+.footer a{color:var(--orange);text-decoration:none;font-weight:600}
+@media(max-width:600px){.row.c3,.row.c2,.breakdown{grid-template-columns:1fr}.tb-nav{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="tb-brand"><img src="../assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/><span>VKS</span><span class="vks-tech">Tech</span></a>
+  <nav class="tb-nav"><a href="/">Home</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a></nav>
+</div>
+
+<div class="wrap">
+  <div class="crumb"><a href="/">Home</a> · <a href="/calculators">Calculators</a> · Min Manpower</div>
+  <h1>Minimum <span>Manpower</span> Calculator</h1>
+  <p class="lead">Estimate headcount for packaging lines using shifts, machines, relief and buffer. Same core logic as the Man Power app.</p>
+
+  <div class="card">
+    <div class="sec">Shift &amp; roster</div>
+    <div class="row c3">
+      <div><label>Shifts / day</label><input type="number" id="mm-shifts" value="3" min="1" max="4" oninput="calc()"></div>
+      <div><label>Weekly offs (per person)</label><input type="number" id="mm-offs" value="1" min="0" max="3" oninput="calc()"></div>
+      <div><label>Roster days</label><input type="number" id="mm-run" value="7" min="1" max="7" oninput="calc()"></div>
+    </div>
+    <div class="row c2">
+      <div><label>Buffer %</label><input type="number" id="mm-buf" value="10" min="0" max="50" oninput="calc()"></div>
+      <div><label>Relief factor (auto)</label><input type="text" id="mm-relief" value="1.167" readonly style="background:var(--bg2)"></div>
+    </div>
+
+    <div class="sec">Machines (people on duty per shift)</div>
+    <div class="row c3">
+      <div><label>Machine qty</label><input type="number" id="mm-qty" value="4" min="0" oninput="calc()"></div>
+      <div><label>People / machine / shift</label><input type="number" id="mm-ps" value="2" min="0" step="0.5" oninput="calc()"></div>
+      <div><label>On-duty crew / shift</label><input type="text" id="mm-onduty" value="8" readonly style="background:var(--bg2)"></div>
+    </div>
+
+    <div class="sec">Shared / support (on-duty per shift)</div>
+    <div class="row c3">
+      <div><label>Engineers</label><input type="number" id="mm-eng" value="1" min="0" oninput="calc()"></div>
+      <div><label>Supervisors</label><input type="number" id="mm-sup" value="1" min="0" oninput="calc()"></div>
+      <div><label>Other support</label><input type="number" id="mm-other" value="0" min="0" oninput="calc()"></div>
+    </div>
+
+    <div class="result">
+      <div><div class="val" id="mm-res">—</div><div class="sub" id="mm-sub">Minimum headcount (rounded up)</div></div>
+      <div class="unit">People</div>
+    </div>
+    <div class="breakdown">
+      <div class="bitem"><div class="n" id="mm-proc">—</div><div class="l">Process (machines)</div></div>
+      <div class="bitem"><div class="n" id="mm-shared">—</div><div class="l">Shared / support</div></div>
+      <div class="bitem"><div class="n" id="mm-detail">—</div><div class="l">Relief × Buffer</div></div>
+    </div>
+    <div class="note">For multi-machine types and engineering headcount with per-machine rates, use the full calculator on the <a href="/#calc-min-manpower" style="color:var(--orange);font-weight:700">homepage</a> or the <a href="https://manpower.vkstech.com" target="_blank" rel="noopener" style="color:var(--orange);font-weight:700">Man Power app</a>.</div>
+  </div>
+
+  <div class="explain">
+    <h2>Formula</h2>
+    <p><strong>Relief</strong> = Roster days ÷ (Roster days − weekly offs). Example: 7 ÷ 6 ≈ 1.167.</p>
+    <p><strong>Process headcount</strong> = ceil( On-duty machine crew × Shifts × Relief × (1 + Buffer%) )</p>
+    <p><strong>Shared headcount</strong> = ceil( (Eng + Sup + Other) × Relief × (1 + Buffer%) )</p>
+    <p><strong>Total</strong> = Process + Shared</p>
+  </div>
+
+  <div class="related">
+    <a href="/calculators/film-roll-weight">Film Roll Weight</a>
+    <a href="/calculators/met-capacity">Met Capacity</a>
+    <a href="https://manpower.vkstech.com" target="_blank" rel="noopener">Man Power App</a>
+    <a href="/calculators">All calculators</a>
+  </div>
+</div>
+
+<footer class="footer"><p>© <span id="y">2026</span> <a href="/">VKS Tech</a></p></footer>
+<script>
+function calc(){
+  var shifts=Math.max(1,parseFloat(document.getElementById('mm-shifts').value)||1);
+  var offs=Math.max(0,Math.min(3,parseFloat(document.getElementById('mm-offs').value)||0));
+  var run=Math.max(1,Math.min(7,parseFloat(document.getElementById('mm-run').value)||7));
+  var bufPct=Math.max(0,parseFloat(document.getElementById('mm-buf').value)||0);
+  var work=Math.max(1,run-offs);
+  var relief=run/work;
+  var buf=1+bufPct/100;
+  document.getElementById('mm-relief').value=relief.toFixed(3);
+
+  var qty=Math.max(0,parseFloat(document.getElementById('mm-qty').value)||0);
+  var ps=Math.max(0,parseFloat(document.getElementById('mm-ps').value)||0);
+  var onDuty=qty*ps;
+  document.getElementById('mm-onduty').value=onDuty.toFixed(1);
+
+  var eng=Math.max(0,parseFloat(document.getElementById('mm-eng').value)||0);
+  var sup=Math.max(0,parseFloat(document.getElementById('mm-sup').value)||0);
+  var other=Math.max(0,parseFloat(document.getElementById('mm-other').value)||0);
+
+  var process=Math.ceil(onDuty*shifts*relief*buf);
+  var shared=Math.ceil((eng+sup+other)*relief*buf);
+  var total=process+shared;
+
+  document.getElementById('mm-res').textContent=String(total);
+  document.getElementById('mm-proc').textContent=String(process);
+  document.getElementById('mm-shared').textContent=String(shared);
+  document.getElementById('mm-detail').textContent=relief.toFixed(3)+' × '+(1+bufPct/100).toFixed(2);
+  document.getElementById('mm-sub').textContent='Relief '+relief.toFixed(3)+' · Buffer '+bufPct+'% · On-duty/shift '+onDuty.toFixed(1);
+}
+calc();
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

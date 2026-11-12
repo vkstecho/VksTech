@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Metalliser Capacity Calculator | MT/day from Cycle Time — Free | VKS Tech</title>
+<meta name="description" content="Free metalliser (Met) machine capacity calculator. Estimate rolls/day and MT/day from setup, vacuum, speed, jumbo length and boat-set life. Built for flexible packaging plants."/>
+<meta name="keywords" content="metalliser capacity calculator, met machine capacity, MT per day calculator, flexible packaging capacity, vacuum metalliser production"/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#1a2744"/>
+<link rel="canonical" href="https://vkstech.com/calculators/met-capacity"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Metalliser Capacity Calculator — Free | VKS Tech"/>
+<meta property="og:description" content="Calculate Met M/C capacity in MT/day from cycle inputs, film geometry and boat-set life."/>
+<meta property="og:url" content="https://vkstech.com/calculators/met-capacity"/>
+<meta property="og:image" content="https://vkstech.com/assets/og-image.png"/>
+<link rel="icon" href="../assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Metalliser Capacity Calculator",
+      "url": "https://vkstech.com/calculators/met-capacity",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "description": "Estimate vacuum metalliser capacity in MT/day from cycle time, film geometry and boat-set life."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I calculate metalliser machine capacity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Capacity (MT/day) = (Rolls per day) × (Roll weight kg) ÷ 1000. Rolls/day comes from available minutes divided by full cycle time (setup + vacuum/heat + run + vent + boat overhead). Roll weight comes from width × length × micron × density."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is boat-set life in a metalliser?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Boat-set life is the total film length (metres) a set of evaporation boats can process before replacement. Longer life reduces boat-change overhead and increases effective capacity."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vkstech.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://vkstech.com/calculators" },
+        { "@type": "ListItem", "position": 3, "name": "Met Capacity", "item": "https://vkstech.com/calculators/met-capacity" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{--navy:#1a2744;--orange:#e85d26;--bg:#faf9f6;--bg2:#f3f1ec;--card:#fff;--border:#e8e4dc;--muted:#5c6b7a;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 5%;background:rgba(250,249,246,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.tb-brand{display:flex;align-items:center;text-decoration:none;color:var(--navy);font-weight:800;font-size:1.15rem}
+.vks-tech{color:var(--orange);margin-left:2px}
+.tb-nav a{color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:600;padding:8px 12px;border-radius:8px;margin-left:4px}
+.tb-nav a:hover{background:rgba(232,93,38,.08);color:var(--orange)}
+.wrap{max-width:780px;margin:0 auto;padding:36px 5% 60px}
+.crumb{font-size:.8rem;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--orange);text-decoration:none;font-weight:600}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.55rem,3.5vw,2.15rem);font-weight:800;margin-bottom:10px}
+h1 span{color:var(--orange)}
+.lead{color:var(--muted);margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(26,39,68,.06)}
+.sec{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin:14px 0 8px;font-family:'JetBrains Mono',monospace}
+.row{display:grid;gap:10px;margin-bottom:10px}
+.row.c3{grid-template-columns:repeat(3,1fr)}
+.row.c2{grid-template-columns:1fr 1fr}
+label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:3px}
+input,select{width:100%;padding:10px 11px;border:1.5px solid var(--border);border-radius:9px;font-size:.92rem;font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--orange)}
+input.missing{border-color:#e11;background:#fff5f5}
+.result{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:12px;padding:16px 18px;margin-top:14px}
+.result .val{font-size:1.7rem;font-weight:800;font-family:'Playfair Display',serif}
+.result .sub{font-size:.72rem;opacity:.8;margin-top:2px;line-height:1.4}
+.result .unit{font-size:.95rem;font-weight:700}
+.result.waiting{opacity:.55}
+.explain{margin-top:28px}
+.explain h2{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:10px}
+.explain p,.explain li{color:var(--muted);font-size:.93rem;line-height:1.7;margin-bottom:8px}
+.explain ul{padding-left:1.2rem}
+.related{margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.related a{display:inline-block;margin:0 8px 8px 0;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--navy);font-size:.84rem;font-weight:600}
+.related a:hover{border-color:var(--orange);color:var(--orange)}
+.footer{border-top:1px solid var(--border);padding:22px 5%;text-align:center;color:var(--muted);font-size:.85rem}
+.footer a{color:var(--orange);text-decoration:none;font-weight:600}
+@media(max-width:640px){.row.c3,.row.c2{grid-template-columns:1fr}.tb-nav{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="tb-brand"><img src="../assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/><span>VKS</span><span class="vks-tech">Tech</span></a>
+  <nav class="tb-nav"><a href="/">Home</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a></nav>
+</div>
+
+<div class="wrap">
+  <div class="crumb"><a href="/">Home</a> · <a href="/calculators">Calculators</a> · Met Capacity</div>
+  <h1>Metalliser <span>Capacity</span> Calculator</h1>
+  <p class="lead">Estimate MT/day from cycle inputs, film geometry and boat-set life. Three-step method used on real Met lines.</p>
+
+  <div class="card">
+    <div class="sec">Film geometry</div>
+    <div class="row c3">
+      <div><label>Film Type</label>
+        <select id="mc-film" onchange="calc()">
+          <option value="1.38">PET — 1.38</option>
+          <option value="0.91">BOPP — 0.91</option>
+          <option value="0.90">CPP — 0.90</option>
+          <option value="0.92">LDPE — 0.92</option>
+        </select>
+      </div>
+      <div><label>Width (mm)</label><input type="number" id="mc-width" value="3000" oninput="calc()"></div>
+      <div><label>Thickness (μm)</label><input type="number" id="mc-micron" placeholder="12" oninput="calc()"></div>
+    </div>
+
+    <div class="sec">Cycle inputs (per roll)</div>
+    <div class="row c3">
+      <div><label>Setup (min)</label><input type="number" id="mc-setup" placeholder="20" oninput="calc()"></div>
+      <div><label>Vacuum + Heat (min)</label><input type="number" id="mc-vacheat" placeholder="20" oninput="calc()"></div>
+      <div><label>Vent (min)</label><input type="number" id="mc-vent" placeholder="10" oninput="calc()"></div>
+    </div>
+    <div class="row c3">
+      <div><label>Line Speed (m/min)</label><input type="number" id="mc-speed" placeholder="800" oninput="calc()"></div>
+      <div><label>Jumbo Length (m)</label><input type="number" id="mc-jumbo" placeholder="54000" oninput="calc()"></div>
+      <div><label>Boat Change (min)</label><input type="number" id="mc-boatchange" placeholder="10" oninput="calc()"></div>
+    </div>
+    <div class="row c2">
+      <div><label>Boat-Set Life (m)</label><input type="number" id="mc-boatset" placeholder="600000" oninput="calc()"></div>
+      <div><label>Source Cleaning / day (min)</label><input type="number" id="mc-cleaning" value="20" oninput="calc()"></div>
+    </div>
+
+    <div class="result waiting" id="mc-box">
+      <div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub">Fill all fields</div></div>
+      <div class="unit">MT/day</div>
+    </div>
+  </div>
+
+  <div class="explain">
+    <h2>How capacity is calculated</h2>
+    <ol style="padding-left:1.2rem;color:var(--muted)">
+      <li><strong>Cycle time</strong> = Setup + Vacuum/Heat + Run time (jumbo÷speed) + Vent + Boat overhead</li>
+      <li><strong>Rolls/day</strong> = (1440 − cleaning minutes) ÷ cycle time</li>
+      <li><strong>Roll weight</strong> from width × length × micron × density</li>
+      <li><strong>Capacity</strong> = Rolls/day × Roll kg ÷ 1000 → MT/day</li>
+    </ol>
+  </div>
+
+  <div class="related">
+    <a href="/calculators/film-roll-weight">Film Roll Weight</a>
+    <a href="/calculators/gsm-to-micron">GSM ↔ Micron</a>
+    <a href="/calculators/min-manpower">Min Manpower</a>
+    <a href="/calculators">All calculators</a>
+  </div>
+</div>
+
+<footer class="footer"><p>© <span id="y">2026</span> <a href="/">VKS Tech</a></p></footer>
+<script>
+function calc(){
+  var ids=['mc-width','mc-micron','mc-setup','mc-vacheat','mc-vent','mc-speed','mc-jumbo','mc-boatchange','mc-boatset','mc-cleaning'];
+  var ok=true;
+  ids.forEach(function(id){
+    var el=document.getElementById(id); var v=parseFloat(el.value);
+    if(!v||isNaN(v)){el.classList.add('missing');ok=false;} else el.classList.remove('missing');
+  });
+  var box=document.getElementById('mc-box');
+  if(!ok){document.getElementById('mc-res').textContent='—';document.getElementById('mc-sub').textContent='Fill all fields';box.classList.add('waiting');return;}
+  var density=parseFloat(document.getElementById('mc-film').value);
+  var width=parseFloat(document.getElementById('mc-width').value);
+  var micron=parseFloat(document.getElementById('mc-micron').value);
+  var setup=parseFloat(document.getElementById('mc-setup').value);
+  var vacheat=parseFloat(document.getElementById('mc-vacheat').value);
+  var vent=parseFloat(document.getElementById('mc-vent').value);
+  var speed=parseFloat(document.getElementById('mc-speed').value);
+  var jumbo=parseFloat(document.getElementById('mc-jumbo').value);
+  var boatchange=parseFloat(document.getElementById('mc-boatchange').value);
+  var boatset=parseFloat(document.getElementById('mc-boatset').value);
+  var cleaning=parseFloat(document.getElementById('mc-cleaning').value);
+  var runTime=jumbo/speed;
+  var boatOverhead=(jumbo/boatset)*boatchange;
+  var cycleTime=setup+vacheat+runTime+vent+boatOverhead;
+  var availableMin=1440-cleaning;
+  if(cycleTime<=0||availableMin<=0){document.getElementById('mc-res').textContent='Invalid';document.getElementById('mc-sub').textContent='Check inputs';return;}
+  var rollsDay=availableMin/cycleTime;
+  var rollKg=width*jumbo*micron*density*0.000001;
+  var capacity=rollsDay*rollKg/1000;
+  document.getElementById('mc-res').textContent=capacity.toFixed(2);
+  document.getElementById('mc-sub').textContent=rollsDay.toFixed(2)+' rolls/day × '+Math.round(rollKg).toLocaleString('en-IN')+' kg · cycle '+cycleTime.toFixed(1)+' min';
+  box.classList.remove('waiting');
+}
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

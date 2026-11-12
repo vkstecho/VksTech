@@ -10,9 +10,56 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vkstech.com/"/>
   </url>
   <url>
+    <loc>https://vkstech.com/calculators</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/calculators/film-roll-weight</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/calculators/gsm-to-micron</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/calculators/met-capacity</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/calculators/min-manpower</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/calculators/roll-length</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/apps</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://vkstech.com/blog</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vkstech.com/downloads</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vkstech.com/youtube</loc>
@@ -25,38 +72,23 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vkstech.com/downloads</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <!-- Calculator deep links (hash URLs are not ideal for sitemaps;
-       when you add dedicated /calculators/* routes, list them here) -->
-  <url>
-    <loc>https://vkstech.com/#calculators</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <!-- Add each published blog post URL, e.g.:
-  <url>
-    <loc>https://vkstech.com/blog/your-slug</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  -->
-  <url>
     <loc>https://vkstech.com/blog/man-power-team-management-app</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vkstech.com/mentor.html</loc>
+    <loc>https://mentor.vkstech.com/</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://vkstech.com/resume.html</loc>
+    <loc>https://manpower.vkstech.com/resume-builder/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://packlink.vkstech.com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

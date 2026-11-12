@@ -9,9 +9,15 @@
 /resume-builder      https://manpower.vkstech.com/resume-builder/  301
 /resume-builder/*    https://manpower.vkstech.com/resume-builder/  301
 
-# Clean URLs (Netlify-style) — Vercel uses vercel.json; kept for Netlify parity
 /downloads   /downloads.html   200
 /people      /people.html      200
 /blog        /blog.html        200
 /blog/*      /api/blog         200
 /youtube     /youtube.html     200
+/calculators /calculators.html 200
+/apps        /apps.html        200
+/calculators/film-roll-weight /calculators/film-roll-weight.html 200
+/calculators/gsm-to-micron    /calculators/gsm-to-micron.html 200
+/calculators/met-capacity     /calculators/met-capacity.html 200
+/calculators/min-manpower     /calculators/min-manpower.html 200
+/calculators/roll-length      /calculators/roll-length.html 200

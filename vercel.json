@@ -5,6 +5,13 @@
     { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" },
     { "source": "/downloads", "destination": "/downloads.html" },
     { "source": "/people", "destination": "/people.html" },
-    { "source": "/youtube", "destination": "/youtube.html" }
+    { "source": "/youtube", "destination": "/youtube.html" },
+    { "source": "/calculators", "destination": "/calculators.html" },
+    { "source": "/apps", "destination": "/apps.html" },
+    { "source": "/calculators/film-roll-weight", "destination": "/calculators/film-roll-weight.html" },
+    { "source": "/calculators/gsm-to-micron", "destination": "/calculators/gsm-to-micron.html" },
+    { "source": "/calculators/met-capacity", "destination": "/calculators/met-capacity.html" },
+    { "source": "/calculators/min-manpower", "destination": "/calculators/min-manpower.html" },
+    { "source": "/calculators/roll-length", "destination": "/calculators/roll-length.html" }
   ]
 }
