@@ -179,3 +179,11 @@ career-journey/
 The page auto-detects images (probes 1–40 for common extensions). Optional: add `manifest.json` array of filenames for explicit control.
 
 Lightbox opens on image click.
+
+
+## Security Note — admin.html
+- `admin.html` contains the blog/admin panel and a Supabase anon key.
+- It already has `noindex, nofollow` meta tags.
+- **Do not link to it publicly.** 
+- Recommended: protect it with host-level Basic Auth, Vercel Password Protection, or IP allow-list.
+- Alternatively, rename the file or serve it only from a private path.

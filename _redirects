@@ -21,3 +21,6 @@
 /calculators/met-capacity     /calculators/met-capacity.html 200
 /calculators/min-manpower     /calculators/min-manpower.html 200
 /calculators/roll-length      /calculators/roll-length.html 200
+
+# Admin is restricted — do not link publicly. Prefer protecting at host level (Basic Auth / Vercel Firewall).
+# /admin.html  /  404
