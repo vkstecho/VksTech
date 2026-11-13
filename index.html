@@ -188,7 +188,7 @@
     <li><a href="/calculators" data-i="nav_calc">Calculators</a></li>
     <li><a href="#blog" data-i="nav_blog">Blog</a></li>
     <li><a href="/youtube" data-i="nav_yt">YouTube</a></li>
-    <li><a href="#request-app" data-i="nav_req">Request App</a></li>
+    <li><a href="#what-i-offer" data-i="nav_req">What I Offer</a></li>
     <li><a href="#about" data-i="nav_about">About</a></li>
     <li><a href="#career-journey" data-i="nav_career">Career</a></li>
     <li><a href="/people" data-i="nav_people">People</a></li>
@@ -199,7 +199,7 @@
       <button class="lpill active" onclick="setLang('en')" aria-label="Switch to English">EN</button>
       <button class="lpill" onclick="setLang('hi')" aria-label="हिन्दी में बदलें">हिं</button>
     </div>
-    <a href="#request-app" class="nav-cta" data-i="nav_cta">Request an App</a>
+    <a href="#what-i-offer" class="nav-cta" data-i="nav_cta">What I Offer</a>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -223,7 +223,7 @@
     <a href="#career-journey" onclick="toggleMenu()" data-i="nav_career">Career Journey</a>
     <a href="#testimonials" onclick="toggleMenu()" data-i="nav_testimonials">Testimonials</a>
     <a href="/people" onclick="toggleMenu()" data-i="nav_people">People</a>
-    <a href="#request-app" onclick="toggleMenu()" data-i="nav_req">Request an App</a>
+    <a href="#what-i-offer" onclick="toggleMenu()" data-i="nav_req">What I Offer</a>
   </div>
   <div class="mob-lang">
     <button class="mob-lang-btn active" onclick="setLang('en')">EN</button>
@@ -889,57 +889,121 @@
   </div>
 </section>
 
-<!-- REQUEST APP -->
-<section id="request-app">
+<!-- WHAT I OFFER -->
+<section id="what-i-offer">
   <div class="container">
-    <div class="req-inner">
-      <div class="reveal">
-        <div class="section-label" data-i="req_label">📩 App Request Portal</div>
-        <h2 class="section-title" data-i="req_title">Have a <span>real problem?</span> Tell me.</h2>
-        <p class="section-sub" data-i="req_sub">Have a workplace or packaging problem that a simple app could solve? Share it — useful ideas may be built free for the requester. If others use it commercially, a fair profit-share model applies.</p>
-        <div class="feats">
-          <div class="feat"><div class="feat-ic it">🆓</div><div class="feat-t"><h4 data-i="f1t">Always Free for You</h4><p data-i="f1d">The person who requested the app always gets it free — no conditions.</p></div></div>
-          <div class="feat"><div class="feat-ic io">💰</div><div class="feat-t"><h4 data-i="f2t">Fair Profit Sharing</h4><p data-i="f2d">If other users benefit commercially, a transparent revenue-share model applies.</p></div></div>
-          <div class="feat"><div class="feat-ic in_">🎓</div><div class="feat-t"><h4 data-i="f3t">Real Engineering Expertise</h4><p data-i="f3d">Every app built with M.Tech-level knowledge and 9+ years of domain experience.</p></div></div>
-          <div class="feat"><div class="feat-ic ig">🌐</div><div class="feat-t"><h4 data-i="f4t">Practical Problems Welcome</h4><p data-i="f4d">Especially packaging, manufacturing, operations, learning and day-to-day work tools that save time.</p></div></div>
-        </div>
-      </div>
-      <div class="form-box reveal">
-        <div class="form-title" data-i="form_title">Submit Your Idea 💡</div>
-        <div class="form-sub" data-i="form_sub">Tell Vivek about the problem you want solved</div>
-        <div class="frow">
-          <div class="fg"><label data-i="fl_name">Your Name *</label><input type="text" id="rn" placeholder="Full Name"/></div>
-          <div class="fg"><label data-i="fl_email">Email *</label><input type="email" id="re" placeholder="you@email.com"/></div>
-        </div>
-        <div class="fg"><label data-i="fl_phone">Phone / WhatsApp</label><input type="tel" id="rp" placeholder="+91 XXXXX XXXXX (optional)"/></div>
-        <div class="fg"><label data-i="fl_cat">Category *</label>
-          <select id="rc">
-            <option value="" disabled selected>Select a category</option>
-            <option>Flexible Packaging / Manufacturing</option>
-            <option>Agriculture / Farming</option>
-            <option>Education / Learning</option>
-            <option>Personal Productivity</option>
-            <option>Health & Fitness</option>
-            <option>Finance / Accounting</option>
-            <option>Other practical tool</option>
-            <option>Business / Management</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="fg"><label data-i="fl_title">App Title *</label><input type="text" id="rt" placeholder="Give your idea a name"/></div>
-        <div class="fg"><label data-i="fl_desc">Describe the Problem *</label><textarea id="rd" rows="4" placeholder="What problem do you face? What should the app do?"></textarea></div>
-        <!-- Honeypot: humans never see/fill this; bots do.
-             aria-hidden + tabindex=-1 + screen-reader-friendly hidden text means
-             real users (sighted, screen-reader, mobile) never encounter it,
-             but bots filling all visible fields will trip it. -->
-        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;" tabindex="-1">
-          <label for="rhp" aria-hidden="true">Leave blank</label>
-          <input type="text" id="rhp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"/>
-        </div>
-        <button class="sbtn" onclick="submitReq()" data-i="submit_btn">Send My App Request 🚀</button>
-      </div>
+    <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto 2.5rem">
+      <div class="section-label" data-i="offer_label">✦ What I Offer</div>
+      <h2 class="section-title" data-i="offer_title">Practical help from <span>real plant experience</span></h2>
+      <p class="section-sub" data-i="offer_sub">Free tools you can use today. Mentorship and consulting when you need a human who has run the lines.</p>
     </div>
+
+    <div class="offer-grid">
+      <!-- 1 Free Calculators -->
+      <article class="offer-card free">
+        <div class="offer-badge free-badge">Free</div>
+        <div class="offer-icon">🧮</div>
+        <h3>Free Packaging Calculators</h3>
+        <p>Film roll weight, GSM ↔ micron, met capacity, min manpower, conversion cost and more — built for flexible packaging professionals.</p>
+        <div class="offer-actions">
+          <a href="/calculators" class="offer-btn primary">Open Calculators</a>
+        </div>
+      </article>
+
+      <!-- 2 Free Resume Builder -->
+      <article class="offer-card free">
+        <div class="offer-badge free-badge">Free</div>
+        <div class="offer-icon"><img src="assets/icon-resume512.jpg" alt="Resume Builder" width="48" height="48" loading="lazy" onerror="this.parentElement.textContent='📄'"/></div>
+        <h3>Free Resume Builder</h3>
+        <p>ATS-friendly professional resume in minutes. Multiple templates, live preview, PDF download — built for plant and corporate roles.</p>
+        <div class="offer-actions">
+          <a href="https://manpower.vkstech.com/resume-builder/" class="offer-btn primary" target="_blank" rel="noopener">Build Resume</a>
+        </div>
+      </article>
+
+      <!-- 3 Mentorship -->
+      <article class="offer-card featured">
+        <div class="offer-badge mentor-badge">Popular</div>
+        <div class="offer-icon"><img src="assets/icon-mentor512.jpg" alt="Mentor" width="48" height="48" loading="lazy" onerror="this.parentElement.textContent='🎓'"/></div>
+        <h3>One-to-One Mentorship</h3>
+        <p>Live 1:1 guidance on AI tools, Excel, career growth, plant ops and freelancing. Personal workspace + session recording.</p>
+        <div class="offer-actions">
+          <a href="https://mentor.vkstech.com/" class="offer-btn primary" target="_blank" rel="noopener">Book Session →</a>
+          <button type="button" class="offer-btn ghost" onclick="openOfferForm('One-to-One Mentorship')">Ask about Mentorship</button>
+        </div>
+      </article>
+
+      <!-- 4 Excel / Reporting -->
+      <article class="offer-card">
+        <div class="offer-badge">Consulting</div>
+        <div class="offer-icon">📊</div>
+        <h3>Excel / Production Reporting Automation</h3>
+        <p>Turn 3-hour manual reports into 10-minute automated trackers. Dashboards, shift reports, KPI visibility for plant teams.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Excel / Production Reporting Automation')">I'm Interested</button>
+        </div>
+      </article>
+
+      <!-- 5 Process Excellence -->
+      <article class="offer-card">
+        <div class="offer-badge">Consulting</div>
+        <div class="offer-icon">⚙️</div>
+        <h3>Process Excellence & Capacity Planning</h3>
+        <p>Defect reduction, root-cause analysis, metalliser & flexible packaging process control, capacity and shift planning.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Process Excellence / Defect Reduction / Capacity Planning')">I'm Interested</button>
+        </div>
+      </article>
+
+      <!-- 6 Custom calculators -->
+      <article class="offer-card">
+        <div class="offer-badge">Custom</div>
+        <div class="offer-icon">🛠️</div>
+        <h3>Custom Calculators & Internal Tools</h3>
+        <p>Plant-specific calculators, trackers and small internal tools for packaging and manufacturing teams.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Custom Calculators / Internal Tools')">I'm Interested</button>
+        </div>
+      </article>
+
+      <!-- 7 Fractional Ops -->
+      <article class="offer-card">
+        <div class="offer-badge">Support</div>
+        <div class="offer-icon">🏭</div>
+        <h3>Fractional / Part-time Ops Support</h3>
+        <p>Experienced production leadership support without a full-time hire — planning, reviews, turnaround guidance.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Fractional / Part-time Production / Ops Support')">I'm Interested</button>
+        </div>
+      </article>
+
+      <!-- 8 Mobile & Web Apps -->
+      <article class="offer-card">
+        <div class="offer-badge">Build</div>
+        <div class="offer-icon">📱</div>
+        <h3>Mobile & Web Applications</h3>
+        <p>Practical web and mobile apps for industry and everyday work — from idea to working product.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Mobile & Web Applications')">I'm Interested</button>
+        </div>
+      </article>
+
+      <!-- 9 Online Business Setup -->
+      <article class="offer-card">
+        <div class="offer-badge">Setup</div>
+        <div class="offer-icon">🌐</div>
+        <h3>Online Business Setup (Website / Apps)</h3>
+        <p>Help setting up websites, apps and digital presence for professionals and small businesses.</p>
+        <div class="offer-actions">
+          <button type="button" class="offer-btn primary" onclick="openOfferForm('Online Business Setup (Website / Apps)')">I'm Interested</button>
+        </div>
+      </article>
+    </div>
+
+    <p class="offer-note reveal" data-i="offer_note">Free tools are available immediately. For consulting and custom work, share a few details — I’ll respond personally.</p>
   </div>
+</section>
+
 </section>
 
 <!-- ABOUT -->
@@ -1047,7 +1111,7 @@
       <div class="fc"><h4>Apps</h4><a href="https://manpower.vkstech.com" target="_blank">Man Power</a><a href="https://mentor.vkstech.com/">Mentor</a><a href="https://manpower.vkstech.com/resume-builder/">Resume Builder</a><a href="https://packlink.vkstech.com" target="_blank">PackLink</a><a href="https://fitsutra.vkstech.com" target="_blank">FitSutra</a><a href="https://moneyflow.vkstech.com" target="_blank">MoneyFlow</a></div>
       <div class="fc"><h4>Explore</h4><a href="/apps">Apps</a><a href="https://mentor.vkstech.com/">Mentor</a><a href="https://manpower.vkstech.com/resume-builder/">Resume</a><a href="/calculators">Calculators</a><a href="/blog">Blog</a><a href="/youtube">YouTube</a><a href="/people">People</a><a href="/downloads">Downloads</a><a href="/#about">About</a></div>
       <div class="fc"><h4>Contact</h4>
-        <a href="/#request-app">Request an App</a>
+        <a href="/#what-i-offer">What I Offer</a>
         <a href="https://wa.me/918929394920" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 6.045L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp · +91-8929394920
@@ -1065,6 +1129,37 @@
     </div>
   </div>
 </footer>
+
+
+<!-- OFFER INTEREST MODAL -->
+<div id="offerModal" class="offer-modal" aria-hidden="true" role="dialog" aria-labelledby="offerModalTitle">
+  <div class="offer-modal-backdrop" onclick="closeOfferForm()"></div>
+  <div class="offer-modal-panel" role="document">
+    <button type="button" class="offer-modal-close" onclick="closeOfferForm()" aria-label="Close">×</button>
+    <h3 id="offerModalTitle">I'm Interested</h3>
+    <p class="offer-modal-sub">Share your details. I’ll get back to you.</p>
+    <div class="offer-modal-service" id="offerModalService">—</div>
+    <form id="offerForm" onsubmit="return submitOfferInterest(event)" novalidate>
+      <input type="hidden" id="oi_service" name="service" value=""/>
+      <div class="fg"><label for="oi_name">Your Name *</label><input type="text" id="oi_name" name="name" required placeholder="Full name" autocomplete="name"/></div>
+      <div class="fg"><label for="oi_phone">Mobile / WhatsApp *</label><input type="tel" id="oi_phone" name="phone" required placeholder="+91 XXXXX XXXXX" autocomplete="tel"/></div>
+      <div class="fg"><label for="oi_email">Email <span class="opt">(optional)</span></label><input type="email" id="oi_email" name="email" placeholder="you@email.com" autocomplete="email"/></div>
+      <div class="fg"><label for="oi_msg">Anything else? <span class="opt">(optional)</span></label><textarea id="oi_msg" name="message" rows="3" placeholder="Timeline, plant type, or specific need…"></textarea></div>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" tabindex="-1">
+        <label for="oi_hp">Leave blank</label>
+        <input type="text" id="oi_hp" name="website" tabindex="-1" autocomplete="off"/>
+      </div>
+      <button type="submit" class="sbtn" id="oi_submit">Send Interest →</button>
+      <p class="offer-modal-note">No spam. Only used to respond to your request.</p>
+    </form>
+  </div>
+</div>
+
+<!-- FLOATING WHAT I OFFER CTA -->
+<a href="#what-i-offer" id="offerFab" class="offer-fab" aria-label="What I Offer">
+  <span class="offer-fab-icon">✦</span>
+  <span class="offer-fab-text">What I Offer</span>
+</a>
 
 <!-- TOAST -->
 <div class="toast" id="toast"><span class="toast-icon">✅</span><div><strong>Request Submitted!</strong><br><span style="font-size:.8rem;opacity:.7;">Vivek will review your idea soon.</span></div></div>

@@ -111,7 +111,7 @@ document.addEventListener('click',(e)=>{const m=document.getElementById('mobileM
    LANGUAGE ENGINE — EN / HI
    ═══════════════════════════════ */
 const HI = {
-  nav_ind:"ऐप्स", nav_mentor:"मेंटर", nav_resume:"रिज़्यूमे", nav_calc:"कैलकुलेटर", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"ऐप अनुरोध", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"ऐप का अनुरोध करें",
+  nav_ind:"ऐप्स", nav_mentor:"मेंटर", nav_resume:"रिज़्यूमे", nav_calc:"कैलकुलेटर", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"मैं क्या देता हूँ", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"मैं क्या देता हूँ",
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
@@ -142,6 +142,10 @@ const HI = {
   form_title:"अपना विचार भेजें 💡", form_sub:"विवेक को बताएं कि आप क्या समाधान चाहते हैं",
   fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
   submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
+  offer_label:"✦ मैं क्या देता हूँ",
+  offer_title:"वास्तविक प्लांट अनुभव से <span>व्यावहारिक मदद</span>",
+  offer_sub:"मुफ़्त टूल जो आप आज ही इस्तेमाल कर सकते हैं। मेंटरशिप और कंसल्टिंग जब आपको असली प्लांट अनुभव वाले व्यक्ति की ज़रूरत हो।",
+  offer_note:"मुफ़्त टूल तुरंत उपलब्ध हैं। कंसल्टिंग और कस्टम काम के लिए कुछ विवरण साझा करें — मैं व्यक्तिगत रूप से जवाब दूँगा।",
   about_label:"👤 मेरे बारे में",
   about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>अनुभव से प्रोडक्शन लीडर</strong> और <strong>पसंद से ऐप बिल्डर व मेंटर</strong> हूँ। UFlex, JPFL Films (Jindal, Nashik) और GLS में 9 साल में मैंने टीमें लीड कीं, स्टाफ को ट्रेन व ऑनबोर्ड किया, और प्रोडक्शन प्लानिंग, प्रोसेस कंट्रोल, क्वालिटी व कॉस्ट की जिम्मेदारी संभाली।",
   about_p2:"आज मैं पैकेजिंग प्रोफेशनल्स के लिए व्यावहारिक ऐप्स बनाता हूँ और mentor.vkstech.com पर वन-टू-वन मेंटरशिप देता हूँ (AI टूल्स, एक्सेल, करियर स्किल्स, पर्सनल फाइनेंस और संबंधित कार्य-कौशल)।",
@@ -154,7 +158,7 @@ const HI = {
 };
 
 const EN = {
-  nav_ind:"Apps", nav_mentor:"Mentor", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"Request App", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Request an App",
+  nav_ind:"Apps", nav_mentor:"Mentor", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"What I Offer", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"What I Offer",
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",
@@ -185,6 +189,10 @@ const EN = {
   form_title:"Submit Your Idea 💡", form_sub:"Tell Vivek about the problem you want solved",
   fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
   submit_btn:"Send My App Request 🚀",
+  offer_label:"✦ What I Offer",
+  offer_title:"Practical help from <span>real plant experience</span>",
+  offer_sub:"Free tools you can use today. Mentorship and consulting when you need a human who has run the lines.",
+  offer_note:"Free tools are available immediately. For consulting and custom work, share a few details — I’ll respond personally.",
   about_label:"👤 About Me",
   about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>production leader by experience</strong>, and an <strong>app builder & mentor by choice</strong>. Over 9 years at UFlex, JPFL Films (Jindal, Nashik) and GLS I led teams, trained and onboarded staff, and owned production planning, process control, quality and cost.",
   about_p2:"Today I build practical apps for packaging professionals and offer one-to-one mentorship at mentor.vkstech.com (AI tools, Excel, career skills, personal finance and related workplace skills).",
@@ -2245,3 +2253,132 @@ window.calcMinManpowerRebuildMachines = calcMinManpowerRebuildMachines;
     init();
   }
 })();
+
+
+/* ════════════════════════════════════════════
+   WHAT I OFFER — modal form + floating CTA
+   ════════════════════════════════════════════ */
+function openOfferForm(serviceName) {
+  var modal = document.getElementById('offerModal');
+  var svcEl = document.getElementById('offerModalService');
+  var hidden = document.getElementById('oi_service');
+  if (!modal || !svcEl || !hidden) return;
+  var name = serviceName || 'General enquiry';
+  svcEl.textContent = name;
+  hidden.value = name;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function () {
+    var n = document.getElementById('oi_name');
+    if (n) n.focus();
+  }, 80);
+}
+
+function closeOfferForm() {
+  var modal = document.getElementById('offerModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function submitOfferInterest(ev) {
+  if (ev) ev.preventDefault();
+  var hp = document.getElementById('oi_hp');
+  if (hp && hp.value.trim() !== '') {
+    closeOfferForm();
+    return false;
+  }
+  var name = (document.getElementById('oi_name') || {}).value || '';
+  var phone = (document.getElementById('oi_phone') || {}).value || '';
+  var email = (document.getElementById('oi_email') || {}).value || '';
+  var msg = (document.getElementById('oi_msg') || {}).value || '';
+  var service = (document.getElementById('oi_service') || {}).value || 'General enquiry';
+  name = name.trim();
+  phone = phone.trim();
+  email = email.trim();
+  msg = msg.trim();
+  if (!name) {
+    alert(curLang === 'hi' ? 'कृपया अपना नाम भरें।' : 'Please enter your name.');
+    return false;
+  }
+  if (!phone || phone.replace(/\D/g, '').length < 8) {
+    alert(curLang === 'hi' ? 'कृपया मान्य मोबाइल नंबर भरें।' : 'Please enter a valid mobile number.');
+    return false;
+  }
+  if (email) {
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!emailOk) {
+      alert(curLang === 'hi' ? 'कृपया मान्य ईमेल भरें।' : 'Please enter a valid email address.');
+      return false;
+    }
+  }
+  var btn = document.getElementById('oi_submit');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = curLang === 'hi' ? 'भेजा जा रहा है…' : 'Sending…';
+  }
+  var payload = {
+    name: name,
+    email: email || (phone + '@whatsapp.placeholder'),
+    phone: phone,
+    category: service,
+    title: service,
+    description: msg || ('Interest in: ' + service)
+  };
+  if (typeof sb === 'undefined' || !sb) {
+    console.error('Supabase client missing');
+    alert(curLang === 'hi' ? 'कुछ गलत हुआ। कृपया फिर कोशिश करें।' : 'Something went wrong. Please try again.');
+    if (btn) { btn.disabled = false; btn.textContent = 'Send Interest →'; }
+    return false;
+  }
+  sb.from('app_requests').insert([payload]).then(function (res) {
+    if (res.error) throw res.error;
+    closeOfferForm();
+    ['oi_name', 'oi_phone', 'oi_email', 'oi_msg'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    var toast = document.getElementById('toast');
+    if (toast) {
+      toast.classList.add('show');
+      setTimeout(function () { toast.classList.remove('show'); }, 4500);
+    }
+  }).catch(function (err) {
+    console.error('Offer submit error:', err);
+    alert(curLang === 'hi' ? 'कुछ गलत हुआ। कृपया फिर कोशिश करें।' : 'Something went wrong. Please try again.');
+  }).finally(function () {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Send Interest →';
+    }
+  });
+  return false;
+}
+
+/* FAB: show after scroll, hide near footer to avoid overlap */
+(function initOfferFab() {
+  function updateFab() {
+    var fab = document.getElementById('offerFab');
+    if (!fab) return;
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var nearFooter = false;
+    var footer = document.querySelector('footer');
+    if (footer) {
+      var fr = footer.getBoundingClientRect();
+      nearFooter = fr.top < window.innerHeight - 40;
+    }
+    if (y > 380 && !nearFooter) fab.classList.add('visible');
+    else fab.classList.remove('visible');
+  }
+  window.addEventListener('scroll', updateFab, { passive: true });
+  window.addEventListener('resize', updateFab, { passive: true });
+  document.addEventListener('DOMContentLoaded', updateFab);
+  updateFab();
+})();
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeOfferForm();
+});
+
