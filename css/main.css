@@ -407,44 +407,50 @@ section{position:relative;z-index:1;}
 .pnote{font-size:.78rem;color:var(--muted);margin-top:8px;font-style:italic;line-height:1.5;}
 
 /* FOOTER */
-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:60px 0 30px;}
+footer{
+  background:var(--bg2);
+  color:var(--muted);
+  padding:60px 0 30px;
+  border-top:1px solid var(--border);
+}
 
-/* Newsletter signup band — top of footer.
-   Quiet, classy, doesn't compete with the rest of the footer. */
+/* Newsletter signup band — light cream theme */
 .newsletter-band{
   display:grid;grid-template-columns:1.3fr 1.7fr;gap:2rem;align-items:center;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;
   padding:28px 32px;
   margin-bottom:2.6rem;
   position:relative;
+  box-shadow:var(--ss);
 }
 .newsletter-band .nl-text h3{
-  color:#fff;font-family:'Playfair Display',serif;font-weight:700;
+  color:var(--navy);font-family:'Playfair Display',serif;font-weight:700;
   font-size:1.15rem;line-height:1.4;margin-bottom:.55rem;
 }
 .newsletter-band .nl-text p{
-  color:rgba(255,255,255,.55);font-size:.84rem;line-height:1.6;margin:0;
+  color:var(--muted);font-size:.84rem;line-height:1.6;margin:0;
 }
 .newsletter-band .nl-form{
   display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;align-items:center;
 }
 .newsletter-band input[type=text]:not(#nlHp),
 .newsletter-band input[type=email]{
-  background:rgba(255,255,255,.06);
-  border:1.5px solid rgba(255,255,255,.12);
+  background:var(--bg);
+  border:1.5px solid var(--border);
   border-radius:50px;
-  color:#fff;
+  color:var(--navy);
   padding:11px 18px;
   font-family:inherit;font-size:.86rem;
-  outline:none;transition:border-color .2s,background .2s;
+  outline:none;transition:border-color .2s,background .2s,box-shadow .2s;
   min-width:0;
 }
-.newsletter-band input::placeholder{color:rgba(255,255,255,.4);}
+.newsletter-band input::placeholder{color:var(--light);}
 .newsletter-band input:focus{
   border-color:var(--orange);
-  background:rgba(255,255,255,.09);
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(232,93,38,.12);
 }
 .newsletter-band .nl-btn{
   background:var(--orange);color:#fff;border:none;
@@ -453,23 +459,24 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:60px 0 30px;}
   cursor:pointer;transition:all .2s;
   white-space:nowrap;
 }
-.newsletter-band .nl-btn:hover{background:var(--orange2);transform:translateY(-1px);}
+.newsletter-band .nl-btn:hover{background:var(--navy);transform:translateY(-1px);}
 .newsletter-band .nl-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
 .newsletter-band .nl-msg{
   grid-column:1/-1;font-size:.82rem;margin-top:6px;min-height:0;
 }
-.newsletter-band .nl-msg.success{color:#5dd9b8;}
-.newsletter-band .nl-msg.error{color:#ff8a6e;}
+.newsletter-band .nl-msg.success{color:var(--teal);}
+.newsletter-band .nl-msg.error{color:#c2410c;}
 @media(max-width:900px){
   .newsletter-band{grid-template-columns:1fr;padding:22px;gap:1.2rem;}
   .newsletter-band .nl-form{grid-template-columns:1fr;}
   .newsletter-band .nl-btn{padding:13px 22px;}
 }
 .fi{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
-.fc h4{color:var(--white);font-weight:700;font-size:.88rem;margin-bottom:16px;}
-.fc a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem;padding:3px 0;transition:color .2s;}
+.fc h4{color:var(--navy);font-weight:700;font-size:.88rem;margin-bottom:16px;}
+.fc a{display:block;color:var(--muted);text-decoration:none;font-size:.82rem;padding:3px 0;transition:color .2s;}
 .fc a:hover{color:var(--orange);}
-.fb{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:.75rem;flex-wrap:wrap;gap:10px;}
+.fc p{color:var(--muted);font-size:.84rem;line-height:1.75;}
+.fb{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:24px;font-size:.75rem;flex-wrap:wrap;gap:10px;color:var(--muted);}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease-out,transform .55s ease-out;}
@@ -717,7 +724,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 900;
+  z-index: 950;
   background: linear-gradient(180deg, rgba(26,39,68,0.97) 0%, #1a2744 100%);
   color: #fff;
   padding: 12px 16px;
@@ -1710,12 +1717,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   margin: 10px 0 0;
 }
 
-/* Floating FAB — does not cover content */
+/* Floating FAB — stays above sticky mentorship bar; never covers Book Now */
 .offer-fab {
   position: fixed;
   bottom: 24px;
   right: 20px;
-  z-index: 9000;
+  z-index: 890; /* below sticky-mentor (900) when both visible? No: we lift FAB via bottom offset */
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1730,12 +1737,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   transform: translateY(100px);
   opacity: 0;
   pointer-events: none;
-  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s, background .2s, box-shadow .2s;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s, background .2s, box-shadow .2s, bottom .3s ease;
 }
 .offer-fab.visible {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+/* When sticky mentor bar is showing, park FAB above it */
+body.sticky-mentor-visible .offer-fab {
+  bottom: 78px;
+  z-index: 910;
 }
 .offer-fab:hover {
   background: var(--orange);
@@ -1759,9 +1771,61 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     padding: 11px 14px;
     font-size: .82rem;
   }
+  body.sticky-mentor-visible .offer-fab {
+    bottom: 72px;
+  }
   .offer-fab-text { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
   .offer-modal-panel { padding: 24px 18px 18px; }
 }
 @media (max-width: 480px) {
   .offer-card h3 { padding-right: 0; font-size: 1rem; }
+  body.sticky-mentor-visible .offer-fab {
+    bottom: 70px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   B2B CONSULTING FUNNEL
+   ═══════════════════════════════════════════ */
+.b2b-banner {
+  max-width: 1100px;
+  margin: 28px auto 8px;
+  padding: 0 4%;
+}
+.b2b-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  background: linear-gradient(135deg, #fff7ed 0%, #fff 60%);
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: var(--ss);
+}
+.b2b-banner-inner strong {
+  display: block;
+  font-size: .92rem;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.b2b-banner-inner span {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.hero-stats.trust-strip .stat-item .num {
+  font-size: 1.15rem;
+  letter-spacing: -0.3px;
+}
+@media (max-width: 640px) {
+  .b2b-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .b2b-banner-inner .offer-btn {
+    width: 100%;
+    text-align: center;
+  }
 }

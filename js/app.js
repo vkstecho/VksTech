@@ -111,7 +111,7 @@ document.addEventListener('click',(e)=>{const m=document.getElementById('mobileM
    LANGUAGE ENGINE — EN / HI
    ═══════════════════════════════ */
 const HI = {
-  nav_ind:"ऐप्स", nav_mentor:"मेंटर", nav_resume:"रिज़्यूमे", nav_calc:"कैलकुलेटर", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"मैं क्या देता हूँ", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"मैं क्या देता हूँ",
+  nav_ind:"ऐप्स", nav_mentor:"मेंटर", nav_resume:"रिज़्यूमे", nav_calc:"कैलकुलेटर", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"मैं क्या देता हूँ", nav_consult:"कंसल्टिंग", nav_about:"परिचय", nav_people:"लोग", nav_yt:"यूट्यूब", nav_cta:"साथ काम करें",
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
   yt_sub:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर प्लेलिस्ट देखें।",
@@ -142,10 +142,10 @@ const HI = {
   form_title:"अपना विचार भेजें 💡", form_sub:"विवेक को बताएं कि आप क्या समाधान चाहते हैं",
   fl_name:"आपका नाम *", fl_email:"ईमेल *", fl_phone:"फोन / WhatsApp", fl_cat:"श्रेणी *", fl_title:"ऐप का शीर्षक *", fl_desc:"समस्या का विवरण *",
   submit_btn:"मेरा ऐप अनुरोध भेजें 🚀",
-  offer_label:"✦ मैं क्या देता हूँ",
-  offer_title:"वास्तविक प्लांट अनुभव से <span>व्यावहारिक मदद</span>",
-  offer_sub:"मुफ़्त टूल जो आप आज ही इस्तेमाल कर सकते हैं। मेंटरशिप और कंसल्टिंग जब आपको असली प्लांट अनुभव वाले व्यक्ति की ज़रूरत हो।",
-  offer_note:"मुफ़्त टूल तुरंत उपलब्ध हैं। कंसल्टिंग और कस्टम काम के लिए कुछ विवरण साझा करें — मैं व्यक्तिगत रूप से जवाब दूँगा।",
+  offer_label:"✦ मुफ़्त टूल और मेंटरशिप",
+  offer_title:"मुफ़्त से शुरू करें। <span>मार्गदर्शन से आगे बढ़ें।</span>",
+  offer_sub:"पैकेजिंग कैलकुलेटर, रिज़्यूमे टूल और वन-टू-वन मेंटरशिप — असली प्लांट अनुभव से। प्लांट कंसल्टिंग के लिए Work With Me देखें।",
+  offer_note:"मुफ़्त टूल तुरंत उपलब्ध हैं। मेंटरशिप कभी भी बुक करें। प्लांट प्रोजेक्ट Consulting पेज पर मुफ़्त 15-मिनट ऑडिट से शुरू होते हैं।",
   about_label:"👤 मेरे बारे में",
   about_p1:"मैं <strong>प्रशिक्षण से मैकेनिकल इंजीनियर</strong>, <strong>अनुभव से प्रोडक्शन लीडर</strong> और <strong>पसंद से ऐप बिल्डर व मेंटर</strong> हूँ। UFlex, JPFL Films (Jindal, Nashik) और GLS में 9 साल में मैंने टीमें लीड कीं, स्टाफ को ट्रेन व ऑनबोर्ड किया, और प्रोडक्शन प्लानिंग, प्रोसेस कंट्रोल, क्वालिटी व कॉस्ट की जिम्मेदारी संभाली।",
   about_p2:"आज मैं पैकेजिंग प्रोफेशनल्स के लिए व्यावहारिक ऐप्स बनाता हूँ और mentor.vkstech.com पर वन-टू-वन मेंटरशिप देता हूँ (AI टूल्स, एक्सेल, करियर स्किल्स, पर्सनल फाइनेंस और संबंधित कार्य-कौशल)।",
@@ -158,7 +158,7 @@ const HI = {
 };
 
 const EN = {
-  nav_ind:"Apps", nav_mentor:"Mentor", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"What I Offer", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"What I Offer",
+  nav_ind:"Apps", nav_mentor:"Mentor", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"What I Offer", nav_consult:"Consulting", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_cta:"Work With Me",
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Channels, one creator",
   yt_sub:"Finance, fitness, animated stories, productivity and everyday life — explore every playlist.",
@@ -166,7 +166,7 @@ const EN = {
   yt_h2:"Channels, <span>one creator.</span>",
   yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
   yt_home_cta:"See all playlists →",
-  hero_badge:"MADE BY NIT ALUMNI · 9 YEARS IN FLEXIBLE PACKAGING",
+  hero_badge:"FLEXIBLE PACKAGING · MANUFACTURING OPERATIONS · DIGITAL AUTOMATION",
   hero_title:"<a href='#industry-apps' class='hero-link'>Apps</a>. <a href='#mentorship' class='hero-link'>Mentorship</a>.<br><a href='#calculators' class='hero-link'>Calculators</a>. <span class='accent'>Free.</span>",
   hero_sub:"Practical tools and one-to-one guidance built from real plant leadership. After 9 years at UFlex, JPFL Films (Jindal, Nashik) & GLS — including leading teams — <a href='#about' class='hero-link'><strong>Vivek Kumar</strong></a> (M.Tech, NIT Uttarakhand) builds practical apps and mentors professionals.",
   hero_btn1:"Book Mentorship →", hero_btn2:"Try Free Calculators", hero_btn3:"Testimonials",
@@ -189,10 +189,10 @@ const EN = {
   form_title:"Submit Your Idea 💡", form_sub:"Tell Vivek about the problem you want solved",
   fl_name:"Your Name *", fl_email:"Email *", fl_phone:"Phone / WhatsApp", fl_cat:"Category *", fl_title:"App Title *", fl_desc:"Describe the Problem *",
   submit_btn:"Send My App Request 🚀",
-  offer_label:"✦ What I Offer",
-  offer_title:"Practical help from <span>real plant experience</span>",
-  offer_sub:"Free tools you can use today. Mentorship and consulting when you need a human who has run the lines.",
-  offer_note:"Free tools are available immediately. For consulting and custom work, share a few details — I’ll respond personally.",
+  offer_label:"✦ Free Tools & Mentorship",
+  offer_title:"Start free. <span>Grow with guidance.</span>",
+  offer_sub:"Packaging calculators, resume tools, and one-to-one mentorship — built from real plant experience. For plant consulting, see Work With Me.",
+  offer_note:"Free tools are available immediately. Mentorship is bookable anytime. Plant projects start with a free 15-min audit on the Consulting page.",
   about_label:"👤 About Me",
   about_p1:"I'm a <strong>Mechanical Engineer by training</strong>, a <strong>production leader by experience</strong>, and an <strong>app builder & mentor by choice</strong>. Over 9 years at UFlex, JPFL Films (Jindal, Nashik) and GLS I led teams, trained and onboarded staff, and owned production planning, process control, quality and cost.",
   about_p2:"Today I build practical apps for packaging professionals and offer one-to-one mentorship at mentor.vkstech.com (AI tools, Excel, career skills, personal finance and related workplace skills).",
@@ -2359,9 +2359,15 @@ function submitOfferInterest(ev) {
 
 /* FAB: show after scroll, hide near footer to avoid overlap */
 (function initOfferFab() {
+  function syncStickyMentorClass() {
+    var bar = document.getElementById('stickyMentor');
+    var showing = !!(bar && bar.classList.contains('show') && getComputedStyle(bar).display !== 'none');
+    document.body.classList.toggle('sticky-mentor-visible', showing);
+  }
   function updateFab() {
     var fab = document.getElementById('offerFab');
     if (!fab) return;
+    syncStickyMentorClass();
     var y = window.scrollY || document.documentElement.scrollTop;
     var nearFooter = false;
     var footer = document.querySelector('footer');
@@ -2375,6 +2381,13 @@ function submitOfferInterest(ev) {
   window.addEventListener('scroll', updateFab, { passive: true });
   window.addEventListener('resize', updateFab, { passive: true });
   document.addEventListener('DOMContentLoaded', updateFab);
+  // Watch sticky mentor show/hide
+  var bar = document.getElementById('stickyMentor');
+  if (bar && typeof MutationObserver !== 'undefined') {
+    new MutationObserver(updateFab).observe(bar, { attributes: true, attributeFilter: ['class', 'style'] });
+  }
+  var closeBtn = document.getElementById('stickyMentorClose');
+  if (closeBtn) closeBtn.addEventListener('click', function(){ setTimeout(updateFab, 50); });
   updateFab();
 })();
 
