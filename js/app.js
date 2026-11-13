@@ -2395,3 +2395,48 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') closeOfferForm();
 });
 
+
+/* ============================================================
+   Live Mentor rates — same Firebase source as mentor.vkstech.com
+   Keeps website prices in sync when admin changes rates.
+   ============================================================ */
+(function loadLiveMentorRates() {
+  var FALLBACK = { career_ai: 699, packaging: 799 };
+  var url = 'https://mentor-vkstech-default-rtdb.asia-southeast1.firebasedatabase.app/mentor_settings/tracks.json';
+
+  function formatRate(rate, format) {
+    var n = Number(rate);
+    if (!isFinite(n) || n <= 0) return null;
+    var formatted = '₹' + n.toLocaleString('en-IN');
+    if (format === 'short') return formatted + '/hr';
+    return formatted + ' <small>/ hour</small>';
+  }
+
+  function applyRates(career, pack) {
+    document.querySelectorAll('[data-rate-career]').forEach(function (el) {
+      var fmt = el.getAttribute('data-rate-format') || 'full';
+      var text = formatRate(career, fmt);
+      if (text) el.innerHTML = text;
+    });
+    document.querySelectorAll('[data-rate-pack]').forEach(function (el) {
+      var fmt = el.getAttribute('data-rate-format') || 'full';
+      var text = formatRate(pack, fmt);
+      if (text) el.innerHTML = text;
+    });
+  }
+
+  // Apply fallbacks immediately so UI never shows blank
+  applyRates(FALLBACK.career_ai, FALLBACK.packaging);
+
+  fetch(url, { method: 'GET', mode: 'cors', cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (o) {
+      if (!o || typeof o !== 'object') return;
+      var career = (o.career_ai && o.career_ai.hourlyRate) || FALLBACK.career_ai;
+      var pack = (o.packaging && o.packaging.hourlyRate) || FALLBACK.packaging;
+      applyRates(career, pack);
+    })
+    .catch(function (err) {
+      console.warn('Mentor rates fetch failed, using fallbacks:', err);
+    });
+})();

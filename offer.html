@@ -101,7 +101,7 @@
         <div class="offer-badge mentor-badge">Popular</div>
         <div class="offer-icon"><img src="assets/icon-mentor512.jpg" alt="Mentor" width="48" height="48" loading="lazy" onerror="this.parentElement.textContent='🎓'"/></div>
         <h3>One-to-One Mentorship</h3>
-        <p>AI tools, Excel, career growth, plant ops and freelancing — live 1:1 sessions.</p>
+        <p>Two tracks · live rates from Mentor app: Career &amp; AI <span data-rate-career data-rate-format="short">₹699/hr</span> · Packaging <span data-rate-pack data-rate-format="short">₹799/hr</span>.</p>
         <div class="offer-actions">
           <a href="https://mentor.vkstech.com/" class="offer-btn primary" target="_blank" rel="noopener">Book Session →</a>
         </div>
@@ -110,13 +110,13 @@
         <div class="offer-badge free-badge">Apps</div>
         <div class="offer-icon">📱</div>
         <h3>Career &amp; Lifestyle Apps</h3>
-        <p>Man Power, PackLink, FitSutra, MoneyFlow — practical apps from the VKS Tech ecosystem.</p>
+        <p>Man Power, PackLink, FitSutra, Cashly — practical apps from the VKS Tech ecosystem.</p>
         <div class="offer-actions">
           <a href="/apps" class="offer-btn primary">Explore Apps</a>
         </div>
       </article>
       <article class="offer-card" style="border-color:rgba(232,93,38,.35);">
-        <div class="offer-badge mentor-badge">B2B</div>
+        <div class="offer-badge mentor-badge">For plants</div>
         <div class="offer-icon">🏭</div>
         <h3>Plant Consulting &amp; Automation</h3>
         <p>KPI dashboards, custom tools, process/defect consulting for packaging plants.</p>
@@ -134,7 +134,7 @@
     <div class="fi" style="grid-template-columns:1fr;text-align:center;padding:28px 0 12px">
       <div class="fc">
         <h4>VKS Tech</h4>
-        <p style="font-size:.84rem;color:var(--muted);max-width:400px;margin:0 auto 12px;line-height:1.7">Free tools and mentorship for professionals. B2B plant consulting at <a href="/consulting" style="color:var(--orange)">vkstech.com/consulting</a>.</p>
+        <p style="font-size:.84rem;color:var(--muted);max-width:400px;margin:0 auto 12px;line-height:1.7">Free tools and mentorship for professionals. Plant consulting at <a href="/consulting" style="color:var(--orange)">vkstech.com/consulting</a>.</p>
         <a href="/" style="color:var(--orange);font-weight:700;text-decoration:none">← Home</a>
         &nbsp;·&nbsp;
         <a href="/consulting" style="color:var(--muted);text-decoration:none">Consulting</a>
@@ -146,5 +146,15 @@
     </div>
   </div>
 </footer>
+  <script>
+  (function(){
+    var FALLBACK={career_ai:699,packaging:799};
+    var url='https://mentor-vkstech-default-rtdb.asia-southeast1.firebasedatabase.app/mentor_settings/tracks.json';
+    function fmt(r,f){var n=Number(r);if(!isFinite(n)||n<=0)return null;var s='₹'+n.toLocaleString('en-IN');return f==='short'?s+'/hr':s+' <small>/ hour</small>';}
+    function apply(c,p){document.querySelectorAll('[data-rate-career]').forEach(function(el){var t=fmt(c,el.getAttribute('data-rate-format')||'full');if(t)el.innerHTML=t;});document.querySelectorAll('[data-rate-pack]').forEach(function(el){var t=fmt(p,el.getAttribute('data-rate-format')||'full');if(t)el.innerHTML=t;});}
+    apply(FALLBACK.career_ai,FALLBACK.packaging);
+    fetch(url,{mode:'cors',cache:'no-store'}).then(function(r){return r.ok?r.json():Promise.reject()}).then(function(o){if(!o)return;apply((o.career_ai&&o.career_ai.hourlyRate)||FALLBACK.career_ai,(o.packaging&&o.packaging.hourlyRate)||FALLBACK.packaging);}).catch(function(){});
+  })();
+  </script>
 </body>
 </html>
