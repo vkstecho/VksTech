@@ -2074,3 +2074,9 @@ body.sticky-mentor-visible .offer-fab {
   .path-card { padding: 22px 18px; }
   .path-card h3 { font-size: 1.2rem; }
 }
+
+/* Slightly tighter top nav when more items */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .nav-links { gap: 0.15rem; }
+  .nav-links a { font-size: .82rem; padding: 6px 8px; }
+}
