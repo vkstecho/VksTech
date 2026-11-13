@@ -506,7 +506,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 /* Floating back-to-top button */
 .btt{
-  position:fixed;bottom:24px;left:24px;z-index:9996;
+  position:fixed;bottom:24px;left:20px;z-index:9996;
   width:46px;height:46px;border-radius:50%;
   background:var(--navy);color:#fff;border:none;
   font-size:1.3rem;font-weight:700;cursor:pointer;
@@ -1828,11 +1828,11 @@ body.sticky-mentor-visible .float-wa {
   margin: 10px 0 0;
 }
 
-/* Floating FAB — BOTTOM LEFT so it never intersects WhatsApp (right) */
+/* Floating FAB — CENTER bottom so it never intersects ↑ (left) or WhatsApp (right) */
 .offer-fab {
   position: fixed;
   bottom: 24px;
-  left: 16px;
+  left: 50%;
   right: auto;
   z-index: 980;
   display: inline-flex;
@@ -1846,13 +1846,13 @@ body.sticky-mentor-visible .float-wa {
   font-weight: 700;
   font-size: .88rem;
   box-shadow: 0 8px 28px rgba(26,39,68,.28);
-  transform: translateY(100px);
+  transform: translate(-50%, 100px);
   opacity: 0;
   pointer-events: none;
   transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s, background .2s, box-shadow .2s, bottom .3s ease;
 }
 .offer-fab.visible {
-  transform: translateY(0);
+  transform: translate(-50%, 0);
   opacity: 1;
   pointer-events: auto;
 }
@@ -1878,15 +1878,15 @@ body.sticky-mentor-visible .offer-fab {
   .offer-grid { grid-template-columns: 1fr; }
   .offer-fab {
     bottom: 18px;
-    left: 12px;
+    left: 50%;
     right: auto;
-    padding: 11px 14px;
+    padding: 11px 16px 11px 14px;
     font-size: .82rem;
   }
   body.sticky-mentor-visible .offer-fab {
     bottom: 72px;
   }
-  .offer-fab-text { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
+  .offer-fab-text { max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
   .offer-modal-panel { padding: 24px 18px 18px; }
 }
 @media (max-width: 480px) {
