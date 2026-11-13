@@ -1086,7 +1086,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   }
 }
 
-/* Floating WhatsApp-style helper (appears after scroll) */
+/* Floating WhatsApp — always bottom-right; clears sticky mentor bar */
 .float-wa {
   position: fixed;
   bottom: 24px;
@@ -1104,7 +1104,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   text-decoration: none;
   opacity: 0;
   transform: translateY(20px) scale(0.8);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, bottom 0.3s ease;
   pointer-events: none;
 }
 .float-wa.show {
@@ -1123,10 +1123,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media (min-width: 901px) {
   .float-wa { bottom: 32px; right: 28px; }
 }
-/* Keep clear of sticky mentor bar on mobile */
+/* Above sticky mentor bar when visible */
+body.sticky-mentor-visible .float-wa {
+  bottom: 78px;
+}
 @media (max-width: 768px) {
-  .float-wa { bottom: 90px; }
-  body:has(.sticky-mentor:not(.show)) .float-wa { bottom: 24px; }
+  body.sticky-mentor-visible .float-wa { bottom: 72px; }
+}
+@media (max-width: 480px) {
+  body.sticky-mentor-visible .float-wa { bottom: 70px; }
 }
 
 /* Smoother section reveals on mobile */
@@ -1717,12 +1722,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   margin: 10px 0 0;
 }
 
-/* Floating FAB — stays above sticky mentorship bar; never covers Book Now */
+/* Floating FAB — BOTTOM LEFT so it never intersects WhatsApp (right) */
 .offer-fab {
   position: fixed;
   bottom: 24px;
-  right: 20px;
-  z-index: 890; /* below sticky-mentor (900) when both visible? No: we lift FAB via bottom offset */
+  left: 16px;
+  right: auto;
+  z-index: 980;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1747,7 +1753,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* When sticky mentor bar is showing, park FAB above it */
 body.sticky-mentor-visible .offer-fab {
   bottom: 78px;
-  z-index: 910;
 }
 .offer-fab:hover {
   background: var(--orange);
@@ -1767,7 +1772,8 @@ body.sticky-mentor-visible .offer-fab {
   .offer-grid { grid-template-columns: 1fr; }
   .offer-fab {
     bottom: 18px;
-    right: 14px;
+    left: 12px;
+    right: auto;
     padding: 11px 14px;
     font-size: .82rem;
   }
