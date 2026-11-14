@@ -45,6 +45,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .drop-zone input{display:none}
 .toast{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;padding:14px 22px;border-radius:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;z-index:999;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}.toast.err{background:var(--red)}
+#tab-autopub .ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+@media(max-width:720px){#tab-autopub .ap-grid{grid-template-columns:1fr}}
 </style></head>
 <body>
 
@@ -63,6 +65,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="container">
 <div class="tabs">
 <button class="tab active" onclick="switchTab('github',this)">📦 From GitHub</button>
+<button class="tab" onclick="switchTab('autopub',this)">🤖 Auto Publish</button>
 <button class="tab" onclick="switchTab('upload',this)">📤 Upload File</button>
 <button class="tab" onclick="switchTab('write',this)">✍️ Write Manually</button>
 <button class="tab" onclick="switchTab('posts',this)">📋 All Posts</button>
@@ -118,6 +121,119 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="resetGithubForm()">🔄 Reset</button>
 </div>
 </div></div>
+
+<div id="tab-autopub" class="panel" style="display:none">
+<h3>🤖 Auto Publish — Sequential from GitHub</h3>
+<p style="background:#f0f7ff;border-left:3px solid var(--teal);padding:12px 14px;border-radius:8px;font-size:.83rem;color:var(--navy);margin-bottom:18px;line-height:1.55">
+<strong>Sequential publishing.</strong> Pick a <strong>starting folder</strong> (e.g. <code>93-man-power-...</code> or <code>Blogs/93-...</code>). Every day at the time you choose, the system publishes the <strong>next unpublished</strong> folder in numeric order — no more login → select → publish for each post.
+</p>
+
+<div style="background:#fffbea;border:1px solid #f0d47c;border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.82rem;line-height:1.7">
+<strong style="color:var(--navy)">Recommended time: 09:00 IST</strong><br>
+Morning is ideal for packaging / manufacturing readers in India (pre-shift, tea break, or first desktop check). Cron is set to <code>03:30 UTC</code> (= 09:00 IST). You can still change the preferred hour below — the job only runs inside a ±90 min window of that time unless you force it.
+</div>
+
+<!-- One-time SQL setup -->
+<div id="apSetupBanner" style="display:none;background:#fff4e6;border-left:3px solid var(--orange);padding:14px 16px;border-radius:8px;font-size:.82rem;color:var(--navy);margin-bottom:18px;line-height:1.7">
+<strong>One-time setup needed.</strong> Run this in your Supabase SQL editor, then click Refresh status:
+<pre style="background:#1a2744;color:#d4e0ff;padding:14px;border-radius:8px;margin-top:10px;font-size:.72rem;overflow-x:auto;line-height:1.55;white-space:pre">create table if not exists auto_publish_config (
+  id int primary key default 1 check (id = 1),
+  enabled boolean not null default false,
+  start_folder text,
+  last_published_folder text,
+  publish_hour_ist int not null default 9,
+  publish_minute_ist int not null default 0,
+  last_run_at timestamptz,
+  last_result text,
+  updated_at timestamptz default now()
+);
+insert into auto_publish_config (id) values (1) on conflict (id) do nothing;
+-- Optional: lock down so only authenticated users can write
+alter table auto_publish_config enable row level security;
+create policy "auth read/write auto_publish" on auto_publish_config
+  for all to authenticated using (true) with check (true);</pre>
+</div>
+
+<div class="ap-grid">
+  <div style="background:#f8f6f1;border:1px solid var(--border);border-radius:12px;padding:18px">
+    <h4 style="margin:0 0 14px;font-family:'Playfair Display',serif;color:var(--navy)">⚙️ Schedule</h4>
+    <div class="field" style="margin-bottom:14px">
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;text-transform:none;font-size:.95rem">
+        <input type="checkbox" id="apEnabled" style="width:18px;height:18px;cursor:pointer">
+        <span><strong>Enable auto-publish</strong></span>
+      </label>
+    </div>
+    <div class="field">
+      <label>Starting folder *</label>
+      <select id="apStartFolder" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.92rem;font-family:inherit;background:#fff">
+        <option value="">⏳ Load folders…</option>
+      </select>
+      <div style="font-size:.72rem;color:#999;margin-top:5px">First run publishes this folder (if still unpublished), then continues in numeric order (93 → 94 → … → 100 → 101).</div>
+    </div>
+    <div class="field" style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:120px">
+        <label>Publish hour (IST)</label>
+        <select id="apHour" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:.92rem;font-family:inherit;background:#fff">
+          <option value="7">07:00</option>
+          <option value="8">08:00</option>
+          <option value="9" selected>09:00 ★ recommended</option>
+          <option value="10">10:00</option>
+          <option value="11">11:00</option>
+          <option value="12">12:00</option>
+          <option value="18">18:00</option>
+          <option value="20">20:00</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:120px">
+        <label>Minute</label>
+        <select id="apMinute" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:.92rem;font-family:inherit;background:#fff">
+          <option value="0" selected>:00</option>
+          <option value="15">:15</option>
+          <option value="30">:30</option>
+          <option value="45">:45</option>
+        </select>
+      </div>
+    </div>
+    <div class="buttons" style="margin-top:8px">
+      <button class="btn btn-primary" onclick="apSaveConfig()">💾 Save schedule</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="apLoadConfig()">🔄 Refresh</button>
+    </div>
+  </div>
+
+  <div style="background:#f8f6f1;border:1px solid var(--border);border-radius:12px;padding:18px">
+    <h4 style="margin:0 0 14px;font-family:'Playfair Display',serif;color:var(--navy)">📡 Status</h4>
+    <div id="apStatusBox" style="font-size:.88rem;line-height:1.75;color:var(--navy)">
+      <div style="color:var(--muted)">Loading…</div>
+    </div>
+    <div class="buttons" style="margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-success" onclick="apRunNow(false)">🚀 Publish next now</button>
+      <button class="btn btn-ghost" style="color:var(--navy);border:1.5px solid var(--border)" onclick="apRunNow(true)">👁 Dry-run (preview next)</button>
+    </div>
+    <div style="font-size:.72rem;color:#999;margin-top:10px;line-height:1.5">
+      “Publish next now” uses your saved secret (see below) and ignores the time window. Dry-run does not write anything.
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px">
+  <h4 style="margin:0 0 12px;font-family:'Playfair Display',serif;color:var(--navy)">📋 Upcoming queue</h4>
+  <div id="apQueue" style="font-size:.85rem;line-height:1.6;color:var(--muted)">Load schedule first, then dry-run or refresh.</div>
+</div>
+
+<div style="background:#f0f7ff;border:1px solid #b8d4f0;border-radius:12px;padding:16px;font-size:.8rem;line-height:1.7;color:var(--navy)">
+  <strong>Cron + secret setup (once)</strong>
+  <ol style="margin:8px 0 0 18px">
+    <li>In Vercel → Project → Settings → Environment Variables, add <code>AUTO_PUBLISH_SECRET</code> = a long random string (e.g. from a password manager).</li>
+    <li>Also set the same value in the box below (stored only in your browser for the “Publish next now” button).</li>
+    <li><code>vercel.json</code> already schedules <code>/api/auto-publish</code> daily at <strong>03:30 UTC (09:00 IST)</strong>. Vercel Cron sends a trusted header so no secret is needed for the scheduled run.</li>
+    <li>Optional: external cron (cron-job.org) can hit <code>https://vkstech.com/api/auto-publish?secret=YOUR_SECRET</code> if you leave Vercel Cron.</li>
+  </ol>
+  <div class="field" style="margin-top:12px;margin-bottom:0">
+    <label>Local secret (for manual “Publish next now” only — not stored on server)</label>
+    <input type="password" id="apSecret" placeholder="Same value as AUTO_PUBLISH_SECRET env" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit" onchange="try{localStorage.setItem('ap_secret',this.value)}catch(e){}">
+  </div>
+</div>
+</div>
 
 <div id="tab-upload" class="panel" style="display:none">
 <h3>📤 Upload Blog HTML File</h3>
@@ -421,8 +537,9 @@ function toast(msg, err){
 function switchTab(tab,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['github','upload','write','posts','qa','req','subs','yt','visitors'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
+  ['github','autopub','upload','write','posts','qa','req','subs','yt','visitors'].forEach(t=>document.getElementById('tab-'+t).style.display=tab===t?'block':'none');
   if(tab==='github' && !ghFoldersLoaded) loadGithubFolders();
+  if(tab==='autopub') apOnTabOpen();
   if(tab==='posts')loadPosts();
   if(tab==='qa')loadQuestions();
   if(tab==='req')loadRequests();
@@ -2177,6 +2294,199 @@ function folderToSlug(folder){
     .replace(/-(?:blog|post|article)s?$/, '') // strip -blog / -post / -article suffix
     .replace(/^-|-$/g, '');                   // re-trim in case above left stragglers
 }
+
+/* ════════════════════════════════════════════════════════════
+   AUTO PUBLISH — sequential daily publish from GitHub folders
+   ════════════════════════════════════════════════════════════ */
+function apFolderSortKey(folder){
+  const name = (folder || '').split('/').pop() || '';
+  const m = name.match(/^(\d+)/);
+  if (m) return [parseInt(m[1], 10), name.toLowerCase()];
+  return [999999, name.toLowerCase()];
+}
+function apCompareFolders(a, b){
+  const ka = apFolderSortKey(a), kb = apFolderSortKey(b);
+  if (ka[0] !== kb[0]) return ka[0] - kb[0];
+  return ka[1].localeCompare(kb[1]);
+}
+
+async function apOnTabOpen(){
+  try {
+    const s = localStorage.getItem('ap_secret');
+    if (s) document.getElementById('apSecret').value = s;
+  } catch(e){}
+  await apLoadFoldersIntoSelect();
+  await apLoadConfig();
+}
+
+async function apLoadFoldersIntoSelect(){
+  const select = document.getElementById('apStartFolder');
+  select.innerHTML = '<option value="">⏳ Scanning GitHub…</option>';
+  try {
+    if (!_ghTreeCache) await loadGithubFolders();
+    /* Re-use tree cache built by loadGithubFolders */
+    const tree = _ghTreeCache;
+    if (!tree || !tree.byFolder) {
+      select.innerHTML = '<option value="">Could not load folders</option>';
+      return;
+    }
+    const { data: publishedRows } = await sb.from('blogs').select('github_path').not('github_path','is',null);
+    const published = new Set();
+    (publishedRows || []).forEach(row => {
+      if (row.github_path) published.add(row.github_path.split('::')[0]);
+    });
+    const blogFolders = [];
+    Object.keys(tree.byFolder).forEach(folder => {
+      const files = tree.byFolder[folder];
+      if (files.some(f => /\.html?$/i.test(f.name))) blogFolders.push(folder);
+    });
+    blogFolders.sort(apCompareFolders);
+    const opts = ['<option value="">— Select starting folder —</option>'];
+    blogFolders.forEach(folder => {
+      const isPub = published.has(folder);
+      const tag = isPub ? ' [already published]' : ' (NEW)';
+      opts.push('<option value="'+escH(folder)+'">'+escH(folder)+tag+'</option>');
+    });
+    select.innerHTML = opts.join('');
+  } catch (err) {
+    select.innerHTML = '<option value="">Error loading folders</option>';
+    console.error(err);
+  }
+}
+
+async function apLoadConfig(){
+  const box = document.getElementById('apStatusBox');
+  const banner = document.getElementById('apSetupBanner');
+  try {
+    const { data, error } = await sb.from('auto_publish_config').select('*').eq('id', 1).maybeSingle();
+    if (error) {
+      /* Table missing */
+      banner.style.display = 'block';
+      box.innerHTML = '<div style="color:var(--red)">Table not found — run the SQL above first.</div>';
+      return;
+    }
+    banner.style.display = 'none';
+    if (!data) {
+      banner.style.display = 'block';
+      box.innerHTML = '<div style="color:var(--muted)">No config row yet — run the SQL insert, then Refresh.</div>';
+      return;
+    }
+    document.getElementById('apEnabled').checked = !!data.enabled;
+    if (data.start_folder) {
+      const sel = document.getElementById('apStartFolder');
+      /* Ensure option exists */
+      let found = false;
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === data.start_folder) { found = true; break; }
+      }
+      if (!found && data.start_folder) {
+        const o = document.createElement('option');
+        o.value = data.start_folder;
+        o.textContent = data.start_folder + ' (saved)';
+        sel.appendChild(o);
+      }
+      sel.value = data.start_folder;
+    }
+    if (data.publish_hour_ist != null) document.getElementById('apHour').value = String(data.publish_hour_ist);
+    if (data.publish_minute_ist != null) document.getElementById('apMinute').value = String(data.publish_minute_ist);
+
+    const en = data.enabled
+      ? '<span style="color:var(--green);font-weight:700">● ENABLED</span>'
+      : '<span style="color:var(--muted);font-weight:700">○ Disabled</span>';
+    const lastRun = data.last_run_at
+      ? new Date(data.last_run_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST'
+      : 'Never';
+    box.innerHTML =
+      '<div>'+en+'</div>'+
+      '<div><strong>Start folder:</strong> '+(data.start_folder ? '<code>'+escH(data.start_folder)+'</code>' : '— not set —')+'</div>'+
+      '<div><strong>Last published:</strong> '+(data.last_published_folder ? '<code>'+escH(data.last_published_folder)+'</code>' : '— none yet —')+'</div>'+
+      '<div><strong>Preferred time:</strong> '+String(data.publish_hour_ist||9).padStart(2,'0')+':'+String(data.publish_minute_ist||0).padStart(2,'0')+' IST</div>'+
+      '<div><strong>Last run:</strong> '+escH(lastRun)+'</div>'+
+      '<div><strong>Last result:</strong> '+(data.last_result ? escH(data.last_result) : '—')+'</div>';
+  } catch (err) {
+    banner.style.display = 'block';
+    box.innerHTML = '<div style="color:var(--red)">'+escH(err.message || 'Failed to load config')+'</div>';
+  }
+}
+
+async function apSaveConfig(){
+  const enabled = document.getElementById('apEnabled').checked;
+  const start_folder = document.getElementById('apStartFolder').value || null;
+  const publish_hour_ist = parseInt(document.getElementById('apHour').value, 10);
+  const publish_minute_ist = parseInt(document.getElementById('apMinute').value, 10);
+  if (enabled && !start_folder) {
+    toast('Pick a starting folder before enabling', true);
+    return;
+  }
+  const row = {
+    id: 1,
+    enabled,
+    start_folder,
+    publish_hour_ist,
+    publish_minute_ist,
+    updated_at: new Date().toISOString()
+  };
+  const { error } = await sb.from('auto_publish_config').upsert(row, { onConflict: 'id' });
+  if (error) {
+    toast('Save failed: ' + error.message + ' — did you run the SQL setup?', true);
+    document.getElementById('apSetupBanner').style.display = 'block';
+    return;
+  }
+  toast(enabled ? 'Auto-publish enabled' : 'Schedule saved (currently disabled)');
+  await apLoadConfig();
+}
+
+async function apRunNow(dry){
+  const secret = (document.getElementById('apSecret').value || '').trim();
+  if (!secret && !dry) {
+    toast('Enter AUTO_PUBLISH_SECRET for manual publish', true);
+    return;
+  }
+  const q = dry ? '?dry=1&force=1' : ('?force=1&secret=' + encodeURIComponent(secret));
+  const queueEl = document.getElementById('apQueue');
+  if (dry) queueEl.innerHTML = '⏳ Checking next folder…';
+  try {
+    const r = await fetch('/api/auto-publish' + q, {
+      headers: (!dry && secret) ? { 'x-auto-publish-secret': secret } : {}
+    });
+    const data = await r.json();
+    if (!r.ok || data.ok === false) {
+      toast(data.error || 'Request failed', true);
+      if (data.needsSetup) document.getElementById('apSetupBanner').style.display = 'block';
+      queueEl.innerHTML = '<span style="color:var(--red)">'+escH(data.error || 'Error')+'</span>';
+      return;
+    }
+    if (dry) {
+      const list = (data.upcoming || []).map((f,i) =>
+        '<div style="padding:6px 0;border-bottom:1px solid var(--border)">'+(i===0?'<strong style="color:var(--teal)">NEXT → </strong>':'')+'<code>'+escH(f)+'</code></div>'
+      ).join('');
+      queueEl.innerHTML = data.nextFolder
+        ? '<div style="margin-bottom:8px;color:var(--navy)"><strong>Next to publish:</strong> <code>'+escH(data.nextFolder)+'</code></div>'+
+          (list || '') +
+          '<div style="margin-top:10px;font-size:.78rem;color:var(--muted)">'+escH(String(data.publishedCount||0))+' already published · '+escH(String(data.totalBlogFolders||0))+' total blog folders</div>'
+        : '<div style="color:var(--green)">Queue empty — nothing left to publish.</div>';
+      toast('Dry-run complete');
+    } else {
+      if (data.published) {
+        toast('Published: ' + (data.title || data.slug));
+        queueEl.innerHTML = '<div style="color:var(--green)"><strong>Just published:</strong> <a href="'+escH(data.url)+'" target="_blank">'+escH(data.title||data.slug)+'</a><br><code>'+escH(data.folder)+'</code></div>';
+      } else if (data.skipped) {
+        toast(data.reason || 'Skipped', true);
+        queueEl.innerHTML = '<div style="color:var(--muted)">'+escH(data.reason || 'Skipped')+'</div>';
+      } else if (data.done) {
+        toast(data.message || 'Queue done');
+        queueEl.innerHTML = '<div style="color:var(--green)">'+escH(data.message || 'Done')+'</div>';
+      } else {
+        toast('Done');
+      }
+      await apLoadConfig();
+    }
+  } catch (err) {
+    toast('Request failed: ' + (err.message || err), true);
+    queueEl.innerHTML = '<span style="color:var(--red)">'+escH(err.message || 'Network error')+'</span>';
+  }
+}
+
 /* Hook: auto-fill slug when title changes */
 document.addEventListener('DOMContentLoaded', function(){
   ['upTitle','wTitle'].forEach(function(tid){

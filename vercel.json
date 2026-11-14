@@ -1,6 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "crons": [
+    {
+      "path": "/api/auto-publish",
+      "schedule": "30 3 * * *"
+    }
+  ],
+
   "rewrites": [
     {
       "source": "/blog/:slug",
