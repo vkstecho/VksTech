@@ -21,6 +21,12 @@
 /calculators/met-capacity     /calculators/met-capacity.html 200
 /calculators/min-manpower     /calculators/min-manpower.html 200
 /calculators/roll-length      /calculators/roll-length.html 200
+/calculators/roll-od              /calculators/roll-od.html 200
+/calculators/yield                /calculators/yield.html 200
+/calculators/machine-utilisation  /calculators/machine-utilisation.html 200
+/calculators/cost-sqm             /calculators/cost-sqm.html 200
+/calculators/met-conversion-cost  /calculators/met-conversion-cost.html 200
+/calculators/converting-capacity  /calculators/converting-capacity.html 200
 
 # Admin is restricted — do not link publicly. Prefer protecting at host level (Basic Auth / Vercel Firewall).
 # /admin.html  /  404

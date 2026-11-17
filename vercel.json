@@ -53,6 +53,30 @@
       "source": "/calculators/roll-length",
       "destination": "/calculators/roll-length.html"
     },
+        {
+      "source": "/calculators/roll-od",
+      "destination": "/calculators/roll-od.html"
+    },
+    {
+      "source": "/calculators/yield",
+      "destination": "/calculators/yield.html"
+    },
+    {
+      "source": "/calculators/machine-utilisation",
+      "destination": "/calculators/machine-utilisation.html"
+    },
+    {
+      "source": "/calculators/cost-sqm",
+      "destination": "/calculators/cost-sqm.html"
+    },
+    {
+      "source": "/calculators/met-conversion-cost",
+      "destination": "/calculators/met-conversion-cost.html"
+    },
+    {
+      "source": "/calculators/converting-capacity",
+      "destination": "/calculators/converting-capacity.html"
+    },
     {
       "source": "/offer",
       "destination": "/offer.html"
