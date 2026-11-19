@@ -258,14 +258,20 @@ async function loadChannels(){
   var plRes = await sb.from('youtube_playlists').select('*').order('sort_order',{ascending:true});
   var playlists = (plRes && !plRes.error && plRes.data) ? plRes.data : [];
 
+  // Auto playlists from YouTube API (used when Admin has none for a channel)
+  var autoPlaylists = [];
+  try{
+    var apr = await fetch('/api/youtube-playlists?limit=25');
+    var apd = await apr.json();
+    if(apr.ok && apd && apd.ok && apd.playlists) autoPlaylists = apd.playlists;
+  }catch(e){}
+
   state.style.display = 'none';
 
   grid.innerHTML = channels.map(function(c, i){
     var myPls = playlists.filter(function(p){ return p.channel_id === c.id; });
     var plHtml;
-    if(myPls.length === 0){
-      plHtml = '<div class="pl-empty">Playlists coming soon.</div>';
-    } else {
+    if(myPls.length > 0){
       plHtml = myPls.map(function(p){
         var shortUrl = '/' + encodeURIComponent(c.slug) + '/' + encodeURIComponent(p.slug);
         return '<a class="pl-link" href="' + shortUrl + '">'
@@ -273,6 +279,16 @@ async function loadChannels(){
              + '<span class="pl-ttl">' + esc(p.title) + '</span>'
              + '</a>';
       }).join('');
+    } else if(autoPlaylists.length > 0){
+      // WorkoHolic (and any single primary channel): fill from live YouTube
+      plHtml = autoPlaylists.map(function(p){
+        return '<a class="pl-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">'
+             + '<span class="pl-ico">▶️</span>'
+             + '<span class="pl-ttl">' + esc(p.title) + '</span>'
+             + '</a>';
+      }).join('');
+    } else {
+      plHtml = '<div class="pl-empty">Playlists coming soon.</div>';
     }
     /* If icon_url is set, use the real image; fall back to initial badge if image fails or is missing.
        The onerror handler swaps in a colored initial badge if the image URL is broken. */

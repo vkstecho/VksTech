@@ -165,13 +165,13 @@
 <button class="btt" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top">↑</button>
 
 <!-- Sticky Mentorship CTA (mobile-first) — rates loaded live from Mentor app -->
-<div class="sticky-mentor" id="stickyMentor" role="region" aria-label="Book mentorship">
-  <button class="sm-close" id="stickyMentorClose" aria-label="Dismiss">&times;</button>
-  <div class="sm-text">
-    <p class="sm-title">1:1 Mentorship</p>
-    <p class="sm-sub"><span data-rate-career data-rate-format="short">₹699/hr</span> · Career, AI &amp; Packaging</p>
+<div class="sticky-mentor sticky-dual" id="stickyMentor" role="region" aria-label="Book plant audit or mentorship">
+  <button class="sm-close" id="stickyMentorClose" aria-label="Dismiss sticky bar">&times;</button>
+  <div class="sm-dual-actions">
+    <a href="/consulting#audit" class="sm-btn sm-btn-audit">Free plant audit</a>
+    <a href="https://mentor.vkstech.com/" class="sm-btn sm-btn-mentor" target="_blank" rel="noopener">1:1 Mentorship</a>
   </div>
-  <a href="https://mentor.vkstech.com/" class="sm-btn">Book Now →</a>
+  <p class="sm-dual-hint">Plants · free 15-min audit &nbsp;·&nbsp; Professionals · from <span data-rate-career data-rate-format="short">₹699/hr</span></p>
 </div>
 <div class="pg"><div class="b1"></div><div class="b2"></div></div>
 
@@ -241,8 +241,29 @@
         <div class="hero-btns">
           <a href="/consulting#audit" class="btn-p" data-i="hero_btn1">Book a Free 15-Min Plant Audit</a>
           <a href="#mentorship" class="btn-s" data-i="hero_btn2">1:1 Mentorship</a>
-          <a href="/calculators" class="btn-s" data-i="hero_btn3">Free Calculators</a>
-          <a href="#testimonials" class="btn-s" data-i="hero_btn4">Testimonials</a>
+        </div>
+        <p class="hero-assurance" data-i="hero_assurance">
+          <strong>In 15 minutes:</strong> map your biggest reporting or process pain → see if a dashboard, calculator, or SOP fits → clear next step.
+          <span class="ha-meta">For plant / production / QA heads · WhatsApp reply same day · no obligation</span>
+        </p>
+        <p class="hero-secondary-links">
+          <a href="/calculators" data-i="hero_link_calc">Free packaging calculators</a>
+          <span aria-hidden="true">·</span>
+          <a href="#testimonials" data-i="hero_link_proof">Results &amp; testimonials</a>
+        </p>
+        <div class="hero-proof" aria-label="Proof from plant floor and mentees">
+          <div class="hp-item">
+            <div class="hp-metric">Operator → AM Planning</div>
+            <div class="hp-who">Ajab Singh · Sumilon Surat</div>
+          </div>
+          <div class="hp-item">
+            <div class="hp-metric">GET → Sr. Engineer / Shift In-charge</div>
+            <div class="hp-who">N.K. Jena · Uflex Dharwad</div>
+          </div>
+          <div class="hp-item">
+            <div class="hp-metric">Critical defects 9% → 0.2%</div>
+            <div class="hp-who">Plant leadership result · flexible packaging</div>
+          </div>
         </div>
         <div class="hero-stats trust-strip">
           <div class="stat-item"><div class="num">9+</div><div class="lbl" data-i="stat2">Years Packaging Leadership</div></div>
@@ -347,26 +368,58 @@
       <a href="#mentorship" class="path-card path-pro reveal">
         <div class="path-eyebrow">For professionals</div>
         <h3>1:1 Mentorship &amp; free tools</h3>
-        <p>Career &amp; AI guidance, packaging expertise, free calculators, resume builder and practical apps — live rates from the Mentor app.</p>
+        <p>Choose this if you want personal growth — Excel, AI tools, career moves, or packaging skills — not a full plant project.</p>
         <ul class="path-bullets">
-          <li>Two mentorship tracks</li>
-          <li>Free packaging calculators</li>
-          <li>Resume builder &amp; career apps</li>
+          <li>Career &amp; AI track from ₹699/hr</li>
+          <li>Packaging track from ₹799/hr</li>
+          <li>Free calculators &amp; resume tools</li>
         </ul>
-        <span class="path-cta">Explore mentorship →</span>
+        <span class="path-cta">Book mentorship →</span>
       </a>
       <a href="/consulting" class="path-card path-plant reveal">
         <div class="path-eyebrow">For packaging plants</div>
         <h3>Work With Me — consulting</h3>
-        <p>KPI dashboards, custom calculators, process &amp; defect troubleshooting, and operator training content for flexible packaging lines.</p>
+        <p>Choose this if your plant needs KPI automation, a custom tool, or process/defect help on the lines.</p>
         <ul class="path-bullets">
-          <li>Excel / KPI automation</li>
-          <li>Custom plant tools</li>
-          <li>Free 15-min plant audit</li>
+          <li>KPI dashboards from ₹15k</li>
+          <li>Custom calculators from ₹25k</li>
+          <li>Free 15-min plant audit first</li>
         </ul>
-        <span class="path-cta">See plant services →</span>
+        <span class="path-cta">Book free plant audit →</span>
       </a>
     </div>
+  </div>
+</section>
+
+
+<!-- MINI CASE — problem → action → result -->
+<section id="mini-case" class="mini-case-section" aria-label="Example plant result">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto 1.4rem">
+      <div class="section-label">Example from the floor</div>
+      <h2 class="section-title">One problem. One system. <span>Clear result.</span></h2>
+      <p class="section-sub" style="margin:0 auto">A real pattern from flexible packaging production leadership — the same approach behind consulting and tools on this site.</p>
+    </div>
+    <div class="mini-case reveal">
+      <div class="mc-step">
+        <div class="mc-label">Problem</div>
+        <div class="mc-body">Critical process defects sitting near <strong>9%</strong> — quality loss, customer risk, and firefighting every shift.</div>
+      </div>
+      <div class="mc-arrow" aria-hidden="true">→</div>
+      <div class="mc-step">
+        <div class="mc-label">Action</div>
+        <div class="mc-body">Root-cause on the line, process control discipline, and daily ownership habits — not another slide deck.</div>
+      </div>
+      <div class="mc-arrow" aria-hidden="true">→</div>
+      <div class="mc-step mc-result">
+        <div class="mc-label">Result</div>
+        <div class="mc-body"><strong>9% → 0.2%</strong> critical defects, with the same plant teams executing the system.</div>
+      </div>
+    </div>
+    <p class="mc-cta reveal">
+      Want the same clarity for reporting, KPIs, or a custom tool on your lines?
+      <a href="/consulting#audit">Book a free 15-min plant audit →</a>
+    </p>
   </div>
 </section>
 
