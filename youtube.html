@@ -63,10 +63,51 @@ main{position:relative;z-index:1;}
 .hero p{font-size:1.02rem;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7;}
 
 /* Channels grid */
-.channels{max-width:1080px;margin:30px auto 60px;padding:0 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
+.channels{max-width:1080px;margin:30px auto 40px;padding:0 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
 .ch-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;}
 .ch-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(26,39,68,.1);border-color:var(--border2);}
 .ch-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+
+/* Latest videos — WorkoHolic channel auto feed */
+.videos-section{max-width:1080px;margin:0 auto 70px;padding:0 5%;}
+.videos-section h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.55rem;color:var(--navy);margin-bottom:6px;}
+.videos-section .vs-sub{font-size:.9rem;color:var(--muted);margin-bottom:22px;}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+.vid-card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.vid-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,39,68,.1);border-color:var(--border2);}
+.vid-thumb-wrap{position:relative;aspect-ratio:16/9;background:#1a2744;overflow:hidden;}
+.vid-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.vid-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);opacity:0;transition:opacity .2s;}
+.vid-card:hover .vid-play{opacity:1;}
+.vid-play span{width:48px;height:48px;border-radius:50%;background:#ff0000;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;box-shadow:0 4px 14px rgba(0,0,0,.35);}
+.vid-body{padding:12px 14px 14px;}
+.vid-title{font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.vid-date{font-size:.72rem;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;}
+.vid-loading,.vid-empty{grid-column:1/-1;text-align:center;padding:28px;color:var(--muted);font-size:.9rem;}
+.vid-more-btn{appearance:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.92rem;padding:12px 28px;border-radius:50px;background:var(--orange);color:#fff;transition:background .2s,transform .2s;box-shadow:0 4px 14px rgba(232,93,38,.25)}
+.vid-more-btn:hover{background:var(--orange2);transform:translateY(-1px)}
+.vid-more-btn:disabled{opacity:.65;cursor:wait;transform:none}
+@media(max-width:720px){
+  .videos-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+  .vid-title{font-size:.82rem;}
+}
+
+/* Auto playlists from YouTube API */
+.pl-section{max-width:1080px;margin:0 auto 50px;padding:0 5%;}
+.pl-section h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.55rem;color:var(--navy);margin-bottom:6px;}
+.pl-section .vs-sub{font-size:.9rem;color:var(--muted);margin-bottom:22px;}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.pl-card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.pl-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(26,39,68,.1);border-color:var(--border2);}
+.pl-thumb{aspect-ratio:16/9;background:#1a2744;overflow:hidden;}
+.pl-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.pl-info{padding:12px 14px 14px;}
+.pl-ttl{font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pl-meta{font-size:.72rem;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;}
+.pl-loading,.pl-empty{grid-column:1/-1;text-align:center;padding:24px;color:var(--muted);font-size:.9rem;}
+@media(max-width:720px){
+  .pl-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+}
 .ch-badge{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;color:#fff;flex-shrink:0;}
 .ch-badge-img{object-fit:cover;background:var(--bg2);border:1px solid var(--border);}
 .ch-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.18rem;color:var(--navy);line-height:1.25;}
@@ -133,6 +174,26 @@ footer a:hover{color:var(--orange2);}
 
   <div id="channelsGrid" class="channels"></div>
   <div id="stateMsg" class="state"><div class="ico">⏳</div><p>Loading channels…</p></div>
+
+  <section class="pl-section" id="playlistsSection" aria-label="Playlists from WorkoHolic VKS Tech">
+    <h2>Playlists</h2>
+    <p class="vs-sub">Fetched automatically from the YouTube channel — title and thumbnail.</p>
+    <div class="pl-grid" id="playlistsGrid">
+      <div class="pl-loading">Loading playlists…</div>
+    </div>
+  </section>
+
+  <section class="videos-section" id="latestVideosSection" aria-label="Latest videos from WorkoHolic VKS Tech">
+    <h2>Latest from WorkoHolic VKS Tech</h2>
+    <p class="vs-sub">Newest uploads — titles and thumbnails update automatically from the channel.</p>
+    <div class="videos-grid" id="videosGrid">
+      <div class="vid-loading">Loading videos…</div>
+    </div>
+    <div id="videosMoreWrap" style="display:none;text-align:center;margin-top:28px">
+      <button type="button" id="videosMoreBtn" class="vid-more-btn">Show all videos</button>
+      <p id="videosMoreStatus" class="vs-sub" style="margin:12px 0 0;display:none"></p>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -236,7 +297,132 @@ async function loadChannels(){
   }).join('');
 }
 
+function renderVideoCards(videos){
+  return videos.map(function(v){
+    var d = '';
+    if(v.publishedAt){
+      try{
+        d = new Date(v.publishedAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+      }catch(e){ d = ''; }
+    }
+    return '<a class="vid-card" href="' + esc(v.url) + '" target="_blank" rel="noopener" title="' + esc(v.title) + '">'
+      + '<div class="vid-thumb-wrap">'
+      +   '<img src="' + esc(v.thumbnail) + '" alt="" loading="lazy" width="480" height="360"/>'
+      +   '<div class="vid-play" aria-hidden="true"><span>▶</span></div>'
+      + '</div>'
+      + '<div class="vid-body">'
+      +   '<div class="vid-title">' + esc(v.title) + '</div>'
+      +   (d ? '<div class="vid-date">' + esc(d) + '</div>' : '')
+      + '</div>'
+      + '</a>';
+  }).join('');
+}
+
+async function loadLatestVideos(){
+  var grid = document.getElementById('videosGrid');
+  var moreWrap = document.getElementById('videosMoreWrap');
+  var moreBtn = document.getElementById('videosMoreBtn');
+  var moreStatus = document.getElementById('videosMoreStatus');
+  if(!grid) return;
+  try{
+    var r = await fetch('/api/youtube-feed?limit=12');
+    var data = await r.json();
+    if(!r.ok || !data.ok || !data.videos || !data.videos.length){
+      grid.innerHTML = '<div class="vid-empty">Videos will appear here once the channel feed is available.</div>';
+      if(moreWrap) moreWrap.style.display = 'none';
+      return;
+    }
+    grid.innerHTML = renderVideoCards(data.videos);
+    if(moreWrap && moreBtn){
+      if(data.hasMore !== false){
+        moreWrap.style.display = 'block';
+        moreBtn.disabled = false;
+        moreBtn.textContent = 'Show all videos';
+        if(moreStatus){ moreStatus.style.display = 'none'; moreStatus.textContent = ''; }
+        moreBtn.onclick = loadAllVideos;
+      } else {
+        moreWrap.style.display = 'none';
+      }
+    }
+  }catch(err){
+    console.error(err);
+    grid.innerHTML = '<div class="vid-empty">Could not load videos right now. Try refreshing.</div>';
+  }
+}
+
+async function loadAllVideos(){
+  var grid = document.getElementById('videosGrid');
+  var moreBtn = document.getElementById('videosMoreBtn');
+  var moreStatus = document.getElementById('videosMoreStatus');
+  if(!grid) return;
+  if(moreBtn){ moreBtn.disabled = true; moreBtn.textContent = 'Loading all…'; }
+  if(moreStatus){ moreStatus.style.display = 'block'; moreStatus.textContent = 'Fetching full channel list…'; }
+  try{
+    var r = await fetch('/api/youtube-feed?all=1');
+    var data = await r.json();
+    if(!r.ok || !data.ok){
+      var msg = (data && data.error) ? data.error : 'Could not load all videos';
+      if(moreStatus) moreStatus.textContent = msg;
+      if(moreBtn){ moreBtn.disabled = false; moreBtn.textContent = 'Show all videos'; }
+      return;
+    }
+    grid.innerHTML = renderVideoCards(data.videos || []);
+    if(moreBtn){
+      moreBtn.style.display = 'none';
+    }
+    if(moreStatus){
+      moreStatus.style.display = 'block';
+      moreStatus.textContent = 'Showing all ' + (data.count || (data.videos && data.videos.length) || 0) + ' videos';
+    }
+  }catch(err){
+    console.error(err);
+    if(moreStatus) moreStatus.textContent = 'Could not load all videos. Try again.';
+    if(moreBtn){ moreBtn.disabled = false; moreBtn.textContent = 'Show all videos'; }
+  }
+}
+
+async function loadPlaylists(){
+  var grid = document.getElementById('playlistsGrid');
+  if(!grid) return;
+  try{
+    var r = await fetch('/api/youtube-playlists?limit=25');
+    var data = await r.json();
+    if(!r.ok || !data.ok){
+      var msg = (data && data.error) ? data.error : 'Playlists unavailable';
+      if(data && data.needsKey){
+        msg = 'Add YOUTUBE_API_KEY in Vercel to load playlists automatically.';
+      }
+      grid.innerHTML = '<div class="pl-empty">' + esc(msg) + '</div>';
+      return;
+    }
+    if(!data.playlists || !data.playlists.length){
+      grid.innerHTML = '<div class="pl-empty">No public playlists found on this channel yet.</div>';
+      return;
+    }
+    grid.innerHTML = data.playlists.map(function(p){
+      var meta = [];
+      if(p.itemCount != null) meta.push(p.itemCount + (p.itemCount === 1 ? ' video' : ' videos'));
+      return '<a class="pl-card" href="' + esc(p.url) + '" target="_blank" rel="noopener" title="' + esc(p.title) + '">'
+        + '<div class="pl-thumb">'
+        +   (p.thumbnail
+          ? '<img src="' + esc(p.thumbnail) + '" alt="" loading="lazy" width="480" height="360"/>'
+          : '')
+        + '</div>'
+        + '<div class="pl-info">'
+        +   '<div class="pl-ttl">' + esc(p.title) + '</div>'
+        +   (meta.length ? '<div class="pl-meta">' + esc(meta.join(' · ')) + '</div>' : '')
+        + '</div>'
+        + '</a>';
+    }).join('');
+  }catch(err){
+    console.error(err);
+    grid.innerHTML = '<div class="pl-empty">Could not load playlists. Try refreshing.</div>';
+  }
+}
+
 loadChannels();
+loadPlaylists();
+loadLatestVideos();
 </script>
 <!-- Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
