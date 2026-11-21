@@ -76,28 +76,32 @@ input.missing{border-color:#e11;background:#fff5f5}
 <body>
 <div class="topbar">
   <a href="/" class="tb-brand"><img src="../assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/><span>VKS</span><span class="vks-tech">Tech</span></a>
-  <nav class="tb-nav"><a href="/">Home</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a></nav>
+  <nav class="tb-nav"><a href="/" data-i="nav_home">Home</a><a href="/calculators" data-i="nav_calc">Calculators</a><a href="/apps" data-i="nav_apps">Apps</a></nav>
+  <div class="lang-pills" role="group" aria-label="Language" style="margin-left:auto;display:flex;gap:4px;align-items:center">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div>
 </div>
 
 <div class="wrap">
-  <div class="crumb"><a href="/">Home</a> · <a href="/calculators">Calculators</a> · Cost / sqm</div>
+  <div class="crumb"><a href="/" data-i="nav_home">Home</a> · <a href="/calculators" data-i="nav_calc">Calculators</a> · Cost / sqm</div>
   <h1>Cost per <span>Square Meter</span></h1>
-  <p class="lead">Convert material cost in ₹/kg into ₹ per square meter using GSM. Useful for quotes, laminate costing and customer comparisons.</p>
+  <p class="lead" data-i="lead_cost_sqm">Convert material cost in ₹/kg into ₹ per square meter using GSM. Useful for quotes, laminate costing and customer comparisons.</p>
   <div class="card">
     <div class="formula">₹/sqm = (₹/kg × GSM) ÷ 1000</div>
     
     <div class="row c2">
-      <div><label>Material cost (₹/kg)</label><input id="c-rate" type="number" inputmode="decimal" placeholder="e.g. 180" oninput="calc()"/></div>
-      <div><label>GSM</label><input id="c-gsm" type="number" inputmode="decimal" placeholder="e.g. 16.5" oninput="calc()"/></div>
+      <div><label data-i="lab_material_cost_kg">Material cost (₹/kg)</label><input id="c-rate" type="number" inputmode="decimal" placeholder="e.g. 180" oninput="calc()"/></div>
+      <div><label data-i="lab_gsm">GSM</label><input id="c-gsm" type="number" inputmode="decimal" placeholder="e.g. 16.5" oninput="calc()"/></div>
     </div>
     <div class="result waiting" id="c-box">
-      <div><div class="val" id="c-res">—</div><div class="sub" id="c-sub">Fill ₹/kg and GSM</div></div>
+      <div><div class="val" id="c-res">—</div><div class="sub" id="c-sub" data-i="fill_rskg">Fill ₹/kg and GSM</div></div>
       <div class="unit">₹/sqm</div>
     </div>
   </div>
   <div class="explain">
     
-    <h2>Why this matters</h2>
+    <h2 data-i="h2_why_this_matters">Why this matters</h2>
     <p>Customers and estimators often think in area. Same ₹/kg looks very different at 12 GSM vs 40 GSM.</p>
     <ul>
       <li>1 kg of 10 GSM film covers 100 sqm → ₹/sqm = rate ÷ 100</li>
@@ -106,7 +110,7 @@ input.missing{border-color:#e11;background:#fff5f5}
     <p>Use the <a href="/calculators/gsm-to-micron" style="color:var(--orange);font-weight:700">GSM ↔ Micron</a> tool if you only know micron and polymer.</p>
   </div>
   <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;">Share:</span>
+    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;" data-i="share_lbl">Share:</span>
     <a href="https://wa.me/?text=Free%20cost-sqm%20calculator%20on%20VKS%20Tech:%20https://vkstech.com/calculators/cost-sqm" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#25D366;color:#fff;text-decoration:none;">WhatsApp</a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://vkstech.com/calculators/cost-sqm" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#0A66C2;color:#fff;text-decoration:none;">LinkedIn</a>
   </div>
@@ -141,5 +145,6 @@ function calc(){
 }
 
 </script>
+<script src="../js/calc-i18n.js" defer></script>
 </body>
 </html>

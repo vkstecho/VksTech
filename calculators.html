@@ -156,19 +156,23 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
     <span>VKS</span><span class="vks-tech">Tech</span>
   </a>
   <nav class="tb-nav" aria-label="Secondary">
-    <a href="/">Home</a>
-    <a href="/apps">Apps</a>
-    <a href="/calculators" class="active">Calculators</a>
-    <a href="/downloads">Free Downloads</a>
-    <a href="/blog">Blog</a>
-    <a href="/#request-app">Request</a>
+    <a href="/" data-i="nav_home">Home</a>
+    <a href="/apps" data-i="nav_ind">Apps</a>
+    <a href="/calculators" class="active" data-i="nav_calc">Calculators</a>
+    <a href="/downloads" data-i="nav_downloads">Free Downloads</a>
+    <a href="/blog" data-i="nav_blog">Blog</a>
+    <a href="/#request-app" data-i="nav_req_short">Request</a>
   </nav>
+  <div class="lang-pills" role="group" aria-label="Language" style="margin-left:12px;display:flex;gap:4px">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div>
 </div>
 
 <header class="hero">
-  <div class="hero-eyebrow">🧮 Free tools for packaging professionals</div>
-  <h1>Packaging <span>Calculators</span></h1>
-  <p>11 free calculators built from real flexible packaging plant experience. Film roll weight, GSM ↔ micron, metalliser capacity, converting capacity, minimum manpower and more. No login required.</p>
+  <div class="hero-eyebrow" data-i="ch_eyebrow">🧮 Free tools for packaging professionals</div>
+  <h1 data-i="ch_title">Packaging <span>Calculators</span></h1>
+  <p data-i="ch_sub">11 free calculators built from real flexible packaging plant experience. Film roll weight, GSM ↔ micron, metalliser capacity, converting capacity, minimum manpower and more. No login required.</p>
 </header>
 
 <section class="section">
@@ -179,9 +183,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Film Roll Weight</h2>
         <div class="formula">W = L × W/1000 × μm/10⁶ × ρ</div>
-        <p>Calculate exact roll weight for PET, BOPP, CPP, LDPE or paper from length, width and thickness.</p>
+        <p data-i="cd_frw">Calculate exact roll weight for PET, BOPP, CPP, LDPE or paper from length, width and thickness.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/roll-length">
@@ -189,9 +193,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Roll Length from Weight</h2>
         <div class="formula">L = W / (W/1000 × μm/10⁶ × ρ)</div>
-        <p>Reverse calculation — find how many metres are in a known-weight roll.</p>
+        <p data-i="cd_rl">Reverse calculation — find how many metres are in a known-weight roll.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/roll-od">
@@ -199,9 +203,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Roll OD (Outer Diameter)</h2>
         <div class="formula">OD = √((4×L×μm)/π + (Core ID + 2×Wall)²)</div>
-        <p>Estimate outer diameter for storage, handling and machine loading decisions.</p>
+        <p data-i="cd_od">Estimate outer diameter for storage, handling and machine loading decisions.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/gsm-to-micron">
@@ -209,9 +213,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>GSM ↔ Micron Conversion</h2>
         <div class="formula">GSM = Micron × Density (g/cm³)</div>
-        <p>Convert between GSM and micron for PET (1.38), BOPP (0.91), CPP (0.90) and more.</p>
+        <p data-i="cd_gsm">Convert between GSM and micron for PET (1.38), BOPP (0.91), CPP (0.90) and more.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/yield">
@@ -219,9 +223,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Production Yield %</h2>
         <div class="formula">Yield = (Output ÷ Input) × 100</div>
-        <p>Quick yield check for any converting or metallising process.</p>
+        <p data-i="cd_yield">Quick yield check for any converting or metallising process.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/machine-utilisation">
@@ -229,9 +233,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Machine Utilisation %</h2>
         <div class="formula">Running time ÷ Shift time × 100</div>
-        <p>Measure how much of available shift time the machine was actually running.</p>
+        <p data-i="cd_util">Measure how much of available shift time the machine was actually running.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/cost-sqm">
@@ -239,9 +243,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Cost per Square Meter</h2>
         <div class="formula">₹/sqm = ₹/kg × GSM ÷ 1000</div>
-        <p>Convert material cost from ₹/kg into ₹/sqm for quoting and comparison.</p>
+        <p data-i="cd_cost">Convert material cost from ₹/kg into ₹/sqm for quoting and comparison.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/met-capacity">
@@ -249,9 +253,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Met M/C Capacity</h2>
         <div class="formula">Cycle → Rolls/day → MT/day</div>
-        <p>Three-step metalliser capacity: cycle time, rolls per day, then tonnes per day.</p>
+        <p data-i="cd_met">Three-step metalliser capacity: cycle time, rolls per day, then tonnes per day.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/met-conversion-cost">
@@ -259,9 +263,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Met Conversion Cost</h2>
         <div class="formula">Actual vs Equivalent ₹/kg · product-mix aware</div>
-        <p>Calculate actual and equivalent conversion cost with product-mix difficulty factors.</p>
+        <p data-i="cd_mcc">Calculate actual and equivalent conversion cost with product-mix difficulty factors.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/converting-capacity">
@@ -269,9 +273,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Converting Plant Capacity</h2>
         <div class="formula">All machines → MT/day · plant bottleneck</div>
-        <p>Model multiple machines, speeds and efficiencies to find true plant capacity and bottleneck.</p>
+        <p data-i="cd_conv">Model multiple machines, speeds and efficiencies to find true plant capacity and bottleneck.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
     <a class="calc-item" href="/calculators/min-manpower">
@@ -279,17 +283,17 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="calc-body">
         <h2>Min Manpower</h2>
         <div class="formula">Shifts × Machines × Relief × Buffer → Headcount</div>
-        <p>Same formula as the Man Power app — calculate minimum headcount with relief and buffer.</p>
+        <p data-i="cd_man">Same formula as the Man Power app — calculate minimum headcount with relief and buffer.</p>
       </div>
-      <span class="calc-cta">Open →</span>
+      <span class="calc-cta" data-i="ch_open">Open →</span>
     </a>
 
   </div>
 
   <div class="cta-bar">
-    <p>All calculators open on the homepage — free, no signup.</p>
-    <a class="btn" href="/#calculators">Open full calculator suite →</a>
-    <a class="btn btn-s" href="/apps" style="margin-left:10px">View all apps</a>
+    <p data-i="ch_cta_p">All calculators open on the homepage — free, no signup.</p>
+    <a class="btn" href="/#calculators" data-i="ch_cta_suite">Open full calculator suite →</a>
+    <a class="btn btn-s" href="/apps" style="margin-left:10px" data-i="ch_cta_apps">View all apps</a>
   </div>
 </section>
 
@@ -298,5 +302,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <p style="margin-top:8px"><a href="/apps">Apps</a> · <a href="/downloads">Free Downloads</a> · <a href="/blog">Blog</a> · <a href="https://packlink.vkstech.com" target="_blank" rel="noopener">PackLink</a></p>
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script src="js/app.js" defer></script>
 </body>
 </html>

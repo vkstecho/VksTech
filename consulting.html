@@ -99,33 +99,38 @@
     <span class="nav-logo-text">VKS<span class="nav-logo-tech">Tech</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="/consulting">Consulting</a></li>
-    <li><a href="/#mentorship">Mentorship</a></li>
-    <li><a href="/calculators">Calculators</a></li>
-    <li><a href="/downloads">Free Downloads</a></li>
-    <li><a href="/apps">Apps</a></li>
-    <li><a href="/#blog">Blog</a></li>
-    <li><a href="/youtube">YouTube</a></li>
-    <li><a href="/#about">About</a></li>
+    <li><a href="/consulting" data-i="nav_consult">Consulting</a></li>
+    <li><a href="/#mentorship" data-i="nav_mentor">Mentorship</a></li>
+    <li><a href="/calculators" data-i="nav_calc">Calculators</a></li>
+    <li><a href="/downloads" data-i="nav_downloads">Free Downloads</a></li>
+    <li><a href="/apps" data-i="nav_ind">Apps</a></li>
+    <li><a href="/#blog" data-i="nav_blog">Blog</a></li>
+    <li><a href="/youtube" data-i="nav_yt">YouTube</a></li>
+    <li><a href="/#about" data-i="nav_about">About</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#audit" class="nav-cta">Book Free Audit</a>
+    <a href="#audit" class="nav-cta" data-i="pd_nav_audit">Book Free Audit</a>
+  
+  <div class="lang-pills" role="group" aria-label="Language" style="display:flex;gap:4px;align-items:center;margin-left:8px">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div>
   </div>
 </nav>
 
 <header class="consult-hero">
   <div class="container">
-    <div class="section-label" style="margin-bottom:10px">For packaging plants · Consulting</div>
-    <h1>Manufacturing Operations &amp; <span>Digital Automation</span></h1>
-    <p class="lead">Help packaging plants cut reporting time, eliminate process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.</p>
+    <div class="section-label" style="margin-bottom:10px" data-i="cs_label">For packaging plants · Consulting</div>
+    <h1 data-i="cs_h1">Manufacturing Operations &amp; <span>Digital Automation</span></h1>
+    <p class="lead" data-i="cs_lead">Help packaging plants cut reporting time, eliminate process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.</p>
     <div class="cta-row">
-      <a href="#audit" class="btn-p">Book a Free 15-Min Plant Audit</a>
-      <a href="/calculators" class="btn-s">Try Free Calculators</a>
+      <a href="#audit" class="btn-p" data-i="cs_btn1">Book a Free 15-Min Plant Audit</a>
+      <a href="/calculators" class="btn-s" data-i="cs_btn2">Try Free Calculators</a>
     </div>
     <div class="trust-pills">
-      <span class="trust-pill">9+ Years Plant Leadership</span>
-      <span class="trust-pill">3 hrs → 10 min Reporting</span>
-      <span class="trust-pill">9% → 0.2% Defects</span>
+      <span class="trust-pill" data-i="cs_pill1">9+ Years Plant Leadership</span>
+      <span class="trust-pill" data-i="cs_pill2">3 hrs → 10 min Reporting</span>
+      <span class="trust-pill" data-i="cs_pill3">9% → 0.2% Defects</span>
       <span class="trust-pill">UFlex · JPFL · GLS</span>
     </div>
   </div>
@@ -134,34 +139,34 @@
 <section class="section-tight" id="services">
   <div class="container">
     <div style="text-align:center;max-width:640px;margin:0 auto 8px">
-      <div class="section-label">For packaging plants · Productized services</div>
-      <h2 class="section-title">How I <span>help plants</span></h2>
+      <div class="section-label" data-i="cs_svc_label">For packaging plants · Productized services</div>
+      <h2 class="section-title" data-i="cs_svc_title">How I <span>help plants</span></h2>
       <p class="section-sub">Clear scope. Starting prices (project-based). Remote delivery with optional site visits in India. Mentorship rates live on the <a href="https://mentor.vkstech.com/" style="color:var(--orange);font-weight:600">Mentor app</a>.</p>
     </div>
     <div class="svc-grid">
       <article class="svc-card">
         <div class="price">From ₹15,000 / $200</div>
-        <h3>Manufacturing KPI &amp; Excel Dashboard Automation</h3>
+        <h3 data-i="cs_s1_h">Manufacturing KPI &amp; Excel Dashboard Automation</h3>
         <p>Automated OEE, scrap/yield %, shift output, and conversion-cost trackers that replace manual logs. Same approach that cut reporting from 3 hours to 10 minutes.</p>
-        <a href="#audit" class="offer-btn primary" onclick="prefillService('Excel / KPI Dashboard Automation')">Request this →</a>
+        <a href="#audit" class="offer-btn primary" onclick="prefillService('Excel / KPI Dashboard Automation')" data-i="cs_req">Request this →</a>
       </article>
       <article class="svc-card">
         <div class="price">From ₹25,000 / $300</div>
-        <h3>Custom Web Calculators &amp; Internal Micro-Apps</h3>
+        <h3 data-i="cs_s2_h">Custom Web Calculators &amp; Internal Micro-Apps</h3>
         <p>Embeddable plant calculators (roll weight, GSM, capacity) or shift/manpower trackers tailored to your lines and product mix.</p>
-        <a href="#audit" class="offer-btn primary" onclick="prefillService('Custom Web Calculator / Micro-App')">Request this →</a>
+        <a href="#audit" class="offer-btn primary" onclick="prefillService('Custom Web Calculator / Micro-App')" data-i="cs_req">Request this →</a>
       </article>
       <article class="svc-card">
         <div class="price">₹3,500/hr · $45/hr</div>
-        <h3>Flexible Packaging Process &amp; Defect Troubleshooting</h3>
+        <h3 data-i="cs_s3_h">Flexible Packaging Process &amp; Defect Troubleshooting</h3>
         <p>Remote root-cause analysis for crease/tram defects, tension/winding, metallising issues + SOP and PM checklist support.</p>
-        <a href="#audit" class="offer-btn primary" onclick="prefillService('Process / Defect Consulting')">Request this →</a>
+        <a href="#audit" class="offer-btn primary" onclick="prefillService('Process / Defect Consulting')" data-i="cs_req">Request this →</a>
       </article>
       <article class="svc-card">
         <div class="price">From ₹5,000 / $60</div>
-        <h3>Technical Playbooks &amp; Operator Training Content</h3>
+        <h3 data-i="cs_s4_h">Technical Playbooks &amp; Operator Training Content</h3>
         <p>Custom SOP manuals, SMED changeover guides, and practical technical content your operators can actually use on the floor.</p>
-        <a href="#audit" class="offer-btn primary" onclick="prefillService('Technical Playbooks / Training Content')">Request this →</a>
+        <a href="#audit" class="offer-btn primary" onclick="prefillService('Technical Playbooks / Training Content')" data-i="cs_req">Request this →</a>
       </article>
     </div>
   </div>
@@ -170,7 +175,7 @@
 <section class="section-tight" style="background:#f8fafc" id="results">
   <div class="container">
     <div style="text-align:center;max-width:640px;margin:0 auto 8px">
-      <div class="section-label">Proven Track Record</div>
+      <div class="section-label" data-i="cs_track_label">Proven Track Record</div>
       <h2 class="section-title">Problem → Action → <span>Result</span></h2>
       <p class="section-sub">Real outcomes from production leadership — not theory.</p>
     </div>
@@ -203,23 +208,23 @@
 <section class="section-tight" id="audit">
   <div class="container">
     <div class="audit-box">
-      <h3>Book a Free 15-Min Plant Audit</h3>
-      <p class="sub">Tell me the bottleneck. I’ll reply with a practical next step — no obligation.</p>
+      <h3 data-i="cs_audit_h">Book a Free 15-Min Plant Audit</h3>
+      <p class="sub" data-i="cs_audit_sub">Tell me the bottleneck. I’ll reply with a practical next step — no obligation.</p>
       <form id="consultForm" onsubmit="return submitConsultForm(event)" novalidate>
         <div class="fg">
-          <label for="cf_name">Full Name *</label>
+          <label for="cf_name" data-i="cs_lbl_name">Full Name *</label>
           <input type="text" id="cf_name" name="name" required placeholder="Your name" autocomplete="name"/>
         </div>
         <div class="fg">
-          <label for="cf_company">Company / Plant Name *</label>
+          <label for="cf_company" data-i="cs_lbl_co">Company / Plant Name *</label>
           <input type="text" id="cf_company" name="company" required placeholder="Plant or company name"/>
         </div>
         <div class="fg">
-          <label for="cf_contact">Work Email or WhatsApp *</label>
+          <label for="cf_contact" data-i="cs_lbl_contact">Work Email or WhatsApp *</label>
           <input type="text" id="cf_contact" name="contact" required placeholder="email@company.com or +91…" autocomplete="email"/>
         </div>
         <div class="fg">
-          <label for="cf_service">Service Needed *</label>
+          <label for="cf_service" data-i="cs_lbl_svc">Service Needed *</label>
           <select id="cf_service" name="service" required>
             <option value="" disabled selected>Select a service</option>
             <option>Excel / KPI Dashboard Automation</option>

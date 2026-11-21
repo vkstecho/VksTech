@@ -2122,3 +2122,20 @@ body.sticky-mentor-visible .offer-fab {
   .mc-arrow{display:none}
   .mini-case{flex-direction:column}
 }
+
+
+/* Connect section — YouTube / WhatsApp Channel / LinkedIn */
+.connect-section{padding:3.4rem 0 3rem;background:linear-gradient(180deg,#f8fafc 0%,#fff 100%)}
+.connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:0 auto}
+.connect-card{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:22px 20px;border-radius:16px;background:#fff;border:1px solid var(--border);text-decoration:none;color:inherit;box-shadow:var(--ss,0 4px 18px rgba(26,39,68,.05));transition:transform .2s,box-shadow .2s,border-color .2s}
+.connect-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,39,68,.1);border-color:rgba(232,93,38,.35)}
+.connect-ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.connect-yt .connect-ico{background:#fee2e2;color:#dc2626}
+.connect-wa .connect-ico{background:#dcfce7;color:#16a34a}
+.connect-li .connect-ico{background:#dbeafe;color:#2563eb}
+.connect-title{font-weight:800;font-size:1.05rem;color:var(--navy)}
+.connect-desc{font-size:.86rem;color:var(--muted);line-height:1.45;flex:1}
+.connect-cta{font-size:.84rem;font-weight:700;color:var(--orange);margin-top:6px}
+@media(max-width:720px){
+  .connect-grid{grid-template-columns:1fr;max-width:400px}
+}

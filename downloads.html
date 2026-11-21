@@ -89,19 +89,23 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
     <span class="vks-name">VKS</span><span class="vks-tech">Tech</span>
   </a>
   <nav class="tb-nav" aria-label="Secondary">
-    <a href="/">Home</a>
-    <a href="/apps">Apps</a>
-    <a href="/calculators">Calculators</a>
+    <a href="/" data-i="nav_home">Home</a>
+    <a href="/apps" data-i="nav_ind">Apps</a>
+    <a href="/calculators" data-i="nav_calc">Calculators</a>
     <a href="/people">People</a>
-    <a href="/downloads" class="active">Free Downloads</a>
+    <a href="/downloads" class="active" data-i="nav_downloads">Free Downloads</a>
     <a href="/#request-app">Request</a>
-  </nav>
+  
+  <div class="lang-pills" role="group" aria-label="Language" style="display:flex;gap:4px;align-items:center;margin-left:8px">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div></nav>
 </div>
 
 <header class="hero">
-  <div class="hero-eyebrow">Free resources</div>
-  <h1>Downloads for <span>plant teams</span></h1>
-  <p>Practical Metalliser SOPs, Work Instructions, PM checklists and production formats — ready to use on the shop floor.</p>
+  <div class="hero-eyebrow" data-i="dl_eyebrow">Free resources</div>
+  <h1 data-i="dl_title">Downloads for <span>plant teams</span></h1>
+  <p data-i="dl_sub">Practical Metalliser SOPs, Work Instructions, PM checklists and production formats — ready to use on the shop floor.</p>
   <div class="stats">
     <div class="stat"><div class="n">12</div><div class="l">SOPs</div></div>
     <div class="stat"><div class="n">29</div><div class="l">Work Instructions</div></div>
@@ -142,7 +146,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-01: Process-Flow</div>
         <div class="dl-meta">VKS-MET-SOP-01_Process-Flow.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-02_Roll-Movement.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -150,7 +154,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-02: Roll-Movement</div>
         <div class="dl-meta">VKS-MET-SOP-02_Roll-Movement.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-03_Operating-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -158,7 +162,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-03: Operating-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-03_Operating-Parameters.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-04_AlBond-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -166,7 +170,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-04: AlBond-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-04_AlBond-Parameters.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-05_CPP-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -174,7 +178,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-05: CPP-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-05_CPP-Parameters.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-06_OD-Set-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -182,7 +186,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-06: OD-Set-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-06_OD-Set-Parameters.docx · 16 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-07_Bare-Waste-Control.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -190,7 +194,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-07: Bare-Waste-Control</div>
         <div class="dl-meta">VKS-MET-SOP-07_Bare-Waste-Control.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-08_Copper-Clamp-Change.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -198,7 +202,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-08: Copper-Clamp-Change</div>
         <div class="dl-meta">VKS-MET-SOP-08_Copper-Clamp-Change.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-09_Ripple-Free-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -206,7 +210,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-09: Ripple-Free-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-09_Ripple-Free-Parameters.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-10_Al-Dust-Disposal.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -214,7 +218,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-10: Al-Dust-Disposal</div>
         <div class="dl-meta">VKS-MET-SOP-10_Al-Dust-Disposal.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-11_Roll-Wrapping.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -222,7 +226,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-11: Roll-Wrapping</div>
         <div class="dl-meta">VKS-MET-SOP-11_Roll-Wrapping.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-SOP-12_Scratch-Free-Parameters.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -230,13 +234,13 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">SOP-12: Scratch-Free-Parameters</div>
         <div class="dl-meta">VKS-MET-SOP-12_Scratch-Free-Parameters.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag sop">SOP</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
   </div>
 </section>
 
 <section class="section" id="wis">
-  <h2>Metalliser Work Instructions</h2>
+  <h2 data-i="dl_sec_wi">Metalliser Work Instructions</h2>
   <p class="sub">Step-by-step WIs for operators — boat change, drum cleaning, roll handling, GMP and more.</p>
   <div class="grid">
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-01_Bare-Film-Selection.docx" download target="_blank" rel="noopener">
@@ -245,7 +249,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-01: Bare-Film-Selection</div>
         <div class="dl-meta">VKS-MET-WI-01_Bare-Film-Selection.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-02_Boat-Change-Programme.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -253,7 +257,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-02: Boat-Change-Programme</div>
         <div class="dl-meta">VKS-MET-WI-02_Boat-Change-Programme.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-03_Safety-Moving-Parts.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -261,7 +265,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-03: Safety-Moving-Parts</div>
         <div class="dl-meta">VKS-MET-WI-03_Safety-Moving-Parts.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-04_Drum-Cleaning.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -269,7 +273,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-04: Drum-Cleaning</div>
         <div class="dl-meta">VKS-MET-WI-04_Drum-Cleaning.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-05_Shaft-Fixing.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -277,7 +281,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-05: Shaft-Fixing</div>
         <div class="dl-meta">VKS-MET-WI-05_Shaft-Fixing.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-06_Roll-Loading-Unloading.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -285,7 +289,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-06: Roll-Loading-Unloading</div>
         <div class="dl-meta">VKS-MET-WI-06_Roll-Loading-Unloading.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-07_Al-Dust-Heat-Noise-Safety.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -293,7 +297,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-07: Al-Dust-Heat-Noise-Safety</div>
         <div class="dl-meta">VKS-MET-WI-07_Al-Dust-Heat-Noise-Safety.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-08_Paper-Tape-Storage.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -301,7 +305,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-08: Paper-Tape-Storage</div>
         <div class="dl-meta">VKS-MET-WI-08_Paper-Tape-Storage.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-09_Per-Cycle-Maintenance.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -309,7 +313,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-09: Per-Cycle-Maintenance</div>
         <div class="dl-meta">VKS-MET-WI-09_Per-Cycle-Maintenance.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-10_Cork-Tape-Layering.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -317,7 +321,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-10: Cork-Tape-Layering</div>
         <div class="dl-meta">VKS-MET-WI-10_Cork-Tape-Layering.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-11_Boat-Issuance-Consumption.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -325,7 +329,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-11: Boat-Issuance-Consumption</div>
         <div class="dl-meta">VKS-MET-WI-11_Boat-Issuance-Consumption.docx · 16 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-12_GMP-General-Instructions.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -333,7 +337,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-12: GMP-General-Instructions</div>
         <div class="dl-meta">VKS-MET-WI-12_GMP-General-Instructions.docx · 16 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-13_Shift-Incharge-Responsibilities.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -341,7 +345,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-13: Shift-Incharge-Responsibilities</div>
         <div class="dl-meta">VKS-MET-WI-13_Shift-Incharge-Responsibilities.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-14_AlOx-Metallisation.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -349,7 +353,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-14: AlOx-Metallisation</div>
         <div class="dl-meta">VKS-MET-WI-14_AlOx-Metallisation.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-15_Waste-Reduction-Control.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -357,7 +361,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-15: Waste-Reduction-Control</div>
         <div class="dl-meta">VKS-MET-WI-15_Waste-Reduction-Control.docx · 16 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-16_Critical-Customer-Slitting.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -365,7 +369,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-16: Critical-Customer-Slitting</div>
         <div class="dl-meta">VKS-MET-WI-16_Critical-Customer-Slitting.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET-WI-17_SAP-Entry-Met-Jumbo.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -373,7 +377,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WI-17: SAP-Entry-Met-Jumbo</div>
         <div class="dl-meta">VKS-MET-WI-17_SAP-Entry-Met-Jumbo.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag wi">WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
   </div>
 </section>
@@ -388,7 +392,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-01: Roll-Selection</div>
         <div class="dl-meta">VKS-MET_SL-WI-01_Roll-Selection.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-02_Machine-Setup.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -396,7 +400,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-02: Machine-Setup</div>
         <div class="dl-meta">VKS-MET_SL-WI-02_Machine-Setup.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-03_Blade-Change.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -404,7 +408,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-03: Blade-Change</div>
         <div class="dl-meta">VKS-MET_SL-WI-03_Blade-Change.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-04_Paper-Core.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -412,7 +416,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-04: Paper-Core</div>
         <div class="dl-meta">VKS-MET_SL-WI-04_Paper-Core.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-05_Joint-Formation.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -420,7 +424,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-05: Joint-Formation</div>
         <div class="dl-meta">VKS-MET_SL-WI-05_Joint-Formation.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-06_Slitting-Start.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -428,7 +432,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-06: Slitting-Start</div>
         <div class="dl-meta">VKS-MET_SL-WI-06_Slitting-Start.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-07_Unloading-Wrapping.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -436,7 +440,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-07: Unloading-Wrapping</div>
         <div class="dl-meta">VKS-MET_SL-WI-07_Unloading-Wrapping.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-08_Data-Entry-Roll-ID.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -444,7 +448,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-08: Data-Entry-Roll-ID</div>
         <div class="dl-meta">VKS-MET_SL-WI-08_Data-Entry-Roll-ID.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-09_Supervisor.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -452,7 +456,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-09: Supervisor</div>
         <div class="dl-meta">VKS-MET_SL-WI-09_Supervisor.docx · 17 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS-MET_SL-WI-10_SAP-Entry.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -460,7 +464,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Slitter WI-10: SAP-Entry</div>
         <div class="dl-meta">VKS-MET_SL-WI-10_SAP-Entry.docx · 18 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_02_Met_Slitter_Log_Book.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -468,7 +472,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 02 Met Slitter Log Book</div>
         <div class="dl-meta">VKS_MET_F_02_Met_Slitter_Log_Book.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_04_Met_Slitter_Planning.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -476,7 +480,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 04 Met Slitter Planning</div>
         <div class="dl-meta">VKS_MET_F_04_Met_Slitter_Planning.docx · 55 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag slitter">Slitter WI</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
   </div>
 </section>
@@ -491,7 +495,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 01 Metallizer Log Book</div>
         <div class="dl-meta">VKS_MET_F_01_Metallizer_Log_Book.docx · 58 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_03_Metallised_Roll_Job_Card.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -499,7 +503,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 03 Metallised Roll Job Card</div>
         <div class="dl-meta">VKS_MET_F_03_Metallised_Roll_Job_Card.docx · 54 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_05_Met_Feed_Planning.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -507,7 +511,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 05 Met Feed Planning</div>
         <div class="dl-meta">VKS_MET_F_05_Met_Feed_Planning.docx · 54 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_06_Boats_Life_Testing.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -515,7 +519,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 06 Boats Life Testing</div>
         <div class="dl-meta">VKS_MET_F_06_Boats_Life_Testing.docx · 56 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_07_PM_Daily.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -523,7 +527,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 07 PM Daily</div>
         <div class="dl-meta">VKS_MET_F_07_PM_Daily.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_08_PM_Weekly.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -531,7 +535,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 08 PM Weekly</div>
         <div class="dl-meta">VKS_MET_F_08_PM_Weekly.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_09_PM_Monthly.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -539,7 +543,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 09 PM Monthly</div>
         <div class="dl-meta">VKS_MET_F_09_PM_Monthly.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_10_PM_Quarterly_Annually_Met1.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -547,7 +551,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 10 PM Quarterly Annually Met1</div>
         <div class="dl-meta">VKS_MET_F_10_PM_Quarterly_Annually_Met1.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_11_PM_Quarterly_Annually_Met2.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -555,7 +559,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 11 PM Quarterly Annually Met2</div>
         <div class="dl-meta">VKS_MET_F_11_PM_Quarterly_Annually_Met2.docx · 57 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_12_PM_Mechanical.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -563,7 +567,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 12 PM Mechanical</div>
         <div class="dl-meta">VKS_MET_F_12_PM_Mechanical.docx · 20 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_13_Blade_Record.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -571,7 +575,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 13 Blade Record</div>
         <div class="dl-meta">VKS_MET_F_13_Blade_Record.docx · 56 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_14_Roll_Weighing_Record.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -579,7 +583,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 14 Roll Weighing Record</div>
         <div class="dl-meta">VKS_MET_F_14_Roll_Weighing_Record.docx · 55 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_15_GMP_Personal_Hygiene.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -587,7 +591,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 15 GMP Personal Hygiene</div>
         <div class="dl-meta">VKS_MET_F_15_GMP_Personal_Hygiene.docx · 54 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_16_Web_Break_Downtime_Record.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -595,7 +599,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 16 Web Break Downtime Record</div>
         <div class="dl-meta">VKS_MET_F_16_Web_Break_Downtime_Record.docx · 55 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/VKS_MET_F_17_PM_Weekly_Mechanical.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -603,7 +607,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">Form F: 17 PM Weekly Mechanical</div>
         <div class="dl-meta">VKS_MET_F_17_PM_Weekly_Mechanical.docx · 19 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag format">Format</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag format">Format</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
   </div>
 </section>
@@ -618,7 +622,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">DailyChecklist Template</div>
         <div class="dl-meta">DailyChecklist_Template.docx · 11 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag template">Template</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag template">Template</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/JobCard_Template.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -626,7 +630,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">JobCard Template</div>
         <div class="dl-meta">JobCard_Template.docx · 10 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag template">Template</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag template">Template</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/LogBook_Template.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -634,7 +638,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">LogBook Template</div>
         <div class="dl-meta">LogBook_Template.docx · 12 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag template">Template</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag template">Template</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
     <a class="dl-card" href="https://github.com/vkstecho/VksTech/raw/main/Blogs/16-sop-wi-format-guide_blog/met-sop-library/WeighingRecord_Template.docx" download target="_blank" rel="noopener">
       <div class="dl-icon">📄</div>
@@ -642,7 +646,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
         <div class="dl-title">WeighingRecord Template</div>
         <div class="dl-meta">WeighingRecord_Template.docx · 11 KB</div>
       </div>
-      <div class="dl-foot"><span class="tag template">Template</span><span class="clink">Download ↓</span></div>
+      <div class="dl-foot"><span class="tag template">Template</span><span class="clink" data-i="dl_btn">Download ↓</span></div>
     </a>
   </div>
 </section>
@@ -652,5 +656,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <p style="margin-top:14px"><a href="/">← Back to VKS Tech</a></p>
 </footer>
 
+<script src="js/page-i18n.js" defer></script>
 </body>
 </html>

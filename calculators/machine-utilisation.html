@@ -76,28 +76,32 @@ input.missing{border-color:#e11;background:#fff5f5}
 <body>
 <div class="topbar">
   <a href="/" class="tb-brand"><img src="../assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/><span>VKS</span><span class="vks-tech">Tech</span></a>
-  <nav class="tb-nav"><a href="/">Home</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a></nav>
+  <nav class="tb-nav"><a href="/" data-i="nav_home">Home</a><a href="/calculators" data-i="nav_calc">Calculators</a><a href="/apps" data-i="nav_apps">Apps</a></nav>
+  <div class="lang-pills" role="group" aria-label="Language" style="margin-left:auto;display:flex;gap:4px;align-items:center">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div>
 </div>
 
 <div class="wrap">
-  <div class="crumb"><a href="/">Home</a> · <a href="/calculators">Calculators</a> · Utilisation %</div>
+  <div class="crumb"><a href="/" data-i="nav_home">Home</a> · <a href="/calculators" data-i="nav_calc">Calculators</a> · Utilisation %</div>
   <h1>Machine <span>Utilisation %</span></h1>
-  <p class="lead">See what share of available shift time the machine was actually running. Complements yield and capacity planning.</p>
+  <p class="lead" data-i="lead_machine_utilisation">See what share of available shift time the machine was actually running. Complements yield and capacity planning.</p>
   <div class="card">
     <div class="formula">Utilisation % = (Running time ÷ Available shift time) × 100</div>
     
     <div class="row c2">
-      <div><label>Running time (hours)</label><input id="u-run" type="number" inputmode="decimal" placeholder="e.g. 6.5" oninput="calc()"/></div>
-      <div><label>Available shift time (hours)</label><input id="u-avail" type="number" inputmode="decimal" placeholder="e.g. 8" value="8" oninput="calc()"/></div>
+      <div><label data-i="lab_running_time_hours">Running time (hours)</label><input id="u-run" type="number" inputmode="decimal" placeholder="e.g. 6.5" oninput="calc()"/></div>
+      <div><label data-i="lab_available_shift_time_hours">Available shift time (hours)</label><input id="u-avail" type="number" inputmode="decimal" placeholder="e.g. 8" value="8" oninput="calc()"/></div>
     </div>
     <div class="result waiting" id="u-box">
-      <div><div class="val" id="u-res">—</div><div class="sub" id="u-sub">Fill running &amp; available time</div></div>
+      <div><div class="val" id="u-res">—</div><div class="sub" id="u-sub" data-i="fill_run">Fill running &amp; available time</div></div>
       <div class="unit">% util</div>
     </div>
   </div>
   <div class="explain">
     
-    <h2>Notes</h2>
+    <h2 data-i="h2_notes">Notes</h2>
     <ul>
       <li>Available time = shift length minus planned breaks (or full shift if you include breaks in downtime)</li>
       <li>Running time = time the machine was producing (exclude setup, breakdown, no-plan, quality holds if you want pure run util)</li>
@@ -106,7 +110,7 @@ input.missing{border-color:#e11;background:#fff5f5}
     <p>Low utilisation with high yield usually means planning or material gaps. High utilisation with low yield means process/quality issues.</p>
   </div>
   <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;">Share:</span>
+    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;" data-i="share_lbl">Share:</span>
     <a href="https://wa.me/?text=Free%20machine-utilisation%20calculator%20on%20VKS%20Tech:%20https://vkstech.com/calculators/machine-utilisation" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#25D366;color:#fff;text-decoration:none;">WhatsApp</a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://vkstech.com/calculators/machine-utilisation" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#0A66C2;color:#fff;text-decoration:none;">LinkedIn</a>
   </div>
@@ -141,5 +145,6 @@ function calc(){
 }
 
 </script>
+<script src="../js/calc-i18n.js" defer></script>
 </body>
 </html>

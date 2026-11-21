@@ -76,32 +76,36 @@ input.missing{border-color:#e11;background:#fff5f5}
 <body>
 <div class="topbar">
   <a href="/" class="tb-brand"><img src="../assets/logo.jpeg" alt="" width="32" height="32" style="height:32px;width:32px;border-radius:50%;object-fit:cover;margin-right:8px" onerror="this.style.display='none'"/><span>VKS</span><span class="vks-tech">Tech</span></a>
-  <nav class="tb-nav"><a href="/">Home</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a></nav>
+  <nav class="tb-nav"><a href="/" data-i="nav_home">Home</a><a href="/calculators" data-i="nav_calc">Calculators</a><a href="/apps" data-i="nav_apps">Apps</a></nav>
+  <div class="lang-pills" role="group" aria-label="Language" style="margin-left:auto;display:flex;gap:4px;align-items:center">
+    <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
+    <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
+  </div>
 </div>
 
 <div class="wrap">
-  <div class="crumb"><a href="/">Home</a> · <a href="/calculators">Calculators</a> · Met Conversion Cost</div>
+  <div class="crumb"><a href="/" data-i="nav_home">Home</a> · <a href="/calculators" data-i="nav_calc">Calculators</a> · Met Conversion Cost</div>
   <h1>Met <span>Conversion Cost</span></h1>
-  <p class="lead">Turn shift or order costs into ₹/kg conversion cost, and optionally compare with a target or rate-card equivalent.</p>
+  <p class="lead" data-i="lead_met_conversion_cost">Turn shift or order costs into ₹/kg conversion cost, and optionally compare with a target or rate-card equivalent.</p>
   <div class="card">
     <div class="formula">Actual ₹/kg = Total conversion cost ÷ Output kg</div>
     
     <div class="row c2">
-      <div><label>Total conversion cost (₹)</label><input id="mc-cost" type="number" inputmode="decimal" placeholder="e.g. 45000" oninput="calc()"/></div>
-      <div><label>Output (kg)</label><input id="mc-kg" type="number" inputmode="decimal" placeholder="e.g. 8500" oninput="calc()"/></div>
+      <div><label data-i="lab_total_conversion_cost">Total conversion cost (₹)</label><input id="mc-cost" type="number" inputmode="decimal" placeholder="e.g. 45000" oninput="calc()"/></div>
+      <div><label data-i="lab_output_kg">Output (kg)</label><input id="mc-kg" type="number" inputmode="decimal" placeholder="e.g. 8500" oninput="calc()"/></div>
     </div>
     <div class="row c2">
-      <div><label>Target / rate-card ₹/kg (optional)</label><input id="mc-target" type="number" inputmode="decimal" placeholder="e.g. 4.5" oninput="calc()"/></div>
-      <div><label>Base film cost ₹/kg (optional)</label><input id="mc-base" type="number" inputmode="decimal" placeholder="e.g. 160" oninput="calc()"/></div>
+      <div><label data-i="lab_target_rate_card_kg_optional">Target / rate-card ₹/kg (optional)</label><input id="mc-target" type="number" inputmode="decimal" placeholder="e.g. 4.5" oninput="calc()"/></div>
+      <div><label data-i="lab_base_film_cost_kg_optional">Base film cost ₹/kg (optional)</label><input id="mc-base" type="number" inputmode="decimal" placeholder="e.g. 160" oninput="calc()"/></div>
     </div>
     <div class="result waiting" id="mc-box">
-      <div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub">Fill cost and output kg</div></div>
+      <div><div class="val" id="mc-res">—</div><div class="sub" id="mc-sub" data-i="fill_cost">Fill cost and output kg</div></div>
       <div class="unit">₹/kg</div>
     </div>
   </div>
   <div class="explain">
     
-    <h2>What to include in “conversion cost”</h2>
+    <h2 data-i="h2_what_to_include_in_conversion_cost">What to include in “conversion cost”</h2>
     <ul>
       <li>Aluminium / boat / energy / labour allocated to the run</li>
       <li>Or full shift conversion pool if you are doing daily review</li>
@@ -110,7 +114,7 @@ input.missing{border-color:#e11;background:#fff5f5}
     <p>Pair with <a href="/calculators/met-capacity" style="color:var(--orange);font-weight:700">Met Capacity</a> when volume drives cost absorption.</p>
   </div>
   <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;">Share:</span>
+    <span style="font-size:.8rem;font-weight:700;color:var(--muted);margin-right:4px;" data-i="share_lbl">Share:</span>
     <a href="https://wa.me/?text=Free%20met-conversion-cost%20calculator%20on%20VKS%20Tech:%20https://vkstech.com/calculators/met-conversion-cost" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#25D366;color:#fff;text-decoration:none;">WhatsApp</a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://vkstech.com/calculators/met-conversion-cost" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;padding:7px 12px;border-radius:8px;background:#0A66C2;color:#fff;text-decoration:none;">LinkedIn</a>
   </div>
@@ -154,5 +158,6 @@ function calc(){
 }
 
 </script>
+<script src="../js/calc-i18n.js" defer></script>
 </body>
 </html>
