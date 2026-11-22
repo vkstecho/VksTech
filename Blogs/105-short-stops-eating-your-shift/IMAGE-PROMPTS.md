@@ -3,7 +3,7 @@
 
 **Workflow:** Generate with Flux / Ideogram / Midjourney / Google ImageFX  
 **Style:** Clean modern technical + photorealistic plant scenes. Brand orange `#E85D26`, navy `#1E293B`, soft cream `#FAF9F6`.  
-**Save as JPG.**
+**Save as PNG (match GitHub/site).**
 
 **Files:**
 - `cover.jpg` / `cover-hi.jpg`

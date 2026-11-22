@@ -1,7 +1,7 @@
 # 🎨 Image Generation Prompts — Blog #107
 ## Splice Discipline: Fewer Breaks, Less CLEAR Scrap
 
-**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save as JPG.
+**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save as PNG (match GitHub/site).
 
 **Files:** `cover.jpg`/`cover-hi.jpg`, `splice-checklist.jpg`/`splice-checklist-hi.jpg`, `when-to-log.jpg`/`when-to-log-hi.jpg`
 

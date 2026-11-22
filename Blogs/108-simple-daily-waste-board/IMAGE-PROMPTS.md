@@ -1,7 +1,7 @@
 # 🎨 Image Generation Prompts — Blog #108
 ## A Simple Daily Waste Board the Shift Will Actually Use
 
-**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save as JPG.
+**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save as PNG (match GitHub/site).
 
 **Files:** `cover.jpg`/`cover-hi.jpg`, `board-layout.jpg`/`board-layout-hi.jpg`, `checklist.jpg`/`checklist-hi.jpg`
 

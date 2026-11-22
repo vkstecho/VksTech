@@ -1,7 +1,7 @@
 # 🎨 Image Generation Prompts — Blog #109
 ## Incoming Film Checks That Prevent Line Stops
 
-**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save JPG.
+**Style:** Photorealistic plant + clean infographics. Orange `#E85D26`, navy `#1E293B`, cream `#FAF9F6`. Save as PNG.
 
 **Files:** cover.jpg/cover-hi.jpg, check-list.jpg/check-list-hi.jpg, flow.jpg/flow-hi.jpg
 
