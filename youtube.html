@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>YouTube Channels | VKS Tech</title>
-<meta name="description" content="VKS Tech YouTube channels — Cashly, FitSutra, Toon Tales, WorkOHolic and VikiChoni Life. Curated playlists on finance, fitness, stories, productivity and everyday life."/>
+<meta name="description" content="VKS Tech YouTube channels — Cashly, FitSutra, Toon Tales, VKS Tech and VikiChoni Life. Curated playlists on finance, fitness, stories, productivity and everyday life."/>
 <meta name="robots" content="index, follow"/>
 <meta name="theme-color" content="#1a2744"/>
 <link rel="canonical" href="https://vkstech.com/youtube"/>
@@ -68,7 +68,7 @@ main{position:relative;z-index:1;}
 .ch-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(26,39,68,.1);border-color:var(--border2);}
 .ch-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
 
-/* Latest videos — WorkoHolic channel auto feed */
+/* Latest videos — VKS Tech channel auto feed */
 .videos-section{max-width:1080px;margin:0 auto 70px;padding:0 5%;}
 .videos-section h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.55rem;color:var(--navy);margin-bottom:6px;}
 .videos-section .vs-sub{font-size:.9rem;color:var(--muted);margin-bottom:22px;}
@@ -175,7 +175,7 @@ footer a:hover{color:var(--orange2);}
   <div id="channelsGrid" class="channels"></div>
   <div id="stateMsg" class="state"><div class="ico">⏳</div><p>Loading channels…</p></div>
 
-  <section class="pl-section" id="playlistsSection" aria-label="Playlists from WorkoHolic VKS Tech">
+  <section class="pl-section" id="playlistsSection" aria-label="Playlists from VKS Tech">
     <h2>Playlists</h2>
     <p class="vs-sub">Fetched automatically from the YouTube channel — title and thumbnail.</p>
     <div class="pl-grid" id="playlistsGrid">
@@ -183,8 +183,8 @@ footer a:hover{color:var(--orange2);}
     </div>
   </section>
 
-  <section class="videos-section" id="latestVideosSection" aria-label="Latest videos from WorkoHolic VKS Tech">
-    <h2>Latest from WorkoHolic VKS Tech</h2>
+  <section class="videos-section" id="latestVideosSection" aria-label="Latest videos from VKS Tech">
+    <h2>Latest from VKS Tech</h2>
     <p class="vs-sub">Newest uploads — titles and thumbnails update automatically from the channel.</p>
     <div class="videos-grid" id="videosGrid">
       <div class="vid-loading">Loading videos…</div>
@@ -280,7 +280,7 @@ async function loadChannels(){
              + '</a>';
       }).join('');
     } else if(autoPlaylists.length > 0){
-      // WorkoHolic (and any single primary channel): fill from live YouTube
+      // VKS Tech (and any single primary channel): fill from live YouTube
       plHtml = autoPlaylists.map(function(p){
         return '<a class="pl-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">'
              + '<span class="pl-ico">▶️</span>'
