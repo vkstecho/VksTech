@@ -3,7 +3,10 @@
    ═══════════════════════════════════════════ */
 const SUPABASE_URL = 'https://hozqkfvusazdneockkxf.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvenFrZnZ1c2F6ZG5lb2Nra3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MjM3ODIsImV4cCI6MjA5MTQ5OTc4Mn0.OFFqme0Ov8BBieN75xDIv5-UeBrddFl-GUr_-8aL1yY';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* Safe on pages that do not load the Supabase SDK (e.g. /calculators) — must not block setLang */
+const sb = (typeof window !== 'undefined' && window.supabase && typeof window.supabase.createClient === 'function')
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
 
 /* ═══════════════════════════════════════════
    VISITOR TRACKING (lightweight, privacy-friendly)
@@ -43,6 +46,7 @@ function trackPath(pathOverride){
       }
     }
     path = String(path).slice(0, 300);
+    if(!sb) return;
     sb.from('page_views').insert([{
       path: path,
       referrer: (document.referrer || '').slice(0, 300) || null,
@@ -438,6 +442,7 @@ let curLang = (function(){
 
 function setLang(lang) {
   curLang = lang;
+  try { window.setLang = setLang; } catch(e) {}
   localStorage.setItem('vkstech_lang', lang);
   /* Flip <html lang> so screen readers pronounce Devanagari correctly */
   document.documentElement.lang = lang;
@@ -463,6 +468,7 @@ function setLang(lang) {
 }
 
 // Apply saved language on load
+try { window.setLang = setLang; } catch(e) {}
 if(curLang === 'hi') setLang('hi');
 
 /* Dynamic copyright year — no more stale "© 2025" */

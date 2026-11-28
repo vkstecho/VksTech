@@ -5,7 +5,7 @@
  * GET /api/youtube-feed?all=1             → all public uploads (needs YOUTUBE_API_KEY)
  * GET /api/youtube-feed?channelId=UCxxx
  *
- * Default channel: WorkoHolic VKS Tech (UCSJiDqOZiwIQBBsXjxFwSSg)
+ * Default channel: VKS Tech (UCSJiDqOZiwIQBBsXjxFwSSg)
  */
 
 const DEFAULT_CHANNEL_ID = 'UCSJiDqOZiwIQBBsXjxFwSSg';
