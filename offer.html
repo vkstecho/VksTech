@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/main.css?v=20261128-client"/>
 <style>
   body { background: var(--bg); }
   .offer-page-hero {
@@ -69,6 +69,7 @@
   <div class="nav-right">
     <a href="/consulting" class="nav-cta">Work With Me</a>
   </div>
+<details class="client-mobile-menu"><summary>Menu</summary><div><a href="/">Home</a><a href="/consulting">Consulting</a><a href="https://mentor.vkstech.com/">Mentor learning</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a><a href="/downloads">Downloads</a><a href="/blog">Blog</a><a href="/youtube">YouTube</a><a href="/business-information">Business information</a></div></details>
 </nav>
 
 <header class="offer-page-hero">
@@ -104,7 +105,7 @@
         <div class="offer-badge mentor-badge">Popular</div>
         <div class="offer-icon"><img src="assets/icon-mentor512.jpg" alt="Mentor" width="48" height="48" loading="lazy" onerror="this.parentElement.textContent='🎓'"/></div>
         <h3>One-to-One Mentorship</h3>
-        <p>Two tracks · live rates from Mentor app: Career &amp; AI <span data-rate-career data-rate-format="short">₹699/hr</span> · Packaging <span data-rate-pack data-rate-format="short">₹799/hr</span>.</p>
+        <p>Two educational tracks · current rates from Mentor app: Career &amp; AI <span data-rate-career data-rate-format="short">View current rate</span> · Packaging <span data-rate-pack data-rate-format="short">View current rate</span>.</p>
         <div class="offer-actions">
           <a href="https://mentor.vkstech.com/" class="offer-btn primary" target="_blank" rel="noopener">Book Session →</a>
         </div>
@@ -128,7 +129,7 @@
         </div>
       </article>
     </div>
-    <p class="offer-note">Free tools are available immediately. Plant projects start with a free 15-min audit on the Consulting page.</p>
+    <p class="offer-note">Free tools are available immediately. Plant projects start with an enquiry for a free introductory discussion. No online payment is collected here for commercial services. Paid mentoring and educational subscriptions are offered separately through Mentor. <a href="/business-information">Business &amp; payment information</a>.</p>
   </div>
 </section>
 
@@ -149,15 +150,6 @@
     </div>
   </div>
 </footer>
-  <script>
-  (function(){
-    var FALLBACK={career_ai:699,packaging:799};
-    var url='https://mentor-vkstech-default-rtdb.asia-southeast1.firebasedatabase.app/mentor_settings/tracks.json';
-    function fmt(r,f){var n=Number(r);if(!isFinite(n)||n<=0)return null;var s='₹'+n.toLocaleString('en-IN');return f==='short'?s+'/hr':s+' <small>/ hour</small>';}
-    function apply(c,p){document.querySelectorAll('[data-rate-career]').forEach(function(el){var t=fmt(c,el.getAttribute('data-rate-format')||'full');if(t)el.innerHTML=t;});document.querySelectorAll('[data-rate-pack]').forEach(function(el){var t=fmt(p,el.getAttribute('data-rate-format')||'full');if(t)el.innerHTML=t;});}
-    apply(FALLBACK.career_ai,FALLBACK.packaging);
-    fetch(url,{mode:'cors',cache:'no-store'}).then(function(r){return r.ok?r.json():Promise.reject()}).then(function(o){if(!o)return;apply((o.career_ai&&o.career_ai.hourlyRate)||FALLBACK.career_ai,(o.packaging&&o.packaging.hourlyRate)||FALLBACK.packaging);}).catch(function(){});
-  })();
-  </script>
+  <script defer src="/js/mentor-rates.js?v=20261128"></script>
 </body>
 </html>

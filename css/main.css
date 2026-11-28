@@ -2139,3 +2139,63 @@ body.sticky-mentor-visible .offer-fab {
 @media(max-width:720px){
   .connect-grid{grid-template-columns:1fr;max-width:400px}
 }
+
+/* V3.27 client acquisition and business disclosure — scoped marketing styles */
+#hero {min-height:auto;padding:110px 0 52px;}
+#hero .hero-inner {grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);overflow:visible;}
+#hero .hero-title {font-size:clamp(2.4rem,4.3vw,3.85rem);}
+#hero .hero-sub {margin-bottom:1.45rem;color:#45556f;}
+#hero .hero-stats {margin-top:1.4rem;padding-top:1.15rem;}
+#hero .client-visual {display:block;min-width:0;}
+.client-panel {background:#172943;color:#fff;border-radius:20px;padding:clamp(22px,3vw,34px);box-shadow:0 16px 44px #1a274422;text-align:left;}
+.client-kicker {font-size:.72rem;letter-spacing:.12em;color:#f7b58b;font-weight:700;margin-bottom:12px;}
+.client-panel h2 {font-size:clamp(1.35rem,2.1vw,1.8rem);line-height:1.35;margin-bottom:18px;}
+.client-service {display:grid;grid-template-columns:34px minmax(0,1fr) 16px;gap:10px;align-items:center;color:#fff;text-decoration:none;border-top:1px solid #ffffff28;padding:15px 0;}
+.client-service strong,.client-service small {display:block;line-height:1.45;}
+.client-service small {font-size:.81rem;color:#d2dbe9;margin-top:4px;}
+.client-service:hover strong {text-decoration:underline;}
+.client-number {font-size:.8rem;color:#f7b58b;font-weight:700;}
+.client-panel-cta {display:block;background:#fff;color:#172943;text-align:center;text-decoration:none;font-weight:700;padding:11px;border-radius:9px;margin:16px 0 10px;}
+.client-caption {font-size:.79rem;line-height:1.55;color:#53627a;}
+.client-panel .client-caption {color:#c8d4e5;}
+.client-caption a,.consult-disclosure a {color:inherit;text-decoration:underline;}
+.business-scope {padding:0 0 32px;background:var(--bg);}
+.scope-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.scope-grid>div {border:1px solid var(--border);border-top:3px solid #1a2744;background:#fff;border-radius:12px;padding:20px 22px;}
+.scope-grid>div+div {border-top-color:#0d8c7e;}
+.scope-label {font-size:.68rem;letter-spacing:.09em;font-weight:700;color:#53627a;}
+.scope-grid h2 {font-size:1.18rem;line-height:1.35;margin:7px 0;color:var(--navy);}
+.scope-grid p {font-size:.87rem;line-height:1.65;color:#45556f;margin-bottom:10px;}
+.scope-grid a {display:inline-block;font-size:.85rem;font-weight:700;color:#174c86;text-decoration:underline;}
+.scope-grid .scope-detail {font-weight:500;margin-left:.6rem;}
+.consult-disclosure {font-size:.86rem;color:#45556f;background:#fff;border:1px solid var(--border);border-radius:10px;max-width:760px;padding:13px 17px;margin:0 auto 22px;line-height:1.65;}
+.client-process-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px;}
+.client-process-grid article {background:#fff;border:1px solid var(--border);padding:22px;border-radius:12px;}
+.client-process-grid article>span {font-size:.8rem;font-weight:700;color:#a64320;}
+.client-process-grid h3 {margin:5px 0;font-size:1.12rem;}
+.client-process-grid p {font-size:.9rem;color:#45556f;}
+.lead-alternatives {display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:14px;}
+.lead-alternatives a {border:1px solid #cbd5e1;border-radius:8px;padding:8px 13px;color:#174c86;font-size:.85rem;font-weight:700;text-decoration:none;}
+.lead-status {margin-top:12px;padding:11px 13px;background:#edf6ef;color:#205331;border-radius:8px;font-size:.86rem;}
+.lead-status.is-error {background:#fff2ee;color:#8c2e14;}
+.audit-box .client-caption {margin:8px 0 14px;}
+.client-mobile-menu {display:none;position:relative;flex-shrink:0;}
+.client-mobile-menu summary {cursor:pointer;font-weight:700;border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--navy);list-style:none;}
+.client-mobile-menu summary::-webkit-details-marker {display:none;}
+.client-mobile-menu>div {position:absolute;right:0;top:calc(100% + 10px);background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:var(--sm);width:min(260px,85vw);padding:10px;max-height:70vh;overflow:auto;}
+.client-mobile-menu a {display:block;color:var(--navy);font-size:.9rem;text-decoration:none;padding:8px 10px;}
+.client-mobile-menu a:hover {background:var(--bg2);}
+.business-info-page {padding:110px 0 60px;}
+.business-info-page .info-content {max-width:850px;margin:auto;}
+.business-info-page article {background:#fff;border:1px solid var(--border);padding:clamp(18px,4vw,32px);border-radius:14px;margin-top:18px;}
+.business-info-page article h2 {font-size:1.35rem;margin-bottom:10px;}
+.business-info-page article p {color:#45556f;margin:0 0 12px;}
+.business-info-page article a {color:#174c86;overflow-wrap:anywhere;}
+.business-info-page article {scroll-margin-top:86px;}
+#hero a:focus-visible,.scope-grid a:focus-visible,.client-mobile-menu summary:focus-visible,.client-mobile-menu a:focus-visible,.lead-alternatives a:focus-visible {outline:3px solid #ed8d39;outline-offset:3px;}
+@media(max-width:1024px){#hero .hero-inner{grid-template-columns:1fr;text-align:left;gap:20px;padding-top:0;}#hero .hero-sub,#hero .hero-assurance,#hero .hero-secondary-links{margin-left:0;margin-right:0;}#hero .hero-btns,#hero .hero-stats{justify-content:flex-start;}#hero .client-visual{display:block;} .client-mobile-menu{display:block;} nav:has(.client-mobile-menu) .nav-links{display:none;} nav:has(.client-mobile-menu) .nav-cta{display:none;}}
+@media(max-width:768px){#hero{padding:90px 0 24px!important;min-height:auto;}#hero .hero-title{font-size:clamp(2rem,8vw,2.8rem)!important;}#hero .hero-eyebrow{font-size:.68rem;letter-spacing:.03em;margin-bottom:14px;}#hero .hero-btns a{padding:12px 18px;}#hero .hero-stats{gap:1rem;display:grid;grid-template-columns:1fr 1fr;} .scope-grid,.client-process-grid{grid-template-columns:1fr;} .business-scope{padding:0 0 25px!important;} .scope-grid .scope-detail{display:block;margin-left:0;margin-top:4px;} .client-process-grid article{padding:17px;} .business-info-page{padding-top:90px;} }
+@media(prefers-reduced-motion:reduce){.client-panel *, .client-mobile-menu * {transition:none!important;animation:none!important;}}
+.hero-payment-note{font-size:.81rem;line-height:1.55;color:#45556f;margin:13px 0 0;padding-left:11px;border-left:3px solid #0d8c7e;max-width:36rem;}
+#hero .hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;}
+@media(min-width:1025px){#hero .hero-stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}#hero .hero-title{font-size:clamp(2.4rem,4.2vw,3.6rem);}}

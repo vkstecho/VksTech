@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/main.css?v=20261128-client"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,24 +109,26 @@
     <li><a href="/#about" data-i="nav_about">About</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#audit" class="nav-cta" data-i="pd_nav_audit">Book Free Audit</a>
+    <a href="#audit" class="nav-cta" data-i="pd_nav_audit">Request Free Audit</a>
   
   <div class="lang-pills" role="group" aria-label="Language" style="display:flex;gap:4px;align-items:center;margin-left:8px">
     <button type="button" class="lpill active" onclick="setLang('en')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">EN</button>
     <button type="button" class="lpill" onclick="setLang('hi')" style="border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:700;cursor:pointer">हिं</button>
   </div>
   </div>
+<details class="client-mobile-menu"><summary>Menu</summary><div><a href="/">Home</a><a href="/consulting">Consulting</a><a href="https://mentor.vkstech.com/">Mentor learning</a><a href="/calculators">Calculators</a><a href="/apps">Apps</a><a href="/downloads">Downloads</a><a href="/blog">Blog</a><a href="/youtube">YouTube</a><a href="/business-information">Business information</a></div></details>
 </nav>
 
 <header class="consult-hero">
   <div class="container">
     <div class="section-label" style="margin-bottom:10px" data-i="cs_label">For packaging plants · Consulting</div>
     <h1 data-i="cs_h1">Manufacturing Operations &amp; <span>Digital Automation</span></h1>
-    <p class="lead" data-i="cs_lead">Help packaging plants cut reporting time, eliminate process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.</p>
+    <p class="lead" data-i="cs_lead">Help packaging plants cut reporting time, reduce process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.</p>
     <div class="cta-row">
-      <a href="#audit" class="btn-p" data-i="cs_btn1">Book a Free 15-Min Plant Audit</a>
+      <a href="#audit" class="btn-p" data-i="cs_btn1">Request a Free 15-Min Plant Audit</a>
       <a href="/calculators" class="btn-s" data-i="cs_btn2">Try Free Calculators</a>
     </div>
+    <p class="consult-disclosure">Industrial consulting, Excel automation and custom software are enquiry-based. No online payment gateway or payment links are integrated for these services. Paid learning is offered separately on <a href="https://mentor.vkstech.com/">Mentor</a>. <a href="/business-information">Business &amp; payment information</a>.</p>
     <div class="trust-pills">
       <span class="trust-pill" data-i="cs_pill1">A Decade of Plant Leadership</span>
       <span class="trust-pill" data-i="cs_pill2">3 hrs → 10 min Reporting</span>
@@ -177,7 +179,7 @@
     <div style="text-align:center;max-width:640px;margin:0 auto 8px">
       <div class="section-label" data-i="cs_track_label">Proven Track Record</div>
       <h2 class="section-title">Problem → Action → <span>Result</span></h2>
-      <p class="section-sub">Real outcomes from production leadership — not theory.</p>
+      <p class="section-sub">Selected historical outcomes from production leadership, not guaranteed results for future clients.</p>
     </div>
     <div class="case-grid">
       <article class="case-card">
@@ -205,23 +207,24 @@
   </div>
 </section>
 
+<section class="section-tight client-process" aria-labelledby="process-title"><div class="container"><div class="section-label">Working together</div><h2 class="section-title" id="process-title">From bottleneck to <span>clear next steps</span></h2><div class="client-process-grid"><article><span>01</span><h3>Share your problem</h3><p>Tell us the line, reporting task or process challenge. No confidential production files needed at this stage.</p></article><article><span>02</span><h3>Introductory discussion</h3><p>Review the need in a free 15-minute discussion, subject to confirmation.</p></article><article><span>03</span><h3>Agree the scope</h3><p>If there is a fit, discuss deliverables, timeline and commercial terms before proceeding.</p></article></div></div></section>
 <section class="section-tight" id="audit">
   <div class="container">
     <div class="audit-box">
-      <h3 data-i="cs_audit_h">Book a Free 15-Min Plant Audit</h3>
+      <h3 data-i="cs_audit_h">Request a Free 15-Min Plant Audit</h3>
       <p class="sub" data-i="cs_audit_sub">Tell me the bottleneck. I’ll reply with a practical next step — no obligation.</p>
-      <form id="consultForm" onsubmit="return submitConsultForm(event)" novalidate>
+      <form id="consultForm" onsubmit="return submitConsultForm(event)">
         <div class="fg">
           <label for="cf_name" data-i="cs_lbl_name">Full Name *</label>
-          <input type="text" id="cf_name" name="name" required placeholder="Your name" autocomplete="name"/>
+          <input type="text" id="cf_name" name="name" required maxlength="100" placeholder="Your name" autocomplete="name"/>
         </div>
         <div class="fg">
           <label for="cf_company" data-i="cs_lbl_co">Company / Plant Name *</label>
-          <input type="text" id="cf_company" name="company" required placeholder="Plant or company name"/>
+          <input type="text" id="cf_company" name="company" required maxlength="160" placeholder="Plant or company name"/>
         </div>
         <div class="fg">
           <label for="cf_contact" data-i="cs_lbl_contact">Work Email or WhatsApp *</label>
-          <input type="text" id="cf_contact" name="contact" required placeholder="email@company.com or +91…" autocomplete="email"/>
+          <input type="text" id="cf_contact" name="contact" required maxlength="254" placeholder="email@company.com or +91…" autocomplete="email"/>
         </div>
         <div class="fg">
           <label for="cf_service" data-i="cs_lbl_svc">Service Needed *</label>
@@ -236,13 +239,16 @@
         </div>
         <div class="fg">
           <label for="cf_desc">Brief Description of Bottleneck</label>
-          <textarea id="cf_desc" name="description" rows="3" placeholder="e.g. shift reports take 2+ hours daily; crease defects on metalliser…"></textarea>
+          <textarea id="cf_desc" name="description" maxlength="2000" rows="3" placeholder="e.g. shift reports take 2+ hours daily; crease defects on metalliser…"></textarea>
         </div>
         <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" tabindex="-1">
           <label for="cf_hp">Leave blank</label>
           <input type="text" id="cf_hp" name="website" tabindex="-1" autocomplete="off"/>
         </div>
+        <p class="client-caption">We use your contact details to respond to this enquiry. Please do not include confidential plant or customer data. <a href="/business-information#privacy">Enquiry &amp; privacy information</a>.</p>
         <button type="submit" class="sbtn" id="cf_submit">Request Free Audit →</button>
+        <p id="cf_status" class="lead-status" role="status" aria-live="polite" hidden></p>
+        <div class="lead-alternatives"><a href="https://wa.me/918929394920?text=Hello%20VKS%20Tech%2C%20I%20would%20like%20to%20discuss%20a%20plant%20project." target="_blank" rel="noopener">Enquire on WhatsApp</a><a href="mailto:Care@vkstech.com?subject=Plant%20consulting%20enquiry">Email us</a></div>
         <p class="avail-note">Based in India (IST) — Available for remote consulting across India, Middle East, Africa, Europe &amp; North America.</p>
       </form>
     </div>
@@ -264,15 +270,15 @@
     </div>
     <div class="fb">
       <span>© <span id="copyYear">2026</span> VKS Tech</span>
-      <span>Made with ❤️ from Haryana, India</span>
+      <span>Haryana, India · <a href="/business-information">Business &amp; payment information</a></span>
     </div>
   </div>
 </footer>
 
-<div class="toast" id="toast"><span class="toast-icon">✅</span><div><strong>Request received!</strong><br><span style="font-size:.8rem;opacity:.7;">Vivek will respond shortly.</span></div></div>
+<div class="toast" id="toast"><span class="toast-icon">✅</span><div><strong>Request received!</strong><br><span style="font-size:.8rem;opacity:.7;">We will contact you to confirm the discussion.</span></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/app.js" defer></script>
+<script src="/js/app.js?v=20261128-client" defer></script>
 <script>
 function prefillService(name) {
   var sel = document.getElementById('cf_service');
@@ -283,6 +289,13 @@ function prefillService(name) {
       break;
     }
   }
+}
+const serviceOptions = {kpi:'Excel / KPI Dashboard Automation',tools:'Custom Web Calculator / Micro-App',process:'Process / Defect Consulting',training:'Technical Playbooks / Training Content'};
+const requestedService = new URLSearchParams(location.search).get('service');
+if (Object.hasOwn(serviceOptions, requestedService)) prefillService(serviceOptions[requestedService]);
+function leadStatus(message, error) {
+  var status = document.getElementById('cf_status');
+  status.hidden = false; status.textContent = message; status.classList.toggle('is-error', !!error);
 }
 function submitConsultForm(ev) {
   if (ev) ev.preventDefault();
@@ -295,10 +308,13 @@ function submitConsultForm(ev) {
   var desc = (document.getElementById('cf_desc') || {}).value || '';
   name = name.trim(); company = company.trim(); contact = contact.trim(); desc = desc.trim();
   if (!name || !company || !contact || !service) {
-    alert('Please fill all required fields (*)');
+    leadStatus('Please fill all required fields.', true);
     return false;
   }
+  if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) || /^\+?[\d ()-]{7,22}$/.test(contact) && contact.replace(/\D/g,'').length >= 7 && contact.replace(/\D/g,'').length <= 15)) { leadStatus('Enter a valid email address or WhatsApp number.', true); document.getElementById('cf_contact').focus(); return false; }
   var btn = document.getElementById('cf_submit');
+  if (btn && btn.disabled) return false;
+  leadStatus('Sending your enquiry…', false);
   if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
   var payload = {
     name: name,
@@ -309,19 +325,20 @@ function submitConsultForm(ev) {
     description: (desc || 'Plant audit request') + '\n\nCompany/Plant: ' + company + '\nContact: ' + contact + '\nService: ' + service
   };
   if (typeof sb === 'undefined' || !sb) {
-    alert('Something went wrong. Please try WhatsApp: +91-8929394920');
+    leadStatus('Unable to submit your enquiry. Your details remain in the form. Please try again or use WhatsApp or email below.', true);
     if (btn) { btn.disabled = false; btn.textContent = 'Request Free Audit →'; }
     return false;
   }
   sb.from('app_requests').insert([payload]).then(function(res) {
     if (res.error) throw res.error;
+    leadStatus('Enquiry received. We will contact you to confirm the introductory discussion. No payment has been collected.', false);
     ['cf_name','cf_company','cf_contact','cf_desc'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
     var sel = document.getElementById('cf_service'); if (sel) sel.selectedIndex = 0;
     var toast = document.getElementById('toast');
     if (toast) { toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 4500); }
   }).catch(function(err) {
     console.error(err);
-    alert('Something went wrong. Please try WhatsApp: +91-8929394920');
+    leadStatus('Unable to submit your enquiry. Your details remain in the form. Please try again or use WhatsApp or email below.', true);
   }).finally(function() {
     if (btn) { btn.disabled = false; btn.textContent = 'Request Free Audit →'; }
   });

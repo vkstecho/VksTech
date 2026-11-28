@@ -115,6 +115,26 @@ document.addEventListener('click',(e)=>{const m=document.getElementById('mobileM
    LANGUAGE ENGINE — EN / HI
    ═══════════════════════════════ */
 const HI = {
+  hero_payment_note:"व्यावसायिक प्रोजेक्ट पूछताछ आधारित हैं। सशुल्क शिक्षण और सब्सक्रिप्शन अलग Mentor प्लेटफॉर्म पर हैं; Razorpay केवल इन शिक्षण सेवाओं के लिए है, स्वीकृति के अधीन।",
+  client_kicker:"प्लांट और ऑपरेशंस टीमों के लिए",
+  client_h:"प्लांट की समस्याओं के व्यावहारिक समाधान।",
+  client_s1:"Excel और KPI डैशबोर्ड",
+  client_d1:"मैनुअल रिपोर्ट कम करें और प्रदर्शन देखें।",
+  client_s2:"कस्टम कैलकुलेटर और सॉफ्टवेयर",
+  client_d2:"अपने प्लांट के वास्तविक वर्कफ़्लो के अनुसार।",
+  client_s3:"प्रक्रिया और दोष में सुधार",
+  client_d3:"समस्या की पहचान और सुधारात्मक कार्रवाई।",
+  client_cta:"अपने प्रोजेक्ट पर चर्चा करें →",
+  client_caption:"पूछताछ आधारित प्रोजेक्ट · इन सेवाओं के लिए इस साइट पर ऑनलाइन चेकआउट नहीं है।",
+  scope_b2b_label:"व्यावसायिक सेवाएँ",
+  scope_b2b_h:"औद्योगिक कंसल्टिंग और तकनीक",
+  scope_b2b_p:"प्लांट कंसल्टिंग, Excel ऑटोमेशन और कस्टम सॉफ्टवेयर पूछताछ आधारित सेवाएँ हैं। इस वेबसाइट पर इन सेवाओं के लिए पेमेंट गेटवे या पेमेंट लिंक नहीं हैं।",
+  scope_b2b_cta:"प्रोजेक्ट पर चर्चा का अनुरोध करें →",
+  scope_edu_label:"ऑनलाइन शिक्षा और कौशल विकास",
+  scope_edu_h:"Mentor by VKS Tech",
+  scope_edu_p:"हमारा अलग शिक्षण प्लेटफॉर्म सशुल्क 1:1 सत्र और शैक्षणिक सब्सक्रिप्शन देता है। Razorpay केवल इन Mentor शिक्षण सेवाओं के लिए है, व्यापारी स्वीकृति के अधीन।",
+  scope_edu_cta:"Mentor देखें →",
+  scope_more:"व्यवसाय और भुगतान की जानकारी",
   nav_ind:"Apps", nav_mentor:"Mentorship", nav_resume:"रिज़्यूमे", nav_calc:"Calculators", nav_per:"व्यक्तिगत ऐप्स", nav_blog:"ब्लॉग", nav_req:"मैं क्या देता हूँ", nav_consult:"Consulting", nav_about:"परिचय", nav_people:"लोग", nav_yt:"YouTube", nav_downloads:"मुफ़्त Downloads", nav_cta:"साथ काम करें",
   yt_eyebrow:"VKS Tech यूट्यूब पर",
   yt_title:"पाँच चैनल, एक क्रिएटर",
@@ -124,9 +144,9 @@ const HI = {
   yt_sub2:"फाइनेंस, फिटनेस, एनिमेटेड कहानियाँ, प्रोडक्टिविटी और रोज़मर्रा की ज़िंदगी — हर चैनल और प्लेलिस्ट एक जगह।",
   yt_home_cta:"सभी प्लेलिस्ट देखें →",
   hero_badge:"NIT एलमनी · फ्लेक्सिबल पैकेजिंग में एक दशक · डिजिटल ऑटोमेशन",
-  hero_title:"पैकेजिंग प्लांट्स के लिए Manufacturing Operations &amp; <span class='accent'>Digital Automation</span>",
-  hero_sub:"UFlex, JPFL &amp; GLS Polyfilms में एक दशक की shop-floor leadership — reporting time 90% तक कम, process defects कम, और custom Excel व web workflow tools।",
-  hero_btn1:"मुफ़्त 15-मिनट प्लांट ऑडिट बुक करें", hero_btn2:"1:1 मेंटरशिप", hero_btn3:"मुफ़्त पैकेजिंग कैलकुलेटर", hero_assurance:"<strong>15 मिनट में:</strong> आपकी सबसे बड़ी रिपोर्टिंग/प्रोसेस समस्या समझें → डैशबोर्ड, कैलकुलेटर या SOP सही है या नहीं → अगला स्पष्ट कदम।<span class=\"ha-meta\">प्लांट / प्रोडक्शन / QA हेड्स के लिए · उसी दिन WhatsApp जवाब · कोई बाध्यता नहीं</span>", hero_link_calc:"मुफ़्त पैकेजिंग कैलकुलेटर", hero_link_proof:"परिणाम और प्रशंसापत्र",
+  hero_title:"पैकेजिंग प्लांट कंसल्टिंग और <span class='accent'>डिजिटल ऑटोमेशन</span>",
+  hero_sub:"मैनुअल रिपोर्टिंग कम करें, प्रक्रिया की जानकारी बेहतर बनाएँ और अपने प्लांट के लिए Excel या वेब टूल बनवाएँ। UFlex, JPFL और GLS Polyfilms में एक दशक का अनुभव।",
+  hero_btn1:"मुफ़्त 15-मिनट प्लांट ऑडिट का अनुरोध करें", hero_btn2:"1:1 मेंटरशिप", hero_btn3:"मुफ़्त पैकेजिंग कैलकुलेटर", hero_assurance:"<strong>15 मिनट में:</strong> आपकी सबसे बड़ी रिपोर्टिंग/प्रोसेस समस्या समझें → डैशबोर्ड, कैलकुलेटर या SOP सही है या नहीं → अगला स्पष्ट कदम।<span class=\"ha-meta\">प्लांट / प्रोडक्शन / QA हेड्स के लिए · अनुरोध की समीक्षा के बाद पुष्टि · कोई बाध्यता नहीं</span>", hero_link_calc:"मुफ़्त पैकेजिंग कैलकुलेटर", hero_link_proof:"परिणाम और प्रशंसापत्र",
   nav_career:"करियर", nav_testimonials:"प्रशंसापत्र",
   stat1:"प्रोफेशनल्स गाइडेड", stat2:"वर्ष अनुभव", stat3:"लाइव ऐप्स", stat4:"मुफ़्त टूल्स",
   cos_label:"भारत के फ्लेक्सिबल पैकेजिंग उद्योग में एक दशक · VKS Tech बना रहे हैं",
@@ -166,8 +186,8 @@ const HI = {
   path_pro_eye:"प्रोफेशनल्स के लिए",
   path_pro_h:"1:1 Mentorship और मुफ़्त टूल्स",
   path_pro_p:"अगर आपको व्यक्तिगत growth चाहिए — Excel, AI tools, करियर, या packaging skills — पूरा plant project नहीं।",
-  path_pro_b1:"Career &amp; AI track ₹699/hr से",
-  path_pro_b2:"Packaging track ₹799/hr से",
+  path_pro_b1:"Career &amp; AI सीखने के सत्र",
+  path_pro_b2:"फ्लेक्सिबल पैकेजिंग की तकनीकी शिक्षा",
   path_pro_b3:"मुफ़्त calculators और resume tools",
   path_pro_cta:"Mentorship बुक करें →",
   path_plant_eye:"पैकेजिंग प्लांट्स के लिए",
@@ -226,8 +246,8 @@ const HI = {
   pd_nav_audit:"मुफ़्त Audit बुक करें",
   cs_label:"पैकेजिंग प्लांट्स के लिए · Consulting",
   cs_h1:"Manufacturing Operations &amp; <span>Digital Automation</span>",
-  cs_lead:"पैकेजिंग प्लांट्स की reporting time कम करें, process defects हटाएँ, और practical Excel व web tools लगाएँ — उस व्यक्ति द्वारा जिसने lines चलाई हैं।",
-  cs_btn1:"मुफ़्त 15-मिनट Plant Audit बुक करें",
+  cs_lead:"पैकेजिंग प्लांट्स की reporting time कम करें, process defects कम करें, और practical Excel व web tools लगाएँ — उस व्यक्ति द्वारा जिसने lines चलाई हैं।",
+  cs_btn1:"मुफ़्त 15-मिनट Plant Audit का अनुरोध करें",
   cs_btn2:"मुफ़्त Calculators आज़माएँ",
   cs_pill1:"एक दशक Plant Leadership",
   cs_pill2:"3 hrs → 10 min Reporting",
@@ -247,7 +267,7 @@ const HI = {
   cs_track_label:"Proven Track Record",
   cs_track_title:"Problem → Action → <span>Result</span>",
   cs_track_sub:"Production leadership के असली नतीजे — सिर्फ theory नहीं।",
-  cs_audit_h:"मुफ़्त 15-मिनट Plant Audit बुक करें",
+  cs_audit_h:"मुफ़्त 15-मिनट Plant Audit का अनुरोध करें",
   cs_audit_sub:"Bottleneck बताएँ। Practical next step से जवाब मिलेगा — कोई बाध्यता नहीं।",
   cs_lbl_name:"पूरा नाम *",
   cs_lbl_co:"Company / Plant Name *",
@@ -274,6 +294,26 @@ const HI = {
 };
 
 const EN = {
+  hero_payment_note:"Commercial projects are enquiry-based. Paid learning and subscriptions are offered separately on Mentor; Razorpay is intended for those learning services only, subject to approval.",
+  client_kicker:"FOR PLANT & OPERATIONS TEAMS",
+  client_h:"Turn plant problems into practical solutions.",
+  client_s1:"Excel & KPI dashboards",
+  client_d1:"Reduce manual reports and track performance.",
+  client_s2:"Custom calculators & software",
+  client_d2:"Build around your actual plant workflow.",
+  client_s3:"Process & defect improvement",
+  client_d3:"Structure troubleshooting and corrective action.",
+  client_cta:"Discuss your project →",
+  client_caption:"Enquiry-based projects · No online checkout on this site for commercial services.",
+  scope_b2b_label:"BUSINESS SERVICES",
+  scope_b2b_h:"Industrial consulting & technology",
+  scope_b2b_p:"Plant consulting, Excel automation and custom software are enquiry-based services. This website has no integrated payment gateway or payment links for these commercial services.",
+  scope_b2b_cta:"Request a project discussion →",
+  scope_edu_label:"ONLINE EDUCATION & SKILL DEVELOPMENT",
+  scope_edu_h:"Mentor by VKS Tech",
+  scope_edu_p:"Our separate learning platform offers paid 1:1 sessions and educational subscriptions. Razorpay is intended exclusively for these Mentor learning services, subject to merchant approval.",
+  scope_edu_cta:"Explore Mentor →",
+  scope_more:"Business & payment information",
   nav_ind:"Apps", nav_mentor:"Mentorship", nav_resume:"Resume", nav_calc:"Calculators", nav_per:"Personal Apps", nav_blog:"Blog", nav_req:"What I Offer", nav_consult:"Consulting", nav_about:"About", nav_people:"People", nav_yt:"YouTube", nav_downloads:"Free Downloads", nav_cta:"Work With Me",
   yt_eyebrow:"VKS Tech on YouTube",
   yt_title:"Channels, one creator",
@@ -283,9 +323,9 @@ const EN = {
   yt_sub2:"Finance, fitness, animated stories, productivity and everyday life — every channel and playlist gathered in one place.",
   yt_home_cta:"See all playlists →",
   hero_badge:"NIT ALUMNI · A DECADE IN FLEXIBLE PACKAGING · DIGITAL AUTOMATION",
-  hero_title:"Manufacturing Operations &amp; <span class='accent'>Digital Automation</span> for Packaging Plants",
-  hero_sub:"A decade of shop-floor leadership at UFlex, JPFL &amp; GLS Polyfilms—helping plants cut reporting time by 90%, reduce process defects, and deploy custom Excel &amp; web workflow tools.",
-  hero_btn1:"Book a Free 15-Min Plant Audit", hero_btn2:"1:1 Mentorship", hero_btn3:"Free packaging calculators", hero_assurance:"<strong>In 15 minutes:</strong> map your biggest reporting or process pain → see if a dashboard, calculator, or SOP fits → clear next step.<span class=\"ha-meta\">For plant / production / QA heads · WhatsApp reply same day · no obligation</span>", hero_link_calc:"Free packaging calculators", hero_link_proof:"Results & testimonials",
+  hero_title:"Packaging Plant Consulting &amp; <span class='accent'>Digital Automation</span>",
+  hero_sub:"Reduce manual reporting, improve process visibility and build practical Excel or web tools for your plant. Grounded in a decade of shop-floor leadership at UFlex, JPFL &amp; GLS Polyfilms.",
+  hero_btn1:"Request a Free 15-Min Plant Audit", hero_btn2:"1:1 Mentorship", hero_btn3:"Free packaging calculators", hero_assurance:"<strong>In 15 minutes:</strong> map your biggest reporting or process pain → see if a dashboard, calculator, or SOP fits → clear next step.<span class=\"ha-meta\">For plant / production / QA heads · Enquiry reviewed before confirmation · no obligation</span>", hero_link_calc:"Free packaging calculators", hero_link_proof:"Results & testimonials",
   nav_career:"Career", nav_testimonials:"Testimonials",
   stat1:"Professionals Guided", stat2:"Years Experience", stat3:"Apps Live", stat4:"Free Tools",
   cos_label:"A Decade in India's Flexible Packaging Industry · Building VKS Tech",
@@ -325,8 +365,8 @@ const EN = {
   path_pro_eye:"For professionals",
   path_pro_h:"1:1 Mentorship &amp; free tools",
   path_pro_p:"Choose this if you want personal growth — Excel, AI tools, career moves, or packaging skills — not a full plant project.",
-  path_pro_b1:"Career &amp; AI track from ₹699/hr",
-  path_pro_b2:"Packaging track from ₹799/hr",
+  path_pro_b1:"Career &amp; AI learning sessions",
+  path_pro_b2:"Flexible packaging technical learning",
   path_pro_b3:"Free calculators &amp; resume tools",
   path_pro_cta:"Book mentorship →",
   path_plant_eye:"For packaging plants",
@@ -382,11 +422,11 @@ const EN = {
   cd_conv:"Model multiple machines, speeds and efficiencies to find true plant capacity and bottleneck.",
   cd_man:"Same formula as the Man Power app — calculate minimum headcount with relief and buffer."
 ,
-  pd_nav_audit:"Book Free Audit",
+  pd_nav_audit:"Request Free Audit",
   cs_label:"For packaging plants · Consulting",
   cs_h1:"Manufacturing Operations &amp; <span>Digital Automation</span>",
-  cs_lead:"Help packaging plants cut reporting time, eliminate process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.",
-  cs_btn1:"Book a Free 15-Min Plant Audit",
+  cs_lead:"Help packaging plants cut reporting time, reduce process defects, and deploy practical Excel &amp; web tools — built by someone who has run the lines.",
+  cs_btn1:"Request a Free 15-Min Plant Audit",
   cs_btn2:"Try Free Calculators",
   cs_pill1:"A Decade of Plant Leadership",
   cs_pill2:"3 hrs → 10 min Reporting",
@@ -406,7 +446,7 @@ const EN = {
   cs_track_label:"Proven Track Record",
   cs_track_title:"Problem → Action → <span>Result</span>",
   cs_track_sub:"Real outcomes from production leadership — not theory.",
-  cs_audit_h:"Book a Free 15-Min Plant Audit",
+  cs_audit_h:"Request a Free 15-Min Plant Audit",
   cs_audit_sub:"Tell me the bottleneck. I’ll reply with a practical next step — no obligation.",
   cs_lbl_name:"Full Name *",
   cs_lbl_co:"Company / Plant Name *",
@@ -2630,43 +2670,4 @@ document.addEventListener('keydown', function (e) {
    Live Mentor rates — same Firebase source as mentor.vkstech.com
    Keeps website prices in sync when admin changes rates.
    ============================================================ */
-(function loadLiveMentorRates() {
-  var FALLBACK = { career_ai: 699, packaging: 799 };
-  var url = 'https://mentor-vkstech-default-rtdb.asia-southeast1.firebasedatabase.app/mentor_settings/tracks.json';
-
-  function formatRate(rate, format) {
-    var n = Number(rate);
-    if (!isFinite(n) || n <= 0) return null;
-    var formatted = '₹' + n.toLocaleString('en-IN');
-    if (format === 'short') return formatted + '/hr';
-    return formatted + ' <small>/ hour</small>';
-  }
-
-  function applyRates(career, pack) {
-    document.querySelectorAll('[data-rate-career]').forEach(function (el) {
-      var fmt = el.getAttribute('data-rate-format') || 'full';
-      var text = formatRate(career, fmt);
-      if (text) el.innerHTML = text;
-    });
-    document.querySelectorAll('[data-rate-pack]').forEach(function (el) {
-      var fmt = el.getAttribute('data-rate-format') || 'full';
-      var text = formatRate(pack, fmt);
-      if (text) el.innerHTML = text;
-    });
-  }
-
-  // Apply fallbacks immediately so UI never shows blank
-  applyRates(FALLBACK.career_ai, FALLBACK.packaging);
-
-  fetch(url, { method: 'GET', mode: 'cors', cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (o) {
-      if (!o || typeof o !== 'object') return;
-      var career = (o.career_ai && o.career_ai.hourlyRate) || FALLBACK.career_ai;
-      var pack = (o.packaging && o.packaging.hourlyRate) || FALLBACK.packaging;
-      applyRates(career, pack);
-    })
-    .catch(function (err) {
-      console.warn('Mentor rates fetch failed, using fallbacks:', err);
-    });
-})();
+/* Mentor rates are loaded by js/mentor-rates.js on pages that display prices. */
